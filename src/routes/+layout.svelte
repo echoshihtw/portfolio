@@ -29,11 +29,8 @@
       <Icon icon="ri:arrow-up-circle-line" />
     </button>
   </div>
-  <div class="max-w-[1400px]">
-    <Header
-      {y}
-      {innerHeight}
-    />
+  <div class="w-full m-auto flex items-center flex-col">
+    <Header {y} />
     <slot />
     <Footer />
   </div>

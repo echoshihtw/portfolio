@@ -3,7 +3,6 @@
 
   function handleSwitchDarkMode() {
     darkMode = !darkMode;
-
     darkMode
       ? document.documentElement.classList.add("dark")
       : document.documentElement.classList.remove("dark");
