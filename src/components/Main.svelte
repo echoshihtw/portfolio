@@ -53,22 +53,26 @@
     <div
       class="flex flex-col lg:justify-center text-center lg:text-left gap-6 md:gap-8 lg:gap-10"
     >
-      <h2 class="font-semibold text-4xl sm:text-5xl md:text-6xl">
-        Hi! I'm
-        <span class="poppins text-violet-400">Echo</span>
+      <h2 class="font-semibold text-4xl sm:text-5xl md:text-6xl h1_font_family">
+        <span class="flex gap-0">
+          <span class="toggle_font_color_highlight">Echo</span>
+          <span class="text-white">,</span>
+        </span>
         <br />
-        Front End
-        <span class="poppins text-violet-400">Developer</span>
+        Your
+        <span class="toggle_font_color_highlight">Front End</span>
+        Developer
       </h2>
       <p class="text-base sm:text-lg md:text-xl">
-        I <span class="text-violet-400">build with</span>
-        Javascript (React.js, Next.js), and TailwindCSS
+        <span class="toggle_font_color_highlight">
+          who creates clean and impactful, user-friendly digital experiences.
+        </span>
       </p>
       <button
-        class="blueShadow mx-auto lg:mr-auto lg:ml-0 text-base sm:text-lg md:text-xl poppins relative overflow-hidden px-6 py-3 group rounded-full bg-white text-slate-950"
+        class="dark:blueShadow mx-auto lg:my-auto text-base sm:text-lg md:text-xl relative overflow-hidden px-6 py-3 group rounded-full bg-white text-slate-950"
       >
         <span
-          class="absolute top-0 right-full w-full h-full bg-violet-400 opacity-20 group-hover:translate-x-full z-0 duration-200"
+          class="absolute top-0 right-full w-full h-full toggle_btn_hover_color opacity-20 group-hover:translate-x-full z-0 duration-200"
         />
         <span class="relative z-9">Get in touch &rarr;</span>
       </button>

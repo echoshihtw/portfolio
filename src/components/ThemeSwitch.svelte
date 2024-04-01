@@ -1,6 +1,19 @@
 <script lang="ts">
-  let darkMode = true;
+  import { onMount } from "svelte";
 
+  let darkMode = false;
+
+  onMount(() => {
+    if (document.documentElement.classList.contains("dark")) {
+      darkMode = true;
+      console.log("Dark mode is enabled");
+      // Perform any action you need when dark mode is enabled
+    } else {
+      darkMode = false;
+      console.log("Dark mode is not enabled");
+      // Perform any action you need when dark mode is not enabled
+    }
+  });
   function handleSwitchDarkMode() {
     darkMode = !darkMode;
     darkMode
