@@ -20,6 +20,8 @@ const config = {
       fallback: "index.html",
       pages: "build/", // output directory for pages
       assets: "build/", // output directory for assets
+      precompress: false,
+      strict: true,
     }),
   },
 };

@@ -1,7 +1,22 @@
-name: Deploy to GitHub Pages
+name: Build and Deploy static content to GitHub Pages
 on:
   push:
-    branches: [ main ]
+    branches: [ 'main' ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Sets the GITHUB_TOKEN permissions to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow one concurrent deployment
+concurrency:
+  group: 'pages'
+  cancel-in-progress: true
+
 
 jobs:
   build_site:
@@ -30,6 +45,9 @@ jobs:
         # this should match the `pages` option in your adapter-static options
         with:
           path: 'build/'
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
 
   deploy:
     needs: build_site
