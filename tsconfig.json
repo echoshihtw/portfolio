@@ -14,7 +14,7 @@
     "resolveJsonModule": true,
     "sourceMap": true,
     "strict": true,
-    "outDir": "./build",
+    "outDir": "build/",
     "moduleResolution": "node",
     "paths": {
       "src/*": ["./src/*"]
