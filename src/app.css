@@ -47,9 +47,9 @@ h3,
 }
 
 
-/*.blueShadow {*/
-/*  box-shadow: 0 14px 55px rgba(109, 40, 217, 0.45);*/
-/*}*/
+.blueShadow {
+  box-shadow: 0 14px 55px rgba(109, 40, 217, 0.45);
+}
 
 .specialSpin {
     animation: spin 5s linear infinite;

@@ -1,6 +1,5 @@
 <script>
-  const githubUrl = "https://github.com/echoshihtw";
-  const linkedInUrl = "https://www.linkedin.com/in/echoshihtw/";
+  import { githubUrl, linkedInUrl } from "../links.ts";
 </script>
 
 <footer

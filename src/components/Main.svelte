@@ -1,6 +1,7 @@
 <script lang="ts">
   import Step from "./Step.svelte";
   import { projects } from "../projects";
+  import { email, githubUrl, linkedInUrl } from "../links";
 
   let benefits = [
     {
@@ -47,14 +48,37 @@
           who creates clean and impactful, user-friendly digital experiences.
         </span>
       </p>
-      <button
-        class="dark:blueShadow mx-auto lg:my-auto text-base sm:text-lg md:text-xl relative overflow-hidden px-6 py-3 group rounded-full bg-white text-slate-950"
-      >
-        <span
-          class="absolute top-0 right-full w-full h-full toggle_btn_hover_color opacity-20 group-hover:translate-x-full z-0 duration-200"
-        />
-        <span class="relative z-9">Get in touch &rarr;</span>
-      </button>
+
+      <div class="flex flex-col gap-4 items-center justify-center">
+        <div
+          class="flex items-center gap-4 sm:gap-6 text-2xl sm:text-3xl md:text-4xl mx-auto"
+        >
+          <a
+            href={linkedInUrl}
+            target="_blank"
+            class="text-white hover:text-violet-800 hover:dark:text-lime-400 duration-200"
+          >
+            <i class="fa-brands fa-linkedin" />
+          </a>
+          <a
+            href={githubUrl}
+            target="_blank"
+            class="text-white hover:text-lime-400 duration-200"
+          >
+            <i class="fa-brands fa-github" />
+          </a>
+          <a href={email}><i class="fa-solid fa-envelope" /></a>
+        </div>
+      </div>
+
+      <!--      <button-->
+      <!--        class="hidden sm:block dark:blueShadow mx-auto lg:my-auto text-base sm:text-lg md:text-xl relative overflow-hidden px-6 py-3 group rounded-full bg-white text-slate-950"-->
+      <!--      >-->
+      <!--        <span-->
+      <!--          class="absolute top-0 right-full w-full h-full toggle_btn_hover_color opacity-20 group-hover:translate-x-full z-0 duration-200"-->
+      <!--        />-->
+      <!--        <span class="relative z-9">Get in touch &rarr;</span>-->
+      <!--      </button>-->
     </div>
   </section>
   <section
