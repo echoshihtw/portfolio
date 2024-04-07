@@ -1,5 +1,5 @@
 <script>
-  import { githubUrl, linkedInUrl } from "../links.ts";
+  import { githubUrl, linkedInUrl } from "$lib/contactLinks.ts";
 </script>
 
 <footer

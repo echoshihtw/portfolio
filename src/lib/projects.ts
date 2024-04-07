@@ -1,11 +1,6 @@
-interface Project {
-  name: string;
-  description?: string;
-  href?: string;
-  file?: string;
-}
+import type { Projects } from "$lib/types/types";
 
-export const projects: Project[] = [
+export const projects: Projects = [
   {
     href: "https://todo-list-v2-multilingual.vercel.app/",
     name: "Todo 2.0",

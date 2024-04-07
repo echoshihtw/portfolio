@@ -1,14 +1,15 @@
 <script lang="ts">
-  import ThemeSwitch from "./ThemeSwitch.svelte";
+  import ThemeSwitch from "../ThemeSwitch.svelte";
+  import { getDrawerStore } from "@skeletonlabs/skeleton";
+  import { tabs } from "$lib/menuTabs";
 
   export let scrollPosition: number;
 
-  let tabs = [
-    { name: "Projects", link: "#projects" },
-    { name: "About", link: "#about" },
-    { name: "CV", link: "#cv" },
-    { name: "Github", link: "https://github.com/echoshihtw" },
-  ];
+  const drawerStore = getDrawerStore();
+
+  function toggleDrawer(): void {
+    drawerStore.open();
+  }
 </script>
 
 <header
@@ -20,8 +21,12 @@
   <div class={"w-full max-w-[1400px] flex items-center justify-between m-auto"}>
     <h1>
       <b>Echo</b>
-      Shih
     </h1>
+    <div class="flex md:hidden">
+      <button on:click={toggleDrawer}>
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
     <div class="hidden md:flex items-center gap-4">
       {#each tabs as tab, index}
         <a
