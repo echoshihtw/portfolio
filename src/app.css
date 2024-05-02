@@ -26,7 +26,7 @@ h3,
     font-family: "Poppins", sans-serif;
 }
 
-.blueShadow {
+.green_shadow {
     box-shadow: 0 14px 55px rgba(47, 115, 4, 0.75);
 }
 
@@ -47,10 +47,22 @@ h3,
 }
 
 
-.blueShadow {
-  box-shadow: 0 14px 55px rgba(109, 40, 217, 0.45);
+.blue_shadow {
+    box-shadow: 0 14px 55px rgba(109, 40, 217, 0.45);
 }
 
 .specialSpin {
     animation: spin 5s linear infinite;
+}
+
+.section_title_content_layout {
+    @apply flex flex-col gap-16 sm:gap-20 md:gap-24 w-full
+}
+
+.section_title {
+    @apply font-semibold text-3xl sm:text-4xl md:text-5xl
+}
+
+.section_content_padding {
+    @apply p-6 w-full
 }

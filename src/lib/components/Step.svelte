@@ -10,14 +10,17 @@
   <img
     alt={step.name}
     class="grid place-items-center px-4 md:text-6xl -mt-10 sm:-mt-12 md:-mt-14 lg:-mt-16 mx-auto duration-200"
-    src="assets/screenshot-todo.png"
+    src={`assets/${step.file}`}
   />
-  <h3 class="font-medium text-xl sm:text-2xl md:text-3xl">
-    {step.name}
-  </h3>
-  <p id="text">
-    {step.description}
-  </p>
+  <!--  <h3 class="font-medium text-xl sm:text-2xl md:text-3xl">-->
+  <!--    {step.name}-->
+  <!--  </h3>-->
+  <!--  <p-->
+  <!--    id="text"-->
+  <!--    class="text-left"-->
+  <!--  >-->
+  <!--    {step.description}-->
+  <!--  </p>-->
   <div class="flex-1 flex justify-between gap-4 items-end">
     <div
       class="ml-auto cursor-pointer hover:text-slate-950 duration-200 relative after:absolute after:top-0 after:h-0 after:right-full after:bg-white after:w-full after:h-full after:duration-200 hover:after:translate-x-full after:z-[-1] overflow-hidden"
