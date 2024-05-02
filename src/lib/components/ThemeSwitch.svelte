@@ -22,10 +22,11 @@
   }
 </script>
 
-<div>
+<div class="h-full grid items-center">
   <input
     type="checkbox"
     id="theme-toggle"
+    class="hidden"
     on:click={handleSwitchDarkMode}
   />
   <label for="theme-toggle" />
@@ -37,7 +38,7 @@
   }
 
   #theme-toggle + label {
-    @apply inline-block cursor-pointer h-12 w-12  rounded-full duration-300 content-[''];
+    @apply inline-block cursor-pointer h-8 w-8  rounded-full duration-300 content-[''];
   }
 
   #theme-toggle:not(:checked) + label {
