@@ -35,15 +35,15 @@ h3,
 }
 
 .toggle_font_color_highlight {
-    @apply dark:text-lime-400 text-violet-800;
+    @apply dark:text-lime-400 text-gray-900;
 }
 
 .toggle_hover_font_color {
-    @apply hover:dark:text-lime-400 hover:text-violet-800
+    @apply hover:dark:text-lime-400 hover:text-gray-900
 }
 
 .toggle_btn_hover_color {
-    @apply dark:bg-lime-400 bg-violet-400;
+    @apply dark:bg-lime-400 bg-gray-400;
 }
 
 
@@ -60,7 +60,7 @@ h3,
 }
 
 .section_title {
-    @apply font-semibold text-3xl sm:text-4xl md:text-5xl
+    @apply font-light text-3xl sm:text-4xl pt-[150px]
 }
 
 .section_content_padding {

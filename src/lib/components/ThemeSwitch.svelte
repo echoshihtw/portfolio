@@ -47,6 +47,7 @@
 
   #theme-toggle:checked + label {
     @apply bg-transparent;
-    box-shadow: inset -18px -16px 1px 1px #ddd;
+    /*change the shape of the switch on light mode*/
+    box-shadow: inset -10px -8px 1px 1px #ddd;
   }
 </style>

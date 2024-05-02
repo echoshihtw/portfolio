@@ -29,7 +29,7 @@
       {#each tabs as tab, index}
         <a
           href={tab.link}
-          class="duration-200 toggle_hover_font_color hover:line-through"
+          class="duration-200 toggle_hover_font_color hover:line-through text-white"
           target={index === 3 ? "_blank" : ""}
         >
           <p>{tab.name}</p>

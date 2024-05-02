@@ -15,22 +15,27 @@
       <a
         href={linkedInUrl}
         target="_blank"
-        class="text-white hover:text-violet-800 hover:dark:text-lime-400 duration-200"
+        class="text-white hover:text-gray-600 hover:dark:text-lime-400 duration-200"
       >
         <i class="fa-brands fa-linkedin-in" />
       </a>
       <a
         href={githubUrl}
         target="_blank"
-        class="text-white hover:text-lime-400 duration-200"
+        class="text-white hover:text-gray-600 hover:dark:text-lime-400 duration-200"
       >
         <i class="fa-brands fa-github" />
       </a>
     </div>
     <p class="mx-auto text-sm opacity-70">or</p>
     <p>
-      <b class="pr-2">Email</b>
-      <a href="mailto:echoshihtw@gmail.com">echoshihtw@gmail.com</a>
+      <b class="pr-2 dark:text-white text-gray-500">Email</b>
+      <a
+        href="mailto:echoshihtw@gmail.com"
+        class="text-white"
+      >
+        echoshihtw@gmail.com
+      </a>
     </p>
   </div>
 </footer>
