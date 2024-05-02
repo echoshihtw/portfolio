@@ -19,7 +19,7 @@
   }
 </script>
 
-<div class="antialiased dark:bg-blue-950/50 bg-pink-50">
+<div class="antialiased dark:bg-slate-900 bg-pink-50 text-white">
   <div
     class={"fixed bottom-0 right-0 w-full duration-200 flex p-10" +
       (scrollPosition > 50
@@ -35,8 +35,8 @@
   </div>
 
   <Header {scrollPosition} />
-  <main>
-    <div class="h-auto">
+  <main class="max-w-[1400px] mx-auto">
+    <div class="h-auto flex flex-col gap-y-20 lg:gap-y-32">
       <slot />
     </div>
   </main>

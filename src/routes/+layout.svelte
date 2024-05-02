@@ -9,15 +9,15 @@
 
 <Drawer
   position="right"
-  bgDrawer="bg-slate-200"
+  bgDrawer="backdrop-blur-md bg-white/20"
   rounded="rounded-l-2xl"
   width="w-[280px] md:w-[480px]"
 >
-  <div class="btn-group-vertical variant-filled w-full">
+  <div class="w-full pt-10 flex items-center gap-4 flex-col">
     {#each tabs as tab, index}
       <a
         href={tab.link}
-        class="duration-200 toggle_hover_font_color"
+        class="duration-200 text-white toggle_hover_font_color hover:line-through"
         target={index === 3 ? "_blank" : ""}
       >
         <p>{tab.name}</p>
