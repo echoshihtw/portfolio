@@ -61,7 +61,15 @@
         on:click={() => setActive(project.name)}
       >
         <div class="title flex flex-col gap-2">
-          <h3>{project.name}</h3>
+          <a
+            href={project.href}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <h3 class="hover:line-through toggle_hover_font_color">
+              {project.name}
+            </h3>
+          </a>
           <p class="text-sm">{project.description}</p>
         </div>
       </div>
