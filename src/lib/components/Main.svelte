@@ -152,7 +152,7 @@
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    border-radius: 50px;
+    @apply dark:rounded-[50px] rounded-none;
     height: 66vh;
     cursor: pointer;
     color: #fff;

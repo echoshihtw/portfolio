@@ -47,7 +47,7 @@
 
   #theme-toggle:checked + label {
     @apply bg-transparent;
-    /*change the shape of the switch on light mode*/
-    box-shadow: inset -10px -8px 1px 1px #ddd;
+    /*change the shape / color of the moon*/
+    box-shadow: inset -10px -8px 1px 1px rgba(148, 163, 184, 0.4);
   }
 </style>
