@@ -37,7 +37,7 @@
         </a>
       {/each}
       <button
-        class="dark:blueShadow relative overflow-hidden px-5 py-2 group dark:rounded-full rounded-none bg-white text-slate-950"
+        class="dark:blueShadow relative overflow-hidden px-5 py-2 group rounded-none dark:rounded-full bg-white text-slate-950"
       >
         <span
           class="absolute toggle_btn_hover_color top-0 right-full w-full h-full opacity-20 group-hover:translate-x-full z-0 duration-200"
