@@ -31,65 +31,51 @@
       color: {
         value: "#C3EB8D",
       },
-      shape: {
-        type: "circle",
-        stroke: {
-          width: 0,
-          color: "transparent",
-        },
-      },
-      polygon: {
-        nb_sides: 8,
-      },
-      image: {
-        src: "img/github.svg",
-        width: 100,
-        height: 100,
-      },
       opacity: {
-        value: 0.5,
+        value: 0.5371430403899501,
         random: true,
         anim: {
-          enable: false,
-          speed: 3,
+          enable: true,
+          speed: 100,
           opacity_min: 0,
           sync: false,
         },
       },
       size: {
-        value: 3,
+        value: 1,
         random: true,
         anim: {
-          enable: false,
-          speed: 4,
+          enable: true,
+          // not changing anything
+          speed: 0.001,
           size_min: 0.3,
           sync: false,
         },
       },
-      links: {
-        enable: false,
-      },
-      move: {
-        enable: true,
-        speed: 1.603412060865523,
-        random: true,
-        straight: false,
-        out_mode: "out",
-      },
       number: {
-        value: 100,
+        value: 160,
         density: {
           enable: true,
           value_area: 800,
         },
       },
-    },
-  };
-  let onParticlesLoaded = (event) => {
-    const particlesContainer = event.detail.particles;
+      move: {
+        enable: true,
+        speed: 0.2,
+        direction: "none",
+        random: true,
+        straight: false,
+        out_mode: "out",
+        bounce: false,
+        attract: {
+          enable: false,
+          rotateX: 600,
+          rotateY: 600,
+        },
+      },
 
-    // you can use particlesContainer to call all the Container class
-    // (from the core library) methods like play, pause, refresh, start, stop
+      detectRetina: true,
+    },
   };
 
   void particlesInit(async (engine) => {
@@ -110,7 +96,6 @@
     id="tsparticles"
     class="hidden dark:block "
     options={particlesConfig}
-    on:particlesLoaded={onParticlesLoaded}
   />
   <div
     class={"fixed bottom-0 right-0 duration-200 flex p-10" +
