@@ -60,9 +60,6 @@ h3,
 }
 
 .section_title {
-    @apply font-light text-3xl sm:text-4xl pt-[150px]
+    @apply font-light text-3xl sm:text-4xl pt-[70px]
 }
 
-.section_content_padding {
-    @apply p-6 w-full
-}

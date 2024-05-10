@@ -1,6 +1,7 @@
 <script lang="ts">
   import { projects } from "$lib/projects";
   import { email, githubUrl, linkedInUrl } from "$lib/contactLinks";
+  import HeroTyping from "$lib/components/HeroTyping.svelte";
 
   let activePanel = projects[0].name;
 
@@ -9,25 +10,16 @@
   }
 </script>
 
-<section class="flex flex-col flex-1 items-center p-[200px]">
+<section class="flex flex-col flex-1 items-center p-[100px] md:p-[200px]">
   <div
-    class="flex flex-col items-center lg:justify-center text-center lg:text-left gap-6 md:gap-8"
+    class="flex flex-col items-center lg:justify-center text-center lg:text-left gap-6 md:gap-8 md:w-[822px]"
   >
-    <h2 class="font-semibold text-3xl md:text-4xl h1_font_family text-left">
-      <span class="flex gap-0">
-        <span class="text-white">I'm&nbsp;</span>
-        <span class="toggle_font_color_highlight">Echo</span>
-        <span class="text-white">,</span>
-      </span>
-      <br />
-      <span class="text-white">
-        a <span class="toggle_font_color_highlight">Front End</span>
-        Developer based in Taipei,
-      </span>
+    <h2
+      class="font-semibold text-3xl md:text-4xl h1_font_family text-left flex gap-6 flex-col"
+    >
+      <HeroTyping />
     </h2>
-    <span class="text-left toggle_font_color_highlight">
-      who creates clean and impactful, user-friendly digital experiences.
-    </span>
+
     <div class="flex flex-col gap-4 items-center justify-center">
       <div
         class="flex items-center gap-4 sm:gap-6 text-2xl sm:text-3xl md:text-4xl mx-auto"
@@ -88,7 +80,10 @@
     {/each}
   </div>
 </section>
-<section id="about">
+<section
+  id="about"
+  class="m-h-[500px]"
+>
   <!--     <div class="z-[-1] bg-violet-950 w-screen left-1/2 -translate-x-1/2 top-0 h-full absolute"> </div> -->
   <!--    <div-->
   <!--      class="flex flex-col gap-2 text-center relative before:absolute before:top-0 before:left-0 before:w-2/3 before:h-1.5 before:bg-lime-700 after:absolute after:bottom-0 after:right-0 after:w-2/3 after:h-1.5 after:bg-lime-700 py-4"-->
@@ -96,16 +91,20 @@
   <h3 class="section_title">#about-me</h3>
 
   <!--    </div>-->
-  <h4
-    class="section_content_padding mx-auto font-semibold text-lg sm:text-xl md:text-2xl h-[500px]"
-  >
-    I am a Front-End Developer based in Taipei, Taiwan. My digital journey began
-    three years ago, and since then, I have collaborated with startups,
-    agencies, and on freelance projects. I specialize in providing innovative
-    solutions in front-end development, helping businesses bring their visions
-    to life on the web.
-  </h4>
-  <p>And I love working on cool projects!</p>
+  <div class="p-6 pb-20 w-full">
+    <h4
+      class="mx-auto font-semibold text-lg sm:text-xl md:text-2xl whitespace-pre-line"
+    >
+      I am a Front-End Developer based in Taipei, Taiwan. My digital journey
+      began three years ago, and since then, I have collaborated with startups,
+      agencies, and on freelance projects. I specialize in providing innovative
+      solutions in front-end development, helping businesses bring their visions
+      to life on the web. \\n 1. i work with international / local teams ,
+      fluent in english, chinese and italian \n 2. i value communications and
+      alignment of requirements
+      <span>And I love working on cool projects!</span>
+    </h4>
+  </div>
 </section>
 
 <!--    <div class="flex flex-col gap-20 w-full mx-auto max-w-[800px]">-->
