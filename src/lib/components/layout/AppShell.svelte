@@ -103,6 +103,7 @@
         : " opacity-0 pointer-events-none")}
   >
     <button
+      aria-label="go to top button"
       on:click={goTop}
       class="dark:grid hidden ml-auto dark:rounded-full rounded-none backdrop-blur-md bg-white/20 dark:bg-slate-900 text-lime-400 px-3 sm:px-4 hover:bg-slate-800 cursor-pointer aspect-square place-items-center relative z-[1]"
     >
@@ -110,6 +111,7 @@
     </button>
     <button
       on:click={goTop}
+      aria-label="go to top button"
       class="dark:hidden grid w-0 h-0 border-l-[40px] border-l-transparent border-b-[60px] border-b-white/20 border-r-[40px] border-r-transparent z-[1] relative cursor-pointer align-baseline hover:drop-shadow-2xl"
     ></button>
   </div>

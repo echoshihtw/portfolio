@@ -26,7 +26,10 @@
         <ThemeSwitch />
       </div>
       <div class="flex md:hidden">
-        <button on:click={toggleDrawer}>
+        <button
+          on:click={toggleDrawer}
+          aria-label="mobile menu toggle button"
+        >
           <i class="fa-solid fa-bars"></i>
         </button>
       </div>
@@ -37,6 +40,7 @@
           href={tab.link}
           class="duration-200 toggle_hover_font_color hover:line-through text-white"
           target={index === 3 ? "_blank" : ""}
+          aria-label="link to {tab.name} page"
         >
           <p>{tab.name}</p>
         </a>
