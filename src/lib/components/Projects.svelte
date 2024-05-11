@@ -20,7 +20,7 @@
           ? ''
           : 'backdrop-grayscale dark:backdrop-grayscale-0'}"
       >
-        <div class="title md:h-[200px] p-5 md:px-8 md:py-14">
+        <div class="title p-5 md:px-8 md:py-14">
           <a
             href={project.href}
             target="_blank"
@@ -69,7 +69,6 @@
     margin: 0;
     opacity: 0;
     background: linear-gradient(to top, #1e293b, transparent);
-    @apply dark:rounded-[50px] rounded-none;
   }
 
   .panel.active {
@@ -79,7 +78,8 @@
   .panel.active .title {
     opacity: 1;
     filter: drop-shadow(0 0 2rem #000);
-    @apply dark:rounded-[50px] rounded-none;
+    height: 200px;
+    @apply dark:rounded-br-[50px] dark:rounded-bl-[50px] rounded-none;
     transition: opacity 0.3s ease-in 0.4s;
   }
 
@@ -87,10 +87,5 @@
     .container {
       width: 100vw;
     }
-
-    /*.panel:nth-of-type(4),*/
-    /*.panel:nth-of-type(5) {*/
-    /*  display: none;*/
-    /*}*/
   }
 </style>
