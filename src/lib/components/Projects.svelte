@@ -16,7 +16,7 @@
       on:click={() => setActive(project.name)}
     >
       <div
-        class="w-full h-full {activePanel === project.name
+        class="w-full h-[200px] {activePanel === project.name
           ? ''
           : 'backdrop-grayscale dark:backdrop-grayscale-0'}"
       >
@@ -29,8 +29,8 @@
             <h3 class="hover:line-through toggle_hover_font_color">
               {project.name}
             </h3>
+            <p class="text-sm">{project.description}</p>
           </a>
-          <p class="text-sm">{project.description}</p>
         </div>
       </div>
     </div>
@@ -61,7 +61,7 @@
 
   .panel .title {
     width: 100%;
-    height: fit-content;
+    height: 200px;
     color: white;
     font-size: 24px;
     position: absolute;
@@ -69,7 +69,7 @@
     margin: 0;
     opacity: 0;
     background: linear-gradient(to top, #1e293b, transparent);
-    padding: 20px;
+    padding: 60px 40px;
   }
 
   .panel.active {
