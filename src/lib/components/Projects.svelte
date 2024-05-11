@@ -69,7 +69,7 @@
     margin: 0;
     opacity: 0;
     background: linear-gradient(to top, #1e293b, transparent);
-    /*padding: 60px 40px;*/
+    @apply dark:rounded-[50px] rounded-none;
   }
 
   .panel.active {

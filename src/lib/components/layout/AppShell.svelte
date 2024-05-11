@@ -111,9 +111,7 @@
     <button
       on:click={goTop}
       class="dark:hidden grid w-0 h-0 border-l-[40px] border-l-transparent border-b-[60px] border-b-white/20 border-r-[40px] border-r-transparent z-[1] relative cursor-pointer align-baseline hover:drop-shadow-2xl"
-    >
-      <!--      <Icon icon="ri:arrow-up-circle-line" />-->
-    </button>
+    ></button>
   </div>
 
   <Header {scrollPosition} />
