@@ -19,12 +19,12 @@
   let parsedText = parseText(aboutMe);
 </script>
 
-<section class="flex flex-col flex-1 items-center p-[100px] md:p-[200px]">
+<section class="flex flex-col flex-1 items-center p-[48px] md:p-[200px]">
   <div
-    class="flex flex-col items-center lg:justify-center text-center lg:text-left gap-6 md:gap-8 md:w-[822px]"
+    class="flex flex-col items-center lg:justify-center text-center lg:text-left gap-6 md:gap-8 w-full md:w-[822px]"
   >
     <h2
-      class="font-semibold text-3xl md:text-4xl h1_font_family text-left flex gap-6 flex-col"
+      class="font-semibold text-3xl h1_font_family text-left flex gap-6 flex-col w-full md:w-[1000px] min-h-[500px] md:min-h-[280px]"
     >
       <HeroTyping />
     </h2>
@@ -57,19 +57,20 @@
     </div>
   </div>
 </section>
-<section id="projects">
-  <h3 class="section_title pb-10">#projects</h3>
+<section
+  id="projects"
+  class=""
+>
+  <h3 class="section_title pb-10 p-[48px]">#projects</h3>
   <Projects />
 </section>
 <section
   id="about"
   class="m-h-[500px]"
 >
-  <h3 class="section_title">#about-me</h3>
-  <div class="p-6 pb-20 w-full">
-    <h4
-      class="mx-auto font-semibold text-lg sm:text-xl md:text-2xl whitespace-pre-line"
-    >
+  <h3 class="section_title p-[48px] md:p-20">#about-me</h3>
+  <div class="p-8 pt-0 md:p-6 pb-20 w-full">
+    <h4 class="mx-auto font-semibold text-xl whitespace-pre-line">
       {#each parsedText as segment}
         <span
           class:toggle_font_color_highlight={segment.highlighted}

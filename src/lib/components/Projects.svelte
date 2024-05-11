@@ -87,9 +87,9 @@
       width: 100vw;
     }
 
-    .panel:nth-of-type(4),
-    .panel:nth-of-type(5) {
-      display: none;
-    }
+    /*.panel:nth-of-type(4),*/
+    /*.panel:nth-of-type(5) {*/
+    /*  display: none;*/
+    /*}*/
   }
 </style>

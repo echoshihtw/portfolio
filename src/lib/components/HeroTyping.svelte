@@ -25,7 +25,7 @@
       }
 
       currentIndex++;
-      setTimeout(typeText, 90);
+      setTimeout(typeText, 80);
       if (currentIndex === rawText.length) {
         isTyping = false;
       }
@@ -37,7 +37,7 @@
   });
 </script>
 
-<span class="w-[1000px] min-h-[280px]">
+<span class="w-full">
   {@html displayText
     .replace(
       /\*([^*]+)\*/g,
