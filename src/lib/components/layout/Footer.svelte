@@ -1,5 +1,6 @@
 <script>
   import { githubUrl, linkedInUrl } from "$lib/contactLinks.ts";
+  import Icon from "@iconify/svelte";
 </script>
 
 <footer
@@ -15,6 +16,7 @@
       <a
         href={linkedInUrl}
         target="_blank"
+        rel="noreferrer noopener"
         class="text-white hover:text-gray-600 hover:dark:text-lime-400 duration-200"
       >
         <i class="fa-brands fa-linkedin-in" />
@@ -22,20 +24,78 @@
       <a
         href={githubUrl}
         target="_blank"
+        rel="noreferrer noopener"
         class="text-white hover:text-gray-600 hover:dark:text-lime-400 duration-200"
       >
         <i class="fa-brands fa-github" />
       </a>
     </div>
-    <p class="mx-auto text-sm opacity-70">or</p>
+    <p class="mx-auto text-sm opacity-70 text-gray-400">or</p>
     <p>
       <b class="pr-2 dark:text-white text-gray-500">Email</b>
       <a
         href="mailto:echoshihtw@gmail.com"
         class="text-white"
+        target="_blank"
+        rel="noreferrer noopener"
       >
         echoshihtw@gmail.com
       </a>
     </p>
+    <div class="flex items-center gap-2 pt-20">
+      <span class="text-gray-400">made with</span>
+      <!--      svelte-->
+      <a
+        href="https://kit.svelte.dev/"
+        target="_blank"
+        rel="noreferrer noopener"
+        class="hidden dark:block"
+      >
+        <Icon icon="devicon:svelte" />
+      </a>
+      <a
+        href="https://kit.svelte.dev/"
+        target="_blank"
+        rel="noreferrer noopener"
+        class="dark:hidden text-gray-400 hover:text-[#ff3e00]"
+      >
+        <Icon icon="devicon-plain:svelte" />
+      </a>
+      <!--      tailwind-->
+      <a
+        href="https://tailwindcss.com/"
+        target="_blank"
+        rel="noreferrer noopener"
+        class="dark:hidden text-gray-400 hover:text-[#38bdf8]"
+      >
+        <Icon icon="simple-icons:tailwindcss" />
+      </a>
+      <a
+        href="https://tailwindcss.com/"
+        target="_blank"
+        rel="noreferrer noopener"
+        class="hidden dark:block"
+      >
+        <Icon icon="devicon:tailwindcss" />
+      </a>
+      <!--      typescript-->
+
+      <a
+        href="https://www.typescriptlang.org/"
+        target="_blank"
+        rel="noreferrer noopener"
+        class="dark:hidden text-gray-400 hover:text-[#3178c6]"
+      >
+        <Icon icon="simple-icons:typescript" />
+      </a>
+      <a
+        href="https://www.typescriptlang.org/"
+        target="_blank"
+        rel="noreferrer noopener"
+        class="hidden dark:block"
+      >
+        <Icon icon="logos:typescript-icon" />
+      </a>
+    </div>
   </div>
 </footer>
