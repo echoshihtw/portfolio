@@ -2,6 +2,21 @@
   import { email, githubUrl, linkedInUrl } from "$lib/contactLinks";
   import HeroTyping from "$lib/components/HeroTyping.svelte";
   import Projects from "$lib/components/Projects.svelte";
+  import { aboutMe } from "$lib/aboutMe";
+
+  function parseText(text) {
+    // Split the string at each "**"
+    const parts = text.split(/(\*\*[^*]+\*\*)/g);
+    return parts.map((part) => {
+      if (part.startsWith("**") && part.endsWith("**")) {
+        return { text: part.slice(2, -2), highlighted: true };
+      } else {
+        return { text: part, highlighted: false };
+      }
+    });
+  }
+
+  let parsedText = parseText(aboutMe);
 </script>
 
 <section class="flex flex-col flex-1 items-center p-[100px] md:p-[200px]">
@@ -55,14 +70,15 @@
     <h4
       class="mx-auto font-semibold text-lg sm:text-xl md:text-2xl whitespace-pre-line"
     >
-      I am a Front-End Developer based in Taipei, Taiwan. My digital journey
-      began three years ago, and since then, I have collaborated with startups,
-      agencies, and on freelance projects. I specialize in providing innovative
-      solutions in front-end development, helping businesses bring their visions
-      to life on the web. \\n 1. i work with international / local teams ,
-      fluent in english, chinese and italian \n 2. i value communications and
-      alignment of requirements
-      <span>And I love working on cool projects!</span>
+      {#each parsedText as segment}
+        <span
+          class:toggle_font_color_highlight={segment.highlighted}
+          class:text-white={!segment.highlighted}
+        >
+          {segment.text}
+        </span>
+      {/each}
+      <span>(p.s. I love working on cool projects!)</span>
     </h4>
   </div>
 </section>
