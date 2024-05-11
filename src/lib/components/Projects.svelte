@@ -16,15 +16,16 @@
       on:click={() => setActive(project.name)}
     >
       <div
-        class="w-full h-[200px] {activePanel === project.name
+        class="w-full {activePanel === project.name
           ? ''
           : 'backdrop-grayscale dark:backdrop-grayscale-0'}"
       >
-        <div class="title flex flex-col gap-2">
+        <div class="title md:h-[200px] p-5 md:px-8 md:py-14">
           <a
             href={project.href}
             target="_blank"
             rel="noreferrer"
+            class="flex flex-col gap-2"
           >
             <h3 class="hover:line-through toggle_hover_font_color">
               {project.name}
@@ -61,7 +62,6 @@
 
   .panel .title {
     width: 100%;
-    height: 200px;
     color: white;
     font-size: 24px;
     position: absolute;
@@ -69,7 +69,7 @@
     margin: 0;
     opacity: 0;
     background: linear-gradient(to top, #1e293b, transparent);
-    padding: 60px 40px;
+    /*padding: 60px 40px;*/
   }
 
   .panel.active {

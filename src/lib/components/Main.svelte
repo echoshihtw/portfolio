@@ -57,10 +57,7 @@
     </div>
   </div>
 </section>
-<section
-  id="projects"
-  class=""
->
+<section id="projects">
   <h3 class="section_title pb-10 p-[48px]">#projects</h3>
   <Projects />
 </section>
@@ -68,8 +65,8 @@
   id="about"
   class="m-h-[500px]"
 >
-  <h3 class="section_title p-[48px] md:p-20">#about-me</h3>
-  <div class="p-8 pt-0 md:p-6 pb-20 w-full">
+  <h3 class="section_title pb-10 p-[48px]">#about-me</h3>
+  <div class="px-8 md:px-6 pb-20 w-full">
     <h4 class="mx-auto font-semibold text-xl whitespace-pre-line">
       {#each parsedText as segment}
         <span
