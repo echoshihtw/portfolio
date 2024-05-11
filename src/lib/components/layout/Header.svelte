@@ -42,12 +42,17 @@
         </a>
       {/each}
       <button
-        class="dark:blueShadow relative overflow-hidden px-5 py-2 group rounded-none dark:rounded-full bg-white text-slate-950"
+        class=" bg-white hover:text_gradient_light relative overflow-hidden px-5 py-2 group rounded-none dark:rounded-full text-slate-950"
       >
         <span
-          class="absolute toggle_btn_hover_color top-0 right-full w-full h-full opacity-20 group-hover:translate-x-full z-0 duration-200"
+          class="absolute toggle_btn_hover_color top-0 right-full w-full h-full opacity-50 group-hover:translate-x-full z-0 duration-200"
         />
-        <span class="relative z-9">Contact Me</span>
+        <a
+          href="#footer"
+          class="relative z-9"
+        >
+          Contact Me
+        </a>
       </button>
       <div class={scrollPosition > 60 && "drop-shadow-lg"}>
         <ThemeSwitch />

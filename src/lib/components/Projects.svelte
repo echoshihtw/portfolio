@@ -79,6 +79,7 @@
   .panel.active .title {
     opacity: 1;
     filter: drop-shadow(0 0 2rem #000);
+    @apply dark:rounded-[50px] rounded-none;
     transition: opacity 0.3s ease-in 0.4s;
   }
 

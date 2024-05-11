@@ -35,7 +35,42 @@ h3,
 }
 
 .toggle_font_color_highlight {
-    @apply dark:text-lime-400 text-gray-900;
+    @apply dark:text-lime-400 text-white
+
+}
+
+.text_gradient {
+    background-image: linear-gradient(-45deg, #d71db0, #1f53ff, #29ff7f, #eaf200, #a8eb12);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 400% 400%;
+    animation: gradient 5s ease infinite;
+}
+
+.text_gradient_light {
+    background: linear-gradient(to right, #ec3f18, #274a6d, #b32867, #49d782, #AA771C);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 400% 400%;
+    animation: gradient 10s ease infinite;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0 50%;
+    }
+}
+
+.text_bg_white {
+    background: white;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .toggle_hover_font_color {
@@ -43,7 +78,9 @@ h3,
 }
 
 .toggle_btn_hover_color {
-    @apply dark:bg-lime-400 bg-gray-400;
+    background-image: linear-gradient(-45deg, #d71db0, #1f53ff, #29ff7f);
+    background-size: 400% 400%;
+    animation: gradient 5s ease infinite;
 }
 
 

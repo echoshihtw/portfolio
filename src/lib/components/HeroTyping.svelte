@@ -18,9 +18,9 @@
         displayText += "<br>";
       } else {
         if (isHighlighting) {
-          displayText += `<span class="toggle_font_color_highlight">${currentChar}</span>`;
+          displayText += `<span class="text-transparent">${currentChar}</span>`;
         } else {
-          displayText += currentChar;
+          displayText += `<span class="text_bg_white">${currentChar}</span>`;
         }
       }
 
@@ -37,12 +37,16 @@
   });
 </script>
 
-<span class="w-full">
+<span class="w-full text_gradient hidden dark:block leading-relaxed">
   {@html displayText
-    .replace(
-      /\*([^*]+)\*/g,
-      '<span class="toggle_font_color_highlight">$1</span>'
-    )
+    .replace(/\*([^*]+)\*/g, '<span class="text-transparent">$1</span>')
+    .replace(/\n/g, "<br/>")}
+  <span class={isTyping && "typing"}></span>
+  <br />
+</span>
+<span class="w-full text_gradient_light dark:hidden leading-relaxed">
+  {@html displayText
+    .replace(/\*([^*]+)\*/g, '<span class="text-transparent">$1</span>')
     .replace(/\n/g, "<br/>")}
   <span class={isTyping && "typing"}></span>
   <br />
@@ -52,12 +56,13 @@
   .typing {
     height: 5px;
     width: 5px;
-    white-space: pre-wrap; /* Preserves whitespace */
+    white-space: pre-wrap;
     font-family: monospace;
     @apply border-r-2 border-lime-400;
     animation: blink-caret 0.5s step-end infinite;
     padding-left: 5px;
   }
+
   @keyframes blink-caret {
     50% {
       border-color: transparent;
