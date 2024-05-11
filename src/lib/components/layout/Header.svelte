@@ -21,10 +21,15 @@
     <h1>
       <b>Echo</b>
     </h1>
-    <div class="flex md:hidden">
-      <button on:click={toggleDrawer}>
-        <i class="fa-solid fa-bars"></i>
-      </button>
+    <div class="flex gap-5">
+      <div class="md:hidden">
+        <ThemeSwitch />
+      </div>
+      <div class="flex md:hidden">
+        <button on:click={toggleDrawer}>
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
     </div>
     <div class="hidden md:flex items-center gap-4">
       {#each tabs as tab, index}
