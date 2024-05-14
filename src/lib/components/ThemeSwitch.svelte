@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  export let id = "";
+  export let id = "theme-toggle";
 
   let darkMode = false;
 
