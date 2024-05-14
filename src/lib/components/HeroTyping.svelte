@@ -25,7 +25,7 @@
       }
 
       currentIndex++;
-      setTimeout(typeText, 80);
+      setTimeout(typeText, 60);
       if (currentIndex === rawText.length) {
         isTyping = false;
       }
