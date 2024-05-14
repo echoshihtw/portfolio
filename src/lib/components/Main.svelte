@@ -24,7 +24,7 @@
     class="flex flex-col items-center lg:justify-center text-center lg:text-left gap-6 md:gap-11 w-full md:w-[822px]"
   >
     <h2
-      class="font-semibold text-3xl h1_font_family text-left flex gap-6 md:gap-11 flex-col w-full md:w-[1000px] min-h-[640px] md:min-h-[345px]"
+      class="font-semibold text-3xl h1_font_family text-left flex gap-6 md:gap-11 flex-col w-full px-5 md:w-max-[1000px] min-h-[640px] md:min-h-[345px]"
     >
       <HeroTyping />
     </h2>
