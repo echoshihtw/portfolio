@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
+  export let id = "";
 
   let darkMode = false;
 
@@ -25,11 +26,11 @@
 <div class="h-full grid items-center">
   <input
     type="checkbox"
-    id="theme-toggle"
+    {id}
     class="hidden"
     on:click={handleSwitchDarkMode}
   />
-  <label for="theme-toggle" />
+  <label for={id} />
 </div>
 
 <style lang="postcss">
@@ -37,15 +38,27 @@
     @apply invisible;
   }
 
-  #theme-toggle + label {
-    @apply inline-block cursor-pointer h-8 w-8  rounded-full duration-300 content-[''];
+  #theme-toggle-desktop + label {
+    @apply inline-block cursor-pointer h-8 w-8 rounded-full duration-300 content-[''];
+  }
+  #theme-toggle-mobile + label {
+    @apply inline-block cursor-pointer h-8 w-8 rounded-full duration-300 content-[''];
   }
 
-  #theme-toggle:not(:checked) + label {
+  #theme-toggle-desktop:not(:checked) + label {
     @apply bg-amber-400;
   }
 
-  #theme-toggle:checked + label {
+  #theme-toggle-mobile:not(:checked) + label {
+    @apply bg-amber-400;
+  }
+
+  #theme-toggle-desktop:checked + label {
+    @apply bg-transparent;
+    /*change the shape / color of the moon*/
+    box-shadow: inset -10px -8px 1px 1px rgba(148, 163, 184, 0.4);
+  }
+  #theme-toggle-mobile:checked + label {
     @apply bg-transparent;
     /*change the shape / color of the moon*/
     box-shadow: inset -10px -8px 1px 1px rgba(148, 163, 184, 0.4);

@@ -23,7 +23,7 @@
     </h1>
     <div class="flex gap-5">
       <div class="md:hidden">
-        <ThemeSwitch />
+        <ThemeSwitch id="theme-toggle-mobile" />
       </div>
       <div class="flex md:hidden">
         <button
@@ -59,7 +59,7 @@
         </a>
       </button>
       <div class={scrollPosition > 60 && "drop-shadow-lg"}>
-        <ThemeSwitch />
+        <ThemeSwitch id="theme-toggle-desktop" />
       </div>
     </div>
   </div>
