@@ -44,7 +44,7 @@ h3,
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-size: 400% 400%;
-    animation: gradient 5s ease infinite;
+    animation: gradient 10s ease infinite;
 }
 
 .text_gradient_light {
