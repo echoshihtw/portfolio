@@ -23,7 +23,7 @@
   class="font-light flex flex-col flex-1 items-center p-[48px] md:p-[200px]"
 >
   <div
-    class="text-xl flex flex-col items-start lg:justify-center text-center lg:text-left gap-6 md:gap-11 w-full md:w-[822px] text_bg_clip bg_gradient h-[1000px]"
+    class="text-xl flex flex-col items-start lg:justify-center text-center lg:text-left gap-6 md:gap-11 w-full md:w-[822px] text_bg_clip bg_gradient"
   >
     <div>
       <span class="hero_text_white">Hi, my name is</span>
