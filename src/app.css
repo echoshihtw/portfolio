@@ -69,9 +69,14 @@ h3,
         background-position: 0 50%;
     }
 }
-
+.hero_text_white {
+    @apply text_bg_white text_bg_clip;
+}
 .text_bg_white {
     background: white;
+}
+
+.text_bg_clip {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
