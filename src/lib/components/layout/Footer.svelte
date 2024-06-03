@@ -43,17 +43,17 @@
         echoshihtw@gmail.com
       </a>
     </p>
-    <p class="text_gradient">
-      <b class="pr-2 text_bg_white dark:text-white text-gray-500">CV</b>
-      <a
-        href="mailto:echoshihtw@gmail.com"
-        class="text_bg_white hover:bg-transparent hover:text-transparent"
-        target="_blank"
-        rel="noreferrer noopener"
-      >
-        echoshihtw@gmail.com
-      </a>
-    </p>
+    <!--    <p class="text_gradient">-->
+    <!--      <b class="pr-2 text_bg_white dark:text-white text-gray-500">CV</b>-->
+    <!--      <a-->
+    <!--        href="mailto:echoshihtw@gmail.com"-->
+    <!--        class="text_bg_white hover:bg-transparent hover:text-transparent"-->
+    <!--        target="_blank"-->
+    <!--        rel="noreferrer noopener"-->
+    <!--      >-->
+    <!--        echoshihtw@gmail.com-->
+    <!--      </a>-->
+    <!--    </p>-->
     <div class="flex items-center gap-2 pt-20">
       <span class="text-gray-400">made with</span>
       <!--      svelte-->
