@@ -122,12 +122,11 @@
   <h3 class="section_title px-20 pb-10 md:p-[48px]">#about-me</h3>
   <div class="px-8 md:px-6 pb-20 w-full">
     <h4
-      class="leading-relaxed dark:hidden mx-auto font-light text-xl whitespace-pre-line text_gradient_light"
+      class="leading-relaxed dark:hidden mx-auto font-light text-xl whitespace-pre-line"
     >
       {#each parsedText as segment}
         <span
-          class:text-transparent={segment.highlighted}
-          class:text_bg_white={!segment.highlighted}
+          class:hover:text-white={segment.highlighted}
           class:underline={segment.highlighted}
           class:underline-offset-4={segment.highlighted}
         >
@@ -142,7 +141,7 @@
       {#each parsedText as segment}
         <span
           class:text-transparent={segment.highlighted}
-          class:text_bg_white={!segment.highlighted}
+          class:text_bg_white={segment.highlighted}
           class:underline={segment.highlighted}
           class:underline-offset-4={segment.highlighted}
         >
