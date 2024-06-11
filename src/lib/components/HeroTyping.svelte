@@ -25,7 +25,7 @@
       }
 
       currentIndex++;
-      setTimeout(typeText, 60);
+      setTimeout(typeText, 30);
       if (currentIndex === rawText.length) {
         isTyping = false;
       }
@@ -37,7 +37,7 @@
   });
 </script>
 
-<span class="w-full hidden dark:block leading-relaxed">
+<span class="text-xl w-full hidden dark:block leading-relaxed">
   {@html displayText
     .replace(/\*([^*]+)\*/g, '<span class="text-transparent">$1</span>')
     .replace(/\n/g, "<br/>")}
