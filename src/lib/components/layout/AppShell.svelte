@@ -42,23 +42,10 @@
       opacity: {
         value: 0.5371430403899501,
         random: true,
-        anim: {
-          enable: true,
-          speed: 100,
-          opacity_min: 0,
-          sync: false,
-        },
       },
       size: {
-        value: 1,
+        value: 0.4,
         random: true,
-        anim: {
-          enable: true,
-          // not changing anything
-          speed: 0.001,
-          size_min: 0.3,
-          sync: false,
-        },
       },
       number: {
         value: 160,
@@ -69,7 +56,7 @@
       },
       move: {
         enable: true,
-        speed: 0.2,
+        speed: 0.05,
         direction: "none",
         random: true,
         straight: false,
