@@ -42,34 +42,21 @@
       opacity: {
         value: 0.5371430403899501,
         random: true,
-        anim: {
-          enable: true,
-          speed: 100,
-          opacity_min: 0,
-          sync: false,
-        },
       },
       size: {
-        value: 1,
+        value: 0.4,
         random: true,
-        anim: {
-          enable: true,
-          // not changing anything
-          speed: 0.001,
-          size_min: 0.3,
-          sync: false,
-        },
       },
       number: {
-        value: 160,
+        value: 80,
         density: {
           enable: true,
-          value_area: 800,
+          value_area: 600,
         },
       },
       move: {
         enable: true,
-        speed: 0.2,
+        speed: 0.05,
         direction: "none",
         random: true,
         straight: false,
@@ -88,7 +75,7 @@
 </script>
 
 <div
-  class="antialiased dark:bg-slate-900 bg-gray-300 text-gray-900 dark:text-white"
+  class="antialiased dark:bg-gray-950 bg-gray-300 text-gray-900 dark:text-white"
 >
   <svelte:component
     this={ParticlesComponent}

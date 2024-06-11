@@ -18,14 +18,14 @@
         displayText += "<br>";
       } else {
         if (isHighlighting) {
-          displayText += `<span class="text-transparent">${currentChar}</span>`;
+          displayText += `<span class="">${currentChar}</span>`;
         } else {
-          displayText += `<span class="text_bg_white">${currentChar}</span>`;
+          displayText += `<span class="hero_text_white">${currentChar}</span>`;
         }
       }
 
       currentIndex++;
-      setTimeout(typeText, 60);
+      setTimeout(typeText, 30);
       if (currentIndex === rawText.length) {
         isTyping = false;
       }
@@ -37,7 +37,7 @@
   });
 </script>
 
-<span class="w-full text_gradient hidden dark:block leading-relaxed">
+<span class="text-xl w-full hidden dark:block leading-relaxed">
   {@html displayText
     .replace(/\*([^*]+)\*/g, '<span class="text-transparent">$1</span>')
     .replace(/\n/g, "<br/>")}

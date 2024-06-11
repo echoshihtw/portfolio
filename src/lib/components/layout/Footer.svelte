@@ -18,7 +18,7 @@
         href={linkedInUrl}
         target="_blank"
         rel="noreferrer noopener"
-        class="text_bg_white hover:bg-transparent hover:dark:text-lime-400 duration-200"
+        class="hero_text_white hover:bg-transparent hover:dark:text-lime-400 duration-200"
       >
         <i class="fa-brands fa-linkedin-in" />
       </a>
@@ -26,17 +26,17 @@
         href={githubUrl}
         target="_blank"
         rel="noreferrer noopener"
-        class="text_bg_white hover:bg-transparent hover:dark:text-lime-400 duration-200"
+        class="hero_text_white hover:bg-transparent hover:dark:text-lime-400 duration-200"
       >
         <i class="fa-brands fa-github" />
       </a>
     </div>
     <p class="mx-auto text-sm opacity-70 text-gray-400">or</p>
     <p class="text_gradient">
-      <b class="pr-2 text_bg_white dark:text-white text-gray-500">Email</b>
+      <b class="pr-2 hero_text_white dark:text-white text-gray-500">Email</b>
       <a
         href="mailto:echoshihtw@gmail.com"
-        class="text_bg_white hover:bg-transparent hover:text-transparent"
+        class="hero_text_white hover:bg-transparent hover:text-transparent"
         target="_blank"
         rel="noreferrer noopener"
       >
