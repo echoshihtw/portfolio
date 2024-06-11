@@ -47,57 +47,73 @@
       <span class="hero_text_white">,</span>
       JavaScript
       <span class="hero_text_white">,</span>
-      Python
-      <span class="hero_text_white">, and so on.</span>
+      Node.js
+      <span class="hero_text_white">,</span>
+      Express.js
+      <span class="hero_text_white">
+        and <a href="#tech-stack">#learn more</a>
+      </span>
     </span>
   </div>
 </section>
-<section
-  id="projects"
-  class="pt-[100px]"
->
-  <h3 class="section_title px-20 pb-10 md:p-[48px]">#projects</h3>
-  <Projects />
-</section>
-<section
-  id="about"
-  class="m-h-[500px] py-[100px]"
->
-  <h3 class="section_title px-20 pb-10 md:p-[48px]">#about-me</h3>
-  <div class="px-8 md:px-6 pb-20 w-full">
-    <h4
-      class="leading-relaxed dark:hidden mx-auto font-light text-xl whitespace-pre-line"
-    >
-      {#each parsedText as segment}
-        <span
-          class:hover:text-white={segment.highlighted}
-          class:underline={segment.highlighted}
-          class:underline-offset-4={segment.highlighted}
-          class:hover:decoration-grey={segment.highlighted}
-        >
-          {segment.text}
-        </span>
-      {/each}
-      <span>(p.s. I love working on cool projects!)</span>
-    </h4>
-    <h4
-      class="leading-relaxed hidden dark:block mx-auto font-light text-xl whitespace-pre-line text_gradient"
-    >
-      {#each parsedText as segment}
-        <span
-          class:hero_text_white={!segment.highlighted}
-          class:text-transparent={segment.highlighted}
-          class:underline={segment.highlighted}
-          class:underline-offset-4={segment.highlighted}
-          class:hover:decoration-white={segment.highlighted}
-        >
-          {segment.text}
-        </span>
-      {/each}
-      <span>(p.s. I love working on cool projects!)</span>
-    </h4>
-  </div>
-</section>
-
-<style>
-</style>
+<div class="flex flex-col gap-5">
+  <section
+    id="tech-stack"
+    class="m-h-[500px]"
+  >
+    <h3 class="section_title px-20 pb-10 md:p-[48px]">#tech-stack</h3>
+    <div class="px-8 md:px-6 pb-20 w-full">
+      Language: TypeScript, JavaScript, CSS, SCSS, Python, PHP...
+      <br />
+      Framework: React.js, Next.js, Svelte, Express.js, LangChain...
+      <br />
+      Library: Redux,Socket.io, TailwindCSS, Material-UI...
+    </div>
+  </section>
+  <section
+    id="projects"
+    class=""
+  >
+    <h3 class="section_title px-20 pb-10 md:p-[48px]">#projects</h3>
+    <Projects />
+  </section>
+  <section
+    id="about"
+    class="m-h-[500px]"
+  >
+    <h3 class="section_title px-20 pb-10 md:p-[48px]">#about-me</h3>
+    <div class="px-8 md:px-6 pb-20 w-full">
+      <h4
+        class="leading-relaxed dark:hidden mx-auto font-light text-xl whitespace-pre-line"
+      >
+        {#each parsedText as segment}
+          <span
+            class:hover:text-white={segment.highlighted}
+            class:underline={segment.highlighted}
+            class:underline-offset-4={segment.highlighted}
+            class:hover:decoration-grey={segment.highlighted}
+          >
+            {segment.text}
+          </span>
+        {/each}
+        <span>(p.s. I love working on cool projects!)</span>
+      </h4>
+      <h4
+        class="leading-relaxed hidden dark:block mx-auto font-light text-xl whitespace-pre-line text_gradient"
+      >
+        {#each parsedText as segment}
+          <span
+            class:hero_text_white={!segment.highlighted}
+            class:text-transparent={segment.highlighted}
+            class:underline={segment.highlighted}
+            class:underline-offset-4={segment.highlighted}
+            class:hover:decoration-white={segment.highlighted}
+          >
+            {segment.text}
+          </span>
+        {/each}
+        <span>(p.s. I love working on cool projects!)</span>
+      </h4>
+    </div>
+  </section>
+</div>
