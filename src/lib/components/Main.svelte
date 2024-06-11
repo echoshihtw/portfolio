@@ -23,37 +23,13 @@
   class="font-light flex flex-col flex-1 items-center p-[48px] md:p-[200px]"
 >
   <div
-    class="text-xl flex flex-col items-start lg:justify-center text-center lg:text-left gap-6 md:gap-11 w-full md:w-[822px] bg_gradient text_bg_clip"
+    class="text-xl flex flex-col items-start lg:justify-center text-center lg:text-left gap-6 md:gap-11 w-full bg_gradient text_bg_clip"
   >
-    <div>
-      <span class="hero_text_white">Hi, I'm</span>
-      <span class="text-4xl">Echo Shih</span>
-      ,
-    </div>
     <h2
-      class="font-light text-3xl h1_font_family text-left flex gap-6 md:gap-11 flex-col w-full md:w-max-[1000px] min-h-[150px] md:min-h-[100px]"
+      class="font-light text-3xl h1_font_family text-left flex gap-6 md:gap-11 flex-col px-20 pb-10 md:p-[48px] min-h-[150px] md:min-h-[100px]"
     >
       <HeroTyping />
     </h2>
-    <span class="text-start">
-      <span class="hero_text_white">
-        I'm a Software Engineer with over 3 years of experience, who's
-        passionate about building cool projects and solving problems.
-        Experienced in
-      </span>
-      React.js
-      <span class="hero_text_white">,</span>
-      TypeScript
-      <span class="hero_text_white">,</span>
-      JavaScript
-      <span class="hero_text_white">,</span>
-      Node.js
-      <span class="hero_text_white">,</span>
-      Express.js
-      <span class="hero_text_white">
-        and <a href="#tech-stack">#learn more</a>
-      </span>
-    </span>
   </div>
 </section>
 <div class="flex flex-col gap-5">
@@ -62,7 +38,7 @@
     class="m-h-[500px]"
   >
     <h3 class="section_title px-20 pb-10 md:p-[48px]">#tech-stack</h3>
-    <div class="px-8 md:px-6 pb-20 w-full">
+    <div class="px-20 pb-10 md:p-[48px] w-full">
       Language: TypeScript, JavaScript, CSS, SCSS, Python, PHP...
       <br />
       Framework: React.js, Next.js, Svelte, Express.js, LangChain...
@@ -72,7 +48,7 @@
   </section>
   <section
     id="projects"
-    class=""
+    class="w-full"
   >
     <h3 class="section_title px-20 pb-10 md:p-[48px]">#projects</h3>
     <Projects />
@@ -82,7 +58,7 @@
     class="m-h-[500px]"
   >
     <h3 class="section_title px-20 pb-10 md:p-[48px]">#about-me</h3>
-    <div class="px-8 md:px-6 pb-20 w-full">
+    <div class="px-20 pb-10 md:p-[48px] w-full">
       <h4
         class="leading-relaxed dark:hidden mx-auto font-light text-xl whitespace-pre-line"
       >
