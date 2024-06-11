@@ -23,10 +23,10 @@
   class="font-light flex flex-col flex-1 items-center p-[48px] md:p-[200px]"
 >
   <div
-    class="text-xl flex flex-col items-start lg:justify-center text-center lg:text-left gap-6 md:gap-11 w-full md:w-[822px] text_bg_clip bg_gradient"
+    class="text-xl flex flex-col items-start lg:justify-center text-center lg:text-left gap-6 md:gap-11 w-full md:w-[822px] bg_gradient text_bg_clip"
   >
     <div>
-      <span class="hero_text_white">Hi, my name is</span>
+      <span class="hero_text_white">Hi, I'm</span>
       <span class="text-4xl">Echo Shih</span>
       ,
     </div>
@@ -39,76 +39,17 @@
       <span class="hero_text_white">
         I'm a Software Engineer with over 3 years of experience, who's
         passionate about building cool projects and solving problems.
-        Specialised in
+        Experienced in
       </span>
-      React
+      React.js
       <span class="hero_text_white">,</span>
-      Typescript
-      <span class="hero_text_white">
-        and front end technologies such as Tailwind
-      </span>
+      TypeScript
+      <span class="hero_text_white">,</span>
+      JavaScript
+      <span class="hero_text_white">,</span>
+      Python
+      <span class="hero_text_white">, and so on.</span>
     </span>
-
-    <div class="flex flex-col gap-4 items-center justify-center">
-      <div
-        class="flex items-center gap-4 sm:gap-6 text-2xl sm:text-3xl md:text-4xl mx-auto text_gradient_light dark:hidden"
-      >
-        <a
-          href={linkedInUrl}
-          target="_blank"
-          class="text_bg_white hover:bg-transparent hover:dark:text-lime-400 duration-200"
-        >
-          <i class="fa-brands fa-linkedin" />
-        </a>
-        <a
-          href={githubUrl}
-          target="_blank"
-          class="text_bg_white hover:bg-transparent hover:dark:text-lime-400 duration-200"
-        >
-          <i class="fa-brands fa-github" />
-        </a>
-        <a
-          href={email}
-          class="text_bg_white hover:bg-transparent hover:dark:text-lime-400"
-        >
-          <i class="fa-solid fa-envelope" />
-        </a>
-      </div>
-      <div
-        class="items-center gap-4 sm:gap-6 text-2xl sm:text-3xl md:text-4xl mx-auto text_gradient hidden dark:flex"
-      >
-        <button
-          class="px-5 py-2 rounded-none dark:rounded-full flex align-baseline group/text bg_gradient"
-        >
-          <a
-            href="#footer"
-            class="hero_text_white z-9 text-2xl duration-200 group-hover/text:drop-shadow-[0_10px_10px_rgba(0,0,0,0.9)] drop-shadow-[0_10px_10px_rgba(0,0,0,0.9)] md:"
-          >
-            Contact Me
-          </a>
-        </button>
-        <a
-          href={linkedInUrl}
-          target="_blank"
-          class="hero_text_white hover:bg-transparent"
-        >
-          <i class="fa-brands fa-linkedin" />
-        </a>
-        <a
-          href={githubUrl}
-          target="_blank"
-          class="hero_text_white hover:bg-transparent"
-        >
-          <i class="fa-brands fa-github" />
-        </a>
-        <a
-          href={email}
-          class="hero_text_white hover:bg-transparent hover:dark:text-lime-400"
-        >
-          <i class="fa-solid fa-envelope" />
-        </a>
-      </div>
-    </div>
   </div>
 </section>
 <section
