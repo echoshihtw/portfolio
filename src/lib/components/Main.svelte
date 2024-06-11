@@ -30,11 +30,11 @@
       <span class="text-4xl">Echo Shih</span>
       ,
     </div>
-    <!--    <h2-->
-    <!--      class="font-light text-3xl h1_font_family text-left flex gap-6 md:gap-11 flex-col w-full md:w-max-[1000px] min-h-[150px] md:min-h-[100px]"-->
-    <!--    >-->
-    <!--      <HeroTyping />-->
-    <!--    </h2>-->
+    <h2
+      class="font-light text-3xl h1_font_family text-left flex gap-6 md:gap-11 flex-col w-full md:w-max-[1000px] min-h-[150px] md:min-h-[100px]"
+    >
+      <HeroTyping />
+    </h2>
     <span class="text-start">
       <span class="hero_text_white">
         I'm a Software Engineer with over 3 years of experience, who's
