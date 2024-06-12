@@ -10,6 +10,9 @@
   function toggleDrawer(): void {
     drawerStore.open();
   }
+  function goTop() {
+    document.body.scrollIntoView();
+  }
 </script>
 
 <header class={"w-full sticky z-[10] top-0 duration-200 bg-transparent py-4"}>
@@ -19,7 +22,12 @@
         "bg-white/20 backdrop-blur-md dark:rounded-full rounded-none")}
   >
     <h1>
-      <b>Echo</b>
+      <b
+        on:click={goTop}
+        class="cursor-pointer hover:"
+      >
+        Echo
+      </b>
     </h1>
     <div class="flex gap-5">
       <div class="md:hidden">

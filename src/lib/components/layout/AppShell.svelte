@@ -104,7 +104,10 @@
   </div>
 
   <Header {scrollPosition} />
-  <main class="max-w-[1400px] mx-auto">
+  <main
+    class="max-w-[1400px] mx-auto"
+    id="main-container"
+  >
     <div class="h-auto flex flex-col">
       <slot />
     </div>

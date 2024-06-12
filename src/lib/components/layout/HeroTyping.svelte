@@ -1,6 +1,6 @@
 <script>
   import { onMount } from "svelte";
-  import { rawText } from "$lib/intro.ts";
+  import { rawText } from "$lib/components/sections/hero/intro.ts";
 
   let displayText = "";
   let currentIndex = 0;
@@ -18,14 +18,14 @@
         displayText += "<br>";
       } else {
         if (isHighlighting) {
-          displayText += `<span class="">${currentChar}</span>`;
+          displayText += `<span class=" font-bold">${currentChar}</span>`;
         } else {
           displayText += `<span class="hero_text_white">${currentChar}</span>`;
         }
       }
 
       currentIndex++;
-      setTimeout(typeText, 30);
+      setTimeout(typeText, 40);
       if (currentIndex === rawText.length) {
         isTyping = false;
       }
@@ -37,14 +37,17 @@
   });
 </script>
 
-<span class="text-xl w-full hidden dark:block leading-relaxed">
+<!--dark mode-->
+<span class="text-2xl w-full hidden dark:block leading-relaxed">
   {@html displayText
     .replace(/\*([^*]+)\*/g, '<span class="text-transparent">$1</span>')
     .replace(/\n/g, "<br/>")}
   <span class={isTyping && "typing"}></span>
   <br />
 </span>
-<span class="w-full text_gradient_light dark:hidden leading-relaxed">
+
+<!--light mode-->
+<span class="w-full text-2xl text-gray-900 dark:hidden leading-relaxed">
   {@html displayText
     .replace(/\*([^*]+)\*/g, '<span class="text-transparent">$1</span>')
     .replace(/\n/g, "<br/>")}

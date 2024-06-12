@@ -25,6 +25,7 @@
             href={project.href}
             target="_blank"
             rel="noreferrer"
+            ß
             class="flex flex-col gap-2"
           >
             <h3 class="hover:line-through toggle_hover_font_color">
