@@ -1,9 +1,9 @@
 <section
   id="tech-stack"
-  class="m-h-[500px]"
+  class="m-h-[500px] section_padding section_layout"
 >
-  <h3 class="section_title px-20 pb-10 md:p-[48px]">#tech-stack</h3>
-  <div class="px-20 pb-10 md:p-[48px] w-full">
+  <h3 class="section_title">#tech-stack</h3>
+  <div class="w-full">
     Language: TypeScript, JavaScript, CSS, SCSS, Python, PHP...
     <br />
     Framework: React.js, Next.js, Svelte, Express.js, LangChain...

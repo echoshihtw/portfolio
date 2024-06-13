@@ -4,8 +4,8 @@
 
 <section
   id="projects"
-  class="w-full"
+  class="w-full section_padding section_layout"
 >
-  <h3 class="section_title px-20 pb-10 md:p-[48px]">#projects</h3>
+  <h3 class="section_title">#projects</h3>
   <Projects />
 </section>

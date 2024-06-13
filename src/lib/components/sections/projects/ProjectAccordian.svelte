@@ -7,7 +7,7 @@
   }
 </script>
 
-<div class="container px-20 pb-10 md:p-[48px]">
+<div class="container">
   {#each projects as project}
     <div
       style={`background-image: url('assets/${project.file}')`}

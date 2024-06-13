@@ -15,7 +15,7 @@
     class="hidden dark:flex flex-col lg:justify-center text-center lg:text-left gap-6 md:gap-11 w-full bg_gradient text_bg_clip"
   >
     <h2
-      class="font-light text-center h1_font_family gap-6 md:gap-11 p-5 sm:p-10 md:p-[48px] min-h-[300px] md:min-h-[180px] grid items-center"
+      class="font-light text-center poppins gap-6 md:gap-11 p-5 sm:p-10 md:p-[48px] min-h-[300px] md:min-h-[180px] grid items-center"
     >
       <HeroTyping />
     </h2>
@@ -26,7 +26,7 @@
     class="dark:hidden flex flex-col g:justify-center text-center lg:text-left gap-6 md:gap-11 w-full"
   >
     <h2
-      class="font-bold text-center h1_font_family flex flex-col gap-6 md:gap-11 px-20 pb-10 md:p-[48px] min-h-[300px] md:min-h-[80px] drop-shadow-xl"
+      class="font-bold text-center poppins flex flex-col gap-6 md:gap-11 px-20 pb-10 md:p-[48px] min-h-[300px] md:min-h-[80px] drop-shadow-xl"
     >
       <HeroTyping />
     </h2>

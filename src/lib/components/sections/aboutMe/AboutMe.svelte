@@ -18,10 +18,10 @@
 
 <section
   id="about"
-  class="m-h-[500px] pb-20"
+  class="m-h-[500px] pb-20 section_padding section_layout"
 >
-  <h3 class="section_title px-20 pb-10 md:p-[48px]">#about-me</h3>
-  <div class="px-20 pb-10 md:p-[48px] w-full">
+  <h3 class="section_title">#about-me</h3>
+  <div class="w-full">
     <h4
       class="leading-relaxed dark:hidden mx-auto font-light text-xl whitespace-pre-line"
     >

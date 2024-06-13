@@ -26,19 +26,6 @@ h3,
     font-family: "Poppins", sans-serif;
 }
 
-.green_shadow {
-    box-shadow: 0 14px 55px rgba(47, 115, 4, 0.75);
-}
-
-.h1_font_family {
-    font-family: "Poppins", sans-serif;
-}
-
-.toggle_font_color_highlight {
-    @apply dark:text-lime-400 text-white
-
-}
-
 .text_gradient {
     background-image: linear-gradient(-45deg, #d71db0, #7500f2, #29edff, #a8eb12);
     -webkit-background-clip: text;
@@ -92,19 +79,17 @@ h3,
 }
 
 
-.blue_shadow {
-    box-shadow: 0 14px 55px rgba(109, 40, 217, 0.45);
-}
-
 .specialSpin {
     animation: spin 5s linear infinite;
 }
 
-.section_title_content_layout {
-    @apply flex flex-col gap-16 sm:gap-20 md:gap-24 w-full
-}
 
 .section_title {
-    @apply font-light text-3xl sm:text-4xl pt-[70px]
+    @apply font-light text-3xl sm:text-4xl pt-4 md:pt-[70px]
 }
-
+.section_padding {
+    @apply px-4 pb-10 md:p-[48px]
+}
+.section_layout{
+    @apply flex flex-col gap-10
+}
