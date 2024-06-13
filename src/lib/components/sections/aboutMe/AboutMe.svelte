@@ -18,7 +18,7 @@
 
 <section
   id="about"
-  class="m-h-[500px]"
+  class="m-h-[500px] pb-20"
 >
   <h3 class="section_title px-20 pb-10 md:p-[48px]">#about-me</h3>
   <div class="px-20 pb-10 md:p-[48px] w-full">

@@ -84,7 +84,7 @@
     options={particlesConfig}
   />
   <div
-    class={"fixed bottom-0 right-0 duration-200 flex p-10" +
+    class={"fixed bottom-[100px] right-0 duration-200 flex p-10" +
       (scrollPosition > 50
         ? " opacity-full pointer-events-auto"
         : " opacity-0 pointer-events-none")}
@@ -104,13 +104,12 @@
   </div>
 
   <Header {scrollPosition} />
-  <main
-    class="max-w-[1400px] mx-auto"
-    id="main-container"
-  >
+  <main class="max-w-[1400px] mx-auto">
     <div class="h-auto flex flex-col">
       <slot />
     </div>
   </main>
+</div>
+<div class="overflow-hidden">
   <Footer />
 </div>
