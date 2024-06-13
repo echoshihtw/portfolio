@@ -56,7 +56,8 @@
   #theme-toggle-desktop:checked + label {
     @apply bg-transparent;
     /*change the shape / color of the moon*/
-    box-shadow: inset -10px -8px 1px 1px rgba(148, 163, 184, 0.4);
+    box-shadow: inset -10px -8px 1px 1px rgb(176, 217, 243);
+    filter: drop-shadow(0 0 0.5rem rgb(69, 101, 221));
   }
   #theme-toggle-mobile:checked + label {
     @apply bg-transparent;
