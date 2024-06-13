@@ -18,7 +18,7 @@
 
 <section
   id="about"
-  class="m-h-[500px] pb-20 section_padding section_layout"
+  class="m-h-[500px] section_padding section_layout mb-28"
 >
   <h3 class="section_title">#about-me</h3>
   <div class="w-full">
