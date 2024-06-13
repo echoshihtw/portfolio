@@ -85,7 +85,7 @@ h3,
 
 
 .section_title {
-    @apply font-light text-3xl sm:text-4xl pt-4 md:pt-[70px]
+    @apply font-light text-3xl sm:text-4xl
 }
 .section_padding {
     @apply px-4 pb-10 md:p-[48px]
