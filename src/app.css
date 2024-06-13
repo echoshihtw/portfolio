@@ -56,9 +56,11 @@ h3,
         background-position: 0 50%;
     }
 }
+
 .hero_text_white {
     @apply text_bg_white text_bg_clip;
 }
+
 .text_bg_white {
     background: white;
 }
@@ -87,9 +89,11 @@ h3,
 .section_title {
     @apply font-light text-3xl sm:text-4xl
 }
+
 .section_padding {
-    @apply px-4 pb-10 md:p-[48px]
+    @apply px-4 pb-10 md:p-[20px]
 }
-.section_layout{
+
+.section_layout {
     @apply flex flex-col gap-10
 }
