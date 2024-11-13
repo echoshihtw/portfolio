@@ -5,7 +5,7 @@
   import Hero from "$lib/components/sections/hero/Hero.svelte";
 </script>
 
-<div class="flex flex-col gap-5 mb-40">
+<div class="flex flex-col gap-5 mb-40 w-full">
   <Hero />
   <!--  <Intro />-->
   <Skills />

@@ -75,7 +75,7 @@
 </script>
 
 <div
-  class="antialiased dark:bg-gray-950 bg-gray-300 text-gray-900 dark:text-white"
+  class="antialiased dark:bg-gray-950 bg-gray-300 text-gray-900 dark:text-white w-full"
 >
   <svelte:component
     this={ParticlesComponent}

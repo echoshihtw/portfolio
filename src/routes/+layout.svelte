@@ -12,7 +12,7 @@
   position="right"
   bgDrawer="backdrop-blur-md bg-white/20"
   rounded="rounded-l-2xl"
-  width="w-[280px] md:w-[480px]"
+  width="w-[280px]"
 >
   <div class="w-full p-10 flex items-start gap-4 flex-col">
     {#each tabs as tab, index}
