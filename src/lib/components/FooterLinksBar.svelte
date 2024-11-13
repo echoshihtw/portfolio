@@ -26,7 +26,6 @@
     <i class="fa-brands fa-github" />
   </a>
 </div>
-<b class="pr-2 hero_text_white dark:text-white text-gray-500">Email</b>
 <div class="text_gradient">
   <a
     href="mailto:echoshihtw@gmail.com"
@@ -38,6 +37,16 @@
   </a>
 </div>
 <div class="flex items-center gap-2">
+  <a
+    href="https://github.com/echoshihtw/portfolio"
+    target="_blank"
+    rel="noreferrer noopener"
+    class="hidden dark:block"
+  >
+    <span class="text_gradient hover:font-bold">
+      <i class="fa-solid fa-code"></i>
+    </span>
+  </a>
   <span class="text-gray-400">made with</span>
   <!--      svelte-->
   <a

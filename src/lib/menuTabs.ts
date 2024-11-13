@@ -1,7 +1,7 @@
 import type { MenuTabs } from "$lib/types/types";
 
 export const tabs: MenuTabs = [
-  { name: "#tech-stack", link: "#tech-stack" },
+  { name: "#hello", link: "#hello" },
   { name: "#projects", link: "#projects" },
-  { name: "#about-me", link: "#about" },
+  { name: "#skills", link: "#skills" },
 ];

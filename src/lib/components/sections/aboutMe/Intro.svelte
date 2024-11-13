@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { aboutMe } from "$lib/components/sections/aboutMe/aboutMe.js";
+  import { intro } from "$lib/components/sections/aboutMe/intro.js";
 
   function parseText(text) {
     // Split the string at each "**"
@@ -13,17 +13,17 @@
     });
   }
 
-  let parsedText = parseText(aboutMe);
+  let parsedText = parseText(intro);
 </script>
 
 <section
   id="about"
   class="m-h-[500px] section_padding section_layout mb-28"
 >
-  <h3 class="section_title">#about-me</h3>
+  <h3 class="section_title">#hello</h3>
   <div class="w-full">
     <h4
-      class="leading-relaxed dark:hidden mx-auto font-light text-xl whitespace-pre-line"
+      class="select-text leading-relaxed dark:hidden mx-auto font-light text-xl whitespace-pre-line"
     >
       {#each parsedText as segment}
         <span

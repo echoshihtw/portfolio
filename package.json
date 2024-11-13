@@ -40,6 +40,8 @@
   "type": "module",
   "dependencies": {
     "@tsparticles/svelte": "^3.0.0",
+    "gray-matter": "^4.0.3",
+    "marked": "^13.0.2",
     "tsparticles": "^3.3.0"
   }
 }
