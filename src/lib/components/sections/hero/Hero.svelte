@@ -26,7 +26,7 @@
     class="dark:hidden flex flex-col g:justify-center text-center lg:text-left gap-6 md:gap-11 w-full"
   >
     <h2
-      class="font-bold text-center poppins flex flex-col gap-6 md:gap-11 px-20 pb-10 md:p-[48px] min-h-[300px] md:min-h-[80px] drop-shadow-xl"
+      class="font-bold text-center poppins md:gap-11 md:p-[48px] min-h-[300px] md:min-h-[80px] drop-shadow-xl"
     >
       <HeroTyping />
     </h2>
