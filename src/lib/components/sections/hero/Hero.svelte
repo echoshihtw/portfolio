@@ -3,11 +3,11 @@
 </script>
 
 <section
-  class="flex flex-col flex-1 gap-12 items-center p-[48px] md:py-[150px]"
+  class="flex flex-col flex-1 gap-12 items-center p-[48px] md:py-[120px]"
 >
   <h2 class="w-full flex flex-col gap-4 md:flex-row justify-center">
-    <b class="text-6xl">Echo Shih</b>
-    <span class="text-3xl self-end">/ Front End Engineer</span>
+    <b class="text-4xl">Obsessive Compulsive Order</b>
+    <span class="text-3xl self-end">/ Your Front End Engineer</span>
   </h2>
 
   <!--  dark mode-->

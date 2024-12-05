@@ -17,7 +17,7 @@
     <br />
     Development Practices: CI/CD, Unit Testing, Code Review, SDLC, UX/UI Optimisation
     <br />
-    Spoken Languages: Mandarin Chinese (Native), English (Fluent), Italian (Business
-    Proficiency)
+    Spoken Languages: Mandarin Chinese (Native), English (Fluent), Italiano (Business
+    Proficiency), Français
   </div>
 </section>

@@ -26,7 +26,7 @@
         on:click={goTop}
         class="cursor-pointer hover:"
       >
-        Echo
+        OCO
       </b>
     </h1>
     <div class="flex gap-5">
@@ -66,7 +66,7 @@
           Contact Me
         </a>
       </button>
-      <div class={scrollPosition > 60 && "drop-shadow-lg"}>
+      <div class={scrollPosition > 60 ? "drop-shadow-lg" : undefined}>
         <ThemeSwitch id="theme-toggle-desktop" />
       </div>
     </div>

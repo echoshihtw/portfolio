@@ -42,7 +42,7 @@
   {@html displayText
     .replace(/\*([^*]+)\*/g, '<span class="text-transparent">$1</span>')
     .replace(/\n/g, "<br/>")}
-  <span class={isTyping && "typing"}></span>
+  <span class={isTyping ? "typing" : undefined}></span>
   <br />
 </span>
 
@@ -51,7 +51,7 @@
   {@html displayText
     .replace(/\*([^*]+)\*/g, '<span class="text-transparent">$1</span>')
     .replace(/\n/g, "<br/>")}
-  <span class={isTyping && "typing"}></span>
+  <span class={isTyping ? "typing" : undefined}></span>
   <br />
 </span>
 
