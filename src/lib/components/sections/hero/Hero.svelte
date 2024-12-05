@@ -7,6 +7,7 @@
 >
   <h2 class="w-full flex flex-col gap-4 md:flex-row justify-center">
     <b class="text-4xl">Obsessive Compulsive Order</b>
+    <br />
     <span class="text-3xl self-end">/ Your Front End Engineer</span>
   </h2>
 
