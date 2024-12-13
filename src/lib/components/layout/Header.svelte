@@ -47,7 +47,6 @@
         <a
           href={tab.link}
           class="duration-200 toggle_hover_font_color hover:line-through text-white"
-          target={index === 3 ? "_blank" : ""}
           aria-label="link to {tab.name} page"
         >
           <p>{tab.name}</p>
