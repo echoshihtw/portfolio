@@ -6,7 +6,7 @@
   class="flex flex-col flex-1 gap-12 items-center p-[48px] md:py-[120px]"
 >
   <h2 class="w-full flex flex-col gap-4 md:flex-row justify-center">
-    <b class="text-4xl">Obsessive Compulsive Order</b>
+    <b class="text-4xl">Echo</b>
     <br />
     <span class="text-3xl self-end">/ Your Front End Engineer</span>
   </h2>

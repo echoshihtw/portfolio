@@ -26,7 +26,7 @@
         on:click={goTop}
         class="cursor-pointer hover:"
       >
-        OCO
+        Echo
       </b>
     </h1>
     <div class="flex gap-5">
