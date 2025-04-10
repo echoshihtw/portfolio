@@ -1,6 +1,6 @@
 <script>
   import Icon from "@iconify/svelte";
-  import { githubUrl, linkedInUrl } from "$lib/contactLinks.ts";
+  import { githubUrl, instagramUrl, linkedInUrl } from "$lib/contactLinks.ts";
 </script>
 
 <p class="px-4 py-2 bg-white text-slate-950 font-medium rounded-full">
@@ -14,6 +14,16 @@
     class="hero_text_white hover:bg-transparent hover:dark:text-lime-400 duration-200"
   >
     <i class="fa-brands fa-linkedin-in" />
+  </a>
+</div>
+<div class="text_gradient">
+  <a
+    href={instagramUrl}
+    target="_blank"
+    rel="noreferrer noopener"
+    class="hero_text_white hover:bg-transparent hover:dark:text-lime-400 duration-200"
+  >
+    <i class="fa-brands fa-instagram" />
   </a>
 </div>
 <div class="text_gradient">
