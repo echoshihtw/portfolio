@@ -97,3 +97,9 @@ h3,
 .section_layout {
     @apply flex flex-col gap-10
 }
+
+html,
+body {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
