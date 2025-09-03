@@ -1,2 +1,2 @@
 export const rawText =
-  "I make sure the *apps and websites* you use not only *work great* but also *look really nice*, so you can *enjoy* using them!";
+  "I build *scalable, user-focused apps* with *TypeScript · React · Next.js* — now bringing that *Web2 experience* into the *Web3 world*.";
