@@ -5,7 +5,7 @@
 <section
   class="flex flex-col flex-1 gap-12 items-center p-[48px] md:py-[120px]"
 >
-  <h2 class="w-full flex flex-col gap-4 md:flex-row justify-center">
+  <h2 class="w-full flex flex-col gap-4 md:flex-row justify-start">
     <b class="text-4xl">Echo</b>
     <br />
     <span class="text-3xl self-end">/ Your Front End Engineer</span>
@@ -16,7 +16,7 @@
     class="hidden dark:flex flex-col lg:justify-center text-center lg:text-left gap-6 md:gap-11 w-full bg_gradient text_bg_clip"
   >
     <h2
-      class="font-light text-center poppins gap-6 md:gap-11 p-5 sm:p-10 md:p-[48px] min-h-[300px] md:min-h-[180px] grid items-center"
+      class="font-light text-center poppins gap-6 md:gap-11 pl-0 p-5 sm:p-10 md:p-[48px] min-h-[300px] md:min-h-[180px] grid items-center"
     >
       <HeroTyping />
     </h2>
