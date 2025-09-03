@@ -18,10 +18,10 @@
 </script>
 
 <section
-  id="cliche"
+  id="about"
   class="m-h-[500px] section_padding section_layout mb-28"
 >
-  <h3 class="section_title">#A bit cliché and touché :D</h3>
+  <h3 class="section_title">#About</h3>
   <div class="w-full">
     <!--    light version-->
     <h4
