@@ -1,12 +1,12 @@
 <script lang="ts">
-  import { Footer, Header } from "./index.ts";
+  import { Footer, Header } from "./index";
   import { onMount } from "svelte";
   import Icon from "@iconify/svelte";
   import { particlesInit } from "@tsparticles/svelte";
   import { loadSlim } from "@tsparticles/slim";
 
   let scrollPosition: number;
-  let ParticlesComponent;
+  let ParticlesComponent: any;
 
   function handleScroll() {
     scrollPosition = window.scrollY; // Get the current vertical scroll position
@@ -75,7 +75,8 @@
 </script>
 
 <div
-  class="antialiased dark:bg-gray-950 bg-gray-300 text-gray-900 dark:text-white w-full"
+  class="antialiased w-full"
+  style="background: var(--color-bg); color: var(--text-color);"
 >
   <svelte:component
     this={ParticlesComponent}
@@ -92,7 +93,8 @@
     <button
       aria-label="go to top button"
       on:click={goTop}
-      class="dark:grid hidden ml-auto dark:rounded-full rounded-none backdrop-blur-md bg-white/20 dark:bg-slate-900 text-lime-400 px-3 sm:px-4 hover:bg-slate-800 cursor-pointer aspect-square place-items-center relative z-[1]"
+      class="dark:grid hidden ml-auto dark:rounded-full rounded-none backdrop-blur-md px-3 sm:px-4 cursor-pointer aspect-square place-items-center relative z-[1]"
+      style="background: rgba(17, 17, 16, 0.75); color: var(--color-accent);"
     >
       <Icon icon="ri:arrow-up-circle-line" />
     </button>

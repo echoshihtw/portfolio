@@ -1,8 +1,12 @@
 interface Project {
   name: string;
-  description?: string;
-  href?: string;
+  subtitle?: string;
+  description: string;
+  href: string;
+  stack: string[];
   file?: string;
+  linkLabel?: string;
+  status: "Live" | "In Progress";
 }
 
 interface MenuTab {

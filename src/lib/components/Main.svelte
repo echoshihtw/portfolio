@@ -9,7 +9,7 @@
 <div class="flex flex-col gap-5 mb-40 w-full">
   <Hero />
   <Intro />
-  <Skills />
   <Experience />
   <Project />
+  <Skills />
 </div>

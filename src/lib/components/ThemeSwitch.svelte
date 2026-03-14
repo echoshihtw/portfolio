@@ -1,34 +1,27 @@
 <script lang="ts">
   import { onMount } from "svelte";
+  import { initializeTheme, theme, toggleTheme } from "$lib/theme";
   export let id = "theme-toggle";
 
   let darkMode = false;
 
   onMount(() => {
-    if (document.documentElement.classList.contains("dark")) {
-      darkMode = true;
-      console.log("Dark mode is enabled");
-      // Perform any action you need when dark mode is enabled
-    } else {
-      darkMode = false;
-      console.log("Dark mode is not enabled");
-      // Perform any action you need when dark mode is not enabled
-    }
+    initializeTheme();
+    const unsubscribe = theme.subscribe((currentTheme) => {
+      darkMode = currentTheme === "dark";
+    });
+
+    return unsubscribe;
   });
-  function handleSwitchDarkMode() {
-    darkMode = !darkMode;
-    darkMode
-      ? document.documentElement.classList.add("dark")
-      : document.documentElement.classList.remove("dark");
-  }
 </script>
 
 <div class="h-full grid items-center">
   <input
     type="checkbox"
     {id}
+    checked={darkMode}
     class="hidden"
-    on:click={handleSwitchDarkMode}
+    on:change={toggleTheme}
   />
   <label for={id} />
 </div>

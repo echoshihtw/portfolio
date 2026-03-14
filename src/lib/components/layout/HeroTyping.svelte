@@ -1,6 +1,6 @@
 <script>
   import { onMount } from "svelte";
-  import { rawText } from "$lib/components/sections/hero/intro.ts";
+  import { rawText } from "$lib/components/sections/hero/intro";
 
   let displayText = "";
   let currentIndex = 0;
@@ -38,7 +38,7 @@
 </script>
 
 <!--dark mode-->
-<span class="text-2xl w-full hidden dark:block leading-relaxed">
+<span class="text-2xl w-full hidden dark:block leading-relaxed text-[var(--text-muted)]">
   {@html displayText
     .replace(/\*([^*]+)\*/g, '<span class="text-transparent">$1</span>')
     .replace(/\n/g, "<br/>")}
@@ -47,7 +47,7 @@
 </span>
 
 <!--light mode-->
-<span class="w-full text-2xl text-gray-900 dark:hidden leading-relaxed">
+<span class="w-full text-2xl dark:hidden leading-relaxed text-[var(--text-muted)]">
   {@html displayText
     .replace(/\*([^*]+)\*/g, '<span class="text-transparent">$1</span>')
     .replace(/\n/g, "<br/>")}
@@ -61,7 +61,7 @@
     width: 5px;
     white-space: pre-wrap;
     font-family: monospace;
-    @apply border-r-2 border-lime-400;
+    border-right: 2px solid var(--color-accent);
     animation: blink-caret 0.5s step-end infinite;
     padding-left: 5px;
   }

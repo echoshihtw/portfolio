@@ -1,67 +1,85 @@
 <script lang="ts">
-  export const experience = [
+  type ExperienceItem = {
+    start: string;
+    end: string;
+    title: string;
+    org: string;
+    location?: string;
+    mode?: string;
+    bullets: string[];
+  };
+
+  export const experience: ExperienceItem[] = [
     {
-      start: "2024.12",
-      end: "Now",
-      title: "Software Engineer",
+      start: "Dec 2024",
+      end: "Present",
+      title: "Full-Stack Engineer (Sole Engineer)",
       location: "Taipei",
       org: "Lockerbie Technology (TW) Ltd",
+      mode: "On-site",
       bullets: [
-        "Built internal project-management dashboards with Next.js + TypeScript",
-        "Delivered scalable PHP e-commerce modules",
-        "Improved long-term system durability and maintainability",
+        "Sole engineer owning Python backend, Next.js frontend, ArangoDB, Docker, and AWS",
+        "Implemented 5-module modular monolith with RabbitMQ for async cross-module communication",
+        "Restructured ArangoDB graph schema; automated CI/CD via GitHub Actions",
       ],
     },
     {
-      start: "2024.07",
-      end: "2024.10",
+      start: "Aug 2024",
+      end: "Oct 2024",
       title: "Software Engineer & Founding Partner",
-      org: "SPIN.FASHION (Circular Fashion Startup)",
-      location: "Singapore · Remote",
+      org: "SPIN.FASHION by Lablaco",
+      location: "Remote",
       bullets: [
-        "Streamlined Electron + React app release workflow with macOS signing/notarising",
-        "Optimised front-end features with backend engineers and partners, enhancing UX",
-        "Introduced agile workflows and release conventions with Notion + Figma",
+        "Resolved critical macOS Electron release blocker via code signing and notarisation",
+        "Optimised React/TypeScript platform; led Agile delivery across distributed time zones",
       ],
     },
     {
-      start: "2022.08",
-      end: "2024.06",
+      start: "Aug 2022",
+      end: "May 2024",
       title: "Software Engineer",
-      location: "Taipei · Hybrid",
-      org: "FindRecruiter",
+      location: "Taipei",
+      org: "Find Recruiter",
+      mode: "Hybrid",
       bullets: [
-        "Led TypeScript migration (–30% bugs, +55% maintainability)",
-        "Boosted team velocity +50% by adopting GitHub Projects",
-        "Delivered modular React components and integrated APIs with Redux-Saga",
+        "Led full TypeScript migration, reducing bugs by 30% and improving maintainability by 55%",
+        "Built reusable React component library; owned full lifecycle of AI-powered JD Generator",
       ],
     },
     {
       start: "2020",
-      end: "Now",
-      title: "Software Engineer",
-      org: "Various Clients",
+      end: "Present",
+      title: "Freelance Engineer",
+      org: "Global Clients",
+      location: "Remote",
       bullets: [
-        "Delivered 10+ production apps (Supabase CRM, Electron apps, ArangoDB APIs, Web3 prototypes)",
-        "Bitcoin Dev Kit (BDK): built custodial wallet prototype in Next.js to visualise coin selection (UTXO logic)",
-        "Crypto Price Ticker: real-time Socket.io app reducing API costs and scaling under high traffic",
+        "Bitcoin Dev Kit: custodial wallet UI in Next.js for UTXO visualisation",
+        "Delivered fintech, e-commerce, and creative apps in React, TypeScript, and Supabase",
       ],
     },
   ];
 </script>
 
 <section
-  id="experience"
+  id="work"
   class="m-h-[500px] section_padding section_layout"
 >
-  <h3 class="section_title">#experience</h3>
-  <div class="w-full space-y-6">
+  <h3 class="section_title">#work</h3>
+  <div class="w-full space-y-7 md:space-y-8">
     {#each experience as item}
-      <div class="p-4 border-l-2 border-gray-300">
-        <div class="text-sm text-gray-500">{item.start} – {item.end}</div>
-        <h4 class="font-semibold">{item.title}</h4>
-        <div class="italic text-gray-600">{item.org} - {item.location}</div>
-        <ul class="list-disc list-inside mt-2 space-y-1">
+      <div class="timeline-item">
+        <div class="timeline-date">{item.start} – {item.end}</div>
+        <h4 class="font-semibold text-[var(--text-color)]">{item.title}</h4>
+        <div class="timeline-meta">
+          {item.org}
+          {#if item.location}
+            · {item.location}
+          {/if}
+          {#if item.mode}
+            · {item.mode}
+          {/if}
+        </div>
+        <ul class="list-disc list-inside mt-2 space-y-1 text-[var(--text-color)]">
           {#each item.bullets as bullet}
             <li>{bullet}</li>
           {/each}
@@ -70,3 +88,24 @@
     {/each}
   </div>
 </section>
+
+<style>
+  .timeline-item {
+    padding: 1.25rem 1.25rem 1.1rem;
+    border-left: 2px solid var(--timeline-rule);
+  }
+
+  .timeline-date {
+    font-size: 0.83rem;
+    color: var(--text-muted);
+    font-family: "JetBrains Mono", monospace;
+    margin-bottom: 0.3rem;
+  }
+
+  .timeline-meta {
+    color: var(--text-muted);
+    font-style: italic;
+    margin-top: 0.15rem;
+    margin-bottom: 0.55rem;
+  }
+</style>

@@ -15,11 +15,10 @@
   width="w-[280px]"
 >
   <div class="w-full p-10 flex items-start gap-4 flex-col">
-    {#each tabs as tab, index}
+    {#each tabs as tab}
       <a
         href={tab.link}
-        class="duration-200 text-white toggle_hover_font_color hover:line-through"
-        target={index === 3 ? "_blank" : ""}
+        class="duration-200 text-[var(--text-color)] toggle_hover_font_color hover:line-through"
       >
         <p>{tab.name}</p>
       </a>
