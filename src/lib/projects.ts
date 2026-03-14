@@ -3,19 +3,14 @@ import type { Projects } from "$lib/types/types";
 export const projects: Projects = [
   {
     name: "Cosmora",
-    subtitle: "Salon Offline-First Operating System",
+    subtitle: "Offline-First Salon Operating System",
     description:
-      "A full-stack, offline-first operating system built for salon businesses — handling appointments, staff, inventory, and operations without depending on a live internet connection.",
+      "Offline-first desktop operating system for salon businesses, focused on privacy-first workflows for independent stylists.",
     // TODO: Replace this placeholder with the final production Cosmora URL.
     href: "https://cosmora.vercel.app",
-    stack: [
-      "Svelte",
-      "Full-Stack",
-      "Offline-First",
-      "IndexedDB / Service Workers",
-    ],
-    linkLabel: "Live Demo →",
-    status: "Live",
+    stack: ["Tauri", "React", "TypeScript", "SQLite", "Offline-First", "Privacy-First"],
+    linkLabel: "In Progress →",
+    status: "In Progress",
   },
   {
     name: "digital-chaos",

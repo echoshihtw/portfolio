@@ -4,6 +4,8 @@
   import { tabs } from "$lib/menuTabs";
 
   export let scrollPosition: number;
+  export let isVisible = true;
+  export let showNavBackdrop = false;
 
   const drawerStore = getDrawerStore();
 
@@ -15,14 +17,14 @@
   }
 </script>
 
-<header class={"w-full sticky z-[10] top-0 duration-200 bg-transparent py-4"}>
+<header
+  class={"w-full sticky z-[40] top-0 py-2 header-shell " +
+    (isVisible ? "header-visible" : "header-hidden")}
+>
   <div
-    class={"w-full flex items-center justify-between m-auto max-w-[1400px] py-4 px-6 " +
-      (scrollPosition > 60 &&
-        "dark:rounded-full rounded-none")}
-    style={scrollPosition > 60
-      ? "background: rgba(24, 23, 21, 0.12); border: 1px solid var(--section-border);"
-      : ""}
+    class={"w-full flex items-center justify-between m-auto max-w-[1400px] py-3 px-6 " +
+      (showNavBackdrop &&
+        "dark:rounded-full rounded-none nav-filtered")}
   >
     <h1>
       <button
@@ -62,3 +64,36 @@
     </div>
   </div>
 </header>
+
+<style>
+  .header-shell {
+    transition:
+      transform 260ms ease,
+      opacity 220ms ease;
+    will-change: transform, opacity;
+  }
+
+  .header-visible {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .header-hidden {
+    transform: translateY(-105%);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .nav-filtered {
+    transition: background-color 180ms ease, border-color 180ms ease;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    background: rgba(247, 245, 240, 0.7);
+    border: 1px solid var(--section-border);
+  }
+
+  :global(html[data-theme="dark"]) .nav-filtered {
+    background: rgba(17, 17, 16, 0.62);
+  }
+</style>

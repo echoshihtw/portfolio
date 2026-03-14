@@ -25,7 +25,7 @@
 
 <style>
   .hero-section {
-    min-height: 80vh;
+    min-height: 64vh;
     display: grid;
     align-items: center;
   }
@@ -34,8 +34,8 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 1.25rem;
-    padding: 1.25rem;
+    gap: 1rem;
+    padding: 1rem;
   }
 
   .hero-name {
@@ -71,8 +71,8 @@
     margin: 0;
     max-width: 70ch;
     color: var(--text-muted);
-    font-size: 1.04rem;
-    line-height: 1.85;
+    font-size: 1rem;
+    line-height: 1.72;
   }
 
   .hero-location {
@@ -87,10 +87,10 @@
   }
 
   .hero-links {
-    margin-top: 0.8rem;
+    margin-top: 0.45rem;
     display: flex;
     flex-wrap: wrap;
-    gap: 1.4rem;
+    gap: 1.2rem;
   }
 
   .hero-links a {
@@ -110,6 +110,12 @@
   @keyframes hero-caret-blink {
     50% {
       opacity: 0;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero-section {
+      min-height: 56vh;
     }
   }
 </style>

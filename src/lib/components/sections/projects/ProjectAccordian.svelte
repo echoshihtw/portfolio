@@ -9,7 +9,7 @@
         <div class="project-image-wrap">
           <img
             class="project-image"
-            src={`${project.file}`}
+            src={`/${project.file}`}
             alt={`${project.name} preview`}
             loading="lazy"
           />
@@ -53,7 +53,7 @@
   .project-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 1.25rem;
+    gap: 1rem;
     width: 100%;
   }
 
@@ -61,11 +61,11 @@
     background: var(--project-card-bg);
     border: 1px solid var(--project-card-border);
     color: var(--project-card-text);
-    padding: 1.75rem;
-    min-height: 18rem;
+    padding: 1.2rem;
+    min-height: 15.5rem;
     display: flex;
     flex-direction: column;
-    gap: 1.15rem;
+    gap: 0.85rem;
     transition:
       border-color 180ms ease,
       transform 180ms ease;
@@ -76,13 +76,13 @@
     background: #141311;
     border-radius: 0.35rem;
     overflow: hidden;
-    aspect-ratio: 16 / 9;
+    padding: 0.4rem;
   }
 
   .project-image {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: auto;
+    object-fit: contain;
     display: block;
   }
 
@@ -106,10 +106,10 @@
   }
 
   .project-subtitle {
-    margin: 0.4rem 0 0;
+    margin: 0.25rem 0 0;
     color: var(--project-card-muted);
-    font-size: 0.98rem;
-    line-height: 1.7;
+    font-size: 0.92rem;
+    line-height: 1.5;
   }
 
   .status {
@@ -135,8 +135,8 @@
   .project-description {
     margin: 0;
     color: var(--project-card-muted);
-    font-size: 1rem;
-    line-height: 1.78;
+    font-size: 0.95rem;
+    line-height: 1.62;
   }
 
   .stack-list {
@@ -157,7 +157,7 @@
   }
 
   .project-link {
-    margin-top: 0.8rem;
+    margin-top: 0.4rem;
     font-family: "JetBrains Mono", monospace;
     font-size: 0.78rem;
     letter-spacing: 0.03em;

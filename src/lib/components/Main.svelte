@@ -6,7 +6,7 @@
   import Experience from "$lib/components/sections/experience/Experience.svelte";
 </script>
 
-<div class="flex flex-col gap-5 mb-40 w-full">
+<div class="flex flex-col gap-2 md:gap-3 mb-24 w-full">
   <Hero />
   <Intro />
   <Experience />

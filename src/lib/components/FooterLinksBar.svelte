@@ -1,6 +1,6 @@
 <script>
   import Icon from "@iconify/svelte";
-  import { githubUrl, instagramUrl, linkedInUrl } from "$lib/contactLinks.ts";
+  import { githubUrl, instagramUrl, linkedInUrl } from "$lib/contactLinks";
 </script>
 
 <p class="px-4 py-2 bg-white text-slate-950 font-medium rounded-full">

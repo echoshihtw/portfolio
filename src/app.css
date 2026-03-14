@@ -59,14 +59,25 @@ body {
     font-family: "DM Sans", sans-serif;
     background: var(--color-bg);
     color: var(--text-color);
-    line-height: 1.75;
+    line-height: 1.7;
     letter-spacing: 0.005em;
     transition: background-color 180ms ease, color 180ms ease;
 }
 
 p,
 li {
-    line-height: 1.82;
+    line-height: 1.74;
+}
+
+a,
+button {
+    transition: color 180ms ease, border-color 180ms ease, background-color 180ms ease;
+}
+
+a:focus-visible,
+button:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
 }
 
 code,
@@ -114,11 +125,11 @@ code,
 }
 
 .section_padding {
-    @apply px-5 py-14 md:px-10 md:py-20;
+    @apply px-5 py-10 md:px-10 md:py-12;
 }
 
 .section_layout {
-    @apply flex flex-col gap-12 md:gap-14;
+    @apply flex flex-col gap-8 md:gap-10;
 }
 
 html,

@@ -1,21 +1,43 @@
 <script lang="ts">
-  import { Footer, Header } from "./index";
+  import FloatingNav from "./FloatingNav.svelte";
+  import Footer from "./Footer.svelte";
+  import Header from "./Header.svelte";
   import { onMount } from "svelte";
-  import Icon from "@iconify/svelte";
   import { particlesInit } from "@tsparticles/svelte";
   import { loadSlim } from "@tsparticles/slim";
 
   let scrollPosition: number;
   let ParticlesComponent: any;
+  let previousScrollY = 0;
+  let isHeaderVisible = true;
+  let showNavBackdrop = false;
+  const HIDE_SCROLL_THRESHOLD = 6;
 
   function handleScroll() {
-    scrollPosition = window.scrollY; // Get the current vertical scroll position
+    const currentY = window.scrollY;
+    const deltaY = currentY - previousScrollY;
+
+    scrollPosition = currentY;
+    if (currentY <= 12) {
+      isHeaderVisible = true;
+      showNavBackdrop = false;
+    } else if (deltaY < 0) {
+      isHeaderVisible = true;
+      showNavBackdrop = true;
+    } else if (deltaY > HIDE_SCROLL_THRESHOLD) {
+      isHeaderVisible = false;
+      showNavBackdrop = false;
+    }
+
+    previousScrollY = currentY;
   }
   onMount(async () => {
     const module = await import("@tsparticles/svelte");
     ParticlesComponent = module.default;
   });
   onMount(() => {
+    previousScrollY = window.scrollY;
+    handleScroll();
     window.addEventListener("scroll", handleScroll);
     void particlesInit(async (engine) => {
       // call this once per app
@@ -30,10 +52,6 @@
       window.removeEventListener("scroll", handleScroll);
     };
   });
-  function goTop() {
-    document.body.scrollIntoView();
-  }
-
   let particlesConfig = {
     particles: {
       color: {
@@ -84,28 +102,12 @@
     class="hidden dark:block "
     options={particlesConfig}
   />
-  <div
-    class={"fixed bottom-[100px] right-0 duration-200 flex p-10" +
-      (scrollPosition > 50
-        ? " opacity-full pointer-events-auto"
-        : " opacity-0 pointer-events-none")}
-  >
-    <button
-      aria-label="go to top button"
-      on:click={goTop}
-      class="dark:grid hidden ml-auto dark:rounded-full rounded-none backdrop-blur-md px-3 sm:px-4 cursor-pointer aspect-square place-items-center relative z-[1]"
-      style="background: rgba(17, 17, 16, 0.75); color: var(--color-accent);"
-    >
-      <Icon icon="ri:arrow-up-circle-line" />
-    </button>
-    <button
-      on:click={goTop}
-      aria-label="go to top button"
-      class="dark:hidden grid w-0 h-0 border-l-[40px] border-l-transparent border-b-[60px] border-b-white/20 border-r-[40px] border-r-transparent z-[1] relative cursor-pointer align-baseline hover:drop-shadow-2xl"
-    ></button>
-  </div>
-
-  <Header {scrollPosition} />
+  <Header
+    {scrollPosition}
+    isVisible={isHeaderVisible}
+    {showNavBackdrop}
+  />
+  <FloatingNav isVisible={!isHeaderVisible} />
   <main class="max-w-[1400px] mx-auto">
     <div class="h-auto flex flex-col">
       <slot />

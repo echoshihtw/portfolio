@@ -1,2 +1,2 @@
 export const rawText =
-  "Systems architecture · Offline-first · End-to-end ownership · Remote-first";
+  "Local-first software · Privacy-first tools · End-to-end ownership · Product builder";

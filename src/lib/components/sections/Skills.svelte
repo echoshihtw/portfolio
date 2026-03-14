@@ -7,39 +7,30 @@
     <article class="skills-group">
       <h4>Frontend</h4>
       <div class="skills-tags">
-        <span>React</span><span>Next.js</span><span>TypeScript</span><span>Redux</span
-        ><span>Tailwind CSS</span><span>Svelte</span><span>React Native</span
-        ><span>Electron</span>
+        <span>TypeScript</span><span>React</span><span>Next.js</span><span>SvelteKit</span
+        ><span>Tailwind CSS</span>
       </div>
     </article>
 
     <article class="skills-group">
-      <h4>Backend</h4>
+      <h4>Desktop &amp; Local-First</h4>
       <div class="skills-tags">
-        <span>Python</span><span>Node.js</span><span>ArangoDB</span><span>RabbitMQ</span
-        ><span>Supabase</span><span>Socket.io</span><span>Docker</span>
+        <span>Electron</span><span>Tauri</span><span>SQLite</span>
       </div>
     </article>
 
     <article class="skills-group">
-      <h4>Infrastructure</h4>
+      <h4>Backend &amp; Infrastructure</h4>
       <div class="skills-tags">
-        <span>AWS</span><span>GitHub Actions</span><span>Vercel</span>
-      </div>
-    </article>
-
-    <article class="skills-group">
-      <h4>AI &amp; LLMs</h4>
-      <div class="skills-tags">
-        <span>LangChain (JS)</span><span>OpenAI APIs</span><span>Prompt Engineering</span>
+        <span>Python</span><span>Docker</span><span>GitHub Actions</span><span>AWS</span>
       </div>
     </article>
 
     <article class="skills-group">
       <h4>Architecture</h4>
       <div class="skills-tags">
-        <span>Modular Monolith</span><span>Event-Driven Messaging</span><span>Offline-First</span
-        ><span>REST API Design</span>
+        <span>Modular Monolith</span><span>Offline-First</span><span>Privacy-First</span
+        ><span>End-to-End Ownership</span>
       </div>
     </article>
   </div>
@@ -49,14 +40,14 @@
   .skills-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 1.25rem;
+    gap: 0.9rem;
     width: 100%;
-    padding: 1.25rem;
+    padding: 0.85rem 1rem;
   }
 
   .skills-group {
     border: 1px solid var(--section-border);
-    padding: 1.2rem;
+    padding: 0.95rem;
     background: var(--surface-bg);
   }
 
@@ -72,7 +63,7 @@
   .skills-tags {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.6rem;
+    gap: 0.5rem;
   }
 
   .skills-tags span {

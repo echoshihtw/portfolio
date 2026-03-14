@@ -6,19 +6,19 @@
 
   <div class="about-grid">
     <p class="about-copy">
-      5+ years building production systems across SaaS, HR tech, e-commerce, and fintech.
-      Currently sole engineer at a construction-industry platform — owning everything from
-      architecture to deployment. Building Cosmora, an offline-first OS for salon businesses.
-      Drawn to blockchain, decentralised systems, and software that lasts.
+      Full-stack engineer experienced in building production systems end-to-end across frontend,
+      backend, infrastructure, and deployment. Interested in local-first software, privacy-first
+      tools, and thoughtful product design. Currently developing Cosmora, an offline-first salon
+      operating system for independent stylists.
     </p>
 
     <div class="tag-cloud" aria-label="Core focus tags">
+      <span>Product Builder</span>
+      <span>Local-First Software</span>
+      <span>Privacy-First Tools</span>
+      <span>End-to-End Delivery</span>
       <span>Modular Monolith</span>
-      <span>Offline-First</span>
-      <span>Graph Databases</span>
-      <span>Bitcoin Ecosystem</span>
-      <span>Remote-First</span>
-      <span>End-to-End Ownership</span>
+      <span>Electron / Tauri</span>
       <span>Cosmora</span>
     </div>
   </div>
@@ -29,15 +29,15 @@
     width: 100%;
     display: grid;
     grid-template-columns: 1fr;
-    gap: 2rem;
-    padding: 1.25rem;
+    gap: 1.2rem;
+    padding: 0.8rem 1rem;
   }
 
   .about-copy {
     margin: 0;
-    max-width: 68ch;
-    font-size: 1.04rem;
-    line-height: 1.9;
+    max-width: 66ch;
+    font-size: 1.01rem;
+    line-height: 1.72;
     color: var(--text-color);
   }
 
@@ -45,7 +45,7 @@
     display: flex;
     flex-wrap: wrap;
     align-content: flex-start;
-    gap: 0.65rem;
+    gap: 0.5rem;
   }
 
   .tag-cloud span {
