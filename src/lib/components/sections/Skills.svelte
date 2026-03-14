@@ -5,32 +5,37 @@
   <h3 class="section_title">#skills</h3>
   <div class="skills-grid">
     <article class="skills-group">
+      <h4>Languages</h4>
+      <div class="skills-tags">
+        <span>TypeScript</span><span>JavaScript</span><span>Python</span>
+      </div>
+    </article>
+
+    <article class="skills-group">
       <h4>Frontend</h4>
       <div class="skills-tags">
-        <span>TypeScript</span><span>React</span><span>Next.js</span><span>SvelteKit</span
-        ><span>Tailwind CSS</span>
+        <span>React</span><span>Next.js</span><span>SvelteKit</span><span>Tailwind</span>
       </div>
     </article>
 
     <article class="skills-group">
-      <h4>Desktop &amp; Local-First</h4>
+      <h4>Backend</h4>
       <div class="skills-tags">
-        <span>Electron</span><span>Tauri</span><span>SQLite</span>
+        <span>Node.js</span><span>Python</span><span>ArangoDB</span><span>RabbitMQ</span>
       </div>
     </article>
 
     <article class="skills-group">
-      <h4>Backend &amp; Infrastructure</h4>
+      <h4>Desktop / Local-First</h4>
       <div class="skills-tags">
-        <span>Python</span><span>Docker</span><span>GitHub Actions</span><span>AWS</span>
+        <span>Tauri</span><span>Electron</span><span>SQLite</span>
       </div>
     </article>
 
     <article class="skills-group">
-      <h4>Architecture</h4>
+      <h4>Infrastructure</h4>
       <div class="skills-tags">
-        <span>Modular Monolith</span><span>Offline-First</span><span>Privacy-First</span
-        ><span>End-to-End Ownership</span>
+        <span>Docker</span><span>GitHub Actions</span><span>Self-Hosted Linux</span>
       </div>
     </article>
   </div>

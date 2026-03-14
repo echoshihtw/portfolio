@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "vite dev",
     "build": "vite build",
+    "build-resume": "tsc --pretty false --target ES2020 --module NodeNext --moduleResolution NodeNext --esModuleInterop --skipLibCheck --outDir .resume-build scripts/buildResume.ts && node .resume-build/buildResume.js && node -e \"require('fs').rmSync('.resume-build',{recursive:true,force:true})\"",
     "preview": "vite preview",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",

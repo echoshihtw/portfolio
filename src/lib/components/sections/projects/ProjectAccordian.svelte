@@ -4,7 +4,10 @@
 
 <div class="project-grid">
   {#each projects as project}
-    <article class="project-card">
+    <article
+      class="project-card"
+      class:project-card-featured={project.featured}
+    >
       {#if project.file}
         <div class="project-image-wrap">
           <img
@@ -30,6 +33,14 @@
       </div>
 
       <p class="project-description">{project.description}</p>
+
+      {#if project.highlights?.length}
+        <ul class="project-highlights">
+          {#each project.highlights as highlight}
+            <li>{highlight}</li>
+          {/each}
+        </ul>
+      {/if}
 
       <div class="stack-list">
         {#each project.stack as stackItem}
@@ -69,6 +80,10 @@
     transition:
       border-color 180ms ease,
       transform 180ms ease;
+  }
+
+  .project-card-featured {
+    border-color: var(--color-accent);
   }
 
   .project-image-wrap {
@@ -139,6 +154,25 @@
     line-height: 1.62;
   }
 
+  .project-highlights {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 0.25rem;
+  }
+
+  .project-highlights li {
+    font-size: 0.82rem;
+    color: var(--project-card-text);
+    line-height: 1.55;
+  }
+
+  .project-highlights li::before {
+    content: "• ";
+    color: var(--color-accent);
+  }
+
   .stack-list {
     display: flex;
     flex-wrap: wrap;
@@ -174,6 +208,10 @@
   @media (min-width: 768px) {
     .project-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .project-card-featured {
+      grid-column: 1 / -1;
     }
   }
 </style>
