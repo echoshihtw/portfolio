@@ -1,4 +1,5 @@
 # Chun-Yu (Echo) Shih
+
 **Full-Stack Engineer · Local-First Systems · Desktop Software · End-to-End Ownership**
 
 Taipei, Taiwan  
@@ -34,6 +35,7 @@ Interested in **local-first software, privacy-first systems, and thoughtful prod
 # Experience
 
 ## Lockerbie Technology
+
 **Full-Stack Engineer — Sole Engineer**  
 Taipei, Taiwan · Dec 2024 – Present
 
@@ -50,6 +52,7 @@ Taipei, Taiwan · Dec 2024 – Present
 ---
 
 ## SPIN.FASHION by Lablaco
+
 **Software Engineer & Founding Partner**  
 Singapore · Remote · Aug 2024 – Oct 2024
 
@@ -64,6 +67,7 @@ Singapore · Remote · Aug 2024 – Oct 2024
 ---
 
 ## Find Recruiter (HR Tech Startup)
+
 **Software Engineer**  
 Taipei, Taiwan · Aug 2022 – May 2024
 
@@ -80,6 +84,7 @@ Taipei, Taiwan · Aug 2022 – May 2024
 ---
 
 ## Independent / Freelance
+
 **Software Engineer**  
 Remote · 2020 – Present
 
@@ -92,10 +97,11 @@ Remote · 2020 – Present
 # Founder & Product Engineering
 
 ## Cosmora
+
 **Founder & Product Engineer**  
 2024 – Present
 
-*Tauri · React · TypeScript · SQLite · Rust*
+_Tauri · React · TypeScript · SQLite · Rust_
 
 - Designing and building a **local-first desktop application** replacing notebook- and WhatsApp-based workflows used by independent salon owners.
 
@@ -124,24 +130,31 @@ Remote · 2020 – Present
 # Skills & Technologies
 
 ### Languages
+
 TypeScript · JavaScript · Python
 
 ### Frontend
+
 React · Next.js · SvelteKit · Redux · TailwindCSS
 
 ### Backend
+
 Node.js · Python · ArangoDB · RabbitMQ · Supabase
 
 ### Desktop / Local-First
+
 Tauri · Electron · SQLite · Rust (integration)
 
 ### Infrastructure
+
 Docker · GitHub Actions · Self-Hosted Linux Servers · AWS · Vercel
 
 ### Architecture
+
 Modular Monolith · Event-Driven Messaging · Offline-First Systems · REST API Design
 
 ### AI & LLM
+
 LangChain (JS) · OpenAI APIs · Prompt Engineering
 
 ---
@@ -155,7 +168,7 @@ Fu Jen Catholic University · Taipei · 2019
 
 # Certifications
 
-CS50 Cybersecurity — Harvard / edX *(In Progress)*  
+CS50 Cybersecurity — Harvard / edX _(In Progress)_  
 Data Science & AI with Python — Preface  
 LangChain for JavaScript Developers
 

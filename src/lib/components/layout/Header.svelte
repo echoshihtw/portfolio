@@ -23,8 +23,7 @@
 >
   <div
     class={"w-full flex items-center justify-between m-auto max-w-[1400px] py-3 px-6 " +
-      (showNavBackdrop &&
-        "dark:rounded-full rounded-none nav-filtered")}
+      (showNavBackdrop && "dark:rounded-full rounded-none nav-filtered")}
   >
     <h1>
       <button
@@ -86,7 +85,9 @@
   }
 
   .nav-filtered {
-    transition: background-color 180ms ease, border-color 180ms ease;
+    transition:
+      background-color 180ms ease,
+      border-color 180ms ease;
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
     background: rgba(247, 245, 240, 0.7);

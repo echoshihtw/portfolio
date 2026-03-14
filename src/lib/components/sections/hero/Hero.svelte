@@ -9,16 +9,28 @@
   <div class="hero-wrap">
     <p class="hero-name">
       Chun-Yu (Echo) Shih
-      <span class="hero-cursor" aria-hidden="true"></span>
+      <span
+        class="hero-cursor"
+        aria-hidden="true"
+      ></span>
     </p>
     <h2 class="hero-title">Full-Stack Engineer.</h2>
-    <p class="hero-subline" aria-label="Systems architecture · Offline-first · End-to-end ownership · Remote-first">
+    <p
+      class="hero-subline"
+      aria-label="Systems architecture · Offline-first · End-to-end ownership · Remote-first"
+    >
       <HeroTyping />
     </p>
     <p class="hero-location">📍 Taipei, Taiwan</p>
     <div class="hero-links">
       <a href="#work">View Work ↓</a>
-      <a href="https://github.com/echoshihtw" target="_blank" rel="noreferrer noopener">GitHub ↑</a>
+      <a
+        href="https://github.com/echoshihtw"
+        target="_blank"
+        rel="noreferrer noopener"
+      >
+        GitHub ↑
+      </a>
     </div>
   </div>
 </section>

@@ -7,6 +7,8 @@ interface Project {
   file?: string;
   linkLabel?: string;
   status: "Live" | "In Progress";
+  highlights?: string[];
+  featured?: boolean;
 }
 
 interface MenuTab {

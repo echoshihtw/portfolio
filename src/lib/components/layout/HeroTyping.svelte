@@ -38,7 +38,9 @@
 </script>
 
 <!--dark mode-->
-<span class="text-2xl w-full hidden dark:block leading-relaxed text-[var(--text-muted)]">
+<span
+  class="text-2xl w-full hidden dark:block leading-relaxed text-[var(--text-muted)]"
+>
   {@html displayText
     .replace(/\*([^*]+)\*/g, '<span class="text-transparent">$1</span>')
     .replace(/\n/g, "<br/>")}
@@ -47,7 +49,9 @@
 </span>
 
 <!--light mode-->
-<span class="w-full text-2xl dark:hidden leading-relaxed text-[var(--text-muted)]">
+<span
+  class="w-full text-2xl dark:hidden leading-relaxed text-[var(--text-muted)]"
+>
   {@html displayText
     .replace(/\*([^*]+)\*/g, '<span class="text-transparent">$1</span>')
     .replace(/\n/g, "<br/>")}

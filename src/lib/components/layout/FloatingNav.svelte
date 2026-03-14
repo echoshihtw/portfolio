@@ -13,7 +13,8 @@
 
 <nav
   aria-label="Floating navigation"
-  class={"floating-nav " + (isVisible ? "floating-nav-visible" : "floating-nav-hidden")}
+  class={"floating-nav " +
+    (isVisible ? "floating-nav-visible" : "floating-nav-hidden")}
 >
   {#each tabs as tab}
     <a

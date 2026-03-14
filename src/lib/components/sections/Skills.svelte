@@ -7,35 +7,47 @@
     <article class="skills-group">
       <h4>Languages</h4>
       <div class="skills-tags">
-        <span>TypeScript</span><span>JavaScript</span><span>Python</span>
+        <span>TypeScript</span>
+        <span>JavaScript</span>
+        <span>Python</span>
       </div>
     </article>
 
     <article class="skills-group">
       <h4>Frontend</h4>
       <div class="skills-tags">
-        <span>React</span><span>Next.js</span><span>SvelteKit</span><span>Tailwind</span>
+        <span>React</span>
+        <span>Next.js</span>
+        <span>SvelteKit</span>
+        <span>Tailwind</span>
       </div>
     </article>
 
     <article class="skills-group">
       <h4>Backend</h4>
       <div class="skills-tags">
-        <span>Node.js</span><span>Python</span><span>ArangoDB</span><span>RabbitMQ</span>
+        <span>Node.js</span>
+        <span>Python</span>
+        <span>ArangoDB</span>
+        <span>RabbitMQ</span>
       </div>
     </article>
 
     <article class="skills-group">
       <h4>Desktop / Local-First</h4>
       <div class="skills-tags">
-        <span>Tauri</span><span>Electron</span><span>SQLite</span>
+        <span>Tauri</span>
+        <span>Electron</span>
+        <span>SQLite</span>
       </div>
     </article>
 
     <article class="skills-group">
       <h4>Infrastructure</h4>
       <div class="skills-tags">
-        <span>Docker</span><span>GitHub Actions</span><span>Self-Hosted Linux</span>
+        <span>Docker</span>
+        <span>GitHub Actions</span>
+        <span>Self-Hosted Linux</span>
       </div>
     </article>
   </div>
