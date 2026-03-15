@@ -64,7 +64,7 @@ export const experience: ExperienceItem[] = [
 
 export const skills: SkillGroup[] = [
   {
-    "category": "### Languages",
+    "category": "Languages",
     "items": [
       "TypeScript",
       "JavaScript",
@@ -76,9 +76,16 @@ export const skills: SkillGroup[] = [
     "items": [
       "React",
       "Next.js",
-      "SvelteKit",
+      "TailwindCSS",
+      "SvelteKit"
+    ]
+  },
+  {
+    "category": "State Management",
+    "items": [
       "Redux",
-      "TailwindCSS"
+      "Zustand",
+      "React Query"
     ]
   },
   {
@@ -175,7 +182,7 @@ export const projects: Projects = [
       "Socket.io"
     ],
     "linkLabel": "Source Code →",
-    "status": "Live"
+    "status": "Archived"
   },
   {
     "name": "Echology",
@@ -187,6 +194,6 @@ export const projects: Projects = [
       "Tailwind CSS"
     ],
     "linkLabel": "Source Code →",
-    "status": "Live"
+    "status": "Archived"
   }
 ];

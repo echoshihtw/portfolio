@@ -12,21 +12,23 @@
     {#each projects as project}
       <article class="project-card">
         <h4 class="project-name">{project.name}</h4>
-        <p class="project-meta">{project.role} · {project.date}</p>
+        <p class="project-meta">{project.subtitle ?? project.status}</p>
 
-        {#if project.stack.length > 0}
+        {#if (project.stack ?? []).length > 0}
           <div class="stack-list">
-            {#each project.stack as tech}
+            {#each project.stack ?? [] as tech}
               <span class="stack-item">{tech}</span>
             {/each}
           </div>
         {/if}
 
-        <ul class="project-highlights">
-          {#each project.highlights as bullet}
-            <li>{bullet}</li>
-          {/each}
-        </ul>
+        {#if (project.highlights ?? []).length > 0}
+          <ul class="project-highlights">
+            {#each project.highlights ?? [] as bullet}
+              <li>{bullet}</li>
+            {/each}
+          </ul>
+        {/if}
       </article>
     {/each}
   </div>

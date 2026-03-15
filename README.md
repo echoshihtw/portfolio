@@ -67,7 +67,7 @@ Edit this file to update:
 
 - experience
 - skills
-- projects
+- projectsConfig
 - achievements
 
 Do not manually edit generated files.

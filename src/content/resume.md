@@ -135,7 +135,10 @@ TypeScript · JavaScript · Python
 
 ### Frontend
 
-React · Next.js · SvelteKit · Redux · TailwindCSS
+React · Next.js · TailwindCSS · SvelteKit
+
+### State Management
+Redux · Zustand · React Query
 
 ### Backend
 

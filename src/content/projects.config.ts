@@ -1,14 +1,20 @@
-import type { Projects } from "$lib/types/types";
+import type { Projects } from "../lib/types/types.js";
 
-export const projects: Projects = [
+export const projectsConfig: Projects = [
   {
     name: "Cosmora",
     subtitle: "Offline-First Salon Operating System",
     description:
-      "Offline-first desktop operating system for salon businesses, focused on privacy-first workflows for independent stylists.",
-    // TODO: Replace this placeholder with the final production Cosmora URL.
-    href: "https://cosmora.vercel.app",
-    stack: ["Tauri", "React", "TypeScript", "SQLite", "Offline-First", "Privacy-First"],
+      "Cosmora is a local-first desktop application designed for independent salon owners. It keeps client and business data on-device while supporting visit history, client records, and financial insight workflows without cloud dependency.",
+    href: "https://cosmora-lab.vercel.app",
+    stack: ["Tauri", "TypeScript", "SQLite", "Local-First", "Privacy-First"],
+    highlights: [
+      "Tauri desktop application",
+      "SQLite local database",
+      "Privacy-first data model",
+      "Financial reporting system",
+    ],
+    featured: true,
     linkLabel: "In Progress →",
     status: "In Progress",
   },
@@ -22,23 +28,22 @@ export const projects: Projects = [
     status: "Live",
   },
   {
-    href: "https://github.com/echoshihtw/crypto-price-ticker",
     name: "Crypto Price Ticker",
-    file: "assets/crypto-price-ticker.png",
+    href: "https://github.com/echoshihtw/crypto-price-ticker",
     description:
       "Full stack realtime cryptocurrency price chart built with React, TypeScript, and Socket.io.",
     stack: ["React", "TypeScript", "Socket.io"],
     linkLabel: "Source Code →",
-    status: "Live",
+    status: "Archived",
   },
   {
+    name: "Echology",
     href: "https://github.com/evanlinjin/echology",
-    name: "Ecology",
     file: "assets/echology.png",
     description:
-      "Regtest custodial web wallet that showcases Bitcoin Dev Kit (BDK) coin selection and spend-scenario exploration.",
+      "Regtest custodial web wallet showcasing Bitcoin Dev Kit (BDK) coin selection and spend-scenario exploration.",
     stack: ["Next.js", "Tailwind CSS"],
     linkLabel: "Source Code →",
-    status: "Live",
+    status: "Archived",
   },
 ];

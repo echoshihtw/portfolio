@@ -1,24 +1,13 @@
 <script lang="ts">
-  import { projects } from "$lib/projects";
+  import { projectsConfig } from "../../../../content/projects.config";
 </script>
 
 <div class="project-grid">
-  {#each projects as project}
+  {#each projectsConfig as project}
     <article
       class="project-card"
       class:project-card-featured={project.featured}
     >
-      {#if project.file}
-        <div class="project-image-wrap">
-          <img
-            class="project-image"
-            src={`/${project.file}`}
-            alt={`${project.name} preview`}
-            loading="lazy"
-          />
-        </div>
-      {/if}
-
       <div class="project-top">
         <div>
           <h4 class="project-name">{project.name}</h4>
@@ -26,13 +15,34 @@
             <p class="project-subtitle">{project.subtitle}</p>
           {/if}
         </div>
-        <p class="status">
-          <span class="status-dot" />
+        <p
+          class="status"
+          class:status-live={project.status === "Live"}
+          class:status-in-progress={project.status === "In Progress"}
+          class:status-archived={project.status === "Archived"}
+        >
+          <span
+            class="status-dot"
+            class:status-dot-live={project.status === "Live"}
+            class:status-dot-in-progress={project.status === "In Progress"}
+            class:status-dot-archived={project.status === "Archived"}
+          />
           {project.status}
         </p>
       </div>
 
       <p class="project-description">{project.description}</p>
+
+      {#if project.file}
+        <div class="project-image-wrap">
+          <img
+            class="project-image"
+            src={`${project.file}`}
+            alt={`${project.name} preview`}
+            loading="lazy"
+          />
+        </div>
+      {/if}
 
       {#if project.highlights?.length}
         <ul class="project-highlights">
@@ -139,13 +149,39 @@
     color: #a7f3d0;
   }
 
+  .status-live {
+    color: #a7f3d0;
+  }
+
+  .status-in-progress {
+    color: #fcd34d;
+  }
+
+  .status-archived {
+    color: #cbd5e1;
+  }
+
   .status-dot {
     width: 0.5rem;
     height: 0.5rem;
     border-radius: 999px;
+  }
+
+  .status-dot-live {
     background: #34d399;
     box-shadow: 0 0 0 3px rgba(52, 211, 153, 0.18);
   }
+
+  .status-dot-in-progress {
+    background: #fbbf24;
+    box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.2);
+  }
+
+  .status-dot-archived {
+    background: #94a3b8;
+    box-shadow: 0 0 0 3px rgba(148, 163, 184, 0.18);
+  }
+
 
   .project-description {
     margin: 0;
