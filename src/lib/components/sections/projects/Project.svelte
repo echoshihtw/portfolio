@@ -1,5 +1,5 @@
 <script>
-  import Projects from "$lib/components/sections/projects/ProjectAccordian.svelte";
+  import Projects from "$lib/components/sections/projects/ProjectAccordion.svelte";
 </script>
 
 <section

@@ -3,7 +3,6 @@
   import { Drawer, initializeStores } from "@skeletonlabs/skeleton";
   import { AppShell } from "../lib/components/layout";
   import { tabs } from "$lib/menuTabs";
-  import { projectsConfig } from "../content/projects.config";
 
   initializeStores();
 </script>
@@ -22,15 +21,6 @@
       >
         <p>{tab.name}</p>
       </a>
-      <div class="flex flex-col gap-6 ml-6">
-        {#if tab.name === "#projectsConfig"}
-          {#each projectsConfig as project}
-            <div class="text-gray-400 text-sm">
-              {project.name}
-            </div>
-          {/each}
-        {/if}
-      </div>
     {/each}
   </div>
 </Drawer>

@@ -52,7 +52,12 @@ class MatrixEffect {
 
   initialize() {
     for (let i = 0; i < this.columns; i += 1) {
-      this.symbols[i] = new MatrixSymbol(i, 0, this.fontSize, this.canvasHeight);
+      this.symbols[i] = new MatrixSymbol(
+        i,
+        0,
+        this.fontSize,
+        this.canvasHeight
+      );
     }
   }
 }

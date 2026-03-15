@@ -6,7 +6,7 @@ interface Project {
   stack: string[];
   file?: string;
   linkLabel?: string;
-  status: "Live" | "In Progress";
+  status: "Live" | "In Progress" | "Archived";
   highlights?: string[];
   featured?: boolean;
 }

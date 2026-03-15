@@ -1,6 +1,6 @@
 <section
   id="about"
-  class="section_padding section_layout min-h-[500px]"
+  class="section_padding section_layout min-h-[300px]"
 >
   <h3 class="section_title">#about</h3>
 

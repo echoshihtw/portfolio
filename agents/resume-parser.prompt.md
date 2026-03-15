@@ -20,14 +20,12 @@ src/lib/resumeData.ts
 
 ## Expected Structure
 
-
 export const resume = {
 summary: "",
 experience: [],
 projects: [],
 skills: []
 }
-
 
 ---
 
@@ -36,10 +34,13 @@ skills: []
 Markdown structure:
 
 # Summary
+
 text
 
 # Experience
+
 ## Company
+
 Role line
 
 - bullet

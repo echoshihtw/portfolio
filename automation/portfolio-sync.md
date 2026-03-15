@@ -37,6 +37,7 @@ import { experience } from "$lib/resumeData"
 </script>
 
 {#each experience as job}
+
 <h3>{job.company}</h3>
 <p>{job.role}</p>
 {/each}

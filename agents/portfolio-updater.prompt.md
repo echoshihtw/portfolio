@@ -49,6 +49,7 @@ import { experience } from "$lib/resumeData"
 </script>
 
 {#each experience as job}
+
 <section>
 <h3>{job.company}</h3>
 <p>{job.role} · {job.date}</p>

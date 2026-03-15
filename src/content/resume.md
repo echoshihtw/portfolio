@@ -1,6 +1,6 @@
 # Chun-Yu (Echo) Shih
 
-**Full-Stack Engineer · Local-First Systems · Desktop Software · End-to-End Ownership**
+**Full-Stack Engineer · Secure Product Architecture · Local-First Systems · End-to-End Platform Ownership**
 
 Taipei, Taiwan  
 📧 echoshihtw@gmail.com  
@@ -12,23 +12,25 @@ Taipei, Taiwan
 
 ## Summary
 
-Full-stack engineer experienced in building and owning production systems end-to-end across frontend, backend, infrastructure, and deployment. Comfortable operating in early-stage environments where engineers drive architecture decisions, developer workflows, and product delivery.
+Full-stack engineer specialising in secure product systems and end-to-end platform ownership.
 
-Interested in **local-first software, privacy-first systems, and thoughtful product design**.
+Experienced designing and operating production platforms across frontend, backend, infrastructure, and deployment, with particular interest in **local-first software and privacy-preserving systems**.
 
 ---
 
-# Selected Engineering Achievements
+# Engineering Impact
 
-- **Owned and operated a full production platform** across backend, frontend, infrastructure, and deployment as the sole engineer.
+- **Operated a full production platform end-to-end**, covering frontend, backend, infrastructure, CI/CD, and system deployment.
 
-- **Redesigned production system architecture → modular monolith with async messaging**, improving maintainability and enabling independent feature development.
+- **Redesigned backend architecture into a modular monolith with asynchronous messaging**, introducing RabbitMQ to decouple services and enable independent feature development.
 
-- **Built CI/CD pipelines using GitHub Actions**, replacing manual releases with automated deployments to self-hosted infrastructure.
+- **Designed a layered authentication architecture** combining HttpOnly backend session tokens, short-lived frontend JWTs, and CSRF protection to secure API communication.
 
-- **Designed and built a local-first desktop product (Cosmora)** using Tauri, SQLite, and TypeScript.
+- **Introduced automated CI/CD pipelines with GitHub Actions**, replacing manual deployments with reproducible releases to self-hosted infrastructure.
 
-- **Delivered AI-powered product features** integrating OpenAI APIs in a production HR platform.
+- **Built a local-first desktop product (Cosmora)** using Tauri, SQLite, and TypeScript to support privacy-first data ownership.
+
+- **Delivered AI-powered production features** integrating OpenAI APIs within a live HR platform.
 
 ---
 
@@ -36,33 +38,35 @@ Interested in **local-first software, privacy-first systems, and thoughtful prod
 
 ## Lockerbie Technology
 
-**Full-Stack Engineer — Sole Engineer**  
+**Full-Stack Engineer — Platform Architecture**  
 Taipei, Taiwan · Dec 2024 – Present
 
-- **Owned the full production platform** across Python backend, Next.js frontend, ArangoDB database, Docker infrastructure, and self-hosted Linux servers.
+- Owned and operated the full production platform across **Next.js frontend, FastAPI backend, ArangoDB graph database, Docker infrastructure, and self-hosted Linux servers**.
 
-- **Redesigned system architecture → modular monolith with RabbitMQ async messaging**, improving maintainability and enabling independent feature development.
+- Designed a **modular Next.js frontend architecture** with a Backend-for-Frontend (BFF) layer isolating frontend code from backend APIs.
 
-- **Refactored ArangoDB graph schema**, simplifying cross-module data relationships and reducing friction when introducing new features.
+- Implemented **layered authentication architecture** using HttpOnly backend tokens, short-lived frontend JWTs, and CSRF validation to prevent token exposure.
 
-- **Implemented CI/CD pipelines using GitHub Actions**, replacing manual deployments with automated releases.
+- Redesigned backend architecture into a **modular monolith with RabbitMQ asynchronous messaging**, enabling decoupled service modules.
 
-- **Served as the primary technical owner**, coordinating requirements and maintaining delivery momentum as the sole engineer.
+- Modeled organisational data using **ArangoDB graph + document schemas** to represent projects, work packages, and vendor relationships.
+
+- Introduced **GitHub Actions CI/CD pipelines**, enabling automated deployments to self-hosted infrastructure.
 
 ---
 
 ## SPIN.FASHION by Lablaco
 
-**Software Engineer & Founding Partner**  
+**Software Engineer · Founding Partner**  
 Singapore · Remote · Aug 2024 – Oct 2024
 
-- **Resolved macOS Electron release blocker** caused by code-signing and notarisation failures, enabling successful desktop distribution.
+- Resolved **macOS Electron release blocker** caused by code-signing and notarisation failures, enabling successful desktop distribution.
 
-- Authored the **macOS deployment runbook**, later adopted as the team standard.
+- Authored the **macOS deployment runbook**, later adopted as the team's release standard.
 
-- **Optimised React + TypeScript frontend performance** alongside backend engineers and third-party vendors.
+- Improved **React + TypeScript frontend performance and stability** alongside backend engineers and third-party vendors.
 
-- Led **distributed sprint delivery** as co-Scrum Master, improving async collaboration and design handoff workflows.
+- Coordinated distributed sprint delivery as **co-Scrum Master**, improving async collaboration and design handoffs.
 
 ---
 
@@ -73,24 +77,24 @@ Taipei, Taiwan · Aug 2022 – May 2024
 
 - One of **two engineers responsible for the full product platform**, reporting directly to the CTO.
 
-- **Migrated the production codebase to TypeScript**, reducing runtime bugs by ~30%.
+- Migrated the production codebase to **TypeScript**, reducing runtime bugs by ~30%.
 
-- Built a **reusable React component system with Redux-Saga**, improving development speed and UI consistency.
+- Built a **reusable React component system with Redux-Saga**, improving UI consistency and development velocity.
 
 - Delivered the company’s **AI-powered JD Generator**, integrating OpenAI APIs from concept through production release.
 
-- **Introduced GitHub Actions CI/CD pipelines**, enabling reliable deployments for a small engineering team.
+- Introduced **GitHub Actions CI/CD pipelines**, enabling reliable deployments for a small engineering team.
 
 ---
 
-## Independent / Freelance
+## Independent Engineering Work
 
 **Software Engineer**  
 Remote · 2020 – Present
 
 - Built the frontend for **Echology**, a Bitcoin research wallet visualising BDK coin-selection algorithms and UTXO fee modelling.
 
-- Delivered production applications across **fintech, e-commerce, and creative sectors** using React, Next.js, TypeScript, and Supabase.
+- Delivered production web applications across **fintech, e-commerce, and creative sectors** using React, Next.js, TypeScript, and Supabase.
 
 ---
 
@@ -98,67 +102,45 @@ Remote · 2020 – Present
 
 ## Cosmora
 
-**Founder & Product Engineer**  
+**Founder · Product Engineer**  
 2024 – Present
 
 _Tauri · React · TypeScript · SQLite · Rust_
 
-- Designing and building a **local-first desktop application** replacing notebook- and WhatsApp-based workflows used by independent salon owners.
+- Building **Cosmora**, a local-first desktop operating system for independent salon owners replacing notebook- and messaging-based workflows.
 
-- Architected a **privacy-first data model using SQLite**, ensuring all client records remain on the user’s device without cloud infrastructure.
+- Designed a **privacy-first architecture using SQLite**, ensuring all client data remains local without mandatory cloud infrastructure.
 
-- Implemented **secure authentication and resilient onboarding**, including Argon2-based PIN protection and fault-tolerant session recovery.
-
-- Built operational modules including **client profiles, hair history tracking, visit logs, and financial summaries**.
-
-- Defining product roadmap and architecture decisions through direct feedback from salon professionals.
-
-### Architecture Highlights
-
-- **Local-first architecture** → SQLite as the primary data layer with zero cloud dependency.
-
-- **Desktop-first application design** → Tauri chosen over Electron to minimise bundle size and improve performance.
-
-- **Security model** → Argon2-hashed authentication with brute-force protection.
-
-- **Resilient onboarding system** → application state recovery after unexpected termination.
-
-- **Data portability** → user-controlled database location supporting local disk or external storage.
+- Implemented **Argon2-based authentication and resilient onboarding**, allowing recovery of application state after unexpected termination.
 
 ---
 
-# Skills & Technologies
+# Skills
 
 ### Languages
 
 TypeScript · JavaScript · Python
 
 ### Frontend
-
-React · Next.js · TailwindCSS · SvelteKit
+React · Next.js · SvelteKit · TailwindCSS
 
 ### State Management
 Redux · Zustand · React Query
 
-### Backend
-
-Node.js · Python · ArangoDB · RabbitMQ · Supabase
+### Backend:
+Node.js · Python · FastAPI · ArangoDB · RabbitMQ · Supabase
 
 ### Desktop / Local-First
-
-Tauri · Electron · SQLite · Rust (integration)
+Tauri · Electron · SQLite · Rust
 
 ### Infrastructure
-
 Docker · GitHub Actions · Self-Hosted Linux Servers · AWS · Vercel
 
 ### Architecture
-
-Modular Monolith · Event-Driven Messaging · Offline-First Systems · REST API Design
+Backend-for-Frontend (BFF) · Modular Monolith · Event-Driven Messaging · Offline-First Systems · REST API Design
 
 ### AI & LLM
-
-LangChain (JS) · OpenAI APIs · Prompt Engineering
+LangChain · OpenAI APIs · Prompt Engineering
 
 ---
 

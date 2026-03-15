@@ -43,13 +43,11 @@ Do not manually duplicate resume information inside components.
 
 All career data should come from the resume pipeline.
 
-
 ---
 
 # 📁 Final Repo Layout
 
 Your repo should now look like:
-
 
 agents/
 resume-builder.prompt.md
@@ -71,20 +69,17 @@ buildResume.ts
 src/lib/
 resumeData.ts
 
-
 ---
 
 # ⭐ Why This Setup Is Excellent
 
 Your portfolio now behaves like **real engineering infrastructure**:
 
-
 edit resume.md
 ↓
 build
 ↓
 portfolio + pdf update
-
 
 Future you (or AI tools) can regenerate the whole system easily.
 

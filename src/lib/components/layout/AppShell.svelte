@@ -11,11 +11,19 @@
   let previousScrollY = 0;
   let isHeaderVisible = true;
   let showNavBackdrop = false;
+  let isNearPageBottom = false;
+  let showFloatingNav = false;
   const HIDE_SCROLL_THRESHOLD = 6;
+  const FLOATING_NAV_BOTTOM_OFFSET = 4;
+  const FLOATING_NAV_TOP_OFFSET = 80;
 
   function handleScroll() {
     const currentY = window.scrollY;
     const deltaY = currentY - previousScrollY;
+    const doc = document.documentElement;
+    isNearPageBottom =
+      currentY + window.innerHeight >=
+      doc.scrollHeight - FLOATING_NAV_BOTTOM_OFFSET;
 
     scrollPosition = currentY;
     if (currentY <= 12) {
@@ -27,6 +35,14 @@
     } else if (deltaY > HIDE_SCROLL_THRESHOLD) {
       isHeaderVisible = false;
       showNavBackdrop = false;
+    }
+
+    if (currentY <= FLOATING_NAV_TOP_OFFSET || isNearPageBottom) {
+      showFloatingNav = false;
+    } else if (deltaY < 0) {
+      showFloatingNav = true;
+    } else if (deltaY > 0) {
+      showFloatingNav = false;
     }
 
     previousScrollY = currentY;
@@ -107,7 +123,7 @@
     isVisible={isHeaderVisible}
     {showNavBackdrop}
   />
-  <FloatingNav isVisible={!isHeaderVisible} />
+  <FloatingNav isVisible={showFloatingNav} />
   <main class="max-w-[1400px] mx-auto">
     <div class="h-auto flex flex-col">
       <slot />

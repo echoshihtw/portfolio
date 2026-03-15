@@ -18,53 +18,54 @@ export const summary = "";
 export const experience: ExperienceItem[] = [
   {
     "company": "Lockerbie Technology",
-    "role": "Full-Stack Engineer — Sole Engineer",
+    "role": "**Full-Stack Engineer — Platform Architecture**",
     "date": "Taipei, Taiwan · Dec 2024 – Present",
     "highlights": [
-      "Owned the full production platform across Python backend, Next.js frontend, ArangoDB database, Docker infrastructure, and self-hosted Linux servers.",
-      "Redesigned system architecture → modular monolith with RabbitMQ async messaging, improving maintainability and enabling independent feature development.",
-      "Refactored ArangoDB graph schema, simplifying cross-module data relationships and reducing friction when introducing new features.",
-      "Implemented CI/CD pipelines using GitHub Actions, replacing manual deployments with automated releases.",
-      "Served as the primary technical owner, coordinating requirements and maintaining delivery momentum as the sole engineer."
+      "Owned and operated the full production platform across **Next.js frontend, FastAPI backend, ArangoDB graph database, Docker infrastructure, and self-hosted Linux servers**.",
+      "Designed a **modular Next.js frontend architecture** with a Backend-for-Frontend (BFF) layer isolating frontend code from backend APIs.",
+      "Implemented **layered authentication architecture** using HttpOnly backend tokens, short-lived frontend JWTs, and CSRF validation to prevent token exposure.",
+      "Redesigned backend architecture into a **modular monolith with RabbitMQ asynchronous messaging**, enabling decoupled service modules.",
+      "Modeled organisational data using **ArangoDB graph + document schemas** to represent projects, work packages, and vendor relationships.",
+      "Introduced **GitHub Actions CI/CD pipelines**, enabling automated deployments to self-hosted infrastructure."
     ]
   },
   {
     "company": "SPIN.FASHION by Lablaco",
-    "role": "Software Engineer & Founding Partner",
+    "role": "**Software Engineer · Founding Partner**",
     "date": "Singapore · Remote · Aug 2024 – Oct 2024",
     "highlights": [
-      "Resolved macOS Electron release blocker caused by code-signing and notarisation failures, enabling successful desktop distribution.",
-      "Authored the macOS deployment runbook, later adopted as the team standard.",
-      "Optimised React + TypeScript frontend performance alongside backend engineers and third-party vendors.",
-      "Led distributed sprint delivery as co-Scrum Master, improving async collaboration and design handoff workflows."
+      "Resolved **macOS Electron release blocker** caused by code-signing and notarisation failures, enabling successful desktop distribution.",
+      "Authored the **macOS deployment runbook**, later adopted as the team's release standard.",
+      "Improved **React + TypeScript frontend performance and stability** alongside backend engineers and third-party vendors.",
+      "Coordinated distributed sprint delivery as **co-Scrum Master**, improving async collaboration and design handoffs."
     ]
   },
   {
     "company": "Find Recruiter (HR Tech Startup)",
-    "role": "Software Engineer",
+    "role": "**Software Engineer**",
     "date": "Taipei, Taiwan · Aug 2022 – May 2024",
     "highlights": [
-      "One of two engineers responsible for the full product platform, reporting directly to the CTO.",
-      "Migrated the production codebase to TypeScript, reducing runtime bugs by ~30%.",
-      "Built a reusable React component system with Redux-Saga, improving development speed and UI consistency.",
-      "Delivered the company’s AI-powered JD Generator, integrating OpenAI APIs from concept through production release.",
-      "Introduced GitHub Actions CI/CD pipelines, enabling reliable deployments for a small engineering team."
+      "One of **two engineers responsible for the full product platform**, reporting directly to the CTO.",
+      "Migrated the production codebase to **TypeScript**, reducing runtime bugs by ~30%.",
+      "Built a **reusable React component system with Redux-Saga**, improving UI consistency and development velocity.",
+      "Delivered the company’s **AI-powered JD Generator**, integrating OpenAI APIs from concept through production release.",
+      "Introduced **GitHub Actions CI/CD pipelines**, enabling reliable deployments for a small engineering team."
     ]
   },
   {
-    "company": "Independent / Freelance",
-    "role": "Software Engineer",
+    "company": "Independent Engineering Work",
+    "role": "**Software Engineer**",
     "date": "Remote · 2020 – Present",
     "highlights": [
-      "Built the frontend for Echology, a Bitcoin research wallet visualising BDK coin-selection algorithms and UTXO fee modelling.",
-      "Delivered production applications across fintech, e-commerce, and creative sectors using React, Next.js, TypeScript, and Supabase."
+      "Built the frontend for **Echology**, a Bitcoin research wallet visualising BDK coin-selection algorithms and UTXO fee modelling.",
+      "Delivered production web applications across **fintech, e-commerce, and creative sectors** using React, Next.js, TypeScript, and Supabase."
     ]
   }
 ];
 
 export const skills: SkillGroup[] = [
   {
-    "category": "Languages",
+    "category": "### Languages",
     "items": [
       "TypeScript",
       "JavaScript",
@@ -76,8 +77,8 @@ export const skills: SkillGroup[] = [
     "items": [
       "React",
       "Next.js",
-      "TailwindCSS",
-      "SvelteKit"
+      "SvelteKit",
+      "TailwindCSS"
     ]
   },
   {
@@ -89,10 +90,11 @@ export const skills: SkillGroup[] = [
     ]
   },
   {
-    "category": "Backend",
+    "category": "Backend:",
     "items": [
       "Node.js",
       "Python",
+      "FastAPI",
       "ArangoDB",
       "RabbitMQ",
       "Supabase"
@@ -104,7 +106,7 @@ export const skills: SkillGroup[] = [
       "Tauri",
       "Electron",
       "SQLite",
-      "Rust (integration)"
+      "Rust"
     ]
   },
   {
@@ -120,6 +122,7 @@ export const skills: SkillGroup[] = [
   {
     "category": "Architecture",
     "items": [
+      "Backend-for-Frontend (BFF)",
       "Modular Monolith",
       "Event-Driven Messaging",
       "Offline-First Systems",
@@ -129,7 +132,7 @@ export const skills: SkillGroup[] = [
   {
     "category": "AI & LLM",
     "items": [
-      "LangChain (JS)",
+      "LangChain",
       "OpenAI APIs",
       "Prompt Engineering",
       "---"
