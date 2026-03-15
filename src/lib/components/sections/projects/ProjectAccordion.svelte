@@ -1,7 +1,8 @@
 <script lang="ts">
   import { projectsConfig } from "../../../../content/projects.config";
 
-  const toStatusKey = (status: string) => status.toLowerCase().replace(/\s+/g, "-");
+  const toStatusKey = (status: string) =>
+    status.toLowerCase().replace(/\s+/g, "-");
 </script>
 
 <div class="project-grid">
@@ -19,7 +20,9 @@
         </div>
 
         <p class={`status status-${toStatusKey(project.status)}`}>
-          <span class={`status-dot status-dot-${toStatusKey(project.status)}`} />
+          <span
+            class={`status-dot status-dot-${toStatusKey(project.status)}`}
+          />
           {project.status}
         </p>
       </div>
@@ -30,7 +33,7 @@
         <div class="project-image-wrap">
           <img
             class="project-image"
-            src={`/${project.file}`}
+            src={`${project.file}`}
             alt={`${project.name} preview`}
             loading="lazy"
           />

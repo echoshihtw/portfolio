@@ -1,6 +1,7 @@
 <script lang="ts">
   import { tabs } from "$lib/menuTabs";
   import Icon from "@iconify/svelte";
+  import ThemeSwitch from "$lib/components/ThemeSwitch.svelte";
 
   export let isVisible = false;
 
@@ -32,6 +33,13 @@
   >
     <Icon icon="ri:arrow-up-circle-line" />
   </button>
+
+  <div
+    class="floating-theme-toggle"
+    aria-label="Toggle theme"
+  >
+    <ThemeSwitch id="theme-toggle-floating" />
+  </div>
 </nav>
 
 <style>
@@ -94,6 +102,12 @@
   .floating-top-button :global(svg) {
     width: 1.1rem;
     height: 1.1rem;
+  }
+
+  .floating-theme-toggle {
+    display: grid;
+    place-items: center;
+    min-width: 1.9rem;
   }
 
   .floating-link:hover {

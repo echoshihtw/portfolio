@@ -98,6 +98,7 @@
   .footer-wrap {
     padding: 3rem 1.2rem 2rem;
     border-top: 1px solid var(--section-border);
+    background: var(--color-bg);
   }
 
   .footer-shell {
@@ -114,6 +115,7 @@
   .footer-brand h2 {
     margin: 0.2rem 0 0.5rem;
     font-size: clamp(1.5rem, 3vw, 2rem);
+    color: var(--text-color);
   }
 
   .footer-kicker {
@@ -142,6 +144,12 @@
     border-radius: 999px;
     padding: 0.42rem 0.75rem;
     text-decoration: none;
+    color: var(--text-color);
+    background: var(--surface-bg);
+    transition:
+      border-color 160ms ease,
+      color 160ms ease,
+      background-color 160ms ease;
   }
 
   .footer-source {
@@ -165,6 +173,7 @@
     color: var(--text-color);
     text-decoration: none;
     margin-bottom: 0.35rem;
+    transition: color 160ms ease;
   }
 
   .footer-nav a:hover {
@@ -183,6 +192,24 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    color: var(--text-color);
+    background: var(--surface-bg);
+    transition:
+      border-color 160ms ease,
+      color 160ms ease,
+      background-color 160ms ease;
+  }
+
+  .footer-mail:hover,
+  .footer-source:hover,
+  .footer-social-link:hover {
+    border-color: var(--color-accent);
+    background: var(--color-bg);
+  }
+
+  .footer-mail:hover,
+  .footer-social-link:hover {
+    color: var(--color-accent);
   }
 
   .footer-meta {
