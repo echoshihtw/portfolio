@@ -1,2 +1,2 @@
 export const rawText =
-  "Local-first software · Privacy-first tools · End-to-end ownership · Product builder";
+  "Secure product systems\nBackend-for-Frontend architecture\nLocal-first desktop software\nEnd-to-end platform ownership";

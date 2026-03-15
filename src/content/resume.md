@@ -10,7 +10,7 @@ Taipei, Taiwan
 
 ---
 
-## Summary
+# Summary
 
 Full-stack engineer specialising in secure product systems and end-to-end platform ownership.
 
@@ -122,24 +122,31 @@ _Tauri · React · TypeScript · SQLite · Rust_
 TypeScript · JavaScript · Python
 
 ### Frontend
+
 React · Next.js · SvelteKit · TailwindCSS
 
 ### State Management
+
 Redux · Zustand · React Query
 
 ### Backend:
+
 Node.js · Python · FastAPI · ArangoDB · RabbitMQ · Supabase
 
 ### Desktop / Local-First
+
 Tauri · Electron · SQLite · Rust
 
 ### Infrastructure
+
 Docker · GitHub Actions · Self-Hosted Linux Servers · AWS · Vercel
 
 ### Architecture
+
 Backend-for-Frontend (BFF) · Modular Monolith · Event-Driven Messaging · Offline-First Systems · REST API Design
 
 ### AI & LLM
+
 LangChain · OpenAI APIs · Prompt Engineering
 
 ---

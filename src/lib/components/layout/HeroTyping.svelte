@@ -1,78 +1,48 @@
-<script>
-  import { onMount } from "svelte";
+<script lang="ts">
   import { rawText } from "$lib/components/sections/hero/intro";
 
-  let displayText = "";
-  let currentIndex = 0;
-  let isHighlighting = false;
-  let isTyping = false;
-
-  function typeText() {
-    if (currentIndex < rawText.length) {
-      isTyping = true;
-      const currentChar = rawText[currentIndex];
-
-      if (currentChar === "*") {
-        isHighlighting = !isHighlighting;
-      } else if (currentChar === "\n") {
-        displayText += "<br>";
-      } else {
-        if (isHighlighting) {
-          displayText += `<span class=" font-bold">${currentChar}</span>`;
-        } else {
-          displayText += `<span class="hero_text_white">${currentChar}</span>`;
-        }
-      }
-
-      currentIndex++;
-      setTimeout(typeText, 40);
-      if (currentIndex === rawText.length) {
-        isTyping = false;
-      }
-    }
-  }
-
-  onMount(() => {
-    typeText();
-  });
+  const principles = rawText
+    .split("\n")
+    .map((line) => line.trim())
+    .filter(Boolean);
 </script>
 
-<!--dark mode-->
-<span
-  class="text-2xl w-full hidden dark:block leading-relaxed text-[var(--text-muted)]"
+<ul
+  class="hero-principles"
+  aria-label="Engineering focus areas"
 >
-  {@html displayText
-    .replace(/\*([^*]+)\*/g, '<span class="text-transparent">$1</span>')
-    .replace(/\n/g, "<br/>")}
-  <span class={isTyping ? "typing" : undefined}></span>
-  <br />
-</span>
-
-<!--light mode-->
-<span
-  class="w-full text-2xl dark:hidden leading-relaxed text-[var(--text-muted)]"
->
-  {@html displayText
-    .replace(/\*([^*]+)\*/g, '<span class="text-transparent">$1</span>')
-    .replace(/\n/g, "<br/>")}
-  <span class={isTyping ? "typing" : undefined}></span>
-  <br />
-</span>
+  {#each principles as principle}
+    <li>{principle}</li>
+  {/each}
+</ul>
 
 <style>
-  .typing {
-    height: 5px;
-    width: 5px;
-    white-space: pre-wrap;
-    font-family: monospace;
-    border-right: 2px solid var(--color-accent);
-    animation: blink-caret 0.5s step-end infinite;
-    padding-left: 5px;
+  .hero-principles {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 0.32rem;
+    max-width: 65ch;
   }
 
-  @keyframes blink-caret {
-    50% {
-      border-color: transparent;
-    }
+  .hero-principles li {
+    position: relative;
+    padding-left: 0.9rem;
+    color: var(--text-muted);
+    font-size: 0.97rem;
+    line-height: 1.6;
+  }
+
+  .hero-principles li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.83em;
+    width: 0.35rem;
+    height: 0.35rem;
+    border-radius: 999px;
+    background: rgba(200, 169, 126, 0.8);
+    transform: translateY(-50%);
   }
 </style>

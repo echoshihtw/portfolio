@@ -1,18 +1,28 @@
+<script lang="ts">
+  import { summary } from "$lib/resumeData";
+
+  const escapeHtml = (value: string) =>
+    value
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;");
+
+  const renderInlineBold = (value: string) =>
+    escapeHtml(value).replace(
+      /\*\*\s*([^*][\s\S]*?)\s*\*\*/g,
+      "<strong>$1</strong>"
+    );
+</script>
+
 <section
-  id="about"
+  id="summary"
   class="section_padding section_layout min-h-[300px]"
 >
-  <h3 class="section_title">#about</h3>
+  <h3 class="section_title">#summary</h3>
 
-  <p class="about-copy">
-    I'm a full-stack engineer who enjoys building complete products, from
-    architecture and user experience to production delivery. Most of my work has
-    been in small teams where engineers own both product outcomes and system
-    reliability. Lately, I've been especially focused on local-first software,
-    privacy-first tooling, and desktop products that give users more control
-    over their data. I’m currently building Cosmora, an offline-first operating
-    system for independent salon owners.
-  </p>
+  <p class="about-copy">{@html renderInlineBold(summary)}</p>
 </section>
 
 <style>
@@ -22,5 +32,10 @@
     font-size: 1.01rem;
     line-height: 1.72;
     color: var(--text-color);
+    white-space: pre-line;
+  }
+
+  .about-copy :global(strong) {
+    font-weight: 700;
   }
 </style>
