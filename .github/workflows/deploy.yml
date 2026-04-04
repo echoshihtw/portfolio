@@ -1,7 +1,7 @@
 name: Build and Deploy static content to GitHub Pages
 on:
   push:
-    branches: [ 'main' ]
+    branches: ["main"]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -14,9 +14,8 @@ permissions:
 
 # Allow one concurrent deployment
 concurrency:
-  group: 'pages'
+  group: "pages"
   cancel-in-progress: true
-
 
 jobs:
   build_site:
@@ -36,7 +35,7 @@ jobs:
 
       - name: build
         env:
-          BASE_PATH: '/${{ github.event.repository.name }}'
+          BASE_PATH: "/${{ github.event.repository.name }}"
         run: |
           npm run build
 
@@ -44,7 +43,7 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         # this should match the `pages` option in your adapter-static options
         with:
-          path: 'build/'
+          path: "build/"
 
       - name: Setup Pages
         uses: actions/configure-pages@v4

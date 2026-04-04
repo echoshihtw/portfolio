@@ -1,19 +1,22 @@
+
+
 <script>
-  import HeroTyping from "$lib/components/layout/HeroTyping.svelte";
+  import HeroTyping from "$lib/components/sections/hero/HeroTyping.svelte";
+  import { heroContent } from "../../../../content/intro";
 </script>
 
-<section
-  id="home"
-  class="hero-section section_padding"
->
+<section id="home" class="hero-section section_padding">
   <div class="hero-wrap">
-    <p class="hero-name mono">Chun-Yu (Echo) Shih</p>
+    <p class="hero-name mono">{heroContent.name}</p>
 
-    <h1 class="hero-title">Full-Stack Engineer</h1>
+    <h1 class="hero-title">
+      {#each heroContent.title.split('\n') as line}
+        <span>{line}</span><br />
+      {/each}
+    </h1>
 
     <p class="hero-tagline">
-      Secure Product Architecture · Local-First Systems · End-to-End Platform
-      Ownership
+      {heroContent.tagline}
     </p>
 
     <div class="hero-subline">
@@ -21,32 +24,30 @@
     </div>
 
     <div class="hero-meta">
-      <p class="hero-location mono">Taipei, Taiwan</p>
+      <p class="hero-location mono">{heroContent.location}</p>
+
       <p class="hero-status mono">
-        <span
-          class="status-dot"
-          aria-hidden="true"
-        />
-        Currently building Cosmora
+        <span class="status-dot" aria-hidden="true" />
+        {heroContent.status}
       </p>
     </div>
 
     <div class="hero-links">
       <a
-        href="#work"
+        href={heroContent.cta.primary.href}
         class="hero-cta"
       >
-        View Work
+        {heroContent.cta.primary.label}
         <span class="cta-arrow">→</span>
       </a>
 
       <a
-        href="https://github.com/echoshihtw"
+        href={heroContent.cta.secondary.href}
         target="_blank"
         rel="noreferrer noopener"
         class="hero-link-secondary"
       >
-        GitHub
+        {heroContent.cta.secondary.label}
       </a>
     </div>
   </div>
@@ -124,7 +125,8 @@
   .hero-title {
     margin: 0;
     font-family: "DM Serif Display", serif;
-    font-size: clamp(2.8rem, 8vw, 5.25rem);
+    font-size: clamp(2.8rem, 8vw, 4.23rem);
+    white-space: nowrap;
     font-weight: 400;
     line-height: 1.02;
     color: var(--text-color);

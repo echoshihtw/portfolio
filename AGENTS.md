@@ -157,3 +157,4 @@ Potential additions:
 - job-targeted resume variants
 - JSON API export for resume data
 - richer project metadata generation from source content
+çç

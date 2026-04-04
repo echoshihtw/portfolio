@@ -1,6 +1,6 @@
 # Chun-Yu (Echo) Shih
 
-**Full-Stack Engineer · Secure Product Architecture · Local-First Systems · End-to-End Platform Ownership**
+**Full-Stack Engineer (Frontend-focused) · React · TypeScript · End-to-End Product Development**
 
 Taipei, Taiwan  
 📧 echoshihtw@gmail.com  
@@ -12,25 +12,27 @@ Taipei, Taiwan
 
 # Summary
 
-Full-stack engineer specialising in secure product systems and end-to-end platform ownership.
+Full-stack engineer with a strong focus on frontend systems, specialising in React and TypeScript.
 
-Experienced designing and operating production platforms across frontend, backend, infrastructure, and deployment, with particular interest in **local-first software and privacy-preserving systems**.
+Experienced in building production applications end-to-end, from designing user interfaces and managing complex state to defining backend APIs, implementing testing across the stack, and structuring system architecture.
+
+Particularly interested in **local-first software and data-intensive interfaces**, with an emphasis on building reliable, scalable, and user-focused products.
 
 ---
 
 # Engineering Impact
 
-- **Operated a full production platform end-to-end**, covering frontend, backend, infrastructure, CI/CD, and system deployment.
+- **Built and operated production systems end-to-end**, covering frontend (React/Next.js), backend APIs, infrastructure, and deployment.
 
-- **Redesigned backend architecture into a modular monolith with asynchronous messaging**, introducing RabbitMQ to decouple services and enable independent feature development.
+- **Built scalable frontend systems using React and Next.js**, handling complex workflows, asynchronous data flows, and multi-role state management.
 
-- **Designed a layered authentication architecture** combining HttpOnly backend session tokens, short-lived frontend JWTs, and CSRF protection to secure API communication.
+- **Defined backend API requirements and guided implementation**, ensuring reliable integration between frontend systems and backend services.
 
-- **Introduced automated CI/CD pipelines with GitHub Actions**, replacing manual deployments with reproducible releases to self-hosted infrastructure.
+- **Implemented CI/CD pipelines using GitHub Actions and Makefile-based workflows**, enabling reproducible builds and reliable deployments in Linux-based environments.
 
-- **Built a local-first desktop product (Cosmora)** using Tauri, SQLite, and TypeScript to support privacy-first data ownership.
+- **Designed and built local-first applications managing UI and data persistence (SQLite)**, eliminating backend dependency and enabling offline-first workflows.
 
-- **Delivered AI-powered production features** integrating OpenAI APIs within a live HR platform.
+- **Delivered AI-powered production features** integrating OpenAI APIs within a live product.
 
 ---
 
@@ -38,20 +40,22 @@ Experienced designing and operating production platforms across frontend, backen
 
 ## Lockerbie Technology
 
-**Full-Stack Engineer — Platform Architecture**  
+**Full-Stack Engineer — Frontend-focused Platform Development**  
 Taipei, Taiwan · Dec 2024 – Present
 
-- Owned and operated the full production platform across **Next.js frontend, FastAPI backend, ArangoDB graph database, Docker infrastructure, and self-hosted Linux servers**.
+- Owned full-stack development of a production system, delivering both frontend (Next.js) and backend services supporting complex operational workflows.
 
-- Designed a **modular Next.js frontend architecture** with a Backend-for-Frontend (BFF) layer isolating frontend code from backend APIs.
+- Built a **Next.js frontend for complex multi-role workflows**, designing predictable state management and ensuring consistent data flow across user interactions.
 
-- Implemented **layered authentication architecture** using HttpOnly backend tokens, short-lived frontend JWTs, and CSRF validation to prevent token exposure.
+- **Defined backend API requirements and guided implementation**, enabling seamless end-to-end feature delivery.
 
-- Redesigned backend architecture into a **modular monolith with RabbitMQ asynchronous messaging**, enabling decoupled service modules.
+- Designed backend services and API integrations (FastAPI, REST), structuring workflow logic and enabling reliable data flow across systems.
 
-- Modeled organisational data using **ArangoDB graph + document schemas** to represent projects, work packages, and vendor relationships.
+- Built reusable UI components aligned with backend domain logic, improving maintainability and development speed.
 
-- Introduced **GitHub Actions CI/CD pipelines**, enabling automated deployments to self-hosted infrastructure.
+- **Implemented CI/CD pipelines using GitHub Actions and Makefile-based workflows**, enabling reproducible builds and reliable deployments in Linux-based environments.
+
+- **Implemented unit and integration tests across frontend (Jest, React Testing Library) and backend (Python)**, ensuring reliability of UI behavior and API logic.
 
 ---
 
@@ -60,13 +64,13 @@ Taipei, Taiwan · Dec 2024 – Present
 **Software Engineer · Founding Partner**  
 Singapore · Remote · Aug 2024 – Oct 2024
 
-- Resolved **macOS Electron release blocker** caused by code-signing and notarisation failures, enabling successful desktop distribution.
+- Resolved a **critical macOS Electron release blocker**, enabling successful desktop distribution.
 
-- Authored the **macOS deployment runbook**, later adopted as the team's release standard.
+- Authored a **deployment runbook**, later adopted as the team’s release standard.
 
-- Improved **React + TypeScript frontend performance and stability** alongside backend engineers and third-party vendors.
+- Improved **React + TypeScript frontend performance and stability**.
 
-- Coordinated distributed sprint delivery as **co-Scrum Master**, improving async collaboration and design handoffs.
+- Supported distributed delivery across time zones.
 
 ---
 
@@ -75,15 +79,15 @@ Singapore · Remote · Aug 2024 – Oct 2024
 **Software Engineer**  
 Taipei, Taiwan · Aug 2022 – May 2024
 
-- One of **two engineers responsible for the full product platform**, reporting directly to the CTO.
+- One of two engineers responsible for the full product platform.
 
-- Migrated the production codebase to **TypeScript**, reducing runtime bugs by ~30%.
+- Led frontend development using React and TypeScript, delivering core user-facing features.
 
-- Built a **reusable React component system with Redux-Saga**, improving UI consistency and development velocity.
+- Migrated production codebase to TypeScript, reducing runtime bugs by ~30%.
 
-- Delivered the company’s **AI-powered JD Generator**, integrating OpenAI APIs from concept through production release.
+- Built reusable UI components and structured state management, improving development speed.
 
-- Introduced **GitHub Actions CI/CD pipelines**, enabling reliable deployments for a small engineering team.
+- Delivered an AI-powered feature (JD Generator) using OpenAI APIs.
 
 ---
 
@@ -92,9 +96,9 @@ Taipei, Taiwan · Aug 2022 – May 2024
 **Software Engineer**  
 Remote · 2020 – Present
 
-- Built the frontend for **Echology**, a Bitcoin research wallet visualising BDK coin-selection algorithms and UTXO fee modelling.
+- Built full-stack applications across fintech, e-commerce, and research domains, adapting system design to varied product requirements.
 
-- Delivered production web applications across **fintech, e-commerce, and creative sectors** using React, Next.js, TypeScript, and Supabase.
+- Built a Bitcoin research tool visualizing UTXO-level behavior and fee modeling.
 
 ---
 
@@ -102,52 +106,43 @@ Remote · 2020 – Present
 
 ## Cosmora
 
-**Founder · Product Engineer**  
+**Founder · Full-Stack Product Engineer**  
 2024 – Present
 
 _Tauri · React · TypeScript · SQLite · Rust_
 
-- Building **Cosmora**, a local-first desktop operating system for independent salon owners replacing notebook- and messaging-based workflows.
+- **Built a production-ready local-first desktop application using React + Tauri**, managing both UI and data persistence via SQLite.
 
-- Designed a **privacy-first architecture using SQLite**, ensuring all client data remains local without mandatory cloud infrastructure.
+- Designed UI systems for complex workflows (client profiles, history, financial tracking).
 
-- Implemented **Argon2-based authentication and resilient onboarding**, allowing recovery of application state after unexpected termination.
+- Implemented local-first data architecture using SQLite.
+
+- Developed secure onboarding and authentication flows with session recovery.
 
 ---
 
 # Skills
 
-### Languages
-
-TypeScript · JavaScript · Python
-
 ### Frontend
+React · Next.js · TypeScript · TailwindCSS
 
-React · Next.js · SvelteKit · TailwindCSS
+### Backend
+Node.js · FastAPI · REST APIs · Supabase
 
-### State Management
+### State & Data
+React Query · Zustand · Redux · SQLite
 
-Redux · Zustand · React Query
-
-### Backend:
-
-Node.js · Python · FastAPI · ArangoDB · RabbitMQ · Supabase
-
-### Desktop / Local-First
-
-Tauri · Electron · SQLite · Rust
+### Testing
+Jest · React Testing Library · Python (unit & integration)
 
 ### Infrastructure
+Linux (Ubuntu) · GitHub Actions · Docker · AWS · Vercel
 
-Docker · GitHub Actions · Self-Hosted Linux Servers · AWS · Vercel
+### Build & Automation
+Makefile
 
-### Architecture
-
-Backend-for-Frontend (BFF) · Modular Monolith · Event-Driven Messaging · Offline-First Systems · REST API Design
-
-### AI & LLM
-
-LangChain · OpenAI APIs · Prompt Engineering
+### Additional
+Python · Rust · Tauri · Electron
 
 ---
 
@@ -168,4 +163,4 @@ LangChain for JavaScript Developers
 
 # Engineering Interests
 
-Local-First Software · Privacy-First Systems · Developer Tooling · Thoughtful Product Design
+Local-First Software · Data-Intensive Interfaces · Developer Tooling · Product-Focused Engineering

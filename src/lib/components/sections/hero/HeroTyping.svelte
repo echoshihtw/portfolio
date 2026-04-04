@@ -1,5 +1,6 @@
 <script lang="ts">
-  import { rawText } from "$lib/components/sections/hero/intro";
+
+  import { rawText } from "../../../../content/intro";
 
   const principles = rawText
     .split("\n")
