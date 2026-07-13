@@ -182,9 +182,3 @@ Fu Jen Catholic University · Taipei · 2019
 CS50 Cybersecurity — Harvard / edX _(In Progress)_  
 Data Science & AI with Python — Preface  
 LangChain for JavaScript Developers
-
----
-
-# Engineering Interests
-
-Local-First Software · Data-Intensive Interfaces · Developer Tooling · Product-Focused Engineering

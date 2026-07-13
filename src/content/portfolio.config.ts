@@ -63,6 +63,23 @@ export const heroConfig: {
   seeWorkHref: "#projects",
 };
 
+// Curated, portfolio-facing skills — signal over completeness (PG/Jobs).
+// The full keyword list stays in resume.md for the ATS-friendly PDF.
+// Buckets aligned to the "full-spectrum" story: Frontend · Mobile · Backend · Infra.
+export const skillsConfig: { label: string; items: string[] }[] = [
+  { label: "Frontend", items: ["React", "Next.js", "TypeScript", "Tailwind"] },
+  { label: "Mobile", items: ["Flutter", "Dart", "Riverpod"] },
+  {
+    label: "Backend & Data",
+    items: ["FastAPI", "Node.js", "Postgres", "ArangoDB", "RabbitMQ"],
+  },
+  {
+    label: "Infra & CI/CD",
+    items: ["Docker", "GitHub Actions", "GHCR", "AWS"],
+  },
+  { label: "Testing", items: ["Vitest", "React Testing Library", "pytest"] },
+];
+
 // Distilled experience copy, keyed by company (matches resumeData `experience`).
 // The full formal bullets stay in resume.md and show in the "details" expander.
 // Each entry: one weighty impact line + one problem→solution proof + quiet tech.
