@@ -3,23 +3,17 @@
   import ProjectCard from "./ProjectCard.svelte";
 </script>
 
-<div class="grid">
+<div class="stack">
   {#each projectsConfig as project}
     <ProjectCard {project} />
   {/each}
 </div>
 
 <style>
-  .grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1rem;
+  .stack {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
     width: 100%;
-  }
-
-  @media (min-width: 768px) {
-    .grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
   }
 </style>

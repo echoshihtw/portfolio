@@ -9,9 +9,13 @@
   const statusKey = (s: string) => s.toLowerCase().replace(/\s+/g, "-");
 </script>
 
-<article class="card" class:featured={project.featured}>
+<article
+  class="row"
+  class:featured={project.featured}
+  class:has-media={!!project.file}
+>
   {#if project.file}
-    <div class="thumb">
+    <div class="media">
       <img
         src="{base}/{project.file}"
         alt="{project.name} preview"
@@ -20,83 +24,93 @@
     </div>
   {/if}
 
-  <div class="top">
-    <div>
-      <h4 class="name">{project.name}</h4>
-      {#if project.subtitle}<p class="subtitle mono">{project.subtitle}</p>{/if}
+  <div class="body">
+    <div class="top">
+      <div>
+        <h4 class="name">{project.name}</h4>
+        {#if project.subtitle}<p class="subtitle mono">{project.subtitle}</p>{/if}
+      </div>
+      <span class="status status-{statusKey(project.status)}">
+        <span class="dot" aria-hidden="true" />
+        {project.status}
+      </span>
     </div>
-    <span class="status status-{statusKey(project.status)}">
-      <span class="dot" aria-hidden="true" />
-      {project.status}
-    </span>
-  </div>
 
-  <p class="desc">{project.description}</p>
+    <p class="desc">{project.description}</p>
 
-  {#if project.now}
-    <p class="now"><span class="now-label mono">Now</span>{project.now}</p>
-  {/if}
+    {#if project.now}
+      <p class="now"><span class="now-label mono">Now</span>{project.now}</p>
+    {/if}
 
-  <p class="tech mono">{project.stack.join("  ·  ")}</p>
+    <p class="tech mono">{project.stack.join("  ·  ")}</p>
 
-  <div class="foot">
-    <a
-      class="link mono"
-      href={project.href}
-      target="_blank"
-      rel="noreferrer noopener"
-    >
-      {project.linkLabel || "View"}
-    </a>
-    {#if project.highlights?.length}
-      <button
-        class="expander mono"
-        aria-expanded={expanded}
-        on:click={() => (expanded = !expanded)}
+    <div class="foot">
+      <a
+        class="link mono"
+        href={project.href}
+        target="_blank"
+        rel="noreferrer noopener"
       >
-        {expanded ? "Less ↑" : "Details ↓"}
-      </button>
+        {project.linkLabel || "View"}
+      </a>
+      {#if project.highlights?.length}
+        <button
+          class="expander mono"
+          aria-expanded={expanded}
+          on:click={() => (expanded = !expanded)}
+        >
+          {expanded ? "Less ↑" : "Details ↓"}
+        </button>
+      {/if}
+    </div>
+
+    {#if expanded && project.highlights?.length}
+      <ul class="details" transition:slide|local={{ duration: 200 }}>
+        {#each project.highlights as h}
+          <li>{h}</li>
+        {/each}
+      </ul>
     {/if}
   </div>
-
-  {#if expanded && project.highlights?.length}
-    <ul class="details" transition:slide|local={{ duration: 200 }}>
-      {#each project.highlights as h}
-        <li>{h}</li>
-      {/each}
-    </ul>
-  {/if}
 </article>
 
 <style>
-  .card {
+  .row {
+    display: flex;
+    align-items: stretch;
+    width: 100%;
     background: var(--surface-bg);
     border: 1px solid var(--section-border);
     border-radius: 4px;
-    padding: 1.25rem 1.4rem;
-    display: flex;
-    flex-direction: column;
+    overflow: hidden;
   }
 
-  .card.featured {
+  .row.featured {
     border-color: var(--color-accent);
   }
 
-  .thumb {
-    margin: -1.25rem -1.4rem 1.15rem;
-    aspect-ratio: 16 / 9;
-    overflow: hidden;
+  .media {
+    flex: 0 0 38%;
+    min-height: 190px;
     background: #141311;
-    border-bottom: 1px solid var(--section-border);
-    border-radius: 3px 3px 0 0;
+    overflow: hidden;
+    border-right: 1px solid var(--section-border);
   }
 
-  .thumb img {
+  .media img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: top center;
     display: block;
+  }
+
+  .body {
+    flex: 1;
+    min-width: 0;
+    padding: 1.4rem 1.6rem;
+    display: flex;
+    flex-direction: column;
   }
 
   .top {
@@ -110,7 +124,7 @@
     margin: 0;
     font-family: "DM Serif Display", serif;
     font-weight: 400;
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     line-height: 1.1;
     color: var(--text-color);
   }
@@ -163,14 +177,15 @@
   }
 
   .desc {
-    margin: 0.9rem 0 0;
+    margin: 0.85rem 0 0;
     font-size: 0.92rem;
     line-height: 1.58;
     color: var(--text-muted);
+    max-width: 62ch;
   }
 
   .now {
-    margin: 0.9rem 0 0;
+    margin: 0.85rem 0 0;
     padding: 0.55rem 0.75rem;
     border-left: 2px solid var(--color-accent);
     background: rgba(200, 169, 126, 0.08);
@@ -189,7 +204,7 @@
   }
 
   .tech {
-    margin: 0.95rem 0 0;
+    margin: 0.9rem 0 0;
     font-size: 0.71rem;
     letter-spacing: 0.02em;
     color: var(--text-muted);
@@ -197,7 +212,8 @@
   }
 
   .foot {
-    margin-top: 1rem;
+    margin-top: auto;
+    padding-top: 1rem;
     display: flex;
     align-items: center;
     gap: 1.3rem;
@@ -241,9 +257,17 @@
     color: var(--text-muted);
   }
 
-  @media (min-width: 768px) {
-    .card.featured {
-      grid-column: 1 / -1;
+  @media (max-width: 700px) {
+    .row {
+      flex-direction: column;
+    }
+    .media {
+      flex: none;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      min-height: 0;
+      border-right: none;
+      border-bottom: 1px solid var(--section-border);
     }
   }
 </style>
