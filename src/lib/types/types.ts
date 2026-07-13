@@ -9,6 +9,7 @@ interface Project {
   status: "Live" | "In Progress" | "Archived";
   highlights?: string[];
   featured?: boolean;
+  now?: string;
 }
 
 interface MenuTab {
