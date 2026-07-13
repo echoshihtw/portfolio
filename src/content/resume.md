@@ -12,27 +12,27 @@ Taipei, Taiwan
 
 # Summary
 
-Full-stack engineer with a strong focus on frontend systems, specialising in React and TypeScript.
+Full-stack engineer with a strong focus on frontend systems, specialising in **React, Next.js, and TypeScript**, and comfortable owning the backend — **FastAPI, event-driven services, and CI/CD** — end to end.
 
-Experienced in building production applications end-to-end, from designing user interfaces and managing complex state to defining backend APIs, implementing testing across the stack, and structuring system architecture.
+Experienced building production applications from the UI and complex state down to backend APIs, data modeling, testing across the stack, and the deployment pipeline. Recent work spans an **event-driven modular-monolith platform**, a **Supabase-backed multi-tenant web app**, and a **Flutter mobile app shipped to both app stores**.
 
-Particularly interested in **local-first software and data-intensive interfaces**, with an emphasis on building reliable, scalable, and user-focused products.
+Particularly interested in **local-first software and data-intensive interfaces**, with an emphasis on building reliable, secure, and user-focused products.
 
 ---
 
 # Engineering Impact
 
-- **Built and operated production systems end-to-end**, covering frontend (React/Next.js), backend APIs, infrastructure, and deployment.
+- **Built and operate production systems end-to-end** — frontend (React / Next.js), backend APIs (FastAPI), data layer, and deployment.
 
-- **Built scalable frontend systems using React and Next.js**, handling complex workflows, asynchronous data flows, and multi-role state management.
+- **Architected an event-driven modular monolith** with bounded modules communicating over a **RabbitMQ message bus**, backed by **ArangoDB** (multi-model).
 
-- **Defined backend API requirements and guided implementation**, ensuring reliable integration between frontend systems and backend services.
+- **Designed role- and policy-based access control** with secure authentication (JWT, Argon2), and hardened data access via **Postgres Row-Level Security**.
 
-- **Implemented CI/CD pipelines using GitHub Actions and Makefile-based workflows**, enabling reproducible builds and reliable deployments in Linux-based environments.
+- **Engineered a build-once, promote-by-digest CI/CD pipeline** (GitHub Actions → GHCR) that eliminated redundant rebuilds and guarantees production ships the exact image validated in staging.
 
-- **Designed and built local-first applications managing UI and data persistence (SQLite)**, eliminating backend dependency and enabling offline-first workflows.
+- **Shipped local-first applications** with encrypted on-device persistence (**SQLCipher / SQLite**) and offline-capable data flows.
 
-- **Delivered AI-powered production features** integrating OpenAI APIs within a live product.
+- **Delivered AI-powered production features** integrating OpenAI / ChatGPT APIs within live products.
 
 ---
 
