@@ -52,35 +52,4 @@ export const projectsConfig: Projects = [
     linkLabel: "Source Code →",
     status: "Archived",
   },
-  {
-    name: "Crypto Price Ticker",
-    subtitle: "Real-Time Crypto Data Visualization",
-    href: "https://github.com/echoshihtw/crypto-price-ticker",
-    file: "assets/crypto-price-ticker.png",
-    description:
-      "A full-stack real-time cryptocurrency price tracker with live chart updates using WebSockets. Built to handle streaming data and dynamic UI updates.",
-    stack: ["React", "TypeScript", "Socket.io"],
-    highlights: [
-      "Real-time data streaming with WebSockets",
-      "Dynamic chart rendering",
-      "Full-stack data flow handling",
-    ],
-    linkLabel: "Source Code →",
-    status: "Archived",
-  },
-  {
-    name: "Digital Chaos",
-    subtitle: "Personal Knowledge & Reflection App",
-    description:
-      "A lightweight web app for capturing personal quotes, ideas, and life rules. Focused on fast input, simple organization, and clean UI for daily use.",
-    href: "https://digital-chaos-jzg2.vercel.app",
-    stack: ["React", "TypeScript", "Vercel"],
-    highlights: [
-      "Fast input and minimal UI design",
-      "Lightweight personal knowledge system",
-      "Deployed on Vercel for instant access",
-    ],
-    linkLabel: "Live Demo →",
-    status: "Live",
-  },
 ];
