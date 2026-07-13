@@ -1,8 +1,9 @@
-# Chun-Yu (Echo) Shih
-
-**Full-Stack Engineer · React · TypeScript · FastAPI · Mobile · CI/CD**
-
-Taipei, Taiwan · echoshihtw@gmail.com · linkedin.com/in/echoshihtw · github.com/echoshihtw · echoshihtw.github.io/portfolio
+```{=latex}
+{\fontsize{22}{25}\selectfont\bfseries\color{ink}Chun-Yu (Echo) Shih}\\[3pt]
+{\large Full-Stack Engineer · React · TypeScript · FastAPI · Mobile · CI/CD}\\[5pt]
+{\small\color{muted}Taipei, Taiwan · echoshihtw@gmail.com · linkedin.com/in/echoshihtw · github.com/echoshihtw · echoshihtw.github.io/portfolio}
+\vspace{4pt}
+```
 
 # Summary
 
