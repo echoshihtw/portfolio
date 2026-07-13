@@ -1,40 +1,12 @@
 # Chun-Yu (Echo) Shih
 
-**Full-Stack Engineer (Frontend-focused) · React · TypeScript · End-to-End Product Development**
+**Full-Stack Engineer · React · TypeScript · FastAPI · Mobile · CI/CD**
 
-Taipei, Taiwan  
-📧 echoshihtw@gmail.com  
-🔗 linkedin.com/in/echoshihtw  
-🔗 github.com/echoshihtw  
-🔗 echoshihtw.github.io/portfolio
-
----
+Taipei, Taiwan · echoshihtw@gmail.com · linkedin.com/in/echoshihtw · github.com/echoshihtw · echoshihtw.github.io/portfolio
 
 # Summary
 
-Full-stack engineer with a strong focus on frontend systems, specialising in **React, Next.js, and TypeScript**, and comfortable owning the backend — **FastAPI, event-driven services, and CI/CD** — end to end.
-
-Experienced building production applications from the UI and complex state down to backend APIs, data modeling, testing across the stack, and the deployment pipeline. Recent work spans an **event-driven modular-monolith platform**, a **Supabase-backed multi-tenant web app**, and a **Flutter mobile app shipped to both app stores**.
-
-Particularly interested in **local-first software and data-intensive interfaces**, with an emphasis on building reliable, secure, and user-focused products.
-
----
-
-# Engineering Impact
-
-- **Built and operate production systems end-to-end** — frontend (React / Next.js), backend APIs (FastAPI), data layer, and deployment.
-
-- **Architected an event-driven modular monolith** with bounded modules communicating over a **RabbitMQ message bus**, backed by **ArangoDB** (multi-model).
-
-- **Designed role- and policy-based access control** with secure authentication (JWT, Argon2), and hardened data access via **Postgres Row-Level Security**.
-
-- **Engineered a build-once, promote-by-digest CI/CD pipeline** (GitHub Actions → GHCR) that eliminated redundant rebuilds and guarantees production ships the exact image validated in staging.
-
-- **Shipped local-first applications** with encrypted on-device persistence (**SQLCipher / SQLite**) and offline-capable data flows.
-
-- **Delivered AI-powered production features** integrating OpenAI / ChatGPT APIs within live products.
-
----
+Full-stack engineer who takes products from an empty repo to a shipped app — frontend, backend, and the pipeline that deploys them. I find the real problem and ship the fix, across web, mobile, and infrastructure.
 
 # Experience
 
@@ -43,142 +15,50 @@ Particularly interested in **local-first software and data-intensive interfaces*
 **Full-Stack Engineer — Internal Platform Development**  
 Taipei, Taiwan · Dec 2024 – Present
 
-- Building an internal team project-management platform end-to-end as one of two engineers, owning both the **Next.js 15 / React 19 (TypeScript)** frontend and the **FastAPI / Python 3.12** backend.
-
-- Architected an **event-driven modular monolith** — bounded modules for auth, organisation, user, project, and project management communicating asynchronously over a **RabbitMQ message bus (aio-pika)** with a dedicated consumer service for background processing.
-
-- Modeled the data layer on **ArangoDB (multi-model)**, representing organisational and project relationships as connected graph/document data.
-
-- Designed **role- and policy-based access control** — a role→permission/capability model enforced across backend modules and mirrored in the frontend — with secure auth via **JWT (python-jose)** and **Argon2 password hashing**.
-
-- Built the **Next.js frontend** (MUI, TanStack Query, Zustand) delivering **dual client/vendor viewpoints** where a single user can act as either, plus a **superadmin dashboard** that visualises project node/edge relationships with **force-graph / Three.js** for at-a-glance oversight and fast cleanup of test data.
-
-- Established **full-stack quality gates** — Vitest + React Testing Library + **Playwright E2E** + MSW (frontend), **pytest / pytest-asyncio** (backend), with **mypy (strict)** and **Ruff**.
-
-- Re-architected the deploy pipeline to **build-once, promote-by-digest** (GitHub Actions → **GHCR**): images build a single time on staging (multi-arch amd64/arm64), then production and tagged (`v*`) releases **re-tag the exact digest** instead of rebuilding — cutting a release path that previously rebuilt **up to 3×** down to one build, reducing CI time and GitHub storage while guaranteeing prod ships the byte-identical image validated in staging.
-
-- Hardened the release flow with **least-privilege job permissions, buildx layer caching, automated cache cleanup, and conventional-commit / tag-driven versioning**, plus auto-generated staging→production promotion PRs.
-
----
+- Own an internal team project-management platform end-to-end as one of two engineers — the **Next.js / React (TypeScript)** frontend and the **FastAPI / Python** backend.
+- Architected an **event-driven modular monolith** (bounded modules over a **RabbitMQ** bus with a dedicated consumer) on **ArangoDB**, with **role- and policy-based access control** and secure auth (JWT, Argon2).
+- Re-architected deploys to **build-once, promote-by-digest** (GitHub Actions, **GHCR**), cutting redundant rebuilds from **3 builds to 1** so production ships the exact image tested in staging.
+- Built the **Next.js frontend** (MUI, TanStack Query, Zustand) with dual client/vendor views and a **force-graph** admin dashboard; tested with **Vitest, React Testing Library, and pytest**.
 
 ## SPIN.FASHION by Lablaco
 
 **Software Engineer · Founding Partner**  
 Singapore · Remote · Aug 2024 – Oct 2024
 
-- Resolved a **critical macOS Electron release blocker** — fixing code-signing, **Apple notarization, and S3-based auto-update** — to unblock desktop distribution of the in-store app (React / Redux-Saga).
-
-- Authored a **release runbook** for the signed and notarized macOS + Windows builds, adopted as the team’s deployment standard.
-
-- Improved **React frontend performance and stability** across the Electron renderer.
-
-- Delivered remotely across time zones as a founding partner on a small distributed team.
-
----
+- Resolved a **critical macOS Electron release blocker** (code-signing, **Apple notarization**, auto-update) to ship the desktop app, and authored the team's release runbook — working remotely across time zones.
 
 ## Find Recruiter (HR Tech Startup)
 
 **Software Engineer**  
 Taipei, Taiwan · Aug 2022 – May 2024
 
-- One of two engineers on a **B2B recruitment / applicant-tracking platform** (React 18, ~150k LOC), leading frontend development across employer and recruiter workflows.
-
-- Built and shipped **multiple OpenAI / ChatGPT-powered features** — a **JD Generator**, AI interview-plan generation, and a CV standardiser — orchestrating server-side LLM calls from the frontend.
-
-- Drove an **incremental JavaScript → TypeScript migration** of a large production codebase, reducing runtime bugs by ~30%.
-
-- Developed **100+ reusable UI components** with **Redux Toolkit + redux-saga** state management and **Firebase-backed realtime chat and notifications**.
-
-- Shipped a **5-language internationalised** product deployed via GitHub Actions CI/CD to **GCP Cloud Run and AWS**.
-
----
+- Led frontend development of a **B2B recruitment / ATS platform** (**React 18**, ~150k LOC) used by employers and agencies.
+- Shipped multiple **OpenAI / ChatGPT features** — a JD generator, AI interview-plan generation, and a CV standardiser.
+- Drove an incremental **JavaScript to TypeScript** migration (~30% fewer runtime bugs); built 100+ reusable components with **Redux Toolkit and redux-saga** and **Firebase** realtime.
 
 ## Independent Engineering Work
 
-**Software Engineer**  
-Remote · 2020 – Present
+**Software Engineer** · Remote · 2020 – Present
 
-- Built full-stack applications across fintech, e-commerce, and research domains, adapting system design to varied product requirements.
+- Built the **Next.js frontend for a Bitcoin coin-selection wallet** (*echology*) alongside a **BDK core maintainer** — UTXO coin-control and fee/waste metrics — plus full-stack apps across fintech and research.
 
-- Built the **Next.js / React frontend for a Bitcoin coin-selection demo wallet** (*echology*), in collaboration with a **BDK core maintainer** — implementing UTXO coin-control selection, spend-scenario and fee-rate configuration, and surfacing coin-selection metrics (waste, fee, feerate deviation).
+# Projects
 
----
+**Cosmora** — _Founder_ · solo bilingual, multi-tenant **salon platform** (React · Supabase · **Postgres RLS** · per-member permissions), packaged for desktop with Tauri.
 
-# Founder & Product Engineering
-
-## Cosmora — Salon Management Platform
-
-**Founder · Full-Stack Product Engineer**  
-2024 – Present
-
-_React · TypeScript · Supabase (Postgres) · Tauri (desktop packaging)_
-
-- Built a **bilingual, multi-tenant salon-management application** solo (React 19 + TypeScript), packaged for desktop with Tauri and shipped as a macOS build.
-
-- Designed a **domain-driven frontend architecture** (7 domains, strict `api → provider` import boundaries) with the boundaries **enforced at test time** by a custom static-analysis contract.
-
-- Hardened data security with **Postgres Row-Level Security** scoped to org membership, a **per-member JSONB permission model**, and SECURITY DEFINER RPCs on Supabase.
-
-- Implemented an **offline-capable read layer** (React Query cache hydrated from local storage) and secure staff provisioning via a **Supabase Edge Function**.
-
-- Set up **Jest + React Testing Library with coverage gates** and **semantic-release CI** (automated versioning from conventional commits).
-
-- Now designing the **next-generation version (SalonOS)** — product spec, financial engine, and visit-logging flows in active design.
-
-## Runway — Personal Financial Runway App
-
-**Founder · Mobile Product Engineer**  
-2026 – Present
-
-_Flutter · Dart · Riverpod · Drift (SQLite) · SQLCipher_
-
-- Built a **near-production cross-platform mobile app** (iOS + Android) that computes how long a person's savings will last — solo, in **Flutter / Dart**.
-
-- Structured a **Melos monorepo with Clean Architecture / DDD** — a pure-Dart domain layer with compile-time-enforced package boundaries and dedicated logic engines for burn rate, loan amortization, and subscription normalization.
-
-- Implemented **AES-256 encrypted local-first storage** (Drift + SQLCipher, key held in device secure storage) with versioned schema migrations and screenshot/recording blocking.
-
-- Shipped **in-app purchases (RevenueCat)**, **7-language localization**, ~100 unit/integration tests, and **CI/CD releasing signed builds to TestFlight and Google Play** on version tags.
-
----
+**Runway** — _Founder_ · solo cross-platform **Flutter** app (iOS + Android): Clean Architecture, **SQLCipher-encrypted** storage, and **CI/CD to TestFlight + Google Play**.
 
 # Skills
 
-### Frontend
-React · Next.js · TypeScript · MUI · TailwindCSS
-
-### Mobile
-Flutter · Dart · Riverpod · SQLCipher
-
-### Backend
-FastAPI · Python · REST APIs · Pydantic · Node.js · Supabase
-
-### State & Data
-TanStack Query · Zustand · Redux · Redux-Saga · ArangoDB · SQLite · Drift · Firebase · RabbitMQ
-
-### Testing
-Vitest · Playwright · React Testing Library · MSW · pytest · Jest
-
-### Infrastructure & DevOps
-Docker · Docker Compose · GHCR · GitHub Actions · buildx · Linux (Ubuntu) · AWS · Vercel
-
-### Build & Automation
-Makefile · Poetry · semantic versioning (conventional commits)
-
-### Languages & Runtimes
-Python · Electron · Tauri (desktop packaging)
-
----
+**Frontend** — React · Next.js · TypeScript · MUI · Tailwind · TanStack Query · Zustand  
+**Backend & Data** — FastAPI · Python · Node.js · Postgres · ArangoDB · Supabase · RabbitMQ · SQLite  
+**Mobile & Infra** — Flutter · Dart · Riverpod · Docker · GitHub Actions · GHCR · AWS  
+**Testing** — Vitest · React Testing Library · Jest · pytest
 
 # Education
 
-**B.A. Italian Language and Culture**  
-Fu Jen Catholic University · Taipei · 2019
-
----
+**B.A. Italian Language & Culture** — Fu Jen Catholic University, Taipei · 2019
 
 # Certifications
 
-CS50 Cybersecurity — Harvard / edX _(In Progress)_  
-Data Science & AI with Python — Preface  
-LangChain for JavaScript Developers
+CS50 Cybersecurity — Harvard / edX _(in progress)_ · Data Science & AI with Python — Preface · LangChain for JavaScript

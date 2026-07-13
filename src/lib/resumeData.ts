@@ -13,7 +13,7 @@ type SkillGroup = {
   items: string[];
 };
 
-export const summary = "Full-stack engineer with a strong focus on frontend systems, specialising in **React, Next.js, and TypeScript**, and comfortable owning the backend — **FastAPI, event-driven services, and CI/CD** — end to end.\n\nExperienced building production applications from the UI and complex state down to backend APIs, data modeling, testing across the stack, and the deployment pipeline. Recent work spans an **event-driven modular-monolith platform**, a **Supabase-backed multi-tenant web app**, and a **Flutter mobile app shipped to both app stores**.\n\nParticularly interested in **local-first software and data-intensive interfaces**, with an emphasis on building reliable, secure, and user-focused products.\n\n---";
+export const summary = "Full-stack engineer who takes products from an empty repo to a shipped app — frontend, backend, and the pipeline that deploys them. I find the real problem and ship the fix, across web, mobile, and infrastructure.";
 
 export const experience: ExperienceItem[] = [
   {
@@ -21,14 +21,10 @@ export const experience: ExperienceItem[] = [
     "role": "**Full-Stack Engineer — Internal Platform Development**",
     "date": "Taipei, Taiwan · Dec 2024 – Present",
     "highlights": [
-      "Building an internal team project-management platform end-to-end as one of two engineers, owning both the **Next.js 15 / React 19 (TypeScript)** frontend and the **FastAPI / Python 3.12** backend.",
-      "Architected an **event-driven modular monolith** — bounded modules for auth, organisation, user, project, and project management communicating asynchronously over a **RabbitMQ message bus (aio-pika)** with a dedicated consumer service for background processing.",
-      "Modeled the data layer on **ArangoDB (multi-model)**, representing organisational and project relationships as connected graph/document data.",
-      "Designed **role- and policy-based access control** — a role→permission/capability model enforced across backend modules and mirrored in the frontend — with secure auth via **JWT (python-jose)** and **Argon2 password hashing**.",
-      "Built the **Next.js frontend** (MUI, TanStack Query, Zustand) delivering **dual client/vendor viewpoints** where a single user can act as either, plus a **superadmin dashboard** that visualises project node/edge relationships with **force-graph / Three.js** for at-a-glance oversight and fast cleanup of test data.",
-      "Established **full-stack quality gates** — Vitest + React Testing Library + **Playwright E2E** + MSW (frontend), **pytest / pytest-asyncio** (backend), with **mypy (strict)** and **Ruff**.",
-      "Re-architected the deploy pipeline to **build-once, promote-by-digest** (GitHub Actions → **GHCR**): images build a single time on staging (multi-arch amd64/arm64), then production and tagged (`v*`) releases **re-tag the exact digest** instead of rebuilding — cutting a release path that previously rebuilt **up to 3×** down to one build, reducing CI time and GitHub storage while guaranteeing prod ships the byte-identical image validated in staging.",
-      "Hardened the release flow with **least-privilege job permissions, buildx layer caching, automated cache cleanup, and conventional-commit / tag-driven versioning**, plus auto-generated staging→production promotion PRs."
+      "Own an internal team project-management platform end-to-end as one of two engineers — the **Next.js / React (TypeScript)** frontend and the **FastAPI / Python** backend.",
+      "Architected an **event-driven modular monolith** (bounded modules over a **RabbitMQ** bus with a dedicated consumer) on **ArangoDB**, with **role- and policy-based access control** and secure auth (JWT, Argon2).",
+      "Re-architected deploys to **build-once, promote-by-digest** (GitHub Actions, **GHCR**), cutting redundant rebuilds from **3 builds to 1** so production ships the exact image tested in staging.",
+      "Built the **Next.js frontend** (MUI, TanStack Query, Zustand) with dual client/vendor views and a **force-graph** admin dashboard; tested with **Vitest, React Testing Library, and pytest**."
     ]
   },
   {
@@ -36,10 +32,7 @@ export const experience: ExperienceItem[] = [
     "role": "**Software Engineer · Founding Partner**",
     "date": "Singapore · Remote · Aug 2024 – Oct 2024",
     "highlights": [
-      "Resolved a **critical macOS Electron release blocker** — fixing code-signing, **Apple notarization, and S3-based auto-update** — to unblock desktop distribution of the in-store app (React / Redux-Saga).",
-      "Authored a **release runbook** for the signed and notarized macOS + Windows builds, adopted as the team’s deployment standard.",
-      "Improved **React frontend performance and stability** across the Electron renderer.",
-      "Delivered remotely across time zones as a founding partner on a small distributed team."
+      "Resolved a **critical macOS Electron release blocker** (code-signing, **Apple notarization**, auto-update) to ship the desktop app, and authored the team's release runbook — working remotely across time zones."
     ]
   },
   {
@@ -47,108 +40,44 @@ export const experience: ExperienceItem[] = [
     "role": "**Software Engineer**",
     "date": "Taipei, Taiwan · Aug 2022 – May 2024",
     "highlights": [
-      "One of two engineers on a **B2B recruitment / applicant-tracking platform** (React 18, ~150k LOC), leading frontend development across employer and recruiter workflows.",
-      "Built and shipped **multiple OpenAI / ChatGPT-powered features** — a **JD Generator**, AI interview-plan generation, and a CV standardiser — orchestrating server-side LLM calls from the frontend.",
-      "Drove an **incremental JavaScript → TypeScript migration** of a large production codebase, reducing runtime bugs by ~30%.",
-      "Developed **100+ reusable UI components** with **Redux Toolkit + redux-saga** state management and **Firebase-backed realtime chat and notifications**.",
-      "Shipped a **5-language internationalised** product deployed via GitHub Actions CI/CD to **GCP Cloud Run and AWS**."
+      "Led frontend development of a **B2B recruitment / ATS platform** (**React 18**, ~150k LOC) used by employers and agencies.",
+      "Shipped multiple **OpenAI / ChatGPT features** — a JD generator, AI interview-plan generation, and a CV standardiser.",
+      "Drove an incremental **JavaScript to TypeScript** migration (~30% fewer runtime bugs); built 100+ reusable components with **Redux Toolkit and redux-saga** and **Firebase** realtime."
     ]
   },
   {
     "company": "Independent Engineering Work",
-    "role": "**Software Engineer**",
-    "date": "Remote · 2020 – Present",
+    "role": "**Software Engineer** · Remote · 2020 – Present",
+    "date": "",
     "highlights": [
-      "Built full-stack applications across fintech, e-commerce, and research domains, adapting system design to varied product requirements.",
-      "Built the **Next.js / React frontend for a Bitcoin coin-selection demo wallet** (*echology*), in collaboration with a **BDK core maintainer** — implementing UTXO coin-control selection, spend-scenario and fee-rate configuration, and surfacing coin-selection metrics (waste, fee, feerate deviation)."
+      "Built the **Next.js frontend for a Bitcoin coin-selection wallet** (*echology*) alongside a **BDK core maintainer** — UTXO coin-control and fee/waste metrics — plus full-stack apps across fintech and research."
     ]
   }
 ];
 
 export const skills: SkillGroup[] = [
   {
-    "category": "### Frontend",
+    "category": "**Frontend** — React · Next.js · TypeScript · MUI · Tailwind · TanStack Query · Zustand",
     "items": [
-      "React",
-      "Next.js",
-      "TypeScript",
-      "MUI",
-      "TailwindCSS"
-    ]
-  },
-  {
-    "category": "Mobile",
-    "items": [
-      "Flutter",
+      "**Backend & Data** — FastAPI",
+      "Python",
+      "Node.js",
+      "Postgres",
+      "ArangoDB",
+      "Supabase",
+      "RabbitMQ",
+      "SQLite",
+      "**Mobile & Infra** — Flutter",
       "Dart",
       "Riverpod",
-      "SQLCipher"
-    ]
-  },
-  {
-    "category": "Backend",
-    "items": [
-      "FastAPI",
-      "Python",
-      "REST APIs",
-      "Pydantic",
-      "Node.js",
-      "Supabase"
-    ]
-  },
-  {
-    "category": "State & Data",
-    "items": [
-      "TanStack Query",
-      "Zustand",
-      "Redux",
-      "Redux-Saga",
-      "ArangoDB",
-      "SQLite",
-      "Drift",
-      "Firebase",
-      "RabbitMQ"
-    ]
-  },
-  {
-    "category": "Testing",
-    "items": [
-      "Vitest",
-      "Playwright",
-      "React Testing Library",
-      "MSW",
-      "pytest",
-      "Jest"
-    ]
-  },
-  {
-    "category": "Infrastructure & DevOps",
-    "items": [
       "Docker",
-      "Docker Compose",
-      "GHCR",
       "GitHub Actions",
-      "buildx",
-      "Linux (Ubuntu)",
+      "GHCR",
       "AWS",
-      "Vercel"
-    ]
-  },
-  {
-    "category": "Build & Automation",
-    "items": [
-      "Makefile",
-      "Poetry",
-      "semantic versioning (conventional commits)"
-    ]
-  },
-  {
-    "category": "Languages & Runtimes",
-    "items": [
-      "Python",
-      "Electron",
-      "Tauri (desktop packaging)",
-      "---"
+      "**Testing** — Vitest",
+      "React Testing Library",
+      "Jest",
+      "pytest"
     ]
   }
 ];
