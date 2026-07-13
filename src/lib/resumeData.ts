@@ -156,44 +156,67 @@ export const skills: SkillGroup[] = [
 export const projects: Projects = [
   {
     "name": "Cosmora",
-    "subtitle": "Local-First Salon Operating System",
-    "description": "Cosmora is a production-focused local-first desktop application for independent salon owners. It manages client records, visit history, and financial workflows entirely on-device, eliminating cloud dependency while ensuring data ownership and reliability.",
+    "subtitle": "Salon Management Platform",
+    "description": "A bilingual, multi-tenant salon-management application for independent salon owners — managing client records, visit history, and financial workflows. Built with a domain-driven architecture on Supabase (Postgres) with row-level security and per-member permissions, and packaged for desktop with Tauri.",
     "href": "https://cosmora-lab.vercel.app",
     "stack": [
       "React",
-      "Tauri",
       "TypeScript",
-      "SQLite",
-      "Zustand",
-      "React Query"
+      "Supabase",
+      "Postgres",
+      "Tauri",
+      "TanStack Query"
     ],
     "highlights": [
-      "Built desktop app with React + Tauri",
-      "Designed local-first data layer using SQLite",
-      "Handled complex workflows (clients, visits, finances)",
-      "Implemented secure onboarding and state recovery"
+      "Domain-driven architecture with test-enforced import boundaries",
+      "Postgres row-level security + per-member permission model",
+      "Offline-capable read layer via cached hydration",
+      "Semantic-release CI with coverage gates"
     ],
     "featured": true,
     "linkLabel": "In Progress →",
     "status": "In Progress"
   },
   {
-    "name": "Digital Chaos",
-    "subtitle": "Personal Knowledge & Reflection App",
-    "description": "A lightweight web app for capturing personal quotes, ideas, and life rules. Focused on fast input, simple organization, and clean UI for daily use.",
-    "href": "https://digital-chaos-jzg2.vercel.app",
+    "name": "Runway",
+    "subtitle": "Personal Financial Runway App",
+    "description": "A cross-platform mobile app (iOS + Android) that calculates how long your savings will last. Built solo in Flutter with a Clean-Architecture monorepo, AES-256 encrypted on-device storage, and automated releases to TestFlight and Google Play.",
+    "href": "#",
     "stack": [
-      "React",
-      "TypeScript",
-      "Vercel"
+      "Flutter",
+      "Dart",
+      "Riverpod",
+      "Drift",
+      "SQLCipher"
     ],
     "highlights": [
-      "Fast input and minimal UI design",
-      "Lightweight personal knowledge system",
-      "Deployed on Vercel for instant access"
+      "Clean Architecture / DDD across a Melos monorepo",
+      "AES-256 encrypted local storage (Drift + SQLCipher)",
+      "In-app purchases + 7-language localization",
+      "CI/CD releasing signed builds to both app stores"
     ],
-    "linkLabel": "Live Demo →",
-    "status": "Live"
+    "featured": true,
+    "linkLabel": "Coming Soon →",
+    "status": "In Progress"
+  },
+  {
+    "name": "Echology",
+    "subtitle": "Bitcoin Coin-Selection Demo Wallet",
+    "href": "https://github.com/evanlinjin/echology",
+    "file": "assets/echology.png",
+    "description": "The Next.js frontend for a Bitcoin coin-selection demo wallet, built in collaboration with a BDK (Bitcoin Dev Kit) core maintainer. Provides UTXO coin-control selection, spend-scenario and fee-rate configuration, and surfaces coin-selection metrics (waste, fee, feerate deviation) as structured tables.",
+    "stack": [
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS"
+    ],
+    "highlights": [
+      "Built the coin-control UI for UTXO selection",
+      "Spend-scenario and fee-rate configuration",
+      "Surfaced selection metrics (waste, fee, feerate deviation)"
+    ],
+    "linkLabel": "Source Code →",
+    "status": "Archived"
   },
   {
     "name": "Crypto Price Ticker",
@@ -214,22 +237,21 @@ export const projects: Projects = [
     "status": "Archived"
   },
   {
-    "name": "Echology",
-    "subtitle": "Bitcoin UTXO Analysis Tool",
-    "href": "https://github.com/evanlinjin/echology",
-    "file": "assets/echology.png",
-    "description": "A research-focused Bitcoin wallet interface visualizing coin selection and UTXO behavior using Bitcoin Dev Kit (BDK), enabling exploration of fee modeling and transaction strategies.",
+    "name": "Digital Chaos",
+    "subtitle": "Personal Knowledge & Reflection App",
+    "description": "A lightweight web app for capturing personal quotes, ideas, and life rules. Focused on fast input, simple organization, and clean UI for daily use.",
+    "href": "https://digital-chaos-jzg2.vercel.app",
     "stack": [
-      "Next.js",
+      "React",
       "TypeScript",
-      "Tailwind CSS"
+      "Vercel"
     ],
     "highlights": [
-      "Visualized UTXO-level behavior",
-      "Explored coin selection algorithms",
-      "Built for Bitcoin research workflows"
+      "Fast input and minimal UI design",
+      "Lightweight personal knowledge system",
+      "Deployed on Vercel for instant access"
     ],
-    "linkLabel": "Source Code →",
-    "status": "Archived"
+    "linkLabel": "Live Demo →",
+    "status": "Live"
   }
 ];
