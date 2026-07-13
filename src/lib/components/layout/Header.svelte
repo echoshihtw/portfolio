@@ -1,17 +1,11 @@
 <script lang="ts">
   import ThemeSwitch from "../ThemeSwitch.svelte";
-  import { getDrawerStore } from "@skeletonlabs/skeleton";
   import { tabs } from "$lib/menuTabs";
 
   export let scrollPosition: number;
   export let isVisible = true;
   export let showNavBackdrop = false;
 
-  const drawerStore = getDrawerStore();
-
-  function toggleDrawer(): void {
-    drawerStore.open();
-  }
   function goTop() {
     document.body.scrollIntoView();
   }
@@ -36,14 +30,6 @@
     <div class="flex gap-5">
       <div class="md:hidden">
         <ThemeSwitch id="theme-toggle-mobile" />
-      </div>
-      <div class="flex md:hidden">
-        <button
-          on:click={toggleDrawer}
-          aria-label="mobile menu toggle button"
-        >
-          <i class="fa-solid fa-bars"></i>
-        </button>
       </div>
     </div>
     <div class="hidden md:flex items-center gap-4">
