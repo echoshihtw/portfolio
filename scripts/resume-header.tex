@@ -3,14 +3,19 @@
 
 \usepackage[left=0.5in,right=0.5in,top=0.45in,bottom=0.4in]{geometry}
 
+\usepackage{xcolor}
+\definecolor{ink}{HTML}{1A1A1A}
+\definecolor{muted}{HTML}{5B584F}
+\definecolor{accent}{HTML}{A07D45}
+
 \usepackage{enumitem}
 \setlist[itemize]{leftmargin=1.1em, itemsep=1pt, topsep=1.5pt, parsep=0pt}
 
 \usepackage{titlesec}
-\titleformat{\section}{\large\bfseries}{}{0pt}{}[\vspace{-4pt}\titlerule]
-\titleformat{\subsection}{\normalsize\bfseries}{}{0pt}{}
-\titlespacing*{\section}{0pt}{6pt}{2pt}
-\titlespacing*{\subsection}{0pt}{4pt}{1pt}
+\titleformat{\section}{\large\bfseries\color{ink}}{}{0pt}{}[\vspace{-3pt}{\color{accent}\titlerule[0.7pt]}]
+\titleformat{\subsection}{\normalsize\bfseries\color{ink}}{}{0pt}{}
+\titlespacing*{\section}{0pt}{9pt}{3pt}
+\titlespacing*{\subsection}{0pt}{5pt}{1pt}
 
 \setlength{\parskip}{2pt}
 \setlength{\parindent}{0pt}

@@ -225,6 +225,8 @@ function buildPDF() {
         path.join(ROOT, "scripts", "resume-header.tex"),
         "-V",
         "fontsize=10pt",
+        "-V",
+        "mainfont=Charter",
       ],
       { stdio: "inherit" }
     );
