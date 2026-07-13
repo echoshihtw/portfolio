@@ -1,0 +1,16 @@
+% Tight résumé layout — reduces Pandoc's loose defaults.
+% Narrow side padding (was ~1in), compact lists + section spacing.
+
+\usepackage[left=0.55in,right=0.55in,top=0.5in,bottom=0.5in]{geometry}
+
+\usepackage{enumitem}
+\setlist[itemize]{leftmargin=1.15em, itemsep=1.5pt, topsep=2pt, parsep=0pt}
+
+\usepackage{titlesec}
+\titleformat{\section}{\large\bfseries}{}{0pt}{}
+\titleformat{\subsection}{\normalsize\bfseries}{}{0pt}{}
+\titlespacing*{\section}{0pt}{8pt}{3pt}
+\titlespacing*{\subsection}{0pt}{5pt}{1pt}
+
+\setlength{\parskip}{2.5pt}
+\setlength{\parindent}{0pt}

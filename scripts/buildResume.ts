@@ -211,16 +211,28 @@ function buildPDF() {
   try {
     console.log("Generating resume.pdf...");
 
+    const pdfPath = path.join(OUTPUT_DIR, "resume.pdf");
+
     execFileSync(
       "pandoc",
       [
         RESUME_PATH,
         "-o",
-        path.join(OUTPUT_DIR, "resume.pdf"),
+        pdfPath,
         "--pdf-engine=xelatex",
+        // Tight résumé layout: narrow margins, 10pt, compact lists/sections.
+        "-H",
+        path.join(ROOT, "scripts", "resume-header.tex"),
+        "-V",
+        "fontsize=10pt",
       ],
       { stdio: "inherit" }
     );
+
+    // Keep the downloadable résumé (served from /static) in sync with the build.
+    const staticPdf = path.join(ROOT, "static", "resume.pdf");
+    fs.copyFileSync(pdfPath, staticPdf);
+    console.log("✅ Synced static/resume.pdf");
   } catch {
     console.warn("⚠️ Pandoc/xelatex not installed — skipping PDF build");
   }
