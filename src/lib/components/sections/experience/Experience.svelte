@@ -1,96 +1,71 @@
 <script lang="ts">
   import { experience } from "$lib/resumeData";
-
-  const escapeHtml = (value: string) =>
-    value
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;")
-      .replace(/'/g, "&#39;");
-
-  const renderInlineBold = (value: string) =>
-    escapeHtml(value).replace(
-      /\*\*\s*([^*][\s\S]*?)\s*\*\*/g,
-      "<strong>$1</strong>"
-    );
+  import { experiencePortfolio } from "../../../../content/portfolio.config";
+  import ExperienceCard from "./ExperienceCard.svelte";
 </script>
 
-<section
-  id="work"
-  class="m-h-[500px] section_padding section_layout"
->
+<section id="work" class="section_padding section_layout">
   <h3 class="section_title">#work</h3>
-  <div class="experience-list">
-    {#each experience as item}
-      <article class="experience-card">
-        <p class="experience-dates">{item.date}</p>
-        <p class="experience-role">{@html renderInlineBold(item.role)}</p>
 
-        <h4 class="experience-company">{item.company}</h4>
-        <ul class="impact-list">
-          {#each item.highlights as impact}
-            <li>{@html renderInlineBold(impact)}</li>
-          {/each}
-        </ul>
-      </article>
+  <div class="timeline">
+    {#each experience as item}
+      <div class="tl-entry">
+        <ExperienceCard {item} copy={experiencePortfolio[item.company]} />
+      </div>
     {/each}
   </div>
 </section>
 
 <style>
-  .experience-list {
-    display: grid;
-    gap: 1rem;
+  .timeline {
+    position: relative;
+    padding-left: 1.9rem;
     width: 100%;
   }
 
-  .experience-card {
-    padding: 1.25rem 1.25rem 1.1rem;
-    border-left: 2px solid var(--timeline-rule);
+  .timeline::before {
+    content: "";
+    position: absolute;
+    left: 0.32rem;
+    top: 0.5rem;
+    bottom: 0.5rem;
+    width: 2px;
+    background: linear-gradient(
+      to bottom,
+      var(--color-accent),
+      rgba(200, 169, 126, 0.2)
+    );
   }
 
-  .experience-role {
-    margin: 0;
-    color: var(--text-color);
-    font-weight: 600;
-    font-size: 1.02rem;
+  .tl-entry {
+    position: relative;
+    margin-bottom: 1.35rem;
   }
 
-  .experience-company {
-    margin: 0.18rem 0 0;
-    color: var(--text-muted);
-    font-style: italic;
+  .tl-entry:last-child {
+    margin-bottom: 0;
   }
 
-  .experience-dates {
-    margin: 0.3rem 0 0;
-    font-size: 0.83rem;
-    color: var(--text-muted);
-    font-family: "JetBrains Mono", monospace;
+  .tl-entry::before {
+    content: "";
+    position: absolute;
+    left: -1.9rem;
+    top: 0.6rem;
+    width: 0.72rem;
+    height: 0.72rem;
+    border-radius: 999px;
+    background: var(--color-accent);
+    box-shadow:
+      0 0 0 4px rgba(200, 169, 126, 0.16),
+      0 0 0 5px var(--color-bg);
   }
 
-  .impact-list {
-    margin: 0.65rem 0 0;
-    padding-left: 1rem;
-    list-style: disc;
-    color: var(--text-color);
-    line-height: 1.55;
-    display: grid;
-    gap: 0.2rem;
-  }
-
-  .impact-list li::marker {
-    font-size: 0.72em;
-  }
-
-  .impact-list li {
-    padding-left: 0.35rem;
-  }
-
-  .experience-role :global(strong),
-  .impact-list :global(strong) {
-    font-weight: 700;
-    color: var(--text-color);
+  @media (max-width: 600px) {
+    .timeline {
+      padding-left: 1.5rem;
+    }
+    .tl-entry::before {
+      left: -1.5rem;
+    }
   }
 </style>
