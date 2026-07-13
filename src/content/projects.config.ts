@@ -24,6 +24,7 @@ export const projectsConfig: Projects = [
     description:
       "A cross-platform mobile app (iOS + Android) that calculates how long your savings will last. Built solo in Flutter with a Clean-Architecture monorepo, AES-256 encrypted on-device storage, and automated releases to TestFlight and Google Play.",
     href: "#",
+    now: "Optimizing cross-platform distribution & monetization with RevenueCat (iOS + Android).",
     stack: ["Flutter", "Dart", "Riverpod", "Drift", "SQLCipher"],
     highlights: [
       "Clean Architecture / DDD across a Melos monorepo",
@@ -55,6 +56,7 @@ export const projectsConfig: Projects = [
     name: "Crypto Price Ticker",
     subtitle: "Real-Time Crypto Data Visualization",
     href: "https://github.com/echoshihtw/crypto-price-ticker",
+    file: "assets/crypto-price-ticker.png",
     description:
       "A full-stack real-time cryptocurrency price tracker with live chart updates using WebSockets. Built to handle streaming data and dynamic UI updates.",
     stack: ["React", "TypeScript", "Socket.io"],
