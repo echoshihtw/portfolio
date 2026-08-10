@@ -169,7 +169,18 @@ dropped from the kicker; the shipped-AI-product claim no longer had evidence.
 
 ## 5. Open questions for you
 
-1. **Product name** — Cosmora, Clio, or Vivi? (blocks #1, #2, #6)
+1. ~~**Product name**~~ **RESOLVED: Clio.** Already the codebase's own name (design system,
+   `clio-*` theme tokens) and what résumé (3) says. Card, résumé, and `intro.ts` updated;
+   the Tauri / local-first / multi-tenant claims removed.
+   **It is also live** — daily use at a salon in Tainan since May 2025, two designers,
+   603 clients, 2,694 records, client history entered back to Sept 2024. That fact was
+   missing from the site entirely and is the strongest thing in the portfolio.
+   *(Sept 2024 is the earliest service record — backfilled history, not the go-live. The
+   backfill is itself evidence: people don't migrate a year of business records into
+   software they're trialling.)*
+   **Not published:** the owner's name or the salon's. She is a private individual; that is
+   her call, not a portfolio decision. "A salon in Tainan" carries the claim without it.
+   Any demo imagery must use seeded data, never her client records.
 2. **Runway release state** — is it on TestFlight/Play internal today, or pipeline-ready only?
 3. ~~**Find Recruiter** — keep the ChatGPT/AI story?~~ **RESOLVED 2026-08-10: cut.** Echo was
    junior on it and observed rather than owned it. Removed from `portfolio.config.ts`
