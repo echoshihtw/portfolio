@@ -1,8 +1,7 @@
 <h1 id="summary">Summary</h1>
 <p>Product-minded full-stack engineer who turns ambiguous operational
-needs into shipped software. Owns delivery across React/Next.js
-frontends, FastAPI services, data models, testing, and CI/CD, using
-controlled AI-assisted workflows to accelerate implementation while
+needs into shipped software — React/Next.js frontends, FastAPI services,
+data models, testing, and CI/CD. Uses controlled AI-assisted workflows,
 keeping architecture and verification explicit.</p>
 <h1 id="experience">Experience</h1>
 <h2 id="lockerbie-technology">Lockerbie Technology</h2>
@@ -10,10 +9,10 @@ keeping architecture and verification explicit.</p>
 Taipei, Taiwan · Dec 2024 – Present</p>
 <ul>
 <li>Built and operate an early-stage internal project-management
-platform used by ~5 team members across 10 projects, as one of two
-engineers — <strong>Next.js / TypeScript</strong> frontend,
-<strong>FastAPI / Python</strong> services, and Docker-based
-infrastructure.</li>
+platform for ~5 team members across 10 projects, as one of two engineers
+— sole author of the <strong>Next.js / TypeScript</strong> frontend,
+plus <strong>FastAPI / Python</strong> services, client/vendor
+workflows, and an admin graph view.</li>
 <li>Implemented the team’s <strong>event-driven
 modular-monolith</strong> architecture, learning
 <strong>RabbitMQ</strong> and <strong>ArangoDB</strong> to connect
@@ -24,19 +23,20 @@ production.</li>
 boundary</strong> so browser clients call only same-origin API routes;
 kept backend tokens in <strong>HttpOnly cookies</strong> and centralised
 <strong>CSRF</strong> enforcement for unsafe requests.</li>
-<li>Designed the permission layer over the platform’s role edges:
-org-level <strong>RBAC</strong> plus project-scoped
-<strong>PBAC</strong>, resolving a user’s roles into permissions and
-frontend capability flags so services don’t each reimplement access
-logic. Built dual client/vendor workflows and an administrative graph
-view; covered with <strong>Vitest, React Testing Library, and
+<li>Designed the permission layer: org-level <strong>RBAC</strong> plus
+project-scoped <strong>PBAC</strong>, resolving roles into permissions
+and frontend capability flags so services don’t each reimplement access
+logic; covered with <strong>Vitest, React Testing Library, and
 pytest</strong>.</li>
-<li>Built a local <strong>Claude Code</strong> workflow using reusable
-skills and automated hooks to accelerate implementation and testing,
-while keeping final verification in deterministic quality checks.</li>
-<li>Introduced <strong>build-once, promote-by-digest</strong> delivery
-with <strong>GitHub Actions and GHCR</strong>, reducing three
-environment rebuilds to one and promoting the exact image tested in
+<li>Built a local <strong>Claude Code</strong> workflow — reusable
+skills and automated hooks — to speed implementation and testing, with
+final verification left to deterministic quality checks.</li>
+<li>Owned the path from laptop to production in both repos: one-command
+<strong>Makefile</strong> setup, standalone staging/production deploy
+bundles, multi-stage <strong>Docker</strong> builds with cached layers,
+and build-once, promote-by-digest releases (<strong>GitHub
+Actions</strong>, <strong>GHCR</strong>) cutting three environment
+builds to one, so production ships the exact image tested in
 staging.</li>
 </ul>
 <h2 id="spin.fashion-by-lablaco">SPIN.FASHION by Lablaco</h2>
@@ -45,17 +45,15 @@ Singapore · Remote · Aug 2024 – Oct 2024</p>
 <ul>
 <li>Resolved a macOS <strong>Electron code-signing, notarisation, and
 auto-update</strong> release blocker, then documented the deployment
-workflow for repeatable production releases across a distributed
-team.</li>
+workflow for repeatable releases across a distributed team.</li>
 </ul>
 <h2 id="find-recruiter">Find Recruiter</h2>
 <p><strong>Software Engineer</strong><br />
 Taipei, Taiwan · Aug 2022 – May 2024</p>
 <ul>
 <li>Led frontend delivery for a <strong>B2B recruitment and ATS
-platform</strong> built with <strong>React and TypeScript</strong>,
-working in a two-engineer product team and reporting directly to the
-CTO.</li>
+platform</strong> in <strong>React and TypeScript</strong>, in a
+two-engineer product team reporting to the CTO.</li>
 <li>Drove an incremental <strong>JavaScript-to-TypeScript</strong>
 migration and built <strong>100+ reusable components</strong>, improving
 consistency and reducing type-related regressions across a large
@@ -66,10 +64,10 @@ Engineering</h2>
 <p><strong>Product Engineer</strong><br />
 Remote · 2020 – Present</p>
 <ul>
-<li>Built product experiences across fintech, research, e-commerce, and
-creative industries, including the <strong>Next.js frontend for a
-Bitcoin coin-selection research tool</strong> developed with a
-<strong>BDK core maintainer</strong>.</li>
+<li>Built products across fintech, research, e-commerce, and creative
+industries, including the <strong>Next.js frontend for a Bitcoin
+coin-selection research tool</strong> with a <strong>BDK core
+maintainer</strong>.</li>
 </ul>
 <h1 id="projects">Projects</h1>
 <p><strong>Clio</strong> — <em>Founder / Product Engineer</em> ·
@@ -90,8 +88,8 @@ Query · Zustand · Redux · MUI · Tailwind CSS<br />
 Postgres · ArangoDB · Supabase · RabbitMQ · SQLite<br />
 <strong>Infra &amp; Quality</strong> — Docker · GitHub Actions · GHCR ·
 AWS · Vitest · React Testing Library · pytest · Claude Code<br />
-<strong>Mobile / Desktop</strong> — Flutter · Dart · Tauri ·
+<strong>Mobile / Desktop</strong> — Flutter · Dart · Riverpod · Tauri ·
 Electron</p>
 <h1 id="education">Education</h1>
-<p><strong>B.A. Italian Language and Culture</strong> — Fu Jen Catholic
-University, Taipei · 2019</p>
+<p>B.A. Italian Language and Culture — Fu Jen Catholic University,
+Taipei · 2019</p>

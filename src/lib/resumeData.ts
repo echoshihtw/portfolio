@@ -13,7 +13,7 @@ type SkillGroup = {
   items: string[];
 };
 
-export const summary = "Product-minded full-stack engineer who turns ambiguous operational needs into shipped software. Owns delivery across React/Next.js frontends, FastAPI services, data models, testing, and CI/CD, using controlled AI-assisted workflows to accelerate implementation while keeping architecture and verification explicit.";
+export const summary = "Product-minded full-stack engineer who turns ambiguous operational needs into shipped software — React/Next.js frontends, FastAPI services, data models, testing, and CI/CD. Uses controlled AI-assisted workflows, keeping architecture and verification explicit.";
 
 export const experience: ExperienceItem[] = [
   {
@@ -21,12 +21,12 @@ export const experience: ExperienceItem[] = [
     "role": "**Full-Stack Engineer — Internal Platform**",
     "date": "Taipei, Taiwan · Dec 2024 – Present",
     "highlights": [
-      "Built and operate an early-stage internal project-management platform used by ~5 team members across 10 projects, as one of two engineers — **Next.js / TypeScript** frontend, **FastAPI / Python** services, and Docker-based infrastructure.",
+      "Built and operate an early-stage internal project-management platform for ~5 team members across 10 projects, as one of two engineers — sole author of the **Next.js / TypeScript** frontend, plus **FastAPI / Python** services, client/vendor workflows, and an admin graph view.",
       "Implemented the team's **event-driven modular-monolith** architecture, learning **RabbitMQ** and **ArangoDB** to connect bounded modules and model complex project relationships in production.",
       "Given a requirement that layers stay independent, chose **Next.js App Router** and introduced a **BFF trust boundary** so browser clients call only same-origin API routes; kept backend tokens in **HttpOnly cookies** and centralised **CSRF** enforcement for unsafe requests.",
-      "Designed the permission layer over the platform's role edges: org-level **RBAC** plus project-scoped **PBAC**, resolving a user's roles into permissions and frontend capability flags so services don't each reimplement access logic. Built dual client/vendor workflows and an administrative graph view; covered with **Vitest, React Testing Library, and pytest**.",
-      "Built a local **Claude Code** workflow using reusable skills and automated hooks to accelerate implementation and testing, while keeping final verification in deterministic quality checks.",
-      "Introduced **build-once, promote-by-digest** delivery with **GitHub Actions and GHCR**, reducing three environment rebuilds to one and promoting the exact image tested in staging."
+      "Designed the permission layer: org-level **RBAC** plus project-scoped **PBAC**, resolving roles into permissions and frontend capability flags so services don't each reimplement access logic; covered with **Vitest, React Testing Library, and pytest**.",
+      "Built a local **Claude Code** workflow — reusable skills and automated hooks — to speed implementation and testing, with final verification left to deterministic quality checks.",
+      "Owned the path from laptop to production in both repos: one-command **Makefile** setup, standalone staging/production deploy bundles, multi-stage **Docker** builds with cached layers, and build-once, promote-by-digest releases (**GitHub Actions**, **GHCR**) cutting three environment builds to one, so production ships the exact image tested in staging."
     ]
   },
   {
@@ -34,7 +34,7 @@ export const experience: ExperienceItem[] = [
     "role": "**Full Stack Engineer & Founding Partner**",
     "date": "Singapore · Remote · Aug 2024 – Oct 2024",
     "highlights": [
-      "Resolved a macOS **Electron code-signing, notarisation, and auto-update** release blocker, then documented the deployment workflow for repeatable production releases across a distributed team."
+      "Resolved a macOS **Electron code-signing, notarisation, and auto-update** release blocker, then documented the deployment workflow for repeatable releases across a distributed team."
     ]
   },
   {
@@ -42,7 +42,7 @@ export const experience: ExperienceItem[] = [
     "role": "**Software Engineer**",
     "date": "Taipei, Taiwan · Aug 2022 – May 2024",
     "highlights": [
-      "Led frontend delivery for a **B2B recruitment and ATS platform** built with **React and TypeScript**, working in a two-engineer product team and reporting directly to the CTO.",
+      "Led frontend delivery for a **B2B recruitment and ATS platform** in **React and TypeScript**, in a two-engineer product team reporting to the CTO.",
       "Drove an incremental **JavaScript-to-TypeScript** migration and built **100+ reusable components**, improving consistency and reducing type-related regressions across a large production codebase."
     ]
   },
@@ -51,7 +51,7 @@ export const experience: ExperienceItem[] = [
     "role": "**Product Engineer**",
     "date": "Remote · 2020 – Present",
     "highlights": [
-      "Built product experiences across fintech, research, e-commerce, and creative industries, including the **Next.js frontend for a Bitcoin coin-selection research tool** developed with a **BDK core maintainer**."
+      "Built products across fintech, research, e-commerce, and creative industries, including the **Next.js frontend for a Bitcoin coin-selection research tool** with a **BDK core maintainer**."
     ]
   }
 ];
@@ -78,6 +78,7 @@ export const skills: SkillGroup[] = [
       "Claude Code",
       "**Mobile / Desktop** — Flutter",
       "Dart",
+      "Riverpod",
       "Tauri",
       "Electron"
     ]
