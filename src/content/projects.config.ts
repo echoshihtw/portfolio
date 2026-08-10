@@ -2,21 +2,28 @@ import type { Projects } from "../lib/types/types.js";
 
 export const projectsConfig: Projects = [
   {
-    name: "Cosmora",
-    subtitle: "Salon Management Platform",
+    name: "Clio",
+    subtitle: "Salon Operations — in daily use",
     description:
-      "A bilingual, multi-tenant salon-management application for independent salon owners — managing client records, visit history, and financial workflows. Built with a domain-driven architecture on Supabase (Postgres) with row-level security and per-member permissions, and packaged for desktop with Tauri.",
+      "A bilingual (zh-TW / English) salon operations app, built for a salon in Tainan and used there daily. Clients, service records, designers, and monthly revenue in one place. React and Supabase, with a permission model I shipped, found holes in, and hardened.",
     href: "https://cosmora-lab.vercel.app",
-    stack: ["React", "TypeScript", "Supabase", "Postgres", "Tauri", "TanStack Query"],
+    stack: [
+      "React 19",
+      "TypeScript",
+      "Supabase",
+      "Postgres",
+      "TanStack Query",
+      "Tailwind",
+    ],
     highlights: [
-      "Domain-driven architecture with test-enforced import boundaries",
-      "Postgres row-level security + per-member permission model",
-      "Offline-capable read layer via cached hydration",
-      "Semantic-release CI with coverage gates",
+      "Postgres row-level security, hardened in a second pass after launch",
+      "Per-member permissions, backfilled without locking out existing users",
+      "Only the api layer may touch the database — enforced by a contract test",
+      "Works offline read-only: cached queries rehydrate, mutations pause",
     ],
     featured: true,
-    linkLabel: "In Progress →",
-    status: "In Progress",
+    linkLabel: "Live →",
+    status: "Live",
   },
   {
     name: "Runway",

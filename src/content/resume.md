@@ -47,7 +47,7 @@ Remote · 2020 – Present
 
 # Projects
 
-**Cosmora** — _Founder / Product Engineer_ · Local-first **salon operations** product built with **Tauri, React, TypeScript, SQLite, and Rust**, designed for privacy and reliable offline use.
+**Clio** — _Founder / Product Engineer_ · Bilingual **salon operations** product in daily use at a salon in Tainan. **React, TypeScript, Supabase (Postgres)** with row-level security, per-member permissions, and an offline read layer.
 
 **Runway** — _Founder / Product Engineer_ · Cross-platform **Flutter** app using **Clean Architecture**, encrypted local storage, and **CI/CD** delivery to TestFlight and Google Play.
 
