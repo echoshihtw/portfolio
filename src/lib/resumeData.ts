@@ -91,7 +91,7 @@ export const projects: Projects = [
     "name": "Clio",
     "subtitle": "Salon Operations — in daily use",
     "description": "A bilingual (zh-TW / English) salon operations app, built for a salon in Tainan and in daily use there since May 2025 — two designers, 603 clients, 2,694 records, with client history entered back to September 2024. Clients, service records, and monthly revenue in one place.",
-    "href": "https://cosmora-lab.vercel.app",
+    "href": "https://cliohq.app",
     "stack": [
       "React 19",
       "TypeScript",
