@@ -1,5 +1,5 @@
 ```{=latex}
-{\fontsize{22}{25}\selectfont\bfseries\color{ink}Chun-Yu (Echo) Shih}\\[3pt]
+{\fontsize{18}{21}\selectfont\bfseries\color{ink}Chun-Yu (Echo) Shih}\\[2pt]
 % Headline = professional identity, not job level. Level is settled by the role
 % and the interview, so a self-assigned "Senior" only invites an argument before
 % anyone has read the experience. Swap per application:
@@ -7,12 +7,12 @@
 %   Senior full-stack vacancy        -> Senior Full-Stack Product Engineer
 %   General / international          -> Product Engineer   (default)
 %   Freelance / contract             -> Independent Product Engineer
-{\large Product Engineer · React · TypeScript · FastAPI · Product Ownership}\\[5pt]
+{\large Product Engineer · React · TypeScript · FastAPI · Product Ownership}\\[3pt]
 % Two deliberate lines: availability first, then contacts. As one line it wrapped
 % and left the portfolio URL stranded on its own.
-{\small\color{muted}Taipei, Taiwan (UTC+8) · Remote — APAC hours or async}\\[2pt]
+{\small\color{muted}Taipei, Taiwan (UTC+8) · Remote — APAC hours or async}\\[1pt]
 {\small\color{muted}echoshihtw@gmail.com · linkedin.com/in/echoshihtw · github.com/echoshihtw · echoshihtw.github.io/portfolio}
-\vspace{4pt}
+\vspace{2pt}
 ```
 
 # Summary
@@ -25,10 +25,10 @@ Product-minded full-stack engineer who turns ambiguous operational needs into sh
 
 **Full-Stack Engineer — Internal Platform** · Taipei, Taiwan · Dec 2024 – Present
 
-- Built and operate a project-management platform for the **UK construction sector**, connecting client organisations and vendor contractors through a project to tender to quotation lifecycle governed by **ISO 19650** principles. In production with ~5 users across 10 projects, as one of two engineers — sole author of the **Next.js / TypeScript** frontend, plus **FastAPI / Python** services.
+- Built and operate a project-management platform for the **UK construction sector**, taking client organisations and vendor contractors through a project-to-tender-to-quotation lifecycle governed by **ISO 19650** principles. One of two engineers and sole author of the **Next.js / TypeScript** frontend; ~5 users, 10 projects.
 - Implemented the team's **event-driven modular monolith** — bounded modules over **RabbitMQ**, project relationships in **ArangoDB** — both new to me, both now in production.
-- Given a requirement that layers stay independent, chose **Next.js App Router** and introduced a **BFF trust boundary** so browser clients call only same-origin API routes; kept backend tokens in **HttpOnly cookies** and centralised **CSRF** enforcement for unsafe requests.
-- Designed the six-role permission model — org-level **RBAC** plus project-scoped **PBAC** — resolving roles into permissions and frontend capability flags so services don't each reimplement access logic; covered with **Vitest, React Testing Library, and pytest**.
+- Given a requirement that layers stay independent, chose **Next.js App Router** and introduced a **BFF trust boundary**: browser clients call same-origin API routes only, backend tokens stay in **HttpOnly cookies**, and **CSRF** is enforced centrally on unsafe requests.
+- Designed the six-role permission model — org-level **RBAC** plus project-scoped **PBAC** — resolving roles into permissions and capability flags so services never reimplement access logic. Covered with **Vitest, React Testing Library, and pytest**.
 - Wrote the platform's product specification: role model, architecture rules, eight milestones across three phases, exit criteria, and a decision log — and held scope with a feature freeze until Phase 1 shipped.
 - Brought a teammate with no software background into the codebase by pairing — 278 co-authored commits — from first contribution to shipping independently within two months.
 - Built a local **Claude Code** workflow — reusable skills and automated hooks — to speed implementation and testing, with final verification left to deterministic quality checks.
