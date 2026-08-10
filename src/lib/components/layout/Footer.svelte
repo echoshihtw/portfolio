@@ -9,7 +9,6 @@
   } from "$lib/contactLinks";
 
   const year = new Date().getFullYear();
-  const stack = ["SvelteKit", "Electron", "TypeScript", "Tailwind", "SQLite"];
   const socials = [
     {
       name: "LinkedIn",
@@ -46,7 +45,7 @@
         <h2>Echo Shih</h2>
 
         <p class="footer-copy">
-          I design and build local-first tools and calm product experiences.
+          I build product software end to end — the frontend, the services, and the pipeline that ships them.
         </p>
 
         <div class="footer-cta">
@@ -99,7 +98,7 @@
     <div class="footer-meta">
       <div class="footer-status mono">
         <span class="status-dot"></span>
-        Available for interesting work
+        Available for remote work · Taipei, UTC+8 · APAC hours or async
       </div>
 
       <p class="footer-built mono">Built with SvelteKit & TypeScript</p>

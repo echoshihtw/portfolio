@@ -20,7 +20,9 @@ export const heroConfig: {
   seeWorkHref: string;
 } = {
   kicker: "Chun-Yu (Echo) Shih · Product Engineer · Full-Stack Systems",
-  remoteOpen: "Open to remote roles",
+  // Taipei-based, so the first thing an overseas recruiter needs is the time
+  // zone and how far it stretches. "Open to remote roles" left them guessing.
+  remoteOpen: "Taipei · UTC+8 · open to remote — APAC hours or async",
 
   // Problem-solving spine — diagnosis + delivery + scope. Seniority implied by
   // the range of ownership, not by putting "Senior" in the introduction.
@@ -30,10 +32,12 @@ export const heroConfig: {
     { text: " — across frontend, backend, and delivery infrastructure." },
   ],
 
-  // States the scope as fact, not as a boast. "I build the whole thing" was an
-  // adjective wearing a verb's clothes — this names the three parts instead.
+  // Level is established by the Lockerbie, Clio and delivery evidence further
+  // down the page — not by "Senior", "AI-native" or "architect" up here.
+  // The two adjectives are the two the evidence actually supports: secure
+  // (BFF boundary, RLS, CSRF) and maintainable (tests, contract-tested layers).
   support:
-    "Empty repo to production: the frontend, the services, and the pipeline that deploys them.",
+    "Product Engineer building secure, maintainable software with React, TypeScript, FastAPI, and practical AI-assisted workflows.",
 
   // Scannable capability strip: full-spectrum in five words, not four sentences.
   capabilities: ["Web", "Mobile", "Backend", "Infra", "Product design"],
