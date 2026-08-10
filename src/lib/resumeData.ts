@@ -17,7 +17,7 @@ export const summary = "Product-minded full-stack engineer who turns ambiguous o
 
 export const experience: ExperienceItem[] = [
   {
-    "company": "Lockerbie Technology",
+    "company": "Lockerbie Technology (Musaeum Ltd, UK group)",
     "role": "**Full-Stack Engineer — Internal Platform**",
     "date": "Taipei, Taiwan · Dec 2024 – Present",
     "highlights": [

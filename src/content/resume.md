@@ -21,7 +21,7 @@ Product-minded full-stack engineer who turns ambiguous operational needs into sh
 
 # Experience
 
-## Lockerbie Technology
+## Lockerbie Technology (Musaeum Ltd, UK group)
 
 **Full-Stack Engineer — Internal Platform**  
 Taipei, Taiwan · Dec 2024 – Present
