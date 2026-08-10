@@ -13,7 +13,7 @@ type SkillGroup = {
   items: string[];
 };
 
-export const summary = "Product-minded full-stack engineer with 5+ years of experience turning ambiguous operational needs into shipped software. Owns delivery across React/Next.js frontends, FastAPI services, data models, testing, and CI/CD, with a track record of building products from an empty repository to production.";
+export const summary = "Product-minded full-stack engineer who turns ambiguous operational needs into shipped software. Owns delivery across React/Next.js frontends, FastAPI services, data models, testing, and CI/CD, using controlled AI-assisted workflows to accelerate implementation while keeping architecture and verification explicit.";
 
 export const experience: ExperienceItem[] = [
   {
@@ -25,6 +25,7 @@ export const experience: ExperienceItem[] = [
       "Implemented the team's **event-driven modular-monolith** architecture, learning **RabbitMQ** and **ArangoDB** to connect bounded modules and model complex project relationships in production.",
       "Chose **Next.js App Router** and introduced a **BFF trust boundary** so browser clients call only same-origin API routes; kept backend tokens in **HttpOnly cookies** and centralised **CSRF** enforcement for unsafe requests.",
       "Built **role- and policy-based access control**, dual client/vendor workflows, and an administrative graph view; covered critical behavior with **Vitest, React Testing Library, and pytest**.",
+      "Built a local **Claude Code** workflow using reusable skills and automated hooks to accelerate implementation and testing, while keeping final verification in deterministic quality checks.",
       "Introduced **build-once, promote-by-digest** delivery with **GitHub Actions and GHCR**, reducing three environment rebuilds to one and promoting the exact image tested in staging."
     ]
   },
@@ -42,13 +43,12 @@ export const experience: ExperienceItem[] = [
     "date": "Taipei, Taiwan · Aug 2022 – May 2024",
     "highlights": [
       "Led frontend delivery for a **B2B recruitment and ATS platform** built with **React and TypeScript**, working in a two-engineer product team and reporting directly to the CTO.",
-      "Delivered core **employer and agency workflows** across job briefs, placement milestones, notifications, and real-time product updates in a large production React codebase.",
       "Drove an incremental **JavaScript-to-TypeScript** migration and built **100+ reusable components**, improving consistency and reducing type-related regressions across a large production codebase."
     ]
   },
   {
-    "company": "Independent Engineering Work",
-    "role": "**Product / Software Engineer**",
+    "company": "Independent / Freelance Engineering",
+    "role": "**Product Engineer**",
     "date": "Remote · 2020 – Present",
     "highlights": [
       "Built product experiences across fintech, research, e-commerce, and creative industries, including the **Next.js frontend for a Bitcoin coin-selection research tool** developed with a **BDK core maintainer**."
@@ -68,16 +68,14 @@ export const skills: SkillGroup[] = [
       "Supabase",
       "RabbitMQ",
       "SQLite",
-      "**Infrastructure & Quality** — Docker",
+      "**Infra & Quality** — Docker",
       "GitHub Actions",
       "GHCR",
       "AWS",
       "Vitest",
       "React Testing Library",
       "pytest",
-      "**AI & Automation** — Claude Code",
-      "Skills",
-      "Hooks",
+      "Claude Code",
       "**Mobile / Desktop** — Flutter",
       "Dart",
       "Tauri",
