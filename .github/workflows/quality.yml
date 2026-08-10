@@ -1,0 +1,44 @@
+name: Quality
+
+# Deploy only runs on push to main, so nothing checked a pull request: a PR that
+# broke the build merged cleanly and failed at deploy time, once it was already
+# on main. This gate runs the same build a deploy would, before the merge.
+on:
+  pull_request:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# A new push to a PR makes the previous run irrelevant.
+concurrency:
+  group: quality-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    name: Types and build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      # Same install flags as deploy.yml — a lockfile-only install here would
+      # pass while the deploy still failed.
+      - name: Install dependencies
+        run: npm install --legacy-peer-deps
+
+      - name: svelte-check
+        run: npm run check
+
+      - name: Build
+        env:
+          BASE_PATH: "/${{ github.event.repository.name }}"
+        run: npm run build
