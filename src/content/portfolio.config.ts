@@ -19,10 +19,13 @@ export const heroConfig: {
   resume: string;
   seeWorkHref: string;
 } = {
-  kicker: "Chun-Yu (Echo) Shih · Product Engineer · Full-Stack Systems",
+  // Hierarchy: kicker = who and where · headline = value delivered ·
+  // support = role and capabilities. The title lives in the support line only,
+  // so it isn't stated twice three lines apart.
+  kicker: "Chun-Yu (Echo) Shih · Taipei, Taiwan",
   // Taipei-based, so the first thing an overseas recruiter needs is the time
   // zone and how far it stretches. "Open to remote roles" left them guessing.
-  remoteOpen: "Taipei · UTC+8 · open to remote — APAC hours or async",
+  remoteOpen: "UTC+8 · open to remote — APAC hours or async",
 
   // Problem-solving spine — diagnosis + delivery + scope. Seniority implied by
   // the range of ownership, not by putting "Senior" in the introduction.
