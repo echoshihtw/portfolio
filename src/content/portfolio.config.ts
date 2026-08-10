@@ -30,9 +30,9 @@ export const heroConfig: {
   // Problem-solving spine — diagnosis + delivery + scope. Seniority implied by
   // the range of ownership, not by putting "Senior" in the introduction.
   headline: [
-    { text: "I turn ambiguous operational problems into " },
-    { text: "shipped products", accent: true },
-    { text: " — across frontend, backend, and delivery infrastructure." },
+    { text: "I build software " },
+    { text: "people rely on", accent: true },
+    { text: "." },
   ],
 
   // Level is established by the Lockerbie, Clio and delivery evidence further
