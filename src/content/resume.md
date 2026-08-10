@@ -1,6 +1,13 @@
 ```{=latex}
 {\fontsize{22}{25}\selectfont\bfseries\color{ink}Chun-Yu (Echo) Shih}\\[3pt]
-{\large Senior Product Engineer · React · TypeScript · FastAPI · Product Ownership}\\[5pt]
+% Headline = professional identity, not job level. Level is settled by the role
+% and the interview, so a self-assigned "Senior" only invites an argument before
+% anyone has read the experience. Swap per application:
+%   Senior Product Engineer vacancy  -> Senior Product Engineer
+%   Senior full-stack vacancy        -> Senior Full-Stack Product Engineer
+%   General / international          -> Product Engineer   (default)
+%   Freelance / contract             -> Independent Product Engineer
+{\large Product Engineer · React · TypeScript · FastAPI · Product Ownership}\\[5pt]
 {\small\color{muted}Taipei, Taiwan · echoshihtw@gmail.com · linkedin.com/in/echoshihtw · github.com/echoshihtw · echoshihtw.github.io/portfolio}
 \vspace{4pt}
 ```
