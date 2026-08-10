@@ -1,0 +1,41 @@
+name: Build Resume
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  build_resume:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install Pandoc
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pandoc texlive-latex-base
+
+      - name: Run npm install
+        run: npm install
+
+      - name: Run resume build
+        run: npm run build-resume
+
+      - name: Upload resume.pdf artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: resume-pdf
+          path: output/resume.pdf
+          if-no-files-found: error
