@@ -108,10 +108,10 @@ export const experiencePortfolio: Record<
     techLine: "Next.js · FastAPI · ArangoDB · RabbitMQ · Docker · GHCR",
   },
   "SPIN.FASHION by Lablaco": {
-    // Agreed title was Software Engineer and Founding Partner — use it as agreed,
+    // Agreed title was Full Stack Engineer & Founding Partner — use it as agreed,
     // not a paraphrase.
     impact:
-      "Software engineer and founding partner on SPIN Connect — the in-store desktop app — over a three-month engagement, working remotely across time zones.",
+      "Full stack engineer and founding partner on SPIN Connect — the in-store desktop app — over a three-month engagement, working remotely across time zones.",
     proof: {
       p: "The macOS build couldn't ship.",
       s: "I fixed code-signing, notarization, and auto-update. The desktop app shipped, and the release steps are written down.",

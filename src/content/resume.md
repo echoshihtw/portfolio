@@ -25,7 +25,7 @@ Taipei, Taiwan · Dec 2024 – Present
 
 ## SPIN.FASHION by Lablaco
 
-**Software Engineer / Founding Partner**  
+**Full Stack Engineer & Founding Partner**  
 Singapore · Remote · Aug 2024 – Oct 2024
 
 - Resolved a macOS **Electron code-signing, notarisation, and auto-update** release blocker, then documented the deployment workflow for repeatable production releases across a distributed team.
