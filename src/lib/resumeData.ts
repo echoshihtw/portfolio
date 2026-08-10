@@ -21,13 +21,14 @@ export const experience: ExperienceItem[] = [
     "role": "**Full-Stack Engineer — Internal Platform**",
     "date": "Taipei, Taiwan · Dec 2024 – Present",
     "highlights": [
-      "Built and operate an early-stage internal project-management platform for ~5 team members across 10 projects, as one of two engineers — sole author of the **Next.js / TypeScript** frontend, plus **FastAPI / Python** services, client/vendor workflows, and an admin graph view.",
-      "Implemented the team's **event-driven modular-monolith** architecture, learning **RabbitMQ** and **ArangoDB** to connect bounded modules and model complex project relationships in production.",
+      "Built and operate a project-management platform for the **UK construction sector**, connecting client organisations and vendor contractors through a project to tender to quotation lifecycle governed by **ISO 19650** principles. In production with ~5 users across 10 projects, as one of two engineers — sole author of the **Next.js / TypeScript** frontend, plus **FastAPI / Python** services.",
+      "Implemented the team's **event-driven modular monolith** — bounded modules over **RabbitMQ**, project relationships in **ArangoDB** — both new to me, both now in production.",
       "Given a requirement that layers stay independent, chose **Next.js App Router** and introduced a **BFF trust boundary** so browser clients call only same-origin API routes; kept backend tokens in **HttpOnly cookies** and centralised **CSRF** enforcement for unsafe requests.",
-      "Designed the permission layer: org-level **RBAC** plus project-scoped **PBAC**, resolving roles into permissions and frontend capability flags so services don't each reimplement access logic; covered with **Vitest, React Testing Library, and pytest**.",
-      "Brought a teammate with no software background into the codebase by pairing — 278 co-authored commits — from first contribution to shipping production work independently within two months.",
+      "Designed the six-role permission model — org-level **RBAC** plus project-scoped **PBAC** — resolving roles into permissions and frontend capability flags so services don't each reimplement access logic; covered with **Vitest, React Testing Library, and pytest**.",
+      "Wrote the platform's product specification: role model, architecture rules, eight milestones across three phases, exit criteria, and a decision log — and held scope with a feature freeze until Phase 1 shipped.",
+      "Brought a teammate with no software background into the codebase by pairing — 278 co-authored commits — from first contribution to shipping independently within two months.",
       "Built a local **Claude Code** workflow — reusable skills and automated hooks — to speed implementation and testing, with final verification left to deterministic quality checks.",
-      "Owned the path from laptop to production in both repos: one-command **Makefile** setup, standalone staging/production deploy bundles, multi-stage **Docker** builds with cached layers, and build-once, promote-by-digest releases (**GitHub Actions**, **GHCR**) cutting three environment builds to one, so production ships the exact image tested in staging."
+      "Owned the path from laptop to production in both repos: one-command **Makefile** setup, staging/production deploy bundles, multi-stage **Docker** builds with cached layers, and build-once, promote-by-digest releases (**GitHub Actions**, **GHCR**) cutting three environment builds to one."
     ]
   },
   {
@@ -59,7 +60,7 @@ export const experience: ExperienceItem[] = [
 
 export const skills: SkillGroup[] = [
   {
-    "category": "**Frontend** — React · Next.js · TypeScript · TanStack Query · Zustand · Redux · MUI · Tailwind CSS",
+    "category": "**Frontend** — React · Next.js · TypeScript · TanStack Query · Zustand · Redux · MUI · Tailwind CSS · Flutter · Dart",
     "items": [
       "**Backend & Data** — FastAPI",
       "Python",
@@ -77,10 +78,7 @@ export const skills: SkillGroup[] = [
       "React Testing Library",
       "pytest",
       "Claude Code",
-      "**Mobile / Desktop** — Flutter",
-      "Dart",
-      "Riverpod",
-      "Tauri",
+      "**Desktop** — Tauri",
       "Electron"
     ]
   }
