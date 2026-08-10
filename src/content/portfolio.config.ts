@@ -55,7 +55,7 @@ export const heroConfig: {
     },
     {
       p: "People needed to know how long their money would last.",
-      s: "A Flutter app, built solo — Clean Architecture, encrypted local storage, signed releases to TestFlight and Play.",
+      s: "A Flutter app, built solo — Clean Architecture, encrypted local storage, seven languages. Running on Android; iOS distribution in progress.",
     },
     {
       p: "Remote since 2020.",

@@ -56,7 +56,7 @@ Remote · 2020 – Present
 
 **Clio** — _Founder / Product Engineer_ · Bilingual **React/Supabase** salon operations product in daily use at a Tainan salon **since May 2025**, supporting 603 clients and 2,694 service records with **Postgres RLS** and per-member permissions.
 
-**Runway** — _Founder / Product Engineer_ · Cross-platform **Flutter** app using **Clean Architecture**, encrypted local storage, and **CI/CD** delivery to TestFlight and Google Play.
+**Runway** — _Founder / Product Engineer_ · Personal financial-runway app in **Flutter**: **Clean Architecture** across a Melos monorepo, **SQLCipher**-encrypted local storage, 7-language localisation. In development — running on Android, iOS distribution in progress.
 
 # Skills
 
