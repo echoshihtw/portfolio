@@ -108,15 +108,17 @@ export const experiencePortfolio: Record<
     techLine: "Next.js · FastAPI · ArangoDB · RabbitMQ · Docker · GHCR",
   },
   "SPIN.FASHION by Lablaco": {
+    // Agreed title was Software Engineer and Founding Partner — use it as agreed,
+    // not a paraphrase.
     impact:
-      "Founding engineer on SPIN Connect — the in-store desktop app — working remotely across time zones.",
+      "Software engineer and founding partner on SPIN Connect — the in-store desktop app — over a three-month engagement, working remotely across time zones.",
     proof: {
       p: "The macOS build couldn't ship.",
       s: "I fixed code-signing, notarization, and auto-update. The desktop app shipped, and the release steps are written down.",
     },
     techLine: "React · Redux-Saga · Electron",
   },
-  "Find Recruiter (HR Tech Startup)": {
+  "Find Recruiter": {
     impact:
       "I led the front end of a B2B recruiting and ATS platform used by employers and agencies — a two-engineer product team reporting to the CTO.",
     proof: {
@@ -125,7 +127,7 @@ export const experiencePortfolio: Record<
     },
     techLine: "React · TypeScript · Redux-Saga · Firebase",
   },
-  "Independent Engineering Work": {
+  "Independent / Freelance Engineering": {
     impact:
       "Full-stack product work across fintech, research, e-commerce, and creative industries — remote, since 2020.",
     proof: {
