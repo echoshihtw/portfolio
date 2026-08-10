@@ -1,195 +1,131 @@
-# Resume Automation System
+# Portfolio — echoshihtw.github.io/portfolio
 
-This repository uses `resume.md` as the single source of truth.
+My portfolio site, and the pipeline that keeps it honest.
 
-From one file, it generates:
+The site is SvelteKit, statically exported and deployed to GitHub Pages. The
+interesting part is the résumé: `src/content/resume.md` is the single source of
+truth, and one build produces the PDF people download, the structured data the
+site renders, and an HTML version. There is no second copy to drift.
 
-- `resume.pdf`
-- portfolio content
-- structured website data
+**Live:** <https://echoshihtw.github.io/portfolio> ·
+**Résumé:** [`static/resume.pdf`](static/resume.pdf)
 
-This prevents resume drift and keeps everything synchronized.
+---
 
-## Philosophy
+## Why one source
 
-The resume is treated like code infrastructure.
+Most people keep a `resume.docx`, a PDF exported from it, portfolio copy, and a
+LinkedIn summary — four documents making four slightly different claims. Fixing
+one leaves the others stale, and the drift is invisible until someone reads two
+of them side by side.
 
-Instead of maintaining multiple versions:
+Here, editing `src/content/resume.md` and running one command updates every
+surface at once. Anything not derived from that file is presentation copy, kept
+deliberately separate in `src/content/portfolio.config.ts` — the résumé is
+formal and ATS-oriented; the site speaks in a human voice. Same facts, different
+register.
 
-- `resume.docx`
-- portfolio text
-- LinkedIn text
-- PDF resume
+## Stack
 
-Maintain one source:
+SvelteKit 2 · Svelte 4 · TypeScript · Tailwind · Vite 5 ·
+`adapter-static` → GitHub Pages · Pandoc + XeLaTeX for the PDF
 
-- `content/resume.md`
+## Quick start
 
-and generate everything else.
+```bash
+npm install
+npm run dev            # dev server
+npm run build          # static build to build/
+npm run check          # svelte-check
+npm run build-resume   # regenerate résumé artefacts (see below)
+```
 
-## Repository Structure
+The résumé build needs Pandoc and XeLaTeX:
+
+```bash
+brew install pandoc
+brew install --cask mactex     # large; skip if you only touch the site
+```
+
+Both are optional — `buildResume.ts` warns and skips the PDF/HTML steps if
+they're missing, so `npm run build-resume` still regenerates the site data.
+
+## The résumé pipeline
+
+```
+src/content/resume.md          ← the only file you edit
+        │
+        └── npm run build-resume
+                ├── src/lib/resumeData.ts   summary, experience, skills, projects
+                ├── output/resume.html
+                ├── output/resume.pdf       Pandoc + XeLaTeX
+                └── static/resume.pdf       copied, so the site serves the build
+```
+
+`scripts/buildResume.ts` parses the markdown by section (`# Summary`,
+`# Experience`, `# Projects`, `# Skills`), and `scripts/resume-header.tex` holds
+the LaTeX layout — margins, section rules, list spacing, leading.
+
+**Do not edit `src/lib/resumeData.ts`, `output/*`, or `static/resume.pdf`.** They
+are generated, and the next build overwrites them.
+
+### Two constraints worth knowing before editing
+
+**It must stay exactly one page.** Adding a bullet usually means removing one.
+Check with:
+
+```bash
+npm run build-resume && mdls -raw -name kMDItemNumberOfPages output/resume.pdf
+```
+
+Spotlight caches that value, so re-run it if the number looks stale. When space
+runs out, take it from margins, leading, or wording — not font size.
+
+**It must stay ATS-readable.** No tables, no text boxes, no multi-column layout,
+no images, hyphenation disabled, and plain `# Section` headings. Anything that
+looks clever in a PDF viewer tends to extract badly.
+
+### Company names are join keys
+
+`portfolio.config.ts` keys its per-role copy by company name, matching
+`resumeData.experience[].company`. Renaming a company in `resume.md` without
+updating the key silently blanks that card on the site. There is no build error
+for it.
+
+## Layout
 
 ```text
-content/
-  resume.md
+src/
+  content/
+    resume.md               source of truth for the résumé
+    portfolio.config.ts     site voice: hero, proofs, per-role copy
+    projects.config.ts      project cards
+  lib/
+    resumeData.ts           GENERATED
+    components/             sections, layout, UI
+  routes/                   SvelteKit pages
 
 scripts/
-  buildResume.ts
+  buildResume.ts            the pipeline
+  resume-header.tex         LaTeX layout for the PDF
 
-output/
-  resume.pdf
-  resume.html
-
-src/lib/
-  resumeData.ts
-
-automation/
-  resume-pipeline.md
-  resume-build.md
-  portfolio-sync.md
-
-agents/
-  resume-builder.prompt.md
-  resume-parser.prompt.md
-  portfolio-updater.prompt.md
-
-guide/
-  core_infra.md
+output/                     GENERATED — resume.pdf, resume.html
+static/                     resume.pdf (GENERATED), og-image.png, assets
+docs/                       audits and notes
+agents/, automation/        prompt and workflow notes for AI-assisted edits
 ```
 
-## Source of Truth
+## Deployment
 
-The system is driven by:
+`.github/workflows/deploy.yml` builds and publishes to GitHub Pages on every
+push to `main`. `.github/workflows/resume.yml` rebuilds the résumé PDF and
+uploads it as a build artefact.
 
-- `content/resume.md`
+`main` is protected: force pushes and branch deletion are blocked.
 
-Edit this file to update:
+## A note on claims
 
-- experience
-- skills
-- projectsConfig
-- achievements
-
-Do not manually edit generated files.
-
-## Generate Resume Outputs
-
-Run:
-
-```bash
-npm run build-resume
-```
-
-This command will:
-
-- parse `resume.md`
-- generate structured data
-- create:
-  - `output/resume.pdf`
-  - `output/resume.html`
-  - `src/lib/resumeData.ts`
-
-## PDF Generation
-
-The pipeline uses Pandoc.
-
-Example:
-
-```bash
-pandoc content/resume.md \
-  -o output/resume.pdf \
-  --pdf-engine=xelatex \
-  -V mainfont="Inter"
-```
-
-If LaTeX is not installed:
-
-```bash
-brew install --cask mactex
-```
-
-## Portfolio Data Integration
-
-The website imports structured data from:
-
-- `src/lib/resumeData.ts`
-
-Example usage:
-
-```svelte
-<script>
-  import { experience } from "$lib/resumeData";
-</script>
-
-{#each experience as job}
-  <section>
-    <h3>{job.company}</h3>
-    <p>{job.role}</p>
-  </section>
-{/each}
-```
-
-When `resume.md` changes and the build runs, portfolio content updates automatically.
-
-## Editing Workflow
-
-1. Edit `content/resume.md`.
-2. Update sections like:
-   - `# Experience`
-   - `# Projects`
-   - `# Skills`
-3. Run `npm run build-resume`.
-
-## AI Agents
-
-Automation prompts are in:
-
-- `agents/`
-
-Examples:
-
-- `resume-builder.prompt.md`
-- `resume-parser.prompt.md`
-- `portfolio-updater.prompt.md`
-
-These prompts can be used by Codex/GPT/Cursor to:
-
-- regenerate resume data
-- update portfolio pages
-- modify the resume pipeline
-
-## Recommended Release Flow
-
-1. Edit `resume.md`.
-2. Run `npm run build-resume`.
-3. Commit changes.
-4. Deploy portfolio.
-
-## Long-Term Benefits
-
-- single source of truth
-- consistent resume and portfolio
-- easier automation
-- AI-friendly structure
-
-Future extension:
-
-`resume.md` -> generated `resume.pdf`, portfolio sections, LinkedIn summary
-
-## Troubleshooting
-
-If something breaks, check:
-
-- `resume.md` structure
-- Pandoc installation
-- `buildResume` script
-
-Most failures come from formatting changes in source markdown.
-
-## Final Principle
-
-Maintain the resume like software:
-
-- edit source
-- run build
-- deploy
+Every factual claim on this site — usage numbers, ownership, what shipped and
+what didn't — is meant to be checkable against a repository, a database, or a
+public record. If you find something here that overstates, it's a bug. Open an
+issue.
