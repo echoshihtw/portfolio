@@ -13,51 +13,52 @@ type SkillGroup = {
   items: string[];
 };
 
-export const summary = "Full-stack engineer who takes products from an empty repo to a shipped app — frontend, backend, and the pipeline that deploys them. I find the real problem and ship the fix, across web, mobile, and infrastructure.";
+export const summary = "Product-minded full-stack engineer with 5+ years of experience turning ambiguous operational needs into shipped software. Owns delivery across React/Next.js frontends, FastAPI services, data models, testing, and CI/CD, with a track record of building products from an empty repository to production.";
 
 export const experience: ExperienceItem[] = [
   {
     "company": "Lockerbie Technology",
-    "role": "**Full-Stack Engineer — Internal Platform Development**",
+    "role": "**Full-Stack Engineer — Internal Platform**",
     "date": "Taipei, Taiwan · Dec 2024 – Present",
     "highlights": [
-      "Own an internal team project-management platform end-to-end as one of two engineers — the **Next.js / React (TypeScript)** frontend and the **FastAPI / Python** backend.",
-      "Architected an **event-driven modular monolith** (bounded modules over a **RabbitMQ** bus with a dedicated consumer) on **ArangoDB**, with **role- and policy-based access control** and secure auth (JWT, Argon2).",
-      "Re-architected deploys to **build-once, promote-by-digest** (GitHub Actions, **GHCR**), cutting redundant rebuilds from **3 builds to 1** so production ships the exact image tested in staging.",
-      "Built the **Next.js frontend** (MUI, TanStack Query, Zustand) with dual client/vendor views and a **force-graph** admin dashboard; tested with **Vitest, React Testing Library, and pytest**."
+      "Built and operate an early-stage internal project-management platform used by ~5 team members across 10 projects, as one of two engineers — **Next.js / TypeScript** frontend, **FastAPI / Python** services, and Docker-based infrastructure.",
+      "Implemented the team's **event-driven modular-monolith** architecture, learning **RabbitMQ** and **ArangoDB** to connect bounded modules and model complex project relationships in production.",
+      "Chose **Next.js App Router** and introduced a **BFF trust boundary** so browser clients call only same-origin API routes; kept backend tokens in **HttpOnly cookies** and centralised **CSRF** enforcement for unsafe requests.",
+      "Built **role- and policy-based access control**, dual client/vendor workflows, and an administrative graph view; covered critical behavior with **Vitest, React Testing Library, and pytest**.",
+      "Introduced **build-once, promote-by-digest** delivery with **GitHub Actions and GHCR**, reducing three environment rebuilds to one and promoting the exact image tested in staging."
     ]
   },
   {
     "company": "SPIN.FASHION by Lablaco",
-    "role": "**Software Engineer · Founding Partner**",
+    "role": "**Software Engineer / Founding Partner**",
     "date": "Singapore · Remote · Aug 2024 – Oct 2024",
     "highlights": [
-      "Resolved a **critical macOS Electron release blocker** (code-signing, **Apple notarization**, auto-update) to ship the desktop app, and authored the team's release runbook — working remotely across time zones."
+      "Resolved a macOS **Electron code-signing, notarisation, and auto-update** release blocker, then documented the deployment workflow for repeatable production releases across a distributed team."
     ]
   },
   {
-    "company": "Find Recruiter (HR Tech Startup)",
+    "company": "Find Recruiter",
     "role": "**Software Engineer**",
     "date": "Taipei, Taiwan · Aug 2022 – May 2024",
     "highlights": [
-      "Led frontend development of a **B2B recruitment / ATS platform** (**React 18**, ~150k LOC) used by employers and agencies.",
-      "Shipped multiple **OpenAI / ChatGPT features** — a JD generator, AI interview-plan generation, and a CV standardiser.",
-      "Drove an incremental **JavaScript to TypeScript** migration (~30% fewer runtime bugs); built 100+ reusable components with **Redux Toolkit and redux-saga** and **Firebase** realtime."
+      "Led frontend delivery for a **B2B recruitment and ATS platform** built with **React and TypeScript**, working in a two-engineer product team and reporting directly to the CTO.",
+      "Delivered core **employer and agency workflows** across job briefs, placement milestones, notifications, and real-time product updates in a large production React codebase.",
+      "Drove an incremental **JavaScript-to-TypeScript** migration and built **100+ reusable components**, improving consistency and reducing type-related regressions across a large production codebase."
     ]
   },
   {
     "company": "Independent Engineering Work",
-    "role": "**Software Engineer** · Remote · 2020 – Present",
-    "date": "",
+    "role": "**Product / Software Engineer**",
+    "date": "Remote · 2020 – Present",
     "highlights": [
-      "Built the **Next.js frontend for a Bitcoin coin-selection wallet** (*echology*) alongside a **BDK core maintainer** — UTXO coin-control and fee/waste metrics — plus full-stack apps across fintech and research."
+      "Built product experiences across fintech, research, e-commerce, and creative industries, including the **Next.js frontend for a Bitcoin coin-selection research tool** developed with a **BDK core maintainer**."
     ]
   }
 ];
 
 export const skills: SkillGroup[] = [
   {
-    "category": "**Frontend** — React · Next.js · TypeScript · MUI · Tailwind · TanStack Query · Zustand",
+    "category": "**Frontend** — React · Next.js · TypeScript · TanStack Query · Zustand · Redux · MUI · Tailwind CSS",
     "items": [
       "**Backend & Data** — FastAPI",
       "Python",
@@ -67,17 +68,20 @@ export const skills: SkillGroup[] = [
       "Supabase",
       "RabbitMQ",
       "SQLite",
-      "**Mobile & Infra** — Flutter",
-      "Dart",
-      "Riverpod",
-      "Docker",
+      "**Infrastructure & Quality** — Docker",
       "GitHub Actions",
       "GHCR",
       "AWS",
-      "**Testing** — Vitest",
+      "Vitest",
       "React Testing Library",
-      "Jest",
-      "pytest"
+      "pytest",
+      "**AI & Automation** — Claude Code",
+      "Skills",
+      "Hooks",
+      "**Mobile / Desktop** — Flutter",
+      "Dart",
+      "Tauri",
+      "Electron"
     ]
   }
 ];
