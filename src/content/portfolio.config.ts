@@ -19,18 +19,21 @@ export const heroConfig: {
   resume: string;
   seeWorkHref: string;
 } = {
-  kicker: "Chun-Yu (Echo) Shih · Full-Stack Engineer",
+  kicker: "Chun-Yu (Echo) Shih · Product Engineer · Full-Stack Systems",
   remoteOpen: "Open to remote roles",
 
-  // Problem-solving spine — diagnosis + delivery + scope. No cliché.
+  // Problem-solving spine — diagnosis + delivery + scope. Seniority implied by
+  // the range of ownership, not by putting "Senior" in the introduction.
   headline: [
-    { text: "I find the " },
-    { text: "real problem", accent: true },
-    { text: ", and ship the fix — end to end." },
+    { text: "I turn ambiguous operational problems into " },
+    { text: "shipped products", accent: true },
+    { text: " — across frontend, backend, and delivery infrastructure." },
   ],
 
-  // The differentiator, in one breath (was a 4-line list — too much reading).
-  support: "From an empty repo to a shipped app — I build the whole thing.",
+  // States the scope as fact, not as a boast. "I build the whole thing" was an
+  // adjective wearing a verb's clothes — this names the three parts instead.
+  support:
+    "Empty repo to production: the frontend, the services, and the pipeline that deploys them.",
 
   // Scannable capability strip: full-spectrum in five words, not four sentences.
   capabilities: ["Web", "Mobile", "Backend", "Infra", "Product design"],
@@ -38,23 +41,25 @@ export const heroConfig: {
   proofsLabel: "— a few problems, solved",
 
   // Each marker is a problem → what I did. Chosen to show RANGE:
-  // infra/CI · AI/product · mobile · remote.
+  // security/architecture · infra/CI · mobile · remote.
+  // Every line must be defensible in an interview — no claim I only observed.
+  // Voice: "I" for decisions I made; no subject for outcomes and standing facts.
   proofs: [
     {
-      p: "Releases kept rebuilding the same image three times.",
-      s: "I re-architected CI so a deploy builds once.",
+      p: "Browser clients were talking straight to the backend, holding tokens.",
+      s: "I put a BFF trust boundary in front of it — same-origin routes only, tokens in HttpOnly cookies, CSRF enforced in one place.",
     },
     {
-      p: "A recruiting team was buried in manual work.",
-      s: "I shipped ChatGPT-powered features into the product.",
+      p: "Releases kept rebuilding the same image three times.",
+      s: "I moved delivery to build-once, promote-by-digest. Production ships the exact image tested in staging.",
     },
     {
       p: "People needed to know how long their money would last.",
-      s: "I built and shipped a Flutter app to both app stores — solo.",
+      s: "A Flutter app, built solo — Clean Architecture, encrypted local storage, signed releases to TestFlight and Play.",
     },
     {
       p: "Remote since 2020.",
-      s: "I work autonomously across time zones, and I write things down.",
+      s: "Autonomous across time zones. I write things down.",
     },
   ],
 
@@ -78,6 +83,9 @@ export const skillsConfig: { label: string; items: string[] }[] = [
     items: ["Docker", "GitHub Actions", "GHCR", "AWS"],
   },
   { label: "Testing", items: ["Vitest", "React Testing Library", "pytest"] },
+  // Personal local tooling used while delivering work — not team infrastructure.
+  // Sits in skills, not in the hero proofs: there's no shippable artifact behind it.
+  { label: "AI & Automation", items: ["Claude Code", "Skills", "Hooks"] },
 ];
 
 // Distilled experience copy, keyed by company (matches resumeData `experience`).
@@ -88,11 +96,14 @@ export const experiencePortfolio: Record<
   { impact: string; proof: { p: string; s: string }; techLine: string }
 > = {
   "Lockerbie Technology": {
+    // Scope note: the modular-monolith / RabbitMQ / ArangoDB direction was the team's,
+    // set by my lead. I learned it and implemented it in production. What I chose:
+    // the App Router + BFF boundary, and the build-once delivery pipeline.
     impact:
-      "I own our team's project-management platform end to end — architecture, the Next.js frontend, the FastAPI backend, and the deploy pipeline.",
+      "I build and operate our team's project-management platform — the Next.js frontend, the FastAPI backend, and the deploy pipeline. In production with ~5 people across 10 projects, as one of two engineers.",
     proof: {
-      p: "Releases kept rebuilding the same image three times.",
-      s: "I re-architected CI so a deploy builds once and production ships the exact image tested in staging.",
+      p: "Browser clients were talking straight to the backend, holding tokens.",
+      s: "I chose Next.js App Router and introduced a BFF trust boundary — same-origin API routes only, backend tokens in HttpOnly cookies, CSRF enforcement centralised for unsafe requests.",
     },
     techLine: "Next.js · FastAPI · ArangoDB · RabbitMQ · Docker · GHCR",
   },
@@ -101,25 +112,25 @@ export const experiencePortfolio: Record<
       "Founding engineer on SPIN Connect — the in-store desktop app — working remotely across time zones.",
     proof: {
       p: "The macOS build couldn't ship.",
-      s: "I fixed code-signing, notarization, and auto-update, and unblocked desktop distribution.",
+      s: "I fixed code-signing, notarization, and auto-update. The desktop app shipped, and the release steps are written down.",
     },
     techLine: "React · Redux-Saga · Electron",
   },
   "Find Recruiter (HR Tech Startup)": {
     impact:
-      "I led the front end of a recruiting platform used by employers and agencies — and shipped its AI features.",
+      "I led the front end of a B2B recruiting and ATS platform used by employers and agencies — a two-engineer product team reporting to the CTO.",
     proof: {
-      p: "A recruiting team was buried in manual work.",
-      s: "I built the ChatGPT-powered job-description generator and CV standardiser inside the product.",
+      p: "A large production React codebase kept regressing on types.",
+      s: "I drove an incremental JavaScript-to-TypeScript migration and built 100+ reusable components.",
     },
-    techLine: "React · Redux-Saga · Firebase · OpenAI",
+    techLine: "React · TypeScript · Redux-Saga · Firebase",
   },
   "Independent Engineering Work": {
     impact:
-      "I build full-stack products across fintech, e-commerce, and research — adapting the system to the problem.",
+      "Full-stack product work across fintech, research, e-commerce, and creative industries — remote, since 2020.",
     proof: {
-      p: "Wanted to understand Bitcoin coin-selection hands-on.",
-      s: "I built the Next.js frontend for a BDK demo wallet alongside a core maintainer.",
+      p: "A Bitcoin coin-selection research tool needed a frontend.",
+      s: "I built it in Next.js, working alongside a BDK core maintainer — UTXO coin-control, fee scenarios, selection metrics.",
     },
     techLine: "Next.js · TypeScript · BDK",
   },
