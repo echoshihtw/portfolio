@@ -46,8 +46,8 @@ export const heroConfig: {
   // Voice: "I" for decisions I made; no subject for outcomes and standing facts.
   proofs: [
     {
-      p: "Browser clients were talking straight to the backend, holding tokens.",
-      s: "I put a BFF trust boundary in front of it — same-origin routes only, tokens in HttpOnly cookies, CSRF enforced in one place.",
+      p: "Browser code must never hold backend credentials.",
+      s: "I built the BFF boundary in from the start — same-origin routes only, tokens in HttpOnly cookies, CSRF enforced in one place.",
     },
     {
       p: "Releases kept rebuilding the same image three times.",
@@ -101,9 +101,11 @@ export const experiencePortfolio: Record<
     // the App Router + BFF boundary, and the build-once delivery pipeline.
     impact:
       "I build and operate our team's project-management platform — the Next.js frontend, the FastAPI backend, and the deploy pipeline. In production with ~5 people across 10 projects, as one of two engineers.",
+    // No "before" state to fix: the boundary was there from the start. Saying
+    // otherwise would invent a broken system that never existed.
     proof: {
-      p: "Browser clients were talking straight to the backend, holding tokens.",
-      s: "I chose Next.js App Router and introduced a BFF trust boundary — same-origin API routes only, backend tokens in HttpOnly cookies, CSRF enforcement centralised for unsafe requests.",
+      p: "Browser code must never hold backend credentials.",
+      s: "I built the BFF boundary in on Next.js App Router — same-origin API routes only, backend tokens in HttpOnly cookies, CSRF enforcement centralised for unsafe requests.",
     },
     techLine: "Next.js · FastAPI · ArangoDB · RabbitMQ · Docker · GHCR",
   },
