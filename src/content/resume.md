@@ -25,7 +25,7 @@ Taipei, Taiwan · Dec 2024 – Present
 
 - Built and operate an early-stage internal project-management platform used by ~5 team members across 10 projects, as one of two engineers — **Next.js / TypeScript** frontend, **FastAPI / Python** services, and Docker-based infrastructure.
 - Implemented the team's **event-driven modular-monolith** architecture, learning **RabbitMQ** and **ArangoDB** to connect bounded modules and model complex project relationships in production.
-- Chose **Next.js App Router** and introduced a **BFF trust boundary** so browser clients call only same-origin API routes; kept backend tokens in **HttpOnly cookies** and centralised **CSRF** enforcement for unsafe requests.
+- Given a requirement that layers stay independent, chose **Next.js App Router** and introduced a **BFF trust boundary** so browser clients call only same-origin API routes; kept backend tokens in **HttpOnly cookies** and centralised **CSRF** enforcement for unsafe requests.
 - Designed the permission layer over the platform's role edges: org-level **RBAC** plus project-scoped **PBAC**, resolving a user's roles into permissions and frontend capability flags so services don't each reimplement access logic. Built dual client/vendor workflows and an administrative graph view; covered with **Vitest, React Testing Library, and pytest**.
 - Built a local **Claude Code** workflow using reusable skills and automated hooks to accelerate implementation and testing, while keeping final verification in deterministic quality checks.
 - Introduced **build-once, promote-by-digest** delivery with **GitHub Actions and GHCR**, reducing three environment rebuilds to one and promoting the exact image tested in staging.

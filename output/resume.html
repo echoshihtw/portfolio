@@ -19,11 +19,11 @@ modular-monolith</strong> architecture, learning
 <strong>RabbitMQ</strong> and <strong>ArangoDB</strong> to connect
 bounded modules and model complex project relationships in
 production.</li>
-<li>Chose <strong>Next.js App Router</strong> and introduced a
-<strong>BFF trust boundary</strong> so browser clients call only
-same-origin API routes; kept backend tokens in <strong>HttpOnly
-cookies</strong> and centralised <strong>CSRF</strong> enforcement for
-unsafe requests.</li>
+<li>Given a requirement that layers stay independent, chose
+<strong>Next.js App Router</strong> and introduced a <strong>BFF trust
+boundary</strong> so browser clients call only same-origin API routes;
+kept backend tokens in <strong>HttpOnly cookies</strong> and centralised
+<strong>CSRF</strong> enforcement for unsafe requests.</li>
 <li>Designed the permission layer over the platform’s role edges:
 org-level <strong>RBAC</strong> plus project-scoped
 <strong>PBAC</strong>, resolving a user’s roles into permissions and
