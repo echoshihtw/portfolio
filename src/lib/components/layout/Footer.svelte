@@ -11,9 +11,24 @@
   const year = new Date().getFullYear();
   const stack = ["SvelteKit", "Electron", "TypeScript", "Tailwind", "SQLite"];
   const socials = [
-    { name: "LinkedIn", url: linkedInUrl, icon: "mdi:linkedin" },
-    { name: "GitHub", url: githubUrl, icon: "mdi:github" },
-    { name: "Instagram", url: instagramUrl, icon: "mdi:instagram" },
+    {
+      name: "LinkedIn",
+      label: "LinkedIn profile",
+      url: linkedInUrl,
+      icon: "mdi:linkedin",
+    },
+    {
+      name: "GitHub",
+      label: "GitHub profile",
+      url: githubUrl,
+      icon: "mdi:github",
+    },
+    {
+      name: "Instagram",
+      label: "Instagram profile",
+      url: instagramUrl,
+      icon: "mdi:instagram",
+    },
   ];
 
   const sourceUrl = "https://github.com/echoshihtw/portfolio";
@@ -72,7 +87,7 @@
               target="_blank"
               rel="noreferrer noopener"
               class="footer-social-link"
-              aria-label={social.name}
+              aria-label={social.label}
             >
               <Icon icon={social.icon} />
             </a>
