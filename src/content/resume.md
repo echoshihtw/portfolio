@@ -7,7 +7,7 @@
 %   Senior full-stack vacancy        -> Senior Full-Stack Product Engineer
 %   General / international          -> Product Engineer   (default)
 %   Freelance / contract             -> Independent Product Engineer
-{\large Product Engineer · React · TypeScript · FastAPI · Product Ownership}\\[3pt]
+{\large Product Engineer · React · TypeScript · Next.js · Product Ownership}\\[3pt]
 % Two deliberate lines: availability first, then contacts. As one line it wrapped
 % and left the portfolio URL stranded on its own.
 {\small\color{muted}Taipei, Taiwan (UTC+8) · Remote — APAC hours or async}\\[1pt]
