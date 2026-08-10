@@ -5,7 +5,7 @@ export const projectsConfig: Projects = [
     name: "Clio",
     subtitle: "Salon Operations — in daily use",
     description:
-      "A bilingual (zh-TW / English) salon operations app, built for a salon in Tainan and used there daily. Clients, service records, designers, and monthly revenue in one place. React and Supabase, with a permission model I shipped, found holes in, and hardened.",
+      "A bilingual (zh-TW / English) salon operations app, built for a salon in Tainan and used there daily by two designers — 603 clients and 2,694 records, with history entered back to September 2024. Clients, service records, and monthly revenue in one place.",
     href: "https://cosmora-lab.vercel.app",
     stack: [
       "React 19",
@@ -16,8 +16,8 @@ export const projectsConfig: Projects = [
       "Tailwind",
     ],
     highlights: [
-      "Postgres row-level security, hardened in a second pass after launch",
-      "Per-member permissions, backfilled without locking out existing users",
+      "Audited my own RLS policies and closed a privilege-escalation path",
+      "Shipped a permission change without silently revoking staff access",
       "Only the api layer may touch the database — enforced by a contract test",
       "Works offline read-only: cached queries rehydrate, mutations pause",
     ],
