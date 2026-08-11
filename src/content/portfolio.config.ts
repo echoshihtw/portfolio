@@ -1,6 +1,6 @@
 // Portfolio presentation copy — the distilled, human "voice" layer.
 // Deliberately separate from the formal résumé in `resume.md` (which feeds the
-// ATS PDF). See docs/superpowers/specs/2026-07-13-portfolio-uiux-redesign-design.md
+// ATS PDF).
 //
 // Guardrails: facts, not noise · warmth via specificity · no clichés.
 
