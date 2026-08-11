@@ -79,10 +79,9 @@
 
   .floating-link {
     font-family: "JetBrains Mono", monospace;
-    font-size: 0.76rem;
+    font-size: 0.78rem;
     font-weight: 500;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
+    letter-spacing: 0.02em;
     color: var(--text-color);
     text-decoration: none;
     border: 1px solid var(--section-border);
