@@ -9,7 +9,7 @@ export const projectsConfig: Projects = [
     subtitle: "Salon operations software, in daily use at a Tainan salon since May 2025",
     why: "A friend's hard drive died and took years of salon records with it. She had tried the existing software and found all of it too complicated. She did not need more features. She needed the two minutes before a client sits down: who they are, what was done last time, what it cost.",
     result:
-      "The owner typed a year of past appointments in by hand. People do not migrate their own history into software they are still evaluating. In daily use at the salon since May 2025 — two designers, 603 clients, 2,694 service records, history entered back to September 2024. Small scale, and the constraints were real: her data, her livelihood, no room to be clever. What I would do differently is write the permission model down before building it, rather than discovering its holes afterwards.",
+      "The owner typed a year of past appointments in by hand. People do not migrate their own history into software they are still evaluating. In daily use at the salon since May 2025 — 603 clients, 2,694 service records, history entered back to September 2024. Small scale, and the constraints were real: her data, her livelihood, no room to be clever. What I would do differently is write the permission model down before building it, rather than discovering that afterwards.",
     href: "https://cliohq.app",
     stack: [
       "React 19",
@@ -21,9 +21,12 @@ export const projectsConfig: Projects = [
     ],
     highlights: [
       "No booking, no payments, no inventory, no marketing — the products she rejected had all of it. Clio covers the two minutes before a client sits down, and stops",
-      "Salons are isolated in the database, not by the app remembering to filter — I audited my own policies after launch and closed a path that let an owner take over another salon",
+      "Salons are isolated in the database itself, not by the app remembering to filter",
       "Tightened permission defaults without locking out existing staff: the migration writes intended values before the code stops assuming them",
-      "Every policy change since goes through a written audit against the schema, because the hole I found had been sitting in a WITH CHECK clause since the first migration",
+      // The specifics of the flaw I found stay off a public page: this is a live
+      // product holding real people's records, and naming a past weakness names
+      // where to look. The judgment survives; the map does not.
+      "I audit my own access policies rather than trusting that I got them right, and every change since launch goes through a written review",
       "Only the api layer may reach the database, and a test fails the build if anything else imports it",
       "The salon has patchy Wi-Fi, so reads work offline from cache and writes wait rather than failing silently",
       "Records live in a hosted database, not on a machine that can die — the failure that started this cannot repeat",
