@@ -107,6 +107,9 @@ export const closingConfig = {
 // Buckets aligned to the "full-spectrum" story: Frontend · Mobile · Backend · Infra.
 export const skillsConfig: { label: string; items: string[] }[] = [
   { label: "Frontend", items: ["React", "Next.js", "TypeScript", "Tailwind"] },
+  // Grounded: a design_system package in Runway, a documented design system in
+  // Clio, and the UI patterns I wrote for the Lockerbie frontend.
+  { label: "UI & design", items: ["Design systems", "UI patterns", "Responsive & accessible"] },
   { label: "Mobile", items: ["Flutter", "Dart", "Riverpod"] },
   {
     label: "Backend & Data",

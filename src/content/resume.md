@@ -59,10 +59,10 @@ Product Engineer · _Remote · 2020 – Present_
 
 # Skills
 
-**Frontend** — React · Next.js · TypeScript · TanStack Query · Zustand · Redux · MUI · Tailwind CSS · Flutter · Dart  
+**Frontend & UI** — React · Next.js · TypeScript · TanStack Query · Zustand · Redux · MUI · Tailwind CSS · design systems · UI patterns  
 **Backend & Data** — FastAPI · Python · Node.js · Postgres · ArangoDB · Supabase · RabbitMQ · SQLite  
 **Infra & Quality** — Docker · GitHub Actions · GHCR · AWS · Vitest · React Testing Library · pytest · Claude Code  
-**Desktop** — Tauri · Electron
+**Mobile & Desktop** — Flutter · Dart · Tauri · Electron
 
 # Education
 
