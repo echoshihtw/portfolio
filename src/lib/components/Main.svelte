@@ -3,6 +3,7 @@
   import Skills from "$lib/components/Skills.svelte";
   import Hero from "$lib/components/sections/hero/Hero.svelte";
   import Experience from "$lib/components/sections/experience/Experience.svelte";
+  import Closing from "$lib/components/sections/Closing.svelte";
 </script>
 
 <div class="flex flex-col gap-2 md:gap-3 mb-24 w-full">
@@ -10,4 +11,5 @@
   <Experience />
   <Project />
   <Skills />
+  <Closing />
 </div>

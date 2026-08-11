@@ -1,0 +1,101 @@
+name: CI
+
+# One pipeline: verify on every pull request and every push to main, deploy
+# only from main. Previously this was two workflows repeating the same
+# checkout / setup-node / npm ci / build, and svelte-check ran on pull
+# requests only — so anything pushed straight to main deployed unchecked.
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - "README.md"
+      - "docs/**"
+      - ".githooks/**"
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Check and build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      # Node 24 to match local: it ships npm 11, and npm 11 records optional
+      # platform packages differently from npm 10. A lockfile written by one
+      # and installed by the other fails — npm 10 tried to install
+      # @esbuild/netbsd-arm64 on a Linux runner. Same npm both sides, no drift.
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+
+      # Installing TeX takes ~2 minutes and dominates this job, but the résumé
+      # changes rarely. Key the built PDF on its sources: unchanged sources
+      # mean no apt install and no rebuild.
+      - name: Restore built résumé
+        id: resume
+        uses: actions/cache@v6
+        with:
+          path: static/resume.pdf
+          key: resume-${{ hashFiles('src/content/resume.md', 'scripts/buildResume.ts', 'scripts/resume-header.tex') }}
+
+      - name: Install Pandoc and XeLaTeX
+        if: steps.resume.outputs.cache-hit != 'true'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            pandoc texlive-xetex texlive-fonts-recommended texlive-fonts-extra \
+            lmodern poppler-utils
+
+      - run: npm ci
+
+      - run: npm run check
+
+      - run: npm test
+
+      # The résumé is a build output, not a committed file, so it cannot fall
+      # behind resume.md. One page is a hard constraint, enforced here.
+      - name: Build résumé
+        if: steps.resume.outputs.cache-hit != 'true'
+        run: |
+          npm run build-resume
+          pages=$(pdfinfo static/resume.pdf | awk '/^Pages:/ {print $2}')
+          test "$pages" = "1" || { echo "::error::résumé must be one page, got $pages"; exit 1; }
+
+      - name: Build site
+        env:
+          BASE_PATH: "/${{ github.event.repository.name }}"
+        run: npm run build
+
+      - name: Upload Pages artifact
+        if: github.event_name == 'push'
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: build/
+
+  deploy:
+    name: Deploy to Pages
+    if: github.event_name == 'push'
+    needs: build
+    runs-on: ubuntu-latest
+
+    permissions:
+      pages: write
+      id-token: write
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5

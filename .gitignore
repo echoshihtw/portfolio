@@ -11,6 +11,23 @@ vite.config.ts.timestamp-*
 .eslintignore
 .prettierignore
 /.cache/
+*.tsbuildinfo
+
+# Built by `npm run build-resume`. Not committed — the deploy builds them,
+# so they cannot go stale.
+/output/
+/.resume-build/
+/static/resume.pdf
+
+# Local agent tooling: installed per machine, not part of this project.
+/_bmad/
+/.agents/
+.claude/settings.local.json
+.claude/skills/
 
 # visual brainstorm companion
 .superpowers/
+
+# Working documents: specs, audits, notes. They are written for me, not for
+# readers of a public repo — that is how the portfolio audit leaked.
+/docs/

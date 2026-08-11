@@ -1,6 +1,7 @@
 <script lang="ts">
   import ThemeSwitch from "../ThemeSwitch.svelte";
   import { tabs } from "$lib/menuTabs";
+  import { base } from "$app/paths";
 
   export let scrollPosition: number;
   export let isVisible = true;
@@ -19,14 +20,14 @@
     class={"w-full flex items-center justify-between m-auto max-w-[1400px] py-3 px-6 " +
       (showNavBackdrop && "dark:rounded-full rounded-none nav-filtered")}
   >
-    <h1>
-      <button
-        on:click={goTop}
-        class="cursor-pointer bg-transparent border-0 p-0 text-[var(--text-color)]"
-      >
-        Echo Shih
-      </button>
-    </h1>
+    <!-- Not an <h1>: the hero statement is the page's single heading. -->
+    <a
+      href={base || "/"}
+      on:click|preventDefault={goTop}
+      class="site-name text-[var(--text-color)] no-underline"
+    >
+      Echo Shih
+    </a>
     <div class="flex gap-5">
       <div class="md:hidden">
         <ThemeSwitch id="theme-toggle-mobile" />
@@ -36,9 +37,8 @@
       {#each tabs as tab}
         <a
           href={tab.link}
-          class="duration-200 toggle_hover_font_color hover:line-through"
-          style="color: var(--text-color);"
-          aria-label="link to {tab.name} page"
+          class="nav-link duration-200 toggle_hover_font_color hover:line-through"
+          aria-label="Go to {tab.name.replace('#', '')} section"
         >
           <p>{tab.name}</p>
         </a>
@@ -51,6 +51,15 @@
 </header>
 
 <style>
+  /* Keeps the visual weight the old <h1> had, without the heading semantics. */
+  .site-name {
+    font-family: "DM Serif Display", serif;
+    font-size: 2em;
+    font-weight: bold;
+    line-height: 1.2;
+    cursor: pointer;
+  }
+
   .header-shell {
     transition:
       transform 260ms ease,

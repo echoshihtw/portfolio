@@ -9,11 +9,25 @@
   } from "$lib/contactLinks";
 
   const year = new Date().getFullYear();
-  const stack = ["SvelteKit", "Electron", "TypeScript", "Tailwind", "SQLite"];
   const socials = [
-    { name: "LinkedIn", url: linkedInUrl, icon: "mdi:linkedin" },
-    { name: "GitHub", url: githubUrl, icon: "mdi:github" },
-    { name: "Instagram", url: instagramUrl, icon: "mdi:instagram" },
+    {
+      name: "LinkedIn",
+      label: "LinkedIn profile",
+      url: linkedInUrl,
+      icon: "mdi:linkedin",
+    },
+    {
+      name: "GitHub",
+      label: "GitHub profile",
+      url: githubUrl,
+      icon: "mdi:github",
+    },
+    {
+      name: "Instagram",
+      label: "Instagram profile",
+      url: instagramUrl,
+      icon: "mdi:instagram",
+    },
   ];
 
   const sourceUrl = "https://github.com/echoshihtw/portfolio";
@@ -31,7 +45,7 @@
         <h2>Echo Shih</h2>
 
         <p class="footer-copy">
-          I design and build local-first tools and calm product experiences.
+          I build product software end to end — the frontend, the services, and the pipeline that ships them.
         </p>
 
         <div class="footer-cta">
@@ -72,7 +86,7 @@
               target="_blank"
               rel="noreferrer noopener"
               class="footer-social-link"
-              aria-label={social.name}
+              aria-label={social.label}
             >
               <Icon icon={social.icon} />
             </a>
@@ -84,7 +98,7 @@
     <div class="footer-meta">
       <div class="footer-status mono">
         <span class="status-dot"></span>
-        Available for interesting work
+        Available for remote work · Taipei, UTC+8 · APAC hours or async
       </div>
 
       <p class="footer-built mono">Built with SvelteKit & TypeScript</p>
@@ -108,8 +122,8 @@
 
   .footer-grid {
     display: grid;
-    grid-template-columns: 1.5fr 0.8fr 0.6fr;
-    gap: 2rem;
+    grid-template-columns: 1fr;
+    gap: 1.6rem;
   }
 
   .footer-brand h2 {
@@ -217,6 +231,8 @@
     padding-top: 1rem;
     border-top: 1px solid var(--section-border);
     display: flex;
+    flex-direction: column;
+    align-items: flex-start;
     justify-content: space-between;
     flex-wrap: wrap;
     gap: 0.5rem;
@@ -239,15 +255,15 @@
     background: var(--color-accent);
     box-shadow: 0 0 6px var(--color-accent);
   }
-  @media (max-width: 900px) {
+  @media (min-width: 768px) {
     .footer-grid {
-      grid-template-columns: 1fr;
-      gap: 1.6rem;
+      grid-template-columns: 1.5fr 0.8fr 0.6fr;
+      gap: 2rem;
     }
 
     .footer-meta {
-      flex-direction: column;
-      align-items: flex-start;
+      flex-direction: row;
+      align-items: center;
     }
   }
 </style>

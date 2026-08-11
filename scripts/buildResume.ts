@@ -1,11 +1,14 @@
 import fs from "fs";
+import { pathToFileURL } from "url";
 import path from "path";
 import { execFileSync } from "child_process";
 import { projectsConfig } from "../src/content/projects.config.js";
+import { experiencePortfolio } from "../src/content/portfolio.config.js";
 
 const ROOT = process.cwd();
 const RESUME_PATH = path.join(ROOT, "src", "content", "resume.md");
 const OUTPUT_DIR = path.join(ROOT, "output");
+const BUILD_MD = path.join(OUTPUT_DIR, "resume.build.md");
 const RESUME_DATA_PATH = path.join(ROOT, "src/lib/resumeData.ts");
 
 /*
@@ -26,11 +29,35 @@ function readResume() {
 
 /*
 --------------------------------------------------
+Projects come from projects.config.ts, so a fact lives in one place and is
+rendered twice: a card on the site, one line on the PDF. A project with no
+resumeLine is site-only — the page has room, one page of A4 does not.
+--------------------------------------------------
+*/
+
+const PROJECTS_MARKER =
+  "<!-- generated from src/content/projects.config.ts — projects with a resumeLine -->";
+
+export function withProjects(markdown) {
+  const lines = projectsConfig
+    .filter((p) => p.resumeLine)
+    .map((p) => `**${p.name}** — _Founder / Product Engineer_ · ${p.resumeLine}`)
+    .join("\n\n");
+
+  if (!markdown.includes(PROJECTS_MARKER)) {
+    throw new Error("resume.md is missing the projects marker comment");
+  }
+
+  return markdown.replace(PROJECTS_MARKER, lines);
+}
+
+/*
+--------------------------------------------------
 Markdown Section Parser
 --------------------------------------------------
 */
 
-function extractSection(title, markdown) {
+export function extractSection(title, markdown) {
   const lines = markdown.split("\n");
   const normalizedTitle = title.trim().toLowerCase();
 
@@ -67,7 +94,7 @@ Experience Parser
 --------------------------------------------------
 */
 
-function parseExperience(section) {
+export function parseExperience(section) {
   const entries = [];
 
   const blocks = section.split("## ").filter(Boolean);
@@ -80,12 +107,21 @@ function parseExperience(section) {
       .filter(Boolean);
 
     const company = lines[0].trim();
-    const roleLine = lines[1] || "";
-    const dateLine =
+    let roleLine = lines[1] || "";
+    let dateLine =
       lines.find(
         (line, index) =>
           index > 1 && !line.startsWith("- ") && !line.startsWith("#")
       ) || "";
+
+    // The résumé keeps role, location and dates on one line to save vertical
+    // space on the printed page. Split them back apart so the site still gets
+    // separate role and date fields.
+    if (!dateLine && roleLine.includes(" · ")) {
+      const cut = roleLine.indexOf(" · ");
+      dateLine = roleLine.slice(cut + 3).trim().replace(/^_|_$/g, "");
+      roleLine = roleLine.slice(0, cut).trim();
+    }
 
     const highlights = lines
       .filter((l) => l.startsWith("- "))
@@ -104,56 +140,34 @@ function parseExperience(section) {
 
 /*
 --------------------------------------------------
-Skills Parser
---------------------------------------------------
-*/
-
-function parseSkills(section) {
-  const groups = section.split("\n### ").filter(Boolean);
-
-  return groups.map((group) => {
-    const lines = group.trim().split("\n");
-
-    const category = lines[0].trim();
-
-    const items = lines
-      .slice(1)
-      .flatMap((line) => {
-        if (line.startsWith("- ")) {
-          return [line.replace("- ", "").trim()];
-        }
-
-        return line.split("·").map((s) => s.trim());
-      })
-      .filter(Boolean);
-
-    return {
-      category,
-      items,
-    };
-  });
-}
-
-/*
---------------------------------------------------
 Build Resume Data
 --------------------------------------------------
 */
 
 function buildResumeData(markdown) {
-  const summary = extractSection("Summary", markdown);
+  const experience = parseExperience(extractSection("Experience", markdown));
 
-  const experienceSection = extractSection("Experience", markdown);
-  let skillsSection = extractSection("Skills", markdown);
-  if (!skillsSection) {
-    skillsSection = extractSection("Skills & Technologies", markdown);
+  // Only what the site actually imports. Skills come from
+  // portfolio.config.ts and projects from projects.config.ts; generating
+  // them here too produced exports nobody read, and made editing skills in
+  // resume.md look broken — the PDF changed, the site did not.
+  // The site joins portfolio copy to experience by company name, and a
+  // mismatch renders an empty card with no error. Fail here instead.
+  const companies = experience.map((e) => e.company);
+  const orphans = Object.keys(experiencePortfolio).filter(
+    (key) => !companies.includes(key)
+  );
+  if (orphans.length) {
+    throw new Error(
+      `portfolio.config.ts has copy for ${orphans
+        .map((o) => `"${o}"`)
+        .join(", ")}, which no longer matches any company in resume.md. ` +
+        `Companies are: ${companies.map((c) => `"${c}"`).join(", ")}`
+    );
   }
 
-  const experience = parseExperience(experienceSection);
-  const skills = parseSkills(skillsSection);
-
-  const content = `
-import type { Projects } from "$lib/types/types";
+  const content = `// Generated by \`npm run build-resume\` from src/content/resume.md.
+// Do not edit.
 
 type ExperienceItem = {
   company: string;
@@ -162,22 +176,11 @@ type ExperienceItem = {
   highlights: string[];
 };
 
-type SkillGroup = {
-  category: string;
-  items: string[];
-};
-
-export const summary = ${JSON.stringify(summary, null, 2)};
-
 export const experience: ExperienceItem[] = ${JSON.stringify(
     experience,
     null,
     2
   )};
-
-export const skills: SkillGroup[] = ${JSON.stringify(skills, null, 2)};
-
-export const projects: Projects = ${JSON.stringify(projectsConfig, null, 2)};
 `;
 
   fs.writeFileSync(RESUME_DATA_PATH, content);
@@ -197,7 +200,7 @@ function buildHTML() {
 
     execFileSync(
       "pandoc",
-      [RESUME_PATH, "-o", path.join(OUTPUT_DIR, "resume.html")],
+      [BUILD_MD, "-o", path.join(OUTPUT_DIR, "resume.html")],
       {
         stdio: "inherit",
       }
@@ -216,7 +219,7 @@ function buildPDF() {
     execFileSync(
       "pandoc",
       [
-        RESUME_PATH,
+        BUILD_MD,
         "-o",
         pdfPath,
         "--pdf-engine=xelatex",
@@ -226,7 +229,11 @@ function buildPDF() {
         "-V",
         "fontsize=10pt",
         "-V",
-        "mainfont=Charter",
+        // XCharter, not Charter: it is the same typeface design and ships
+        // with TeX Live on both macOS and Ubuntu, so a CI-built PDF is
+        // identical to a locally built one. That is what makes the automatic
+        // refresh safe — otherwise the two would overwrite each other forever.
+        `mainfont=${process.env.RESUME_MAINFONT || "XCharter"}`,
       ],
       { stdio: "inherit" }
     );
@@ -235,7 +242,14 @@ function buildPDF() {
     const staticPdf = path.join(ROOT, "static", "resume.pdf");
     fs.copyFileSync(pdfPath, staticPdf);
     console.log("✅ Synced static/resume.pdf");
-  } catch {
+  } catch (error) {
+    // Skipping is fine on a laptop without TeX. In CI it means the résumé
+    // silently stopped building, which is how this went unnoticed — so fail
+    // loudly there instead.
+    if (process.env.CI) {
+      console.error("❌ PDF build failed");
+      throw error;
+    }
     console.warn("⚠️ Pandoc/xelatex not installed — skipping PDF build");
   }
 }
@@ -255,10 +269,20 @@ function run() {
 
   buildResumeData(markdown);
 
+  // pandoc reads the composed copy, never the source
+  fs.writeFileSync(BUILD_MD, withProjects(markdown));
+
   buildHTML();
   buildPDF();
 
   console.log("✨ Resume build complete");
 }
 
-run();
+// Run only when invoked directly. Importing this module (from tests) must not
+// touch the filesystem or shell out to pandoc.
+if (
+  process.argv[1] &&
+  import.meta.url === pathToFileURL(process.argv[1]).href
+) {
+  run();
+}

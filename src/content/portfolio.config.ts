@@ -1,66 +1,84 @@
 // Portfolio presentation copy — the distilled, human "voice" layer.
 // Deliberately separate from the formal résumé in `resume.md` (which feeds the
-// ATS PDF). See docs/superpowers/specs/2026-07-13-portfolio-uiux-redesign-design.md
+// ATS PDF).
 //
 // Guardrails: facts, not noise · warmth via specificity · no clichés.
 
 type HeadlinePart = { text: string; accent?: boolean };
-type Proof = { p: string; s: string };
 
 export const heroConfig: {
   kicker: string;
   remoteOpen: string;
+  owns: string[];
+  proofLine: string;
   headline: HeadlinePart[];
   support: string;
-  capabilities: string[];
-  proofsLabel: string;
-  proofs: Proof[];
   email: string;
   resume: string;
+  resumeAs: string;
   seeWorkHref: string;
 } = {
-  kicker: "Chun-Yu (Echo) Shih · Full-Stack Engineer",
-  remoteOpen: "Open to remote roles",
+  // Hierarchy: kicker = who and where · headline = value delivered ·
+  // support = role and capabilities. The title lives in the support line only,
+  // so it isn't stated twice three lines apart.
+  kicker: "Chun-Yu (Echo) Shih · Taipei, Taiwan",
+  // Taipei-based, so the first thing an overseas recruiter needs is the time
+  // zone and how far it stretches. "Open to remote roles" left them guessing.
+  // Logistics only. The offer lives in the closing section, where it invites
+  // rather than announces — and "Senior" would be a level I assigned myself
+  // rather than one the work argues for.
+  remoteOpen: "UTC+8 · open to remote from Taiwan, or Taipei",
 
-  // Problem-solving spine — diagnosis + delivery + scope. No cliché.
+  // Spells out what "end to end" means, layer by layer. An earlier version
+  // listed categories — Web, Mobile, Backend — which repeated the stack line
+  // and proved nothing.
+  owns: [
+    "UI & design systems",
+    "Frontend",
+    "APIs & data models",
+    "Tests",
+    "CI/CD & deploy",
+  ],
+
+  // Problem-solving spine — diagnosis + delivery + scope. Seniority implied by
+  // the range of ownership, not by putting "Senior" in the introduction.
   headline: [
-    { text: "I find the " },
-    { text: "real problem", accent: true },
-    { text: ", and ship the fix — end to end." },
+    { text: "I build software " },
+    { text: "people rely on", accent: true },
+    { text: "." },
   ],
 
-  // The differentiator, in one breath (was a 4-line list — too much reading).
-  support: "From an empty repo to a shipped app — I build the whole thing.",
+  // Says why one person covers all of it rather than listing that I can.
+  // "Stay with", not "own": the claim is persistence, not possession, and it
+  // matches the closing line. Keeps the stack names for scanners.
+  support:
+    "Product Engineer working in React, TypeScript and FastAPI. I stay with a problem from interface to deploy, because the experience breaks at the seams — a slow endpoint, a failed release, an app that gives up when the Wi-Fi does.",
 
-  // Scannable capability strip: full-spectrum in five words, not four sentences.
-  capabilities: ["Web", "Mobile", "Backend", "Infra", "Product design"],
+  // One sentence, not a stat block. Three figures in columns is a SaaS
+  // landing-page pattern: it invites comparison, and 603 read against other
+  // people's numbers looks small. Stated as a fact about a real salon it reads
+  // as remarkable, and "entered by hand" carries what a number cannot.
+  proofLine:
+    "A salon in Tainan has run its business on software I built since May 2025 — 603 clients, 2,694 records, entered by hand.",
 
-  proofsLabel: "— a few problems, solved",
 
-  // Each marker is a problem → what I did. Chosen to show RANGE:
-  // infra/CI · AI/product · mobile · remote.
-  proofs: [
-    {
-      p: "Releases kept rebuilding the same image three times.",
-      s: "I re-architected CI so a deploy builds once.",
-    },
-    {
-      p: "A recruiting team was buried in manual work.",
-      s: "I shipped ChatGPT-powered features into the product.",
-    },
-    {
-      p: "People needed to know how long their money would last.",
-      s: "I built and shipped a Flutter app to both app stores — solo.",
-    },
-    {
-      p: "Remote since 2020.",
-      s: "I work autonomously across time zones, and I write things down.",
-    },
-  ],
 
   email: "echoshihtw@gmail.com",
   resume: "resume.pdf", // served from /static, base-prefixed at render
+  // What the file is called once it lands in someone's downloads folder, and
+  // in an ATS. "resume.pdf" there is indistinguishable from every other one.
+  resumeAs: "Chun-Yu-Echo-Shih-Product-Engineer.pdf",
   seeWorkHref: "#projects",
+};
+
+// The page used to end on the skills list, so a reader who was convinced had
+// to scroll back up to act. This is the close.
+export const closingConfig = {
+  heading: "Want to talk?",
+  body: "If you have a problem nobody has scoped yet, and you need one person to carry it from interface to deploy, that is the work I am best at. Remote from Taiwan, or in Taipei, and happy to travel.",
+  email: "echoshihtw@gmail.com",
+  resume: "resume.pdf",
+  resumeAs: "Chun-Yu-Echo-Shih-Product-Engineer.pdf",
 };
 
 // Curated, portfolio-facing skills — signal over completeness (PG/Jobs).
@@ -68,6 +86,9 @@ export const heroConfig: {
 // Buckets aligned to the "full-spectrum" story: Frontend · Mobile · Backend · Infra.
 export const skillsConfig: { label: string; items: string[] }[] = [
   { label: "Frontend", items: ["React", "Next.js", "TypeScript", "Tailwind"] },
+  // Grounded: a design_system package in Runway, a documented design system in
+  // Clio, and the UI patterns I wrote for the Lockerbie frontend.
+  { label: "UI & design", items: ["Design systems", "UI patterns", "Responsive & accessible"] },
   { label: "Mobile", items: ["Flutter", "Dart", "Riverpod"] },
   {
     label: "Backend & Data",
@@ -78,48 +99,61 @@ export const skillsConfig: { label: string; items: string[] }[] = [
     items: ["Docker", "GitHub Actions", "GHCR", "AWS"],
   },
   { label: "Testing", items: ["Vitest", "React Testing Library", "pytest"] },
+  // Personal local tooling used while delivering work — not team infrastructure.
+  // Sits in skills, not in the hero proofs: there's no shippable artifact behind it.
+  { label: "AI & Automation", items: ["Claude Code", "Skills", "Hooks"] },
 ];
 
 // Distilled experience copy, keyed by company (matches resumeData `experience`).
 // The full formal bullets stay in resume.md and show in the "details" expander.
 // Each entry: one weighty impact line + one problem→solution proof + quiet tech.
+// Written in résumé voice — implied subject, not "I did X" four cards running.
+// These are my cards; the ownership is already established by being here.
 export const experiencePortfolio: Record<
   string,
   { impact: string; proof: { p: string; s: string }; techLine: string }
 > = {
-  "Lockerbie Technology": {
+  "Lockerbie Technology (Musaeum Ltd, UK group)": {
+    // Scope note: the modular-monolith / RabbitMQ / ArangoDB direction was the team's,
+    // set by my lead. I learned it and implemented it in production. What I chose:
+    // the App Router + BFF boundary, and the build-once delivery pipeline.
     impact:
-      "I own our team's project-management platform end to end — architecture, the Next.js frontend, the FastAPI backend, and the deploy pipeline.",
+      "An early-stage internal project-management platform — Next.js frontend, FastAPI integration, deploy pipeline — built and operated as one of two engineers. I brought our second engineer into the codebase through daily pairing, and we worked out the module structure together so the pattern was ours rather than mine.",
+    // The constraint was my lead's — layers independent, no direct
+    // browser-to-backend access. The way of meeting it was mine. No "before"
+    // state to fix either: the boundary was there from the start.
     proof: {
-      p: "Releases kept rebuilding the same image three times.",
-      s: "I re-architected CI so a deploy builds once and production ships the exact image tested in staging.",
+      p: "The layers had to stay independent — no direct browser-to-backend calls.",
+      s: "Chose Next.js App Router and put a BFF security boundary in front: server-managed authentication, centralised CSRF protection, no backend credentials in browser JavaScript.",
     },
     techLine: "Next.js · FastAPI · ArangoDB · RabbitMQ · Docker · GHCR",
   },
   "SPIN.FASHION by Lablaco": {
+    // Agreed title was Full Stack Engineer & Founding Partner — use it as agreed,
+    // not a paraphrase.
     impact:
-      "Founding engineer on SPIN Connect — the in-store desktop app — working remotely across time zones.",
+      "Full stack engineer and founding partner on SPIN Connect — the in-store desktop app — over a three-month engagement, working remotely across time zones.",
     proof: {
       p: "The macOS build couldn't ship.",
-      s: "I fixed code-signing, notarization, and auto-update, and unblocked desktop distribution.",
+      s: "Fixed code-signing, notarisation and auto-update. The desktop app shipped, and the release steps are written down.",
     },
     techLine: "React · Redux-Saga · Electron",
   },
-  "Find Recruiter (HR Tech Startup)": {
+  "Find Recruiter": {
     impact:
-      "I led the front end of a recruiting platform used by employers and agencies — and shipped its AI features.",
+      "Front-end lead on a B2B recruiting and ATS platform used by employers and agencies — a two-engineer product team reporting to the CTO.",
     proof: {
-      p: "A recruiting team was buried in manual work.",
-      s: "I built the ChatGPT-powered job-description generator and CV standardiser inside the product.",
+      p: "A large production React codebase kept regressing on types.",
+      s: "Drove an incremental JavaScript-to-TypeScript migration and built 100+ reusable components.",
     },
-    techLine: "React · Redux-Saga · Firebase · OpenAI",
+    techLine: "React · TypeScript · Redux-Saga · Firebase · Server-Sent Events",
   },
-  "Independent Engineering Work": {
+  "Independent / Freelance Engineering": {
     impact:
-      "I build full-stack products across fintech, e-commerce, and research — adapting the system to the problem.",
+      "Full-stack product work across fintech, research, e-commerce, and creative industries — remote, since 2020.",
     proof: {
-      p: "Wanted to understand Bitcoin coin-selection hands-on.",
-      s: "I built the Next.js frontend for a BDK demo wallet alongside a core maintainer.",
+      p: "A Bitcoin coin-selection research tool needed a frontend.",
+      s: "Built the frontend in Next.js alongside a BDK core maintainer — UTXO coin-control, fee scenarios, selection metrics.",
     },
     techLine: "Next.js · TypeScript · BDK",
   },
