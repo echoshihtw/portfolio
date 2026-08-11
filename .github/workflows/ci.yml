@@ -56,6 +56,8 @@ jobs:
 
       - run: npm run check
 
+      - run: npm test
+
       # The résumé is a build output, not a committed file, so it cannot fall
       # behind resume.md. One page is a hard constraint, enforced here.
       - name: Build résumé
