@@ -97,7 +97,7 @@ export const heroConfig: {
 // to scroll back up to act. This is the close.
 export const closingConfig = {
   heading: "Want to talk?",
-  body: "If you have a problem nobody has scoped yet, and you need one person to carry it from interface to deploy, that is the work I am best at. Remote from Taiwan, or in Taipei.",
+  body: "If you have a problem nobody has scoped yet, and you need one person to carry it from interface to deploy, that is the work I am best at. Remote from Taiwan, or in Taipei — open to relocating for the right one.",
   email: "echoshihtw@gmail.com",
   resume: "resume.pdf",
 };
