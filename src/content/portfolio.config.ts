@@ -26,10 +26,11 @@ export const heroConfig: {
   kicker: "Chun-Yu (Echo) Shih · Taipei, Taiwan",
   // Taipei-based, so the first thing an overseas recruiter needs is the time
   // zone and how far it stretches. "Open to remote roles" left them guessing.
-  // Logistics, not intent. The ask lives in `seeking` below — a visitor who
-  // wants to hire you should not have to infer that you want to be hired.
+  // Logistics, not intent. `seeking` below states what a company gets, not
+  // what I want — an offer reads stronger than an appetite, and "Senior" would
+  // be a level I assigned myself rather than one the work argues for.
   remoteOpen: "UTC+8 · open to remote — APAC hours or async",
-  seeking: "Open to Product Engineer opportunities — remote from Taiwan or based in Taipei.",
+  seeking: "I take ambiguous problems and own them end to end — remote from Taiwan, or in Taipei.",
 
   // Problem-solving spine — diagnosis + delivery + scope. Seniority implied by
   // the range of ownership, not by putting "Senior" in the introduction.
