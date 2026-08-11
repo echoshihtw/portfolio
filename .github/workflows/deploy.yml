@@ -30,8 +30,22 @@ jobs:
         with:
           node-version: 20
           cache: npm
+      - name: Install Pandoc and XeLaTeX
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            pandoc texlive-xetex texlive-fonts-extra poppler-utils
+
       - name: Install dependencies
         run: npm ci
+
+      # The résumé is a build output, so it is built here rather than
+      # committed. It cannot go stale if it is made fresh every deploy.
+      - name: Build résumé
+        run: |
+          npm run build-resume
+          pages=$(pdfinfo static/resume.pdf | awk '/^Pages:/ {print $2}')
+          test "$pages" = "1" || { echo "::error::résumé must be one page, got $pages"; exit 1; }
 
       - name: build
         env:

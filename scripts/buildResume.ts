@@ -235,7 +235,11 @@ function buildPDF() {
         "-V",
         "fontsize=10pt",
         "-V",
-        "mainfont=Charter",
+        // XCharter, not Charter: it is the same typeface design and ships
+        // with TeX Live on both macOS and Ubuntu, so a CI-built PDF is
+        // identical to a locally built one. That is what makes the automatic
+        // refresh safe — otherwise the two would overwrite each other forever.
+        `mainfont=${process.env.RESUME_MAINFONT || "XCharter"}`,
       ],
       { stdio: "inherit" }
     );
@@ -244,7 +248,14 @@ function buildPDF() {
     const staticPdf = path.join(ROOT, "static", "resume.pdf");
     fs.copyFileSync(pdfPath, staticPdf);
     console.log("✅ Synced static/resume.pdf");
-  } catch {
+  } catch (error) {
+    // Skipping is fine on a laptop without TeX. In CI it means the résumé
+    // silently stopped building, which is how this went unnoticed — so fail
+    // loudly there instead.
+    if (process.env.CI) {
+      console.error("❌ PDF build failed");
+      throw error;
+    }
     console.warn("⚠️ Pandoc/xelatex not installed — skipping PDF build");
   }
 }

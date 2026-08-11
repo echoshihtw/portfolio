@@ -7,8 +7,7 @@ interesting part is the résumé: `src/content/resume.md` is the single source o
 truth, and one build produces the PDF people download, the structured data the
 site renders, and an HTML version. There is no second copy to drift.
 
-**Live:** <https://echoshihtw.github.io/portfolio> ·
-**Résumé:** [`static/resume.pdf`](static/resume.pdf)
+**Live:** <https://echoshihtw.github.io/portfolio>
 
 ---
 
@@ -59,7 +58,7 @@ src/content/resume.md          ← the only file you edit
                 ├── src/lib/resumeData.ts   summary, experience, skills, projects
                 ├── output/resume.html
                 ├── output/resume.pdf       Pandoc + XeLaTeX
-                └── static/resume.pdf       copied, so the site serves the build
+                └── static/resume.pdf       what the site serves
 ```
 
 `scripts/buildResume.ts` parses the markdown by section (`# Summary`,
@@ -67,12 +66,13 @@ src/content/resume.md          ← the only file you edit
 the LaTeX layout — margins, section rules, list spacing, leading.
 
 **Do not edit `src/lib/resumeData.ts`, `output/*`, or `static/resume.pdf`.** They
-are generated, and the next build overwrites them.
+are generated. `output/` and `static/resume.pdf` are not committed at all — the
+deploy builds them, which is why the served PDF cannot fall behind `resume.md`.
 
 ### Two constraints worth knowing before editing
 
-**It must stay exactly one page.** Adding a bullet usually means removing one.
-Check with:
+**It must stay exactly one page.** The deploy fails if it isn't. Adding a bullet
+usually means removing one. Check locally with:
 
 ```bash
 npm run build-resume && mdls -raw -name kMDItemNumberOfPages output/resume.pdf
