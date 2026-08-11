@@ -23,11 +23,11 @@ export const heroConfig: {
   // so it isn't stated twice three lines apart.
   kicker: "Chun-Yu (Echo) Shih · Taipei, Taiwan",
   // Taipei-based, so the first thing an overseas recruiter needs is the time
-  // zone and how far it stretches. "Open to remote roles" left them guessing.
-  // Logistics only. The offer lives in the closing section, where it invites
-  // rather than announces — and "Senior" would be a level I assigned myself
-  // rather than one the work argues for.
-  remoteOpen: "UTC+8 · open to remote from Taiwan, or Taipei",
+  // zone and how far it stretches. Remote leads because remote is the ask;
+  // Taipei follows as the second option, not an equal one. Stated as fact
+  // rather than availability — "open to" in front of both reads as asking.
+  // The full offer lives in the closing section, where it invites.
+  remoteOpen: "UTC+8 · Remote from Taiwan · open to Taipei",
 
   // Spells out what "end to end" means, layer by layer. An earlier version
   // listed categories — Web, Mobile, Backend — which repeated the stack line
