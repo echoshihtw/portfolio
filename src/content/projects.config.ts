@@ -29,7 +29,7 @@ export const projectsConfig: Projects = [
       "Records live in a hosted database, not on a machine that can die — the failure that started this cannot repeat",
     ],
     resumeLine:
-      "Bilingual **React/Supabase** salon operations product in daily use at a Tainan salon **since May 2025**, supporting 603 clients and 2,694 service records with **Postgres RLS** and per-member permissions.",
+      "**React/Supabase** salon operations product — Traditional Chinese first, English second — in daily use at a Tainan salon **since May 2025**, supporting 603 clients and 2,694 service records with **Postgres RLS** and per-member permissions.",
     featured: true,
     linkLabel: "Live →",
     status: "Live",
