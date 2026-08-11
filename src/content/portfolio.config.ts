@@ -15,6 +15,7 @@ export const heroConfig: {
   support: string;
   email: string;
   resume: string;
+  resumeAs: string;
   seeWorkHref: string;
 } = {
   // Hierarchy: kicker = who and where · headline = value delivered ·
@@ -64,6 +65,9 @@ export const heroConfig: {
 
   email: "echoshihtw@gmail.com",
   resume: "resume.pdf", // served from /static, base-prefixed at render
+  // What the file is called once it lands in someone's downloads folder, and
+  // in an ATS. "resume.pdf" there is indistinguishable from every other one.
+  resumeAs: "Chun-Yu-Echo-Shih-Product-Engineer.pdf",
   seeWorkHref: "#projects",
 };
 
@@ -74,6 +78,7 @@ export const closingConfig = {
   body: "If you have a problem nobody has scoped yet, and you need one person to carry it from interface to deploy, that is the work I am best at. Remote from Taiwan, or in Taipei, and happy to travel.",
   email: "echoshihtw@gmail.com",
   resume: "resume.pdf",
+  resumeAs: "Chun-Yu-Echo-Shih-Product-Engineer.pdf",
 };
 
 // Curated, portfolio-facing skills — signal over completeness (PG/Jobs).
