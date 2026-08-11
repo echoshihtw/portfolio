@@ -27,3 +27,7 @@ vite.config.ts.timestamp-*
 
 # visual brainstorm companion
 .superpowers/
+
+# Working documents: specs, audits, notes. They are written for me, not for
+# readers of a public repo — that is how the portfolio audit leaked.
+/docs/
