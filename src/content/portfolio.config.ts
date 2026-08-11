@@ -118,13 +118,13 @@ export const experiencePortfolio: Record<
     // set by my lead. I learned it and implemented it in production. What I chose:
     // the App Router + BFF boundary, and the build-once delivery pipeline.
     impact:
-      "Our team's project-management platform — Next.js frontend, FastAPI backend, deploy pipeline — built and operated as one of two engineers. In production with about five people across ten projects. Our second engineer arrived without a software background; 278 commits carry us both, and we worked out the file structure together so the pattern was ours rather than mine.",
+      "An early-stage internal project-management platform — Next.js frontend, FastAPI integration, deploy pipeline — built and operated as one of two engineers. I brought our second engineer into the codebase through daily pairing, and we worked out the module structure together so the pattern was ours rather than mine.",
     // The constraint was my lead's — layers independent, no direct
     // browser-to-backend access. The way of meeting it was mine. No "before"
     // state to fix either: the boundary was there from the start.
     proof: {
       p: "The layers had to stay independent — no direct browser-to-backend calls.",
-      s: "Chose Next.js App Router and put a BFF trust boundary in front: same-origin API routes only, backend tokens in HttpOnly cookies, CSRF enforcement centralised for unsafe requests.",
+      s: "Chose Next.js App Router and put a BFF security boundary in front: server-managed authentication, centralised CSRF protection, no backend credentials in browser JavaScript.",
     },
     techLine: "Next.js · FastAPI · ArangoDB · RabbitMQ · Docker · GHCR",
   },
