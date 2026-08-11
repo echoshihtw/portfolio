@@ -36,7 +36,7 @@ export const projectsConfig: Projects = [
   {
     name: "Runway",
     subtitle: "A runway tracker for people living off savings — how long can your money last?",
-    why: "I was planning a study trip to get better at programming and could not answer the question the whole plan rested on: how long can I live on this while I do it? Budget apps tell you where money went. I needed to know how much time it buys once rent, tools and a flight are accounted for — and to stop recalculating it in my head at night.",
+    why: "I was planning a study trip to get better at programming, and the whole plan rested on one question I could not answer: how long can I sustain myself? Budget apps tell you where money went. I needed to know how much time it buys, once rent, tools and the flight are in.",
     result:
       "I use it. Running on Android, in seven languages and six currencies, built solo. iOS distribution is in progress — the release workflows exist but no tag has been cut, so nothing is on TestFlight or Play yet.",
     href: "#",
