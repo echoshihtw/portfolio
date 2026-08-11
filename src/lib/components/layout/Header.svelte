@@ -39,7 +39,7 @@
           href={tab.link}
           class="duration-200 toggle_hover_font_color hover:line-through"
           style="color: var(--text-color);"
-          aria-label="link to {tab.name} page"
+          aria-label="Go to {tab.name.replace('#', '')} section"
         >
           <p>{tab.name}</p>
         </a>
