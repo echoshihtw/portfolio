@@ -52,8 +52,10 @@
     padding: 0.5rem;
     width: calc(100% - 1.2rem);
     justify-content: center;
-    flex-wrap: wrap;
-    border-radius: 1rem;
+    /* One row on a phone. Wrapping put the theme toggle on a second line and
+       doubled the height of a bar that sits over the content. */
+    flex-wrap: nowrap;
+    border-radius: 999px;
     border: 1px solid var(--color-accent);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
@@ -79,17 +81,27 @@
 
   .floating-link {
     font-family: "JetBrains Mono", monospace;
-    font-size: 0.78rem;
+    font-size: 0.72rem;
     font-weight: 500;
-    letter-spacing: 0.02em;
+    letter-spacing: 0.01em;
     color: var(--text-color);
     text-decoration: none;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     border: 1px solid var(--section-border);
     border-radius: 999px;
-    padding: 0.4rem 0.68rem;
+    padding: 0.4rem 0.3rem;
     background: rgba(255, 255, 255, 0.55);
+    /* Share the row evenly rather than sizing to the longest word, so the bar
+       fills the width instead of wrapping. min-width:0 lets them shrink at all. */
+    flex: 1 1 0;
+    min-width: 0;
   }
 
+  /* The two controls are icons, not labels: they size to their content while
+     the links share what is left. */
   .floating-top-button {
     display: grid;
     place-items: center;
@@ -97,6 +109,7 @@
     min-width: 2.1rem;
     padding-inline: 0.45rem;
     cursor: pointer;
+    flex: none;
   }
 
   .floating-top-button :global(svg) {
@@ -108,6 +121,7 @@
     display: grid;
     place-items: center;
     min-width: 1.9rem;
+    flex: none;
   }
 
   .floating-link:hover {
@@ -139,8 +153,16 @@
   @media (min-width: 640px) {
     .floating-nav {
       width: auto;
-      flex-wrap: nowrap;
-      border-radius: 999px;
+      gap: 0.4rem;
+    }
+
+    /* Past phone width there is room to spare, so the pills go back to sizing
+       to their labels instead of stretching. */
+    .floating-link {
+      flex: none;
+      font-size: 0.78rem;
+      letter-spacing: 0.02em;
+      padding-inline: 0.8rem;
     }
   }
 </style>
