@@ -5,7 +5,6 @@
 // Guardrails: facts, not noise · warmth via specificity · no clichés.
 
 type HeadlinePart = { text: string; accent?: boolean };
-type Proof = { p: string; s: string };
 
 export const heroConfig: {
   kicker: string;
@@ -14,8 +13,6 @@ export const heroConfig: {
   proofLine: string;
   headline: HeadlinePart[];
   support: string;
-  proofsLabel: string;
-  proofs: Proof[];
   email: string;
   resume: string;
   seeWorkHref: string;
@@ -63,30 +60,7 @@ export const heroConfig: {
   proofLine:
     "A salon in Tainan has run its business on software I built since May 2025 — 603 clients, 2,694 records, entered by hand.",
 
-  proofsLabel: "— a few problems, solved",
 
-  // Each marker is a problem → what I did. Chosen to show RANGE:
-  // security/architecture · infra/CI · mobile · remote.
-  // Every line must be defensible in an interview — no claim I only observed.
-  // Voice: "I" for decisions I made; no subject for outcomes and standing facts.
-  proofs: [
-    {
-      p: "The layers had to stay independent — no direct browser-to-backend calls.",
-      s: "I chose Next.js App Router and a BFF boundary to get there: same-origin routes only, tokens in HttpOnly cookies, CSRF enforced in one place.",
-    },
-    {
-      p: "Releases kept rebuilding the same image three times.",
-      s: "I moved delivery to build-once, promote-by-digest. Production ships the exact image tested in staging.",
-    },
-    {
-      p: "People needed to know how long their money would last.",
-      s: "A Flutter app, built solo — Clean Architecture, encrypted local storage, seven languages. Running on Android; iOS distribution in progress.",
-    },
-    {
-      p: "Remote since 2020.",
-      s: "Autonomous across time zones. I write things down.",
-    },
-  ],
 
   email: "echoshihtw@gmail.com",
   resume: "resume.pdf", // served from /static, base-prefixed at render
@@ -128,6 +102,8 @@ export const skillsConfig: { label: string; items: string[] }[] = [
 // Distilled experience copy, keyed by company (matches resumeData `experience`).
 // The full formal bullets stay in resume.md and show in the "details" expander.
 // Each entry: one weighty impact line + one problem→solution proof + quiet tech.
+// Written in résumé voice — implied subject, not "I did X" four cards running.
+// These are my cards; the ownership is already established by being here.
 export const experiencePortfolio: Record<
   string,
   { impact: string; proof: { p: string; s: string }; techLine: string }
@@ -137,13 +113,13 @@ export const experiencePortfolio: Record<
     // set by my lead. I learned it and implemented it in production. What I chose:
     // the App Router + BFF boundary, and the build-once delivery pipeline.
     impact:
-      "I build and operate our team's project-management platform — the Next.js frontend, the FastAPI backend, and the deploy pipeline. In production with ~5 people across 10 projects, as one of two engineers. I paired our second engineer in from no software background; 278 commits carry us both.",
+      "Our team's project-management platform — Next.js frontend, FastAPI backend, deploy pipeline — built and operated as one of two engineers. In production with about five people across ten projects. Our second engineer arrived without a software background; 278 commits carry us both.",
     // The constraint was my lead's — layers independent, no direct
     // browser-to-backend access. The way of meeting it was mine. No "before"
     // state to fix either: the boundary was there from the start.
     proof: {
       p: "The layers had to stay independent — no direct browser-to-backend calls.",
-      s: "I chose Next.js App Router and introduced a BFF trust boundary to meet that: same-origin API routes only, backend tokens in HttpOnly cookies, CSRF enforcement centralised for unsafe requests.",
+      s: "Chose Next.js App Router and put a BFF trust boundary in front: same-origin API routes only, backend tokens in HttpOnly cookies, CSRF enforcement centralised for unsafe requests.",
     },
     techLine: "Next.js · FastAPI · ArangoDB · RabbitMQ · Docker · GHCR",
   },
@@ -154,16 +130,16 @@ export const experiencePortfolio: Record<
       "Full stack engineer and founding partner on SPIN Connect — the in-store desktop app — over a three-month engagement, working remotely across time zones.",
     proof: {
       p: "The macOS build couldn't ship.",
-      s: "I fixed code-signing, notarization, and auto-update. The desktop app shipped, and the release steps are written down.",
+      s: "Fixed code-signing, notarisation and auto-update. The desktop app shipped, and the release steps are written down.",
     },
     techLine: "React · Redux-Saga · Electron",
   },
   "Find Recruiter": {
     impact:
-      "I led the front end of a B2B recruiting and ATS platform used by employers and agencies — a two-engineer product team reporting to the CTO.",
+      "Front-end lead on a B2B recruiting and ATS platform used by employers and agencies — a two-engineer product team reporting to the CTO.",
     proof: {
       p: "A large production React codebase kept regressing on types.",
-      s: "I drove an incremental JavaScript-to-TypeScript migration and built 100+ reusable components.",
+      s: "Drove an incremental JavaScript-to-TypeScript migration and built 100+ reusable components.",
     },
     techLine: "React · TypeScript · Redux-Saga · Firebase · Server-Sent Events",
   },
@@ -172,7 +148,7 @@ export const experiencePortfolio: Record<
       "Full-stack product work across fintech, research, e-commerce, and creative industries — remote, since 2020.",
     proof: {
       p: "A Bitcoin coin-selection research tool needed a frontend.",
-      s: "I built it in Next.js, working alongside a BDK core maintainer — UTXO coin-control, fee scenarios, selection metrics.",
+      s: "Built the frontend in Next.js alongside a BDK core maintainer — UTXO coin-control, fee scenarios, selection metrics.",
     },
     techLine: "Next.js · TypeScript · BDK",
   },

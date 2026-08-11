@@ -130,3 +130,12 @@
 <div class="overflow-hidden">
   <Footer />
 </div>
+
+<style>
+  /* Was an inline style. Both values are theme variables, so this follows the
+     light/dark switch without any JS. */
+  .app-shell {
+    background: var(--color-bg);
+    color: var(--text-color);
+  }
+</style>
