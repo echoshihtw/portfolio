@@ -50,11 +50,17 @@
     display: flex;
     gap: 0.35rem;
     padding: 0.5rem;
-    width: calc(100% - 1.2rem);
-    justify-content: center;
-    /* One row on a phone. Wrapping put the theme toggle on a second line and
-       doubled the height of a bar that sits over the content. */
+    /* One shape at every width: pills sized to their labels, in a single row.
+       The bar is as wide as its contents and no wider, capped so it never
+       touches the screen edge. If a very narrow phone cannot fit the row, it
+       scrolls rather than wrapping — a bar that sits over the content should
+       not grow to two lines. */
+    width: max-content;
+    max-width: calc(100% - 1.2rem);
+    justify-content: flex-start;
     flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
     border-radius: 999px;
     border: 1px solid var(--color-accent);
     backdrop-filter: blur(12px);
@@ -81,23 +87,17 @@
 
   .floating-link {
     font-family: "JetBrains Mono", monospace;
-    font-size: 0.72rem;
+    font-size: 0.76rem;
     font-weight: 500;
-    letter-spacing: 0.01em;
+    letter-spacing: 0.02em;
     color: var(--text-color);
     text-decoration: none;
-    text-align: center;
     white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
     border: 1px solid var(--section-border);
     border-radius: 999px;
-    padding: 0.4rem 0.3rem;
+    padding: 0.4rem 0.62rem;
     background: rgba(255, 255, 255, 0.55);
-    /* Share the row evenly rather than sizing to the longest word, so the bar
-       fills the width instead of wrapping. min-width:0 lets them shrink at all. */
-    flex: 1 1 0;
-    min-width: 0;
+    flex: none;
   }
 
   /* The two controls are icons, not labels: they size to their content while
@@ -150,19 +150,10 @@
     background: rgba(237, 236, 232, 0.05);
   }
 
-  @media (min-width: 640px) {
-    .floating-nav {
-      width: auto;
-      gap: 0.4rem;
-    }
+  /* No width breakpoint: the bar is the same object on a phone and on a
+     desktop, and it already sizes to its contents. */
 
-    /* Past phone width there is room to spare, so the pills go back to sizing
-       to their labels instead of stretching. */
-    .floating-link {
-      flex: none;
-      font-size: 0.78rem;
-      letter-spacing: 0.02em;
-      padding-inline: 0.8rem;
-    }
+  .floating-nav::-webkit-scrollbar {
+    display: none;
   }
 </style>
