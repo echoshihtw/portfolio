@@ -50,11 +50,11 @@ export const heroConfig: {
     { text: "." },
   ],
 
-  // Says why I own the whole path rather than listing that I can. Caring about
-  // the experience is the reason: it breaks at the seams, and the seams are
-  // exactly the parts nobody owns. Keeps the stack names for scanners.
+  // Says why one person covers all of it rather than listing that I can.
+  // "Stay with", not "own": the claim is persistence, not possession, and it
+  // matches the closing line. Keeps the stack names for scanners.
   support:
-    "Product Engineer working in React, TypeScript and FastAPI. I own the whole path because the experience breaks at the seams — a slow endpoint, a failed deploy, an app that gives up when the wifi does.",
+    "Product Engineer working in React, TypeScript and FastAPI. I stay with a problem from interface to deploy, because the experience breaks at the seams — a slow endpoint, a failed release, an app that gives up when the wifi does.",
 
   // One sentence, not a stat block. Three figures in columns is a SaaS
   // landing-page pattern: it invites comparison, and 603 read against other
@@ -97,7 +97,7 @@ export const heroConfig: {
 // to scroll back up to act. This is the close.
 export const closingConfig = {
   heading: "Want to talk?",
-  body: "If you have a problem nobody has scoped yet, and you need one person to carry it from interface to deploy, that is the work I am best at. Remote from Taiwan, or in Taipei — open to relocating for the right one.",
+  body: "If you have a problem nobody has scoped yet, and you need one person to carry it from interface to deploy, that is the work I am best at. Remote from Taiwan, or in Taipei, and happy to travel.",
   email: "echoshihtw@gmail.com",
   resume: "resume.pdf",
 };
