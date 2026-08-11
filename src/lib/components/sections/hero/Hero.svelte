@@ -298,7 +298,7 @@
     border-color: var(--color-accent);
   }
 
-  @media (max-width: 719px) {
+  @media (max-width: 767px) {
     .hero-section {
       min-height: 70vh;
     }

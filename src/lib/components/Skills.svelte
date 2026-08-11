@@ -50,7 +50,7 @@
     color: var(--text-color);
   }
 
-  @media (max-width: 560px) {
+  @media (max-width: 639px) {
     .row {
       grid-template-columns: 1fr;
       gap: 0.3rem;

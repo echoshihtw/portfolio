@@ -226,7 +226,7 @@
     border-bottom: 1px solid currentColor;
   }
 
-  @media (max-width: 640px) {
+  @media (max-width: 639px) {
     /* Bottom sheet on phones: closer to the thumb, and the card it came from
        stays visible above it. */
     dialog {

@@ -38,7 +38,7 @@
     grid-column: 1 / -1;
   }
 
-  @media (max-width: 640px) {
+  @media (max-width: 639px) {
     .grid {
       grid-template-columns: 1fr;
     }

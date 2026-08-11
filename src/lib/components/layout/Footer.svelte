@@ -253,7 +253,7 @@
     background: var(--color-accent);
     box-shadow: 0 0 6px var(--color-accent);
   }
-  @media (max-width: 900px) {
+  @media (max-width: 767px) {
     .footer-grid {
       grid-template-columns: 1fr;
       gap: 1.6rem;

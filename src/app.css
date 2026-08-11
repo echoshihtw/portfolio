@@ -128,7 +128,7 @@ code,
 }
 
 .section_padding {
-  @apply px-5 py-10 md:px-10 md:py-12;
+  @apply px-4 py-8 md:px-10 md:py-12;
 }
 
 /* Gap between a section title and its content. Was 2rem/2.5rem, which read

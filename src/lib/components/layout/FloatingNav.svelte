@@ -136,7 +136,7 @@
     background: rgba(237, 236, 232, 0.05);
   }
 
-  @media (max-width: 560px) {
+  @media (max-width: 639px) {
     .floating-nav {
       width: calc(100% - 1.2rem);
       justify-content: center;

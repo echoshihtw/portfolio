@@ -60,7 +60,7 @@
       0 0 0 5px var(--color-bg);
   }
 
-  @media (max-width: 600px) {
+  @media (max-width: 639px) {
     .timeline {
       padding-left: 1.5rem;
     }
