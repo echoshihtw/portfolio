@@ -24,7 +24,7 @@
     <a
       href={base || "/"}
       on:click|preventDefault={goTop}
-      class="site-name text-[var(--text-color)] no-underline"
+      class="site-name"
     >
       Echo Shih
     </a>
@@ -37,7 +37,7 @@
       {#each tabs as tab}
         <a
           href={tab.link}
-          class="nav-link duration-200 toggle_hover_font_color hover:line-through"
+          class="nav-link"
           aria-label="Go to {tab.name.replace('#', '')} section"
         >
           <p>{tab.name}</p>
@@ -51,6 +51,28 @@
 </header>
 
 <style>
+  /* One hover language across the site: accent colour on text, accent border on
+     surfaces. The nav used a strikethrough and Tailwind greys, which belonged to
+     neither. */
+  .nav-link,
+  .site-name {
+    color: var(--text-color);
+    text-decoration: none;
+    transition: color 180ms ease;
+  }
+
+  .nav-link:hover,
+  .site-name:hover {
+    color: var(--color-accent);
+  }
+
+  .nav-link:focus-visible,
+  .site-name:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
   /* Keeps the visual weight the old <h1> had, without the heading semantics. */
   .site-name {
     font-family: "DM Serif Display", serif;
@@ -58,6 +80,13 @@
     font-weight: bold;
     line-height: 1.2;
     cursor: pointer;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .nav-link,
+    .site-name {
+      transition: none;
+    }
   }
 
   .header-shell {

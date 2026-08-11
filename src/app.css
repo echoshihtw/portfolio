@@ -106,14 +106,6 @@ code,
   -webkit-text-fill-color: unset;
 }
 
-.toggle_hover_font_color {
-  @apply hover:text-gray-900 dark:hover:text-gray-100;
-}
-
-.toggle_btn_hover_color {
-  background: var(--color-accent);
-}
-
 .specialSpin {
   animation: spin 5s linear infinite;
 }
