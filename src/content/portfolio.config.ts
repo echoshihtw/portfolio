@@ -113,7 +113,7 @@ export const experiencePortfolio: Record<
     // set by my lead. I learned it and implemented it in production. What I chose:
     // the App Router + BFF boundary, and the build-once delivery pipeline.
     impact:
-      "Our team's project-management platform — Next.js frontend, FastAPI backend, deploy pipeline — built and operated as one of two engineers. In production with about five people across ten projects. Our second engineer arrived without a software background; 278 commits carry us both.",
+      "Our team's project-management platform — Next.js frontend, FastAPI backend, deploy pipeline — built and operated as one of two engineers. In production with about five people across ten projects. Our second engineer arrived without a software background; 278 commits carry us both, and we worked out the file structure together so the pattern was ours rather than mine.",
     // The constraint was my lead's — layers independent, no direct
     // browser-to-backend access. The way of meeting it was mine. No "before"
     // state to fix either: the boundary was there from the start.
