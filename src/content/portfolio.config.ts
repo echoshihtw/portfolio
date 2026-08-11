@@ -12,7 +12,7 @@ export const heroConfig: {
   remoteOpen: string;
   seeking: string;
   owns: string[];
-  proofStrip: { figure: string; label: string }[];
+  proofLine: string;
   headline: HeadlinePart[];
   support: string;
   proofsLabel: string;
@@ -33,6 +33,17 @@ export const heroConfig: {
   remoteOpen: "UTC+8 · open to remote — APAC hours or async",
   seeking: "I take problems that arrive without a spec and own them end to end — remote from Taiwan, or in Taipei.",
 
+  // Spells out what "end to end" means, layer by layer. An earlier version
+  // listed categories — Web, Mobile, Backend — which repeated the stack line
+  // and proved nothing.
+  owns: [
+    "UI & design systems",
+    "Frontend",
+    "APIs & data models",
+    "Tests",
+    "CI/CD & deploy",
+  ],
+
   // Problem-solving spine — diagnosis + delivery + scope. Seniority implied by
   // the range of ownership, not by putting "Senior" in the introduction.
   headline: [
@@ -47,32 +58,12 @@ export const heroConfig: {
   support:
     "Product Engineer working in React, TypeScript and FastAPI. I own the whole path because the experience breaks at the seams — a slow endpoint, a failed deploy, an app that gives up when the wifi does.",
 
-
-  // The strongest evidence was four steps deep, inside a project dialog. This
-  // puts it where every visitor sees it, next to the claim it supports.
-  // Three kinds of evidence, not three of the same kind: a product people
-  // use, ownership at work, and leverage over another engineer. 603 and 2,694
-  // proved the same fact twice, and "a production frontend" never said the
-  // work was paid.
-  // Three different units on purpose. Two "commits" figures read as the same
-  // measurement twice, and the reader had to work out that one was a subset of
-  // a different repo.
-  // Spells out what "end to end" means, layer by layer. The previous version
-  // listed categories — Web, Mobile, Backend — which repeated the stack line
-  // above and proved nothing.
-  owns: [
-    "UI & design systems",
-    "Frontend",
-    "APIs & data models",
-    "Tests",
-    "CI/CD & deploy",
-  ],
-
-  proofStrip: [
-    { figure: "603", label: "clients on software I built" },
-    { figure: "1,577", label: "commits, sole author of our frontend at work" },
-    { figure: "2 months", label: "to take a teammate from zero to shipping alone" },
-  ],
+  // One sentence, not a stat block. Three figures in columns is a SaaS
+  // landing-page pattern: it invites comparison, and 603 read against other
+  // people's numbers looks small. Stated as a fact about a real salon it reads
+  // as remarkable, and "entered by hand" carries what a number cannot.
+  proofLine:
+    "A salon in Tainan has run its business on software I built since May 2025 — 603 clients, 2,694 records, entered by hand.",
 
   proofsLabel: "— a few problems, solved",
 

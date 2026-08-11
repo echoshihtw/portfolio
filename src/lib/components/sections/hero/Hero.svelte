@@ -29,16 +29,7 @@
       {/each}
     </ul>
 
-    <!-- Claim and evidence in the same view. These numbers were four steps
-         deep, inside a project dialog most visitors never open. -->
-    <dl class="hero-proof">
-      {#each heroConfig.proofStrip as item}
-        <div>
-          <dt>{item.figure}</dt>
-          <dd>{item.label}</dd>
-        </div>
-      {/each}
-    </dl>
+    <p class="hero-proofline">{heroConfig.proofLine}</p>
 
     <div class="hero-links">
       <a class="hero-cta primary" href="{base}/{heroConfig.resume}" download>
@@ -224,29 +215,14 @@
     color: var(--section-border);
   }
 
-  .hero-proof {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.6rem;
+  .hero-proofline {
     margin: 0.3rem 0 0;
     padding-top: 0.9rem;
+    max-width: 60ch;
     border-top: 1px solid var(--section-border);
-  }
-
-  .hero-proof dt {
-    font-family: "DM Serif Display", serif;
-    font-size: 1.45rem;
-    line-height: 1.1;
+    font-size: 0.95rem;
+    line-height: 1.6;
     color: var(--text-color);
-  }
-
-  .hero-proof dd {
-    margin: 0.15rem 0 0;
-    max-width: 18ch;
-    font-family: "JetBrains Mono", monospace;
-    font-size: 0.68rem;
-    line-height: 1.5;
-    color: var(--text-muted);
   }
 
   /* actions */
@@ -320,12 +296,6 @@
 
   .hero-email:hover {
     border-color: var(--color-accent);
-  }
-
-  @media (min-width: 720px) {
-    .hero-proofs {
-      grid-template-columns: 1fr 1fr;
-    }
   }
 
   @media (max-width: 719px) {
