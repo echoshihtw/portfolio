@@ -23,7 +23,7 @@ Product-minded full-stack engineer who turns ambiguous operational needs into sh
 
 ## Lockerbie Technology (Musaeum Ltd, UK group)
 
-**Full-Stack Engineer — Internal Platform** · Taipei, Taiwan · Dec 2024 – Present
+Full-Stack Engineer — Internal Platform · _Taipei, Taiwan · Dec 2024 – Present_
 
 - Built and operate a project-management platform for the **UK construction sector**, taking client organisations and vendor contractors through a project-to-tender-to-quotation lifecycle governed by **ISO 19650** principles. One of two engineers and sole author of the **Next.js / TypeScript** frontend; ~5 users, 10 projects.
 - Implemented the team's **event-driven modular monolith** — bounded modules over **RabbitMQ**, project relationships in **ArangoDB** — both new to me, both now in production.
@@ -36,20 +36,20 @@ Product-minded full-stack engineer who turns ambiguous operational needs into sh
 
 ## SPIN.FASHION by Lablaco
 
-**Full Stack Engineer & Founding Partner** · Singapore · Remote · Aug 2024 – Oct 2024
+Full Stack Engineer & Founding Partner · _Singapore · Remote · Aug 2024 – Oct 2024_
 
 - Resolved a macOS **Electron code-signing, notarisation, and auto-update** release blocker, then documented the deployment workflow for repeatable releases across a distributed team.
 
 ## Find Recruiter
 
-**Software Engineer** · Taipei, Taiwan · Aug 2022 – May 2024
+Software Engineer · _Taipei, Taiwan · Aug 2022 – May 2024_
 
 - Led frontend delivery for a **B2B recruitment and ATS platform** in **React and TypeScript**, in a two-engineer product team reporting to the CTO.
 - Drove an incremental **JavaScript-to-TypeScript** migration and built **100+ reusable components**, improving consistency and reducing type-related regressions across a large production codebase.
 
 ## Independent / Freelance Engineering
 
-**Product Engineer** · Remote · 2020 – Present
+Product Engineer · _Remote · 2020 – Present_
 
 - Built products across fintech, research, e-commerce, and creative industries, including the **Next.js frontend for a Bitcoin coin-selection research tool** with a **BDK core maintainer**.
 

@@ -118,7 +118,7 @@ function parseExperience(section) {
     // separate role and date fields.
     if (!dateLine && roleLine.includes(" · ")) {
       const cut = roleLine.indexOf(" · ");
-      dateLine = roleLine.slice(cut + 3).trim();
+      dateLine = roleLine.slice(cut + 3).trim().replace(/^_|_$/g, "");
       roleLine = roleLine.slice(0, cut).trim();
     }
 

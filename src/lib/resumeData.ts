@@ -13,7 +13,7 @@ export const summary = "Product-minded full-stack engineer who turns ambiguous o
 export const experience: ExperienceItem[] = [
   {
     "company": "Lockerbie Technology (Musaeum Ltd, UK group)",
-    "role": "**Full-Stack Engineer — Internal Platform**",
+    "role": "Full-Stack Engineer — Internal Platform",
     "date": "Taipei, Taiwan · Dec 2024 – Present",
     "highlights": [
       "Built and operate a project-management platform for the **UK construction sector**, taking client organisations and vendor contractors through a project-to-tender-to-quotation lifecycle governed by **ISO 19650** principles. One of two engineers and sole author of the **Next.js / TypeScript** frontend; ~5 users, 10 projects.",
@@ -28,7 +28,7 @@ export const experience: ExperienceItem[] = [
   },
   {
     "company": "SPIN.FASHION by Lablaco",
-    "role": "**Full Stack Engineer & Founding Partner**",
+    "role": "Full Stack Engineer & Founding Partner",
     "date": "Singapore · Remote · Aug 2024 – Oct 2024",
     "highlights": [
       "Resolved a macOS **Electron code-signing, notarisation, and auto-update** release blocker, then documented the deployment workflow for repeatable releases across a distributed team."
@@ -36,7 +36,7 @@ export const experience: ExperienceItem[] = [
   },
   {
     "company": "Find Recruiter",
-    "role": "**Software Engineer**",
+    "role": "Software Engineer",
     "date": "Taipei, Taiwan · Aug 2022 – May 2024",
     "highlights": [
       "Led frontend delivery for a **B2B recruitment and ATS platform** in **React and TypeScript**, in a two-engineer product team reporting to the CTO.",
@@ -45,7 +45,7 @@ export const experience: ExperienceItem[] = [
   },
   {
     "company": "Independent / Freelance Engineering",
-    "role": "**Product Engineer**",
+    "role": "Product Engineer",
     "date": "Remote · 2020 – Present",
     "highlights": [
       "Built products across fintech, research, e-commerce, and creative industries, including the **Next.js frontend for a Bitcoin coin-selection research tool** with a **BDK core maintainer**."
