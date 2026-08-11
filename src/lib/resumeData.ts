@@ -19,8 +19,7 @@ export const experience: ExperienceItem[] = [
       "Given a requirement that layers stay independent, chose **Next.js App Router** and introduced a **BFF trust boundary**: browser clients call same-origin API routes only, backend tokens stay in **HttpOnly cookies**, and **CSRF** is enforced centrally on unsafe requests.",
       "Designed the six-role permission model — org-level **RBAC** plus project-scoped **PBAC** — resolving roles into capability flags so services never reimplement access logic. Covered with **Vitest, React Testing Library, and pytest**.",
       "Wrote the platform's product specification: role model, architecture rules, eight milestones across three phases, exit criteria, and a decision log — and held scope with a feature freeze until Phase 1 shipped.",
-      "Brought a teammate with no software background into the codebase by pairing — 278 co-authored commits — from first contribution to shipping independently within two months.",
-      "Owned the path from laptop to production in both repos: one-command **Makefile** setup, staging/production deploy bundles, multi-stage **Docker** builds with cached layers, and build-once, promote-by-digest releases (**GitHub Actions**, **GHCR**) that cut three environment builds to one."
+      "Brought a teammate with no software background into the codebase by pairing — 278 co-authored commits — from first contribution to shipping independently within two months."
     ]
   },
   {
@@ -28,7 +27,7 @@ export const experience: ExperienceItem[] = [
     "role": "Full Stack Engineer & Founding Partner",
     "date": "Singapore · Remote · Aug 2024 – Oct 2024",
     "highlights": [
-      "Resolved a macOS **Electron code-signing, notarisation, and auto-update** release blocker, then documented the deployment workflow for repeatable releases across a distributed team."
+      "Cleared the **macOS Electron code-signing, notarisation and auto-update** blocker that was stopping release. The desktop app shipped, and the deployment steps are written down for the team."
     ]
   },
   {
@@ -36,9 +35,8 @@ export const experience: ExperienceItem[] = [
     "role": "Software Engineer",
     "date": "Taipei, Taiwan · Aug 2022 – May 2024",
     "highlights": [
-      "Led frontend delivery for a **B2B recruitment and ATS platform** in **React and TypeScript**, in a two-engineer product team reporting to the CTO.",
-      "Consumed a **Server-Sent Events** stream on the frontend so AI-generated drafts rendered as they arrived, rather than after a wait.",
-      "Drove an incremental **JavaScript-to-TypeScript** migration and built **100+ reusable components**, improving consistency and reducing type-related regressions across a large production codebase."
+      "Led frontend delivery for a **B2B recruitment and ATS platform** in **React and TypeScript** — two-engineer product team, reporting to the CTO. Drove an incremental **JavaScript-to-TypeScript** migration and built **100+ reusable components** across a large production codebase.",
+      "Consumed a **Server-Sent Events** stream on the frontend so AI-generated drafts rendered as they arrived, rather than after a wait."
     ]
   },
   {
@@ -46,7 +44,7 @@ export const experience: ExperienceItem[] = [
     "role": "Product Engineer",
     "date": "Remote · 2020 – Present",
     "highlights": [
-      "Built products across fintech, research, e-commerce, and creative industries, including the **Next.js frontend for a Bitcoin coin-selection research tool** with a **BDK core maintainer**."
+      "Built the **Next.js frontend for a Bitcoin coin-selection research tool** with a **BDK core maintainer**, alongside product work across fintech, e-commerce and research."
     ]
   }
 ];
