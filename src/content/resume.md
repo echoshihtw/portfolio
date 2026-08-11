@@ -17,7 +17,7 @@
 
 # Summary
 
-Product-minded full-stack engineer who turns ambiguous operational needs into shipped software — React/Next.js frontends, FastAPI services, data models, testing, and CI/CD. Uses controlled AI-assisted workflows, keeping architecture and verification explicit.
+Product engineer working in **React**, **TypeScript** and **FastAPI**. I own the whole path — UI, services, data models, tests, **CI/CD** — because the experience breaks at the seams: a slow endpoint, a failed deploy, an app that gives up when the wifi does.
 
 # Experience
 

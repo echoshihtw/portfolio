@@ -31,7 +31,7 @@ export const heroConfig: {
   // what I want — an offer reads stronger than an appetite, and "Senior" would
   // be a level I assigned myself rather than one the work argues for.
   remoteOpen: "UTC+8 · open to remote — APAC hours or async",
-  seeking: "I take problems that arrive without a spec and own them end to end — remote from Taiwan, or in Taipei.",
+  seeking: "I take problems that arrive without a spec and see them through — remote from Taiwan, or in Taipei.",
 
   // Spells out what "end to end" means, layer by layer. An earlier version
   // listed categories — Web, Mobile, Backend — which repeated the stack line
@@ -99,7 +99,7 @@ export const heroConfig: {
 // to scroll back up to act. This is the close.
 export const closingConfig = {
   heading: "Want to talk?",
-  body: "Open to Product Engineer opportunities — remote from Taiwan or based in Taipei. If you have an ambiguous problem and need someone to own it end to end, that is the work I am best at.",
+  body: "If you have a problem nobody has scoped yet, and you need one person to carry it from interface to deploy, that is the work I am best at. Remote from Taiwan, or in Taipei.",
   email: "echoshihtw@gmail.com",
   resume: "resume.pdf",
 };
