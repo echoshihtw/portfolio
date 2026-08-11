@@ -235,9 +235,11 @@ function buildPDF() {
         "-V",
         "fontsize=10pt",
         "-V",
-        // Charter locally; CI runners don't have it, so allow an override
-        // rather than silently producing a differently-set résumé.
-        `mainfont=${process.env.RESUME_MAINFONT || "Charter"}`,
+        // XCharter, not Charter: it is the same typeface design and ships
+        // with TeX Live on both macOS and Ubuntu, so a CI-built PDF is
+        // identical to a locally built one. That is what makes the automatic
+        // refresh safe — otherwise the two would overwrite each other forever.
+        `mainfont=${process.env.RESUME_MAINFONT || "XCharter"}`,
       ],
       { stdio: "inherit" }
     );
