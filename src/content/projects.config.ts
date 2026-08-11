@@ -25,7 +25,7 @@ export const projectsConfig: Projects = [
       "Tightened permission defaults without locking out existing staff: the migration writes intended values before the code stops assuming them",
       "Every policy change since goes through a written audit against the schema, because the hole I found had been sitting in a WITH CHECK clause since the first migration",
       "Only the api layer may reach the database, and a test fails the build if anything else imports it",
-      "The salon has patchy wifi, so reads work offline from cache and writes wait rather than failing silently",
+      "The salon has patchy Wi-Fi, so reads work offline from cache and writes wait rather than failing silently",
       "Records live in a hosted database, not on a machine that can die — the failure that started this cannot repeat",
     ],
     resumeLine:
@@ -58,8 +58,8 @@ export const projectsConfig: Projects = [
     stack: ["Flutter", "Dart", "Riverpod", "Drift", "SQLCipher"],
     highlights: [
       "A goal is a number of months, not an amount of money — the question was never how much I had, it was how long it lasts",
-      "Burn takes the worse of what you spent and what you budgeted — reality wins when you overspend, the budget holds the floor when you don't",
-      "Safety fund and investable money are separate pockets with an adaptive buffer, so spare cash can't quietly become next month's rent",
+      "Burn takes the worse of what you spent and what you budgeted — reality wins when you overspend, the budget holds the floor when you do not",
+      "Safety fund and investable money are separate pockets with an adaptive buffer, so spare cash cannot quietly become next month's rent",
       "Layers cannot cross-import: they are separate Dart packages, so a boundary violation is a compile error rather than a review comment",
       "Financial data never leaves the device — encrypted on-device storage, no account, no server",
     ],
