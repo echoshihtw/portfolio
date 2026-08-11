@@ -1,131 +1,86 @@
 # Portfolio — echoshihtw.github.io/portfolio
 
-My portfolio site, and the pipeline that keeps it honest.
+My portfolio site, and the résumé pipeline behind it.
 
-The site is SvelteKit, statically exported and deployed to GitHub Pages. The
-interesting part is the résumé: `src/content/resume.md` is the single source of
-truth, and one build produces the PDF people download, the structured data the
-site renders, and an HTML version. There is no second copy to drift.
+SvelteKit, statically exported to GitHub Pages. `src/content/resume.md` is the
+source of truth for the résumé: one build produces the PDF people download and
+the experience data the site renders, so the two cannot disagree.
 
 **Live:** <https://echoshihtw.github.io/portfolio>
-
----
-
-## Why one source
-
-Most people keep a `resume.docx`, a PDF exported from it, portfolio copy, and a
-LinkedIn summary — four documents making four slightly different claims. Fixing
-one leaves the others stale, and the drift is invisible until someone reads two
-of them side by side.
-
-Here, editing `src/content/resume.md` and running one command updates every
-surface at once. Anything not derived from that file is presentation copy, kept
-deliberately separate in `src/content/portfolio.config.ts` — the résumé is
-formal and ATS-oriented; the site speaks in a human voice. Same facts, different
-register.
-
-## Stack
-
-SvelteKit 2 · Svelte 4 · TypeScript · Tailwind · Vite 5 ·
-`adapter-static` → GitHub Pages · Pandoc + XeLaTeX for the PDF
 
 ## Quick start
 
 ```bash
 npm install
 npm run dev            # dev server
-npm run build          # static build to build/
 npm run check          # svelte-check
-npm run build-resume   # regenerate résumé artefacts (see below)
+npm test               # parser tests
+npm run build          # static site → build/
+npm run build-resume   # résumé → PDF + site data
 ```
 
-The résumé build needs Pandoc and XeLaTeX:
+The résumé build needs Pandoc and XeLaTeX. Without them it warns and skips the
+PDF locally; in CI it fails.
 
 ```bash
 brew install pandoc
 brew install --cask mactex     # large; skip if you only touch the site
 ```
 
-Both are optional — `buildResume.ts` warns and skips the PDF/HTML steps if
-they're missing, so `npm run build-resume` still regenerates the site data.
+## Where content lives
 
-## The résumé pipeline
+| File | Holds | Feeds |
+|---|---|---|
+| `src/content/resume.md` | summary, experience, skills | the PDF, and the site's experience cards |
+| `src/content/projects.config.ts` | projects | a card on the site; one line on the PDF if it has a `resumeLine` |
+| `src/content/portfolio.config.ts` | hero, per-role copy, skills strip | the site only |
+
+The résumé is formal and ATS-oriented; the site speaks in a human voice. Same
+facts, different register — that difference is deliberate, not drift.
 
 ```
-src/content/resume.md          ← the only file you edit
-        │
+src/content/resume.md
         └── npm run build-resume
-                ├── src/lib/resumeData.ts   experience (the only thing the site reads)
-                ├── output/resume.html
-                ├── output/resume.pdf       Pandoc + XeLaTeX
+                ├── src/lib/resumeData.ts   experience — the only thing the site takes from it
+                ├── output/resume.pdf       Pandoc + XeLaTeX, via scripts/resume-header.tex
                 └── static/resume.pdf       what the site serves
 ```
 
-`scripts/buildResume.ts` parses the markdown by section (`# Summary`,
-`# Experience`, `# Projects`, `# Skills`), and `scripts/resume-header.tex` holds
-the LaTeX layout — margins, section rules, list spacing, leading.
+**Generated, never edited by hand:** `src/lib/resumeData.ts`, `output/*`,
+`static/resume.pdf`. The last two aren't committed — the deploy builds them, so
+the served PDF cannot fall behind `resume.md`.
 
-**Do not edit `src/lib/resumeData.ts`, `output/*`, or `static/resume.pdf`.** They
-are generated. `output/` and `static/resume.pdf` are not committed at all — the
-deploy builds them, which is why the served PDF cannot fall behind `resume.md`.
-
-### Two constraints worth knowing before editing
+## Editing the résumé
 
 **It must stay exactly one page.** The deploy fails if it isn't. Adding a bullet
-usually means removing one. Check locally with:
+usually means removing one, and when space runs out, take it from margins,
+leading or wording — not font size.
 
-```bash
-npm run build-resume && mdls -raw -name kMDItemNumberOfPages output/resume.pdf
-```
+**It must stay ATS-readable.** No tables, text boxes, columns or images;
+hyphenation off; plain `# Section` headings.
 
-Spotlight caches that value, so re-run it if the number looks stale. When space
-runs out, take it from margins, leading, or wording — not font size.
+**Company names join the two sources.** `portfolio.config.ts` keys its per-role
+copy by company name. Rename a company in `resume.md` and the build fails,
+naming both lists — that guard exists because a rename once silently blanked two
+cards.
 
-**It must stay ATS-readable.** No tables, no text boxes, no multi-column layout,
-no images, hyphenation disabled, and plain `# Section` headings. Anything that
-looks clever in a PDF viewer tends to extract badly.
+## CI
 
-### Company names are join keys
+`.github/workflows/ci.yml` — one pipeline. Pull requests and pushes to `main`
+run `npm ci`, `check`, `test`, the résumé build and the site build; only pushes
+deploy. Doc-only changes are skipped.
 
-`portfolio.config.ts` keys its per-role copy by company name, matching
-`resumeData.experience[].company`. Renaming a company in `resume.md` without
-updating the key silently blanks that card on the site. There is no build error
-for it.
+The built PDF is cached against `resume.md`, `buildResume.ts` and
+`resume-header.tex`, so TeX is installed only when the résumé actually changed —
+about two minutes on a miss, about twenty-five seconds otherwise.
 
-## Layout
+Node 24 in CI, matching local: npm 10 and 11 disagree about how optional
+platform packages are recorded in the lockfile.
 
-```text
-src/
-  content/
-    resume.md               source of truth for the résumé
-    portfolio.config.ts     site voice: hero, proofs, per-role copy
-    projects.config.ts      project cards
-  lib/
-    resumeData.ts           GENERATED
-    components/             sections, layout, UI
-  routes/                   SvelteKit pages
-
-scripts/
-  buildResume.ts            the pipeline
-  resume-header.tex         LaTeX layout for the PDF
-
-output/                     GENERATED — resume.pdf, resume.html
-static/                     resume.pdf (GENERATED), og-image.png, assets
-docs/                       audits and notes
-agents/, automation/        prompt and workflow notes for AI-assisted edits
-```
-
-## Deployment
-
-`.github/workflows/deploy.yml` builds and publishes to GitHub Pages on every
-push to `main`. `.github/workflows/resume.yml` rebuilds the résumé PDF and
-uploads it as a build artefact.
-
-`main` is protected: force pushes and branch deletion are blocked.
+`main` blocks force pushes and deletion.
 
 ## A note on claims
 
 Every factual claim on this site — usage numbers, ownership, what shipped and
-what didn't — is meant to be checkable against a repository, a database, or a
-public record. If you find something here that overstates, it's a bug. Open an
-issue.
+what didn't — is meant to be checkable against a repository, a database or a
+public record. If something here overstates, it's a bug. Open an issue.
