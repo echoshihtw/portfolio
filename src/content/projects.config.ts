@@ -36,9 +36,9 @@ export const projectsConfig: Projects = [
   {
     name: "Runway",
     subtitle: "A runway tracker for people living off savings — how long can your money last?",
-    why: "Budget apps tell you where your money went. Nobody tells you how long you have — which is the only number that matters when you are between jobs, studying, or bootstrapping something.",
+    why: "I was planning a study trip to get better at programming and could not answer the question the whole plan rested on: how long can I live on this while I do it? Budget apps tell you where money went. I needed to know how much time it buys once rent, tools and a flight are accounted for — and to stop recalculating it in my head at night.",
     result:
-      "Running on Android, in seven languages and six currencies. Built solo. iOS distribution is in progress: the release workflows exist but no tag has been cut, so nothing is on TestFlight or Play yet.",
+      "I use it. Running on Android, in seven languages and six currencies, built solo. iOS distribution is in progress — the release workflows exist but no tag has been cut, so nothing is on TestFlight or Play yet.",
     href: "#",
     shots: [
       {
@@ -56,6 +56,7 @@ export const projectsConfig: Projects = [
     ],
     stack: ["Flutter", "Dart", "Riverpod", "Drift", "SQLCipher"],
     highlights: [
+      "A goal is a number of months, not an amount of money — the question was never how much I had, it was how long it lasts",
       "Burn takes the worse of what you spent and what you budgeted — reality wins when you overspend, the budget holds the floor when you don't",
       "Safety fund and investable money are separate pockets with an adaptive buffer, so spare cash can't quietly become next month's rent",
       "Layers cannot cross-import: they are separate Dart packages, so a boundary violation is a compile error rather than a review comment",
