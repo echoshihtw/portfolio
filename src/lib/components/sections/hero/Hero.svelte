@@ -34,12 +34,6 @@
       {/each}
     </dl>
 
-    <ul class="hero-caps">
-      {#each heroConfig.capabilities as cap}
-        <li>{cap}</li>
-      {/each}
-    </ul>
-
     <div class="hero-links">
       <a class="hero-cta primary" href="{base}/{heroConfig.resume}" download>
         Download résumé <span class="cta-arrow">↓</span>
@@ -225,36 +219,6 @@
     font-size: 0.68rem;
     line-height: 1.5;
     color: var(--text-muted);
-  }
-
-  .hero-caps {
-    list-style: none;
-    margin: 0.2rem 0 0;
-    padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.55rem 0.6rem;
-    align-items: center;
-  }
-
-  .hero-caps li {
-    font-family: "JetBrains Mono", monospace;
-    font-size: 0.71rem;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    color: var(--text-color);
-    border: 1px solid var(--section-border);
-    border-radius: 999px;
-    padding: 0.34rem 0.75rem;
-    background: var(--surface-bg);
-    transition:
-      border-color 160ms ease,
-      transform 160ms ease;
-  }
-
-  .hero-caps li:hover {
-    border-color: var(--color-accent);
-    transform: translateY(-1px);
   }
 
   /* actions */

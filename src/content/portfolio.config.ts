@@ -14,7 +14,6 @@ export const heroConfig: {
   proofStrip: { figure: string; label: string }[];
   headline: HeadlinePart[];
   support: string;
-  capabilities: string[];
   proofsLabel: string;
   proofs: Proof[];
   email: string;
@@ -47,8 +46,6 @@ export const heroConfig: {
   support:
     "Product Engineer building secure, maintainable software with React, TypeScript, FastAPI, and practical AI-assisted workflows.",
 
-  // Scannable capability strip: full-spectrum in five words, not four sentences.
-  capabilities: ["Web", "Mobile", "Backend", "Infra", "Product design"],
 
   // The strongest evidence was four steps deep, inside a project dialog. This
   // puts it where every visitor sees it, next to the claim it supports.
