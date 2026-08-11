@@ -24,10 +24,23 @@
 />
 
 <style>
+  /* Two columns, with the featured project spanning both. The projects are
+     not equals — one has users — and equal cards would spend a third of a
+     visitor's attention on an archived research tool. */
   .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: 0.9rem;
     width: 100%;
+  }
+
+  .grid :global(.card.featured) {
+    grid-column: 1 / -1;
+  }
+
+  @media (max-width: 640px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
   }
 </style>

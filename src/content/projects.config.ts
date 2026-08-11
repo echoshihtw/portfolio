@@ -9,7 +9,7 @@ export const projectsConfig: Projects = [
     subtitle: "Salon operations software, in daily use at a Tainan salon since May 2025",
     why: "A friend who runs a salon lost her hard drive, and years of client records went with it. She had looked at salon software before and found all of it too complicated — so the problem was never a missing feature. She needed the two minutes before a client sits down: who they are, what was done last time, what it cost.",
     result:
-      "In daily use at a salon in Tainan since May 2025 — two designers, 603 clients, 2,694 service records, with history entered back to September 2024. The owner typed a year of past appointments in by hand, which is not something people do for software they are trialling.",
+      "The owner typed a year of past appointments in by hand. People do not migrate their own history into software they are still evaluating. In daily use at the salon since May 2025 — two designers, 603 clients, 2,694 service records, history entered back to September 2024.",
     href: "https://cliohq.app",
     stack: [
       "React 19",
@@ -20,6 +20,7 @@ export const projectsConfig: Projects = [
       "Tailwind",
     ],
     highlights: [
+      "No booking, no payments, no inventory, no marketing — the products she rejected had all of it. Clio covers the two minutes before a client sits down, and stops",
       "Salons are isolated in the database, not by the app remembering to filter — I audited my own policies after launch and closed a path that let an owner take over another salon",
       "Tightened permission defaults without locking out existing staff: the migration writes intended values before the code stops assuming them",
       "Only the api layer may reach the database, and a test fails the build if anything else imports it",
@@ -62,7 +63,6 @@ export const projectsConfig: Projects = [
     ],
     resumeLine:
       "Personal financial-runway app in **Flutter**: **Clean Architecture** across a Melos monorepo, **SQLCipher**-encrypted local storage, 7-language localisation. In development — running on Android, iOS distribution in progress.",
-    featured: true,
     linkLabel: "Coming Soon →",
     status: "In Progress",
   },
@@ -73,7 +73,7 @@ export const projectsConfig: Projects = [
     file: "assets/echology.png",
     why: "Which coins a wallet spends decides what the transaction costs, and every wallet people actually use makes that choice for them, invisibly.",
     result:
-      "A research tool that makes the trade-off visible: pick inputs by hand, change the fee scenario, watch waste and feerate deviation move. Built with a BDK core maintainer. Archived.",
+      "Built with a core maintainer of the Bitcoin Dev Kit as a research tool: pick inputs by hand, change the fee scenario, watch waste and feerate deviation move. Archived.",
     stack: ["Next.js", "TypeScript", "Tailwind CSS"],
     highlights: [
       "Manual UTXO selection, so a researcher can construct the case they want to study",
