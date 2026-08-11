@@ -38,7 +38,7 @@
         <a
           href={tab.link}
           class="nav-link"
-          aria-label="Go to {tab.name.replace('#', '')} section"
+          aria-label="Go to {tab.name} section"
         >
           <p>{tab.name}</p>
         </a>

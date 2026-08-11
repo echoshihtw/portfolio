@@ -31,7 +31,6 @@
   ];
 
   const sourceUrl = "https://github.com/echoshihtw/portfolio";
-  const tabLabel = (name: string) => name.replace("#", "");
 </script>
 
 <footer
@@ -72,7 +71,7 @@
         <p class="footer-title mono">Navigation</p>
 
         {#each tabs as tab}
-          <a href={tab.link}>{tabLabel(tab.name)}</a>
+          <a href={tab.link}>{tab.name}</a>
         {/each}
       </nav>
 

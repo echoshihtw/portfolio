@@ -21,6 +21,7 @@ interface Project {
 }
 
 interface MenuTab {
+  /** Human label, shown as-is. Both navs render this — no stripping. */
   name: string;
   link: string;
 }

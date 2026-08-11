@@ -5,8 +5,6 @@
 
   export let isVisible = false;
 
-  const labelFromTab = (tabName: string) => tabName.replace("#", "");
-
   function goTop() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
@@ -22,7 +20,7 @@
       href={tab.link}
       class="floating-link"
     >
-      {labelFromTab(tab.name)}
+      {tab.name}
     </a>
   {/each}
   <button
