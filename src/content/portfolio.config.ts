@@ -30,7 +30,7 @@ export const heroConfig: {
   // what I want — an offer reads stronger than an appetite, and "Senior" would
   // be a level I assigned myself rather than one the work argues for.
   remoteOpen: "UTC+8 · open to remote — APAC hours or async",
-  seeking: "I take ambiguous problems and own them end to end — remote from Taiwan, or in Taipei.",
+  seeking: "I take problems that arrive without a spec and own them end to end — remote from Taiwan, or in Taipei.",
 
   // Problem-solving spine — diagnosis + delivery + scope. Seniority implied by
   // the range of ownership, not by putting "Senior" in the introduction.

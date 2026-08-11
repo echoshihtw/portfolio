@@ -14,14 +14,13 @@ export const experience: ExperienceItem[] = [
     "role": "Full-Stack Engineer — Internal Platform",
     "date": "Taipei, Taiwan · Dec 2024 – Present",
     "highlights": [
-      "Built and operate a project-management platform for the **UK construction sector**, taking client organisations and vendor contractors through a project-to-tender-to-quotation lifecycle governed by **ISO 19650** principles. One of two engineers and sole author of the **Next.js / TypeScript** frontend; ~5 users, 10 projects.",
+      "Built and operate a project-management platform for the **UK construction sector**, taking client organisations and vendor contractors through a project-to-tender-to-quotation lifecycle governed by **ISO 19650** principles. One of two engineers, sole author of the **Next.js / TypeScript** frontend and its **UI patterns** — one pattern per recurring scenario, so new screens stay consistent; ~5 users, 10 projects.",
       "Implemented the team's **event-driven modular monolith** — bounded modules over **RabbitMQ**, project relationships in **ArangoDB** — both new to me, both now in production.",
       "Given a requirement that layers stay independent, chose **Next.js App Router** and introduced a **BFF trust boundary**: browser clients call same-origin API routes only, backend tokens stay in **HttpOnly cookies**, and **CSRF** is enforced centrally on unsafe requests.",
       "Designed the six-role permission model — org-level **RBAC** plus project-scoped **PBAC** — resolving roles into permissions and capability flags so services never reimplement access logic. Covered with **Vitest, React Testing Library, and pytest**.",
       "Wrote the platform's product specification: role model, architecture rules, eight milestones across three phases, exit criteria, and a decision log — and held scope with a feature freeze until Phase 1 shipped.",
       "Brought a teammate with no software background into the codebase by pairing — 278 co-authored commits — from first contribution to shipping independently within two months.",
-      "Built a local **Claude Code** workflow — reusable skills and automated hooks — to speed implementation and testing, with final verification left to deterministic quality checks.",
-      "Owned the path from laptop to production in both repos: one-command **Makefile** setup, staging/production deploy bundles, multi-stage **Docker** builds with cached layers, and build-once, promote-by-digest releases (**GitHub Actions**, **GHCR**) cutting three environment builds to one."
+      "Owned the path from laptop to production in both repos: one-command **Makefile** setup, staging/production deploy bundles, multi-stage **Docker** builds with cached layers, and build-once, promote-by-digest releases (**GitHub Actions**, **GHCR**) — three environment builds became one."
     ]
   },
   {
@@ -38,7 +37,7 @@ export const experience: ExperienceItem[] = [
     "date": "Taipei, Taiwan · Aug 2022 – May 2024",
     "highlights": [
       "Led frontend delivery for a **B2B recruitment and ATS platform** in **React and TypeScript**, in a two-engineer product team reporting to the CTO.",
-      "Consumed a **Server-Sent Events** stream on the frontend so AI-generated drafts rendered as they arrived, instead of the page waiting on a finished response.",
+      "Consumed a **Server-Sent Events** stream on the frontend so AI-generated drafts rendered as they arrived, rather than after a wait.",
       "Drove an incremental **JavaScript-to-TypeScript** migration and built **100+ reusable components**, improving consistency and reducing type-related regressions across a large production codebase."
     ]
   },
