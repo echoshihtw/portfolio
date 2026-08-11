@@ -1,11 +1,14 @@
 import type { Projects } from "../lib/types/types.js";
 
+// Each card answers: what problem existed, what I decided, how I know it works.
+// Not a stack inventory — the tech is listed in `stack` below each card, so the
+// highlights can carry judgment instead of tool names.
 export const projectsConfig: Projects = [
   {
     name: "Clio",
     subtitle: "Salon Operations — in daily use",
     description:
-      "A bilingual (zh-TW / English) salon operations app, built for a salon in Tainan and in daily use there since May 2025 — two designers, 603 clients, 2,694 records, with client history entered back to September 2024. Clients, service records, and monthly revenue in one place.",
+      "A stylist has thirty seconds between greeting a client and starting work, and needs the last visit's formula in that time — not a paper file or a spreadsheet on someone else's phone. Clio holds clients, service history, designers and revenue in one place, in Chinese and English. In daily use at a salon in Tainan since May 2025: two designers, 603 clients, 2,694 records.",
     href: "https://cliohq.app",
     stack: [
       "React 19",
@@ -16,10 +19,10 @@ export const projectsConfig: Projects = [
       "Tailwind",
     ],
     highlights: [
-      "Audited my own RLS policies and closed a privilege-escalation path",
-      "Shipped a permission change without silently revoking staff access",
-      "Only the api layer may touch the database — enforced by a contract test",
-      "Works offline read-only: cached queries rehydrate, mutations pause",
+      "Salons are isolated in the database, not by the app remembering to filter — I audited my own policies after launch and closed a path that let an owner take over another salon",
+      "Tightened permission defaults without locking out existing staff: the migration writes intended values before the code stops assuming them",
+      "Only the api layer may reach the database, and a test fails the build if anything else imports it",
+      "The salon has patchy wifi, so reads work offline from cache and writes wait rather than failing silently",
     ],
     resumeLine:
       "Bilingual **React/Supabase** salon operations product in daily use at a Tainan salon **since May 2025**, supporting 603 clients and 2,694 service records with **Postgres RLS** and per-member permissions.",
@@ -31,15 +34,15 @@ export const projectsConfig: Projects = [
     name: "Runway",
     subtitle: "Personal Financial Runway App",
     description:
-      "A mobile app that answers one question: how long can your money last? Built solo in Flutter — a Clean-Architecture monorepo, AES-256 encrypted on-device storage, and a survival model that takes the worse of actual spending and budget. In development: running on Android, iOS distribution in progress.",
+      "Budget apps tell you where your money went. Nobody tells you how long you have. Runway answers one question for people living off savings — between jobs, studying, bootstrapping — and keeps answering it as the number moves. Built solo. Running on Android; iOS distribution in progress.",
     href: "#",
     now: "Working through iOS distribution, then one-time purchase via RevenueCat.",
     stack: ["Flutter", "Dart", "Riverpod", "Drift", "SQLCipher"],
     highlights: [
-      "Clean Architecture / DDD across a Melos monorepo",
-      "AES-256 encrypted local storage (Drift + SQLCipher)",
-      "7-language localization, 6 currencies",
-      "Release workflows written for TestFlight and Play (not yet cut)",
+      "Burn takes the worse of what you spent and what you budgeted — reality wins when you overspend, the budget holds the floor when you don't",
+      "Safety fund and investable money are separate pockets with an adaptive buffer, so spare cash can't quietly become next month's rent",
+      "Layers cannot cross-import: they are separate Dart packages, so a boundary violation is a compile error rather than a review comment",
+      "Financial data never leaves the device — encrypted on-device storage, no account, no server",
     ],
     resumeLine:
       "Personal financial-runway app in **Flutter**: **Clean Architecture** across a Melos monorepo, **SQLCipher**-encrypted local storage, 7-language localisation. In development — running on Android, iOS distribution in progress.",
@@ -53,12 +56,12 @@ export const projectsConfig: Projects = [
     href: "https://github.com/evanlinjin/echology",
     file: "assets/echology.png",
     description:
-      "The Next.js frontend for a Bitcoin coin-selection demo wallet, built in collaboration with a BDK (Bitcoin Dev Kit) core maintainer. Provides UTXO coin-control selection, spend-scenario and fee-rate configuration, and surfaces coin-selection metrics (waste, fee, feerate deviation) as structured tables.",
+      "Which coins a wallet spends decides what the transaction costs, and that choice is invisible in every wallet people actually use. This is a research tool that makes it visible: pick the inputs by hand, change the fee scenario, and watch waste and feerate deviation move. Built with a BDK core maintainer.",
     stack: ["Next.js", "TypeScript", "Tailwind CSS"],
     highlights: [
-      "Built the coin-control UI for UTXO selection",
-      "Spend-scenario and fee-rate configuration",
-      "Surfaced selection metrics (waste, fee, feerate deviation)",
+      "Manual UTXO selection, so a researcher can construct the case they want to study",
+      "Spend scenarios and fee rates are adjustable, because the interesting behaviour is at the extremes",
+      "Waste, fee and feerate deviation shown as numbers you can compare, not a single opaque total",
     ],
     linkLabel: "Source Code →",
     status: "Archived",
