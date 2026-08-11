@@ -61,19 +61,28 @@
         />
       {/if}
 
-      <p class="desc">{project.description}</p>
-
-      {#if project.now}
-        <p class="now"><span class="mono">Now</span> {project.now}</p>
-      {/if}
+      <!-- Why it exists, what I decided, what happened. Labelled, because a
+           visitor should not have to infer the structure from a paragraph. -->
+      <section>
+        <h5 class="mono">Why</h5>
+        <p>{project.why}</p>
+      </section>
 
       {#if project.highlights?.length}
-        <ul>
-          {#each project.highlights as highlight}
-            <li>{highlight}</li>
-          {/each}
-        </ul>
+        <section>
+          <h5 class="mono">How</h5>
+          <ul>
+            {#each project.highlights as highlight}
+              <li>{highlight}</li>
+            {/each}
+          </ul>
+        </section>
       {/if}
+
+      <section>
+        <h5 class="mono">Result</h5>
+        <p>{project.result}</p>
+      </section>
 
       <p class="tech mono">{project.stack.join("  ·  ")}</p>
 
@@ -169,19 +178,24 @@
     border: 1px solid var(--section-border);
   }
 
-  .desc,
-  .now {
+  section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  h5 {
+    margin: 0;
+    font-size: 0.66rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+  }
+
+  section p {
     margin: 0;
     line-height: 1.65;
     color: var(--text-muted);
-  }
-
-  .now .mono {
-    font-size: 0.68rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--color-accent);
-    margin-right: 0.4rem;
   }
 
   ul {

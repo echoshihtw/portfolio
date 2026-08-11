@@ -7,8 +7,9 @@ export const projectsConfig: Projects = [
   {
     name: "Clio",
     subtitle: "Salon operations software, in daily use at a Tainan salon since May 2025",
-    description:
-      "A stylist has thirty seconds between greeting a client and starting work, and needs the last visit's formula in that time — not a paper file or a spreadsheet on someone else's phone. Clio holds clients, service history, designers and revenue in one place, in Chinese and English. In daily use at a salon in Tainan since May 2025: two designers, 603 clients, 2,694 records.",
+    why: "A stylist has about thirty seconds between greeting a client and starting work, and in that time needs the last visit's formula. It lived on paper, and in a spreadsheet on someone else's phone.",
+    result:
+      "In daily use at a salon in Tainan since May 2025 — two designers, 603 clients, 2,694 service records, with history entered back to September 2024. The owner typed a year of past appointments in by hand, which is not something people do for software they are trialling.",
     href: "https://cliohq.app",
     stack: [
       "React 19",
@@ -33,10 +34,10 @@ export const projectsConfig: Projects = [
   {
     name: "Runway",
     subtitle: "A runway tracker for people living off savings — how long can your money last?",
-    description:
-      "Budget apps tell you where your money went. Nobody tells you how long you have. Runway answers one question for people living off savings — between jobs, studying, bootstrapping — and keeps answering it as the number moves. Built solo. Running on Android; iOS distribution in progress.",
+    why: "Budget apps tell you where your money went. Nobody tells you how long you have — which is the only number that matters when you are between jobs, studying, or bootstrapping something.",
+    result:
+      "Running on Android, in seven languages and six currencies. Built solo. iOS distribution is in progress: the release workflows exist but no tag has been cut, so nothing is on TestFlight or Play yet.",
     href: "#",
-    now: "Working through iOS distribution, then one-time purchase via RevenueCat.",
     shots: [
       {
         src: "assets/runway/dashboard.png",
@@ -69,8 +70,9 @@ export const projectsConfig: Projects = [
     subtitle: "A Bitcoin research tool for the hidden choice that sets what a transaction costs",
     href: "https://github.com/evanlinjin/echology",
     file: "assets/echology.png",
-    description:
-      "Which coins a wallet spends decides what the transaction costs, and that choice is invisible in every wallet people actually use. This is a research tool that makes it visible: pick the inputs by hand, change the fee scenario, and watch waste and feerate deviation move. Built with a BDK core maintainer.",
+    why: "Which coins a wallet spends decides what the transaction costs, and every wallet people actually use makes that choice for them, invisibly.",
+    result:
+      "A research tool that makes the trade-off visible: pick inputs by hand, change the fee scenario, watch waste and feerate deviation move. Built with a BDK core maintainer. Archived.",
     stack: ["Next.js", "TypeScript", "Tailwind CSS"],
     highlights: [
       "Manual UTXO selection, so a researcher can construct the case they want to study",
