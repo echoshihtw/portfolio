@@ -29,7 +29,7 @@ Full-Stack Engineer — Internal Platform · _Taipei, Taiwan · Dec 2024 – Pre
 - Refactored the backend into the team's **event-driven modular monolith** — modules that imported each other directly now talk over **RabbitMQ** — and set up the module template so my teammate could add to it without me. My lead chose the direction; the refactor was mine, with **RabbitMQ** and **ArangoDB** new to me.
 - Given a requirement that layers stay independent, chose **Next.js App Router** and introduced a **BFF trust boundary**: browser clients call same-origin API routes only, backend tokens stay in **HttpOnly cookies**, and **CSRF** is enforced centrally on unsafe requests.
 - Designed the six-role permission model — org-level **RBAC** plus project-scoped **PBAC** — resolving roles into capability flags so services never reimplement access logic. Covered with **Vitest, React Testing Library, and pytest**.
-- Wrote the platform's product specification: role model, architecture rules, eight milestones across three phases, exit criteria, and a decision log — and held scope with a feature freeze until Phase 1 shipped.
+- Requirements arrived as requests, so I wrote the product specification: role model, architecture rules, eight milestones, exit criteria, decision log — and held scope with a feature freeze until Phase 1 shipped.
 - Brought a teammate with no software background into the codebase by pairing — 278 co-authored commits — from first contribution to shipping independently within two months.
 
 ## SPIN.FASHION by Lablaco
