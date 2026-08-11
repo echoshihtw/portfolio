@@ -1,4 +1,5 @@
 import fs from "fs";
+import { pathToFileURL } from "url";
 import path from "path";
 import { execFileSync } from "child_process";
 import { projectsConfig } from "../src/content/projects.config.js";
@@ -37,7 +38,7 @@ resumeLine is site-only — the page has room, one page of A4 does not.
 const PROJECTS_MARKER =
   "<!-- generated from src/content/projects.config.ts — projects with a resumeLine -->";
 
-function withProjects(markdown) {
+export function withProjects(markdown) {
   const lines = projectsConfig
     .filter((p) => p.resumeLine)
     .map((p) => `**${p.name}** — _Founder / Product Engineer_ · ${p.resumeLine}`)
@@ -56,7 +57,7 @@ Markdown Section Parser
 --------------------------------------------------
 */
 
-function extractSection(title, markdown) {
+export function extractSection(title, markdown) {
   const lines = markdown.split("\n");
   const normalizedTitle = title.trim().toLowerCase();
 
@@ -93,7 +94,7 @@ Experience Parser
 --------------------------------------------------
 */
 
-function parseExperience(section) {
+export function parseExperience(section) {
   const entries = [];
 
   const blocks = section.split("## ").filter(Boolean);
@@ -277,4 +278,11 @@ function run() {
   console.log("✨ Resume build complete");
 }
 
-run();
+// Run only when invoked directly. Importing this module (from tests) must not
+// touch the filesystem or shell out to pandoc.
+if (
+  process.argv[1] &&
+  import.meta.url === pathToFileURL(process.argv[1]).href
+) {
+  run();
+}
