@@ -8,8 +8,6 @@ type ExperienceItem = {
   highlights: string[];
 };
 
-export const summary = "Product-minded full-stack engineer who turns ambiguous operational needs into shipped software — React/Next.js frontends, FastAPI services, data models, testing, and CI/CD. Uses controlled AI-assisted workflows, keeping architecture and verification explicit.";
-
 export const experience: ExperienceItem[] = [
   {
     "company": "Lockerbie Technology (Musaeum Ltd, UK group)",

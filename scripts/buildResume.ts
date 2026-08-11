@@ -144,8 +144,6 @@ Build Resume Data
 */
 
 function buildResumeData(markdown) {
-  const summary = extractSection("Summary", markdown);
-
   const experience = parseExperience(extractSection("Experience", markdown));
 
   // Only what the site actually imports. Skills come from
@@ -176,8 +174,6 @@ type ExperienceItem = {
   date: string;
   highlights: string[];
 };
-
-export const summary = ${JSON.stringify(summary, null, 2)};
 
 export const experience: ExperienceItem[] = ${JSON.stringify(
     experience,

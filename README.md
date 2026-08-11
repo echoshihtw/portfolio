@@ -55,7 +55,7 @@ they're missing, so `npm run build-resume` still regenerates the site data.
 src/content/resume.md          ← the only file you edit
         │
         └── npm run build-resume
-                ├── src/lib/resumeData.ts   summary, experience, skills, projects
+                ├── src/lib/resumeData.ts   experience (the only thing the site reads)
                 ├── output/resume.html
                 ├── output/resume.pdf       Pandoc + XeLaTeX
                 └── static/resume.pdf       what the site serves
