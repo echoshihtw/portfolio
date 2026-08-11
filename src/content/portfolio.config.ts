@@ -50,10 +50,14 @@ export const heroConfig: {
 
   // The strongest evidence was four steps deep, inside a project dialog. This
   // puts it where every visitor sees it, next to the claim it supports.
+  // Three kinds of evidence, not three of the same kind: a product people
+  // use, ownership at work, and leverage over another engineer. 603 and 2,694
+  // proved the same fact twice, and "a production frontend" never said the
+  // work was paid.
   proofStrip: [
-    { figure: "603", label: "clients on software I built" },
-    { figure: "2,694", label: "service records, daily use since May 2025" },
-    { figure: "1,577", label: "commits — sole author of a production frontend" },
+    { figure: "603", label: "clients on software I built — a salon runs on it daily" },
+    { figure: "1,577", label: "commits — sole author of our platform frontend at work" },
+    { figure: "278", label: "co-authored — paired a teammate from zero to shipping" },
   ],
 
   proofsLabel: "— a few problems, solved",
