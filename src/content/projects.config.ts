@@ -6,7 +6,7 @@ import type { Projects } from "../lib/types/types.js";
 export const projectsConfig: Projects = [
   {
     name: "Clio",
-    subtitle: "A salon in Tainan has run on it every day since May 2025",
+    subtitle: "Salon operations software, in daily use at a Tainan salon since May 2025",
     description:
       "A stylist has thirty seconds between greeting a client and starting work, and needs the last visit's formula in that time — not a paper file or a spreadsheet on someone else's phone. Clio holds clients, service history, designers and revenue in one place, in Chinese and English. In daily use at a salon in Tainan since May 2025: two designers, 603 clients, 2,694 records.",
     href: "https://cliohq.app",
@@ -32,7 +32,7 @@ export const projectsConfig: Projects = [
   },
   {
     name: "Runway",
-    subtitle: "Budget apps say where money went. This says how long you have",
+    subtitle: "A runway tracker for people living off savings — how long can your money last?",
     description:
       "Budget apps tell you where your money went. Nobody tells you how long you have. Runway answers one question for people living off savings — between jobs, studying, bootstrapping — and keeps answering it as the number moves. Built solo. Running on Android; iOS distribution in progress.",
     href: "#",
@@ -66,7 +66,7 @@ export const projectsConfig: Projects = [
   },
   {
     name: "Echology",
-    subtitle: "Which coins you spend decides what the transaction costs",
+    subtitle: "A Bitcoin research tool for the hidden choice that sets what a transaction costs",
     href: "https://github.com/evanlinjin/echology",
     file: "assets/echology.png",
     description:
