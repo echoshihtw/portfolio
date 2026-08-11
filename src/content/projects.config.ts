@@ -21,6 +21,8 @@ export const projectsConfig: Projects = [
       "Only the api layer may touch the database — enforced by a contract test",
       "Works offline read-only: cached queries rehydrate, mutations pause",
     ],
+    resumeLine:
+      "Bilingual **React/Supabase** salon operations product in daily use at a Tainan salon **since May 2025**, supporting 603 clients and 2,694 service records with **Postgres RLS** and per-member permissions.",
     featured: true,
     linkLabel: "Live →",
     status: "Live",
@@ -39,6 +41,8 @@ export const projectsConfig: Projects = [
       "7-language localization, 6 currencies",
       "Release workflows written for TestFlight and Play (not yet cut)",
     ],
+    resumeLine:
+      "Personal financial-runway app in **Flutter**: **Clean Architecture** across a Melos monorepo, **SQLCipher**-encrypted local storage, 7-language localisation. In development — running on Android, iOS distribution in progress.",
     featured: true,
     linkLabel: "Coming Soon →",
     status: "In Progress",

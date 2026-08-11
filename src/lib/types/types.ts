@@ -10,6 +10,9 @@ interface Project {
   highlights?: string[];
   featured?: boolean;
   now?: string;
+  // One line for the résumé PDF. Present = it appears there; absent = the
+  // project is site-only. The one-page limit means this is a real choice.
+  resumeLine?: string;
 }
 
 interface MenuTab {
