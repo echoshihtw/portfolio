@@ -68,17 +68,17 @@ export const projectsConfig: Projects = [
   },
   {
     name: "Echology",
-    subtitle: "A Bitcoin research tool for the hidden choice that sets what a transaction costs",
+    subtitle: "A demo wallet for studying how Bitcoin coin-selection algorithms behave",
     href: "https://github.com/evanlinjin/echology",
     file: "assets/echology.png",
-    why: "Which coins a wallet spends decides what the transaction costs, and every wallet people actually use makes that choice for them, invisibly.",
+    why: "Coin selection is the algorithm that picks which UTXOs a transaction spends, and it decides what that transaction costs. Its trade-offs only appear as numbers — waste, fee, feerate deviation — under a specific set of inputs and fee conditions, which makes the behaviour hard to see and hard to compare.",
     result:
-      "Built with a core maintainer of the Bitcoin Dev Kit as a research tool: pick inputs by hand, change the fee scenario, watch waste and feerate deviation move. Archived.",
+      "Built the frontend with a core maintainer of the Bitcoin Dev Kit: construct a UTXO set, run it against a spend scenario, and read the resulting metrics side by side. Archived.",
     stack: ["Next.js", "TypeScript", "Tailwind CSS"],
     highlights: [
-      "Manual UTXO selection, so a researcher can construct the case they want to study",
-      "Spend scenarios and fee rates are adjustable, because the interesting behaviour is at the extremes",
-      "Waste, fee and feerate deviation shown as numbers you can compare, not a single opaque total",
+      "Manual UTXO selection, so the input set is a controlled variable rather than whatever the wallet happened to hold",
+      "Spend scenarios and fee rates are adjustable, because selection behaviour diverges at the extremes",
+      "Waste, fee and feerate deviation shown as separate figures — one combined total hides which trade-off moved",
     ],
     linkLabel: "Source Code →",
     status: "Archived",
