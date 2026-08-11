@@ -65,3 +65,5 @@ Product Engineer · _Remote · 2020 – Present_
 # Education
 
 B.A. Italian Language and Culture — Fu Jen Catholic University, Taipei · 2019
+
+**Languages** — Mandarin (native) · English (professional working language throughout my career) · Italian (B.A.)
