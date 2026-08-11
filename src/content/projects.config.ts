@@ -7,7 +7,7 @@ export const projectsConfig: Projects = [
   {
     name: "Clio",
     subtitle: "Salon operations software, in daily use at a Tainan salon since May 2025",
-    why: "A friend who runs a salon lost her hard drive, and years of client records went with it. She had looked at salon software before and found all of it too complicated — so the problem was never a missing feature. She needed the two minutes before a client sits down: who they are, what was done last time, what it cost.",
+    why: "A friend's hard drive died and took years of salon records with it. She had tried the existing software and found all of it too complicated. She did not need more features. She needed the two minutes before a client sits down: who they are, what was done last time, what it cost.",
     result:
       "The owner typed a year of past appointments in by hand. People do not migrate their own history into software they are still evaluating. In daily use at the salon since May 2025 — two designers, 603 clients, 2,694 service records, history entered back to September 2024.",
     href: "https://cliohq.app",
@@ -36,7 +36,7 @@ export const projectsConfig: Projects = [
   {
     name: "Runway",
     subtitle: "Personal finance measured the way a company measures itself — how long can you sustain yourself?",
-    why: "I was planning a study trip to get better at programming, and the whole plan rested on one question I could not answer: how long can I sustain myself? Budget apps tell you where money went. I needed to know how much time it buys, once rent, tools and the flight are in. It grew from there, because the question is not specific to a trip — a person has an opening balance, a burn rate, liabilities and a number of months left, exactly like a company. Cashflow is what constrains the plan, whatever the plan is.",
+    why: "I was planning a study trip and could not answer the one question it rested on: how long can I sustain myself? Budget apps tell you where the money went. I needed to know how much time was left. A person has an opening balance, a burn rate and months remaining — the same as a company. Cashflow is what constrains the plan, whatever the plan is.",
     result:
       "I use it. Running on Android, in seven languages and six currencies, built solo. iOS distribution is in progress — the release workflows exist but no tag has been cut, so nothing is on TestFlight or Play yet.",
     href: "#",
@@ -72,7 +72,7 @@ export const projectsConfig: Projects = [
     subtitle: "A demo wallet for studying how Bitcoin coin-selection algorithms behave",
     href: "https://github.com/evanlinjin/echology",
     file: "assets/echology.png",
-    why: "Coin selection is the algorithm that picks which UTXOs a transaction spends, and it decides what that transaction costs. Its trade-offs only appear as numbers — waste, fee, feerate deviation — under a specific set of inputs and fee conditions, which makes the behaviour hard to see and hard to compare.",
+    why: "Coin selection is the algorithm that decides which coins a transaction spends. It sets the fee. Its trade-offs only surface as numbers — waste, fee, feerate deviation — and only under one exact set of inputs. Hold the inputs still and the behaviour becomes comparable.",
     result:
       "Built the frontend with a core maintainer of the Bitcoin Dev Kit: construct a UTXO set, run it against a spend scenario, and read the resulting metrics side by side. Archived.",
     stack: ["Next.js", "TypeScript", "Tailwind CSS"],
