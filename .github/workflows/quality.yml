@@ -30,10 +30,10 @@ jobs:
           node-version: 20
           cache: npm
 
-      # Same install flags as deploy.yml — a lockfile-only install here would
-      # pass while the deploy still failed.
+      # npm ci, same as deploy.yml — the lockfile is authoritative, so this
+      # reproduces the deploy exactly.
       - name: Install dependencies
-        run: npm install --legacy-peer-deps
+        run: npm ci
 
       - name: svelte-check
         run: npm run check
