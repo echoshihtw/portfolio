@@ -30,6 +30,11 @@
 
   <span class="hook">{project.subtitle}</span>
 
+  <!-- Recruiters screen on keywords and do not open dialogs. The stack has to
+       be readable without a click, or this section contributes nothing to a
+       first-pass scan. -->
+  <span class="tech mono">{project.stack.join("  ·  ")}</span>
+
   <span class="more mono">Read more →</span>
 </button>
 
@@ -81,6 +86,13 @@
     flex: 1;
     font-size: 0.95rem;
     line-height: 1.5;
+    color: var(--text-muted);
+  }
+
+  .tech {
+    font-size: 0.68rem;
+    line-height: 1.5;
+    letter-spacing: 0.02em;
     color: var(--text-muted);
   }
 
