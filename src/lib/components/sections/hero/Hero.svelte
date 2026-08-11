@@ -21,6 +21,19 @@
 
     <p class="hero-support mono">{heroConfig.support}</p>
 
+    <p class="hero-seeking">{heroConfig.seeking}</p>
+
+    <!-- Claim and evidence in the same view. These numbers were four steps
+         deep, inside a project dialog most visitors never open. -->
+    <dl class="hero-proof">
+      {#each heroConfig.proofStrip as item}
+        <div>
+          <dt>{item.figure}</dt>
+          <dd>{item.label}</dd>
+        </div>
+      {/each}
+    </dl>
+
     <ul class="hero-caps">
       {#each heroConfig.capabilities as cap}
         <li>{cap}</li>
@@ -183,6 +196,37 @@
   }
 
   /* capability strip — scannable in a glance, not reading */
+  .hero-seeking {
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--text-color);
+  }
+
+  .hero-proof {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.6rem;
+    margin: 0.3rem 0 0;
+    padding-top: 0.9rem;
+    border-top: 1px solid var(--section-border);
+  }
+
+  .hero-proof dt {
+    font-family: "DM Serif Display", serif;
+    font-size: 1.45rem;
+    line-height: 1.1;
+    color: var(--text-color);
+  }
+
+  .hero-proof dd {
+    margin: 0.15rem 0 0;
+    max-width: 18ch;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.68rem;
+    line-height: 1.5;
+    color: var(--text-muted);
+  }
+
   .hero-caps {
     list-style: none;
     margin: 0.2rem 0 0;

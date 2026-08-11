@@ -10,6 +10,8 @@ type Proof = { p: string; s: string };
 export const heroConfig: {
   kicker: string;
   remoteOpen: string;
+  seeking: string;
+  proofStrip: { figure: string; label: string }[];
   headline: HeadlinePart[];
   support: string;
   capabilities: string[];
@@ -25,7 +27,10 @@ export const heroConfig: {
   kicker: "Chun-Yu (Echo) Shih · Taipei, Taiwan",
   // Taipei-based, so the first thing an overseas recruiter needs is the time
   // zone and how far it stretches. "Open to remote roles" left them guessing.
+  // Logistics, not intent. The ask lives in `seeking` below — a visitor who
+  // wants to hire you should not have to infer that you want to be hired.
   remoteOpen: "UTC+8 · open to remote — APAC hours or async",
+  seeking: "Looking for a Senior Product Engineer role — remote, or Taipei.",
 
   // Problem-solving spine — diagnosis + delivery + scope. Seniority implied by
   // the range of ownership, not by putting "Senior" in the introduction.
@@ -44,6 +49,14 @@ export const heroConfig: {
 
   // Scannable capability strip: full-spectrum in five words, not four sentences.
   capabilities: ["Web", "Mobile", "Backend", "Infra", "Product design"],
+
+  // The strongest evidence was four steps deep, inside a project dialog. This
+  // puts it where every visitor sees it, next to the claim it supports.
+  proofStrip: [
+    { figure: "603", label: "clients on software I built" },
+    { figure: "2,694", label: "service records, daily use since May 2025" },
+    { figure: "1,577", label: "commits — sole author of a production frontend" },
+  ],
 
   proofsLabel: "— a few problems, solved",
 
@@ -73,6 +86,15 @@ export const heroConfig: {
   email: "echoshihtw@gmail.com",
   resume: "resume.pdf", // served from /static, base-prefixed at render
   seeWorkHref: "#projects",
+};
+
+// The page used to end on the skills list, so a reader who was convinced had
+// to scroll back up to act. This is the close.
+export const closingConfig = {
+  heading: "Want to talk?",
+  body: "I am looking for a Senior Product Engineer role — remote, or in Taipei. If you have an ambiguous problem and need someone to own it end to end, that is the work I am best at.",
+  email: "echoshihtw@gmail.com",
+  resume: "resume.pdf",
 };
 
 // Curated, portfolio-facing skills — signal over completeness (PG/Jobs).
