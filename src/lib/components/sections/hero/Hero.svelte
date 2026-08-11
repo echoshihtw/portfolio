@@ -23,6 +23,12 @@
 
     <p class="hero-seeking">{heroConfig.seeking}</p>
 
+    <ul class="hero-owns">
+      {#each heroConfig.owns as layer}
+        <li>{layer}</li>
+      {/each}
+    </ul>
+
     <!-- Claim and evidence in the same view. These numbers were four steps
          deep, inside a project dialog most visitors never open. -->
     <dl class="hero-proof">
@@ -194,6 +200,28 @@
     margin: 0;
     font-size: 0.95rem;
     color: var(--text-color);
+  }
+
+  .hero-owns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 0.85rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .hero-owns li {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.04em;
+    color: var(--text-muted);
+  }
+
+  .hero-owns li + li::before {
+    content: "·";
+    margin-right: 0.85rem;
+    color: var(--section-border);
   }
 
   .hero-proof {

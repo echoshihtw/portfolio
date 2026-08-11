@@ -11,6 +11,7 @@ export const heroConfig: {
   kicker: string;
   remoteOpen: string;
   seeking: string;
+  owns: string[];
   proofStrip: { figure: string; label: string }[];
   headline: HeadlinePart[];
   support: string;
@@ -40,12 +41,11 @@ export const heroConfig: {
     { text: "." },
   ],
 
-  // Level is established by the Lockerbie, Clio and delivery evidence further
-  // down the page — not by "Senior", "AI-native" or "architect" up here.
-  // The two adjectives are the two the evidence actually supports: secure
-  // (BFF boundary, RLS, CSRF) and maintainable (tests, contract-tested layers).
+  // Says why I own the whole path rather than listing that I can. Caring about
+  // the experience is the reason: it breaks at the seams, and the seams are
+  // exactly the parts nobody owns. Keeps the stack names for scanners.
   support:
-    "Product Engineer building secure, maintainable software with React, TypeScript, FastAPI, and practical AI-assisted workflows.",
+    "Product Engineer working in React, TypeScript and FastAPI. I own the whole path because the experience breaks at the seams — a slow endpoint, a failed deploy, an app that gives up when the wifi does.",
 
 
   // The strongest evidence was four steps deep, inside a project dialog. This
@@ -57,6 +57,17 @@ export const heroConfig: {
   // Three different units on purpose. Two "commits" figures read as the same
   // measurement twice, and the reader had to work out that one was a subset of
   // a different repo.
+  // Spells out what "end to end" means, layer by layer. The previous version
+  // listed categories — Web, Mobile, Backend — which repeated the stack line
+  // above and proved nothing.
+  owns: [
+    "UI & design systems",
+    "Frontend",
+    "APIs & data models",
+    "Tests",
+    "CI/CD & deploy",
+  ],
+
   proofStrip: [
     { figure: "603", label: "clients on software I built" },
     { figure: "1,577", label: "commits, sole author of our frontend at work" },
