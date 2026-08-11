@@ -47,6 +47,11 @@
     overflow: hidden;
     min-height: 78vh;
     display: grid;
+    /* minmax(0, 1fr), not 1fr: a grid track defaults to min-content, so a wide
+       child (the chip row, a long mono line) stretches the track past the
+       viewport instead of wrapping. With overflow:hidden that reads as text
+       cut off at the right edge on phones. */
+    grid-template-columns: minmax(0, 1fr);
     align-items: center;
     isolation: isolate;
   }
@@ -74,7 +79,8 @@
 
   .hero-wrap {
     width: 100%;
-    max-width: 74ch;
+    min-width: 0;
+    max-width: min(74ch, 100%);
     display: flex;
     flex-direction: column;
     gap: 1.25rem;
@@ -127,7 +133,12 @@
     border: 1px solid rgba(74, 122, 85, 0.35);
     border-radius: 999px;
     padding: 0.3rem 0.7rem;
-    white-space: nowrap;
+    max-width: 100%;
+    /* Wraps rather than nowrap: on a narrow phone this string is longer than
+       the viewport, and a nowrap pill forces the whole page to scroll
+       sideways. */
+    white-space: normal;
+    line-height: 1.5;
   }
 
   :global(html[data-theme="dark"]) .hero-avail {
@@ -136,6 +147,7 @@
   }
 
   .avail-dot {
+    flex: none;
     width: 0.44rem;
     height: 0.44rem;
     border-radius: 999px;

@@ -13,51 +13,54 @@ type SkillGroup = {
   items: string[];
 };
 
-export const summary = "Full-stack engineer who takes products from an empty repo to a shipped app — frontend, backend, and the pipeline that deploys them. I find the real problem and ship the fix, across web, mobile, and infrastructure.";
+export const summary = "Product-minded full-stack engineer who turns ambiguous operational needs into shipped software — React/Next.js frontends, FastAPI services, data models, testing, and CI/CD. Uses controlled AI-assisted workflows, keeping architecture and verification explicit.";
 
 export const experience: ExperienceItem[] = [
   {
-    "company": "Lockerbie Technology",
-    "role": "**Full-Stack Engineer — Internal Platform Development**",
+    "company": "Lockerbie Technology (Musaeum Ltd, UK group)",
+    "role": "**Full-Stack Engineer — Internal Platform**",
     "date": "Taipei, Taiwan · Dec 2024 – Present",
     "highlights": [
-      "Own an internal team project-management platform end-to-end as one of two engineers — the **Next.js / React (TypeScript)** frontend and the **FastAPI / Python** backend.",
-      "Architected an **event-driven modular monolith** (bounded modules over a **RabbitMQ** bus with a dedicated consumer) on **ArangoDB**, with **role- and policy-based access control** and secure auth (JWT, Argon2).",
-      "Re-architected deploys to **build-once, promote-by-digest** (GitHub Actions, **GHCR**), cutting redundant rebuilds from **3 builds to 1** so production ships the exact image tested in staging.",
-      "Built the **Next.js frontend** (MUI, TanStack Query, Zustand) with dual client/vendor views and a **force-graph** admin dashboard; tested with **Vitest, React Testing Library, and pytest**."
+      "Built and operate a project-management platform for the **UK construction sector**, taking client organisations and vendor contractors through a project-to-tender-to-quotation lifecycle governed by **ISO 19650** principles. One of two engineers and sole author of the **Next.js / TypeScript** frontend; ~5 users, 10 projects.",
+      "Implemented the team's **event-driven modular monolith** — bounded modules over **RabbitMQ**, project relationships in **ArangoDB** — both new to me, both now in production.",
+      "Given a requirement that layers stay independent, chose **Next.js App Router** and introduced a **BFF trust boundary**: browser clients call same-origin API routes only, backend tokens stay in **HttpOnly cookies**, and **CSRF** is enforced centrally on unsafe requests.",
+      "Designed the six-role permission model — org-level **RBAC** plus project-scoped **PBAC** — resolving roles into permissions and capability flags so services never reimplement access logic. Covered with **Vitest, React Testing Library, and pytest**.",
+      "Wrote the platform's product specification: role model, architecture rules, eight milestones across three phases, exit criteria, and a decision log — and held scope with a feature freeze until Phase 1 shipped.",
+      "Brought a teammate with no software background into the codebase by pairing — 278 co-authored commits — from first contribution to shipping independently within two months.",
+      "Built a local **Claude Code** workflow — reusable skills and automated hooks — to speed implementation and testing, with final verification left to deterministic quality checks.",
+      "Owned the path from laptop to production in both repos: one-command **Makefile** setup, staging/production deploy bundles, multi-stage **Docker** builds with cached layers, and build-once, promote-by-digest releases (**GitHub Actions**, **GHCR**) cutting three environment builds to one."
     ]
   },
   {
     "company": "SPIN.FASHION by Lablaco",
-    "role": "**Software Engineer · Founding Partner**",
+    "role": "**Full Stack Engineer & Founding Partner**",
     "date": "Singapore · Remote · Aug 2024 – Oct 2024",
     "highlights": [
-      "Resolved a **critical macOS Electron release blocker** (code-signing, **Apple notarization**, auto-update) to ship the desktop app, and authored the team's release runbook — working remotely across time zones."
+      "Resolved a macOS **Electron code-signing, notarisation, and auto-update** release blocker, then documented the deployment workflow for repeatable releases across a distributed team."
     ]
   },
   {
-    "company": "Find Recruiter (HR Tech Startup)",
+    "company": "Find Recruiter",
     "role": "**Software Engineer**",
     "date": "Taipei, Taiwan · Aug 2022 – May 2024",
     "highlights": [
-      "Led frontend development of a **B2B recruitment / ATS platform** (**React 18**, ~150k LOC) used by employers and agencies.",
-      "Shipped multiple **OpenAI / ChatGPT features** — a JD generator, AI interview-plan generation, and a CV standardiser.",
-      "Drove an incremental **JavaScript to TypeScript** migration (~30% fewer runtime bugs); built 100+ reusable components with **Redux Toolkit and redux-saga** and **Firebase** realtime."
+      "Led frontend delivery for a **B2B recruitment and ATS platform** in **React and TypeScript**, in a two-engineer product team reporting to the CTO.",
+      "Drove an incremental **JavaScript-to-TypeScript** migration and built **100+ reusable components**, improving consistency and reducing type-related regressions across a large production codebase."
     ]
   },
   {
-    "company": "Independent Engineering Work",
-    "role": "**Software Engineer** · Remote · 2020 – Present",
-    "date": "",
+    "company": "Independent / Freelance Engineering",
+    "role": "**Product Engineer**",
+    "date": "Remote · 2020 – Present",
     "highlights": [
-      "Built the **Next.js frontend for a Bitcoin coin-selection wallet** (*echology*) alongside a **BDK core maintainer** — UTXO coin-control and fee/waste metrics — plus full-stack apps across fintech and research."
+      "Built products across fintech, research, e-commerce, and creative industries, including the **Next.js frontend for a Bitcoin coin-selection research tool** with a **BDK core maintainer**."
     ]
   }
 ];
 
 export const skills: SkillGroup[] = [
   {
-    "category": "**Frontend** — React · Next.js · TypeScript · MUI · Tailwind · TanStack Query · Zustand",
+    "category": "**Frontend** — React · Next.js · TypeScript · TanStack Query · Zustand · Redux · MUI · Tailwind CSS · Flutter · Dart",
     "items": [
       "**Backend & Data** — FastAPI",
       "Python",
@@ -67,51 +70,50 @@ export const skills: SkillGroup[] = [
       "Supabase",
       "RabbitMQ",
       "SQLite",
-      "**Mobile & Infra** — Flutter",
-      "Dart",
-      "Riverpod",
-      "Docker",
+      "**Infra & Quality** — Docker",
       "GitHub Actions",
       "GHCR",
       "AWS",
-      "**Testing** — Vitest",
+      "Vitest",
       "React Testing Library",
-      "Jest",
-      "pytest"
+      "pytest",
+      "Claude Code",
+      "**Desktop** — Tauri",
+      "Electron"
     ]
   }
 ];
 
 export const projects: Projects = [
   {
-    "name": "Cosmora",
-    "subtitle": "Salon Management Platform",
-    "description": "A bilingual, multi-tenant salon-management application for independent salon owners — managing client records, visit history, and financial workflows. Built with a domain-driven architecture on Supabase (Postgres) with row-level security and per-member permissions, and packaged for desktop with Tauri.",
-    "href": "https://cosmora-lab.vercel.app",
+    "name": "Clio",
+    "subtitle": "Salon Operations — in daily use",
+    "description": "A bilingual (zh-TW / English) salon operations app, built for a salon in Tainan and in daily use there since May 2025 — two designers, 603 clients, 2,694 records, with client history entered back to September 2024. Clients, service records, and monthly revenue in one place.",
+    "href": "https://cliohq.app",
     "stack": [
-      "React",
+      "React 19",
       "TypeScript",
       "Supabase",
       "Postgres",
-      "Tauri",
-      "TanStack Query"
+      "TanStack Query",
+      "Tailwind"
     ],
     "highlights": [
-      "Domain-driven architecture with test-enforced import boundaries",
-      "Postgres row-level security + per-member permission model",
-      "Offline-capable read layer via cached hydration",
-      "Semantic-release CI with coverage gates"
+      "Audited my own RLS policies and closed a privilege-escalation path",
+      "Shipped a permission change without silently revoking staff access",
+      "Only the api layer may touch the database — enforced by a contract test",
+      "Works offline read-only: cached queries rehydrate, mutations pause"
     ],
     "featured": true,
-    "linkLabel": "In Progress →",
-    "status": "In Progress"
+    "linkLabel": "Live →",
+    "status": "Live"
   },
   {
     "name": "Runway",
     "subtitle": "Personal Financial Runway App",
-    "description": "A cross-platform mobile app (iOS + Android) that calculates how long your savings will last. Built solo in Flutter with a Clean-Architecture monorepo, AES-256 encrypted on-device storage, and automated releases to TestFlight and Google Play.",
+    "description": "A mobile app that answers one question: how long can your money last? Built solo in Flutter — a Clean-Architecture monorepo, AES-256 encrypted on-device storage, and a survival model that takes the worse of actual spending and budget. In development: running on Android, iOS distribution in progress.",
     "href": "#",
-    "now": "Optimizing cross-platform distribution & monetization with RevenueCat (iOS + Android).",
+    "now": "Working through iOS distribution, then one-time purchase via RevenueCat.",
     "stack": [
       "Flutter",
       "Dart",
@@ -122,8 +124,8 @@ export const projects: Projects = [
     "highlights": [
       "Clean Architecture / DDD across a Melos monorepo",
       "AES-256 encrypted local storage (Drift + SQLCipher)",
-      "In-app purchases + 7-language localization",
-      "CI/CD releasing signed builds to both app stores"
+      "7-language localization, 6 currencies",
+      "Release workflows written for TestFlight and Play (not yet cut)"
     ],
     "featured": true,
     "linkLabel": "Coming Soon →",

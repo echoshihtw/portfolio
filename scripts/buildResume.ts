@@ -80,12 +80,21 @@ function parseExperience(section) {
       .filter(Boolean);
 
     const company = lines[0].trim();
-    const roleLine = lines[1] || "";
-    const dateLine =
+    let roleLine = lines[1] || "";
+    let dateLine =
       lines.find(
         (line, index) =>
           index > 1 && !line.startsWith("- ") && !line.startsWith("#")
       ) || "";
+
+    // The résumé keeps role, location and dates on one line to save vertical
+    // space on the printed page. Split them back apart so the site still gets
+    // separate role and date fields.
+    if (!dateLine && roleLine.includes(" · ")) {
+      const cut = roleLine.indexOf(" · ");
+      dateLine = roleLine.slice(cut + 3).trim();
+      roleLine = roleLine.slice(0, cut).trim();
+    }
 
     const highlights = lines
       .filter((l) => l.startsWith("- "))

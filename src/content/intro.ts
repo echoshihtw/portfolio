@@ -10,7 +10,7 @@ export const heroContent = {
     "React · TypeScript · Complex UI Workflows · End-to-End Product Development",
 
   location: "Taipei, Taiwan",
-  status: "Currently building Cosmora",
+  status: "Currently building Clio",
 
   cta: {
     primary: {

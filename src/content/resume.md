@@ -1,65 +1,71 @@
 ```{=latex}
-{\fontsize{22}{25}\selectfont\bfseries\color{ink}Chun-Yu (Echo) Shih}\\[3pt]
-{\large Full-Stack Engineer · React · TypeScript · FastAPI · Mobile · CI/CD}\\[5pt]
-{\small\color{muted}Taipei, Taiwan · echoshihtw@gmail.com · linkedin.com/in/echoshihtw · github.com/echoshihtw · echoshihtw.github.io/portfolio}
-\vspace{4pt}
+{\fontsize{18}{21}\selectfont\bfseries\color{ink}Chun-Yu (Echo) Shih}\\[2pt]
+% Headline = professional identity, not job level. Level is settled by the role
+% and the interview, so a self-assigned "Senior" only invites an argument before
+% anyone has read the experience. Swap per application:
+%   Senior Product Engineer vacancy  -> Senior Product Engineer
+%   Senior full-stack vacancy        -> Senior Full-Stack Product Engineer
+%   General / international          -> Product Engineer   (default)
+%   Freelance / contract             -> Independent Product Engineer
+{\large Product Engineer · React · TypeScript · Next.js · Product Ownership}\\[3pt]
+% Two deliberate lines: availability first, then contacts. As one line it wrapped
+% and left the portfolio URL stranded on its own.
+{\small\color{muted}Taipei, Taiwan (UTC+8) · Remote — APAC hours or async}\\[1pt]
+{\small\color{muted}echoshihtw@gmail.com · linkedin.com/in/echoshihtw · github.com/echoshihtw · echoshihtw.github.io/portfolio}
+\vspace{2pt}
 ```
 
 # Summary
 
-Full-stack engineer who takes products from an empty repo to a shipped app — frontend, backend, and the pipeline that deploys them. I find the real problem and ship the fix, across web, mobile, and infrastructure.
+Product-minded full-stack engineer who turns ambiguous operational needs into shipped software — React/Next.js frontends, FastAPI services, data models, testing, and CI/CD. Uses controlled AI-assisted workflows, keeping architecture and verification explicit.
 
 # Experience
 
-## Lockerbie Technology
+## Lockerbie Technology (Musaeum Ltd, UK group)
 
-**Full-Stack Engineer — Internal Platform Development**  
-Taipei, Taiwan · Dec 2024 – Present
+**Full-Stack Engineer — Internal Platform** · Taipei, Taiwan · Dec 2024 – Present
 
-- Own an internal team project-management platform end-to-end as one of two engineers — the **Next.js / React (TypeScript)** frontend and the **FastAPI / Python** backend.
-- Architected an **event-driven modular monolith** (bounded modules over a **RabbitMQ** bus with a dedicated consumer) on **ArangoDB**, with **role- and policy-based access control** and secure auth (JWT, Argon2).
-- Re-architected deploys to **build-once, promote-by-digest** (GitHub Actions, **GHCR**), cutting redundant rebuilds from **3 builds to 1** so production ships the exact image tested in staging.
-- Built the **Next.js frontend** (MUI, TanStack Query, Zustand) with dual client/vendor views and a **force-graph** admin dashboard; tested with **Vitest, React Testing Library, and pytest**.
+- Built and operate a project-management platform for the **UK construction sector**, taking client organisations and vendor contractors through a project-to-tender-to-quotation lifecycle governed by **ISO 19650** principles. One of two engineers and sole author of the **Next.js / TypeScript** frontend; ~5 users, 10 projects.
+- Implemented the team's **event-driven modular monolith** — bounded modules over **RabbitMQ**, project relationships in **ArangoDB** — both new to me, both now in production.
+- Given a requirement that layers stay independent, chose **Next.js App Router** and introduced a **BFF trust boundary**: browser clients call same-origin API routes only, backend tokens stay in **HttpOnly cookies**, and **CSRF** is enforced centrally on unsafe requests.
+- Designed the six-role permission model — org-level **RBAC** plus project-scoped **PBAC** — resolving roles into permissions and capability flags so services never reimplement access logic. Covered with **Vitest, React Testing Library, and pytest**.
+- Wrote the platform's product specification: role model, architecture rules, eight milestones across three phases, exit criteria, and a decision log — and held scope with a feature freeze until Phase 1 shipped.
+- Brought a teammate with no software background into the codebase by pairing — 278 co-authored commits — from first contribution to shipping independently within two months.
+- Built a local **Claude Code** workflow — reusable skills and automated hooks — to speed implementation and testing, with final verification left to deterministic quality checks.
+- Owned the path from laptop to production in both repos: one-command **Makefile** setup, staging/production deploy bundles, multi-stage **Docker** builds with cached layers, and build-once, promote-by-digest releases (**GitHub Actions**, **GHCR**) cutting three environment builds to one.
 
 ## SPIN.FASHION by Lablaco
 
-**Software Engineer · Founding Partner**  
-Singapore · Remote · Aug 2024 – Oct 2024
+**Full Stack Engineer & Founding Partner** · Singapore · Remote · Aug 2024 – Oct 2024
 
-- Resolved a **critical macOS Electron release blocker** (code-signing, **Apple notarization**, auto-update) to ship the desktop app, and authored the team's release runbook — working remotely across time zones.
+- Resolved a macOS **Electron code-signing, notarisation, and auto-update** release blocker, then documented the deployment workflow for repeatable releases across a distributed team.
 
-## Find Recruiter (HR Tech Startup)
+## Find Recruiter
 
-**Software Engineer**  
-Taipei, Taiwan · Aug 2022 – May 2024
+**Software Engineer** · Taipei, Taiwan · Aug 2022 – May 2024
 
-- Led frontend development of a **B2B recruitment / ATS platform** (**React 18**, ~150k LOC) used by employers and agencies.
-- Shipped multiple **OpenAI / ChatGPT features** — a JD generator, AI interview-plan generation, and a CV standardiser.
-- Drove an incremental **JavaScript to TypeScript** migration (~30% fewer runtime bugs); built 100+ reusable components with **Redux Toolkit and redux-saga** and **Firebase** realtime.
+- Led frontend delivery for a **B2B recruitment and ATS platform** in **React and TypeScript**, in a two-engineer product team reporting to the CTO.
+- Drove an incremental **JavaScript-to-TypeScript** migration and built **100+ reusable components**, improving consistency and reducing type-related regressions across a large production codebase.
 
-## Independent Engineering Work
+## Independent / Freelance Engineering
 
-**Software Engineer** · Remote · 2020 – Present
+**Product Engineer** · Remote · 2020 – Present
 
-- Built the **Next.js frontend for a Bitcoin coin-selection wallet** (*echology*) alongside a **BDK core maintainer** — UTXO coin-control and fee/waste metrics — plus full-stack apps across fintech and research.
+- Built products across fintech, research, e-commerce, and creative industries, including the **Next.js frontend for a Bitcoin coin-selection research tool** with a **BDK core maintainer**.
 
 # Projects
 
-**Cosmora** — _Founder_ · solo bilingual, multi-tenant **salon platform** (React · Supabase · **Postgres RLS** · per-member permissions), packaged for desktop with Tauri.
+**Clio** — _Founder / Product Engineer_ · Bilingual **React/Supabase** salon operations product in daily use at a Tainan salon **since May 2025**, supporting 603 clients and 2,694 service records with **Postgres RLS** and per-member permissions.
 
-**Runway** — _Founder_ · solo cross-platform **Flutter** app (iOS + Android): Clean Architecture, **SQLCipher-encrypted** storage, and **CI/CD to TestFlight + Google Play**.
+**Runway** — _Founder / Product Engineer_ · Personal financial-runway app in **Flutter**: **Clean Architecture** across a Melos monorepo, **SQLCipher**-encrypted local storage, 7-language localisation. In development — running on Android, iOS distribution in progress.
 
 # Skills
 
-**Frontend** — React · Next.js · TypeScript · MUI · Tailwind · TanStack Query · Zustand  
+**Frontend** — React · Next.js · TypeScript · TanStack Query · Zustand · Redux · MUI · Tailwind CSS · Flutter · Dart  
 **Backend & Data** — FastAPI · Python · Node.js · Postgres · ArangoDB · Supabase · RabbitMQ · SQLite  
-**Mobile & Infra** — Flutter · Dart · Riverpod · Docker · GitHub Actions · GHCR · AWS  
-**Testing** — Vitest · React Testing Library · Jest · pytest
+**Infra & Quality** — Docker · GitHub Actions · GHCR · AWS · Vitest · React Testing Library · pytest · Claude Code  
+**Desktop** — Tauri · Electron
 
 # Education
 
-**B.A. Italian Language & Culture** — Fu Jen Catholic University, Taipei · 2019
-
-# Certifications
-
-CS50 Cybersecurity — Harvard / edX _(in progress)_ · Data Science & AI with Python — Preface · LangChain for JavaScript
+B.A. Italian Language and Culture — Fu Jen Catholic University, Taipei · 2019

@@ -9,6 +9,7 @@
 <div class="text_gradient">
   <a
     href={linkedInUrl}
+    aria-label="LinkedIn profile"
     target="_blank"
     rel="noreferrer noopener"
     class="hero_text_white hover:bg-transparent hover:dark:text-lime-400 duration-200"
@@ -19,6 +20,7 @@
 <div class="text_gradient">
   <a
     href={instagramUrl}
+    aria-label="Instagram profile"
     target="_blank"
     rel="noreferrer noopener"
     class="hero_text_white hover:bg-transparent hover:dark:text-lime-400 duration-200"
@@ -29,6 +31,7 @@
 <div class="text_gradient">
   <a
     href={githubUrl}
+    aria-label="GitHub profile"
     target="_blank"
     rel="noreferrer noopener"
     class="hero_text_white hover:bg-transparent hover:dark:text-lime-400 duration-200"
@@ -49,6 +52,7 @@
 <div class="flex items-center gap-2">
   <a
     href="https://github.com/echoshihtw/portfolio"
+    aria-label="Portfolio source code on GitHub"
     target="_blank"
     rel="noreferrer noopener"
     class="hidden dark:block"
@@ -64,6 +68,7 @@
     target="_blank"
     rel="noreferrer noopener"
     class="hidden dark:block"
+    aria-label="SvelteKit"
   >
     <Icon icon="devicon:svelte" />
   </a>
@@ -72,6 +77,7 @@
     target="_blank"
     rel="noreferrer noopener"
     class="dark:hidden text-gray-400 hover:text-[#ff3e00]"
+    aria-label="SvelteKit"
   >
     <Icon icon="devicon-plain:svelte" />
   </a>
@@ -81,6 +87,7 @@
     target="_blank"
     rel="noreferrer noopener"
     class="dark:hidden text-gray-400 hover:text-[#38bdf8]"
+    aria-label="Tailwind CSS"
   >
     <Icon icon="simple-icons:tailwindcss" />
   </a>
@@ -89,6 +96,7 @@
     target="_blank"
     rel="noreferrer noopener"
     class="hidden dark:block"
+    aria-label="Tailwind CSS"
   >
     <Icon icon="devicon:tailwindcss" />
   </a>
@@ -99,6 +107,7 @@
     target="_blank"
     rel="noreferrer noopener"
     class="dark:hidden text-gray-400 hover:text-[#3178c6]"
+    aria-label="TypeScript"
   >
     <Icon icon="simple-icons:typescript" />
   </a>
@@ -107,6 +116,7 @@
     target="_blank"
     rel="noreferrer noopener"
     class="hidden dark:block"
+    aria-label="TypeScript"
   >
     <Icon icon="logos:typescript-icon" />
   </a>
