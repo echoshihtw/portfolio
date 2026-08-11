@@ -30,6 +30,7 @@ export const projectsConfig: Projects = [
   {
     name: "Runway",
     subtitle: "Personal Financial Runway App",
+    file: "assets/runway.png",
     description:
       "A mobile app that answers one question: how long can your money last? Built solo in Flutter — a Clean-Architecture monorepo, AES-256 encrypted on-device storage, and a survival model that takes the worse of actual spending and budget. In development: running on Android, iOS distribution in progress.",
     href: "#",
