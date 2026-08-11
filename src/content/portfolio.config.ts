@@ -54,10 +54,13 @@ export const heroConfig: {
   // use, ownership at work, and leverage over another engineer. 603 and 2,694
   // proved the same fact twice, and "a production frontend" never said the
   // work was paid.
+  // Three different units on purpose. Two "commits" figures read as the same
+  // measurement twice, and the reader had to work out that one was a subset of
+  // a different repo.
   proofStrip: [
-    { figure: "603", label: "clients on software I built — a salon runs on it daily" },
-    { figure: "1,577", label: "commits — sole author of our platform frontend at work" },
-    { figure: "278", label: "co-authored — paired a teammate from zero to shipping" },
+    { figure: "603", label: "clients on software I built" },
+    { figure: "1,577", label: "commits, sole author of our frontend at work" },
+    { figure: "2 months", label: "to take a teammate from zero to shipping alone" },
   ],
 
   proofsLabel: "— a few problems, solved",
