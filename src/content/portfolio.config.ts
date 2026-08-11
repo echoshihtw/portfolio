@@ -10,7 +10,6 @@ type Proof = { p: string; s: string };
 export const heroConfig: {
   kicker: string;
   remoteOpen: string;
-  seeking: string;
   owns: string[];
   proofLine: string;
   headline: HeadlinePart[];
@@ -27,11 +26,10 @@ export const heroConfig: {
   kicker: "Chun-Yu (Echo) Shih · Taipei, Taiwan",
   // Taipei-based, so the first thing an overseas recruiter needs is the time
   // zone and how far it stretches. "Open to remote roles" left them guessing.
-  // Logistics, not intent. `seeking` below states what a company gets, not
-  // what I want — an offer reads stronger than an appetite, and "Senior" would
-  // be a level I assigned myself rather than one the work argues for.
-  remoteOpen: "UTC+8 · open to remote — APAC hours or async",
-  seeking: "I take problems that arrive without a spec and see them through — remote from Taiwan, or in Taipei.",
+  // Logistics only. The offer lives in the closing section, where it invites
+  // rather than announces — and "Senior" would be a level I assigned myself
+  // rather than one the work argues for.
+  remoteOpen: "UTC+8 · open to remote from Taiwan, or Taipei",
 
   // Spells out what "end to end" means, layer by layer. An earlier version
   // listed categories — Web, Mobile, Backend — which repeated the stack line

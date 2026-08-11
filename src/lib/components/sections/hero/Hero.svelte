@@ -21,8 +21,6 @@
 
     <p class="hero-support mono">{heroConfig.support}</p>
 
-    <p class="hero-seeking">{heroConfig.seeking}</p>
-
     <ul class="hero-owns">
       {#each heroConfig.owns as layer}
         <li>{layer}</li>
@@ -187,12 +185,6 @@
   }
 
   /* capability strip — scannable in a glance, not reading */
-  .hero-seeking {
-    margin: 0;
-    font-size: 0.95rem;
-    color: var(--text-color);
-  }
-
   .hero-owns {
     display: flex;
     flex-wrap: wrap;
