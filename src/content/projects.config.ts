@@ -35,8 +35,8 @@ export const projectsConfig: Projects = [
   },
   {
     name: "Runway",
-    subtitle: "A runway tracker for people living off savings — how long can your money last?",
-    why: "I was planning a study trip to get better at programming, and the whole plan rested on one question I could not answer: how long can I sustain myself? Budget apps tell you where money went. I needed to know how much time it buys, once rent, tools and the flight are in.",
+    subtitle: "Personal finance measured the way a company measures itself — how long can you sustain yourself?",
+    why: "I was planning a study trip to get better at programming, and the whole plan rested on one question I could not answer: how long can I sustain myself? Budget apps tell you where money went. I needed to know how much time it buys, once rent, tools and the flight are in. It grew from there, because the question is not specific to a trip — a person has an opening balance, a burn rate, liabilities and a number of months left, exactly like a company. Cashflow is what constrains the plan, whatever the plan is.",
     result:
       "I use it. Running on Android, in seven languages and six currencies, built solo. iOS distribution is in progress — the release workflows exist but no tag has been cut, so nothing is on TestFlight or Play yet.",
     href: "#",
