@@ -29,7 +29,7 @@
      visitor's attention on an archived research tool. */
   .grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
     gap: 0.9rem;
     width: 100%;
   }
@@ -38,9 +38,9 @@
     grid-column: 1 / -1;
   }
 
-  @media (max-width: 639px) {
+  @media (min-width: 640px) {
     .grid {
-      grid-template-columns: 1fr;
+      grid-template-columns: repeat(2, 1fr);
     }
   }
 </style>

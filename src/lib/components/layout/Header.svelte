@@ -37,8 +37,7 @@
       {#each tabs as tab}
         <a
           href={tab.link}
-          class="duration-200 toggle_hover_font_color hover:line-through"
-          style="color: var(--text-color);"
+          class="nav-link duration-200 toggle_hover_font_color hover:line-through"
           aria-label="Go to {tab.name.replace('#', '')} section"
         >
           <p>{tab.name}</p>

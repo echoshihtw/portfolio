@@ -122,8 +122,8 @@
 
   .footer-grid {
     display: grid;
-    grid-template-columns: 1.5fr 0.8fr 0.6fr;
-    gap: 2rem;
+    grid-template-columns: 1fr;
+    gap: 1.6rem;
   }
 
   .footer-brand h2 {
@@ -231,6 +231,8 @@
     padding-top: 1rem;
     border-top: 1px solid var(--section-border);
     display: flex;
+    flex-direction: column;
+    align-items: flex-start;
     justify-content: space-between;
     flex-wrap: wrap;
     gap: 0.5rem;
@@ -253,15 +255,15 @@
     background: var(--color-accent);
     box-shadow: 0 0 6px var(--color-accent);
   }
-  @media (max-width: 767px) {
+  @media (min-width: 768px) {
     .footer-grid {
-      grid-template-columns: 1fr;
-      gap: 1.6rem;
+      grid-template-columns: 1.5fr 0.8fr 0.6fr;
+      gap: 2rem;
     }
 
     .footer-meta {
-      flex-direction: column;
-      align-items: flex-start;
+      flex-direction: row;
+      align-items: center;
     }
   }
 </style>

@@ -52,7 +52,10 @@
     display: flex;
     gap: 0.35rem;
     padding: 0.5rem;
-    border-radius: 999px;
+    width: calc(100% - 1.2rem);
+    justify-content: center;
+    flex-wrap: wrap;
+    border-radius: 1rem;
     border: 1px solid var(--color-accent);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
@@ -136,12 +139,11 @@
     background: rgba(237, 236, 232, 0.05);
   }
 
-  @media (max-width: 639px) {
+  @media (min-width: 640px) {
     .floating-nav {
-      width: calc(100% - 1.2rem);
-      justify-content: center;
-      flex-wrap: wrap;
-      border-radius: 1rem;
+      width: auto;
+      flex-wrap: nowrap;
+      border-radius: 999px;
     }
   }
 </style>

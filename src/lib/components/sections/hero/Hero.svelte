@@ -49,7 +49,7 @@
   .hero-section {
     position: relative;
     overflow: hidden;
-    min-height: 78vh;
+    min-height: 70vh;
     display: grid;
     /* minmax(0, 1fr), not 1fr: a grid track defaults to min-content, so a wide
        child (the chip row, a long mono line) stretches the track past the
@@ -87,7 +87,7 @@
     max-width: min(74ch, 100%);
     display: flex;
     flex-direction: column;
-    gap: 1.25rem;
+    gap: 1.05rem;
     padding: 1rem;
     animation: rise 620ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
   }
@@ -298,12 +298,12 @@
     border-color: var(--color-accent);
   }
 
-  @media (max-width: 767px) {
+  @media (min-width: 768px) {
     .hero-section {
-      min-height: 70vh;
+      min-height: 78vh;
     }
     .hero-wrap {
-      gap: 1.05rem;
+      gap: 1.25rem;
     }
   }
 </style>

@@ -97,11 +97,15 @@
 </dialog>
 
 <style>
+  /* Bottom sheet by default: closer to the thumb, and the card it came from
+     stays visible above it. A centred modal takes over on wider screens. */
   dialog {
-    width: min(46rem, calc(100vw - 2rem));
+    width: 100vw;
+    max-width: 100vw;
+    margin: auto 0 0;
     padding: 0;
     border: 1px solid var(--section-border);
-    border-radius: 6px;
+    border-radius: 10px 10px 0 0;
     background: var(--surface-bg);
     color: var(--text-color);
   }
@@ -226,14 +230,12 @@
     border-bottom: 1px solid currentColor;
   }
 
-  @media (max-width: 639px) {
-    /* Bottom sheet on phones: closer to the thumb, and the card it came from
-       stays visible above it. */
+  @media (min-width: 640px) {
     dialog {
-      width: 100vw;
-      max-width: 100vw;
-      margin: auto 0 0;
-      border-radius: 10px 10px 0 0;
+      width: min(46rem, calc(100vw - 2rem));
+      max-width: none;
+      margin: auto;
+      border-radius: 6px;
     }
   }
 </style>

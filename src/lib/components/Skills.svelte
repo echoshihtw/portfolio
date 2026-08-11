@@ -24,8 +24,8 @@
 
   .row {
     display: grid;
-    grid-template-columns: 10rem 1fr;
-    gap: 0.4rem 1.5rem;
+    grid-template-columns: 1fr;
+    gap: 0.3rem;
     padding: 0.95rem 0.25rem;
     border-top: 1px solid var(--section-border);
     align-items: baseline;
@@ -50,10 +50,10 @@
     color: var(--text-color);
   }
 
-  @media (max-width: 639px) {
+  @media (min-width: 640px) {
     .row {
-      grid-template-columns: 1fr;
-      gap: 0.3rem;
+      grid-template-columns: 10rem 1fr;
+      gap: 0.4rem 1.5rem;
     }
   }
 </style>

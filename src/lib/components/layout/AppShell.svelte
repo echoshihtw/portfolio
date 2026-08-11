@@ -108,10 +108,7 @@
   };
 </script>
 
-<div
-  class="antialiased w-full"
-  style="background: var(--color-bg); color: var(--text-color);"
->
+<div class="app-shell antialiased w-full">
   <svelte:component
     this={ParticlesComponent}
     id="tsparticles"
