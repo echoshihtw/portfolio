@@ -235,7 +235,9 @@ function buildPDF() {
         "-V",
         "fontsize=10pt",
         "-V",
-        "mainfont=Charter",
+        // Charter locally; CI runners don't have it, so allow an override
+        // rather than silently producing a differently-set résumé.
+        `mainfont=${process.env.RESUME_MAINFONT || "Charter"}`,
       ],
       { stdio: "inherit" }
     );
@@ -244,7 +246,14 @@ function buildPDF() {
     const staticPdf = path.join(ROOT, "static", "resume.pdf");
     fs.copyFileSync(pdfPath, staticPdf);
     console.log("✅ Synced static/resume.pdf");
-  } catch {
+  } catch (error) {
+    // Skipping is fine on a laptop without TeX. In CI it means the résumé
+    // silently stopped building, which is how this went unnoticed — so fail
+    // loudly there instead.
+    if (process.env.CI) {
+      console.error("❌ PDF build failed");
+      throw error;
+    }
     console.warn("⚠️ Pandoc/xelatex not installed — skipping PDF build");
   }
 }

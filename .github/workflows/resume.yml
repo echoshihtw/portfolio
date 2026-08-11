@@ -4,6 +4,10 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -22,16 +26,33 @@ jobs:
           node-version: 20
           cache: npm
 
-      - name: Install Pandoc
+      # The résumé builds with --pdf-engine=xelatex. texlive-latex-base alone
+      # does not provide xelatex, so the PDF step failed and was skipped
+      # silently — which is why this workflow reported "no files found".
+      - name: Install Pandoc and XeLaTeX
         run: |
           sudo apt-get update
-          sudo apt-get install -y pandoc texlive-latex-base
+          sudo apt-get install -y --no-install-recommends \
+            pandoc texlive-xetex texlive-fonts-recommended texlive-fonts-extra
+          fc-cache -f
 
       - name: Install dependencies
         run: npm ci
 
+      # Charter is a macOS font. XCharter ships with texlive-fonts-extra and is
+      # the same design, so CI gets a faithful render without installing fonts
+      # by hand. Local builds still default to Charter.
       - name: Run resume build
+        env:
+          RESUME_MAINFONT: XCharter
         run: npm run build-resume
+
+      # buildResume throws in CI rather than warning, but check the artefact
+      # exists anyway — a zero-byte or missing PDF should not reach upload.
+      - name: Verify the PDF was produced
+        run: |
+          test -s output/resume.pdf || { echo "resume.pdf missing or empty"; exit 1; }
+          echo "resume.pdf: $(stat -c%s output/resume.pdf) bytes"
 
       - name: Upload resume.pdf artifact
         uses: actions/upload-artifact@v4
