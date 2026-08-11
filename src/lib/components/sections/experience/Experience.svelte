@@ -19,7 +19,7 @@
 <style>
   .timeline {
     position: relative;
-    padding-left: 1.9rem;
+    padding-left: 1.5rem;
     width: 100%;
   }
 
@@ -49,7 +49,7 @@
   .tl-entry::before {
     content: "";
     position: absolute;
-    left: -1.9rem;
+    left: -1.5rem;
     top: 0.6rem;
     width: 0.72rem;
     height: 0.72rem;
@@ -60,12 +60,12 @@
       0 0 0 5px var(--color-bg);
   }
 
-  @media (max-width: 600px) {
+  @media (min-width: 640px) {
     .timeline {
-      padding-left: 1.5rem;
+      padding-left: 1.9rem;
     }
     .tl-entry::before {
-      left: -1.5rem;
+      left: -1.9rem;
     }
   }
 </style>

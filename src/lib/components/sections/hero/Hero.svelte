@@ -21,11 +21,13 @@
 
     <p class="hero-support mono">{heroConfig.support}</p>
 
-    <ul class="hero-caps">
-      {#each heroConfig.capabilities as cap}
-        <li>{cap}</li>
+    <ul class="hero-owns">
+      {#each heroConfig.owns as layer}
+        <li>{layer}</li>
       {/each}
     </ul>
+
+    <p class="hero-proofline">{heroConfig.proofLine}</p>
 
     <div class="hero-links">
       <a class="hero-cta primary" href="{base}/{heroConfig.resume}" download>
@@ -45,7 +47,7 @@
   .hero-section {
     position: relative;
     overflow: hidden;
-    min-height: 78vh;
+    min-height: 70vh;
     display: grid;
     /* minmax(0, 1fr), not 1fr: a grid track defaults to min-content, so a wide
        child (the chip row, a long mono line) stretches the track past the
@@ -83,7 +85,7 @@
     max-width: min(74ch, 100%);
     display: flex;
     flex-direction: column;
-    gap: 1.25rem;
+    gap: 1.05rem;
     padding: 1rem;
     animation: rise 620ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
   }
@@ -183,34 +185,36 @@
   }
 
   /* capability strip — scannable in a glance, not reading */
-  .hero-caps {
-    list-style: none;
-    margin: 0.2rem 0 0;
-    padding: 0;
+  .hero-owns {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.55rem 0.6rem;
-    align-items: center;
+    gap: 0.4rem 0.85rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
   }
 
-  .hero-caps li {
+  .hero-owns li {
     font-family: "JetBrains Mono", monospace;
-    font-size: 0.71rem;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    color: var(--text-color);
-    border: 1px solid var(--section-border);
-    border-radius: 999px;
-    padding: 0.34rem 0.75rem;
-    background: var(--surface-bg);
-    transition:
-      border-color 160ms ease,
-      transform 160ms ease;
+    font-size: 0.68rem;
+    letter-spacing: 0.04em;
+    color: var(--text-muted);
   }
 
-  .hero-caps li:hover {
-    border-color: var(--color-accent);
-    transform: translateY(-1px);
+  .hero-owns li + li::before {
+    content: "·";
+    margin-right: 0.85rem;
+    color: var(--section-border);
+  }
+
+  .hero-proofline {
+    margin: 0.3rem 0 0;
+    padding-top: 0.9rem;
+    max-width: 60ch;
+    border-top: 1px solid var(--section-border);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-color);
   }
 
   /* actions */
@@ -286,18 +290,12 @@
     border-color: var(--color-accent);
   }
 
-  @media (min-width: 720px) {
-    .hero-proofs {
-      grid-template-columns: 1fr 1fr;
-    }
-  }
-
-  @media (max-width: 719px) {
+  @media (min-width: 768px) {
     .hero-section {
-      min-height: 70vh;
+      min-height: 78vh;
     }
     .hero-wrap {
-      gap: 1.05rem;
+      gap: 1.25rem;
     }
   }
 </style>
