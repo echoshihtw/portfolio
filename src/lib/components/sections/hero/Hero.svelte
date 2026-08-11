@@ -30,7 +30,7 @@
     <p class="hero-proofline">{heroConfig.proofLine}</p>
 
     <div class="hero-links">
-      <a class="hero-cta primary" href="{base}/{heroConfig.resume}" download>
+      <a class="hero-cta primary" href="{base}/{heroConfig.resume}" download={heroConfig.resumeAs}>
         Download résumé <span class="cta-arrow">↓</span>
       </a>
       <a class="hero-cta ghost" href={heroConfig.seeWorkHref}>

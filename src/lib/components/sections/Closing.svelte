@@ -21,7 +21,7 @@
       <a
         class="cta ghost mono"
         href="{base}/{closingConfig.resume}"
-        download>Download résumé ↓</a
+        download={closingConfig.resumeAs}>Download résumé ↓</a
       >
     </div>
   </div>
