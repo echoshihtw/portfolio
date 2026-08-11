@@ -6,7 +6,7 @@ import type { Projects } from "../lib/types/types.js";
 export const projectsConfig: Projects = [
   {
     name: "Clio",
-    subtitle: "Salon Operations — in daily use",
+    subtitle: "A salon in Tainan has run on it every day since May 2025",
     description:
       "A stylist has thirty seconds between greeting a client and starting work, and needs the last visit's formula in that time — not a paper file or a spreadsheet on someone else's phone. Clio holds clients, service history, designers and revenue in one place, in Chinese and English. In daily use at a salon in Tainan since May 2025: two designers, 603 clients, 2,694 records.",
     href: "https://cliohq.app",
@@ -32,11 +32,25 @@ export const projectsConfig: Projects = [
   },
   {
     name: "Runway",
-    subtitle: "Personal Financial Runway App",
+    subtitle: "Budget apps say where money went. This says how long you have",
     description:
       "Budget apps tell you where your money went. Nobody tells you how long you have. Runway answers one question for people living off savings — between jobs, studying, bootstrapping — and keeps answering it as the number moves. Built solo. Running on Android; iOS distribution in progress.",
     href: "#",
     now: "Working through iOS distribution, then one-time purchase via RevenueCat.",
+    shots: [
+      {
+        src: "assets/runway/dashboard.png",
+        alt: "Runway dashboard: 12 months remaining, caution state, cash and run-out date",
+      },
+      {
+        src: "assets/runway/ledger.png",
+        alt: "Runway ledger: opening balance, income and expenses for the month",
+      },
+      {
+        src: "assets/runway/subscriptions.png",
+        alt: "Runway subscriptions: monthly and yearly totals with per-item cadence",
+      },
+    ],
     stack: ["Flutter", "Dart", "Riverpod", "Drift", "SQLCipher"],
     highlights: [
       "Burn takes the worse of what you spent and what you budgeted — reality wins when you overspend, the budget holds the floor when you don't",
@@ -52,7 +66,7 @@ export const projectsConfig: Projects = [
   },
   {
     name: "Echology",
-    subtitle: "Bitcoin Coin-Selection Demo Wallet",
+    subtitle: "Which coins you spend decides what the transaction costs",
     href: "https://github.com/evanlinjin/echology",
     file: "assets/echology.png",
     description:
