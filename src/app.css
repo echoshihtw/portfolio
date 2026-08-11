@@ -131,8 +131,10 @@ code,
   @apply px-5 py-10 md:px-10 md:py-12;
 }
 
+/* Gap between a section title and its content. Was 2rem/2.5rem, which read
+   as a break rather than a heading attached to what follows. */
 .section_layout {
-  @apply flex flex-col gap-8 md:gap-10;
+  @apply flex flex-col gap-4 md:gap-5;
 }
 
 html,
