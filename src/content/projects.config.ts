@@ -7,7 +7,7 @@ export const projectsConfig: Projects = [
   {
     name: "Clio",
     subtitle: "Salon operations software, in daily use at a Tainan salon since May 2025",
-    why: "A stylist has about thirty seconds between greeting a client and starting work, and in that time needs the last visit's formula. It lived on paper, and in a spreadsheet on someone else's phone.",
+    why: "A friend who runs a salon lost her hard drive, and years of client records went with it. She had looked at salon software before and found all of it too complicated — so the problem was never a missing feature. She needed the two minutes before a client sits down: who they are, what was done last time, what it cost.",
     result:
       "In daily use at a salon in Tainan since May 2025 — two designers, 603 clients, 2,694 service records, with history entered back to September 2024. The owner typed a year of past appointments in by hand, which is not something people do for software they are trialling.",
     href: "https://cliohq.app",
@@ -24,6 +24,7 @@ export const projectsConfig: Projects = [
       "Tightened permission defaults without locking out existing staff: the migration writes intended values before the code stops assuming them",
       "Only the api layer may reach the database, and a test fails the build if anything else imports it",
       "The salon has patchy wifi, so reads work offline from cache and writes wait rather than failing silently",
+      "Records live in a hosted database, not on a machine that can die — the failure that started this cannot repeat",
     ],
     resumeLine:
       "Bilingual **React/Supabase** salon operations product in daily use at a Tainan salon **since May 2025**, supporting 603 clients and 2,694 service records with **Postgres RLS** and per-member permissions.",
