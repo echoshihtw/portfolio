@@ -29,7 +29,7 @@ export const heroConfig: {
   // Logistics, not intent. The ask lives in `seeking` below — a visitor who
   // wants to hire you should not have to infer that you want to be hired.
   remoteOpen: "UTC+8 · open to remote — APAC hours or async",
-  seeking: "Looking for a Senior Product Engineer role — remote, or Taipei.",
+  seeking: "Open to Product Engineer opportunities — remote from Taiwan or based in Taipei.",
 
   // Problem-solving spine — diagnosis + delivery + scope. Seniority implied by
   // the range of ownership, not by putting "Senior" in the introduction.
@@ -89,7 +89,7 @@ export const heroConfig: {
 // to scroll back up to act. This is the close.
 export const closingConfig = {
   heading: "Want to talk?",
-  body: "I am looking for a Senior Product Engineer role — remote, or in Taipei. If you have an ambiguous problem and need someone to own it end to end, that is the work I am best at.",
+  body: "Open to Product Engineer opportunities — remote from Taiwan or based in Taipei. If you have an ambiguous problem and need someone to own it end to end, that is the work I am best at.",
   email: "echoshihtw@gmail.com",
   resume: "resume.pdf",
 };
