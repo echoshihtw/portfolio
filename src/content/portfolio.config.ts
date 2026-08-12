@@ -102,7 +102,7 @@ export const skillsConfig: { label: string; items: string[] }[] = [
   { label: "Testing", items: ["Vitest", "React Testing Library", "pytest"] },
   // Personal local tooling used while delivering work — not team infrastructure.
   // Sits in skills, not in the hero proofs: there's no shippable artifact behind it.
-  { label: "AI & Automation", items: ["Claude Code", "Skills", "Hooks"] },
+  { label: "AI & Automation", items: ["Claude Code", "Skills", "Hooks", "Plugins"] },
 ];
 
 // Distilled experience copy, keyed by company (matches resumeData `experience`).
