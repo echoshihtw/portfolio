@@ -17,7 +17,7 @@
 
 # Summary
 
-Product engineer working in **React**, **TypeScript** and **Node.js**, with **Python** and **FastAPI** on the backend. I stay with a problem from interface to deploy — UI, services, data models, tests, **CI/CD** — because the experience breaks at the seams: a slow endpoint, a failed release, an app that gives up when the Wi-Fi does.
+Product engineer who owns problems end to end — from defining what to build, through UI, services, data models and tests, to **CI/CD** and deploy. I decide what to leave out as deliberately as what to ship, and I remove the cause of a problem rather than working around it, so what I hand over stays simple enough for other people to change. **React**, **TypeScript** and **Node.js**, with **Python** and **FastAPI** on the backend.
 
 # Experience
 
