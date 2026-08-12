@@ -53,7 +53,7 @@ export const heroConfig: {
   // evidence, which is deciding what to build and holding scope. The seams
   // line stays here and not on the CV: it is voice, and this is the voice layer.
   support:
-    "Product Engineer who owns problems end to end — from deciding what to build, through UI, services, data models and tests, to CI/CD and deploy. I stay with a problem because the experience breaks at the seams: a slow endpoint, a failed release, an app that gives up when the Wi-Fi does. React, TypeScript and Node.js, with Python and FastAPI on the backend.",
+    "Product Engineer who owns problems end to end — working out what to build, building it, shipping it, keeping it running. I stay with a problem because the experience breaks at the seams: a slow endpoint, a failed release, an app that gives up when the Wi-Fi does. React, TypeScript and Node.js, with Python and FastAPI behind them.",
 
   // One sentence, not a stat block. Three figures in columns is a SaaS
   // landing-page pattern: it invites comparison, and 603 read against other
