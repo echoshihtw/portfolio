@@ -17,7 +17,7 @@
 
 # Summary
 
-Product engineer who owns problems end to end — working out what to build, building it, shipping it, keeping it running. I am as careful about what I leave out as what I ship, and I fix causes rather than symptoms, so the next person can change my work without breaking it. **React**, **TypeScript** and **Node.js**, with **Python** and **FastAPI** behind them.
+Product engineer who owns problems end to end: working out what to build, building it, shipping it, and keeping it running. I decide what to leave out as carefully as what to ship, and I fix causes rather than symptoms. **React**, **TypeScript** and **Node.js**, with **Python** and **FastAPI** behind them.
 
 # Experience
 
