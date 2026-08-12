@@ -17,7 +17,7 @@
 
 # Summary
 
-Product engineer working in **React**, **TypeScript** and **FastAPI**. I stay with a problem from interface to deploy — UI, services, data models, tests, **CI/CD** — because the experience breaks at the seams: a slow endpoint, a failed release, an app that gives up when the Wi-Fi does.
+Product engineer working in **React**, **TypeScript** and **Node**, with **Python** and **FastAPI** on the backend. I stay with a problem from interface to deploy — UI, services, data models, tests, **CI/CD** — because the experience breaks at the seams: a slow endpoint, a failed release, an app that gives up when the Wi-Fi does.
 
 # Experience
 
