@@ -52,7 +52,7 @@ export const heroConfig: {
   // "Stay with", not "own": the claim is persistence, not possession, and it
   // matches the closing line. Keeps the stack names for scanners.
   support:
-    "Product Engineer working in React, TypeScript and Node, with Python and FastAPI on the backend. I stay with a problem from interface to deploy, because the experience breaks at the seams — a slow endpoint, a failed release, an app that gives up when the Wi-Fi does.",
+    "Product Engineer working in React, TypeScript and Node.js, with Python and FastAPI on the backend. I stay with a problem from interface to deploy, because the experience breaks at the seams — a slow endpoint, a failed release, an app that gives up when the Wi-Fi does.",
 
   // One sentence, not a stat block. Three figures in columns is a SaaS
   // landing-page pattern: it invites comparison, and 603 read against other
