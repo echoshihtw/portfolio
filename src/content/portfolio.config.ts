@@ -147,7 +147,8 @@ export const experiencePortfolio: Record<
       p: "A large production React codebase kept regressing on types.",
       s: "Drove an incremental JavaScript-to-TypeScript migration and built 100+ reusable components.",
     },
-    techLine: "React · TypeScript · Redux-Saga · Firebase · Server-Sent Events",
+    techLine:
+      "React · TypeScript · Redux-Saga · Firebase · Server-Sent Events · Google Analytics · Sentry",
   },
   "Independent / Freelance Engineering": {
     impact:
