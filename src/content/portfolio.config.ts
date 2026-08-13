@@ -127,7 +127,8 @@ export const experiencePortfolio: Record<
       p: "The layers had to stay independent — no direct browser-to-backend calls.",
       s: "Chose Next.js App Router and put a BFF security boundary in front: server-managed authentication, centralised CSRF protection, no backend credentials in browser JavaScript.",
     },
-    techLine: "Next.js · FastAPI · ArangoDB · RabbitMQ · Docker · GHCR",
+    techLine:
+      "Next.js · TanStack Query · FastAPI · ArangoDB · RabbitMQ · Docker · GHCR",
   },
   "SPIN.FASHION by Lablaco": {
     // Agreed title was Full Stack Engineer & Founding Partner — use it as agreed,
