@@ -23,13 +23,13 @@ Product engineer who owns problems end to end. I work out what to build, build i
 
 ## Lockerbie Technology (Musaeum Ltd, UK group)
 
-Full-Stack Engineer — Internal Platform · _Taipei, Taiwan · Dec 2024 – Present_
+Full-Stack Engineer — Internal Platform · _Taipei, Taiwan · Dec 2024 – Jul 2026_
 
-- Built and operate an early-stage internal project-management platform for the **UK construction sector**, working to **ISO 19650** information-management principles. One of two engineers, sole author of the **Next.js / TypeScript** frontend and its **UI patterns**.
-- Refactored the backend into the team's **event-driven modular monolith**, with modules communicating over **RabbitMQ** instead of importing each other, and set up the module template the team now builds against. The direction was the team's; the refactor was mine, with **RabbitMQ** and **ArangoDB** new to me.
+- Built and ran an early-stage internal project-management platform for the **UK construction sector**, working to **ISO 19650** information-management principles. One of two engineers, sole author of the **Next.js / TypeScript** frontend and its **UI patterns**.
+- Refactored the backend into the team's **event-driven modular monolith**, with modules communicating over **RabbitMQ** instead of importing each other, and set up the module template the team builds against. The direction was the team's; the refactor was mine, with **RabbitMQ** and **ArangoDB** new to me.
 - Given a requirement that layers stay independent, chose **Next.js App Router** and introduced a **BFF security boundary** with server-managed authentication and centralised **CSRF** protection, keeping backend credentials out of browser JavaScript.
 - Designed the platform's authorisation model — organisation-level and project-scoped roles resolved into capability flags, so services never reimplement access logic. Tested with **Vitest**, **React Testing Library** and **pytest**.
-- Requirements arrived as requests, so I wrote the product specification the team builds against, and held scope with a feature freeze until the first phase shipped.
+- Requirements arrived as requests, so I wrote the product specification the team built against, and held scope with a feature freeze until the first phase shipped.
 - Brought a new engineer into the codebase through daily pairing, from first contribution to shipping independently within two months.
 
 ## SPIN.FASHION by Lablaco
