@@ -19,11 +19,11 @@ npm run build-resume   # résumé → PDF + site data
 
 ## Content
 
-| File | Holds | Feeds |
-|---|---|---|
-| `content/resume.md` | summary, experience, skills | PDF + the site's experience cards |
-| `content/projects.config.ts` | projects | site card; PDF line if it has a `resumeLine` |
-| `content/portfolio.config.ts` | hero, per-role copy, skills strip | site |
+| File                          | Holds                             | Feeds                                        |
+| ----------------------------- | --------------------------------- | -------------------------------------------- |
+| `content/resume.md`           | summary, experience, skills       | PDF + the site's experience cards            |
+| `content/projects.config.ts`  | projects                          | site card; PDF line if it has a `resumeLine` |
+| `content/portfolio.config.ts` | hero, per-role copy, skills strip | site                                         |
 
 The résumé is formal and ATS-oriented, the site conversational. The overlap is
 deliberate.

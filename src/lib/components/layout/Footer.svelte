@@ -44,7 +44,8 @@
         <h2>Echo Shih</h2>
 
         <p class="footer-copy">
-          I build product software end to end — the frontend, the services, and the pipeline that ships them.
+          I build product software end to end — the frontend, the services, and
+          the pipeline that ships them.
         </p>
 
         <div class="footer-cta">

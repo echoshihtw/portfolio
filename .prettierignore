@@ -12,3 +12,12 @@ pnpm-lock.yaml
 package-lock.json
 yarn.lock
 /.cache/
+
+# Generated, never hand-edited — see resume-invariants. The résumé build emits
+# it unformatted, so checking it here would fail on every rebuild.
+src/lib/resumeData.ts
+
+# Installed tooling and build outputs, not project source.
+_bmad
+output
+static/resume.pdf

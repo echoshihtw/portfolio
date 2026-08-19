@@ -53,7 +53,10 @@ describe("parseExperience", () => {
   const jobs = parseExperience(extractSection("Experience", RESUME));
 
   it("finds every job", () => {
-    expect(jobs.map((j) => j.company)).toEqual(["Acme Ltd (Group plc)", "Beta Co"]);
+    expect(jobs.map((j) => j.company)).toEqual([
+      "Acme Ltd (Group plc)",
+      "Beta Co",
+    ]);
   });
 
   // Role, location and dates share one line to save vertical space on the

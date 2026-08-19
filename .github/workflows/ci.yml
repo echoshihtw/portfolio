@@ -29,34 +29,87 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
-      # Node 24 to match local: it ships npm 11, and npm 11 records optional
-      # platform packages differently from npm 10. A lockfile written by one
-      # and installed by the other fails — npm 10 tried to install
-      # @esbuild/netbsd-arm64 on a Linux runner. Same npm both sides, no drift.
+      # The version lives in .nvmrc and nowhere else, so `nvm use` here and the
+      # runner cannot disagree. It matters that they do not: Node 24 ships npm
+      # 11, and npm 11 records optional platform packages differently from npm
+      # 10. A lockfile written by one and installed by the other fails — npm 10
+      # tried to install @esbuild/netbsd-arm64 on a Linux runner.
       - uses: actions/setup-node@v7
         with:
-          node-version: 24
+          node-version-file: .nvmrc
           cache: npm
 
       # Installing TeX takes ~2 minutes and dominates this job, but the résumé
       # changes rarely. Key the built PDF on its sources: unchanged sources
       # mean no apt install and no rebuild.
+      # The key is a glob, not a list of files. The list had already fallen
+      # behind: the PDF is built from every config in src/content — projects
+      # and skills each render a section of it — while the key named only
+      # resume.md, so editing a project line or a skill hit the cache and
+      # deployed a résumé that did not match its source, with nothing failing.
+      # A glob cannot go stale when a new input file is added next to the
+      # others. It over-invalidates when site-only copy changes, which costs
+      # two minutes of TeX; under-invalidating costs a wrong PDF.
       - name: Restore built résumé
         id: resume
         uses: actions/cache@v6
         with:
           path: static/resume.pdf
-          key: resume-${{ hashFiles('src/content/resume.md', 'scripts/buildResume.ts', 'scripts/resume-header.tex') }}
+          key: resume-${{ hashFiles('src/content/**', 'scripts/buildResume.ts', 'scripts/resume-header.tex') }}
 
+      # texlive-fonts-extra is about a gigabyte and it is not optional — the
+      # résumé sets mainfont=XCharter, and Debian ships XCharter only there.
+      # So cache the .debs. A résumé edit busts the PDF cache below on every
+      # change; without this it would also re-download the whole of TeX each
+      # time, which is the part that actually costs minutes.
+      - name: Restore apt packages
+        id: apt
+        uses: actions/cache@v6
+        with:
+          path: /var/cache/apt/archives/*.deb
+          key: apt-resume-${{ hashFiles('scripts/resume-tex-packages.txt') }}
+
+      # timeout-minutes because this step has hung: on 19 Aug it sat in
+      # apt-get for 28 minutes with the log frozen, and a wedged step blocks
+      # the job until the six-hour default. Ten minutes is roughly twice a
+      # healthy cold install, so a timeout means something is wrong, not slow.
+      # Retries cover the ordinary case of a mirror dropping a connection.
       - name: Install Pandoc and XeLaTeX
         if: steps.resume.outputs.cache-hit != 'true'
+        timeout-minutes: 10
+        env:
+          DEBIAN_FRONTEND: noninteractive
         run: |
-          sudo apt-get update
-          sudo apt-get install -y --no-install-recommends \
-            pandoc texlive-xetex texlive-fonts-recommended texlive-fonts-extra \
-            lmodern poppler-utils
+          sudo rm -f /etc/apt/apt.conf.d/docker-clean
+          echo 'Binary::apt::APT::Keep-Downloaded-Packages "true";' \
+            | sudo tee /etc/apt/apt.conf.d/keep-debs > /dev/null
+
+          # Timeouts, not just retries. A retry only helps when the connection
+          # fails; on 19 Aug it stalled mid-download of a 27MB package and sat
+          # there, because apt has no timeout by default and will wait forever
+          # on a socket that never closes.
+          APT_OPTS="-o Acquire::Retries=3 -o Acquire::http::Timeout=30 -o Acquire::https::Timeout=30"
+          sudo apt-get update $APT_OPTS
+          sudo apt-get install -y --no-install-recommends $APT_OPTS \
+            $(grep -vE '^\s*(#|$)' scripts/resume-tex-packages.txt | tr '\n' ' ')
+
+          # pandoc from its own release rather than apt: the apt copy is the
+          # download that stalled, and pinning means CI and Vercel run the same
+          # version instead of whatever Ubuntu happens to ship.
+          PANDOC=$(cat scripts/pandoc-version.txt)
+          curl -fsSL --retry 3 --retry-connrefused --max-time 180 \
+            "https://github.com/jgm/pandoc/releases/download/${PANDOC}/pandoc-${PANDOC}-linux-amd64.tar.gz" \
+            | tar xz -C /tmp
+          sudo install -m 0755 "/tmp/pandoc-${PANDOC}/bin/pandoc" /usr/local/bin/pandoc
+          pandoc --version | head -1
 
       - run: npm ci
+
+      # Formatting and lint were a script nobody ran: `npm run lint` existed,
+      # no hook called it, and CI did not either — so fifteen files had drifted
+      # out of format without anything failing. Enforced here, in the one place
+      # that cannot be skipped or left uninstalled on a new machine.
+      - run: npm run lint
 
       - run: npm run check
 

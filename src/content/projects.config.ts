@@ -6,7 +6,8 @@ import type { Projects } from "../lib/types/types.js";
 export const projectsConfig: Projects = [
   {
     name: "Clio",
-    subtitle: "Salon operations software, in daily use at a Tainan salon since May 2025",
+    subtitle:
+      "Salon operations software, in daily use at a Tainan salon since May 2025",
     why: "A friend's hard drive died and took years of salon records with it. She had tried the existing software and found all of it too complicated. She did not need more features. She needed the two minutes before a client sits down: who they are, what was done last time, what it cost.",
     result:
       "The owner typed a year of past appointments in by hand. People do not migrate their own history into software they are still evaluating. In daily use at the salon since May 2025 — 603 clients, 2,694 service records, history entered back to September 2024. Small scale, and the constraints were real: her data, her livelihood, no room to be clever. What I would do differently is write the permission model down before building it, rather than discovering that afterwards.",
@@ -39,7 +40,8 @@ export const projectsConfig: Projects = [
   },
   {
     name: "Runway",
-    subtitle: "Personal finance measured the way a company measures itself — how long can you sustain yourself?",
+    subtitle:
+      "Personal finance measured the way a company measures itself — how long can you sustain yourself?",
     why: "I was planning a study trip and could not answer the one question it rested on: how long can I sustain myself? Budget apps tell you where the money went. I needed to know how much time was left. A person has an opening balance, a burn rate and months remaining — the same as a company. Cashflow is what constrains the plan, whatever the plan is.",
     result:
       "I use it. Running on Android, in seven languages and six currencies, built solo. iOS distribution is in progress — the release workflows exist but no tag has been cut, so nothing is on TestFlight or Play yet. One user is not validation. I built the model before I knew whether anyone else wanted it, which is the wrong order, and it is why the next thing I do here is put it in front of people rather than add features.",
@@ -73,7 +75,8 @@ export const projectsConfig: Projects = [
   },
   {
     name: "Echology",
-    subtitle: "A demo wallet for studying how Bitcoin coin-selection algorithms behave",
+    subtitle:
+      "A demo wallet for studying how Bitcoin coin-selection algorithms behave",
     href: "https://github.com/evanlinjin/echology",
     file: "assets/echology.png",
     why: "Coin selection is the algorithm that decides which coins a transaction spends. It sets the fee. Its trade-offs only surface as numbers — waste, fee, feerate deviation — and only under one exact set of inputs. Hold the inputs still and the behaviour becomes comparable.",

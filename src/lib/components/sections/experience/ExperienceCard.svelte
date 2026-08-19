@@ -13,19 +13,14 @@
 
   let expanded = false;
 
-  const escapeHtml = (v: string) =>
+  // Highlights carry **bold** markers from the résumé source. Splitting on the
+  // marker and letting Svelte render each part means no HTML string is ever
+  // built, so there is nothing to escape and nothing to inject — the escaping
+  // this used to do only existed because the output went through {@html}.
+  const boldSegments = (v: string) =>
     v
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;")
-      .replace(/'/g, "&#39;");
-
-  const renderInlineBold = (v: string) =>
-    escapeHtml(v).replace(
-      /\*\*\s*([^*][\s\S]*?)\s*\*\*/g,
-      "<strong>$1</strong>"
-    );
+      .split(/\*\*\s*([^*][\s\S]*?)\s*\*\*/g)
+      .map((text, i) => ({ text, bold: i % 2 === 1 }));
 
   $: cleanRole = item.role.replace(/\*\*/g, "").trim();
 </script>
@@ -37,7 +32,10 @@
 
   {#if copy}
     <p class="impact">{copy.impact}</p>
-    <p class="proof"><span class="p">{copy.proof.p}</span> {copy.proof.s}</p>
+    <p class="proof">
+      <span class="p">{copy.proof.p}</span>
+      {copy.proof.s}
+    </p>
     <p class="tech mono">{copy.techLine}</p>
   {/if}
 
@@ -50,9 +48,16 @@
   </button>
 
   {#if expanded}
-    <ul class="details" transition:slide|local={{ duration: 220 }}>
+    <ul
+      class="details"
+      transition:slide|local={{ duration: 220 }}
+    >
       {#each item.highlights as h}
-        <li>{@html renderInlineBold(h)}</li>
+        <li>
+          {#each boldSegments(h) as seg}{#if seg.bold}<strong>
+                {seg.text}
+              </strong>{:else}{seg.text}{/if}{/each}
+        </li>
       {/each}
     </ul>
   {/if}

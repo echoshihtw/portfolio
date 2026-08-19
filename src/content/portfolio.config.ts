@@ -65,8 +65,6 @@ export const heroConfig: {
   proofLine:
     "A salon in Tainan has run its business on software I built since May 2025 — 603 clients, 2,694 records, entered by hand.",
 
-
-
   email: "echoshihtw@gmail.com",
   resume: "resume.pdf", // served from /static, base-prefixed at render
   // What the file is called once it lands in someone's downloads folder, and
