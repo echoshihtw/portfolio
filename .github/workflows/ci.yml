@@ -124,6 +124,11 @@ jobs:
           pages=$(pdfinfo static/resume.pdf | awk '/^Pages:/ {print $2}')
           test "$pages" = "1" || { echo "::error::résumé must be one page, got $pages"; exit 1; }
 
+      # Two homes, one build. Vercel serves echoshih.com from the root and
+      # supplies no BASE_PATH, so svelte.config falls back to "". Pages keeps
+      # serving the old project URL for the CVs already sent out, and that one
+      # lives under /portfolio — so this build passes the base explicitly.
+      # The config reads it now; before, it was set here and ignored.
       - name: Build site
         env:
           BASE_PATH: "/${{ github.event.repository.name }}"
