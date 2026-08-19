@@ -1,0 +1,12 @@
+# System packages the résumé build needs. One per line, # for comments.
+# Kept in a file rather than inline in the workflow so the apt cache can be
+# keyed on the package list itself — keyed on the workflow, any unrelated edit
+# to CI would throw away a gigabyte of TeX.
+pandoc
+texlive-xetex
+texlive-fonts-recommended
+# XCharter lives here and nowhere else in Debian packaging; the résumé sets
+# mainfont=XCharter, so this ~1GB package is not optional.
+texlive-fonts-extra
+lmodern
+poppler-utils

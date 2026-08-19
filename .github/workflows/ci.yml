@@ -57,13 +57,35 @@ jobs:
           path: static/resume.pdf
           key: resume-${{ hashFiles('src/content/**', 'scripts/buildResume.ts', 'scripts/resume-header.tex') }}
 
+      # texlive-fonts-extra is about a gigabyte and it is not optional — the
+      # résumé sets mainfont=XCharter, and Debian ships XCharter only there.
+      # So cache the .debs. A résumé edit busts the PDF cache below on every
+      # change; without this it would also re-download the whole of TeX each
+      # time, which is the part that actually costs minutes.
+      - name: Restore apt packages
+        id: apt
+        uses: actions/cache@v6
+        with:
+          path: /var/cache/apt/archives/*.deb
+          key: apt-resume-${{ hashFiles('scripts/resume-tex-packages.txt') }}
+
+      # timeout-minutes because this step has hung: on 19 Aug it sat in
+      # apt-get for 28 minutes with the log frozen, and a wedged step blocks
+      # the job until the six-hour default. Ten minutes is roughly twice a
+      # healthy cold install, so a timeout means something is wrong, not slow.
+      # Retries cover the ordinary case of a mirror dropping a connection.
       - name: Install Pandoc and XeLaTeX
         if: steps.resume.outputs.cache-hit != 'true'
+        timeout-minutes: 10
+        env:
+          DEBIAN_FRONTEND: noninteractive
         run: |
-          sudo apt-get update
-          sudo apt-get install -y --no-install-recommends \
-            pandoc texlive-xetex texlive-fonts-recommended texlive-fonts-extra \
-            lmodern poppler-utils
+          sudo rm -f /etc/apt/apt.conf.d/docker-clean
+          echo 'Binary::apt::APT::Keep-Downloaded-Packages "true";' \
+            | sudo tee /etc/apt/apt.conf.d/keep-debs > /dev/null
+          sudo apt-get update -o Acquire::Retries=3
+          sudo apt-get install -y --no-install-recommends -o Acquire::Retries=3 \
+            $(grep -vE '^\s*(#|$)' scripts/resume-tex-packages.txt | tr '\n' ' ')
 
       - run: npm ci
 
