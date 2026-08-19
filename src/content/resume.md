@@ -17,7 +17,7 @@
 
 # Summary
 
-Product engineer who owns problems end to end — mostly systems of record: project platforms, applicant tracking, client histories. I work out what to build, build it, ship it, and keep it running. **React**, **TypeScript** and **Node.js**, with **Python** and **FastAPI** behind them.
+Product engineer who designs the system, not just the feature — then builds it, ships it, and keeps it running. Mostly systems of record: project platforms, applicant tracking, client histories. **React**, **TypeScript** and **Node.js**, with **Python** and **FastAPI** behind them.
 
 # Experience
 
