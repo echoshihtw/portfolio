@@ -52,7 +52,9 @@ const PROJECTS_MARKER =
 export function withProjects(markdown) {
   const lines = projectsConfig
     .filter((p) => p.resumeLine)
-    .map((p) => `**${p.name}** — _Founder / Product Engineer_ · ${p.resumeLine}`)
+    .map(
+      (p) => `**${p.name}** — _Founder / Product Engineer_ · ${p.resumeLine}`
+    )
     .join("\n\n");
 
   if (!markdown.includes(PROJECTS_MARKER)) {
@@ -130,7 +132,10 @@ export function parseExperience(section) {
     // separate role and date fields.
     if (!dateLine && roleLine.includes(" · ")) {
       const cut = roleLine.indexOf(" · ");
-      dateLine = roleLine.slice(cut + 3).trim().replace(/^_|_$/g, "");
+      dateLine = roleLine
+        .slice(cut + 3)
+        .trim()
+        .replace(/^_|_$/g, "");
       roleLine = roleLine.slice(0, cut).trim();
     }
 

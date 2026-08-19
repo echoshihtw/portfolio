@@ -2,12 +2,13 @@
   import FloatingNav from "./FloatingNav.svelte";
   import Footer from "./Footer.svelte";
   import Header from "./Header.svelte";
-  import { onMount } from "svelte";
+  import { onMount, type ComponentType } from "svelte";
   import { particlesInit } from "@tsparticles/svelte";
   import { loadSlim } from "@tsparticles/slim";
 
   let scrollPosition: number;
-  let ParticlesComponent: any;
+  // Loaded on mount, so it is undefined for the first render.
+  let ParticlesComponent: ComponentType | undefined;
   let previousScrollY = 0;
   let isHeaderVisible = true;
   let showNavBackdrop = false;

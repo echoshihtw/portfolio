@@ -34,8 +34,10 @@
         <button
           class="close mono"
           on:click={() => dialog.close()}
-          aria-label="Close">✕</button
+          aria-label="Close"
         >
+          ✕
+        </button>
       </header>
 
       <p class="hook">{project.subtitle}</p>
@@ -90,8 +92,10 @@
         class="link mono"
         href={project.href}
         target="_blank"
-        rel="noreferrer noopener">{project.linkLabel || "View"}</a
+        rel="noreferrer noopener"
       >
+        {project.linkLabel || "View"}
+      </a>
     </article>
   {/if}
 </dialog>

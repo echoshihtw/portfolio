@@ -3,20 +3,26 @@
   import { heroConfig } from "../../../../content/portfolio.config";
 </script>
 
-<section id="home" class="hero-section section_padding">
+<section
+  id="home"
+  class="hero-section section_padding"
+>
   <div class="hero-wrap">
     <div class="hero-top">
       <p class="hero-kicker mono">{heroConfig.kicker}</p>
       <span class="hero-avail mono">
-        <span class="avail-dot" aria-hidden="true" />
+        <span
+          class="avail-dot"
+          aria-hidden="true"
+        />
         {heroConfig.remoteOpen}
       </span>
     </div>
 
     <h1 class="hero-headline">
-      {#each heroConfig.headline as part}<span
-          class:accent={part.accent}>{part.text}</span
-        >{/each}
+      {#each heroConfig.headline as part}<span class:accent={part.accent}>
+          {part.text}
+        </span>{/each}
     </h1>
 
     <p class="hero-support mono">{heroConfig.support}</p>
@@ -30,15 +36,25 @@
     <p class="hero-proofline">{heroConfig.proofLine}</p>
 
     <div class="hero-links">
-      <a class="hero-cta primary" href="{base}/{heroConfig.resume}" download={heroConfig.resumeAs}>
+      <a
+        class="hero-cta primary"
+        href="{base}/{heroConfig.resume}"
+        download={heroConfig.resumeAs}
+      >
         Download résumé <span class="cta-arrow">↓</span>
       </a>
-      <a class="hero-cta ghost" href={heroConfig.seeWorkHref}>
+      <a
+        class="hero-cta ghost"
+        href={heroConfig.seeWorkHref}
+      >
         See the work <span class="cta-arrow">→</span>
       </a>
-      <a class="hero-email mono" href="mailto:{heroConfig.email}"
-        >{heroConfig.email}</a
+      <a
+        class="hero-email mono"
+        href="mailto:{heroConfig.email}"
       >
+        {heroConfig.email}
+      </a>
     </div>
   </div>
 </section>

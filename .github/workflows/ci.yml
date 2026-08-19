@@ -58,6 +58,12 @@ jobs:
 
       - run: npm ci
 
+      # Formatting and lint were a script nobody ran: `npm run lint` existed,
+      # no hook called it, and CI did not either — so fifteen files had drifted
+      # out of format without anything failing. Enforced here, in the one place
+      # that cannot be skipped or left uninstalled on a new machine.
+      - run: npm run lint
+
       - run: npm run check
 
       - run: npm test

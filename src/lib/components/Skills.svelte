@@ -2,7 +2,10 @@
   import { skillsConfig } from "../../content/portfolio.config";
 </script>
 
-<section id="skills" class="section_padding section_layout">
+<section
+  id="skills"
+  class="section_padding section_layout"
+>
   <h3 class="section_title">#skills</h3>
 
   <div class="skills">

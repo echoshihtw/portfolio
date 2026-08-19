@@ -4,13 +4,19 @@
   import ExperienceCard from "./ExperienceCard.svelte";
 </script>
 
-<section id="work" class="section_padding section_layout">
+<section
+  id="work"
+  class="section_padding section_layout"
+>
   <h3 class="section_title">#work</h3>
 
   <div class="timeline">
     {#each experience as item}
       <div class="tl-entry">
-        <ExperienceCard {item} copy={experiencePortfolio[item.company]} />
+        <ExperienceCard
+          {item}
+          copy={experiencePortfolio[item.company]}
+        />
       </div>
     {/each}
   </div>

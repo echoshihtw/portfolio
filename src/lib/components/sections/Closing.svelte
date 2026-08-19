@@ -16,13 +16,17 @@
     <div class="actions">
       <a
         class="cta primary"
-        href="mailto:{closingConfig.email}">{closingConfig.email}</a
+        href="mailto:{closingConfig.email}"
       >
+        {closingConfig.email}
+      </a>
       <a
         class="cta ghost mono"
         href="{base}/{closingConfig.resume}"
-        download={closingConfig.resumeAs}>Download résumé ↓</a
+        download={closingConfig.resumeAs}
       >
+        Download résumé ↓
+      </a>
     </div>
   </div>
 </section>
