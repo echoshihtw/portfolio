@@ -27,7 +27,7 @@ export const experience: ExperienceItem[] = [
     "role": "Full Stack Engineer & Founding Partner",
     "date": "Singapore · Remote · Aug 2024 – Oct 2024",
     "highlights": [
-      "Cleared the **macOS Electron code-signing, notarisation and auto-update** blocker that was stopping release. The desktop app shipped, and the deployment steps are written down for the team."
+      "Founding partner on **SPIN Connect**, the in-store desktop app. Cleared the **macOS code-signing, notarisation and auto-update** work blocking release, shipped the **Electron** app, and wrote the deployment steps down for the team."
     ]
   },
   {
@@ -35,8 +35,9 @@ export const experience: ExperienceItem[] = [
     "role": "Software Engineer",
     "date": "Taipei, Taiwan · Aug 2022 – May 2024",
     "highlights": [
-      "Led frontend delivery for a **B2B recruitment and ATS platform** in **React and TypeScript** — two-engineer product team, reporting to the CTO. Drove an incremental **JavaScript-to-TypeScript** migration and built **100+ reusable components** across a large production codebase.",
-      "Consumed a **Server-Sent Events** stream on the frontend so AI-generated drafts rendered as they arrived, rather than after a wait."
+      "Took over frontend delivery on a **B2B and B2C recruitment and ATS platform** in **React and TypeScript** — two-engineer product team, reporting to the CTO — as the work was handed to me across the two years. Migrated features to **TypeScript** as part of an incremental codebase-wide migration, and authored around 100 of its shared components.",
+      "Wrote the **Server-Sent Events** channel the frontend consumed AI-generated drafts through.",
+      "Built job-opening filtering on the careers pages end to end — filter bar, sorting, the employer settings behind it, and a shared dropdown component with tests."
     ]
   },
   {
@@ -44,7 +45,7 @@ export const experience: ExperienceItem[] = [
     "role": "Product Engineer",
     "date": "Remote · 2020 – Present",
     "highlights": [
-      "Built the **Next.js frontend for a Bitcoin coin-selection research tool** with a **BDK core maintainer**, alongside product work across fintech, e-commerce and research."
+      "Built the **Next.js frontend for a Bitcoin coin-selection research tool** with a **BDK core maintainer**, alongside contract product work in fintech, e-commerce and research."
     ]
   }
 ];

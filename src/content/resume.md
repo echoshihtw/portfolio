@@ -17,7 +17,7 @@
 
 # Summary
 
-Product engineer who owns problems end to end. I work out what to build, build it, ship it, and keep it running, because the experience breaks at the seams: a slow endpoint, a failed release, an app that gives up when the Wi-Fi does. **React**, **TypeScript** and **Node.js**, with **Python** and **FastAPI** behind them.
+Product engineer who owns problems end to end — mostly systems of record: project platforms, applicant tracking, client histories. I work out what to build, build it, ship it, and keep it running. **React**, **TypeScript** and **Node.js**, with **Python** and **FastAPI** behind them.
 
 # Experience
 
@@ -36,20 +36,21 @@ Full-Stack Engineer — Internal Platform · _Taipei, Taiwan · Dec 2024 – Jul
 
 Full Stack Engineer & Founding Partner · _Singapore · Remote · Aug 2024 – Oct 2024_
 
-- Cleared the **macOS Electron code-signing, notarisation and auto-update** blocker that was stopping release. The desktop app shipped, and the deployment steps are written down for the team.
+- Founding partner on **SPIN Connect**, the in-store desktop app. Cleared the **macOS code-signing, notarisation and auto-update** work blocking release, shipped the **Electron** app, and wrote the deployment steps down for the team.
 
 ## Find Recruiter
 
 Software Engineer · _Taipei, Taiwan · Aug 2022 – May 2024_
 
-- Led frontend delivery for a **B2B recruitment and ATS platform** in **React and TypeScript** — two-engineer product team, reporting to the CTO. Drove an incremental **JavaScript-to-TypeScript** migration and built **100+ reusable components** across a large production codebase.
-- Consumed a **Server-Sent Events** stream on the frontend so AI-generated drafts rendered as they arrived, rather than after a wait.
+- Took over frontend delivery on a **B2B and B2C recruitment and ATS platform** in **React and TypeScript** — two-engineer product team, reporting to the CTO — as the work was handed to me across the two years. Migrated features to **TypeScript** as part of an incremental codebase-wide migration, and authored around 100 of its shared components.
+- Wrote the **Server-Sent Events** channel the frontend consumed AI-generated drafts through.
+- Built job-opening filtering on the careers pages end to end — filter bar, sorting, the employer settings behind it, and a shared dropdown component with tests.
 
 ## Independent / Freelance Engineering
 
 Product Engineer · _Remote · 2020 – Present_
 
-- Built the **Next.js frontend for a Bitcoin coin-selection research tool** with a **BDK core maintainer**, alongside product work across fintech, e-commerce and research.
+- Built the **Next.js frontend for a Bitcoin coin-selection research tool** with a **BDK core maintainer**, alongside contract product work in fintech, e-commerce and research.
 
 # Projects
 
@@ -57,10 +58,7 @@ Product Engineer · _Remote · 2020 – Present_
 
 # Skills
 
-**Frontend & UI** — React · Next.js · TypeScript · TanStack Query · Zustand · Redux · MUI · Tailwind CSS · design systems · UI patterns  
-**Backend & Data** — FastAPI · Python · Node.js · Postgres · ArangoDB · Supabase · RabbitMQ · SQLite  
-**Infra & Quality** — Docker · GitHub Actions · GHCR · AWS · Vitest · React Testing Library · pytest · Claude Code  
-**Mobile & Desktop** — Flutter · Dart · Tauri · Electron
+<!-- generated from src/content/skills.config.ts — items marked site-only are omitted -->
 
 # Education
 

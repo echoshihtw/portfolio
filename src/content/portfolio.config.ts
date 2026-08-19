@@ -48,12 +48,15 @@ export const heroConfig: {
     { text: "." },
   ],
 
-  // Ownership leads, stack follows. An earlier version led with the stack and
-  // argued breadth — a capable-IC claim that set up none of the strongest
-  // evidence, which is deciding what to build and holding scope. The seams
-  // line stays here and not on the CV: it is voice, and this is the voice layer.
+  // Ownership leads, the shape of the work follows, stack last. An earlier
+  // version led with the stack and argued breadth — a capable-IC claim that set
+  // up none of the strongest evidence, which is deciding what to build and
+  // holding scope. The seams line stays here and not on the CV: it is voice,
+  // and this is the voice layer. The system-of-record sentence is the opposite
+  // trade — it is the same on both, because it answers "you have no experience
+  // in our domain" and that question gets asked in every screen.
   support:
-    "Product Engineer who owns problems end to end. I work out what to build, build it, ship it, and keep it running, because the experience breaks at the seams: a slow endpoint, a failed release, an app that gives up when the Wi-Fi does. React, TypeScript and Node.js, with Python and FastAPI behind them.",
+    "Product Engineer who owns problems end to end. Most of what I build is a system of record — project platforms, applicant tracking, client histories. I work out what to build, build it, ship it, and keep it running, because the experience breaks at the seams: a slow endpoint, a failed release, an app that gives up when the Wi-Fi does. React, TypeScript and Node.js, with Python and FastAPI behind them.",
 
   // One sentence, not a stat block. Three figures in columns is a SaaS
   // landing-page pattern: it invites comparison, and 603 read against other
@@ -82,28 +85,9 @@ export const closingConfig = {
   resumeAs: "Chun-Yu-Echo-Shih-Product-Engineer.pdf",
 };
 
-// Curated, portfolio-facing skills — signal over completeness (PG/Jobs).
-// The full keyword list stays in resume.md for the ATS-friendly PDF.
-// Buckets aligned to the "full-spectrum" story: Frontend · Mobile · Backend · Infra.
-export const skillsConfig: { label: string; items: string[] }[] = [
-  { label: "Frontend", items: ["React", "Next.js", "TypeScript", "Tailwind"] },
-  // Grounded: a design_system package in Runway, a documented design system in
-  // Clio, and the UI patterns I wrote for the Lockerbie frontend.
-  { label: "UI & design", items: ["Design systems", "UI patterns", "Responsive & accessible"] },
-  { label: "Mobile", items: ["Flutter", "Dart", "Riverpod"] },
-  {
-    label: "Backend & Data",
-    items: ["FastAPI", "Node.js", "Postgres", "ArangoDB", "RabbitMQ"],
-  },
-  {
-    label: "Infra & CI/CD",
-    items: ["Docker", "GitHub Actions", "GHCR", "AWS"],
-  },
-  { label: "Testing", items: ["Vitest", "React Testing Library", "pytest"] },
-  // Personal local tooling used while delivering work — not team infrastructure.
-  // Sits in skills, not in the hero proofs: there's no shippable artifact behind it.
-  { label: "AI & Automation", items: ["Claude Code", "Skills", "Hooks", "Plugins"] },
-];
+// Skills live in skills.config.ts — one list, rendered to the PDF and to the
+// page. Re-exported here so the Skills component's import does not move.
+export { skillsConfig } from "./skills.config.js";
 
 // Distilled experience copy, keyed by company (matches resumeData `experience`).
 // The full formal bullets stay in resume.md and show in the "details" expander.
@@ -134,7 +118,7 @@ export const experiencePortfolio: Record<
     // Agreed title was Full Stack Engineer & Founding Partner — use it as agreed,
     // not a paraphrase.
     impact:
-      "Full stack engineer and founding partner on SPIN Connect — the in-store desktop app — over a three-month engagement, working remotely across time zones.",
+      "Full stack engineer and founding partner on SPIN Connect — the in-store desktop app — working remotely across time zones.",
     proof: {
       p: "The macOS build couldn't ship.",
       s: "Fixed code-signing, notarisation and auto-update. The desktop app shipped, and the release steps are written down.",
@@ -143,7 +127,7 @@ export const experiencePortfolio: Record<
   },
   "Find Recruiter": {
     impact:
-      "Front-end lead on a B2B recruiting and ATS platform used by employers and agencies — a two-engineer product team reporting to the CTO.",
+      "Took the frontend over on a recruiting and ATS platform used by employers, agencies and individual headhunters — a two-engineer product team reporting to the CTO.",
     proof: {
       p: "A large production React codebase kept regressing on types.",
       s: "Drove an incremental JavaScript-to-TypeScript migration and built 100+ reusable components.",
