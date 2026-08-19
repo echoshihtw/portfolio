@@ -85,28 +85,9 @@ export const closingConfig = {
   resumeAs: "Chun-Yu-Echo-Shih-Product-Engineer.pdf",
 };
 
-// Curated, portfolio-facing skills — signal over completeness (PG/Jobs).
-// The full keyword list stays in resume.md for the ATS-friendly PDF.
-// Buckets aligned to the "full-spectrum" story: Frontend · Mobile · Backend · Infra.
-export const skillsConfig: { label: string; items: string[] }[] = [
-  { label: "Frontend", items: ["React", "Next.js", "TypeScript", "Tailwind"] },
-  // Grounded: a design_system package in Runway, a documented design system in
-  // Clio, and the UI patterns I wrote for the Lockerbie frontend.
-  { label: "UI & design", items: ["Design systems", "UI patterns", "Responsive & accessible"] },
-  { label: "Mobile", items: ["Flutter", "Dart", "Riverpod"] },
-  {
-    label: "Backend & Data",
-    items: ["FastAPI", "Node.js", "Postgres", "ArangoDB", "RabbitMQ"],
-  },
-  {
-    label: "Infra & CI/CD",
-    items: ["Docker", "GitHub Actions", "GHCR", "AWS"],
-  },
-  { label: "Testing", items: ["Vitest", "React Testing Library", "pytest"] },
-  // Personal local tooling used while delivering work — not team infrastructure.
-  // Sits in skills, not in the hero proofs: there's no shippable artifact behind it.
-  { label: "AI & Automation", items: ["Claude Code", "Skills", "Hooks", "Plugins"] },
-];
+// Skills live in skills.config.ts — one list, rendered to the PDF and to the
+// page. Re-exported here so the Skills component's import does not move.
+export { skillsConfig } from "./skills.config.js";
 
 // Distilled experience copy, keyed by company (matches resumeData `experience`).
 // The full formal bullets stay in resume.md and show in the "details" expander.
@@ -137,7 +118,7 @@ export const experiencePortfolio: Record<
     // Agreed title was Full Stack Engineer & Founding Partner — use it as agreed,
     // not a paraphrase.
     impact:
-      "Full stack engineer and founding partner on SPIN Connect — the in-store desktop app — over a three-month engagement, working remotely across time zones.",
+      "Full stack engineer and founding partner on SPIN Connect — the in-store desktop app — working remotely across time zones.",
     proof: {
       p: "The macOS build couldn't ship.",
       s: "Fixed code-signing, notarisation and auto-update. The desktop app shipped, and the release steps are written down.",

@@ -4,6 +4,7 @@ import path from "path";
 import { execFileSync } from "child_process";
 import { projectsConfig } from "../src/content/projects.config.js";
 import { experiencePortfolio } from "../src/content/portfolio.config.js";
+import { resumeSkillLines } from "../src/content/skills.config.js";
 
 const ROOT = process.cwd();
 const RESUME_PATH = path.join(ROOT, "src", "content", "resume.md");
@@ -34,6 +35,16 @@ rendered twice: a card on the site, one line on the PDF. A project with no
 resumeLine is site-only — the page has room, one page of A4 does not.
 --------------------------------------------------
 */
+
+const SKILLS_MARKER =
+  "<!-- generated from src/content/skills.config.ts — items marked site-only are omitted -->";
+
+export function withSkills(markdown) {
+  if (!markdown.includes(SKILLS_MARKER)) {
+    throw new Error("resume.md is missing the skills marker comment");
+  }
+  return markdown.replace(SKILLS_MARKER, resumeSkillLines());
+}
 
 const PROJECTS_MARKER =
   "<!-- generated from src/content/projects.config.ts — projects with a resumeLine -->";
@@ -147,10 +158,11 @@ Build Resume Data
 function buildResumeData(markdown) {
   const experience = parseExperience(extractSection("Experience", markdown));
 
-  // Only what the site actually imports. Skills come from
-  // portfolio.config.ts and projects from projects.config.ts; generating
-  // them here too produced exports nobody read, and made editing skills in
-  // resume.md look broken — the PDF changed, the site did not.
+  // Only what the site actually imports. Skills come from skills.config.ts
+  // and projects from projects.config.ts; generating them here too produced
+  // exports nobody read. Skills used to be written twice — that is what made
+  // editing resume.md look broken, the PDF changing while the site did not —
+  // and skills.config.ts is now the single list behind both.
   // The site joins portfolio copy to experience by company name, and a
   // mismatch renders an empty card with no error. Fail here instead.
   const companies = experience.map((e) => e.company);
@@ -270,7 +282,7 @@ function run() {
   buildResumeData(markdown);
 
   // pandoc reads the composed copy, never the source
-  fs.writeFileSync(BUILD_MD, withProjects(markdown));
+  fs.writeFileSync(BUILD_MD, withSkills(withProjects(markdown)));
 
   buildHTML();
   buildPDF();
