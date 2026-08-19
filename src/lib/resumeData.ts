@@ -36,7 +36,8 @@ export const experience: ExperienceItem[] = [
     "date": "Taipei, Taiwan · Aug 2022 – May 2024",
     "highlights": [
       "Led frontend delivery for a **B2B recruitment and ATS platform** in **React and TypeScript** — two-engineer product team, reporting to the CTO. Drove an incremental **JavaScript-to-TypeScript** migration and built **100+ reusable components** across a large production codebase.",
-      "Wrote the **Server-Sent Events** channel the frontend consumed AI-generated drafts through."
+      "Wrote the **Server-Sent Events** channel the frontend consumed AI-generated drafts through.",
+      "Built job-opening filtering on the careers pages end to end — filter bar, sorting, the employer settings behind it, and a shared dropdown component with tests."
     ]
   },
   {
