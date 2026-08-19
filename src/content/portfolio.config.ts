@@ -135,7 +135,7 @@ export const experiencePortfolio: Record<
   },
   "Independent / Freelance Engineering": {
     impact:
-      "Full-stack product work across fintech, research, e-commerce, and creative industries — remote, since 2020.",
+      "Full-stack product work across fintech, research, e-commerce, and creative industries — remote, 2020–2024.",
     proof: {
       p: "A Bitcoin coin-selection research tool needed a frontend.",
       s: "Built the frontend in Next.js alongside a BDK core maintainer — UTXO coin-control, fee scenarios, selection metrics.",

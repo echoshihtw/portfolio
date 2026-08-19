@@ -10,14 +10,14 @@
 {\large Product Engineer · React · TypeScript · Next.js · Product Ownership}\\[3pt]
 % Two deliberate lines: availability first, then contacts. As one line it wrapped
 % and left the portfolio URL stranded on its own.
-{\small\color{muted}Taipei, Taiwan (UTC+8) · Remote — APAC hours or async}\\[1pt]
+{\small\color{muted}Taipei, Taiwan (UTC+8) · Remote — APAC hours or async · Available now}\\[1pt]
 {\small\color{muted}echoshihtw@gmail.com · linkedin.com/in/echoshihtw · github.com/echoshihtw · echoshih.com}
 \vspace{2pt}
 ```
 
 # Summary
 
-Product engineer who owns problems end to end — mostly systems of record: project platforms, applicant tracking, client histories. I work out what to build, build it, ship it, and keep it running. **React**, **TypeScript** and **Node.js**, with **Python** and **FastAPI** behind them.
+Product engineer who designs the system, not just the feature — then builds it, ships it, and keeps it running. Mostly systems of record: project platforms, applicant tracking, client histories. **React**, **TypeScript** and **Node.js**, with **Python** and **FastAPI** behind them.
 
 # Experience
 
@@ -27,9 +27,9 @@ Full-Stack Engineer — Internal Platform · _Taipei, Taiwan · Dec 2024 – Jul
 
 - Built and ran an early-stage internal project-management platform for the **UK construction sector**, working to **ISO 19650** information-management principles. One of two engineers, sole author of the **Next.js / TypeScript** frontend and its **UI patterns**.
 - Refactored the backend into the team's **event-driven modular monolith**, with modules communicating over **RabbitMQ** instead of importing each other, and set up the module template the team builds against. The direction was the team's; the refactor was mine, with **RabbitMQ** and **ArangoDB** new to me.
+- Diagnosed a **RabbitMQ** RPC bug where a stale, uninitialised consumer round-robined into login lookups and failed every user's first attempt; fixed it with a fail-fast DB check before broker registration.
 - Given a requirement that layers stay independent, chose **Next.js App Router** and introduced a **BFF security boundary** with server-managed authentication and centralised **CSRF** protection, keeping backend credentials out of browser JavaScript.
 - Designed the platform's authorisation model — organisation-level and project-scoped roles resolved into capability flags, so services never reimplement access logic. Tested with **Vitest**, **React Testing Library** and **pytest**.
-- Requirements arrived as requests, so I wrote the product specification the team built against, and held scope with a feature freeze until the first phase shipped.
 - Brought a new engineer into the codebase through daily pairing, from first contribution to shipping independently within two months.
 
 ## SPIN.FASHION by Lablaco
@@ -48,7 +48,7 @@ Software Engineer · _Taipei, Taiwan · Aug 2022 – May 2024_
 
 ## Independent / Freelance Engineering
 
-Product Engineer · _Remote · 2020 – Present_
+Product Engineer · _Remote · 2020 – 2024_
 
 - Built the **Next.js frontend for a Bitcoin coin-selection research tool** with a **BDK core maintainer** (2023), and fixed and optimised a **BigCommerce** storefront for Bdigital (2024).
 
