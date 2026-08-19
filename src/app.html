@@ -2,6 +2,23 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <script>
+      // The old GitHub Pages project URL keeps serving (Vercel can't redirect
+      // a domain it doesn't own, and CVs already sent point at it), but the
+      // canonical home is echoshih.com now. A client-side redirect is the
+      // only option static Pages hosting offers — strip the /portfolio base
+      // and forward the rest of the path.
+      (() => {
+        if (location.hostname !== "echoshihtw.github.io") return;
+        const base = "/portfolio";
+        const path = location.pathname.startsWith(base)
+          ? location.pathname.slice(base.length)
+          : location.pathname;
+        location.replace(
+          "https://echoshih.com" + path + location.search + location.hash
+        );
+      })();
+    </script>
     <link
       rel="icon"
       href="%sveltekit.assets%/favicon.png"
