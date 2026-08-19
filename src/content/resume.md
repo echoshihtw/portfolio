@@ -50,7 +50,7 @@ Software Engineer · _Taipei, Taiwan · Aug 2022 – May 2024_
 
 Product Engineer · _Remote · 2020 – Present_
 
-- Built the **Next.js frontend for a Bitcoin coin-selection research tool** with a **BDK core maintainer**, alongside contract product work in fintech, e-commerce and research.
+- Built the **Next.js frontend for a Bitcoin coin-selection research tool** with a **BDK core maintainer** (2023), and fixed and optimised a **BigCommerce** storefront for Bdigital (2024).
 
 # Projects
 
