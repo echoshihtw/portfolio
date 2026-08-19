@@ -15,7 +15,8 @@ dnf install -y \
   --setopt=timeout=30 \
   texlive-xetex \
   texlive-collection-fontsrecommended \
-  texlive-collection-latexrecommended
+  texlive-collection-latexrecommended \
+  texlive-xcharter # the résumé sets mainfont=XCharter; the collections above don't carry it
 
 curl -fsSL "https://github.com/jgm/pandoc/releases/download/${PANDOC_VERSION}/pandoc-${PANDOC_VERSION}-linux-amd64.tar.gz" \
   | tar xz -C /tmp
