@@ -14,7 +14,12 @@ const config = {
   ],
   kit: {
     paths: {
-      base: "/portfolio",
+      // One definition, not two. This was hardcoded to "/portfolio" while CI
+      // set a BASE_PATH the config never read — they agreed only because the
+      // repo happens to be named `portfolio`. On the custom domain the site is
+      // served from the root, so empty is the default and the env var is the
+      // escape hatch for a project-page build.
+      base: process.env.BASE_PATH ?? "",
     },
     // adapter-auto only supports some environments, see https://kit.svelte.dev/docs/adapter-auto for a list.
     // If your environment is not supported, or you settled on a specific environment, switch out the adapter.

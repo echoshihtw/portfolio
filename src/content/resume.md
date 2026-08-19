@@ -11,7 +11,7 @@
 % Two deliberate lines: availability first, then contacts. As one line it wrapped
 % and left the portfolio URL stranded on its own.
 {\small\color{muted}Taipei, Taiwan (UTC+8) · Remote — APAC hours or async}\\[1pt]
-{\small\color{muted}echoshihtw@gmail.com · linkedin.com/in/echoshihtw · github.com/echoshihtw · echoshihtw.github.io/portfolio}
+{\small\color{muted}echoshihtw@gmail.com · linkedin.com/in/echoshihtw · github.com/echoshihtw · echoshih.com}
 \vspace{2pt}
 ```
 

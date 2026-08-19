@@ -124,9 +124,10 @@ jobs:
           pages=$(pdfinfo static/resume.pdf | awk '/^Pages:/ {print $2}')
           test "$pages" = "1" || { echo "::error::résumé must be one page, got $pages"; exit 1; }
 
+      # No BASE_PATH: the site is served from the root of echoshih.com, and
+      # static/CNAME is copied into build/ by adapter-static so Pages keeps the
+      # custom domain on every deploy.
       - name: Build site
-        env:
-          BASE_PATH: "/${{ github.event.repository.name }}"
         run: npm run build
 
       - name: Upload Pages artifact
