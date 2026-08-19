@@ -42,7 +42,7 @@ Full Stack Engineer & Founding Partner · _Singapore · Remote · Aug 2024 – O
 
 Software Engineer · _Taipei, Taiwan · Aug 2022 – May 2024_
 
-- Took over frontend delivery on a **B2B recruitment and ATS platform** in **React and TypeScript** — two-engineer product team, reporting to the CTO — as the work was handed to me across the two years. Migrated features to **TypeScript** as part of an incremental codebase-wide migration, and authored around 100 of its shared components.
+- Took over frontend delivery on a **B2B and B2C recruitment and ATS platform** in **React and TypeScript** — two-engineer product team, reporting to the CTO — as the work was handed to me across the two years. Migrated features to **TypeScript** as part of an incremental codebase-wide migration, and authored around 100 of its shared components.
 - Wrote the **Server-Sent Events** channel the frontend consumed AI-generated drafts through.
 - Built job-opening filtering on the careers pages end to end — filter bar, sorting, the employer settings behind it, and a shared dropdown component with tests.
 

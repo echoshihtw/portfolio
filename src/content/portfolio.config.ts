@@ -127,7 +127,7 @@ export const experiencePortfolio: Record<
   },
   "Find Recruiter": {
     impact:
-      "Front-end lead on a B2B recruiting and ATS platform used by employers and agencies — a two-engineer product team reporting to the CTO.",
+      "Took the frontend over on a recruiting and ATS platform used by employers, agencies and individual headhunters — a two-engineer product team reporting to the CTO.",
     proof: {
       p: "A large production React codebase kept regressing on types.",
       s: "Drove an incremental JavaScript-to-TypeScript migration and built 100+ reusable components.",
