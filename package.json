@@ -44,9 +44,9 @@
   },
   "type": "module",
   "dependencies": {
-    "@tsparticles/svelte": "^3.0.0",
+    "@tsparticles/svelte": "^4.3.2",
     "gray-matter": "^4.0.3",
     "marked": "^13.0.2",
-    "tsparticles": "^3.3.0"
+    "tsparticles": "^4.3.2"
   }
 }
