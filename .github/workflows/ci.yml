@@ -41,12 +41,20 @@ jobs:
       # Installing TeX takes ~2 minutes and dominates this job, but the résumé
       # changes rarely. Key the built PDF on its sources: unchanged sources
       # mean no apt install and no rebuild.
+      # The key is a glob, not a list of files. The list had already fallen
+      # behind: the PDF is built from every config in src/content — projects
+      # and skills each render a section of it — while the key named only
+      # resume.md, so editing a project line or a skill hit the cache and
+      # deployed a résumé that did not match its source, with nothing failing.
+      # A glob cannot go stale when a new input file is added next to the
+      # others. It over-invalidates when site-only copy changes, which costs
+      # two minutes of TeX; under-invalidating costs a wrong PDF.
       - name: Restore built résumé
         id: resume
         uses: actions/cache@v6
         with:
           path: static/resume.pdf
-          key: resume-${{ hashFiles('src/content/resume.md', 'scripts/buildResume.ts', 'scripts/resume-header.tex') }}
+          key: resume-${{ hashFiles('src/content/**', 'scripts/buildResume.ts', 'scripts/resume-header.tex') }}
 
       - name: Install Pandoc and XeLaTeX
         if: steps.resume.outputs.cache-hit != 'true'
