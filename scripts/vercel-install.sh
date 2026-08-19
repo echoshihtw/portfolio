@@ -8,9 +8,11 @@
 # typesetter is a build that silently changes the résumé.
 set -euo pipefail
 
-PANDOC_VERSION=3.10.2
+PANDOC_VERSION=$(cat scripts/pandoc-version.txt)
 
 dnf install -y \
+  --setopt=retries=5 \
+  --setopt=timeout=30 \
   texlive-xetex \
   texlive-collection-fontsrecommended \
   texlive-collection-latexrecommended
