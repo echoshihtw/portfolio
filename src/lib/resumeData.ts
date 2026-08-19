@@ -27,7 +27,7 @@ export const experience: ExperienceItem[] = [
     "role": "Full Stack Engineer & Founding Partner",
     "date": "Singapore · Remote · Aug 2024 – Oct 2024",
     "highlights": [
-      "Cleared the **macOS Electron code-signing, notarisation and auto-update** blocker that was stopping release. The desktop app shipped, and the deployment steps are written down for the team."
+      "Founding partner on **SPIN Connect**, the in-store desktop app. Cleared the **macOS code-signing, notarisation and auto-update** work blocking release, shipped the **Electron** app, and wrote the deployment steps down for the team."
     ]
   },
   {
@@ -44,7 +44,7 @@ export const experience: ExperienceItem[] = [
     "role": "Product Engineer",
     "date": "Remote · 2020 – Present",
     "highlights": [
-      "Built the **Next.js frontend for a Bitcoin coin-selection research tool** with a **BDK core maintainer**, alongside product work across fintech, e-commerce and research."
+      "Built the **Next.js frontend for a Bitcoin coin-selection research tool** with a **BDK core maintainer**, alongside contract product work in fintech, e-commerce and research."
     ]
   }
 ];

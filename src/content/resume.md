@@ -17,7 +17,7 @@
 
 # Summary
 
-Product engineer who owns problems end to end. I work out what to build, build it, ship it, and keep it running, because the experience breaks at the seams: a slow endpoint, a failed release, an app that gives up when the Wi-Fi does. **React**, **TypeScript** and **Node.js**, with **Python** and **FastAPI** behind them.
+Product engineer who owns problems end to end — mostly systems of record: project platforms, applicant tracking, client histories. I work out what to build, build it, ship it, and keep it running. **React**, **TypeScript** and **Node.js**, with **Python** and **FastAPI** behind them.
 
 # Experience
 
@@ -36,7 +36,7 @@ Full-Stack Engineer — Internal Platform · _Taipei, Taiwan · Dec 2024 – Jul
 
 Full Stack Engineer & Founding Partner · _Singapore · Remote · Aug 2024 – Oct 2024_
 
-- Cleared the **macOS Electron code-signing, notarisation and auto-update** blocker that was stopping release. The desktop app shipped, and the deployment steps are written down for the team.
+- Founding partner on **SPIN Connect**, the in-store desktop app. Cleared the **macOS code-signing, notarisation and auto-update** work blocking release, shipped the **Electron** app, and wrote the deployment steps down for the team.
 
 ## Find Recruiter
 
@@ -49,7 +49,7 @@ Software Engineer · _Taipei, Taiwan · Aug 2022 – May 2024_
 
 Product Engineer · _Remote · 2020 – Present_
 
-- Built the **Next.js frontend for a Bitcoin coin-selection research tool** with a **BDK core maintainer**, alongside product work across fintech, e-commerce and research.
+- Built the **Next.js frontend for a Bitcoin coin-selection research tool** with a **BDK core maintainer**, alongside contract product work in fintech, e-commerce and research.
 
 # Projects
 
