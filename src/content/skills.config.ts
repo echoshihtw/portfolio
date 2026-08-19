@@ -87,14 +87,26 @@ export const skillBuckets: SkillBucket[] = [
 
 // The page has room to separate what one line of A4 has to run together.
 export const siteGroups: SiteGroup[] = [
-  { label: "Frontend", pick: ["React", "TypeScript", "Next.js", "Tailwind CSS", "SvelteKit"] },
-  { label: "UI & design", pick: ["design systems", "UI patterns", "Responsive & accessible"] },
+  {
+    label: "Frontend",
+    pick: ["React", "TypeScript", "Next.js", "Tailwind CSS", "SvelteKit"],
+  },
+  {
+    label: "UI & design",
+    pick: ["design systems", "UI patterns", "Responsive & accessible"],
+  },
   { label: "Mobile", pick: ["Flutter", "Dart", "Riverpod"] },
   { label: "State & data", pick: ["TanStack Query", "Zustand", "Redux"] },
-  { label: "Backend & Data", pick: ["FastAPI", "Node.js", "Postgres", "ArangoDB", "RabbitMQ"] },
+  {
+    label: "Backend & Data",
+    pick: ["FastAPI", "Node.js", "Postgres", "ArangoDB", "RabbitMQ"],
+  },
   { label: "Infra & CI/CD", pick: ["Docker", "GitHub Actions", "GHCR", "AWS"] },
   { label: "Testing", pick: ["Vitest", "React Testing Library", "pytest"] },
-  { label: "AI & Automation", pick: ["Claude Code", "Skills", "Hooks", "Plugins"] },
+  {
+    label: "AI & Automation",
+    pick: ["Claude Code", "Skills", "Hooks", "Plugins"],
+  },
 ];
 
 const byName = new Map<string, Skill>();
@@ -106,7 +118,9 @@ for (const bucket of skillBuckets) {
 // into a failed build instead of a group that quietly renders short.
 const unknown = siteGroups.flatMap((g) => g.pick.filter((n) => !byName.has(n)));
 if (unknown.length) {
-  throw new Error(`skills.config: siteGroups names not in skillBuckets: ${unknown.join(", ")}`);
+  throw new Error(
+    `skills.config: siteGroups names not in skillBuckets: ${unknown.join(", ")}`
+  );
 }
 
 /** Bold-label markdown lines for the résumé's Skills section. */
@@ -123,7 +137,8 @@ export function resumeSkillLines(): string {
 }
 
 /** What the site's Skills section renders. */
-export const skillsConfig: { label: string; items: string[] }[] = siteGroups.map((g) => ({
-  label: g.label,
-  items: g.pick.filter((n) => byName.get(n)!.on !== "resume"),
-}));
+export const skillsConfig: { label: string; items: string[] }[] =
+  siteGroups.map((g) => ({
+    label: g.label,
+    items: g.pick.filter((n) => byName.get(n)!.on !== "resume"),
+  }));
