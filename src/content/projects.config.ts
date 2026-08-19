@@ -67,7 +67,7 @@ export const projectsConfig: Projects = [
       "Financial data never leaves the device — encrypted on-device storage, no account, no server",
     ],
     resumeLine:
-      "Personal financial-runway app in **Flutter**: **Clean Architecture** across a Melos monorepo, **SQLCipher**-encrypted local storage, 7-language localisation. In development — running on Android, iOS distribution in progress.",
+      "Personal financial-runway app in **Flutter**: **Clean Architecture** across a Melos monorepo, **SQLCipher**-encrypted local storage, 7-language localisation. Running on Android.",
     linkLabel: "Source Code →",
     status: "In Progress",
   },
