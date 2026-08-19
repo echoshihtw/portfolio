@@ -29,13 +29,14 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
-      # Node 24 to match local: it ships npm 11, and npm 11 records optional
-      # platform packages differently from npm 10. A lockfile written by one
-      # and installed by the other fails — npm 10 tried to install
-      # @esbuild/netbsd-arm64 on a Linux runner. Same npm both sides, no drift.
+      # The version lives in .nvmrc and nowhere else, so `nvm use` here and the
+      # runner cannot disagree. It matters that they do not: Node 24 ships npm
+      # 11, and npm 11 records optional platform packages differently from npm
+      # 10. A lockfile written by one and installed by the other fails — npm 10
+      # tried to install @esbuild/netbsd-arm64 on a Linux runner.
       - uses: actions/setup-node@v7
         with:
-          node-version: 24
+          node-version-file: .nvmrc
           cache: npm
 
       # Installing TeX takes ~2 minutes and dominates this job, but the résumé
