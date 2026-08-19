@@ -83,9 +83,25 @@ jobs:
           sudo rm -f /etc/apt/apt.conf.d/docker-clean
           echo 'Binary::apt::APT::Keep-Downloaded-Packages "true";' \
             | sudo tee /etc/apt/apt.conf.d/keep-debs > /dev/null
-          sudo apt-get update -o Acquire::Retries=3
-          sudo apt-get install -y --no-install-recommends -o Acquire::Retries=3 \
+
+          # Timeouts, not just retries. A retry only helps when the connection
+          # fails; on 19 Aug it stalled mid-download of a 27MB package and sat
+          # there, because apt has no timeout by default and will wait forever
+          # on a socket that never closes.
+          APT_OPTS="-o Acquire::Retries=3 -o Acquire::http::Timeout=30 -o Acquire::https::Timeout=30"
+          sudo apt-get update $APT_OPTS
+          sudo apt-get install -y --no-install-recommends $APT_OPTS \
             $(grep -vE '^\s*(#|$)' scripts/resume-tex-packages.txt | tr '\n' ' ')
+
+          # pandoc from its own release rather than apt: the apt copy is the
+          # download that stalled, and pinning means CI and Vercel run the same
+          # version instead of whatever Ubuntu happens to ship.
+          PANDOC=$(cat scripts/pandoc-version.txt)
+          curl -fsSL --retry 3 --retry-connrefused --max-time 180 \
+            "https://github.com/jgm/pandoc/releases/download/${PANDOC}/pandoc-${PANDOC}-linux-amd64.tar.gz" \
+            | tar xz -C /tmp
+          sudo install -m 0755 "/tmp/pandoc-${PANDOC}/bin/pandoc" /usr/local/bin/pandoc
+          pandoc --version | head -1
 
       - run: npm ci
 
