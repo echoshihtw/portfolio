@@ -152,7 +152,11 @@
   outline-color: #4dd6a8;
 }
 #boot-gate[data-variant="terminal"] .gate-theme-core::after {
-  background: #0b0a17;
+  /* Flattened equivalent of rgba(237, 236, 232, 0.05) over the gate's
+     #0b0a17 background — the label's actual visible tint at this spot.
+     Has to be opaque: a semi-transparent mask would let the core's blue
+     show through instead of hiding it. */
+  background: #16151f;
 }
 
 /* Dark: terminal boot sequence, headshot to the left of the typed text. */
