@@ -4,10 +4,12 @@
       <stop offset="0" stop-color="#2a2350"/>
       <stop offset="1" stop-color="#161233"/>
     </radialGradient>
-    <filter id="glow" x="-80%" y="-80%" width="260%" height="260%">
-      <feGaussianBlur in="SourceGraphic" stdDeviation="1.4" result="blur"/>
+    <filter id="glow" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="2.6" result="halo"/>
+      <feGaussianBlur in="SourceGraphic" stdDeviation="0.6" result="core"/>
       <feMerge>
-        <feMergeNode in="blur"/>
+        <feMergeNode in="halo"/>
+        <feMergeNode in="core"/>
         <feMergeNode in="SourceGraphic"/>
       </feMerge>
     </filter>
