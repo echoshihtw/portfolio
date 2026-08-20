@@ -30,7 +30,8 @@
 }
 #boot-gate-terminal {
   display: flex;
-  align-items: center;
+  flex-direction: row;
+  align-items: stretch;
   justify-content: center;
   gap: 1.1rem;
   max-width: 90vw;
@@ -39,12 +40,13 @@
 /* Background-removed headshot in a scanning reticle frame — the photo's
    own backdrop was already near-black, so it was keyed to transparent
    (see the headshot-cutout.png generation notes) and sits directly on the
-   gate's dark background instead of showing a cutout square. */
+   gate's dark background instead of showing a cutout square. Stretched to
+   match the (JS-measured, fixed-height) text block next to it. */
 .terminal-photo-wrap {
   position: relative;
   flex: none;
+  align-self: stretch;
   width: 3.2rem;
-  height: 3.2rem;
 }
 .terminal-photo-wrap .corner {
   position: absolute;

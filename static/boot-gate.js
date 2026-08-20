@@ -62,6 +62,7 @@
     "systems nominal",
     "access granted_",
   ];
+
   let lineIndex = 0;
   let charIndex = 0;
   let out = "";
@@ -71,7 +72,7 @@
     textEl.appendChild(document.createTextNode(out));
     const caret = document.createElement("span");
     caret.className = "caret";
-    caret.textContent = " ";
+    caret.textContent = " ";
     textEl.appendChild(caret);
   }
 
@@ -87,13 +88,42 @@
       render();
       setTimeout(typeNext, 18);
     } else {
-      out += "\n";
       charIndex = 0;
       lineIndex += 1;
+      // Newline only between lines, not after the last one — the
+      // measurement pass below builds the same string via
+      // lines.join("\n"), which has no trailing newline either. A
+      // mismatch here means the caret wraps onto its own extra line
+      // once typing reaches the end, growing the box after the fact.
+      if (lineIndex < lines.length) {
+        out += "\n";
+      }
       render();
       setTimeout(typeNext, 110);
     }
   }
-  render();
-  typeNext();
+
+  function startTyping() {
+    // Reserve the box's final width and height up front, using the exact
+    // markup typing will end on (text + trailing caret span) — how many
+    // lines the second entry wraps to depends on viewport width, and the
+    // caret span itself can push a wrap, so measuring before the web font
+    // has swapped in under-reserved the box and it visibly grew once
+    // typing caught up. Waiting on document.fonts.ready (below) is what
+    // actually fixes that; this still measures against the true final
+    // markup rather than plain text, belt and suspenders.
+    out = lines.join("\n");
+    render();
+    textEl.style.width = textEl.offsetWidth + "px";
+    textEl.style.minHeight = textEl.offsetHeight + "px";
+    out = "";
+    render();
+    typeNext();
+  }
+
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(startTyping);
+  } else {
+    startTyping();
+  }
 })();
