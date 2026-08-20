@@ -70,12 +70,18 @@ export const heroConfig: {
   support:
     "Software Engineer who works product-first, building systems of record — project platforms, applicant tracking, client histories — and keeping them running after ship. React, TypeScript, Supabase and Postgres.",
 
-  // One sentence, not a stat block. Three figures in columns is a SaaS
+  // Two sentences, not a stat block. Three figures in columns is a SaaS
   // landing-page pattern: it invites comparison, and 603 read against other
   // people's numbers looks small. Stated as a fact about a real salon it reads
   // as remarkable, and "entered by hand" carries what a number cannot.
+  // "Engineered multi-tenant from day one" carries the origin story — built
+  // for one salon owner, but architected for scale before there was any
+  // pressure to — without spending a separate sentence on it. The second
+  // sentence is the one line here nobody else could have written: an admitted
+  // mistake, pulled from Clio's own project card, reads as more credible to a
+  // technical reader than a clean win alone.
   proofLine:
-    "A salon in Tainan has run its business on software I built since May 2025 — 603 clients, 2,694 records, entered by hand.",
+    "Built for one salon owner, engineered multi-tenant from day one — in daily use since May 2025, 603 clients and 2,694 records entered by hand. What I'd do differently: write the permission model down before building it, not after.",
 
   email: "echoshihtw@gmail.com",
   resume: "resume.pdf", // served from /static, base-prefixed at render
