@@ -9,13 +9,15 @@
   let scrollPosition: number;
   // Loaded on mount, so it is undefined for the first render.
   let ParticlesComponent: ComponentType | undefined;
+  let headerEl: HTMLElement | undefined;
   let isNearPageBottom = false;
-  let showFloatingNav = false;
+  let isHeaderVisible = true;
   const FLOATING_NAV_BOTTOM_OFFSET = 4;
-  const FLOATING_NAV_TOP_OFFSET = 80;
-  // Backdrop fades in continuously over this scroll distance, rather than
-  // snapping on at a threshold.
-  const HEADER_BACKDROP_DISTANCE = 80;
+  // The floating pill's job is to stand in for the header nav once it has
+  // actually scrolled out of view — driven by observing the header itself
+  // rather than a guessed scroll-pixel threshold, so it stays correct
+  // regardless of header height.
+  $: showFloatingNav = !isHeaderVisible && !isNearPageBottom;
 
   function handleScroll() {
     const currentY = window.scrollY;
@@ -25,17 +27,7 @@
       doc.scrollHeight - FLOATING_NAV_BOTTOM_OFFSET;
 
     scrollPosition = currentY;
-
-    // Position-based, not direction-based: the header already carries nav
-    // from first paint on both mobile and desktop, so the floating pill's
-    // job is quick access without a trip back to the top — available
-    // whenever you're past the hero, not gated behind scrolling upward.
-    showFloatingNav = currentY > FLOATING_NAV_TOP_OFFSET && !isNearPageBottom;
   }
-  $: headerBackdrop = Math.min(
-    1,
-    (scrollPosition ?? 0) / HEADER_BACKDROP_DISTANCE
-  );
   onMount(async () => {
     const module = await import("@tsparticles/svelte");
     ParticlesComponent = module.default;
@@ -43,6 +35,15 @@
   onMount(() => {
     handleScroll();
     window.addEventListener("scroll", handleScroll);
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isHeaderVisible = entry.isIntersecting;
+      },
+      { threshold: 0 }
+    );
+    if (headerEl) observer.observe(headerEl);
+
     void particlesInit(async (engine) => {
       // call this once per app
       // you can use main to customize the tsParticles instance adding presets or custom shapes
@@ -54,6 +55,7 @@
     return () => {
       // Cleanup listener when the component is unmounted
       window.removeEventListener("scroll", handleScroll);
+      observer.disconnect();
     };
   });
   let particlesConfig = {
@@ -105,7 +107,7 @@
   />
   <Header
     {scrollPosition}
-    {headerBackdrop}
+    bind:headerEl
   />
   <FloatingNav isVisible={showFloatingNav} />
   <main class="max-w-[1400px] mx-auto">

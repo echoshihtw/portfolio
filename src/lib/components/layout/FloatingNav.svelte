@@ -41,20 +41,22 @@
 </nav>
 
 <style>
+  /* Docked at the top, same spot the header nav just vacated — the position
+     itself is what makes this read as a continuation of that nav rather than
+     a separate floating widget, so it drops down into place instead of
+     rising from the bottom. Styling mirrors the header's mobile-tab-link
+     exactly: same font, same plain-text (no per-link chip/border), same
+     hover language. */
   .floating-nav {
     position: fixed;
     left: 50%;
-    bottom: 1.2rem;
+    top: 1rem;
     transform: translateX(-50%);
     z-index: 60;
     display: flex;
-    gap: 0.35rem;
-    padding: 0.5rem;
-    /* One shape at every width: pills sized to their labels, in a single row.
-       The bar is as wide as its contents and no wider, capped so it never
-       touches the screen edge. If a very narrow phone cannot fit the row, it
-       scrolls rather than wrapping — a bar that sits over the content should
-       not grow to two lines. */
+    align-items: center;
+    gap: 1rem;
+    padding: 0.6rem 1rem;
     width: max-content;
     max-width: calc(100% - 1.2rem);
     justify-content: flex-start;
@@ -62,13 +64,17 @@
     overflow-x: auto;
     scrollbar-width: none;
     border-radius: 999px;
-    border: 1px solid var(--color-accent);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    background: rgba(247, 245, 240, 0.94);
+    /* Liquid glass: strong blur + saturation boost so content behind actually
+       reads through, a translucent tint rather than a flat surface, and an
+       inset highlight along the top edge for the glass-reflection cue. */
+    backdrop-filter: blur(20px) saturate(1.6);
+    -webkit-backdrop-filter: blur(20px) saturate(1.6);
+    background: color-mix(in srgb, var(--surface-bg) 40%, transparent);
+    border: 1px solid color-mix(in srgb, var(--text-color) 8%, transparent);
     box-shadow:
-      0 10px 28px rgba(0, 0, 0, 0.16),
-      0 2px 0 rgba(255, 255, 255, 0.35) inset;
+      0 10px 28px -8px rgba(0, 0, 0, 0.18),
+      inset 0 1px 0 color-mix(in srgb, white 35%, transparent),
+      inset 0 0 0 1px color-mix(in srgb, white 6%, transparent);
     transition:
       opacity 220ms ease,
       transform 220ms ease;
@@ -82,22 +88,30 @@
   .floating-nav-hidden {
     opacity: 0;
     pointer-events: none;
-    transform: translateX(-50%) translateY(16px);
+    transform: translateX(-50%) translateY(-16px);
   }
 
   .floating-link {
     font-family: "JetBrains Mono", monospace;
-    font-size: 0.76rem;
-    font-weight: 500;
-    letter-spacing: 0.02em;
-    color: var(--text-color);
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--text-muted);
     text-decoration: none;
     white-space: nowrap;
-    border: 1px solid var(--section-border);
-    border-radius: 999px;
-    padding: 0.4rem 0.62rem;
-    background: rgba(255, 255, 255, 0.55);
     flex: none;
+    transition: color 180ms ease;
+  }
+
+  .floating-link:hover,
+  .floating-link:focus-visible {
+    color: var(--color-accent);
+  }
+
+  .floating-link:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+    border-radius: 2px;
   }
 
   /* The two controls are icons, not labels: they size to their content while
@@ -106,10 +120,8 @@
     display: grid;
     place-items: center;
     color: var(--color-accent);
-    min-width: 2.1rem;
-    padding-inline: 0.45rem;
+    min-width: 1.4rem;
     cursor: pointer;
-    flex: none;
   }
 
   .floating-top-button :global(svg) {
@@ -122,32 +134,13 @@
     place-items: center;
     min-width: 1.9rem;
     flex: none;
+    margin-left: auto;
   }
 
-  .floating-link:hover {
-    border-color: var(--color-accent);
-    background: rgba(255, 255, 255, 0.88);
-  }
-
-  .floating-link:focus-visible {
-    outline: 2px solid var(--color-accent);
-    outline-offset: 1px;
-  }
-
-  :global(html[data-theme="dark"]) .floating-nav {
-    background: rgba(17, 17, 16, 0.9);
-    box-shadow:
-      0 12px 30px rgba(0, 0, 0, 0.42),
-      0 1px 0 rgba(255, 255, 255, 0.05) inset;
-  }
-
-  :global(html[data-theme="dark"]) .floating-link:hover {
-    background: rgba(237, 236, 232, 0.14);
-  }
-
-  :global(html[data-theme="dark"]) .floating-link {
-    border-color: var(--project-card-border);
-    background: rgba(237, 236, 232, 0.05);
+  @media (prefers-reduced-motion: reduce) {
+    .floating-link {
+      transition: none;
+    }
   }
 
   /* No width breakpoint: the bar is the same object on a phone and on a

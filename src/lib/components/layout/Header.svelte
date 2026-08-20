@@ -4,58 +4,36 @@
   import { base } from "$app/paths";
 
   export let scrollPosition: number;
-  // 0 at page top, 1 once scrolled HEADER_BACKDROP_DISTANCE px — drives a
-  // continuous fade-in instead of a hard on/off swap.
-  export let headerBackdrop = 0;
+  export let headerEl: HTMLElement | undefined = undefined;
 
   function goTop() {
     document.body.scrollIntoView();
   }
 </script>
 
+<!-- Not sticky: scrolls away with the page. The floating pill (driven by an
+     IntersectionObserver on this element, in AppShell) takes over navigation
+     once this leaves the viewport, rather than two navs stacking. -->
 <header
-  class="w-full sticky z-[40] top-0 py-2 header-shell"
+  class="w-full py-2 header-shell"
+  bind:this={headerEl}
 >
-  <div
-    class="w-full m-auto max-w-[1400px] px-6 py-3 nav-filtered"
-    style="--backdrop: {headerBackdrop}"
-  >
-    <div class="w-full flex items-center justify-between">
-      <!-- Not an <h1>: the hero statement is the page's single heading. -->
-      <a
-        href={base || "/"}
-        on:click|preventDefault={goTop}
-        class="site-name"
-      >
-        Echo Shih
-      </a>
-      <div class="flex gap-5">
-        <div class="md:hidden">
-          <ThemeSwitch id="theme-toggle-mobile" />
-        </div>
-      </div>
-      <div class="hidden md:flex items-center gap-4">
-        {#each tabs as tab}
-          <a
-            href={tab.link}
-            class="nav-link"
-            aria-label="Go to {tab.name} section"
-          >
-            <p>{tab.name}</p>
-          </a>
-        {/each}
-        <div class={scrollPosition > 60 ? "drop-shadow-lg" : undefined}>
-          <ThemeSwitch id="theme-toggle-desktop" />
-        </div>
-      </div>
-    </div>
-    <!-- Mobile only: the header used to carry no section links at all below
-         md, leaving a first-time visitor with no way to navigate until they
-         scrolled far enough to trigger the floating nav. This makes the same
-         links available from first paint. -->
+  <div class="w-full m-auto max-w-[1400px] px-6 py-3 nav-filtered">
+    <!-- Not an <h1>: the hero statement is the page's single heading. -->
+    <a
+      href={base || "/"}
+      on:click|preventDefault={goTop}
+      class="site-name"
+    >
+      Echo Shih
+    </a>
+    <!-- One nav, one font, at every width — was a sans-font desktop-only row
+         plus a separate mono mobile-only row; two treatments for the same
+         links. Theme toggle grouped in as the last action here rather than
+         floating alone opposite the logo. -->
     <nav
       aria-label="Section navigation"
-      class="mobile-tabs md:hidden"
+      class="mobile-tabs"
     >
       {#each tabs as tab}
         <a
@@ -66,6 +44,9 @@
           {tab.name}
         </a>
       {/each}
+      <div class={scrollPosition > 60 ? "drop-shadow-lg" : undefined}>
+        <ThemeSwitch id="theme-toggle" />
+      </div>
     </nav>
   </div>
 </header>
@@ -74,19 +55,16 @@
   /* One hover language across the site: accent colour on text, accent border on
      surfaces. The nav used a strikethrough and Tailwind greys, which belonged to
      neither. */
-  .nav-link,
   .site-name {
     color: var(--text-color);
     text-decoration: none;
     transition: color 180ms ease;
   }
 
-  .nav-link:hover,
   .site-name:hover {
     color: var(--color-accent);
   }
 
-  .nav-link:focus-visible,
   .site-name:focus-visible {
     outline: 2px solid var(--color-accent);
     outline-offset: 3px;
@@ -104,7 +82,6 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .nav-link,
     .site-name {
       transition: none;
     }
@@ -112,6 +89,7 @@
 
   .mobile-tabs {
     display: flex;
+    align-items: center;
     gap: 1rem;
     margin-top: 0.6rem;
     padding-top: 0.6rem;
@@ -119,6 +97,10 @@
     overflow-x: auto;
     -ms-overflow-style: none;
     scrollbar-width: none;
+  }
+
+  .mobile-tabs > :last-child {
+    margin-left: auto;
   }
 
   .mobile-tabs::-webkit-scrollbar {
@@ -149,18 +131,6 @@
   }
 
   .nav-filtered {
-    transition: box-shadow 200ms ease;
-    border-radius: calc(999px * var(--backdrop, 0));
-    backdrop-filter: blur(calc(6px * var(--backdrop, 0)));
-    -webkit-backdrop-filter: blur(calc(6px * var(--backdrop, 0)));
-    background: color-mix(
-      in srgb,
-      var(--surface-bg) calc(70% * var(--backdrop, 0)),
-      transparent
-    );
-    border: 1px solid
-      color-mix(in srgb, var(--section-border) calc(100% * var(--backdrop, 0)), transparent);
-    box-shadow: 0 8px 24px -16px
-      color-mix(in srgb, var(--text-color) calc(18% * var(--backdrop, 0)), transparent);
+    border-radius: 999px;
   }
 </style>
