@@ -16,6 +16,10 @@
           aria-hidden="true"
         />
         {heroConfig.remoteOpen}
+        <span
+          class="term-cursor"
+          aria-hidden="true">_</span
+        >
       </span>
     </div>
 
@@ -135,22 +139,26 @@
   .hero-kicker {
     margin: 0;
     font-size: 0.72rem;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
+    font-weight: 500;
     color: var(--color-accent);
   }
 
+  /* Quiet by design: a status badge in saturated green reads as a SaaS
+     product pill, not a personal introduction. Monochrome text with a thin
+     accent-colored dot keeps the information without the shouting. */
   .hero-avail {
     display: inline-flex;
     align-items: center;
-    gap: 0.45rem;
+    gap: 0.5rem;
     font-size: 0.66rem;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: #4a7a55;
-    border: 1px solid rgba(74, 122, 85, 0.35);
+    color: var(--text-muted);
+    border: 1px solid var(--section-border);
     border-radius: 999px;
-    padding: 0.3rem 0.7rem;
+    padding: 0.3rem 0.75rem;
     max-width: 100%;
     /* Wraps rather than nowrap: on a narrow phone this string is longer than
        the viewport, and a nowrap pill forces the whole page to scroll
@@ -159,18 +167,38 @@
     line-height: 1.5;
   }
 
-  :global(html[data-theme="dark"]) .hero-avail {
-    color: #86c99a;
-    border-color: rgba(134, 201, 154, 0.32);
-  }
-
   .avail-dot {
     flex: none;
-    width: 0.44rem;
-    height: 0.44rem;
+    width: 0.36rem;
+    height: 0.36rem;
     border-radius: 999px;
-    background: #4a9d63;
-    box-shadow: 0 0 0 3px rgba(74, 157, 99, 0.18);
+    background: var(--color-accent);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-accent) 16%, transparent);
+  }
+
+  /* Terminal cursor: invisible in light mode, blinks in dark mode via
+     --glow-strength — the "fun, cypherpunk" half of the metaphor. */
+  .term-cursor {
+    color: var(--color-accent);
+    opacity: var(--glow-strength, 0);
+    animation: cursor-blink calc(1.1s * var(--glow-strength, 0)) step-end infinite;
+  }
+
+  @keyframes cursor-blink {
+    0%,
+    49% {
+      opacity: var(--glow-strength, 0);
+    }
+    50%,
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .term-cursor {
+      animation: none;
+    }
   }
 
   /* headline */
@@ -183,6 +211,12 @@
     letter-spacing: -0.015em;
     color: var(--text-color);
     max-width: 18ch;
+  }
+
+  :global(html[data-theme="dark"]) .hero-headline {
+    font-family: "JetBrains Mono", monospace;
+    font-weight: 500;
+    letter-spacing: -0.01em;
   }
 
   .hero-headline .accent {
@@ -221,6 +255,22 @@
     content: "·";
     margin-right: 0.85rem;
     color: var(--section-border);
+  }
+
+  /* Below 640px the "·" separator sits inside each <li>, so a flex-wrap
+     line break strands it at the start of the next line ("· APIs & data
+     models"). A two-column grid with no separator avoids that entirely. */
+  @media (max-width: 639px) {
+    .hero-owns {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.5rem 1rem;
+    }
+
+    .hero-owns li + li::before {
+      content: none;
+      margin-right: 0;
+    }
   }
 
   .hero-proofline {

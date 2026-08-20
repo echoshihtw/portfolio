@@ -82,6 +82,24 @@ html {
   box-sizing: border-box;
 }
 
+/* CRT scanlines: the cypherpunk half of the metaphor, dark mode only.
+   Fixed overlay, extremely low opacity, never intercepts clicks. */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: calc(0.05 * var(--glow-strength, 0));
+  background: repeating-linear-gradient(
+    to bottom,
+    #fff 0px,
+    #fff 1px,
+    transparent 1px,
+    transparent 3px
+  );
+}
+
 canvas {
   position: absolute;
   top: 0;
@@ -95,6 +113,16 @@ h2,
 h3,
 .poppins {
   font-family: "DM Serif Display", serif;
+}
+
+/* Dark mode leans terminal: headings swap to mono, light mode keeps the
+   editorial serif. Same "composed vs. fun" split as the rest of the theme. */
+html[data-theme="dark"] h1,
+html[data-theme="dark"] h2,
+html[data-theme="dark"] h3,
+html[data-theme="dark"] .poppins {
+  font-family: "JetBrains Mono", monospace;
+  font-weight: 500;
 }
 
 body {
@@ -156,7 +184,7 @@ code,
 .section_title {
   @apply font-light text-3xl sm:text-4xl;
   color: var(--text-muted);
-  letter-spacing: 0.08em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   font-size: 0.8rem;
   margin-bottom: 0.6rem;

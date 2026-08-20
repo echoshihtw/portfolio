@@ -9,51 +9,38 @@
   let scrollPosition: number;
   // Loaded on mount, so it is undefined for the first render.
   let ParticlesComponent: ComponentType | undefined;
-  let previousScrollY = 0;
-  let isHeaderVisible = true;
-  let showNavBackdrop = false;
   let isNearPageBottom = false;
   let showFloatingNav = false;
-  const HIDE_SCROLL_THRESHOLD = 6;
   const FLOATING_NAV_BOTTOM_OFFSET = 4;
   const FLOATING_NAV_TOP_OFFSET = 80;
+  // Backdrop fades in continuously over this scroll distance, rather than
+  // snapping on at a threshold.
+  const HEADER_BACKDROP_DISTANCE = 80;
 
   function handleScroll() {
     const currentY = window.scrollY;
-    const deltaY = currentY - previousScrollY;
     const doc = document.documentElement;
     isNearPageBottom =
       currentY + window.innerHeight >=
       doc.scrollHeight - FLOATING_NAV_BOTTOM_OFFSET;
 
     scrollPosition = currentY;
-    if (currentY <= 12) {
-      isHeaderVisible = true;
-      showNavBackdrop = false;
-    } else if (deltaY < 0) {
-      isHeaderVisible = true;
-      showNavBackdrop = true;
-    } else if (deltaY > HIDE_SCROLL_THRESHOLD) {
-      isHeaderVisible = false;
-      showNavBackdrop = false;
-    }
 
-    if (currentY <= FLOATING_NAV_TOP_OFFSET || isNearPageBottom) {
-      showFloatingNav = false;
-    } else if (deltaY < 0) {
-      showFloatingNav = true;
-    } else if (deltaY > 0) {
-      showFloatingNav = false;
-    }
-
-    previousScrollY = currentY;
+    // Position-based, not direction-based: the header already carries nav
+    // from first paint on both mobile and desktop, so the floating pill's
+    // job is quick access without a trip back to the top — available
+    // whenever you're past the hero, not gated behind scrolling upward.
+    showFloatingNav = currentY > FLOATING_NAV_TOP_OFFSET && !isNearPageBottom;
   }
+  $: headerBackdrop = Math.min(
+    1,
+    (scrollPosition ?? 0) / HEADER_BACKDROP_DISTANCE
+  );
   onMount(async () => {
     const module = await import("@tsparticles/svelte");
     ParticlesComponent = module.default;
   });
   onMount(() => {
-    previousScrollY = window.scrollY;
     handleScroll();
     window.addEventListener("scroll", handleScroll);
     void particlesInit(async (engine) => {
@@ -118,8 +105,7 @@
   />
   <Header
     {scrollPosition}
-    isVisible={isHeaderVisible}
-    {showNavBackdrop}
+    {headerBackdrop}
   />
   <FloatingNav isVisible={showFloatingNav} />
   <main class="max-w-[1400px] mx-auto">
