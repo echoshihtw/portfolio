@@ -4,3 +4,5 @@ export const instagramUrl =
   "https://www.instagram.com/echothecho?igsh=MW5sbXVycnFvMnpreQ==";
 export const email: string = "mailto:echoshihtw@gmail.com";
 export const codePen: string = "https://codepen.io/echochunyushih";
+export const calendlyUrl: string =
+  "https://calendly.com/echoshihtw/new-meeting";

@@ -14,7 +14,7 @@ function resolveInitialTheme() {
     return fromDom;
   }
 
-  return LIGHT;
+  return DARK;
 }
 
 export const theme = writable(resolveInitialTheme());
@@ -37,13 +37,11 @@ export function initializeTheme() {
   }
 
   /** @type {string} */
-  let nextTheme = LIGHT;
+  let nextTheme = DARK;
   try {
     const stored = localStorage.getItem(THEME_KEY);
     if (stored === LIGHT || stored === DARK) {
       nextTheme = stored;
-    } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-      nextTheme = DARK;
     }
   } catch (_error) {
     // Ignore localStorage read failures.

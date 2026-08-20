@@ -45,18 +45,14 @@
     <script>
       (() => {
         const key = "echo-theme";
-        // Default to dark unless the visitor's OS explicitly asks for light,
-        // or they've picked a theme here before.
+        // Always default to dark, regardless of OS preference — light mode
+        // only applies once a visitor explicitly picks it here.
         let theme = "dark";
 
         try {
           const savedTheme = localStorage.getItem(key);
           if (savedTheme === "light" || savedTheme === "dark") {
             theme = savedTheme;
-          } else if (
-            window.matchMedia("(prefers-color-scheme: light)").matches
-          ) {
-            theme = "light";
           }
         } catch (_error) {
           theme = "dark";
@@ -111,9 +107,94 @@
       name="twitter:card"
       content="summary_large_image"
     />
+    <link
+      rel="stylesheet"
+      href="%sveltekit.assets%/boot-gate.css"
+    />
     %sveltekit.head%
   </head>
   <body data-sveltekit-preload-data="hover">
+    <div id="boot-gate">
+      <div class="gate-theme-switch">
+        <input
+          type="checkbox"
+          id="boot-gate-theme-toggle"
+          class="gate-theme-input"
+        />
+        <label
+          for="boot-gate-theme-toggle"
+          class="gate-theme-label"
+          aria-label="Toggle theme"
+        >
+          <span class="gate-theme-core"></span>
+        </label>
+      </div>
+      <div id="boot-gate-terminal">
+        <pre id="gate-line-boot"></pre>
+        <pre id="gate-line-profile"></pre>
+        <div
+          id="gate-profile"
+          class="gate-profile"
+        >
+          <div class="terminal-photo-wrap">
+            <span class="corner tl"></span>
+            <span class="corner tr"></span>
+            <span class="corner bl"></span>
+            <span class="corner br"></span>
+            <div class="terminal-photo-frame">
+              <img
+                class="terminal-photo"
+                src="%sveltekit.assets%/headshot-cutout.png"
+                alt=""
+              />
+            </div>
+          </div>
+          <div class="gate-profile-info">
+            <p class="gate-profile-name">Echo Shih</p>
+            <p class="gate-profile-role">Software Engineer</p>
+          </div>
+        </div>
+        <pre id="gate-line-systems"></pre>
+      </div>
+      <div
+        id="boot-gate-card"
+        hidden
+      >
+        <div class="card-photo-frame">
+          <img
+            class="card-photo"
+            src="%sveltekit.assets%/headshot.jpg"
+            alt=""
+          />
+        </div>
+        <p class="card-eyebrow">Taipei, Taiwan</p>
+        <p class="card-name">Echo Shih</p>
+        <p class="card-role">Software Engineer</p>
+        <div class="card-rule"></div>
+        <a
+          class="card-link"
+          href="https://www.linkedin.com/in/echoshihtw/"
+          target="_blank"
+          rel="noreferrer noopener"
+        >
+          linkedin.com/in/echoshihtw
+        </a>
+      </div>
+      <button
+        type="button"
+        class="card-enter"
+        id="boot-gate-enter"
+      >
+        Click to continue
+        <span
+          class="cta-arrow"
+          aria-hidden="true"
+        >
+          →
+        </span>
+      </button>
+    </div>
+    <script src="%sveltekit.assets%/boot-gate.js"></script>
     <div style="display: contents">%sveltekit.body%</div>
   </body>
 </html>

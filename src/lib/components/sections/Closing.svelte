@@ -1,5 +1,6 @@
 <script lang="ts">
   import { base } from "$app/paths";
+  import { calendlyUrl } from "$lib/contactLinks";
   import { closingConfig } from "../../../content/portfolio.config";
 </script>
 
@@ -19,6 +20,14 @@
         href="mailto:{closingConfig.email}"
       >
         {closingConfig.email}
+      </a>
+      <a
+        class="cta ghost mono"
+        href={calendlyUrl}
+        target="_blank"
+        rel="noreferrer noopener"
+      >
+        Book a call →
       </a>
       <a
         class="cta ghost mono"

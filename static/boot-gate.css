@@ -1,0 +1,477 @@
+/* Loaded as a blocking stylesheet, not from app.css: this has to be opaque
+   before first paint, or the real page flashes through underneath for a
+   frame. Dark mode gets a terminal boot sequence; light mode gets a name
+   card being presented — each matching that theme's own register. Neither
+   auto-dismisses; both wait for "Enter portfolio". */
+#boot-gate {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  transition: opacity 380ms ease;
+}
+#boot-gate:not([data-variant="terminal"]) #boot-gate-terminal {
+  display: none;
+}
+#boot-gate:not([data-variant="card"]) #boot-gate-card {
+  display: none;
+}
+#boot-gate.boot-gate-hide {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Theme toggle in the corner — a faithful port of the real header
+   ThemeSwitch (src/lib/components/ThemeSwitch.svelte), not a
+   reimplementation, so it looks and behaves identically. Positioned here
+   since the gate is plain HTML/JS and can't import the Svelte component.
+   Colors are hardcoded per variant rather than reading CSS custom
+   properties, matching how the rest of this stylesheet handles theming. */
+.gate-theme-switch {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  display: grid;
+  place-items: center;
+}
+.gate-theme-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  opacity: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.gate-theme-label {
+  width: 1.9rem;
+  height: 1.9rem;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  border: 1px solid #ddd8c8;
+  background: rgba(255, 255, 255, 0.45);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.42) inset,
+    0 2px 8px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  transition:
+    transform 160ms ease,
+    border-color 160ms ease,
+    background-color 160ms ease,
+    box-shadow 160ms ease;
+}
+.gate-theme-core {
+  position: relative;
+  width: 0.86rem;
+  height: 0.86rem;
+  border-radius: 999px;
+  background: #f4c95f;
+  box-shadow:
+    0 0 0 3px rgba(244, 201, 95, 0.18),
+    0 0 14px rgba(244, 201, 95, 0.24);
+  transition:
+    background-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+.gate-theme-core::before,
+.gate-theme-core::after {
+  content: "";
+  position: absolute;
+  border-radius: 999px;
+  transition:
+    opacity 180ms ease,
+    transform 180ms ease;
+}
+.gate-theme-core::before {
+  inset: -0.25rem;
+  border: 1.5px solid rgba(244, 201, 95, 0.5);
+  opacity: 0.9;
+}
+.gate-theme-core::after {
+  width: 0.88rem;
+  height: 0.88rem;
+  left: 0.28rem;
+  top: -0.06rem;
+  background: #f1efe6;
+  opacity: 0;
+  transform: scale(0.6);
+}
+.gate-theme-label:hover {
+  transform: translateY(-1px);
+  border-color: #b1552e;
+  background: rgba(255, 255, 255, 0.75);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.48) inset,
+    0 6px 14px rgba(0, 0, 0, 0.08);
+}
+.gate-theme-input:focus-visible + .gate-theme-label {
+  outline: 2px solid #b1552e;
+  outline-offset: 2px;
+}
+.gate-theme-input:checked + .gate-theme-label {
+  background: rgba(237, 236, 232, 0.08);
+}
+.gate-theme-input:checked + .gate-theme-label .gate-theme-core {
+  background: #bfe6f5;
+  box-shadow:
+    inset -0.17rem -0.08rem 1.5px 0 rgba(94, 158, 189, 0.6),
+    0 0 12px rgba(120, 205, 232, 0.3);
+  transform: translateX(-0.04rem);
+}
+.gate-theme-input:checked + .gate-theme-label .gate-theme-core::before {
+  opacity: 0;
+  transform: scale(0.7);
+}
+.gate-theme-input:checked + .gate-theme-label .gate-theme-core::after {
+  opacity: 1;
+  transform: scale(1);
+  filter: blur(0.5px);
+}
+#boot-gate[data-variant="terminal"] .gate-theme-label {
+  background: rgba(237, 236, 232, 0.05);
+  border-color: #3a3568;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.03) inset,
+    0 2px 10px rgba(0, 0, 0, 0.24);
+}
+#boot-gate[data-variant="terminal"] .gate-theme-label:hover {
+  background: rgba(237, 236, 232, 0.1);
+}
+#boot-gate[data-variant="terminal"]
+  .gate-theme-input:focus-visible
+  + .gate-theme-label {
+  outline-color: #4dd6a8;
+}
+#boot-gate[data-variant="terminal"] .gate-theme-core::after {
+  /* Flattened equivalent of rgba(237, 236, 232, 0.05) over the gate's
+     #0b0a17 background — the label's actual visible tint at this spot.
+     Has to be opaque: a semi-transparent mask would let the core's blue
+     show through instead of hiding it. */
+  background: #16151f;
+}
+
+/* Dark: terminal boot sequence, headshot to the left of the typed text. */
+#boot-gate[data-variant="terminal"] {
+  background: #0b0a17;
+  color: #a78bfa;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+}
+/* A vertical sequence, one stage at a time: boot line, then the "loading
+   profile:" line followed by the profile reveal, then the systems line,
+   then (see .card-enter below) the CTA. */
+#boot-gate-terminal {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.55rem;
+  max-width: 90vw;
+  margin: 0 0 1.1rem;
+}
+.gate-line {
+  white-space: pre;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0;
+}
+.gate-line .caret {
+  display: inline-block;
+  width: 0.5ch;
+  background: #a78bfa;
+  animation: boot-gate-caret-blink 0.7s step-end infinite;
+}
+@keyframes boot-gate-caret-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* The profile reveal: photo + name/role, indented under "loading
+   profile:" like a nested detail block. Hidden until its stage fires. */
+.gate-profile {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 0.8rem 1.1rem;
+  border: 1px solid #3a3568;
+  border-radius: 12px;
+  background: #1d1840;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  transform: translateY(6px);
+  transition:
+    opacity 380ms ease,
+    transform 380ms ease;
+}
+.gate-profile.profile-in {
+  opacity: 1;
+  transform: none;
+}
+.gate-profile-info p {
+  margin: 0;
+}
+.gate-profile-name {
+  font-weight: 500;
+  font-size: 1rem;
+  color: #eef0f5;
+}
+.gate-profile-role {
+  font-size: 0.8rem;
+  color: #b8b8d4;
+}
+
+/* Background-removed headshot in a scanning reticle frame — the photo's
+   own backdrop was already near-black, so it was keyed to transparent
+   (see the headshot-cutout.png generation notes) and sits directly on the
+   gate's dark background instead of showing a cutout square. Fixed
+   square, not stretched — the source photo's aspect ratio stays intact. */
+.terminal-photo-wrap {
+  position: relative;
+  flex: none;
+  width: 3.2rem;
+  height: 3.2rem;
+}
+@media (max-width: 480px) {
+  .terminal-photo-wrap {
+    width: 4.2rem;
+    height: 4.2rem;
+  }
+}
+.terminal-photo-wrap .corner {
+  position: absolute;
+  width: 0.5rem;
+  height: 0.5rem;
+  border: 1.5px solid #a78bfa;
+}
+.terminal-photo-wrap .corner.tl {
+  top: -3px;
+  left: -3px;
+  border-right: none;
+  border-bottom: none;
+}
+.terminal-photo-wrap .corner.tr {
+  top: -3px;
+  right: -3px;
+  border-left: none;
+  border-bottom: none;
+}
+.terminal-photo-wrap .corner.bl {
+  bottom: -3px;
+  left: -3px;
+  border-right: none;
+  border-top: none;
+}
+.terminal-photo-wrap .corner.br {
+  bottom: -3px;
+  right: -3px;
+  border-left: none;
+  border-top: none;
+}
+.terminal-photo-frame {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.terminal-photo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  filter: grayscale(1) brightness(1.05) contrast(1.25) sepia(1)
+    hue-rotate(220deg) saturate(3.2);
+}
+.terminal-photo-wrap::after {
+  content: "";
+  position: absolute;
+  left: -2px;
+  right: -2px;
+  height: 2px;
+  background: #d8c9ff;
+  box-shadow:
+    0 0 6px 1px #a78bfa,
+    0 0 14px 3px rgba(167, 139, 250, 0.7);
+  mix-blend-mode: screen;
+  animation: boot-gate-laser-sweep 1.8s linear infinite;
+  pointer-events: none;
+}
+@keyframes boot-gate-laser-sweep {
+  0% {
+    top: -6%;
+    opacity: 0;
+  }
+  6% {
+    opacity: 1;
+  }
+  94% {
+    opacity: 1;
+  }
+  100% {
+    top: 100%;
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .terminal-photo-wrap::after {
+    animation: none;
+    display: none;
+  }
+}
+/* Dark mode: plain text, not a pill button — reads as a terminal prompt
+   rather than a UI control breaking the boot-sequence illusion. */
+#boot-gate[data-variant="terminal"] .card-enter {
+  border: none;
+  background: none;
+  padding: 0;
+  color: #a78bfa;
+}
+#boot-gate[data-variant="terminal"] .card-enter:hover {
+  transform: none;
+  text-decoration: underline;
+}
+#boot-gate[data-variant="terminal"] .card-enter:focus-visible {
+  outline-color: #4dd6a8;
+}
+#boot-gate[data-variant="terminal"] .card-enter[hidden] {
+  display: none;
+}
+
+/* Light: a name card being presented, not a terminal. */
+#boot-gate[data-variant="card"] {
+  background: #f1efe6;
+}
+#boot-gate-card {
+  width: fit-content;
+  max-width: 84vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  border: 1px solid #ddd8c8;
+  border-radius: 14px;
+  background: #fcfbf5;
+  padding: 1.9rem 1.7rem;
+  box-shadow: 0 18px 40px rgba(20, 18, 42, 0.1);
+  opacity: 0;
+  transform: translateY(10px) scale(0.98);
+  transition:
+    opacity 460ms cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 460ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+#boot-gate-card.card-in {
+  opacity: 1;
+  transform: none;
+}
+#boot-gate-card p {
+  margin: 0;
+}
+#boot-gate-card .card-photo-frame {
+  width: 5.2rem;
+  height: 5.2rem;
+  border-radius: 999px;
+  overflow: hidden;
+  margin: 0 0 0.9rem;
+  border: 1px solid #ddd8c8;
+}
+#boot-gate-card .card-photo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+#boot-gate-card .card-eyebrow {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #b1552e;
+}
+#boot-gate-card .card-name {
+  font-family: "DM Serif Display", serif;
+  font-weight: 400;
+  font-size: 1.7rem;
+  color: #14122a;
+  margin: 0.4rem 0 0.15rem;
+}
+#boot-gate-card .card-role {
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.82rem;
+  color: #5b5870;
+}
+#boot-gate-card .card-rule {
+  align-self: stretch;
+  height: 1px;
+  background: #ddd8c8;
+  margin: 1rem 0;
+}
+#boot-gate-card .card-link {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 0.72rem;
+  color: #14122a;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 160ms ease;
+}
+#boot-gate-card .card-link:hover {
+  border-color: #b1552e;
+}
+
+/* Shared CTA look, per-variant color override above/below. */
+.card-enter {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 1.3rem;
+  padding: 0.55rem 1.05rem;
+  border: 1px solid #14122a;
+  border-radius: 999px;
+  background: #14122a;
+  color: #fcfbf5;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 0.74rem;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  opacity: 0;
+  transition:
+    transform 160ms ease,
+    border-color 160ms ease,
+    opacity 220ms ease;
+}
+.card-enter.enter-visible {
+  opacity: 1;
+}
+.card-enter:hover {
+  transform: translateY(-1px);
+}
+.card-enter:focus-visible {
+  outline: 2px solid #b1552e;
+  outline-offset: 2px;
+}
+.card-enter .cta-arrow {
+  display: inline-block;
+  animation: card-enter-nudge 1.4s ease-in-out infinite;
+}
+@keyframes card-enter-nudge {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(3px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .card-enter .cta-arrow {
+    animation: none;
+  }
+}
