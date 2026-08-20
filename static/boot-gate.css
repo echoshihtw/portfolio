@@ -54,6 +54,12 @@
   width: 3.2rem;
   height: 3.2rem;
 }
+@media (max-width: 480px) {
+  .terminal-photo-wrap {
+    width: 4.6rem;
+    height: 4.6rem;
+  }
+}
 .terminal-photo-wrap .corner {
   position: absolute;
   width: 0.5rem;
