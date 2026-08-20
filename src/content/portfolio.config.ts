@@ -42,9 +42,14 @@ export const heroConfig: {
 
   // Problem-solving spine — diagnosis + delivery + scope. Seniority implied by
   // the range of ownership, not by putting "Senior" in the introduction.
+  // "People rely on" read as a reliability boast — a claim about the outcome
+  // that implies things never break. This states scope of responsibility
+  // instead: a plain fact, not a promise, and the one signal remote hiring
+  // actually screens hardest for (can this person be trusted without
+  // oversight).
   headline: [
-    { text: "I build software " },
-    { text: "people rely on", accent: true },
+    { text: "I own it, " },
+    { text: "end to end", accent: true },
     { text: "." },
   ],
 
