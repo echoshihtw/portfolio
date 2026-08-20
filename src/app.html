@@ -116,18 +116,29 @@
   <body data-sveltekit-preload-data="hover">
     <div id="boot-gate">
       <div id="boot-gate-terminal">
-        <div class="terminal-photo-wrap">
-          <span class="corner tl"></span>
-          <span class="corner tr"></span>
-          <span class="corner bl"></span>
-          <span class="corner br"></span>
-          <img
-            class="terminal-photo"
-            src="%sveltekit.assets%/headshot-cutout.png"
-            alt=""
-          />
+        <pre id="gate-line-boot"></pre>
+        <pre id="gate-line-profile"></pre>
+        <div
+          id="gate-profile"
+          class="gate-profile"
+        >
+          <div class="terminal-photo-wrap">
+            <span class="corner tl"></span>
+            <span class="corner tr"></span>
+            <span class="corner bl"></span>
+            <span class="corner br"></span>
+            <img
+              class="terminal-photo"
+              src="%sveltekit.assets%/headshot-cutout.png"
+              alt=""
+            />
+          </div>
+          <div class="gate-profile-info">
+            <p class="gate-profile-name">Echo Shih</p>
+            <p class="gate-profile-role">Software Engineer</p>
+          </div>
         </div>
-        <pre id="boot-gate-text"></pre>
+        <pre id="gate-line-systems"></pre>
       </div>
       <div
         id="boot-gate-card"

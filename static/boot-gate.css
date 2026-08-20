@@ -28,21 +28,65 @@
   color: #a78bfa;
   font-family: "JetBrains Mono", ui-monospace, monospace;
 }
+/* A vertical sequence, one stage at a time: boot line, then the "loading
+   profile:" line followed by the profile reveal, then the systems line,
+   then (see .card-enter below) the CTA. */
 #boot-gate-terminal {
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  gap: 1.1rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.55rem;
   max-width: 90vw;
   margin: 0 0 1.1rem;
 }
-@media (max-width: 480px) {
-  #boot-gate-terminal {
-    flex-direction: column;
-    gap: 0.9rem;
+.gate-line {
+  white-space: pre;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0;
+}
+.gate-line .caret {
+  display: inline-block;
+  width: 0.5ch;
+  background: #a78bfa;
+  animation: boot-gate-caret-blink 0.7s step-end infinite;
+}
+@keyframes boot-gate-caret-blink {
+  50% {
+    opacity: 0;
   }
 }
+
+/* The profile reveal: photo + name/role, indented under "loading
+   profile:" like a nested detail block. Hidden until its stage fires. */
+.gate-profile {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  margin-left: 1.4rem;
+  opacity: 0;
+  transform: translateY(6px);
+  transition:
+    opacity 380ms ease,
+    transform 380ms ease;
+}
+.gate-profile.profile-in {
+  opacity: 1;
+  transform: none;
+}
+.gate-profile-info p {
+  margin: 0;
+}
+.gate-profile-name {
+  font-weight: 500;
+  font-size: 1rem;
+  color: #eef0f5;
+}
+.gate-profile-role {
+  font-size: 0.8rem;
+  color: #b8b8d4;
+}
+
 /* Background-removed headshot in a scanning reticle frame — the photo's
    own backdrop was already near-black, so it was keyed to transparent
    (see the headshot-cutout.png generation notes) and sits directly on the
@@ -56,8 +100,8 @@
 }
 @media (max-width: 480px) {
   .terminal-photo-wrap {
-    width: 4.6rem;
-    height: 4.6rem;
+    width: 4.2rem;
+    height: 4.2rem;
   }
 }
 .terminal-photo-wrap .corner {
@@ -135,25 +179,6 @@
     display: none;
   }
 }
-#boot-gate-text {
-  white-space: pre;
-  font-size: 0.95rem;
-  line-height: 1.6;
-  margin: 0;
-  min-height: 6.5em;
-}
-#boot-gate-text .caret {
-  display: inline-block;
-  width: 0.5ch;
-  background: #a78bfa;
-  animation: boot-gate-caret-blink 0.7s step-end infinite;
-}
-@keyframes boot-gate-caret-blink {
-  50% {
-    opacity: 0;
-  }
-}
-
 /* Dark mode: plain text, not a pill button — reads as a terminal prompt
    rather than a UI control breaking the boot-sequence illusion. */
 #boot-gate[data-variant="terminal"] .card-enter {

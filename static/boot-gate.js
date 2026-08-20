@@ -55,78 +55,54 @@
   }
 
   gate.dataset.variant = "terminal";
-  const textEl = document.getElementById("boot-gate-text");
-  const lines = [
-    "booting echo.dev ...",
-    "loading profile:",
-    "",
-    "Echo Shih — Software Engineer",
-    "",
-    "systems nominal",
-    "access granted_",
-  ];
+  const lineBootEl = document.getElementById("gate-line-boot");
+  const lineProfileEl = document.getElementById("gate-line-profile");
+  const lineSystemsEl = document.getElementById("gate-line-systems");
+  const profileEl = document.getElementById("gate-profile");
 
-  let lineIndex = 0;
-  let charIndex = 0;
-  let out = "";
+  // Each pre already reserves one line's height via line-height even
+  // while empty, and the profile block's photo/name/role are always in
+  // the DOM at full size (only opacity/transform animate) — so typing
+  // into them and revealing the profile never shifts anything below.
 
-  function render() {
-    textEl.innerHTML = "";
-    textEl.appendChild(document.createTextNode(out));
-    const caret = document.createElement("span");
-    caret.className = "caret";
-    caret.textContent = " ";
-    textEl.appendChild(caret);
-  }
-
-  function typeNext() {
-    if (lineIndex >= lines.length) {
-      enterBtn.classList.add("enter-visible");
-      return;
-    }
-    const line = lines[lineIndex];
-    if (charIndex < line.length) {
-      out += line[charIndex];
-      charIndex += 1;
-      render();
-      setTimeout(typeNext, 18);
-    } else {
-      charIndex = 0;
-      lineIndex += 1;
-      // Newline only between lines, not after the last one — the
-      // measurement pass below builds the same string via
-      // lines.join("\n"), which has no trailing newline either. A
-      // mismatch here means the caret wraps onto its own extra line
-      // once typing reaches the end, growing the box after the fact.
-      if (lineIndex < lines.length) {
-        out += "\n";
+  function typeLine(el, text) {
+    return new Promise((resolve) => {
+      let i = 0;
+      function step() {
+        el.innerHTML = "";
+        el.appendChild(document.createTextNode(text.slice(0, i)));
+        const caret = document.createElement("span");
+        caret.className = "caret";
+        caret.textContent = " ";
+        el.appendChild(caret);
+        if (i < text.length) {
+          i += 1;
+          setTimeout(step, 18);
+        } else {
+          setTimeout(resolve, 200);
+        }
       }
-      render();
-      setTimeout(typeNext, 110);
-    }
+      step();
+    });
   }
 
-  function startTyping() {
-    // Reserve the box's final width and height up front, using the exact
-    // markup typing will end on (text + trailing caret span) — how many
-    // lines the second entry wraps to depends on viewport width, and the
-    // caret span itself can push a wrap, so measuring before the web font
-    // has swapped in under-reserved the box and it visibly grew once
-    // typing caught up. Waiting on document.fonts.ready (below) is what
-    // actually fixes that; this still measures against the true final
-    // markup rather than plain text, belt and suspenders.
-    out = lines.join("\n");
-    render();
-    textEl.style.width = textEl.offsetWidth + "px";
-    textEl.style.minHeight = textEl.offsetHeight + "px";
-    out = "";
-    render();
-    typeNext();
+  function wait(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+
+  async function runSequence() {
+    await typeLine(lineBootEl, "booting echo.dev ....");
+    await typeLine(lineProfileEl, "loading profile:");
+    profileEl.classList.add("profile-in");
+    await wait(480);
+    await typeLine(lineSystemsEl, "systems nominal.......");
+    await wait(200);
+    enterBtn.classList.add("enter-visible");
   }
 
   if (document.fonts && document.fonts.ready) {
-    document.fonts.ready.then(startTyping);
+    document.fonts.ready.then(runSequence);
   } else {
-    startTyping();
+    runSequence();
   }
 })();
