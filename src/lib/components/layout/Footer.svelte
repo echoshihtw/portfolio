@@ -144,7 +144,7 @@
   }
 
   .footer-shell {
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
   }
 
@@ -156,6 +156,7 @@
 
   .footer-brand h2 {
     margin: 0.2rem 0 0.5rem;
+    font-family: "JetBrains Mono", monospace;
     font-size: clamp(1.5rem, 3vw, 2rem);
     color: var(--text-color);
   }
@@ -306,6 +307,11 @@
     color: var(--color-accent);
   }
   @media (min-width: 768px) {
+    .footer-wrap {
+      padding-left: 2.5rem;
+      padding-right: 2.5rem;
+    }
+
     .footer-grid {
       grid-template-columns: 1.5fr 0.8fr 0.6fr;
       gap: 2rem;
