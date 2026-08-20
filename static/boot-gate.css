@@ -25,52 +25,133 @@
   pointer-events: none;
 }
 
-/* Small, quiet theme toggle in the corner — lets a visitor who lands on
-   the "wrong" variant switch before entering, without competing with the
-   CTA for attention. */
-.gate-theme-toggle {
+/* Theme toggle in the corner — a faithful port of the real header
+   ThemeSwitch (src/lib/components/ThemeSwitch.svelte), not a
+   reimplementation, so it looks and behaves identically. Positioned here
+   since the gate is plain HTML/JS and can't import the Svelte component.
+   Colors are hardcoded per variant rather than reading CSS custom
+   properties, matching how the rest of this stylesheet handles theming. */
+.gate-theme-switch {
   position: absolute;
   top: 1.25rem;
   right: 1.25rem;
-  width: 2rem;
-  height: 2rem;
+  display: grid;
+  place-items: center;
+}
+.gate-theme-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  opacity: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.gate-theme-label {
+  width: 1.9rem;
+  height: 1.9rem;
   display: grid;
   place-items: center;
   border-radius: 999px;
   border: 1px solid #ddd8c8;
-  background: rgba(20, 18, 42, 0.04);
+  background: rgba(255, 255, 255, 0.45);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.42) inset,
+    0 2px 8px rgba(0, 0, 0, 0.08);
   cursor: pointer;
   transition:
+    transform 160ms ease,
     border-color 160ms ease,
     background-color 160ms ease,
-    transform 160ms ease;
+    box-shadow 160ms ease;
 }
-.gate-theme-toggle:hover {
+.gate-theme-core {
+  position: relative;
+  width: 0.86rem;
+  height: 0.86rem;
+  border-radius: 999px;
+  background: #f4c95f;
+  box-shadow:
+    0 0 0 3px rgba(244, 201, 95, 0.18),
+    0 0 14px rgba(244, 201, 95, 0.24);
+  transition:
+    background-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+.gate-theme-core::before,
+.gate-theme-core::after {
+  content: "";
+  position: absolute;
+  border-radius: 999px;
+  transition:
+    opacity 180ms ease,
+    transform 180ms ease;
+}
+.gate-theme-core::before {
+  inset: -0.25rem;
+  border: 1.5px solid rgba(244, 201, 95, 0.5);
+  opacity: 0.9;
+}
+.gate-theme-core::after {
+  width: 0.88rem;
+  height: 0.88rem;
+  left: 0.28rem;
+  top: -0.06rem;
+  background: #ddd8c8;
+  opacity: 0;
+  transform: scale(0.6);
+}
+.gate-theme-label:hover {
   transform: translateY(-1px);
+  border-color: #b1552e;
+  background: rgba(255, 255, 255, 0.75);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.48) inset,
+    0 6px 14px rgba(0, 0, 0, 0.08);
 }
-.gate-theme-toggle:focus-visible {
+.gate-theme-input:focus-visible + .gate-theme-label {
   outline: 2px solid #b1552e;
   outline-offset: 2px;
 }
-.gate-theme-core {
-  width: 0.7rem;
-  height: 0.7rem;
-  border-radius: 999px;
-  background: #f4c95f;
-  box-shadow: 0 0 8px rgba(244, 201, 95, 0.4);
+.gate-theme-input:checked + .gate-theme-label {
+  background: rgba(237, 236, 232, 0.08);
 }
-#boot-gate[data-variant="terminal"] .gate-theme-toggle {
-  border-color: #3a3568;
-  background: rgba(238, 240, 245, 0.05);
-}
-#boot-gate[data-variant="terminal"] .gate-theme-toggle:focus-visible {
-  outline-color: #4dd6a8;
-}
-#boot-gate[data-variant="terminal"] .gate-theme-core {
+.gate-theme-input:checked + .gate-theme-label .gate-theme-core {
   background: #bfe6f5;
   box-shadow:
-    inset -0.16rem -0.08rem 0 #0b0a17,
-    0 0 8px rgba(120, 205, 232, 0.35);
+    inset -0.16rem -0.08rem 0 rgba(94, 158, 189, 0.6),
+    0 0 12px rgba(120, 205, 232, 0.3);
+  transform: translateX(-0.04rem);
+}
+.gate-theme-input:checked + .gate-theme-label .gate-theme-core::before {
+  opacity: 0;
+  transform: scale(0.7);
+}
+.gate-theme-input:checked + .gate-theme-label .gate-theme-core::after {
+  opacity: 1;
+  transform: scale(1);
+}
+#boot-gate[data-variant="terminal"] .gate-theme-label {
+  background: rgba(237, 236, 232, 0.05);
+  border-color: #3a3568;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.03) inset,
+    0 2px 10px rgba(0, 0, 0, 0.24);
+}
+#boot-gate[data-variant="terminal"] .gate-theme-label:hover {
+  background: rgba(237, 236, 232, 0.1);
+}
+#boot-gate[data-variant="terminal"] .gate-theme-input:focus-visible
+  + .gate-theme-label {
+  outline-color: #4dd6a8;
+}
+#boot-gate[data-variant="terminal"] .gate-theme-core::after {
+  background: #3a3568;
 }
 
 /* Dark: terminal boot sequence, headshot to the left of the typed text. */

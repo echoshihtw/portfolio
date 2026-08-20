@@ -117,10 +117,13 @@
     showCard();
   }
 
+  const isLight = document.documentElement.dataset.theme === "light";
+
   if (themeToggle) {
-    themeToggle.addEventListener("click", () => {
-      const goingLight = gate.dataset.variant !== "card";
-      const nextTheme = goingLight ? "light" : "dark";
+    // Checked = dark, same convention as the real header ThemeSwitch.
+    themeToggle.checked = !isLight;
+    themeToggle.addEventListener("change", () => {
+      const nextTheme = themeToggle.checked ? "dark" : "light";
 
       document.documentElement.dataset.theme = nextTheme;
       document.documentElement.classList.toggle("dark", nextTheme === "dark");
@@ -130,7 +133,7 @@
         // Ignore storage failures — the toggle still works this visit.
       }
 
-      if (goingLight) {
+      if (nextTheme === "light") {
         enterLight();
       } else {
         enterDark();
@@ -138,8 +141,6 @@
       }
     });
   }
-
-  const isLight = document.documentElement.dataset.theme === "light";
 
   if (isLight) {
     enterLight();
