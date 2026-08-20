@@ -14,30 +14,18 @@
   </defs>
   <rect x="0" y="0" width="64" height="64" rx="14" fill="url(#bg)"/>
 
-  <!-- neon halo: saturated violet, blurred -->
-  <g
+  <!-- single continuous hand-drawn stroke, one neon hue throughout -->
+  <path
+    d="M 41 17
+       C 30 12, 19 14, 19 22
+       C 19 28, 27 28, 33 27
+       C 26 28, 19 29, 19 37
+       C 19 46, 31 48, 42 43"
     fill="none"
-    stroke="#8b5cf6"
-    stroke-width="3.6"
+    stroke="#a78bfa"
+    stroke-width="3.4"
     stroke-linecap="round"
+    stroke-linejoin="round"
     filter="url(#glow)"
-  >
-    <path d="M 25.25 12.5 L 23.75 51.5" />
-    <path d="M 17 20.75 L 47 17" />
-    <path d="M 19.25 32.75 L 41.75 30.5" />
-    <path d="M 16.25 46.25 L 47.75 43.25" />
-  </g>
-
-  <!-- neon core: bright, crisp, unblurred -->
-  <g
-    fill="none"
-    stroke="#f2ecff"
-    stroke-width="1.5"
-    stroke-linecap="round"
-  >
-    <path d="M 25.25 12.5 L 23.75 51.5" />
-    <path d="M 17 20.75 L 47 17" />
-    <path d="M 19.25 32.75 L 41.75 30.5" />
-    <path d="M 16.25 46.25 L 47.75 43.25" />
-  </g>
+  />
 </svg>
