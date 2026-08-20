@@ -2,6 +2,7 @@
   import ThemeSwitch from "../ThemeSwitch.svelte";
   import { tabs } from "$lib/menuTabs";
   import { base } from "$app/paths";
+  import { heroConfig } from "../../../content/portfolio.config";
 
   export let scrollPosition: number;
   export let headerEl: HTMLElement | undefined = undefined;
@@ -44,6 +45,13 @@
           {tab.name}
         </a>
       {/each}
+      <a
+        href="{base}/{heroConfig.resume}"
+        download={heroConfig.resumeAs}
+        class="mobile-tab-link"
+      >
+        Résumé
+      </a>
       <div class={scrollPosition > 60 ? "drop-shadow-lg" : undefined}>
         <ThemeSwitch id="theme-toggle" />
       </div>
