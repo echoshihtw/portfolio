@@ -56,12 +56,19 @@ export const heroConfig: {
   // Ownership leads, the shape of the work follows, stack last. An earlier
   // version led with the stack and argued breadth — a capable-IC claim that set
   // up none of the strongest evidence, which is deciding what to build and
-  // holding scope. The seams line stays here and not on the CV: it is voice,
-  // and this is the voice layer. The system-of-record sentence is the opposite
-  // trade — it is the same on both, because it answers "you have no experience
-  // in our domain" and that question gets asked in every screen.
+  // holding scope. The system-of-record sentence is the same on both this and
+  // the CV, because it answers "you have no experience in our domain" and
+  // that question gets asked in every screen.
+  // Trimmed once the headline changed to "I own it, end to end" — restating
+  // ownership here read as redundant, and the "breaks at the seams" list was
+  // vivid but added length without adding information the proof line below
+  // doesn't already demonstrate concretely.
+  // Stack line matches Clio (the featured, in-production project the proof
+  // line is about) rather than the FastAPI/Node experience from client work —
+  // this is the one sentence on the page a Supabase-caliber team's hiring
+  // manager is most likely to specifically recognize.
   support:
-    "Software Engineer who works product-first: I own problems end to end, not just the tickets inside them. Most of what I build is a system of record — project platforms, applicant tracking, client histories. I work out what to build, build it, ship it, and keep it running, because the experience breaks at the seams: a slow endpoint, a failed release, an app that gives up when the Wi-Fi does. React, TypeScript and Node.js, with Python and FastAPI behind them.",
+    "Software Engineer who works product-first, building systems of record — project platforms, applicant tracking, client histories — and keeping them running after ship. React, TypeScript, Supabase and Postgres.",
 
   // One sentence, not a stat block. Three figures in columns is a SaaS
   // landing-page pattern: it invites comparison, and 603 read against other
