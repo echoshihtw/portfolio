@@ -29,16 +29,11 @@ export const heroConfig: {
   // The full offer lives in the closing section, where it invites.
   remoteOpen: "UTC+8 · Remote from Taiwan · or on-site in Taipei",
 
-  // Spells out what "end to end" means, layer by layer. An earlier version
-  // listed categories — Web, Mobile, Backend — which repeated the stack line
-  // and proved nothing. A later version ("UI & design systems", "Tests",
-  // "CI/CD & deploy") fixed the redundancy but was still buzzword-shaped —
-  // any portfolio could claim those five nouns. Named the actual technique
-  // behind each layer instead, pulled from real project work below: RLS is
-  // Clio's tenant isolation, build-failing tests is the api-layer-only test
-  // from the same project, GHCR image deploys is the Lockerbie release
-  // pipeline. Passes the test of "could a thousand other portfolios say
-  // this exact phrase" — these mostly could not.
+  // Spells out what "end to end" means, layer by layer — named techniques
+  // pulled from real project work, not category nouns any portfolio could
+  // claim. RLS and offline-first sync are Clio's; build-failing tests is
+  // Clio's api-layer-only test; GHCR image deploys is the Lockerbie release
+  // pipeline.
   owns: [
     "React 19 UI",
     "Postgres RLS",
@@ -47,46 +42,33 @@ export const heroConfig: {
     "GHCR image deploys",
   ],
 
-  // Problem-solving spine — diagnosis + delivery + scope. Seniority implied by
-  // the range of ownership, not by putting "Senior" in the introduction.
-  // "People rely on" read as a reliability boast — a claim about the outcome
-  // that implies things never break. This states scope of responsibility
-  // instead: a plain fact, not a promise, and the one signal remote hiring
-  // actually screens hardest for (can this person be trusted without
-  // oversight).
+  // States scope of responsibility as a plain fact rather than a reliability
+  // claim ("people rely on" implies things never break) — the signal remote
+  // hiring screens hardest for is whether someone can be trusted without
+  // oversight, not whether their software never fails.
   headline: [
     { text: "I own it, " },
     { text: "end to end", accent: true },
     { text: "." },
   ],
 
-  // Ownership leads, the shape of the work follows, stack last. An earlier
-  // version led with the stack and argued breadth — a capable-IC claim that set
-  // up none of the strongest evidence, which is deciding what to build and
-  // holding scope. The system-of-record sentence is the same on both this and
-  // the CV, because it answers "you have no experience in our domain" and
-  // that question gets asked in every screen.
-  // Trimmed once the headline changed to "I own it, end to end" — restating
-  // ownership here read as redundant, and the "breaks at the seams" list was
-  // vivid but added length without adding information the proof line below
-  // doesn't already demonstrate concretely.
-  // Stack line matches Clio (the featured, in-production project the proof
-  // line is about) rather than the FastAPI/Node experience from client work —
-  // this is the one sentence on the page a Supabase-caliber team's hiring
-  // manager is most likely to specifically recognize.
+  // Ownership leads, the shape of the work follows, stack last. The
+  // system-of-record sentence is the same on both this and the CV, because
+  // it answers "you have no experience in our domain" and that question
+  // gets asked in every screen. Stack mention matches Clio (the featured,
+  // in-production project the proof line is about) rather than unrelated
+  // client work, since it's the one detail here most likely to specifically
+  // land with a Supabase-caliber hiring manager.
   support:
     "Software Engineer who works product-first, building systems of record — project platforms, applicant tracking, client histories — and keeping them running after ship. React, TypeScript, Supabase and Postgres.",
 
-  // Two sentences, not a stat block. Three figures in columns is a SaaS
-  // landing-page pattern: it invites comparison, and 603 read against other
-  // people's numbers looks small. Stated as a fact about a real salon it reads
-  // as remarkable, and "entered by hand" carries what a number cannot.
-  // "Engineered multi-tenant from day one" carries the origin story — built
-  // for one salon owner, but architected for scale before there was any
-  // pressure to — without spending a separate sentence on it. The second
-  // sentence is the one line here nobody else could have written: an admitted
-  // mistake, pulled from Clio's own project card, reads as more credible to a
-  // technical reader than a clean win alone.
+  // Two sentences, not a stat block: three figures in columns is a SaaS
+  // landing-page pattern that invites comparison, and "entered by hand"
+  // carries what a number can't. "Engineered multi-tenant from day one"
+  // folds in the origin story (built for one owner, architected for scale
+  // before there was pressure to) without a separate sentence. The second
+  // sentence — an admitted mistake, pulled from Clio's own project card —
+  // is the one line here nobody else could have written.
   proofLine:
     "Built for one salon owner, engineered multi-tenant from day one — in daily use since May 2025, 603 clients and 2,694 records entered by hand. What I'd do differently: write the permission model down before building it, not after.",
 
