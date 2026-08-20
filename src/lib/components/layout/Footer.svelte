@@ -183,7 +183,9 @@
 
   .footer-nav a {
     display: block;
-    font-size: 0.9rem;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.02em;
     color: var(--text-color);
     text-decoration: none;
     margin-bottom: 0.35rem;
