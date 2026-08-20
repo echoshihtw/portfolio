@@ -262,12 +262,7 @@
   .hero-cta.primary {
     background: var(--text-color);
     color: var(--color-bg);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
-  }
-
-  .hero-cta.primary:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.16);
+    border-color: var(--text-color);
   }
 
   .hero-cta.ghost {

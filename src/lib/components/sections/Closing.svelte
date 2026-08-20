@@ -79,10 +79,6 @@
     border-color: var(--text-color);
   }
 
-  .primary:hover {
-    opacity: 0.85;
-  }
-
   .ghost {
     color: var(--text-color);
     background: var(--surface-bg);

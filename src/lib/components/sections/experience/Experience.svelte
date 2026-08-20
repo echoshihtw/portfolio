@@ -35,12 +35,36 @@
     left: 0.32rem;
     top: 0.5rem;
     bottom: 0.5rem;
-    width: 2px;
+    width: 1px;
+    border-radius: 999px;
     background: linear-gradient(
       to bottom,
       var(--color-accent),
-      rgba(200, 169, 126, 0.2)
+      color-mix(in srgb, var(--color-accent) 20%, transparent)
     );
+    /* Lightsaber glow: near-invisible in light mode, a soft mint blade-light
+       in dark mode via --glow-strength, breathing gently rather than static. */
+    box-shadow:
+      0 0 calc(8px * var(--glow-strength)) var(--color-accent),
+      0 0 calc(22px * var(--glow-strength))
+        color-mix(in srgb, var(--color-accent) calc(60% * var(--glow-strength)), transparent);
+    animation: blade-breathe calc(4.5s * var(--glow-strength, 0)) ease-in-out infinite;
+  }
+
+  @keyframes blade-breathe {
+    0%,
+    100% {
+      filter: brightness(1);
+    }
+    50% {
+      filter: brightness(1.25);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .timeline::before {
+      animation: none;
+    }
   }
 
   .tl-entry {
@@ -62,7 +86,7 @@
     border-radius: 999px;
     background: var(--color-accent);
     box-shadow:
-      0 0 0 4px rgba(200, 169, 126, 0.16),
+      0 0 0 4px color-mix(in srgb, var(--color-accent) 16%, transparent),
       0 0 0 5px var(--color-bg);
   }
 

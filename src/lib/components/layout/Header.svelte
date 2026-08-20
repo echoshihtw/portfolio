@@ -114,11 +114,11 @@
       border-color 180ms ease;
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
-    background: rgba(247, 245, 240, 0.7);
+    background: color-mix(in srgb, var(--surface-bg) 70%, transparent);
     border: 1px solid var(--section-border);
   }
 
   :global(html[data-theme="dark"]) .nav-filtered {
-    background: rgba(17, 17, 16, 0.62);
+    background: color-mix(in srgb, var(--surface-bg) 62%, transparent);
   }
 </style>
