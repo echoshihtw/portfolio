@@ -17,9 +17,58 @@
 #boot-gate:not([data-variant="terminal"]) #boot-gate-terminal {
   display: none;
 }
+#boot-gate:not([data-variant="card"]) #boot-gate-card {
+  display: none;
+}
 #boot-gate.boot-gate-hide {
   opacity: 0;
   pointer-events: none;
+}
+
+/* Small, quiet theme toggle in the corner — lets a visitor who lands on
+   the "wrong" variant switch before entering, without competing with the
+   CTA for attention. */
+.gate-theme-toggle {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  width: 2rem;
+  height: 2rem;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  border: 1px solid #ddd8c8;
+  background: rgba(20, 18, 42, 0.04);
+  cursor: pointer;
+  transition:
+    border-color 160ms ease,
+    background-color 160ms ease,
+    transform 160ms ease;
+}
+.gate-theme-toggle:hover {
+  transform: translateY(-1px);
+}
+.gate-theme-toggle:focus-visible {
+  outline: 2px solid #b1552e;
+  outline-offset: 2px;
+}
+.gate-theme-core {
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 999px;
+  background: #f4c95f;
+  box-shadow: 0 0 8px rgba(244, 201, 95, 0.4);
+}
+#boot-gate[data-variant="terminal"] .gate-theme-toggle {
+  border-color: #3a3568;
+  background: rgba(238, 240, 245, 0.05);
+}
+#boot-gate[data-variant="terminal"] .gate-theme-toggle:focus-visible {
+  outline-color: #4dd6a8;
+}
+#boot-gate[data-variant="terminal"] .gate-theme-core {
+  background: #bfe6f5;
+  box-shadow: 0 0 8px rgba(120, 205, 232, 0.35);
 }
 
 /* Dark: terminal boot sequence, headshot to the left of the typed text. */
@@ -271,6 +320,7 @@
   color: #5b5870;
 }
 #boot-gate-card .card-rule {
+  align-self: stretch;
   height: 1px;
   background: #ddd8c8;
   margin: 1rem 0;

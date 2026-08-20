@@ -41,24 +41,12 @@
   }
   enterBtn.addEventListener("click", dismiss);
 
-  const isLight = document.documentElement.dataset.theme === "light";
-
-  if (isLight) {
-    gate.dataset.variant = "card";
-    const card = document.getElementById("boot-gate-card");
-    card.hidden = false;
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => card.classList.add("card-in"));
-    });
-    enterBtn.classList.add("enter-visible");
-    return;
-  }
-
-  gate.dataset.variant = "terminal";
+  const card = document.getElementById("boot-gate-card");
   const lineBootEl = document.getElementById("gate-line-boot");
   const lineProfileEl = document.getElementById("gate-line-profile");
   const lineSystemsEl = document.getElementById("gate-line-systems");
   const profileEl = document.getElementById("gate-profile");
+  const themeToggle = document.getElementById("boot-gate-theme-toggle");
 
   // Each pre already reserves one line's height via line-height even
   // while empty, and the profile block's photo/name/role are always in
@@ -90,7 +78,7 @@
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
 
-  async function runSequence() {
+  async function runTerminalSequence() {
     await typeLine(lineBootEl, "booting echo.dev ....");
     await typeLine(lineProfileEl, "loading profile:");
     profileEl.classList.add("profile-in");
@@ -100,9 +88,68 @@
     enterBtn.classList.add("enter-visible");
   }
 
+  // Used both for the initial dark-mode load and for switching into the
+  // terminal variant via the toggle after the light card was already
+  // showing — in the latter case there's no reason to replay the typing
+  // animation, so it jumps straight to the finished state.
+  function showTerminalFinal() {
+    lineBootEl.textContent = "booting echo.dev ....";
+    lineProfileEl.textContent = "loading profile:";
+    lineSystemsEl.textContent = "systems nominal.......";
+    profileEl.classList.add("profile-in");
+    enterBtn.classList.add("enter-visible");
+  }
+
+  function showCard() {
+    card.hidden = false;
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => card.classList.add("card-in"));
+    });
+    enterBtn.classList.add("enter-visible");
+  }
+
+  function enterDark() {
+    gate.dataset.variant = "terminal";
+  }
+
+  function enterLight() {
+    gate.dataset.variant = "card";
+    showCard();
+  }
+
+  if (themeToggle) {
+    themeToggle.addEventListener("click", () => {
+      const goingLight = gate.dataset.variant !== "card";
+      const nextTheme = goingLight ? "light" : "dark";
+
+      document.documentElement.dataset.theme = nextTheme;
+      document.documentElement.classList.toggle("dark", nextTheme === "dark");
+      try {
+        localStorage.setItem("echo-theme", nextTheme);
+      } catch (_error) {
+        // Ignore storage failures — the toggle still works this visit.
+      }
+
+      if (goingLight) {
+        enterLight();
+      } else {
+        enterDark();
+        showTerminalFinal();
+      }
+    });
+  }
+
+  const isLight = document.documentElement.dataset.theme === "light";
+
+  if (isLight) {
+    enterLight();
+    return;
+  }
+
+  enterDark();
   if (document.fonts && document.fonts.ready) {
-    document.fonts.ready.then(runSequence);
+    document.fonts.ready.then(runTerminalSequence);
   } else {
-    runSequence();
+    runTerminalSequence();
   }
 })();
