@@ -1,6 +1,58 @@
-<script>
+<script lang="ts">
+  import { onMount } from "svelte";
   import { base } from "$app/paths";
   import { heroConfig } from "../../../../content/portfolio.config";
+
+  // Boot-up typing: dark mode only, once on first load, skipped entirely
+  // under reduced-motion. Defaults to fully revealed so light mode / SSR /
+  // no-JS never see a blank headline.
+  const totalChars = heroConfig.headline.reduce(
+    (sum, part) => sum + part.text.length,
+    0
+  );
+  const partOffsets = (() => {
+    let acc = 0;
+    return heroConfig.headline.map((part) => {
+      const start = acc;
+      acc += part.text.length;
+      return start;
+    });
+  })();
+
+  let revealCount = totalChars;
+  let isTyping = false;
+
+  $: visibleParts = heroConfig.headline.map((part, i) => ({
+    text: part.text.slice(
+      0,
+      Math.max(0, Math.min(part.text.length, revealCount - partOffsets[i]))
+    ),
+    accent: part.accent,
+    fullText: part.text,
+  }));
+
+  onMount(() => {
+    const isDark = document.documentElement.dataset.theme === "dark";
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+    if (!isDark || reduceMotion) return;
+
+    revealCount = 0;
+    isTyping = true;
+    const start = performance.now();
+    const duration = 900;
+    function tick(now: number) {
+      const t = Math.min(1, (now - start) / duration);
+      revealCount = Math.round(t * totalChars);
+      if (t < 1) {
+        requestAnimationFrame(tick);
+      } else {
+        isTyping = false;
+      }
+    }
+    requestAnimationFrame(tick);
+  });
 </script>
 
 <section
@@ -26,9 +78,17 @@
     </div>
 
     <h1 class="hero-headline">
-      {#each heroConfig.headline as part}<span class:accent={part.accent}>
+      {#each visibleParts as part}<span
+          class:accent={part.accent}
+          data-text={part.accent ? part.fullText : undefined}
+        >
           {part.text}
         </span>{/each}
+      <span
+        class="type-caret"
+        class:typing={isTyping}
+        aria-hidden="true"
+      ></span>
     </h1>
 
     <p class="hero-support">{heroConfig.support}</p>
@@ -226,6 +286,125 @@
   .hero-headline .accent {
     color: var(--color-accent);
     font-style: italic;
+  }
+
+  /* Boot-up cursor: only rendered mid-type (see isTyping in script), dark
+     mode only via --glow-strength — invisible/inert once typing finishes or
+     in light mode. */
+  .type-caret {
+    display: inline-block;
+    width: 0.5ch;
+    height: 0.85em;
+    margin-left: 0.05em;
+    background: var(--color-accent);
+    opacity: 0;
+    vertical-align: -0.1em;
+  }
+
+  .type-caret.typing {
+    opacity: var(--glow-strength, 0);
+    animation: caret-blink 0.7s step-end infinite;
+  }
+
+  @keyframes caret-blink {
+    50% {
+      opacity: 0;
+    }
+  }
+
+  /* Hover glitch on the accent word, dark mode only: a brief RGB-split
+     jitter, ~200ms, not a repeating effect. */
+  :global(html[data-theme="dark"]) .hero-headline .accent {
+    position: relative;
+  }
+
+  :global(html[data-theme="dark"]) .hero-headline .accent:hover {
+    animation: glitch-shake 220ms steps(2, jump-none);
+  }
+
+  :global(html[data-theme="dark"]) .hero-headline .accent:hover::before,
+  :global(html[data-theme="dark"]) .hero-headline .accent:hover::after {
+    content: attr(data-text);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    overflow: hidden;
+    font-style: italic;
+  }
+
+  :global(html[data-theme="dark"]) .hero-headline .accent:hover::before {
+    color: var(--color-highlight);
+    clip-path: inset(0 0 60% 0);
+    animation: glitch-shift-a 220ms steps(2, jump-none);
+  }
+
+  :global(html[data-theme="dark"]) .hero-headline .accent:hover::after {
+    color: #4dd6a8;
+    clip-path: inset(60% 0 0 0);
+    animation: glitch-shift-b 220ms steps(2, jump-none);
+  }
+
+  @keyframes glitch-shake {
+    0%,
+    100% {
+      transform: translate(0);
+    }
+    20% {
+      transform: translate(-2px, 1px);
+    }
+    40% {
+      transform: translate(2px, -1px);
+    }
+    60% {
+      transform: translate(-1px, -1px);
+    }
+    80% {
+      transform: translate(1px, 1px);
+    }
+  }
+
+  @keyframes glitch-shift-a {
+    0%,
+    100% {
+      transform: translate(0);
+    }
+    20% {
+      transform: translate(3px, 0);
+    }
+    50% {
+      transform: translate(-3px, 0);
+    }
+    80% {
+      transform: translate(2px, 0);
+    }
+  }
+
+  @keyframes glitch-shift-b {
+    0%,
+    100% {
+      transform: translate(0);
+    }
+    20% {
+      transform: translate(-3px, 0);
+    }
+    50% {
+      transform: translate(3px, 0);
+    }
+    80% {
+      transform: translate(-2px, 0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    :global(html[data-theme="dark"]) .hero-headline .accent:hover,
+    :global(html[data-theme="dark"]) .hero-headline .accent:hover::before,
+    :global(html[data-theme="dark"]) .hero-headline .accent:hover::after {
+      animation: none;
+    }
+    .type-caret.typing {
+      animation: none;
+    }
   }
 
   /* support / differentiator */

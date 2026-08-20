@@ -193,11 +193,43 @@ code,
 
 .section_title {
   @apply font-light text-3xl sm:text-4xl;
+  position: relative;
+  overflow: hidden;
   color: var(--text-muted);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   font-size: 0.8rem;
   margin-bottom: 0.6rem;
+}
+
+/* One-shot signal-scan cue, dark mode only (via --glow-strength), the first
+   time a section title scrolls into view — see sweepOnView action. */
+.section_title.sweep-in::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-accent-strong),
+    transparent
+  );
+  box-shadow: 0 0 8px var(--color-accent-strong);
+  opacity: var(--glow-strength, 0);
+  animation: title-sweep 700ms ease-out forwards;
+  pointer-events: none;
+}
+
+@keyframes title-sweep {
+  from {
+    top: -100%;
+  }
+  to {
+    top: 100%;
+  }
 }
 
 .section_padding {
