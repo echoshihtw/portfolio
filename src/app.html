@@ -45,19 +45,21 @@
     <script>
       (() => {
         const key = "echo-theme";
-        let theme = "light";
+        // Default to dark unless the visitor's OS explicitly asks for light,
+        // or they've picked a theme here before.
+        let theme = "dark";
 
         try {
           const savedTheme = localStorage.getItem(key);
           if (savedTheme === "light" || savedTheme === "dark") {
             theme = savedTheme;
           } else if (
-            window.matchMedia("(prefers-color-scheme: dark)").matches
+            window.matchMedia("(prefers-color-scheme: light)").matches
           ) {
-            theme = "dark";
+            theme = "light";
           }
         } catch (_error) {
-          theme = "light";
+          theme = "dark";
         }
 
         document.documentElement.dataset.theme = theme;

@@ -56,7 +56,7 @@ export const heroConfig: {
   // trade — it is the same on both, because it answers "you have no experience
   // in our domain" and that question gets asked in every screen.
   support:
-    "Product Engineer who owns problems end to end. Most of what I build is a system of record — project platforms, applicant tracking, client histories. I work out what to build, build it, ship it, and keep it running, because the experience breaks at the seams: a slow endpoint, a failed release, an app that gives up when the Wi-Fi does. React, TypeScript and Node.js, with Python and FastAPI behind them.",
+    "Software Engineer who works product-first: I own problems end to end, not just the tickets inside them. Most of what I build is a system of record — project platforms, applicant tracking, client histories. I work out what to build, build it, ship it, and keep it running, because the experience breaks at the seams: a slow endpoint, a failed release, an app that gives up when the Wi-Fi does. React, TypeScript and Node.js, with Python and FastAPI behind them.",
 
   // One sentence, not a stat block. Three figures in columns is a SaaS
   // landing-page pattern: it invites comparison, and 603 read against other
@@ -69,7 +69,7 @@ export const heroConfig: {
   resume: "resume.pdf", // served from /static, base-prefixed at render
   // What the file is called once it lands in someone's downloads folder, and
   // in an ATS. "resume.pdf" there is indistinguishable from every other one.
-  resumeAs: "Chun-Yu-Echo-Shih-Product-Engineer.pdf",
+  resumeAs: "Chun-Yu-Echo-Shih-Software-Engineer.pdf",
   seeWorkHref: "#projects",
 };
 
@@ -80,7 +80,7 @@ export const closingConfig = {
   body: "If you have a problem nobody has scoped yet, and you need one person to carry it from interface to deploy, that is the work I am best at. Remote from Taiwan, or in Taipei, and happy to travel.",
   email: "echoshihtw@gmail.com",
   resume: "resume.pdf",
-  resumeAs: "Chun-Yu-Echo-Shih-Product-Engineer.pdf",
+  resumeAs: "Chun-Yu-Echo-Shih-Software-Engineer.pdf",
 };
 
 // Skills live in skills.config.ts — one list, rendered to the PDF and to the

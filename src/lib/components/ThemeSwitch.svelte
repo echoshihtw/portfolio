@@ -132,10 +132,10 @@
   }
 
   .theme-input:checked + .theme-label .theme-core {
-    background: #d7e7fa;
+    background: #bfe6f5;
     box-shadow:
-      inset -0.16rem -0.08rem 0 rgba(145, 172, 205, 0.55),
-      0 0 12px rgba(166, 198, 230, 0.24);
+      inset -0.16rem -0.08rem 0 rgba(94, 158, 189, 0.6),
+      0 0 12px rgba(120, 205, 232, 0.3);
     transform: translateX(-0.04rem);
   }
 

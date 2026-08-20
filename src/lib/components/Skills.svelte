@@ -1,5 +1,7 @@
 <script lang="ts">
+  import Icon from "@iconify/svelte";
   import { skillsConfig } from "../../content/portfolio.config";
+  import { skillIcons } from "../../content/skillIcons";
 </script>
 
 <section
@@ -12,7 +14,24 @@
     {#each skillsConfig as group}
       <div class="row">
         <p class="label mono">{group.label}</p>
-        <p class="items">{group.items.join("  ·  ")}</p>
+        <ul class="items">
+          {#each group.items as item, i}
+            <li>
+              {#if skillIcons[item]}
+                <Icon
+                  icon={skillIcons[item]}
+                  class="skill-icon"
+                  aria-hidden="true"
+                />
+              {/if}{item}{#if i < group.items.length - 1}<span
+                  class="items-sep"
+                  aria-hidden="true"
+                >
+                  ·
+                </span>{/if}
+            </li>
+          {/each}
+        </ul>
       </div>
     {/each}
   </div>
@@ -48,9 +67,32 @@
 
   .items {
     margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
     font-size: 0.95rem;
     line-height: 1.5;
     color: var(--text-color);
+  }
+
+  .items li {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  .items :global(.skill-icon) {
+    flex: none;
+    width: 0.9em;
+    height: 0.9em;
+    color: var(--color-accent);
+    opacity: 0.85;
+  }
+
+  .items-sep {
+    margin: 0 0.5rem;
+    color: var(--section-border);
   }
 
   @media (min-width: 640px) {

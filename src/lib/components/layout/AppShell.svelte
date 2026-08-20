@@ -9,53 +9,41 @@
   let scrollPosition: number;
   // Loaded on mount, so it is undefined for the first render.
   let ParticlesComponent: ComponentType | undefined;
-  let previousScrollY = 0;
-  let isHeaderVisible = true;
-  let showNavBackdrop = false;
+  let headerEl: HTMLElement | undefined;
   let isNearPageBottom = false;
-  let showFloatingNav = false;
-  const HIDE_SCROLL_THRESHOLD = 6;
+  let isHeaderVisible = true;
   const FLOATING_NAV_BOTTOM_OFFSET = 4;
-  const FLOATING_NAV_TOP_OFFSET = 80;
+  // The floating pill's job is to stand in for the header nav once it has
+  // actually scrolled out of view — driven by observing the header itself
+  // rather than a guessed scroll-pixel threshold, so it stays correct
+  // regardless of header height.
+  $: showFloatingNav = !isHeaderVisible && !isNearPageBottom;
 
   function handleScroll() {
     const currentY = window.scrollY;
-    const deltaY = currentY - previousScrollY;
     const doc = document.documentElement;
     isNearPageBottom =
       currentY + window.innerHeight >=
       doc.scrollHeight - FLOATING_NAV_BOTTOM_OFFSET;
 
     scrollPosition = currentY;
-    if (currentY <= 12) {
-      isHeaderVisible = true;
-      showNavBackdrop = false;
-    } else if (deltaY < 0) {
-      isHeaderVisible = true;
-      showNavBackdrop = true;
-    } else if (deltaY > HIDE_SCROLL_THRESHOLD) {
-      isHeaderVisible = false;
-      showNavBackdrop = false;
-    }
-
-    if (currentY <= FLOATING_NAV_TOP_OFFSET || isNearPageBottom) {
-      showFloatingNav = false;
-    } else if (deltaY < 0) {
-      showFloatingNav = true;
-    } else if (deltaY > 0) {
-      showFloatingNav = false;
-    }
-
-    previousScrollY = currentY;
   }
   onMount(async () => {
     const module = await import("@tsparticles/svelte");
     ParticlesComponent = module.default;
   });
   onMount(() => {
-    previousScrollY = window.scrollY;
     handleScroll();
     window.addEventListener("scroll", handleScroll);
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isHeaderVisible = entry.isIntersecting;
+      },
+      { threshold: 0 }
+    );
+    if (headerEl) observer.observe(headerEl);
+
     void particlesInit(async (engine) => {
       // call this once per app
       // you can use main to customize the tsParticles instance adding presets or custom shapes
@@ -67,6 +55,7 @@
     return () => {
       // Cleanup listener when the component is unmounted
       window.removeEventListener("scroll", handleScroll);
+      observer.disconnect();
     };
   });
   let particlesConfig = {
@@ -118,8 +107,7 @@
   />
   <Header
     {scrollPosition}
-    isVisible={isHeaderVisible}
-    {showNavBackdrop}
+    bind:headerEl
   />
   <FloatingNav isVisible={showFloatingNav} />
   <main class="max-w-[1400px] mx-auto">

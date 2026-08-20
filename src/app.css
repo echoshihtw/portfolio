@@ -3,31 +3,39 @@
 @tailwind utilities;
 
 :root {
-  --color-bg: #f7f5f0;
-  --text-color: #1a1a1a;
-  --text-muted: #5b584f;
-  --color-accent: #c8a97e;
-  --section-border: #d7d1c6;
-  --surface-bg: #fcfbf7;
-  --timeline-rule: #c8c2b6;
-  --project-card-bg: #1b1a18;
-  --project-card-border: #34312b;
-  --project-card-text: #edece8;
-  --project-card-muted: #c9c5bb;
+  --color-bg: #f7f5ee;
+  --text-color: #14122a;
+  --text-muted: #5b5870;
+  --color-accent: #b1552e;
+  --color-accent-strong: #14122a;
+  --color-highlight: #b1552e;
+  --section-border: #ddd8c8;
+  --section-border-strong: #14122a;
+  --surface-bg: #fcfbf5;
+  --timeline-rule: #d3cdb9;
+  --project-card-bg: #171233;
+  --project-card-border: #34305e;
+  --project-card-text: #eef0f5;
+  --project-card-muted: #b8b8d4;
+  --glow-strength: 0;
 }
 
 html[data-theme="dark"] {
-  --color-bg: #111110;
-  --text-color: #edece8;
-  --text-muted: #b8b3a8;
-  --color-accent: #c8a97e;
-  --section-border: #2a2927;
-  --surface-bg: #181715;
-  --timeline-rule: #3a3833;
-  --project-card-bg: #1b1a18;
-  --project-card-border: #34312b;
-  --project-card-text: #edece8;
-  --project-card-muted: #c9c5bb;
+  --color-bg: #171233;
+  --text-color: #eef0f5;
+  --text-muted: #b8b8d4;
+  --color-accent: #4dd6a8;
+  --color-accent-strong: #ff5c88;
+  --color-highlight: #ff5c88;
+  --section-border: #3a3568;
+  --section-border-strong: #ff5c88;
+  --surface-bg: #1d1840;
+  --timeline-rule: #3a3568;
+  --project-card-bg: #1d1840;
+  --project-card-border: #3a3568;
+  --project-card-text: #eef0f5;
+  --project-card-muted: #b8b8d4;
+  --glow-strength: 1;
 }
 
 html {
@@ -35,8 +43,71 @@ html {
   scroll-padding-top: 5rem;
 }
 
+/* Shared button/pill treatment: pill radius, mono label, one hover language,
+   and a tiny halo+core glow on hover echoing the favicon's neon-tube mark
+   (soft blur wash + tight bright ring). Glow is near-invisible in light mode
+   and reads as the "fun" dark-mode glow via --glow-strength. */
+.hero-cta,
+.cta,
+.footer-mail,
+.footer-source,
+.footer-social-link,
+.floating-link {
+  border-radius: 999px !important;
+  font-family: "JetBrains Mono", monospace !important;
+  font-size: 0.75rem !important;
+  letter-spacing: 0.03em !important;
+  transition:
+    border-color 160ms ease,
+    background-color 160ms ease,
+    color 160ms ease,
+    transform 160ms ease,
+    box-shadow 160ms ease !important;
+}
+
+.hero-cta:hover,
+.cta:hover,
+.footer-mail:hover,
+.footer-source:hover,
+.footer-social-link:hover,
+.floating-link:hover {
+  transform: translateY(-1px);
+  border-color: var(--color-accent);
+  box-shadow:
+    0 0 0 1px
+      color-mix(
+        in srgb,
+        var(--color-accent) calc(35% + 35% * var(--glow-strength)),
+        transparent
+      ),
+    0 0 calc(16px * var(--glow-strength))
+      color-mix(
+        in srgb,
+        var(--color-accent) calc(30% * var(--glow-strength)),
+        transparent
+      );
+}
+
 * {
   box-sizing: border-box;
+}
+
+/* CRT scanlines: the cypherpunk half of the metaphor, dark mode only.
+   Fixed overlay, extremely low opacity, never intercepts clicks. */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: calc(0.05 * var(--glow-strength, 0));
+  background: repeating-linear-gradient(
+    to bottom,
+    #fff 0px,
+    #fff 1px,
+    transparent 1px,
+    transparent 3px
+  );
 }
 
 canvas {
@@ -52,6 +123,16 @@ h2,
 h3,
 .poppins {
   font-family: "DM Serif Display", serif;
+}
+
+/* Dark mode leans terminal: headings swap to mono, light mode keeps the
+   editorial serif. Same "composed vs. fun" split as the rest of the theme. */
+html[data-theme="dark"] h1,
+html[data-theme="dark"] h2,
+html[data-theme="dark"] h3,
+html[data-theme="dark"] .poppins {
+  font-family: "JetBrains Mono", monospace;
+  font-weight: 500;
 }
 
 body {
@@ -113,7 +194,7 @@ code,
 .section_title {
   @apply font-light text-3xl sm:text-4xl;
   color: var(--text-muted);
-  letter-spacing: 0.08em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   font-size: 0.8rem;
   margin-bottom: 0.6rem;

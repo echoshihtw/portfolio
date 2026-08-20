@@ -4,22 +4,21 @@
   import { base } from "$app/paths";
 
   export let scrollPosition: number;
-  export let isVisible = true;
-  export let showNavBackdrop = false;
+  export let headerEl: HTMLElement | undefined = undefined;
 
   function goTop() {
     document.body.scrollIntoView();
   }
 </script>
 
+<!-- Not sticky: scrolls away with the page. The floating pill (driven by an
+     IntersectionObserver on this element, in AppShell) takes over navigation
+     once this leaves the viewport, rather than two navs stacking. -->
 <header
-  class={"w-full sticky z-[40] top-0 py-2 header-shell " +
-    (isVisible ? "header-visible" : "header-hidden")}
+  class="w-full py-2 header-shell"
+  bind:this={headerEl}
 >
-  <div
-    class={"w-full flex items-center justify-between m-auto max-w-[1400px] py-3 px-6 " +
-      (showNavBackdrop && "dark:rounded-full rounded-none nav-filtered")}
-  >
+  <div class="w-full m-auto max-w-[1400px] px-6 py-3 nav-filtered">
     <!-- Not an <h1>: the hero statement is the page's single heading. -->
     <a
       href={base || "/"}
@@ -28,25 +27,27 @@
     >
       Echo Shih
     </a>
-    <div class="flex gap-5">
-      <div class="md:hidden">
-        <ThemeSwitch id="theme-toggle-mobile" />
-      </div>
-    </div>
-    <div class="hidden md:flex items-center gap-4">
+    <!-- One nav, one font, at every width — was a sans-font desktop-only row
+         plus a separate mono mobile-only row; two treatments for the same
+         links. Theme toggle grouped in as the last action here rather than
+         floating alone opposite the logo. -->
+    <nav
+      aria-label="Section navigation"
+      class="mobile-tabs"
+    >
       {#each tabs as tab}
         <a
           href={tab.link}
-          class="nav-link"
+          class="mobile-tab-link"
           aria-label="Go to {tab.name} section"
         >
-          <p>{tab.name}</p>
+          {tab.name}
         </a>
       {/each}
       <div class={scrollPosition > 60 ? "drop-shadow-lg" : undefined}>
-        <ThemeSwitch id="theme-toggle-desktop" />
+        <ThemeSwitch id="theme-toggle" />
       </div>
-    </div>
+    </nav>
   </div>
 </header>
 
@@ -54,19 +55,16 @@
   /* One hover language across the site: accent colour on text, accent border on
      surfaces. The nav used a strikethrough and Tailwind greys, which belonged to
      neither. */
-  .nav-link,
   .site-name {
     color: var(--text-color);
     text-decoration: none;
     transition: color 180ms ease;
   }
 
-  .nav-link:hover,
   .site-name:hover {
     color: var(--color-accent);
   }
 
-  .nav-link:focus-visible,
   .site-name:focus-visible {
     outline: 2px solid var(--color-accent);
     outline-offset: 3px;
@@ -75,50 +73,64 @@
 
   /* Keeps the visual weight the old <h1> had, without the heading semantics. */
   .site-name {
-    font-family: "DM Serif Display", serif;
-    font-size: 2em;
-    font-weight: bold;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 1.15em;
+    font-weight: 500;
+    letter-spacing: 0.01em;
     line-height: 1.2;
     cursor: pointer;
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .nav-link,
     .site-name {
       transition: none;
     }
   }
 
-  .header-shell {
-    transition:
-      transform 260ms ease,
-      opacity 220ms ease;
-    will-change: transform, opacity;
+  .mobile-tabs {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 0.6rem;
+    padding-top: 0.6rem;
+    border-top: 1px solid var(--section-border);
+    overflow-x: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 
-  .header-visible {
-    transform: translateY(0);
-    opacity: 1;
-    pointer-events: auto;
+  .mobile-tabs > :last-child {
+    margin-left: auto;
   }
 
-  .header-hidden {
-    transform: translateY(-105%);
-    opacity: 0;
-    pointer-events: none;
+  .mobile-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .mobile-tab-link {
+    flex: none;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color 180ms ease;
+  }
+
+  .mobile-tab-link:hover,
+  .mobile-tab-link:focus-visible {
+    color: var(--color-accent);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .mobile-tab-link {
+      transition: none;
+    }
   }
 
   .nav-filtered {
-    transition:
-      background-color 180ms ease,
-      border-color 180ms ease;
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-    background: rgba(247, 245, 240, 0.7);
-    border: 1px solid var(--section-border);
-  }
-
-  :global(html[data-theme="dark"]) .nav-filtered {
-    background: rgba(17, 17, 16, 0.62);
+    border-radius: 999px;
   }
 </style>
