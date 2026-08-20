@@ -147,7 +147,8 @@
 #boot-gate[data-variant="terminal"] .gate-theme-label:hover {
   background: rgba(237, 236, 232, 0.1);
 }
-#boot-gate[data-variant="terminal"] .gate-theme-input:focus-visible
+#boot-gate[data-variant="terminal"]
+  .gate-theme-input:focus-visible
   + .gate-theme-label {
   outline-color: #4dd6a8;
 }
