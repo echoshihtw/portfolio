@@ -68,7 +68,9 @@
 }
 #boot-gate[data-variant="terminal"] .gate-theme-core {
   background: #bfe6f5;
-  box-shadow: 0 0 8px rgba(120, 205, 232, 0.35);
+  box-shadow:
+    inset -0.16rem -0.08rem 0 #0b0a17,
+    0 0 8px rgba(120, 205, 232, 0.35);
 }
 
 /* Dark: terminal boot sequence, headshot to the left of the typed text. */
