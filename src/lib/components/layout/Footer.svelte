@@ -2,6 +2,7 @@
   import Icon from "@iconify/svelte";
   import { tabs } from "$lib/menuTabs";
   import {
+    calendlyUrl,
     email,
     githubUrl,
     instagramUrl,
@@ -31,6 +32,15 @@
   ];
 
   const sourceUrl = "https://github.com/echoshihtw/portfolio";
+
+  function replayGate() {
+    try {
+      sessionStorage.removeItem("echo-gate-seen");
+    } catch (_error) {
+      // Ignore storage failures — the gate just won't replay.
+    }
+    location.reload();
+  }
 </script>
 
 <footer
@@ -54,6 +64,16 @@
             class="footer-mail"
           >
             Email
+          </a>
+
+          <a
+            href={calendlyUrl}
+            target="_blank"
+            rel="noreferrer noopener"
+            class="footer-source"
+          >
+            Book a call
+            <Icon icon="mdi:arrow-top-right" />
           </a>
 
           <a
@@ -103,6 +123,14 @@
 
       <p class="footer-built mono">Built with SvelteKit & TypeScript</p>
 
+      <button
+        type="button"
+        class="footer-replay mono"
+        on:click={replayGate}
+      >
+        Replay intro card
+      </button>
+
       <p class="mono">© {year} Echo Shih</p>
     </div>
   </div>
@@ -146,6 +174,7 @@
   .footer-cta {
     margin-top: 1rem;
     display: flex;
+    flex-wrap: wrap;
     gap: 0.6rem;
   }
 
@@ -256,6 +285,25 @@
     border-radius: 50%;
     background: var(--color-accent);
     box-shadow: 0 0 6px var(--color-accent);
+  }
+
+  /* A quiet utility link, not a CTA: same size/weight as the surrounding
+     meta text so it doesn't compete with the actual footer actions. */
+  .footer-replay {
+    border: none;
+    background: none;
+    padding: 0;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-decoration: underline;
+    text-decoration-color: var(--section-border);
+    text-underline-offset: 2px;
+    cursor: pointer;
+    transition: color 160ms ease;
+  }
+
+  .footer-replay:hover {
+    color: var(--color-accent);
   }
   @media (min-width: 768px) {
     .footer-grid {
