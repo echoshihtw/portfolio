@@ -413,10 +413,16 @@
   background: #ddd8c8;
   margin: 1rem 0;
 }
-#boot-gate-card .card-email {
+#boot-gate-card .card-link {
   font-family: "JetBrains Mono", ui-monospace, monospace;
   font-size: 0.72rem;
   color: #14122a;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 160ms ease;
+}
+#boot-gate-card .card-link:hover {
+  border-color: #b1552e;
 }
 
 /* Shared CTA look, per-variant color override above/below. */
