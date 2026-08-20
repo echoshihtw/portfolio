@@ -29,7 +29,7 @@
         </span>{/each}
     </h1>
 
-    <p class="hero-support mono">{heroConfig.support}</p>
+    <p class="hero-support">{heroConfig.support}</p>
 
     <ul class="hero-owns">
       {#each heroConfig.owns as layer}
@@ -228,8 +228,9 @@
   .hero-support {
     margin: 0;
     max-width: 62ch;
-    font-size: 0.8rem;
-    letter-spacing: 0.02em;
+    font-family: "DM Sans", sans-serif;
+    font-size: 0.92rem;
+    letter-spacing: 0;
     line-height: 1.7;
     color: var(--text-muted);
   }
