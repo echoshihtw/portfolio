@@ -5,7 +5,7 @@
       <stop offset="1" stop-color="#161233"/>
     </radialGradient>
     <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
-      <feGaussianBlur in="SourceGraphic" stdDeviation="2.4" result="blur"/>
+      <feGaussianBlur in="SourceGraphic" stdDeviation="2.2" result="blur"/>
       <feMerge>
         <feMergeNode in="blur"/>
         <feMergeNode in="blur"/>
@@ -14,15 +14,20 @@
     </filter>
   </defs>
   <rect x="0" y="0" width="64" height="64" rx="14" fill="url(#bg)"/>
-  <text
-    x="32"
-    y="34"
-    text-anchor="middle"
-    dominant-baseline="central"
-    font-family="Arial, Helvetica, sans-serif"
-    font-weight="700"
-    font-size="34"
-    fill="#c9c4ff"
+  <g
+    fill="none"
+    stroke="#c9c4ff"
+    stroke-width="4.6"
+    stroke-linecap="round"
     filter="url(#glow)"
-  >E</text>
+  >
+    <!-- vertical spine, overshoots top and bottom -->
+    <path d="M 17 6 L 15 58" />
+    <!-- top stroke, overshoots the spine on both sides -->
+    <path d="M 6 17 L 46 12" />
+    <!-- middle stroke, overshoots the spine on both sides -->
+    <path d="M 9 33 L 39 30" />
+    <!-- bottom stroke, overshoots the spine on both sides -->
+    <path d="M 5 51 L 47 47" />
+  </g>
 </svg>
