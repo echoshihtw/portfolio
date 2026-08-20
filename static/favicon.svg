@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="bg" cx="35%" cy="30%" r="85%">
+      <stop offset="0" stop-color="#2a2350"/>
+      <stop offset="1" stop-color="#161233"/>
+    </radialGradient>
+    <filter id="halo-blur" x="-120%" y="-120%" width="340%" height="340%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="3"/>
+    </filter>
+    <filter id="core-blur" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="0.5"/>
+    </filter>
+  </defs>
+  <rect x="0" y="0" width="64" height="64" rx="14" fill="url(#bg)"/>
+
+  <!-- blue halo, white-hot core: two passes over the same stroke -->
+  <path
+    id="e-stroke"
+    transform="translate(1.5, 2)"
+    d="M 41 17
+       C 30 12, 19 14, 19 22
+       C 19 28, 27 28, 33 27
+       C 26 28, 19 29, 19 37
+       C 19 46, 31 48, 42 43"
+    fill="none"
+    stroke-width="4.6"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+  <use href="#e-stroke" stroke="#4da8ff" filter="url(#halo-blur)"/>
+  <use href="#e-stroke" stroke="#7cc4ff" filter="url(#core-blur)"/>
+  <use href="#e-stroke" stroke="#f2fbff"/>
+</svg>
