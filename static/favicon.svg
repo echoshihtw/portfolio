@@ -16,13 +16,14 @@
   <!-- blue halo, white-hot core: two passes over the same stroke -->
   <path
     id="e-stroke"
+    transform="translate(1.5, 2)"
     d="M 41 17
        C 30 12, 19 14, 19 22
        C 19 28, 27 28, 33 27
        C 26 28, 19 29, 19 37
        C 19 46, 31 48, 42 43"
     fill="none"
-    stroke-width="3.4"
+    stroke-width="4.6"
     stroke-linecap="round"
     stroke-linejoin="round"
   />
