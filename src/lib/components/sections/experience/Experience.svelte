@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { sweepOnView } from "$lib/actions/sweepOnView";
   import { experience } from "$lib/resumeData";
   import { experiencePortfolio } from "../../../../content/portfolio.config";
   import ExperienceCard from "./ExperienceCard.svelte";
@@ -8,7 +9,12 @@
   id="work"
   class="section_padding section_layout"
 >
-  <h3 class="section_title">#work</h3>
+  <h3
+    class="section_title"
+    use:sweepOnView
+  >
+    #work
+  </h3>
 
   <div class="timeline">
     {#each experience as item}

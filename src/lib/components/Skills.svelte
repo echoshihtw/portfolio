@@ -2,13 +2,19 @@
   import Icon from "@iconify/svelte";
   import { skillsConfig } from "../../content/portfolio.config";
   import { skillIcons } from "../../content/skillIcons";
+  import { sweepOnView } from "$lib/actions/sweepOnView";
 </script>
 
 <section
   id="skills"
   class="section_padding section_layout"
 >
-  <h3 class="section_title">#skills</h3>
+  <h3
+    class="section_title"
+    use:sweepOnView
+  >
+    #skills
+  </h3>
 
   <div class="skills">
     {#each skillsConfig as group}
