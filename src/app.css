@@ -74,8 +74,18 @@ html {
   transform: translateY(-1px);
   border-color: var(--color-accent);
   box-shadow:
-    0 0 0 1px color-mix(in srgb, var(--color-accent) calc(35% + 35% * var(--glow-strength)), transparent),
-    0 0 calc(16px * var(--glow-strength)) color-mix(in srgb, var(--color-accent) calc(30% * var(--glow-strength)), transparent);
+    0 0 0 1px
+      color-mix(
+        in srgb,
+        var(--color-accent) calc(35% + 35% * var(--glow-strength)),
+        transparent
+      ),
+    0 0 calc(16px * var(--glow-strength))
+      color-mix(
+        in srgb,
+        var(--color-accent) calc(30% * var(--glow-strength)),
+        transparent
+      );
 }
 
 * {

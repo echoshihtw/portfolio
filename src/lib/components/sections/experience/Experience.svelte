@@ -47,8 +47,13 @@
     box-shadow:
       0 0 calc(8px * var(--glow-strength)) var(--color-accent),
       0 0 calc(22px * var(--glow-strength))
-        color-mix(in srgb, var(--color-accent) calc(60% * var(--glow-strength)), transparent);
-    animation: blade-breathe calc(4.5s * var(--glow-strength, 0)) ease-in-out infinite;
+        color-mix(
+          in srgb,
+          var(--color-accent) calc(60% * var(--glow-strength)),
+          transparent
+        );
+    animation: blade-breathe calc(4.5s * var(--glow-strength, 0)) ease-in-out
+      infinite;
   }
 
   @keyframes blade-breathe {

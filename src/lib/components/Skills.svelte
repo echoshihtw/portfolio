@@ -25,8 +25,10 @@
                 />
               {/if}{item}{#if i < group.items.length - 1}<span
                   class="items-sep"
-                  aria-hidden="true">·</span
-                >{/if}
+                  aria-hidden="true"
+                >
+                  ·
+                </span>{/if}
             </li>
           {/each}
         </ul>

@@ -18,8 +18,10 @@
         {heroConfig.remoteOpen}
         <span
           class="term-cursor"
-          aria-hidden="true">_</span
+          aria-hidden="true"
         >
+          _
+        </span>
       </span>
     </div>
 
@@ -173,7 +175,8 @@
     height: 0.36rem;
     border-radius: 999px;
     background: var(--color-accent);
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-accent) 16%, transparent);
+    box-shadow: 0 0 0 3px
+      color-mix(in srgb, var(--color-accent) 16%, transparent);
   }
 
   /* Terminal cursor: invisible in light mode, blinks in dark mode via
@@ -181,7 +184,8 @@
   .term-cursor {
     color: var(--color-accent);
     opacity: var(--glow-strength, 0);
-    animation: cursor-blink calc(1.1s * var(--glow-strength, 0)) step-end infinite;
+    animation: cursor-blink calc(1.1s * var(--glow-strength, 0)) step-end
+      infinite;
   }
 
   @keyframes cursor-blink {

@@ -78,7 +78,11 @@
       inset 0 1px 0 color-mix(in srgb, white 35%, transparent),
       inset 0 0 0 1px color-mix(in srgb, white 6%, transparent),
       0 0 calc(6px + 10px * var(--glow-strength, 0))
-        color-mix(in srgb, var(--color-accent) calc(10% + 20% * var(--glow-strength, 0)), transparent);
+        color-mix(
+          in srgb,
+          var(--color-accent) calc(10% + 20% * var(--glow-strength, 0)),
+          transparent
+        );
     transition:
       opacity 220ms ease,
       transform 220ms ease,
@@ -95,7 +99,11 @@
       inset 0 1px 0 color-mix(in srgb, white 45%, transparent),
       inset 0 0 0 1px color-mix(in srgb, white 8%, transparent),
       0 0 calc(12px + 16px * var(--glow-strength, 0))
-        color-mix(in srgb, var(--color-accent) calc(20% + 25% * var(--glow-strength, 0)), transparent);
+        color-mix(
+          in srgb,
+          var(--color-accent) calc(20% + 25% * var(--glow-strength, 0)),
+          transparent
+        );
     transform: translateX(-50%) translateY(-1px);
   }
 
@@ -153,7 +161,8 @@
   }
 
   .floating-link:focus-visible {
-    text-shadow: 0 0 8px color-mix(in srgb, var(--color-accent) 55%, transparent);
+    text-shadow: 0 0 8px
+      color-mix(in srgb, var(--color-accent) 55%, transparent);
   }
 
   /* The two controls are icons, not labels: they size to their content while
