@@ -3,9 +3,9 @@
   import { base } from "$app/paths";
   import { heroConfig } from "../../../../content/portfolio.config";
 
-  // Boot-up typing: dark mode only, once on first load, skipped entirely
-  // under reduced-motion. Defaults to fully revealed so light mode / SSR /
-  // no-JS never see a blank headline.
+  // Boot-up typing: runs once on first load in both themes, skipped entirely
+  // under reduced-motion. Defaults to fully revealed so SSR/no-JS never see
+  // a blank headline.
   const totalChars = heroConfig.headline.reduce(
     (sum, part) => sum + part.text.length,
     0
@@ -32,11 +32,10 @@
   }));
 
   onMount(() => {
-    const isDark = document.documentElement.dataset.theme === "dark";
     const reduceMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
-    if (!isDark || reduceMotion) return;
+    if (reduceMotion) return;
 
     revealCount = 0;
     isTyping = true;
@@ -288,9 +287,8 @@
     font-style: italic;
   }
 
-  /* Boot-up cursor: only rendered mid-type (see isTyping in script), dark
-     mode only via --glow-strength — invisible/inert once typing finishes or
-     in light mode. */
+  /* Boot-up cursor: only rendered mid-type (see isTyping in script), in
+     either theme — invisible/inert once typing finishes. */
   .type-caret {
     display: inline-block;
     width: 0.5ch;
@@ -302,7 +300,7 @@
   }
 
   .type-caret.typing {
-    opacity: var(--glow-strength, 0);
+    opacity: 1;
     animation: caret-blink 0.7s step-end infinite;
   }
 
@@ -418,11 +416,15 @@
     color: var(--text-muted);
   }
 
-  /* capability strip — scannable in a glance, not reading */
+  /* capability strip — scannable in a glance, not reading. Mobile-first: a
+     two-column grid with no separator is the base layout, since a flex-wrap
+     line break would strand a "·" separator at the start of the next line
+     ("· APIs & data models") below 640px. Wider viewports switch to a single
+     flex-wrap row with separators. */
   .hero-owns {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem 0.85rem;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.5rem 1rem;
     margin: 0;
     padding: 0;
     list-style: none;
@@ -435,25 +437,17 @@
     color: var(--text-muted);
   }
 
-  .hero-owns li + li::before {
-    content: "·";
-    margin-right: 0.85rem;
-    color: var(--section-border);
-  }
-
-  /* Below 640px the "·" separator sits inside each <li>, so a flex-wrap
-     line break strands it at the start of the next line ("· APIs & data
-     models"). A two-column grid with no separator avoids that entirely. */
-  @media (max-width: 639px) {
+  @media (min-width: 640px) {
     .hero-owns {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 0.5rem 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem 0.85rem;
     }
 
     .hero-owns li + li::before {
-      content: none;
-      margin-right: 0;
+      content: "·";
+      margin-right: 0.85rem;
+      color: var(--section-border);
     }
   }
 
