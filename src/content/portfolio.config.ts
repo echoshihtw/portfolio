@@ -99,9 +99,9 @@ export const experiencePortfolio: Record<
   "Lockerbie Technology (Musaeum Ltd, UK group)": {
     // Scope note: the modular-monolith / RabbitMQ / ArangoDB direction was the team's,
     // set by my lead. I learned it and implemented it in production. What I chose:
-    // the App Router + BFF boundary, and the build-once delivery pipeline.
+    // the App Router + BFF boundary, and the deploy packaging below.
     impact:
-      "An early-stage internal project-management platform — Next.js frontend, FastAPI integration, deploy pipeline — built and operated as one of two engineers. I brought our second engineer into the codebase through daily pairing, and we worked out the module structure together so the pattern was ours rather than mine.",
+      "An early-stage internal project-management platform — Next.js frontend, FastAPI integration — built and operated as one of two engineers. Packaged deploys into a three-file runner folder that pulls the promoted image from GHCR, so running production needs no source checkout and no dev dependencies. I brought our second engineer into the codebase through daily pairing, and we worked out the module structure together so the pattern was ours rather than mine.",
     // The constraint was my lead's — layers independent, no direct
     // browser-to-backend access. The way of meeting it was mine. No "before"
     // state to fix either: the boundary was there from the start.

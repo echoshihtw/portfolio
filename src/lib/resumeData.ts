@@ -17,9 +17,9 @@ export const experience: ExperienceItem[] = [
       "Built and ran an early-stage internal project-management platform for the **UK construction sector**, working to **ISO 19650** information-management principles. One of two engineers, sole author of the **Next.js / TypeScript** frontend and its **UI patterns**.",
       "Refactored the backend into the team's **event-driven modular monolith**, with modules communicating over **RabbitMQ** instead of importing each other, and set up the module template the team builds against. The direction was the team's; the refactor was mine, with **RabbitMQ** and **ArangoDB** new to me.",
       "Diagnosed a **RabbitMQ** RPC bug where a stale, uninitialised consumer round-robined into login lookups and failed every user's first attempt; fixed it with a fail-fast DB check before broker registration.",
+      "Packaged deploys into a three-file runner folder — **Docker Compose**, Makefile, env — that pulls the promoted production image from **GHCR**: no source checkout, no dev dependencies, an ~80 MB download instead of a full build.",
       "Given a requirement that layers stay independent, chose **Next.js App Router** and introduced a **BFF security boundary** with server-managed authentication and centralised **CSRF** protection, keeping backend credentials out of browser JavaScript.",
-      "Designed the platform's authorisation model — organisation-level and project-scoped roles resolved into capability flags, so services never reimplement access logic. Tested with **Vitest**, **React Testing Library** and **pytest**.",
-      "Brought a new engineer into the codebase through daily pairing, from first contribution to shipping independently within two months."
+      "Designed the platform's authorisation model — organisation-level and project-scoped roles resolved into capability flags, so services never reimplement access logic. Tested with **Vitest**, **React Testing Library** and **pytest**."
     ]
   },
   {
