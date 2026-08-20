@@ -31,13 +31,20 @@ export const heroConfig: {
 
   // Spells out what "end to end" means, layer by layer. An earlier version
   // listed categories — Web, Mobile, Backend — which repeated the stack line
-  // and proved nothing.
+  // and proved nothing. A later version ("UI & design systems", "Tests",
+  // "CI/CD & deploy") fixed the redundancy but was still buzzword-shaped —
+  // any portfolio could claim those five nouns. Named the actual technique
+  // behind each layer instead, pulled from real project work below: RLS is
+  // Clio's tenant isolation, build-failing tests is the api-layer-only test
+  // from the same project, GHCR image deploys is the Lockerbie release
+  // pipeline. Passes the test of "could a thousand other portfolios say
+  // this exact phrase" — these mostly could not.
   owns: [
-    "UI & design systems",
-    "Frontend",
-    "APIs & data models",
-    "Tests",
-    "CI/CD & deploy",
+    "React 19 UI",
+    "Postgres RLS",
+    "Offline-first sync",
+    "Build-failing tests",
+    "GHCR image deploys",
   ],
 
   // Problem-solving spine — diagnosis + delivery + scope. Seniority implied by
