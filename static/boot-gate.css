@@ -102,7 +102,7 @@
   height: 0.88rem;
   left: 0.28rem;
   top: -0.06rem;
-  background: #ddd8c8;
+  background: #f1efe6;
   opacity: 0;
   transform: scale(0.6);
 }
@@ -152,7 +152,7 @@
   outline-color: #4dd6a8;
 }
 #boot-gate[data-variant="terminal"] .gate-theme-core::after {
-  background: #3a3568;
+  background: #0b0a17;
 }
 
 /* Dark: terminal boot sequence, headshot to the left of the typed text. */
