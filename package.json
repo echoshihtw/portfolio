@@ -45,6 +45,7 @@
   "type": "module",
   "dependencies": {
     "@tsparticles/svelte": "^4.3.2",
+    "@vercel/analytics": "^2.0.1",
     "gray-matter": "^4.0.3",
     "marked": "^13.0.2",
     "tsparticles": "^4.3.2"
