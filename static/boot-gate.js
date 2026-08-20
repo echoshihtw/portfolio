@@ -58,7 +58,10 @@
   const textEl = document.getElementById("boot-gate-text");
   const lines = [
     "booting echo.dev ...",
-    "loading profile: Echo Shih — Software Engineer",
+    "loading profile:",
+    "",
+    "Echo Shih — Software Engineer",
+    "",
     "systems nominal",
     "access granted_",
   ];

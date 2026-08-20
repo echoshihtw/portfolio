@@ -37,6 +37,12 @@
   max-width: 90vw;
   margin: 0 0 1.1rem;
 }
+@media (max-width: 480px) {
+  #boot-gate-terminal {
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+}
 /* Background-removed headshot in a scanning reticle frame — the photo's
    own backdrop was already near-black, so it was keyed to transparent
    (see the headshot-cutout.png generation notes) and sits directly on the
@@ -124,7 +130,7 @@
   }
 }
 #boot-gate-text {
-  white-space: pre-wrap;
+  white-space: pre;
   font-size: 0.95rem;
   line-height: 1.6;
   margin: 0;
@@ -142,10 +148,17 @@
   }
 }
 
+/* Dark mode: plain text, not a pill button — reads as a terminal prompt
+   rather than a UI control breaking the boot-sequence illusion. */
 #boot-gate[data-variant="terminal"] .card-enter {
-  border-color: #a78bfa;
-  background: #a78bfa;
-  color: #0b0a17;
+  border: none;
+  background: none;
+  padding: 0;
+  color: #a78bfa;
+}
+#boot-gate[data-variant="terminal"] .card-enter:hover {
+  transform: none;
+  text-decoration: underline;
 }
 #boot-gate[data-variant="terminal"] .card-enter:focus-visible {
   outline-color: #4dd6a8;
