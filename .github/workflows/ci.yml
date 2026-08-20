@@ -1,9 +1,9 @@
 name: CI
 
-# One pipeline: verify on every pull request and every push to main, deploy
-# only from main. Previously this was two workflows repeating the same
-# checkout / setup-node / npm ci / build, and svelte-check ran on pull
-# requests only — so anything pushed straight to main deployed unchecked.
+# One job: verify on every pull request and every push to main. Vercel is the
+# only live deploy now — Pages served the project URL for CVs already sent
+# out, but that URL now redirects to echoshih.com (src/app.html), so its last
+# GitHub Pages deploy stays frozen rather than being rebuilt on every push.
 on:
   push:
     branches: [main]
@@ -124,36 +124,8 @@ jobs:
           pages=$(pdfinfo static/resume.pdf | awk '/^Pages:/ {print $2}')
           test "$pages" = "1" || { echo "::error::résumé must be one page, got $pages"; exit 1; }
 
-      # Two homes, one build. Vercel serves echoshih.com from the root and
-      # supplies no BASE_PATH, so svelte.config falls back to "". Pages keeps
-      # serving the old project URL for the CVs already sent out, and that one
-      # lives under /portfolio — so this build passes the base explicitly.
-      # The config reads it now; before, it was set here and ignored.
+      # Vercel builds and deploys separately with its own default base (the
+      # site serves from the root there). This build just has to succeed —
+      # nothing consumes its output, so it uses the same default.
       - name: Build site
-        env:
-          BASE_PATH: "/${{ github.event.repository.name }}"
         run: npm run build
-
-      - name: Upload Pages artifact
-        if: github.event_name == 'push'
-        uses: actions/upload-pages-artifact@v5
-        with:
-          path: build/
-
-  deploy:
-    name: Deploy to Pages
-    if: github.event_name == 'push'
-    needs: build
-    runs-on: ubuntu-latest
-
-    permissions:
-      pages: write
-      id-token: write
-
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
-    steps:
-      - id: deployment
-        uses: actions/deploy-pages@v5
