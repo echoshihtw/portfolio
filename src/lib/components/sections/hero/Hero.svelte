@@ -285,6 +285,7 @@
   .hero-headline .accent {
     color: var(--color-accent);
     font-style: italic;
+    white-space: nowrap;
   }
 
   /* Boot-up cursor: only rendered mid-type (see isTyping in script), in

@@ -3,5 +3,16 @@
   "framework": "sveltekit",
   "outputDirectory": "build",
   "installCommand": "./scripts/vercel-install.sh",
-  "buildCommand": "npm run build-resume && npm run build"
+  "buildCommand": "npm run build-resume && npm run build",
+  "headers": [
+    {
+      "source": "/resume.pdf",
+      "headers": [
+        {
+          "key": "Content-Disposition",
+          "value": "attachment; filename=\"Chun-Yu-Echo-Shih-Software-Engineer.pdf\""
+        }
+      ]
+    }
+  ]
 }

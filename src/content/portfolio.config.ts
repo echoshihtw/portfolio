@@ -29,41 +29,48 @@ export const heroConfig: {
   // The full offer lives in the closing section, where it invites.
   remoteOpen: "UTC+8 · Remote from Taiwan · or on-site in Taipei",
 
-  // Spells out what "end to end" means, layer by layer. An earlier version
-  // listed categories — Web, Mobile, Backend — which repeated the stack line
-  // and proved nothing.
+  // Spells out what "end to end" means, layer by layer — named techniques
+  // pulled from real project work, not category nouns any portfolio could
+  // claim. RLS and offline-first sync are Clio's; build-failing tests is
+  // Clio's api-layer-only test; GHCR image deploys is the Lockerbie release
+  // pipeline.
   owns: [
-    "UI & design systems",
-    "Frontend",
-    "APIs & data models",
-    "Tests",
-    "CI/CD & deploy",
+    "React 19 UI",
+    "Postgres RLS",
+    "Offline-first sync",
+    "Build-failing tests",
+    "GHCR image deploys",
   ],
 
-  // Problem-solving spine — diagnosis + delivery + scope. Seniority implied by
-  // the range of ownership, not by putting "Senior" in the introduction.
+  // States scope of responsibility as a plain fact rather than a reliability
+  // claim ("people rely on" implies things never break) — the signal remote
+  // hiring screens hardest for is whether someone can be trusted without
+  // oversight, not whether their software never fails.
   headline: [
-    { text: "I build software " },
-    { text: "people rely on", accent: true },
+    { text: "I own it, " },
+    { text: "end to end", accent: true },
     { text: "." },
   ],
 
-  // Ownership leads, the shape of the work follows, stack last. An earlier
-  // version led with the stack and argued breadth — a capable-IC claim that set
-  // up none of the strongest evidence, which is deciding what to build and
-  // holding scope. The seams line stays here and not on the CV: it is voice,
-  // and this is the voice layer. The system-of-record sentence is the opposite
-  // trade — it is the same on both, because it answers "you have no experience
-  // in our domain" and that question gets asked in every screen.
+  // Ownership leads, the shape of the work follows, stack last. The
+  // system-of-record sentence is the same on both this and the CV, because
+  // it answers "you have no experience in our domain" and that question
+  // gets asked in every screen. Stack mention matches Clio (the featured,
+  // in-production project the proof line is about) rather than unrelated
+  // client work, since it's the one detail here most likely to specifically
+  // land with a Supabase-caliber hiring manager.
   support:
-    "Software Engineer who works product-first: I own problems end to end, not just the tickets inside them. Most of what I build is a system of record — project platforms, applicant tracking, client histories. I work out what to build, build it, ship it, and keep it running, because the experience breaks at the seams: a slow endpoint, a failed release, an app that gives up when the Wi-Fi does. React, TypeScript and Node.js, with Python and FastAPI behind them.",
+    "Software Engineer who works product-first, building systems of record — project platforms, applicant tracking, client histories — and keeping them running after ship. React, TypeScript, Supabase and Postgres.",
 
-  // One sentence, not a stat block. Three figures in columns is a SaaS
-  // landing-page pattern: it invites comparison, and 603 read against other
-  // people's numbers looks small. Stated as a fact about a real salon it reads
-  // as remarkable, and "entered by hand" carries what a number cannot.
+  // Two sentences, not a stat block: three figures in columns is a SaaS
+  // landing-page pattern that invites comparison, and "entered by hand"
+  // carries what a number can't. "Engineered multi-tenant from day one"
+  // folds in the origin story (built for one owner, architected for scale
+  // before there was pressure to) without a separate sentence. The second
+  // sentence — an admitted mistake, pulled from Clio's own project card —
+  // is the one line here nobody else could have written.
   proofLine:
-    "A salon in Tainan has run its business on software I built since May 2025 — 603 clients, 2,694 records, entered by hand.",
+    "Built for one salon owner, engineered multi-tenant from day one — in daily use since May 2025, 603 clients and 2,694 records entered by hand. What I'd do differently: write the permission model down before building it, not after.",
 
   email: "echoshihtw@gmail.com",
   resume: "resume.pdf", // served from /static, base-prefixed at render
