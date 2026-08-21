@@ -34,8 +34,7 @@ export const blogPosts: BlogPost[] = [
       {
         heading: "Every fix bought exactly one more failure",
         paragraphs: [
-          "The first errors looked like plumbing: a shallow git checkout missing branch refs, a missing label, a stale beta tag left over from an earlier attempt. Each had a specific cause, each got a specific fix, and each fix uncovered the next problem in the chain — a manifest with no version anchor, then a config missing a required packages block, then a changelog setting that only works once a prior tag already exists.",
-          "None of that was wrong to fix. It's what happened after: Cannot read properties of undefined (reading 'replace'). release-please's node release type, run with the tag prefix stripped out the way I wanted it, hit a code path that assumes a component name is always there and crashes when it isn't. That's not a config mistake. That's the tool telling you, badly, that the path you're on doesn't exist.",
+          "The first errors were plumbing — a shallow checkout, a missing label, a stale tag — each fixed, each revealing the next problem, until: Cannot read properties of undefined (reading 'replace'). release-please's node release type, run with the tag prefix stripped out the way I wanted it, hit a code path that assumes a component name is always there and crashes when it isn't. That's not a config mistake. That's the tool telling you, badly, that the path you're on doesn't exist.",
         ],
       },
       {
