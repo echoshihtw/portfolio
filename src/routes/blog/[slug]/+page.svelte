@@ -30,7 +30,7 @@
       class="blog-back mono"
       href="{base}/blog"
     >
-      ← Writing
+      ← Working notes
     </a>
 
     <p class="blog-post-meta mono">

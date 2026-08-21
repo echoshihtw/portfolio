@@ -16,18 +16,18 @@
 </script>
 
 <Seo
-  title="Writing"
-  description="Short, specific technical posts — real bugs, real fixes, what generalizes."
+  title="Working notes"
+  description="Notes from building things — what broke, what it turned out to be, and anything worth keeping."
   path="/blog"
 />
 
 <section class="section_padding blog-index">
   <div class="blog-index-wrap">
     <p class="blog-kicker mono">Writing</p>
-    <h1>Short, specific, technical.</h1>
+    <h1>Working notes</h1>
     <p class="blog-intro">
-      No takes, no "5 tips" — one real thing that happened, what it turned out
-      to actually be, and what generalizes past this one case.
+      Notes from building things — what broke, what it turned out to be, and
+      anything worth keeping.
     </p>
 
     <ul class="blog-list">

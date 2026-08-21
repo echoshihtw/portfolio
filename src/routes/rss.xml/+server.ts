@@ -55,9 +55,9 @@ export function GET() {
   const body = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>${escapeXml(SITE_NAME)} — Writing</title>
+    <title>${escapeXml(SITE_NAME)} — Working notes</title>
     <link>${SITE_ORIGIN}/blog</link>
-    <description>Short, specific technical posts — real bugs, real fixes, what generalizes.</description>
+    <description>Notes from building things — what broke, what it turned out to be, and anything worth keeping.</description>
     <language>en</language>
     <atom:link href="${SITE_ORIGIN}/rss.xml" rel="self" type="application/rss+xml" />
 ${items}
