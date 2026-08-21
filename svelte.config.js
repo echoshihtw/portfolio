@@ -30,6 +30,16 @@ const config = {
       precompress: false,
       strict: true,
     }),
+    prerender: {
+      // The homepage renders with ssr:false (a client-only SPA), so its
+      // prerendered HTML is an empty shell — section ids like "work" only
+      // exist after client JS hydrates in a real browser. Other pages
+      // (e.g. /blog) link to "/#work" and that's correct for a real
+      // visitor, but the crawler checks the static HTML and sees no
+      // matching id, which would otherwise fail the build on a link that
+      // isn't actually broken.
+      handleMissingId: "warn",
+    },
   },
 };
 
