@@ -52,15 +52,11 @@
   <div class="footer-shell">
     <div class="footer-grid">
       <section class="footer-brand">
-        <!-- No kicker above the name: the footer's bottom bar already
-             carries the location and timezone, and saying it twice in one
-             footer reads as padding. -->
+        <!-- Name, then the ways to reach me. No kicker above and no blurb
+             below: the bottom bar already carries the location and
+             timezone, and the blurb restated the hero headline. By the
+             time a reader is down here they know what I do. -->
         <h2>Echo Shih</h2>
-
-        <p class="footer-copy">
-          I build product software end to end — the frontend, the services, and
-          the pipeline that ships them.
-        </p>
 
         <div class="footer-cta">
           <a
@@ -164,11 +160,6 @@
     font-family: "JetBrains Mono", monospace;
     font-size: clamp(1.5rem, 3vw, 2rem);
     color: var(--text-color);
-  }
-
-  .footer-copy {
-    max-width: 42ch;
-    color: var(--text-muted);
   }
 
   .footer-cta {
