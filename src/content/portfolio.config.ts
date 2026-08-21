@@ -60,7 +60,7 @@ export const heroConfig: {
   // client work, since it's the one detail here most likely to specifically
   // land with a Supabase-caliber hiring manager.
   support:
-    "Software Engineer who works product-first, building systems of record — project platforms, applicant tracking, client histories — and keeping them running after ship. React, TypeScript, Supabase and Postgres.",
+    "Software Engineer building systems of record — project platforms, applicant tracking, client histories — and keeping them running after ship. React, TypeScript, Supabase and Postgres.",
 
   // Two sentences, not a stat block: three figures in columns is a SaaS
   // landing-page pattern that invites comparison, and "entered by hand"
@@ -84,7 +84,7 @@ export const heroConfig: {
 // to scroll back up to act. This is the close.
 export const closingConfig = {
   heading: "Want to talk?",
-  body: "If you have a problem nobody has scoped yet, and you need one person to carry it from interface to deploy, that is the work I am best at. Remote from Taiwan, or in Taipei, and happy to travel.",
+  body: "If you have a problem nobody has scoped yet, and you need one person to carry it from interface to deploy — that's the work. Remote from Taiwan, or in Taipei.",
   email: "echoshihtw@gmail.com",
   resume: "resume.pdf",
   resumeAs: "Chun-Yu-Echo-Shih-Software-Engineer.pdf",
@@ -121,9 +121,10 @@ export const experiencePortfolio: Record<
   },
   "SPIN.FASHION by Lablaco": {
     // Agreed title was Full Stack Engineer & Founding Partner — use it as agreed,
-    // not a paraphrase.
+    // not a paraphrase. The product name is the employer's, so it stays out;
+    // employer names are fine here, the things built under them are not.
     impact:
-      "Full stack engineer and founding partner on SPIN Connect — the in-store desktop app — working remotely across time zones.",
+      "Full stack engineer and founding partner on the in-store desktop app, working remotely across time zones.",
     proof: {
       p: "The macOS build couldn't ship.",
       s: "Fixed code-signing, notarisation and auto-update. The desktop app shipped, and the release steps are written down.",
@@ -135,7 +136,7 @@ export const experiencePortfolio: Record<
       "Took the frontend over on a recruiting and ATS platform used by employers, agencies and individual headhunters — a two-engineer product team reporting to the CTO.",
     proof: {
       p: "A large production React codebase kept regressing on types.",
-      s: "Drove an incremental JavaScript-to-TypeScript migration and built 100+ reusable components.",
+      s: "Migrated a large React codebase to TypeScript incrementally, while it kept shipping.",
     },
     techLine:
       "React · TypeScript · Redux-Saga · Firebase · Server-Sent Events · Google Analytics · Sentry",
