@@ -1,9 +1,22 @@
 name: CI
 
-# One job: verify on every pull request and every push to main. Vercel is the
-# only live deploy now — Pages served the project URL for CVs already sent
-# out, but that URL now redirects to echoshih.com (src/app.html), so its last
-# GitHub Pages deploy stays frozen rather than being rebuilt on every push.
+# Verify on every pull request and every push to main. Vercel is the only live
+# deploy now — Pages served the project URL for CVs already sent out, but that
+# URL now redirects to echoshih.com (src/app.html), so its last GitHub Pages
+# deploy stays frozen rather than being rebuilt on every push.
+#
+# Four jobs, one concern each:
+#
+#   quality → lint, types, unit tests. No TeX, no browser: ~40s, and it starts
+#             immediately, so a formatting slip fails fast instead of after a
+#             two-minute TeX install it had nothing to do with.
+#   resume  → the PDF. Owns the TeX install and both caches, and hands the
+#             result on as an artifact so nothing else pays for LaTeX.
+#   build   → the static site, which needs the PDF to prerender.
+#   e2e     → browser assertions against that exact build output.
+#
+# quality and resume run in parallel; build and e2e are a chain because each
+# genuinely needs what the one before it produced.
 on:
   push:
     branches: [main]
@@ -23,8 +36,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
-    name: Check and build
+  quality:
+    name: Lint, types, unit tests
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
@@ -34,6 +47,29 @@ jobs:
       # 11, and npm 11 records optional platform packages differently from npm
       # 10. A lockfile written by one and installed by the other fails — npm 10
       # tried to install @esbuild/netbsd-arm64 on a Linux runner.
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - run: npm ci
+
+      # Formatting and lint were a script nobody ran: `npm run lint` existed,
+      # no hook called it, and CI did not either — so fifteen files had drifted
+      # out of format without anything failing. Enforced here, in the one place
+      # that cannot be skipped or left uninstalled on a new machine.
+      - run: npm run lint
+
+      - run: npm run check
+
+      - run: npm test
+
+  resume:
+    name: Résumé PDF
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
       - uses: actions/setup-node@v7
         with:
           node-version-file: .nvmrc
@@ -105,16 +141,6 @@ jobs:
 
       - run: npm ci
 
-      # Formatting and lint were a script nobody ran: `npm run lint` existed,
-      # no hook called it, and CI did not either — so fifteen files had drifted
-      # out of format without anything failing. Enforced here, in the one place
-      # that cannot be skipped or left uninstalled on a new machine.
-      - run: npm run lint
-
-      - run: npm run check
-
-      - run: npm test
-
       # The résumé is a build output, not a committed file, so it cannot fall
       # behind resume.md. One page is a hard constraint, enforced here.
       - name: Build résumé
@@ -132,8 +158,79 @@ jobs:
           pages=$(pdfinfo "$pdf" | awk '/^Pages:/ {print $2}')
           test "$pages" = "1" || { echo "::error::résumé must be one page, got $pages"; exit 1; }
 
+      # Handed on rather than rebuilt: this is the only job that installs TeX,
+      # and the site build below needs the PDF to prerender — a link to a
+      # missing /resume.pdf fails the prerender outright.
+      - name: Upload résumé
+        uses: actions/upload-artifact@v4
+        with:
+          name: resume-pdf
+          path: static/*.pdf
+          retention-days: 1
+
+  build:
+    name: Build site
+    needs: resume
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: resume-pdf
+          path: static/
+
+      - run: npm ci
+
       # Vercel builds and deploys separately with its own default base (the
-      # site serves from the root there). This build just has to succeed —
-      # nothing consumes its output, so it uses the same default.
-      - name: Build site
-        run: npm run build
+      # site serves from the root there). This build just has to succeed, and
+      # then be handed to the browser tests, so it uses the same default.
+      - run: npm run build
+
+      - name: Upload built site
+        uses: actions/upload-artifact@v4
+        with:
+          name: site
+          path: build/
+          retention-days: 1
+
+  e2e:
+    name: Browser tests
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      # The exact output the build job produced, not a rebuild of it. Nothing
+      # here needs TeX, because nothing here rebuilds the PDF.
+      - uses: actions/download-artifact@v4
+        with:
+          name: site
+          path: build/
+
+      - run: npm ci
+
+      # Chromium only: these assertions are about layout, focus order and which
+      # hosts get called, not about engine differences.
+      - name: Install Playwright browser
+        run: npx playwright install chromium --with-deps
+
+      - run: npm run test:e2e
+
+      - name: Upload Playwright report
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 7
