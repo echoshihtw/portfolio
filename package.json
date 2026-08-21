@@ -11,12 +11,16 @@
     "test": "vitest run",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
     "lint": "prettier --check . && eslint .",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "build-icons": "tsx scripts/buildIcons.ts"
   },
   "engines": {
     "node": ">=20"
   },
   "devDependencies": {
+    "@iconify-json/mdi": "^1.2.3",
+    "@iconify-json/ri": "^1.2.10",
+    "@iconify-json/simple-icons": "^1.2.93",
     "@iconify/svelte": "^3.1.4",
     "@sveltejs/adapter-static": "^3.0.10",
     "@sveltejs/kit": "^2.0.4",
