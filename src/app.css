@@ -295,12 +295,16 @@ body {
   color: var(--color-accent);
 }
 
+/* Translucent rather than a solid panel, the same treatment as the floating
+   nav: the page tint reads through, so the block separates from the prose by
+   depth instead of by a hard slab of a different colour. The border still
+   does the edge, so the block is no less distinct. */
 .blog-prose pre {
   margin: 0 0 1.8rem;
   padding: 1.1rem 1.2rem;
   border: 1px solid var(--section-border);
   border-radius: 8px;
-  background: var(--surface-bg);
+  background: color-mix(in srgb, var(--surface-bg) 55%, transparent);
   overflow-x: auto;
   font-size: 0.78rem;
   line-height: 1.6;
