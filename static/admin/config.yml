@@ -1,0 +1,62 @@
+# yaml-language-server: $schema=https://unpkg.com/@sveltia/cms/schema/sveltia-cms.json
+
+# Sveltia CMS — a git-based admin at /admin. Editing a post here commits
+# markdown straight to this repo, which triggers the usual Vercel deploy.
+# No database and no server: the site stays adapter-static, and the OAuth
+# handshake runs on a separate Cloudflare Worker (see base_url below).
+
+backend:
+  name: github
+  repo: echoshihtw/portfolio
+  branch: main
+  # The sveltia-cms-auth Worker that handles the GitHub OAuth handshake.
+  # Deploy https://github.com/sveltia/sveltia-cms-auth to Cloudflare
+  # Workers (free tier), then replace this with the Worker's URL — no
+  # trailing slash. Auth will not work until this points somewhere real.
+  base_url: https://REPLACE-ME.workers.dev
+
+# Where images uploaded through the CMS land, and the path the site serves
+# them from. Separate from static/assets, which holds hand-curated project
+# screenshots rather than post images.
+media_folder: static/uploads
+public_folder: /uploads
+
+collections:
+  - name: blog
+    label: Blog Posts
+    label_singular: Blog Post
+    folder: src/posts
+    extension: md
+    format: yaml-frontmatter
+    create: true
+    # Filename becomes the URL: /blog/<slug>.
+    slug: "{{slug}}"
+    preview_path: blog/{{slug}}
+    fields:
+      - { name: title, label: Title, widget: string }
+      - {
+          name: date,
+          label: Date,
+          widget: datetime,
+          format: "YYYY-MM-DD",
+          date_format: "YYYY-MM-DD",
+          time_format: false,
+        }
+      - {
+          name: excerpt,
+          label: Excerpt,
+          widget: text,
+          hint: "One line on the index — what the post is actually about, not a teaser.",
+        }
+      - {
+          name: order,
+          label: Display order,
+          widget: number,
+          value_type: int,
+          hint: "Editorial ranking on the index, lowest first. Not the date — a stronger older post can still lead.",
+        }
+      # Sveltia treats a field named `body` as the file's main content;
+      # everything else above is frontmatter. `markdown` rather than
+      # `richtext` so code fences stay raw instead of being reformatted
+      # by a WYSIWYG editor.
+      - { name: body, label: Content, widget: markdown }
