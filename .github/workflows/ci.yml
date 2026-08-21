@@ -54,7 +54,7 @@ jobs:
         id: resume
         uses: actions/cache@v6
         with:
-          path: static/resume.pdf
+          path: static/*.pdf
           key: resume-${{ hashFiles('src/content/**', 'scripts/buildResume.ts', 'scripts/resume-header.tex') }}
 
       # texlive-fonts-extra is about a gigabyte and it is not optional — the
@@ -121,7 +121,15 @@ jobs:
         if: steps.resume.outputs.cache-hit != 'true'
         run: |
           npm run build-resume
-          pages=$(pdfinfo static/resume.pdf | awk '/^Pages:/ {print $2}')
+          # Globbed, not hardcoded: the PDF is named after me so the name
+          # survives a cmd-S from the browser's viewer, and that name is
+          # already spelled out in buildResume.ts, portfolio.config.ts and
+          # vercel.json. Naming it a fourth time here is how this check
+          # silently stopped running the last time it moved.
+          count=$(ls static/*.pdf 2>/dev/null | wc -l)
+          test "$count" = "1" || { echo "::error::expected exactly one PDF in static/, found $count"; exit 1; }
+          pdf=$(ls static/*.pdf)
+          pages=$(pdfinfo "$pdf" | awk '/^Pages:/ {print $2}')
           test "$pages" = "1" || { echo "::error::résumé must be one page, got $pages"; exit 1; }
 
       # Vercel builds and deploys separately with its own default base (the
