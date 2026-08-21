@@ -22,8 +22,11 @@ vite.config.ts.timestamp-*
 # Local agent tooling: installed per machine, not part of this project.
 /_bmad/
 /.agents/
-.claude/settings.local.json
-.claude/skills/
+# The whole directory, not just settings and skills: it also accumulates
+# scratch git worktrees, which are full checkouts of this repo. Twenty-odd
+# megabytes of it sat untracked, one `git add -A` away from being committed.
+# Negate a specific path here if something under it is ever worth sharing.
+.claude/
 
 # visual brainstorm companion
 .superpowers/

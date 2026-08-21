@@ -23,11 +23,10 @@ export const heroConfig: {
   // so it isn't stated twice three lines apart.
   kicker: "Chun-Yu (Echo) Shih · Taipei, Taiwan",
   // Taipei-based, so the first thing an overseas recruiter needs is the time
-  // zone and how far it stretches. Remote leads because remote is the ask;
-  // Taipei follows as the second option, not an equal one. Stated as fact
-  // rather than availability — "open to" in front of both reads as asking.
-  // The full offer lives in the closing section, where it invites.
-  remoteOpen: "UTC+8 · Remote from Taiwan · or on-site in Taipei",
+  // zone and how far it stretches. Remote only — naming an on-site option
+  // invited the wrong roles. Stated as fact rather than availability:
+  // "open to" in front of it reads as asking.
+  remoteOpen: "UTC+8 · Remote from Taiwan · APAC hours or async",
 
   // Spells out what "end to end" means, layer by layer — named techniques
   // pulled from real project work, not category nouns any portfolio could
@@ -53,14 +52,20 @@ export const heroConfig: {
   ],
 
   // Ownership leads, the shape of the work follows, stack last. The
-  // system-of-record sentence is the same on both this and the CV, because
-  // it answers "you have no experience in our domain" and that question
-  // gets asked in every screen. Stack mention matches Clio (the featured,
+  // systems-of-record list is the same here and on the CV, because it
+  // answers "you have no experience in our domain" and that question gets
+  // asked in every screen. Stack mention matches Clio (the featured,
   // in-production project the proof line is about) rather than unrelated
   // client work, since it's the one detail here most likely to specifically
   // land with a Supabase-caliber hiring manager.
+  //
+  // The three verbs are each evidenced elsewhere on the page, which is the
+  // only reason they earn a line: securing is Clio's RLS and the BFF
+  // boundary; keeping it running is Clio in daily use since May 2025;
+  // writing down what broke is the blog, and the admitted mistake in the
+  // proof line directly below.
   support:
-    "Software Engineer building systems of record — project platforms, applicant tracking, client histories — and keeping them running after ship. React, TypeScript, Supabase and Postgres.",
+    "Software Engineer building systems of record — project platforms, applicant tracking, client histories. I secure them, keep them running after ship, and write down what broke. React, TypeScript, Supabase and Postgres.",
 
   // Two sentences, not a stat block: three figures in columns is a SaaS
   // landing-page pattern that invites comparison, and "entered by hand"
@@ -80,11 +85,11 @@ export const heroConfig: {
   seeWorkHref: "#projects",
 };
 
-// The page used to end on the skills list, so a reader who was convinced had
-// to scroll back up to act. This is the close.
+// The page's one call to action, at the end — so a reader who is convinced
+// does not have to scroll back up to act.
 export const closingConfig = {
   heading: "Want to talk?",
-  body: "If you have a problem nobody has scoped yet, and you need one person to carry it from interface to deploy — that's the work. Remote from Taiwan, or in Taipei.",
+  body: "If you have a problem nobody has scoped yet, and you need one person to build it and keep it running — that's the work. Remote, from Taiwan.",
   email: "echoshihtw@gmail.com",
   resume: "resume.pdf",
   resumeAs: "Chun-Yu-Echo-Shih-Software-Engineer.pdf",

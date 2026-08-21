@@ -1,7 +1,7 @@
 // A once-per-session fake front gate before the real homepage: dark mode
 // gets a terminal boot sequence, light mode gets a name card being
 // presented — each matching that theme's own register. Neither
-// auto-dismisses; both wait for the visitor to click "Enter portfolio".
+// auto-dismisses; both wait for the visitor to click the gate's CTA.
 // Skipped on repeat visits within the tab session and entirely under
 // prefers-reduced-motion.
 (() => {
