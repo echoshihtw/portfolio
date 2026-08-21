@@ -73,8 +73,6 @@
 
   .cta {
     padding: 0.62rem 1.1rem;
-    border-radius: 999px;
-    font-size: 0.82rem;
     text-decoration: none;
     border: 1px solid var(--section-border);
     transition:

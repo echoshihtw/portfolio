@@ -46,31 +46,38 @@ html {
 /* Shared button/pill treatment: pill radius, mono label, one hover language,
    and a tiny halo+core glow on hover echoing the favicon's neon-tube mark
    (soft blur wash + tight bright ring). Glow is near-invisible in light mode
-   and reads as the "fun" dark-mode glow via --glow-strength. */
+   and reads as the "fun" dark-mode glow via --glow-strength.
+
+   These are defaults, not overrides. They used to carry !important, because
+   Svelte scopes a component's rules with an extra class and that out-specifies
+   a bare class here — so the shared sheet could only win by force. Winning by
+   force is the wrong relationship: it silently beat two components that had
+   asked for something else (a 4px hero button, a rounded-square social chip),
+   and it beat the floating pill's font size, which is why that "mirrors the
+   header exactly" for months while measuring half a pixel off. Now a
+   component that states a value gets it. */
 .hero-cta,
 .cta,
 .footer-mail,
 .footer-source,
-.footer-social-link,
-.floating-link {
-  border-radius: 999px !important;
-  font-family: "JetBrains Mono", monospace !important;
-  font-size: 0.75rem !important;
-  letter-spacing: 0.03em !important;
+.footer-social-link {
+  border-radius: 999px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.03em;
   transition:
     border-color 160ms ease,
     background-color 160ms ease,
     color 160ms ease,
     transform 160ms ease,
-    box-shadow 160ms ease !important;
+    box-shadow 160ms ease;
 }
 
 .hero-cta:hover,
 .cta:hover,
 .footer-mail:hover,
 .footer-source:hover,
-.footer-social-link:hover,
-.floating-link:hover {
+.footer-social-link:hover {
   transform: translateY(-1px);
   border-color: var(--color-accent);
   box-shadow:

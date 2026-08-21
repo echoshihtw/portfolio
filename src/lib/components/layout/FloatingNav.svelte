@@ -174,10 +174,8 @@
     text-underline-offset: 0.28em;
     white-space: nowrap;
     flex: none;
-    /* .floating-link is one of the shared classes app.css's global button
-       rule targets, which sets border-color on hover — background is a
-       <button> for the go-to-top icon, so without this it picks up the
-       browser's default button border, colored, on hover. */
+    /* The go-to-top control is a <button>, so it arrives with the browser's
+       default chrome. */
     border: none;
     background: none;
     transition:
@@ -186,15 +184,15 @@
       text-shadow 180ms ease;
   }
 
-  /* Underline rather than a boxed outline: the glow on focus keeps a
-     visible, accessible cue for keyboard users without a hard rectangle.
-     Also overrides app.css's shared button-hover rule, whose
-     `0 0 0 1px accent` box-shadow ring reads as a border even though it
-     isn't one — not wanted here, since these are plain-text links rather
-     than chip buttons. */
+  /* Underline rather than a boxed outline. It is already there at rest in
+     transparent, so hover and focus fade it in instead of reflowing the
+     text. Hover stops at the underline plus brighter text; focus goes on to
+     accent colour and a glow, so a keyboard user can still tell the two
+     apart without a hard rectangle. */
   .floating-link:hover,
   .floating-link:focus-visible {
     color: var(--text-color);
+    text-decoration-color: var(--color-accent);
   }
 
   .floating-link[aria-current="page"] {
@@ -203,11 +201,6 @@
 
   .floating-link:focus-visible {
     color: var(--color-accent);
-    text-decoration-color: var(--color-accent);
-    box-shadow: none;
-  }
-
-  .floating-link:focus-visible {
     text-shadow: 0 0 8px
       color-mix(in srgb, var(--color-accent) 55%, transparent);
   }
