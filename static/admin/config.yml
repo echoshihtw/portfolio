@@ -2,8 +2,8 @@
 
 # Sveltia CMS — a git-based admin at /admin. Editing a post here commits
 # markdown straight to this repo, which triggers the usual Vercel deploy.
-# No database and no server: the site stays adapter-static, and the OAuth
-# handshake runs on a separate Cloudflare Worker (see base_url below).
+# No database and no server: the site stays adapter-static, and sign-in is
+# a personal access token held in the browser (see the backend note below).
 
 backend:
   name: github
@@ -16,11 +16,10 @@ backend:
   # links out to GitHub's token page with the right scopes preselected;
   # the token is kept in the browser's local storage.
   #
-  # A placeholder URL used to sit here, which made "Sign In with GitHub"
-  # fail by pointing at a host that does not exist. If a proxy is ever
-  # wanted — the reason would be non-technical users needing to sign in —
-  # deploy https://github.com/sveltia/sveltia-cms-auth and add its URL
-  # back as base_url.
+  # If a proxy is ever wanted — the reason would be non-technical users
+  # needing to sign in — deploy sveltia/sveltia-cms-auth and add its URL
+  # here as base_url. A base_url pointing at a host that does not exist
+  # makes "Sign In with GitHub" fail, so leave it out rather than stub it.
 
 # Where images uploaded through the CMS land, and the path the site serves
 # them from. Separate from static/assets, which holds hand-curated project
