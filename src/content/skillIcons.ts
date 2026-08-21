@@ -4,6 +4,10 @@
 // plain text, same as before. Simple Icons render as a single currentColor
 // path, so every logo picks up one accent tint instead of each tool's own
 // brand color.
+// Zustand and Riverpod are deliberately absent: neither has a simple-icons
+// entry, so naming one here 404'd at the icon API and the chip rendered
+// with an empty gap. Skills.svelte already omits the icon when there is no
+// entry, which is the correct fallback.
 export const skillIcons: Record<string, string> = {
   React: "simple-icons:react",
   TypeScript: "simple-icons:typescript",
@@ -13,7 +17,6 @@ export const skillIcons: Record<string, string> = {
   Redux: "simple-icons:redux",
   SvelteKit: "simple-icons:svelte",
   "TanStack Query": "simple-icons:reactquery",
-  Zustand: "simple-icons:zustand",
   FastAPI: "simple-icons:fastapi",
   Python: "simple-icons:python",
   "Node.js": "simple-icons:nodedotjs",
@@ -31,7 +34,6 @@ export const skillIcons: Record<string, string> = {
   "Claude Code": "simple-icons:anthropic",
   Flutter: "simple-icons:flutter",
   Dart: "simple-icons:dart",
-  Riverpod: "simple-icons:riverpod",
   Tauri: "simple-icons:tauri",
   Electron: "simple-icons:electron",
 };
