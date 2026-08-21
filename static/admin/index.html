@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    />
+    <!-- Keep the admin out of search results. -->
+    <meta
+      name="robots"
+      content="noindex"
+    />
+    <title>Content admin — Echo Shih</title>
+  </head>
+  <body>
+    <!-- Sveltia CMS ships as a single CDN bundle, so the admin needs no
+         build step and no dependencies in package.json — it is a static
+         file the rest of the site never imports. Deliberately no
+         type="module" and no stylesheet link: the docs call out both as
+         common mistakes that break the CMS. -->
+    <script src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js"></script>
+  </body>
+</html>
