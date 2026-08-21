@@ -17,6 +17,7 @@
 
 <Seo
   title={data.meta.title}
+  seoTitle={data.meta.seoTitle}
   description={data.meta.excerpt}
   path="/blog/{data.slug}"
   type="article"
@@ -29,10 +30,13 @@
       class="blog-back mono"
       href="{base}/blog"
     >
-      ← Writing
+      ← Working notes
     </a>
 
-    <p class="blog-post-date mono">{formatDate(data.meta.date)}</p>
+    <p class="blog-post-meta mono">
+      {formatDate(data.meta.date)} ·
+      <span class="blog-post-author">Echo Shih</span>
+    </p>
     <h1>{data.meta.title}</h1>
 
     <div class="blog-prose">
@@ -61,12 +65,16 @@
     color: var(--color-accent);
   }
 
-  .blog-post-date {
+  .blog-post-meta {
     margin: 0 0 0.4rem;
     font-size: 0.72rem;
     letter-spacing: 0.06em;
     text-transform: uppercase;
     color: var(--color-accent);
+  }
+
+  .blog-post-author {
+    color: var(--text-muted);
   }
 
   h1 {

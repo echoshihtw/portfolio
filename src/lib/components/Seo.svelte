@@ -1,7 +1,21 @@
 <script lang="ts">
-  import { DEFAULT_OG_IMAGE, SITE_NAME, absoluteUrl } from "$lib/seo";
+  import {
+    DEFAULT_OG_IMAGE,
+    SITE_NAME,
+    absoluteUrl,
+    articleJsonLd,
+    jsonLdScript,
+    websiteJsonLd,
+  } from "$lib/seo";
 
   export let title: string;
+  /**
+   * Overrides only the <title> tag. Search results want the literal terms
+   * someone would type — an error message, a tool name. Social cards and
+   * the schema headline keep `title`, which can stay evocative, because a
+   * share is read by a human deciding whether it looks worth clicking.
+   */
+  export let seoTitle: string | undefined = undefined;
   export let description: string;
   /** Site-root-relative path, e.g. "/blog/some-post". */
   export let path: string;
@@ -12,7 +26,28 @@
   export let image: string = DEFAULT_OG_IMAGE;
 
   $: url = absoluteUrl(path);
-  $: fullTitle = title.includes(SITE_NAME) ? title : `${title} — ${SITE_NAME}`;
+  $: displayTitle = seoTitle ?? title;
+  $: fullTitle = displayTitle.includes(SITE_NAME)
+    ? displayTitle
+    : `${displayTitle} — ${SITE_NAME}`;
+  $: socialTitle = title.includes(SITE_NAME)
+    ? title
+    : `${title} — ${SITE_NAME}`;
+
+  // A post describes itself as a BlogPosting with an author; everything
+  // else declares the Person/WebSite the pages belong to. Both carry the
+  // same Person node by @id, so the graph resolves to one identity rather
+  // than a separate author per page.
+  $: schema =
+    type === "article" && publishedTime
+      ? articleJsonLd({
+          url,
+          title,
+          description,
+          datePublished: publishedTime,
+          image,
+        })
+      : websiteJsonLd(url);
 </script>
 
 <svelte:head>
@@ -36,7 +71,7 @@
   />
   <meta
     property="og:title"
-    content={fullTitle}
+    content={socialTitle}
   />
   <meta
     property="og:description"
@@ -53,7 +88,7 @@
 
   <meta
     name="twitter:title"
-    content={fullTitle}
+    content={socialTitle}
   />
   <meta
     name="twitter:description"
@@ -63,6 +98,13 @@
     name="twitter:image"
     content={image}
   />
+
+  <!-- {@html} is the only way to put a script tag with a JSON body into
+       svelte:head. Safe here: the payload is this site's own data, never
+       user input, and jsonLdScript escapes "<" so no string value can
+       close the tag early. -->
+  <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+  {@html jsonLdScript(schema)}
 
   {#if publishedTime}
     <meta

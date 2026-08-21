@@ -5,6 +5,7 @@ export const prerender = true;
 
 type PostMeta = {
   title: string;
+  seoTitle?: string;
   date: string;
   excerpt: string;
   draft?: boolean;

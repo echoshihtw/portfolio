@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# The CMS admin is a static shell that fetches everything client-side, so
+# there is nothing there for a crawler to index. It also carries a noindex
+# meta tag; this just avoids the crawl.
+Disallow: /admin
+
+Sitemap: https://echoshih.com/sitemap.xml
