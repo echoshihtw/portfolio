@@ -9,11 +9,18 @@ backend:
   name: github
   repo: echoshihtw/portfolio
   branch: main
-  # The sveltia-cms-auth Worker that handles the GitHub OAuth handshake.
-  # Deploy https://github.com/sveltia/sveltia-cms-auth to Cloudflare
-  # Workers (free tier), then replace this with the Worker's URL — no
-  # trailing slash. Auth will not work until this points somewhere real.
-  base_url: https://REPLACE-ME.workers.dev
+  # No base_url on purpose. That property points at an OAuth proxy, and
+  # Sveltia's own docs say a single technical user doesn't need one —
+  # "Sign In Using Access Token" on the login screen covers this case,
+  # with no Cloudflare Worker and no GitHub OAuth App to maintain. It
+  # links out to GitHub's token page with the right scopes preselected;
+  # the token is kept in the browser's local storage.
+  #
+  # A placeholder URL used to sit here, which made "Sign In with GitHub"
+  # fail by pointing at a host that does not exist. If a proxy is ever
+  # wanted — the reason would be non-technical users needing to sign in —
+  # deploy https://github.com/sveltia/sveltia-cms-auth and add its URL
+  # back as base_url.
 
 # Where images uploaded through the CMS land, and the path the site serves
 # them from. Separate from static/assets, which holds hand-curated project
