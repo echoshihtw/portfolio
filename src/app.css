@@ -316,12 +316,30 @@ body {
   line-height: 1.6;
 }
 
-.blog-prose pre code {
-  font-family: "JetBrains Mono", monospace;
-  color: var(--text-color);
-}
-
+/* Inline code — `web-app@0.1.0`, `package.json`, an error string mid-sentence.
+   A mono font alone did not separate these from the prose around them, which
+   is the readability problem: at 0.9em, mono next to a sans paragraph reads
+   as a font wobble rather than as a quoted identifier. The tint and the
+   padding are what make it a token. Kept light so a sentence carrying four of
+   them does not turn into a row of buttons. */
 .blog-prose code {
   font-family: "JetBrains Mono", monospace;
-  font-size: 0.9em;
+  font-size: 0.88em;
+  padding: 0.1em 0.34em;
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--code-bg) 80%, transparent);
+  /* Long identifiers and error strings should break rather than push the
+     paragraph sideways on a phone. */
+  overflow-wrap: anywhere;
+}
+
+/* Inside a block the tint would be a box within a box, and the padding would
+   misalign the first line against the rest. */
+.blog-prose pre code {
+  color: var(--text-color);
+  padding: 0;
+  border-radius: 0;
+  background: none;
+  font-size: inherit;
+  overflow-wrap: normal;
 }
