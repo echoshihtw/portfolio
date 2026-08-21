@@ -51,8 +51,7 @@ html {
 .cta,
 .footer-mail,
 .footer-source,
-.footer-social-link,
-.floating-link {
+.footer-social-link {
   border-radius: 999px !important;
   font-family: "JetBrains Mono", monospace !important;
   font-size: 0.75rem !important;
@@ -69,8 +68,7 @@ html {
 .cta:hover,
 .footer-mail:hover,
 .footer-source:hover,
-.footer-social-link:hover,
-.floating-link:hover {
+.footer-social-link:hover {
   transform: translateY(-1px);
   border-color: var(--color-accent);
   box-shadow:
