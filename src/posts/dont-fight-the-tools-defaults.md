@@ -6,11 +6,11 @@ excerpt: "A flag that looked cosmetic — include-component-in-tag: false — wa
 order: 1
 ---
 
-I wanted release tags to read `v1.0.0`. release-please, the tool doing the tagging, wanted `web-app@0.1.0`. I spent most of a day arguing with it before I noticed that wasn't a disagreement — it was a default, and I was the one deviating.
+The repo was already cutting releases, tagged `web-app@0.1.0`. I wanted them to read `v1.0.0` instead, so I changed the config. I spent most of a day discovering why that wasn't a setting I had got wrong — it was the default, working as designed, and I was the one deviating from it.
 
 ## Every fix bought exactly one more failure
 
-The first errors were plumbing — a shallow checkout, a missing label, a stale tag — each fixed, each revealing the next problem, until: `Cannot read properties of undefined (reading 'replace')`. release-please's `node` release type, run with the tag prefix stripped out the way I wanted it, hit a code path that assumes a component name is always there and crashes when it isn't. That's not a config mistake. That's the tool telling you, badly, that the path you're on doesn't exist.
+The first errors were plumbing, most of them side effects of changing a scheme that already had history behind it — a shallow checkout, a missing label, a leftover tag in the old format. Each fixed, each revealing the next problem, until: `Cannot read properties of undefined (reading 'replace')`. release-please's `node` release type, run with the tag prefix stripped out the way I wanted it, hit a code path that assumes a component name is always there and crashes when it isn't. That's not a config mistake. That's the tool telling you, badly, that the path you're on doesn't exist.
 
 ## The flag that wasn't a flag
 
