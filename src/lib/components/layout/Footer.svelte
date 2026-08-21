@@ -95,7 +95,11 @@
         {#each tabs as tab}
           <a href={tabHref(tab.link, $page.url.pathname)}>{tab.name}</a>
         {/each}
+        <!-- Same split as the header: sections of this page above, places
+             you go below. A gap does here what the vertical rule does in a
+             horizontal row. -->
         <a
+          class="footer-nav-destination"
           href="{base}/blog"
           aria-current={$page.url.pathname.startsWith(`${base}/blog`)
             ? "page"
@@ -217,15 +221,23 @@
     margin-bottom: 0.6rem;
   }
 
+  /* Matches .mobile-tab-link in the header exactly. These are the same six
+     words on the same site; rendering them here in Title Case at full
+     brightness made the footer read as a different site's nav. */
   .footer-nav a {
     display: block;
     font-family: "JetBrains Mono", monospace;
-    font-size: 0.78rem;
-    letter-spacing: 0.02em;
-    color: var(--text-color);
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--text-muted);
     text-decoration: none;
-    margin-bottom: 0.35rem;
+    margin-bottom: 0.5rem;
     transition: color 160ms ease;
+  }
+
+  .footer-nav-destination {
+    margin-top: 0.85rem;
   }
 
   .footer-nav a:hover,

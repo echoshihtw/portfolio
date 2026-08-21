@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { tabs, tabHref } from "$lib/menuTabs";
   import Icon from "@iconify/svelte";
   import ThemeSwitch from "$lib/components/ThemeSwitch.svelte";
   import { page } from "$app/stores";
@@ -24,18 +23,14 @@
   class={"floating-nav " +
     (isVisible ? "floating-nav-visible" : "floating-nav-hidden")}
 >
-  <!-- Only the links scroll. The two icons are the controls you always need
-       within reach, so they sit outside the strip — inside it they scroll
-       out of the pill on any phone narrower than 480px. -->
+  <!-- Deliberately not the header's six. This bar exists because the header
+       scrolled away, so a slot is earned by being something you cannot get
+       from where you are standing: Blog is the one destination scrolling
+       will never reach, Résumé is the conversion, top is the way back, and
+       the toggle is the only theme control left on screen. Work, Projects
+       and Skills are the page you are already scrolling through — they were
+       four of the six links and all of the crowding. -->
   <div class="floating-links">
-    {#each tabs as tab}
-      <a
-        href={tabHref(tab.link, $page.url.pathname)}
-        class="floating-link"
-      >
-        {tab.name}
-      </a>
-    {/each}
     <a
       href="{base}/blog"
       class="floating-link"
