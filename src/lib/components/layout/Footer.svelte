@@ -52,7 +52,9 @@
   <div class="footer-shell">
     <div class="footer-grid">
       <section class="footer-brand">
-        <p class="footer-kicker mono">Taipei · UTC+8</p>
+        <!-- No kicker above the name: the footer's bottom bar already
+             carries the location and timezone, and saying it twice in one
+             footer reads as padding. -->
         <h2>Echo Shih</h2>
 
         <p class="footer-copy">
@@ -162,12 +164,6 @@
     font-family: "JetBrains Mono", monospace;
     font-size: clamp(1.5rem, 3vw, 2rem);
     color: var(--text-color);
-  }
-
-  .footer-kicker {
-    font-size: 0.72rem;
-    letter-spacing: 0.08em;
-    color: var(--text-muted);
   }
 
   .footer-copy {
