@@ -3,11 +3,11 @@
 % Headline = professional identity, not job level. Level is settled by the role
 % and the interview, so a self-assigned "Senior" only invites an argument before
 % anyone has read the experience. Swap per application:
-%   Senior Product Engineer vacancy  -> Senior Product Engineer
-%   Senior full-stack vacancy        -> Senior Full-Stack Product Engineer
-%   General / international          -> Product Engineer   (default)
-%   Freelance / contract             -> Independent Product Engineer
-{\large Product Engineer · React · TypeScript · Next.js · Product Ownership}\\[3pt]
+%   Senior vacancy                   -> Senior Software Engineer
+%   Senior full-stack vacancy        -> Senior Full-Stack Software Engineer
+%   General / international          -> Software Engineer   (default)
+%   Freelance / contract             -> Independent Software Engineer
+{\large Software Engineer · React · TypeScript · Next.js · Product Ownership}\\[3pt]
 % Two deliberate lines: availability first, then contacts. As one line it wrapped
 % and left the portfolio URL stranded on its own.
 {\small\color{muted}Taipei, Taiwan (UTC+8) · Remote — APAC hours or async · Available now}\\[1pt]
@@ -48,7 +48,7 @@ Software Engineer · _Taipei, Taiwan · Aug 2022 – May 2024_
 
 ## Independent / Freelance Engineering
 
-Product Engineer · _Remote · 2020 – 2024_
+Software Engineer · _Remote · 2020 – 2024_
 
 - Built the **Next.js frontend for a Bitcoin coin-selection research tool** with a **BDK core maintainer** (2023), and fixed and optimised a **BigCommerce** storefront for Bdigital (2024).
 
