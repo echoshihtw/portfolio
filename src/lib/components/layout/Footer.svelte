@@ -52,7 +52,7 @@
   <div class="footer-shell">
     <div class="footer-grid">
       <section class="footer-brand">
-        <p class="footer-kicker mono">Building software with care</p>
+        <p class="footer-kicker mono">Taipei · UTC+8</p>
         <h2>Echo Shih</h2>
 
         <p class="footer-copy">
