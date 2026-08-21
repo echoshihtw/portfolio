@@ -2,7 +2,7 @@
    before first paint, or the real page flashes through underneath for a
    frame. Dark mode gets a terminal boot sequence; light mode gets a name
    card being presented — each matching that theme's own register. Neither
-   auto-dismisses; both wait for "Enter portfolio". */
+   auto-dismisses; both wait for a click on the gate's CTA. */
 #boot-gate {
   position: fixed;
   inset: 0;

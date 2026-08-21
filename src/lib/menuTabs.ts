@@ -1,9 +1,8 @@
 import { base } from "$app/paths";
 import type { MenuTabs } from "$lib/types/types";
 
-// The label is the label. It used to carry the anchor's "#", which the header
-// stripped for its aria-label and the floating nav stripped again for display —
-// so one nav read "#work" and the other "WORK".
+// The label is the display text and nothing else; the anchor lives in `link`.
+// Every nav renders `name` verbatim, so none of them has to strip anything.
 export const tabs: MenuTabs = [
   { name: "Work", link: "#work" },
   { name: "Projects", link: "#projects" },

@@ -15,8 +15,7 @@
 
   // Highlights carry **bold** markers from the résumé source. Splitting on the
   // marker and letting Svelte render each part means no HTML string is ever
-  // built, so there is nothing to escape and nothing to inject — the escaping
-  // this used to do only existed because the output went through {@html}.
+  // built, so there is nothing to escape and nothing to inject.
   const boldSegments = (v: string) =>
     v
       .split(/\*\*\s*([^*][\s\S]*?)\s*\*\*/g)
