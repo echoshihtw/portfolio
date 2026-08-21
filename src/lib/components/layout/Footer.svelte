@@ -111,7 +111,8 @@
              away — so it left the page along with it. -->
         <a
           href="{base}/{heroConfig.resume}"
-          download={heroConfig.resumeAs}
+          target="_blank"
+          rel="noreferrer noopener"
         >
           Résumé
         </a>

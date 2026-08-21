@@ -32,7 +32,7 @@
       <a
         class="cta ghost mono"
         href="{base}/{closingConfig.resume}"
-        download={closingConfig.resumeAs}
+        download
       >
         Download résumé ↓
       </a>

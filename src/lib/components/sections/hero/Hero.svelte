@@ -113,7 +113,7 @@
       <a
         class="hero-cta primary"
         href="{base}/{heroConfig.resume}"
-        download={heroConfig.resumeAs}
+        download
       >
         Download résumé <span class="cta-arrow">↓</span>
       </a>

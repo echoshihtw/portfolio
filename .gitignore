@@ -17,7 +17,7 @@ vite.config.ts.timestamp-*
 # so they cannot go stale.
 /output/
 /.resume-build/
-/static/resume.pdf
+/static/Chun-Yu-Echo-Shih-Software-Engineer.pdf
 
 # Local agent tooling: installed per machine, not part of this project.
 /_bmad/
