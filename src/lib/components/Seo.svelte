@@ -1,5 +1,12 @@
 <script lang="ts">
-  import { DEFAULT_OG_IMAGE, SITE_NAME, absoluteUrl } from "$lib/seo";
+  import {
+    DEFAULT_OG_IMAGE,
+    SITE_NAME,
+    absoluteUrl,
+    articleJsonLd,
+    jsonLdScript,
+    websiteJsonLd,
+  } from "$lib/seo";
 
   export let title: string;
   export let description: string;
@@ -13,6 +20,21 @@
 
   $: url = absoluteUrl(path);
   $: fullTitle = title.includes(SITE_NAME) ? title : `${title} — ${SITE_NAME}`;
+
+  // A post describes itself as a BlogPosting with an author; everything
+  // else declares the Person/WebSite the pages belong to. Both carry the
+  // same Person node by @id, so the graph resolves to one identity rather
+  // than a separate author per page.
+  $: schema =
+    type === "article" && publishedTime
+      ? articleJsonLd({
+          url,
+          title,
+          description,
+          datePublished: publishedTime,
+          image,
+        })
+      : websiteJsonLd(url);
 </script>
 
 <svelte:head>
@@ -63,6 +85,13 @@
     name="twitter:image"
     content={image}
   />
+
+  <!-- {@html} is the only way to put a script tag with a JSON body into
+       svelte:head. Safe here: the payload is this site's own data, never
+       user input, and jsonLdScript escapes "<" so no string value can
+       close the tag early. -->
+  <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+  {@html jsonLdScript(schema)}
 
   {#if publishedTime}
     <meta
