@@ -11,6 +11,8 @@ const RESUME_PATH = path.join(ROOT, "src", "content", "resume.md");
 const OUTPUT_DIR = path.join(ROOT, "output");
 const BUILD_MD = path.join(OUTPUT_DIR, "resume.build.md");
 const RESUME_DATA_PATH = path.join(ROOT, "src/lib/resumeData.ts");
+// Must match `resume` in portfolio.config.ts and the redirect in vercel.json.
+const RESUME_FILENAME = "Chun-Yu-Echo-Shih-Software-Engineer.pdf";
 
 /*
 --------------------------------------------------
@@ -255,10 +257,12 @@ function buildPDF() {
       { stdio: "inherit" }
     );
 
-    // Keep the downloadable résumé (served from /static) in sync with the build.
-    const staticPdf = path.join(ROOT, "static", "resume.pdf");
+    // Named on disk, not renamed at download time: the URL's last segment is
+    // what a browser proposes when someone views the PDF in a tab and saves
+    // it, so the name has to live in the path to survive every route out.
+    const staticPdf = path.join(ROOT, "static", RESUME_FILENAME);
     fs.copyFileSync(pdfPath, staticPdf);
-    console.log("✅ Synced static/resume.pdf");
+    console.log(`✅ Synced static/${RESUME_FILENAME}`);
   } catch (error) {
     // Skipping is fine on a laptop without TeX. In CI it means the résumé
     // silently stopped building, which is how this went unnoticed — so fail

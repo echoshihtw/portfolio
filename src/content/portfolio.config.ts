@@ -15,7 +15,6 @@ export const heroConfig: {
   support: string;
   email: string;
   resume: string;
-  resumeAs: string;
   seeWorkHref: string;
 } = {
   // Hierarchy: kicker = who and where · headline = value delivered ·
@@ -78,10 +77,13 @@ export const heroConfig: {
     "Built for one salon owner, engineered multi-tenant from day one — in daily use since May 2025, 603 clients and 2,694 records entered by hand. What I'd do differently: write the permission model down before building it, not after.",
 
   email: "echoshihtw@gmail.com",
-  resume: "resume.pdf", // served from /static, base-prefixed at render
-  // What the file is called once it lands in someone's downloads folder, and
-  // in an ATS. "resume.pdf" there is indistinguishable from every other one.
-  resumeAs: "Chun-Yu-Echo-Shih-Software-Engineer.pdf",
+  // The file is named on disk rather than renamed by a download attribute or
+  // a Content-Disposition header, so it carries my name whichever way it is
+  // taken: opened in a tab and saved with cmd-S, right-click-saved, or pulled
+  // by an ATS. "resume.pdf" in a recruiter's downloads folder is
+  // indistinguishable from every other one. /resume.pdf still redirects here,
+  // for the CVs already sent out carrying that URL.
+  resume: "Chun-Yu-Echo-Shih-Software-Engineer.pdf",
   seeWorkHref: "#projects",
 };
 
@@ -91,8 +93,7 @@ export const closingConfig = {
   heading: "Want to talk?",
   body: "If you have a problem nobody has scoped yet, and you need one person to build it and keep it running — that's the work. Remote, from Taiwan.",
   email: "echoshihtw@gmail.com",
-  resume: "resume.pdf",
-  resumeAs: "Chun-Yu-Echo-Shih-Software-Engineer.pdf",
+  resume: "Chun-Yu-Echo-Shih-Software-Engineer.pdf",
 };
 
 // Skills live in skills.config.ts — one list, rendered to the PDF and to the

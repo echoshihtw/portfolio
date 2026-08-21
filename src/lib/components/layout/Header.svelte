@@ -72,9 +72,17 @@
         >
           Blog
         </a>
+        <!-- Opens the PDF rather than downloading it. This link is labelled
+             "Résumé", not "Download résumé": a recruiter skims first and
+             keeps it only if interested, and a forced download puts a file
+             on their disk before they know they want it — worse on a phone,
+             where it lands in Downloads and they have to leave the browser
+             to read it. The hero button is the one that says download and
+             does it. -->
         <a
           href="{base}/{heroConfig.resume}"
-          download={heroConfig.resumeAs}
+          target="_blank"
+          rel="noreferrer noopener"
           class="mobile-tab-link"
         >
           Résumé
