@@ -99,13 +99,15 @@ font, or accepting it. Not done yet.
 
 ### The gap this suite does not cover
 
-`vite preview` resolves extensionless paths, so `/blog` finds `build/blog.html`.
-**Vercel does not do this by default.** That difference is exactly how `/blog`
-404'd in production while every local check passed — fixed with `cleanUrls` in
-`vercel.json`, but nothing local would have caught it.
+The suite serves `build/` with sirv, which resolves `/blog` to `blog.html` the
+same way Vercel's `cleanUrls` does — so it models the real host. What it can't
+see is Vercel's routing config itself. `/blog` 404'd in production once because
+adapter-static writes `blog.html` and Vercel wasn't stripping `.html`; that's
+fixed by `cleanUrls` in `vercel.json`, but delete that key and nothing here
+would notice.
 
-A local suite gives false confidence there. Checking the deployed URL after a
-merge is a separate, necessary step, and it has caught things nothing else did.
+Checking the deployed URL after a merge is a separate, necessary step, and it
+has caught things nothing else did.
 
 ## CI
 
