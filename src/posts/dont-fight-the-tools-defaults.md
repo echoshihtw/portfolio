@@ -5,7 +5,7 @@ excerpt: "A flag that looked cosmetic — include-component-in-tag: false — wa
 order: 1
 ---
 
-I wanted release tags to read v1.0.0. release-please, the tool doing the tagging, wanted lockerbie-website@0.1.0. I spent most of a day arguing with it before I noticed that wasn't a disagreement — it was a default, and I was the one deviating.
+I wanted release tags to read v1.0.0. release-please, the tool doing the tagging, wanted web-app@0.1.0. I spent most of a day arguing with it before I noticed that wasn't a disagreement — it was a default, and I was the one deviating.
 
 ## Every fix bought exactly one more failure
 
@@ -25,7 +25,7 @@ A working example earns its keep here in a way documentation can't: a reference 
 
 ## Read the schema, not your memory of it
 
-The rest of the fix — switching to a component-prefixed tag, lockerbie-website@0.1.0 instead of v0.1.0 — came from release-please's actual JSON schema, not from half-remembered examples of what the config should look like. The final version is small:
+The rest of the fix — switching to a component-prefixed tag, web-app@0.1.0 instead of v0.1.0 — came from release-please's actual JSON schema, not from half-remembered examples of what the config should look like. The final version is small:
 
 ```json
 {
@@ -35,7 +35,7 @@ The rest of the fix — switching to a component-prefixed tag, lockerbie-website
   "packages": {
     ".": {
       "release-type": "node",
-      "component": "lockerbie-website",
+      "component": "web-app",
       "tag-separator": "@",
       "include-v-in-tag": false
     }
