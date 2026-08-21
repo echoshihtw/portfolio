@@ -17,7 +17,7 @@
 
 <Seo
   title="Working notes"
-  description="Notes from building things — what broke, what it turned out to be, and anything worth keeping."
+  description="What broke, what it actually turned out to be, and what I'd do differently."
   path="/blog"
 />
 
@@ -26,8 +26,8 @@
     <p class="blog-kicker mono">Writing</p>
     <h1>Working notes</h1>
     <p class="blog-intro">
-      Notes from building things — what broke, what it turned out to be, and
-      anything worth keeping.
+      What broke, what it actually turned out to be, and what I'd do
+      differently.
     </p>
 
     <ul class="blog-list">

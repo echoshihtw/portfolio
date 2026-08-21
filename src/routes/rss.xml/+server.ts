@@ -57,7 +57,7 @@ export function GET() {
   <channel>
     <title>${escapeXml(SITE_NAME)} — Working notes</title>
     <link>${SITE_ORIGIN}/blog</link>
-    <description>Notes from building things — what broke, what it turned out to be, and anything worth keeping.</description>
+    <description>What broke, what it actually turned out to be, and what I'd do differently.</description>
     <language>en</language>
     <atom:link href="${SITE_ORIGIN}/rss.xml" rel="self" type="application/rss+xml" />
 ${items}
