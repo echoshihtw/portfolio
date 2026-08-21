@@ -46,7 +46,7 @@
          whole document a horizontal scroll at any width below 414px. -->
     <div class="nav-row">
       <nav
-        aria-label="Section navigation"
+        aria-label="Main navigation"
         class="mobile-tabs"
       >
         {#each tabs as tab}
@@ -57,6 +57,14 @@
             {tab.name}
           </a>
         {/each}
+        <!-- The four above are positions on this page; the two below are
+             places you go. Rendered as one flat row they read as six peers,
+             so clicking Blog does something categorically different from its
+             neighbours with nothing to warn you. The rule is the warning. -->
+        <span
+          class="nav-sep"
+          aria-hidden="true"
+        ></span>
         <a
           href="{base}/blog"
           class="mobile-tab-link"
@@ -140,6 +148,16 @@
 
   .nav-toggle {
     flex: none;
+  }
+
+  /* Divides the page's own sections from the links that leave it. Sized in
+     em so it tracks the link text rather than a fixed pixel height. */
+  .nav-sep {
+    flex: none;
+    width: 1px;
+    height: 1.1em;
+    margin: 0 -0.15rem;
+    background: var(--section-border);
   }
 
   .mobile-tabs::-webkit-scrollbar {
