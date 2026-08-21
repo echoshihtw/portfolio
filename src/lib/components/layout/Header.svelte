@@ -1,13 +1,19 @@
 <script lang="ts">
   import ThemeSwitch from "../ThemeSwitch.svelte";
-  import { tabs } from "$lib/menuTabs";
+  import { tabs, tabHref } from "$lib/menuTabs";
   import { base } from "$app/paths";
+  import { page } from "$app/stores";
   import { heroConfig } from "../../../content/portfolio.config";
 
   export let scrollPosition: number;
   export let headerEl: HTMLElement | undefined = undefined;
 
-  function goTop() {
+  // Scroll-to-top only makes sense when already on the one-page home. On
+  // any other route (e.g. /blog), the click has to actually navigate home
+  // instead of being swallowed by preventDefault.
+  function goTop(event: MouseEvent) {
+    if ($page.url.pathname !== (base || "/")) return;
+    event.preventDefault();
     document.body.scrollIntoView();
   }
 </script>
@@ -23,7 +29,7 @@
     <!-- Not an <h1>: the hero statement is the page's single heading. -->
     <a
       href={base || "/"}
-      on:click|preventDefault={goTop}
+      on:click={goTop}
       class="site-name"
     >
       Echo Shih
@@ -38,13 +44,19 @@
     >
       {#each tabs as tab}
         <a
-          href={tab.link}
+          href={tabHref(tab.link, $page.url.pathname)}
           class="mobile-tab-link"
           aria-label="Go to {tab.name} section"
         >
           {tab.name}
         </a>
       {/each}
+      <a
+        href="{base}/blog"
+        class="mobile-tab-link"
+      >
+        Blog
+      </a>
       <a
         href="{base}/{heroConfig.resume}"
         download={heroConfig.resumeAs}

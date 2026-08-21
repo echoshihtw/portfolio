@@ -1,6 +1,8 @@
 <script lang="ts">
   import Icon from "@iconify/svelte";
-  import { tabs } from "$lib/menuTabs";
+  import { base } from "$app/paths";
+  import { page } from "$app/stores";
+  import { tabs, tabHref } from "$lib/menuTabs";
   import {
     calendlyUrl,
     email,
@@ -92,8 +94,9 @@
         <p class="footer-title mono">Navigation</p>
 
         {#each tabs as tab}
-          <a href={tab.link}>{tab.name}</a>
+          <a href={tabHref(tab.link, $page.url.pathname)}>{tab.name}</a>
         {/each}
+        <a href="{base}/blog">Blog</a>
       </nav>
 
       <section class="footer-socials">

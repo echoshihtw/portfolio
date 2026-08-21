@@ -1,7 +1,8 @@
 <script lang="ts">
-  import { tabs } from "$lib/menuTabs";
+  import { tabs, tabHref } from "$lib/menuTabs";
   import Icon from "@iconify/svelte";
   import ThemeSwitch from "$lib/components/ThemeSwitch.svelte";
+  import { page } from "$app/stores";
 
   export let isVisible = false;
 
@@ -17,7 +18,7 @@
 >
   {#each tabs as tab}
     <a
-      href={tab.link}
+      href={tabHref(tab.link, $page.url.pathname)}
       class="floating-link"
     >
       {tab.name}

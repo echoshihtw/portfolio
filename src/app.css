@@ -245,3 +245,66 @@ body {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+/* Blog post body: mdsvex compiles each post's markdown into its own Svelte
+   component (see src/routes/blog/[slug]/+page.svelte), rendered via
+   <svelte:component> — its output doesn't inherit that page's scoped
+   styles, so the prose typography lives here globally instead. */
+.blog-prose h2 {
+  font-size: 1.15rem;
+  margin: 1.8rem 0 0.7rem;
+}
+
+.blog-prose h2:first-child {
+  margin-top: 0;
+}
+
+.blog-prose p {
+  margin: 0 0 1rem;
+  line-height: 1.75;
+  color: var(--text-color);
+}
+
+.blog-prose p:last-child {
+  margin-bottom: 0;
+}
+
+.blog-prose ul,
+.blog-prose ol {
+  list-style: revert;
+  margin: 0 0 1.8rem;
+  padding-left: 1.3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.blog-prose li {
+  line-height: 1.65;
+  color: var(--text-color);
+}
+
+.blog-prose li::marker {
+  color: var(--color-accent);
+}
+
+.blog-prose pre {
+  margin: 0 0 1.8rem;
+  padding: 1.1rem 1.2rem;
+  border: 1px solid var(--section-border);
+  border-radius: 8px;
+  background: var(--surface-bg);
+  overflow-x: auto;
+  font-size: 0.78rem;
+  line-height: 1.6;
+}
+
+.blog-prose pre code {
+  font-family: "JetBrains Mono", monospace;
+  color: var(--text-color);
+}
+
+.blog-prose code {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.9em;
+}
