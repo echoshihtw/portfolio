@@ -17,6 +17,7 @@
 
 <Seo
   title={data.meta.title}
+  seoTitle={data.meta.seoTitle}
   description={data.meta.excerpt}
   path="/blog/{data.slug}"
   type="article"

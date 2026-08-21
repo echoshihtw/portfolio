@@ -9,6 +9,13 @@
   } from "$lib/seo";
 
   export let title: string;
+  /**
+   * Overrides only the <title> tag. Search results want the literal terms
+   * someone would type — an error message, a tool name. Social cards and
+   * the schema headline keep `title`, which can stay evocative, because a
+   * share is read by a human deciding whether it looks worth clicking.
+   */
+  export let seoTitle: string | undefined = undefined;
   export let description: string;
   /** Site-root-relative path, e.g. "/blog/some-post". */
   export let path: string;
@@ -19,7 +26,13 @@
   export let image: string = DEFAULT_OG_IMAGE;
 
   $: url = absoluteUrl(path);
-  $: fullTitle = title.includes(SITE_NAME) ? title : `${title} — ${SITE_NAME}`;
+  $: displayTitle = seoTitle ?? title;
+  $: fullTitle = displayTitle.includes(SITE_NAME)
+    ? displayTitle
+    : `${displayTitle} — ${SITE_NAME}`;
+  $: socialTitle = title.includes(SITE_NAME)
+    ? title
+    : `${title} — ${SITE_NAME}`;
 
   // A post describes itself as a BlogPosting with an author; everything
   // else declares the Person/WebSite the pages belong to. Both carry the
@@ -58,7 +71,7 @@
   />
   <meta
     property="og:title"
-    content={fullTitle}
+    content={socialTitle}
   />
   <meta
     property="og:description"
@@ -75,7 +88,7 @@
 
   <meta
     name="twitter:title"
-    content={fullTitle}
+    content={socialTitle}
   />
   <meta
     name="twitter:description"

@@ -1,5 +1,6 @@
 ---
 title: Don't fight the tool's defaults
+seoTitle: "release-please: Cannot read properties of undefined (reading 'replace')"
 date: 2026-07-08
 excerpt: "A flag that looked cosmetic — include-component-in-tag: false — was actually emptying a value release-please's node logic depends on internally. No amount of correct configuration fixed that. The fix was a release type whose internal model never needed the value to begin with."
 order: 1
