@@ -1,12 +1,27 @@
 // Writing lives here as data, same pattern as projects/skills config —
 // not a markdown pipeline, since one or two real posts don't justify one.
-// A post is sections: an optional heading, then either paragraphs or one
-// code block (not both — a section is prose or an artifact, not a mix).
+// A post is sections: an optional heading, then exactly one of paragraphs,
+// a code block, or a bullet list — a section is prose, an artifact, or a
+// scannable summary, not a mix.
 // Add a post here and it's live at /blog/<slug> with no other wiring.
 
 export type BlogSection =
-  | { heading?: string; paragraphs: string[]; code?: undefined }
-  | { heading?: string; code: string; paragraphs?: undefined };
+  | {
+      heading?: string;
+      paragraphs: string[];
+      code?: undefined;
+      list?: undefined;
+    }
+  | { heading?: string; code: string; paragraphs?: undefined; list?: undefined }
+  | {
+      heading?: string;
+      list: string[];
+      // Numbered when the items are a sequence or a ranked set of
+      // takeaways; bulleted (default) when order doesn't carry meaning.
+      ordered?: boolean;
+      paragraphs?: undefined;
+      code?: undefined;
+    };
 export type BlogPost = {
   slug: string;
   title: string;
@@ -24,7 +39,7 @@ export const blogPosts: BlogPost[] = [
     title: "Don't fight the tool's defaults",
     date: "2026-07-08",
     excerpt:
-      "release-please kept crashing on a preference I hadn't noticed I'd made. Nine fixes in, the answer wasn't in the docs I was rereading — it was in a sibling repo that had already solved this and never fought the tool to begin with.",
+      "A flag that looked cosmetic — include-component-in-tag: false — was actually emptying a value release-please's node logic depends on internally. No amount of correct configuration fixed that. The fix was a release type whose internal model never needed the value to begin with.",
     sections: [
       {
         paragraphs: [
@@ -38,27 +53,37 @@ export const blogPosts: BlogPost[] = [
         ],
       },
       {
-        heading: "The fix was already running, in a repo I hadn't looked at",
+        heading: "The flag that wasn't a flag",
         paragraphs: [
-          "A sibling repository had release-please working the entire time I was debugging this one — no elaborate config, just a release type declared inline. It used python, which (like simple) never derives a component name to begin with, so the crash I'd spent a day chasing simply had no code path to occur on.",
-          'That comparison did more than an hour of documentation would have. Not because the docs were wrong, but because a working example answers a different question than a reference page does: not "what does this option mean" but "what does this actually look like when nobody is fighting it." I\'d been reading about the tool. I hadn\'t looked at what the tool wanted to do by default until I had one right next to me already doing it.',
+          "include-component-in-tag: false reads like a display option — don't show the component in the tag, keep everything else the same. It isn't. node derives its component from package.json's name and uses that value internally, not just when rendering a tag. Turning the display off doesn't hide the value. It empties it, and node's release logic has no path that handles an empty one — hence Cannot read properties of undefined (reading 'replace').",
+          "python and simple aren't node with a different default. They never derive a component at all — there's no internal value to empty, because the concept doesn't exist in their release logic. That's not a configuration difference between the release types. It's an architectural one, and no flag on node crosses it.",
         ],
       },
       {
-        heading: "The other half: read the schema, not your memory of it",
+        heading: "The fix was already running, in a repo I hadn't looked at",
         paragraphs: [
-          "Fixing it meant switching from a bare tag to a component-prefixed one — lockerbie-website@0.1.0 instead of v0.1.0 — and getting there took reading release-please's actual JSON schema instead of continuing to guess at config shape from half-remembered examples. Two of the nine failures were exactly that: a parameter that only applies under a different setting, a nested block whose required shape I'd assumed rather than checked.",
-          "The final config is small:",
+          "A sibling repository had release-please working the entire time I was debugging this one — no elaborate config, just python declared inline. Once I understood why that worked, the fix stopped being a config problem. Bare tags were never a node setting away; they needed a release type that had never needed a component to begin with.",
+          'A working example earns its keep here in a way documentation can\'t: a reference page answers "what does this option do," but only a running instance answers "what does this actually look like when nothing is fighting it." I had been reading about the tool for a day. I understood it in the time it took to read one file that already worked.',
+        ],
+      },
+      {
+        heading: "Read the schema, not your memory of it",
+        paragraphs: [
+          "The rest of the fix — switching to a component-prefixed tag, lockerbie-website@0.1.0 instead of v0.1.0 — came from release-please's actual JSON schema, not from half-remembered examples of what the config should look like. The final version is small:",
         ],
       },
       {
         code: '{\n  "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json",\n  "bootstrap-sha": "<main HEAD at reset>",\n  "commit-search-depth": 500,\n  "packages": {\n    ".": {\n      "release-type": "node",\n      "component": "lockerbie-website",\n      "tag-separator": "@",\n      "include-v-in-tag": false\n    }\n  }\n}',
       },
       {
-        heading: "What generalizes",
-        paragraphs: [
-          "A tool's default isn't an opinion to negotiate with — it's the path every maintainer, every test, and every edge case in the codebase has already been run against. Deviating from it is allowed, but it isn't free, and the cost doesn't show up as a warning. It shows up nine fixes later as an undefined property crash that reads like a bug in the tool.",
-          "The way out of that wasn't trying harder on the same approach. It was two separate moves: find something that already works and look at what it does differently from what you're doing, and when you're still stuck, read the schema instead of your memory of the schema. Neither is exotic. Both were faster than the day I spent doing neither.",
+        heading: "What I actually learned",
+        ordered: true,
+        list: [
+          "A flag can look cosmetic while quietly depending on load-bearing internal state. include-component-in-tag reads as formatting; what it actually controls is whether a value node's own logic assumes exists.",
+          'Different implementations of a "similar" feature can have different internal models, not just different defaults — node derives a component, python/simple never do. That\'s architecture, not configuration.',
+          "No amount of correct configuration fixes an architectural mismatch. Once the crash traced back to node's internal assumption, the fix was picking a release type without that assumption, not tuning node further.",
+          "A known-working example answers a different question than documentation does — not what an option means, but what the tool looks like when nobody is fighting it.",
+          "When each fix reveals a new failure with no change in kind, that's a signal the current approach is structurally wrong, not almost right.",
         ],
       },
     ],

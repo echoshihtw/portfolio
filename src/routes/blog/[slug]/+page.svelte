@@ -42,6 +42,20 @@
         {/if}
         {#if section.code}
           <pre class="blog-code mono"><code>{section.code}</code></pre>
+        {:else if section.list}
+          {#if section.ordered}
+            <ol class="blog-list">
+              {#each section.list as item}
+                <li>{item}</li>
+              {/each}
+            </ol>
+          {:else}
+            <ul class="blog-list">
+              {#each section.list as item}
+                <li>{item}</li>
+              {/each}
+            </ul>
+          {/if}
         {:else}
           {#each section.paragraphs as paragraph}
             <p>{paragraph}</p>
@@ -103,6 +117,26 @@
 
   .blog-section p:last-child {
     margin-bottom: 0;
+  }
+
+  .blog-list {
+    /* Tailwind's preflight resets list-style: none on ul/ol globally —
+       bring back real markers (bullets or numbers) here. */
+    list-style: revert;
+    margin: 0;
+    padding-left: 1.3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+
+  .blog-list li {
+    line-height: 1.65;
+    color: var(--text-color);
+  }
+
+  .blog-list li::marker {
+    color: var(--color-accent);
   }
 
   .blog-code {
