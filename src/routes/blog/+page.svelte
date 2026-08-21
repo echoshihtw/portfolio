@@ -1,5 +1,6 @@
 <script lang="ts">
   import { base } from "$app/paths";
+  import Seo from "$lib/components/Seo.svelte";
   import type { PageData } from "./$types";
 
   export let data: PageData;
@@ -14,13 +15,11 @@
   }
 </script>
 
-<svelte:head>
-  <title>Writing — Echo Shih</title>
-  <meta
-    name="description"
-    content="Short, specific technical posts — real bugs, real fixes, what generalizes."
-  />
-</svelte:head>
+<Seo
+  title="Writing"
+  description="Short, specific technical posts — real bugs, real fixes, what generalizes."
+  path="/blog"
+/>
 
 <section class="section_padding blog-index">
   <div class="blog-index-wrap">

@@ -1,5 +1,6 @@
 <script lang="ts">
   import { base } from "$app/paths";
+  import Seo from "$lib/components/Seo.svelte";
   import type { PageData } from "./$types";
 
   export let data: PageData;
@@ -14,13 +15,13 @@
   }
 </script>
 
-<svelte:head>
-  <title>{data.meta.title} — Echo Shih</title>
-  <meta
-    name="description"
-    content={data.meta.excerpt}
-  />
-</svelte:head>
+<Seo
+  title={data.meta.title}
+  description={data.meta.excerpt}
+  path="/blog/{data.slug}"
+  type="article"
+  publishedTime={data.meta.date}
+/>
 
 <article class="section_padding blog-post">
   <div class="blog-post-wrap">

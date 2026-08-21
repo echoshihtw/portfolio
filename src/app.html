@@ -73,36 +73,14 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <title>Echo Shih — Product Engineer</title>
-    <meta
-      name="description"
-      content="Product engineer in Taipei. I build systems of record — project platforms, applicant tracking, client histories — in React, TypeScript, FastAPI and Flutter."
-    />
-    <link
-      rel="canonical"
-      href="https://echoshih.com/"
-    />
-
-    <meta
-      property="og:type"
-      content="website"
-    />
-    <meta
-      property="og:url"
-      content="https://echoshih.com/"
-    />
-    <meta
-      property="og:title"
-      content="Echo Shih — Product Engineer"
-    />
-    <meta
-      property="og:description"
-      content="From ambiguous product problems to shipped software."
-    />
-    <meta
-      property="og:image"
-      content="https://echoshih.com/og-image.png"
-    />
+    <!-- Page-specific SEO (title, description, canonical, og:*) is NOT set
+         here. This template renders on every route, so anything absolute
+         put here follows every page around. It previously shipped a
+         canonical pointing at the homepage on every blog post — telling
+         search engines each post was a duplicate and to index the homepage
+         instead — plus a duplicate page title that won, because this block
+         renders before %sveltekit.head%. Each route now owns its own tags
+         via the Seo component; see src/lib/seo.ts. -->
     <meta
       name="twitter:card"
       content="summary_large_image"
