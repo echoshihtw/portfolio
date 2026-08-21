@@ -14,8 +14,11 @@
   function goTop(event: MouseEvent) {
     if ($page.url.pathname !== (base || "/")) return;
     event.preventDefault();
-    document.body.scrollIntoView();
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }
+
+  // Route-level, so a post page marks Blog as current too.
+  $: isBlog = $page.url.pathname.startsWith(`${base}/blog`);
 </script>
 
 <!-- Not sticky: scrolls away with the page. The floating pill (driven by an
@@ -34,47 +37,52 @@
     >
       Echo Shih
     </a>
-    <!-- One nav, one font, at every width — was a sans-font desktop-only row
-         plus a separate mono mobile-only row; two treatments for the same
-         links. Theme toggle grouped in as the last action here rather than
-         floating alone opposite the logo. -->
-    <nav
-      aria-label="Section navigation"
-      class="mobile-tabs"
-    >
-      {#each tabs as tab}
+    <!-- One nav, one font, at every width.
+
+         The toggle sits beside the link strip, not inside it. The strip
+         scrolls horizontally on narrow phones, so anything in it scrolls out
+         of reach along with it — and an auto-margined last child pushes past
+         the container entirely, which put the toggle off-screen and gave the
+         whole document a horizontal scroll at any width below 414px. -->
+    <div class="nav-row">
+      <nav
+        aria-label="Section navigation"
+        class="mobile-tabs"
+      >
+        {#each tabs as tab}
+          <a
+            href={tabHref(tab.link, $page.url.pathname)}
+            class="mobile-tab-link"
+          >
+            {tab.name}
+          </a>
+        {/each}
         <a
-          href={tabHref(tab.link, $page.url.pathname)}
+          href="{base}/blog"
           class="mobile-tab-link"
-          aria-label="Go to {tab.name} section"
+          aria-current={isBlog ? "page" : undefined}
         >
-          {tab.name}
+          Blog
         </a>
-      {/each}
-      <a
-        href="{base}/blog"
-        class="mobile-tab-link"
-      >
-        Blog
-      </a>
-      <a
-        href="{base}/{heroConfig.resume}"
-        download={heroConfig.resumeAs}
-        class="mobile-tab-link"
-      >
-        Résumé
-      </a>
-      <div class={scrollPosition > 60 ? "drop-shadow-lg" : undefined}>
+        <a
+          href="{base}/{heroConfig.resume}"
+          download={heroConfig.resumeAs}
+          class="mobile-tab-link"
+        >
+          Résumé
+        </a>
+      </nav>
+
+      <div class="nav-toggle {scrollPosition > 60 ? 'drop-shadow-lg' : ''}">
         <ThemeSwitch id="theme-toggle" />
       </div>
-    </nav>
+    </div>
   </div>
 </header>
 
 <style>
-  /* One hover language across the site: accent colour on text, accent border on
-     surfaces. The nav used a strikethrough and Tailwind greys, which belonged to
-     neither. */
+  /* One hover language across the site: accent colour on text, accent border
+     on surfaces. */
   .site-name {
     color: var(--text-color);
     text-decoration: none;
@@ -91,7 +99,8 @@
     border-radius: 2px;
   }
 
-  /* Keeps the visual weight the old <h1> had, without the heading semantics. */
+  /* Carries the visual weight of a heading without the heading semantics —
+     the hero statement is the page's <h1>. */
   .site-name {
     font-family: "JetBrains Mono", monospace;
     font-size: 1.15em;
@@ -107,20 +116,30 @@
     }
   }
 
-  .mobile-tabs {
+  .nav-row {
     display: flex;
     align-items: center;
     gap: 1rem;
     margin-top: 0.6rem;
     padding-top: 0.6rem;
     border-top: 1px solid var(--section-border);
+  }
+
+  .mobile-tabs {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    /* min-width: 0 lets the strip shrink below its content width so it, and
+       not the page, is what scrolls. */
+    flex: 1 1 auto;
+    min-width: 0;
     overflow-x: auto;
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
 
-  .mobile-tabs > :last-child {
-    margin-left: auto;
+  .nav-toggle {
+    flex: none;
   }
 
   .mobile-tabs::-webkit-scrollbar {
@@ -142,6 +161,10 @@
   .mobile-tab-link:hover,
   .mobile-tab-link:focus-visible {
     color: var(--color-accent);
+  }
+
+  .mobile-tab-link[aria-current="page"] {
+    color: var(--text-color);
   }
 
   @media (prefers-reduced-motion: reduce) {

@@ -3,6 +3,7 @@
   import { base } from "$app/paths";
   import { page } from "$app/stores";
   import { tabs, tabHref } from "$lib/menuTabs";
+  import { heroConfig } from "../../../content/portfolio.config";
   import {
     calendlyUrl,
     email,
@@ -94,7 +95,22 @@
         {#each tabs as tab}
           <a href={tabHref(tab.link, $page.url.pathname)}>{tab.name}</a>
         {/each}
-        <a href="{base}/blog">Blog</a>
+        <a
+          href="{base}/blog"
+          aria-current={$page.url.pathname.startsWith(`${base}/blog`)
+            ? "page"
+            : undefined}
+        >
+          Blog
+        </a>
+        <!-- Résumé was in the header only — the one surface that scrolls
+             away — so it left the page along with it. -->
+        <a
+          href="{base}/{heroConfig.resume}"
+          download={heroConfig.resumeAs}
+        >
+          Résumé
+        </a>
       </nav>
 
       <section class="footer-socials">
@@ -212,7 +228,8 @@
     transition: color 160ms ease;
   }
 
-  .footer-nav a:hover {
+  .footer-nav a:hover,
+  .footer-nav a[aria-current="page"] {
     color: var(--color-accent);
   }
 

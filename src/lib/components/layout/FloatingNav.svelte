@@ -3,27 +3,54 @@
   import Icon from "@iconify/svelte";
   import ThemeSwitch from "$lib/components/ThemeSwitch.svelte";
   import { page } from "$app/stores";
+  import { base } from "$app/paths";
+  import { heroConfig } from "../../../content/portfolio.config";
 
   export let isVisible = false;
 
   function goTop() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
+
+  $: isBlog = $page.url.pathname.startsWith(`${base}/blog`);
 </script>
 
+<!-- inert while hidden: this pill is only faded out, not removed, so without
+     it every control inside stays in the tab order and keyboard focus
+     disappears into an invisible nav. -->
 <nav
   aria-label="Floating navigation"
+  inert={!isVisible}
   class={"floating-nav " +
     (isVisible ? "floating-nav-visible" : "floating-nav-hidden")}
 >
-  {#each tabs as tab}
+  <!-- Only the links scroll. The two icons are the controls you always need
+       within reach, so they sit outside the strip — inside it they scroll
+       out of the pill on any phone narrower than 480px. -->
+  <div class="floating-links">
+    {#each tabs as tab}
+      <a
+        href={tabHref(tab.link, $page.url.pathname)}
+        class="floating-link"
+      >
+        {tab.name}
+      </a>
+    {/each}
     <a
-      href={tabHref(tab.link, $page.url.pathname)}
+      href="{base}/blog"
+      class="floating-link"
+      aria-current={isBlog ? "page" : undefined}
+    >
+      Blog
+    </a>
+    <a
+      href="{base}/{heroConfig.resume}"
+      download={heroConfig.resumeAs}
       class="floating-link"
     >
-      {tab.name}
+      Résumé
     </a>
-  {/each}
+  </div>
   <button
     type="button"
     aria-label="Go to top"
@@ -62,8 +89,7 @@
     max-width: calc(100% - 1.2rem);
     justify-content: flex-start;
     flex-wrap: nowrap;
-    overflow-x: auto;
-    scrollbar-width: none;
+    overflow: hidden;
     border-radius: 999px;
     /* Liquid glass: strong blur + saturation boost so content behind actually
        reads through, a translucent tint rather than a flat surface, and an
@@ -71,9 +97,9 @@
     backdrop-filter: blur(20px) saturate(1.6);
     -webkit-backdrop-filter: blur(20px) saturate(1.6);
     background: color-mix(in srgb, var(--surface-bg) 40%, transparent);
-    /* A hairline border sat right up against the link text inside — swapped
-       for a soft outer glow instead, so the edge reads as light diffusing
-       off the glass rather than a hard line hugging the content. */
+    /* A soft outer glow rather than a hairline border, so the edge reads as
+       light diffusing off the glass rather than a hard line hugging the
+       link text inside. */
     box-shadow:
       0 10px 28px -8px rgba(0, 0, 0, 0.18),
       inset 0 1px 0 color-mix(in srgb, white 35%, transparent),
@@ -125,6 +151,22 @@
     transform: translateX(-50%) translateY(-16px);
   }
 
+  .floating-links {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    /* min-width: 0 lets the strip shrink below its content width, so the
+       links are what scroll rather than the pill growing past the screen. */
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .floating-links::-webkit-scrollbar {
+    display: none;
+  }
+
   .floating-link {
     font-family: "JetBrains Mono", monospace;
     font-size: 0.72rem;
@@ -148,13 +190,21 @@
       text-shadow 180ms ease;
   }
 
-  /* Underline instead of a boxed outline — it was hugging the text tightly
-     at only 2px offset. The glow on focus keeps a visible, accessible cue
-     for keyboard users without the hard rectangle. Also overrides
-     app.css's shared button-hover rule, whose `0 0 0 1px accent` box-shadow
-     ring reads as a border even though it isn't one — not wanted here since
-     these are plain-text links, not chip buttons. */
+  /* Underline rather than a boxed outline: the glow on focus keeps a
+     visible, accessible cue for keyboard users without a hard rectangle.
+     Also overrides app.css's shared button-hover rule, whose
+     `0 0 0 1px accent` box-shadow ring reads as a border even though it
+     isn't one — not wanted here, since these are plain-text links rather
+     than chip buttons. */
   .floating-link:hover,
+  .floating-link:focus-visible {
+    color: var(--text-color);
+  }
+
+  .floating-link[aria-current="page"] {
+    color: var(--text-color);
+  }
+
   .floating-link:focus-visible {
     color: var(--color-accent);
     text-decoration-color: var(--color-accent);
@@ -186,7 +236,6 @@
     place-items: center;
     min-width: 1.9rem;
     flex: none;
-    margin-left: auto;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -197,8 +246,4 @@
 
   /* No width breakpoint: the bar is the same object on a phone and on a
      desktop, and it already sizes to its contents. */
-
-  .floating-nav::-webkit-scrollbar {
-    display: none;
-  }
 </style>
