@@ -52,14 +52,20 @@ export const heroConfig: {
   ],
 
   // Ownership leads, the shape of the work follows, stack last. The
-  // system-of-record sentence is the same on both this and the CV, because
-  // it answers "you have no experience in our domain" and that question
-  // gets asked in every screen. Stack mention matches Clio (the featured,
+  // systems-of-record list is the same here and on the CV, because it
+  // answers "you have no experience in our domain" and that question gets
+  // asked in every screen. Stack mention matches Clio (the featured,
   // in-production project the proof line is about) rather than unrelated
   // client work, since it's the one detail here most likely to specifically
   // land with a Supabase-caliber hiring manager.
+  //
+  // The three verbs are each evidenced elsewhere on the page, which is the
+  // only reason they earn a line: securing is Clio's RLS and the BFF
+  // boundary; keeping it running is Clio in daily use since May 2025;
+  // writing down what broke is the blog, and the admitted mistake in the
+  // proof line directly below.
   support:
-    "Software Engineer building systems of record — project platforms, applicant tracking, client histories — and keeping them running after ship. React, TypeScript, Supabase and Postgres.",
+    "Software Engineer building systems of record — project platforms, applicant tracking, client histories. I secure them, keep them running after ship, and write down what broke. React, TypeScript, Supabase and Postgres.",
 
   // Two sentences, not a stat block: three figures in columns is a SaaS
   // landing-page pattern that invites comparison, and "entered by hand"

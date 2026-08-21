@@ -17,7 +17,7 @@
 
 # Summary
 
-Product engineer who designs the system, not just the feature — then builds it, ships it, and keeps it running. Mostly systems of record: project platforms, applicant tracking, client histories. **React**, **TypeScript** and **Node.js**, with **Python** and **FastAPI** behind them.
+Software engineer who designs the system, not just the feature — then builds it, ships it, and keeps it running. Mostly systems of record: project platforms, applicant tracking, client histories. **React**, **TypeScript** and **Node.js**, with **Python** and **FastAPI** behind them.
 
 # Experience
 
