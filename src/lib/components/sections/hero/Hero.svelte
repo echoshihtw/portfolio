@@ -22,14 +22,32 @@
   let revealCount = totalChars;
   let isTyping = false;
 
-  $: visibleParts = heroConfig.headline.map((part, i) => ({
-    text: part.text.slice(
+  // Every part renders its full text; the not-yet-typed tail is hidden with
+  // visibility rather than removed. Slicing the DOM text made the headline
+  // re-wrap as it grew — "end to end" started on line one and jumped to line
+  // two mid-word — and the h1 grew a line at a time, shoving the whole page
+  // down twice during the 900ms. Laying out the final text from frame one
+  // fixes the wrap and the shift together.
+  $: visibleParts = heroConfig.headline.map((part, i) => {
+    const shown = Math.max(
       0,
-      Math.max(0, Math.min(part.text.length, revealCount - partOffsets[i]))
-    ),
-    accent: part.accent,
-    fullText: part.text,
-  }));
+      Math.min(part.text.length, revealCount - partOffsets[i])
+    );
+    return {
+      text: part.text.slice(0, shown),
+      rest: part.text.slice(shown),
+      accent: part.accent,
+      fullText: part.text,
+    };
+  });
+
+  // The caret belongs after the last typed character, not after the ghost
+  // text, so it rides along with the part currently being typed.
+  $: caretIndex = heroConfig.headline.findIndex(
+    (part, i) =>
+      revealCount >= partOffsets[i] &&
+      revealCount <= partOffsets[i] + part.text.length
+  );
 
   onMount(() => {
     const reduceMotion = window.matchMedia(
@@ -77,17 +95,8 @@
     </div>
 
     <h1 class="hero-headline">
-      {#each visibleParts as part}<span
-          class:accent={part.accent}
-          data-text={part.accent ? part.fullText : undefined}
-        >
-          {part.text}
-        </span>{/each}
-      <span
-        class="type-caret"
-        class:typing={isTyping}
-        aria-hidden="true"
-      ></span>
+      <!-- prettier-ignore -->
+      {#each visibleParts as part, i}<span class:accent={part.accent} data-text={part.accent ? part.fullText : undefined}>{part.text}{#if isTyping && i === caretIndex}<span class="type-caret typing" aria-hidden="true"></span>{/if}<span class="type-ghost" aria-hidden="true">{part.rest}</span></span>{/each}
     </h1>
 
     <p class="hero-support">{heroConfig.support}</p>
@@ -288,13 +297,22 @@
     white-space: nowrap;
   }
 
+  /* The tail that hasn't been typed yet: present for layout, invisible to
+     eyes and to screen readers. This is what keeps the headline's wrap and
+     height fixed from the first frame. */
+  .type-ghost {
+    visibility: hidden;
+  }
+
   /* Boot-up cursor: only rendered mid-type (see isTyping in script), in
-     either theme — invisible/inert once typing finishes. */
+     either theme — invisible/inert once typing finishes. Absolutely sized so
+     it takes no width in the flow; with the ghost text holding the line, a
+     caret that occupied space would nudge the wrap point as it moved. */
   .type-caret {
     display: inline-block;
     width: 0.5ch;
     height: 0.85em;
-    margin-left: 0.05em;
+    margin: 0 -0.5ch 0 0.05em;
     background: var(--color-accent);
     opacity: 0;
     vertical-align: -0.1em;
