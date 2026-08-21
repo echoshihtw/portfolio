@@ -35,12 +35,13 @@ deliberate.
 
 ```
 resume.md → npm run build-resume → src/lib/resumeData.ts   experience only
-                                 → static/resume.pdf       what the site serves
+                                 → static/<name>.pdf       what the site serves
 ```
 
 Generated, never hand-edited: `src/lib/resumeData.ts`, `src/lib/generated/*`,
-`output/*`, `static/resume.pdf`. The last two aren't committed — the deploy
-builds them.
+`output/*`, and the résumé PDF in `static/`. The last two aren't committed — the
+deploy builds them. The PDF is named after me so the name survives a save from
+the browser's viewer; `/resume.pdf` redirects to it.
 
 Posts can also be edited through Sveltia CMS at `/admin`, which commits
 markdown straight to this repo. Sign in with a GitHub access token; there is
@@ -83,6 +84,18 @@ says which one:
   fetched per-visitor from two icon APIs, and an unused Font Awesome stylesheet
   came from a third
 - no `<svg>` may render empty — two icon names had 404'd silently for months
+
+### Known, not yet fixed: the font-swap shift
+
+With a cold font cache the headline renders in the fallback font first, and at
+320px it reflows by a **whole line** (44.5px measured) when JetBrains Mono
+swaps in. That is a real layout shift on a narrow screen, separate from the
+typing animation. The hero spec waits on `document.fonts.ready` and reloads
+before sampling so it measures the typing rather than this — otherwise it
+would fail for the wrong reason and teach us to ignore it.
+
+Fixing it means `size-adjust` on a fallback `@font-face`, or preloading the
+font, or accepting it. Not done yet.
 
 ### The gap this suite does not cover
 

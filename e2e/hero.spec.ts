@@ -15,36 +15,47 @@ test.describe("hero headline", () => {
       page,
     }) => {
       await page.setViewportSize({ width, height: 900 });
-      // Let the webfonts land, then reload so the animation restarts against
-      // settled metrics. Without this the test measures a font swap rather
-      // than the typing: JetBrains Mono arrives with `display=swap` partway
-      // through the 900ms and reflows the headline on its own.
+      // Fonts first, then reload so the animation restarts against settled
+      // metrics. This isolates the typing from a separate, real problem:
+      // with a cold cache the headline renders in the fallback font and
+      // reflows by a whole line at 320px when JetBrains Mono swaps in
+      // (measured: 44.5px). That is a font-loading shift, not a typing one,
+      // and it wants its own fix — see the note in the README.
       await page.goto("/");
       await page.evaluate(() => document.fonts.ready);
       await page.reload();
 
-      const samples = await page.evaluate(async () => {
+      const { spread, lines, lineHeight } = await page.evaluate(async () => {
         const h1 = document.querySelector(".hero-headline")!;
         const lineHeight = parseFloat(getComputedStyle(h1).lineHeight);
-        const seen: { height: number; accentLine: number }[] = [];
+        const heights: number[] = [];
+        const accentLines = new Set<number>();
         for (let i = 0; i < 12; i++) {
           const box = h1.getBoundingClientRect();
           const accent = h1.querySelector(".accent")!.getBoundingClientRect();
-          seen.push({
-            height: Math.round(box.height),
-            accentLine: Math.round((accent.top - box.top) / lineHeight),
-          });
+          heights.push(box.height);
+          accentLines.add(Math.round((accent.top - box.top) / lineHeight));
           await new Promise((r) =>
             requestAnimationFrame(() => setTimeout(r, 90))
           );
         }
-        return seen;
+        return {
+          spread: Math.max(...heights) - Math.min(...heights),
+          lines: [...accentLines],
+          lineHeight,
+        };
       });
 
-      const heights = new Set(samples.map((s) => s.height));
-      const lines = new Set(samples.map((s) => s.accentLine));
-      expect(heights.size, "h1 height changed mid-animation").toBe(1);
-      expect([...lines], '"end to end" left the second line').toEqual([1]);
+      // Measured against half a line rather than exact equality on purpose.
+      // The bug was the headline gaining and losing whole lines — 45 → 89 →
+      // 134px at 390px. A webfont swapping in mid-animation moves the height
+      // by a pixel or two, which is a real layout shift but a different one,
+      // and pinning this to an exact value made the test flaky under load
+      // rather than making it catch more.
+      expect(spread, "h1 gained or lost a line mid-animation").toBeLessThan(
+        lineHeight / 2
+      );
+      expect(lines, '"end to end" left the second line').toEqual([1]);
     });
   }
 
