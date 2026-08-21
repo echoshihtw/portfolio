@@ -1,17 +1,31 @@
 import { error } from "@sveltejs/kit";
-import { blogPosts } from "../../../content/blog.config";
 import type { PageLoad } from "./$types";
 
 export const prerender = true;
 
+const modules = import.meta.glob("/src/posts/*.md");
+
 export function entries() {
-  return blogPosts.map((post) => ({ slug: post.slug }));
+  return Object.keys(modules).map((path) => ({
+    slug: path.replace("/src/posts/", "").replace(".md", ""),
+  }));
 }
 
-export const load: PageLoad = ({ params }) => {
-  const post = blogPosts.find((p) => p.slug === params.slug);
-  if (!post) {
+export const load: PageLoad = async ({ params }) => {
+  const path = `/src/posts/${params.slug}.md`;
+  const importPost = modules[path];
+  if (!importPost) {
     throw error(404, "Post not found");
   }
-  return { post };
+
+  const post = (await importPost()) as {
+    default: unknown;
+    metadata: { title: string; date: string; excerpt: string };
+  };
+
+  return {
+    slug: params.slug,
+    content: post.default,
+    meta: post.metadata,
+  };
 };

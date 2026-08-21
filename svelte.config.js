@@ -1,12 +1,18 @@
 import adapter from "@sveltejs/adapter-static";
 import preprocess from "svelte-preprocess";
 import { vitePreprocess } from "@sveltejs/vite-plugin-svelte";
+import { mdsvex } from "mdsvex";
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
+  // .md added alongside .svelte so blog posts (src/posts/*.md) compile as
+  // real Svelte components, loaded dynamically by slug via
+  // import.meta.glob rather than hand-built TS objects.
+  extensions: [".svelte", ".md"],
   // Consult https://kit.svelte.dev/docs/integrations#preprocessors
   // for more information about preprocessors
   preprocess: [
+    mdsvex({ extensions: [".md"] }),
     preprocess({
       postcss: true,
     }),

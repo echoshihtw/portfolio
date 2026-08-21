@@ -3,7 +3,6 @@
   import type { PageData } from "./$types";
 
   export let data: PageData;
-  $: post = data.post;
 
   function formatDate(iso: string) {
     return new Date(iso).toLocaleDateString("en-US", {
@@ -16,10 +15,10 @@
 </script>
 
 <svelte:head>
-  <title>{post.title} — Echo Shih</title>
+  <title>{data.meta.title} — Echo Shih</title>
   <meta
     name="description"
-    content={post.excerpt}
+    content={data.meta.excerpt}
   />
 </svelte:head>
 
@@ -32,37 +31,12 @@
       ← Writing
     </a>
 
-    <p class="blog-post-date mono">{formatDate(post.date)}</p>
-    <h1>{post.title}</h1>
+    <p class="blog-post-date mono">{formatDate(data.meta.date)}</p>
+    <h1>{data.meta.title}</h1>
 
-    {#each post.sections as section}
-      <section class="blog-section">
-        {#if section.heading}
-          <h2>{section.heading}</h2>
-        {/if}
-        {#if section.code}
-          <pre class="blog-code mono"><code>{section.code}</code></pre>
-        {:else if section.list}
-          {#if section.ordered}
-            <ol class="blog-list">
-              {#each section.list as item}
-                <li>{item}</li>
-              {/each}
-            </ol>
-          {:else}
-            <ul class="blog-list">
-              {#each section.list as item}
-                <li>{item}</li>
-              {/each}
-            </ul>
-          {/if}
-        {:else}
-          {#each section.paragraphs as paragraph}
-            <p>{paragraph}</p>
-          {/each}
-        {/if}
-      </section>
-    {/each}
+    <div class="blog-prose">
+      <svelte:component this={data.content} />
+    </div>
   </div>
 </article>
 
@@ -98,56 +72,5 @@
     margin: 0 0 1.8rem;
     font-size: clamp(1.8rem, 4.2vw, 2.4rem);
     line-height: 1.2;
-  }
-
-  .blog-section {
-    margin-bottom: 1.8rem;
-  }
-
-  .blog-section h2 {
-    font-size: 1.15rem;
-    margin: 0 0 0.7rem;
-  }
-
-  .blog-section p {
-    margin: 0 0 1rem;
-    line-height: 1.75;
-    color: var(--text-color);
-  }
-
-  .blog-section p:last-child {
-    margin-bottom: 0;
-  }
-
-  .blog-list {
-    /* Tailwind's preflight resets list-style: none on ul/ol globally —
-       bring back real markers (bullets or numbers) here. */
-    list-style: revert;
-    margin: 0;
-    padding-left: 1.3rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.65rem;
-  }
-
-  .blog-list li {
-    line-height: 1.65;
-    color: var(--text-color);
-  }
-
-  .blog-list li::marker {
-    color: var(--color-accent);
-  }
-
-  .blog-code {
-    margin: 0;
-    padding: 1.1rem 1.2rem;
-    border: 1px solid var(--section-border);
-    border-radius: 8px;
-    background: var(--surface-bg);
-    overflow-x: auto;
-    font-size: 0.78rem;
-    line-height: 1.6;
-    color: var(--text-color);
   }
 </style>

@@ -1,6 +1,8 @@
 <script lang="ts">
   import { base } from "$app/paths";
-  import { blogPosts } from "../../content/blog.config";
+  import type { PageData } from "./$types";
+
+  export let data: PageData;
 
   function formatDate(iso: string) {
     return new Date(iso).toLocaleDateString("en-US", {
@@ -30,7 +32,7 @@
     </p>
 
     <ul class="blog-list">
-      {#each blogPosts as post}
+      {#each data.posts as post}
         <li>
           <a
             class="blog-list-link"
