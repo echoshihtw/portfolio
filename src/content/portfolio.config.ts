@@ -23,11 +23,10 @@ export const heroConfig: {
   // so it isn't stated twice three lines apart.
   kicker: "Chun-Yu (Echo) Shih · Taipei, Taiwan",
   // Taipei-based, so the first thing an overseas recruiter needs is the time
-  // zone and how far it stretches. Remote leads because remote is the ask;
-  // Taipei follows as the second option, not an equal one. Stated as fact
-  // rather than availability — "open to" in front of both reads as asking.
-  // The full offer lives in the closing section, where it invites.
-  remoteOpen: "UTC+8 · Remote from Taiwan · or on-site in Taipei",
+  // zone and how far it stretches. Remote only — naming an on-site option
+  // invited the wrong roles. Stated as fact rather than availability:
+  // "open to" in front of it reads as asking.
+  remoteOpen: "UTC+8 · Remote from Taiwan · APAC hours or async",
 
   // Spells out what "end to end" means, layer by layer — named techniques
   // pulled from real project work, not category nouns any portfolio could
@@ -80,11 +79,11 @@ export const heroConfig: {
   seeWorkHref: "#projects",
 };
 
-// The page used to end on the skills list, so a reader who was convinced had
-// to scroll back up to act. This is the close.
+// The page's one call to action, at the end — so a reader who is convinced
+// does not have to scroll back up to act.
 export const closingConfig = {
   heading: "Want to talk?",
-  body: "If you have a problem nobody has scoped yet, and you need one person to carry it from interface to deploy — that's the work. Remote from Taiwan, or in Taipei.",
+  body: "If you have a problem nobody has scoped yet, and you need one person to build it and keep it running — that's the work. Remote, from Taiwan.",
   email: "echoshihtw@gmail.com",
   resume: "resume.pdf",
   resumeAs: "Chun-Yu-Echo-Shih-Software-Engineer.pdf",
