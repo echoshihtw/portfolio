@@ -40,9 +40,13 @@
         {#if section.heading}
           <h2>{section.heading}</h2>
         {/if}
-        {#each section.paragraphs as paragraph}
-          <p>{paragraph}</p>
-        {/each}
+        {#if section.code}
+          <pre class="blog-code mono"><code>{section.code}</code></pre>
+        {:else}
+          {#each section.paragraphs as paragraph}
+            <p>{paragraph}</p>
+          {/each}
+        {/if}
       </section>
     {/each}
   </div>
@@ -99,5 +103,17 @@
 
   .blog-section p:last-child {
     margin-bottom: 0;
+  }
+
+  .blog-code {
+    margin: 0;
+    padding: 1.1rem 1.2rem;
+    border: 1px solid var(--section-border);
+    border-radius: 8px;
+    background: var(--surface-bg);
+    overflow-x: auto;
+    font-size: 0.78rem;
+    line-height: 1.6;
+    color: var(--text-color);
   }
 </style>
