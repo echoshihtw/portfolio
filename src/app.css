@@ -12,6 +12,12 @@
   --section-border: #ddd8c8;
   --section-border-strong: #14122a;
   --surface-bg: #fcfbf5;
+  /* Code blocks read as a recess, not a panel: darker than the page in
+     light mode, darker again in dark mode. --surface-bg was the obvious
+     candidate but it sits within 3/255 of --color-bg in both themes, so a
+     block painted with it — opaque or translucent — is invisible against
+     the prose. */
+  --code-bg: #edebe4;
   --timeline-rule: #d3cdb9;
   --project-card-bg: #171233;
   --project-card-border: #34305e;
@@ -30,6 +36,7 @@ html[data-theme="dark"] {
   --section-border: #3a3568;
   --section-border-strong: #ff5c88;
   --surface-bg: #1d1840;
+  --code-bg: #110d27;
   --timeline-rule: #3a3568;
   --project-card-bg: #1d1840;
   --project-card-border: #3a3568;
@@ -295,16 +302,15 @@ body {
   color: var(--color-accent);
 }
 
-/* Translucent rather than a solid panel, the same treatment as the floating
-   nav: the page tint reads through, so the block separates from the prose by
-   depth instead of by a hard slab of a different colour. The border still
-   does the edge, so the block is no less distinct. */
+/* Slightly translucent over --code-bg: the block reads as a recess in the
+   page rather than a panel on top of it, and the translucency keeps the edge
+   soft instead of a hard slab. */
 .blog-prose pre {
   margin: 0 0 1.8rem;
   padding: 1.1rem 1.2rem;
   border: 1px solid var(--section-border);
   border-radius: 8px;
-  background: color-mix(in srgb, var(--surface-bg) 55%, transparent);
+  background: color-mix(in srgb, var(--code-bg) 88%, transparent);
   overflow-x: auto;
   font-size: 0.78rem;
   line-height: 1.6;
