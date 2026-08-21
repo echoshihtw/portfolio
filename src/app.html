@@ -73,14 +73,19 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <!-- Page-specific SEO (title, description, canonical, og:*) is NOT set
-         here. This template renders on every route, so anything absolute
-         put here follows every page around. It previously shipped a
-         canonical pointing at the homepage on every blog post — telling
+    <!-- Page-specific SEO (title, description, canonical, og tags) is NOT
+         set here. This template renders on every route, so anything
+         absolute put here follows every page around: it previously shipped
+         a canonical pointing at the homepage on every blog post, telling
          search engines each post was a duplicate and to index the homepage
-         instead — plus a duplicate page title that won, because this block
-         renders before %sveltekit.head%. Each route now owns its own tags
-         via the Seo component; see src/lib/seo.ts. -->
+         instead, plus a duplicate page title that won because it rendered
+         first. Each route now owns its own tags via the Seo component; see
+         src/lib/seo.ts.
+
+         Note: do not write SvelteKit's head placeholder token in this
+         comment. It is substituted anywhere it appears, including inside
+         comments, which breaks the comment and leaks markup onto the
+         page. -->
     <meta
       name="twitter:card"
       content="summary_large_image"
