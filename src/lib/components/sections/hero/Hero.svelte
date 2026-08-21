@@ -494,11 +494,7 @@
     align-items: center;
     gap: 0.4rem;
     padding: 0.6rem 1.1rem;
-    border-radius: 4px;
     text-decoration: none;
-    font-family: "JetBrains Mono", monospace;
-    font-size: 0.76rem;
-    letter-spacing: 0.03em;
     transition:
       transform 160ms ease,
       border-color 160ms ease,

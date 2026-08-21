@@ -252,7 +252,6 @@
 
   .footer-social-link {
     border: 1px solid var(--section-border);
-    border-radius: 0.6rem;
     padding: 0.45rem;
     display: flex;
     align-items: center;
