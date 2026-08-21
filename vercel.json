@@ -4,6 +4,7 @@
   "outputDirectory": "build",
   "installCommand": "./scripts/vercel-install.sh",
   "buildCommand": "npm run build-resume && npm run build",
+  "cleanUrls": true,
   "headers": [
     {
       "source": "/resume.pdf",
