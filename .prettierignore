@@ -17,6 +17,10 @@ yarn.lock
 # it unformatted, so checking it here would fail on every rebuild.
 src/lib/resumeData.ts
 
+# Same reason: `npm run build-icons` emits this and prettier would reformat
+# it, so a regenerate would fail the check on a file nobody hand-edits.
+src/lib/generated/
+
 # Installed tooling and build outputs, not project source.
 _bmad
 output

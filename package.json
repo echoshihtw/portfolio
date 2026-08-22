@@ -12,7 +12,8 @@
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
     "lint": "prettier --check . && eslint .",
     "format": "prettier --write .",
-    "build-icons": "tsx scripts/buildIcons.ts"
+    "build-icons": "tsx scripts/buildIcons.ts",
+    "test:e2e": "playwright test"
   },
   "engines": {
     "node": ">=20"
@@ -22,6 +23,7 @@
     "@iconify-json/ri": "^1.2.10",
     "@iconify-json/simple-icons": "^1.2.93",
     "@iconify/svelte": "^3.1.4",
+    "@playwright/test": "^1.62.1",
     "@sveltejs/adapter-static": "^3.0.10",
     "@sveltejs/kit": "^2.0.4",
     "@sveltejs/vite-plugin-svelte": "^3.0.0",
@@ -35,6 +37,7 @@
     "postcss": "^8.4.38",
     "prettier": "^3.1.0",
     "prettier-plugin-svelte": "^3.1.2",
+    "sirv-cli": "^3.0.1",
     "svelte": "^4.2.7",
     "svelte-check": "^3.6.0",
     "svelte-preprocess": "^5.1.3",

@@ -305,17 +305,36 @@
   }
 
   /* Boot-up cursor: only rendered mid-type (see isTyping in script), in
-     either theme — invisible/inert once typing finishes. Absolutely sized so
-     it takes no width in the flow; with the ghost text holding the line, a
-     caret that occupied space would nudge the wrap point as it moved. */
+     either theme — invisible/inert once typing finishes.
+
+     The bar is drawn by an absolutely-positioned ::after, so the caret
+     contributes exactly nothing to the line's width. It used to be an
+     inline-block 0.5ch wide with a negative right margin, which nets to zero
+     but is still a box the line has to fit — and .accent is white-space:
+     nowrap, so at 320px, with "end to end" fully typed and the caret sitting
+     at its end, that box tipped the span past the wrap point and the headline
+     jumped to three lines for a single frame before the caret disappeared.
+
+     Caught by the browser tests: a spread of exactly 44.5px, one line, at
+     320px only. The ghost text holds the layout so the wrap cannot move; a
+     caret with any width at all undoes that. */
   .type-caret {
     display: inline-block;
-    width: 0.5ch;
+    position: relative;
+    width: 0;
     height: 0.85em;
-    margin: 0 -0.5ch 0 0.05em;
-    background: var(--color-accent);
     opacity: 0;
     vertical-align: -0.1em;
+  }
+
+  .type-caret::after {
+    content: "";
+    position: absolute;
+    left: 0.05em;
+    top: 0;
+    width: 0.5ch;
+    height: 100%;
+    background: var(--color-accent);
   }
 
   .type-caret.typing {
