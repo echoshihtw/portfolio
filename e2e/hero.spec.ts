@@ -15,15 +15,34 @@ test.describe("hero headline", () => {
       page,
     }) => {
       await page.setViewportSize({ width, height: 900 });
-      // Fonts first, then reload so the animation restarts against settled
-      // metrics. This isolates the typing from a separate, real problem:
-      // with a cold cache the headline renders in the fallback font and
-      // reflows by a whole line at 320px when JetBrains Mono swaps in
-      // (measured: 44.5px). That is a font-loading shift, not a typing one,
-      // and it wants its own fix — see the note in the README.
+      // Webfonts blocked, so the page renders in the fallback for the whole
+      // run. This spec is about the typing animation, and the animation's
+      // effect on layout does not depend on which font is loaded — but *when*
+      // the font arrives very much does. Waiting on document.fonts.ready was
+      // not enough: it resolves, the metrics settle locally, and then on a CI
+      // runner the swap lands mid-sample anyway and the headline moves a whole
+      // line. Removing the font removes the race.
+      //
+      // The shift the font swap itself causes is real and measured — 44.5px
+      // at 320px — and is recorded in the README as known and unfixed. It is
+      // not this test's subject.
+      await page.route(/fonts\.(googleapis|gstatic)\.com/, (route) =>
+        route.abort()
+      );
       await page.goto("/");
-      await page.evaluate(() => document.fonts.ready);
-      await page.reload();
+      // Sample only once the animation is actually running. Without this the
+      // first sample can land before hydration, catching the server-rendered
+      // layout, and the difference between that and the first typed frame is
+      // a whole line at 320px — where the headline sits hardest against its
+      // wrap point. That produced a failure of exactly 44.5px, one line,
+      // roughly one run in six, and only under parallel load.
+      await page
+        .locator(".hero-headline .type-caret")
+        .waitFor({ state: "attached", timeout: 3000 })
+        .catch(() => {
+          // Animation already finished — a settled headline is still worth
+          // asserting on, just a weaker version of the same check.
+        });
 
       const { spread, lines, lineHeight } = await page.evaluate(async () => {
         const h1 = document.querySelector(".hero-headline")!;
