@@ -11,7 +11,7 @@
   class="section_padding"
 >
   <div class="wrap">
-    <h3>{closingConfig.heading}</h3>
+    <h2>{closingConfig.heading}</h2>
     <p>{closingConfig.body}</p>
 
     <div class="actions">
@@ -50,7 +50,7 @@
     border-top: 1px solid var(--section-border);
   }
 
-  h3 {
+  h2 {
     margin: 0;
     font-family: "DM Serif Display", serif;
     font-size: clamp(1.6rem, 3.4vw, 2.1rem);

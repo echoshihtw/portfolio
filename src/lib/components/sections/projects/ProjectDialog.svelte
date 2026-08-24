@@ -30,7 +30,7 @@
   {#if project}
     <article>
       <header>
-        <h4 id="project-dialog-title">{project.name}</h4>
+        <h3 id="project-dialog-title">{project.name}</h3>
         <button
           class="close mono"
           on:click={() => dialog.close()}
@@ -133,7 +133,7 @@
     gap: 1rem;
   }
 
-  h4 {
+  h3 {
     margin: 0;
     font-family: "DM Serif Display", serif;
     font-size: 1.7rem;

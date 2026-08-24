@@ -124,7 +124,7 @@
   }
 
   .status-live {
-    color: #4a9d63;
+    color: var(--status-live);
   }
 
   .status-in-progress {

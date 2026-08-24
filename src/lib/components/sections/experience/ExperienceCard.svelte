@@ -26,7 +26,7 @@
 
 <article class="card">
   <p class="meta">{item.date}</p>
-  <h4 class="role">{cleanRole}</h4>
+  <h3 class="role">{cleanRole}</h3>
   <p class="company">{item.company}</p>
 
   {#if copy}
