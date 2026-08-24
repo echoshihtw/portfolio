@@ -31,7 +31,7 @@ export const skillBuckets: SkillBucket[] = [
       { name: "React" },
       { name: "TypeScript" },
       { name: "Next.js" },
-      { name: "design systems" },
+      { name: "Design systems" },
       { name: "UI patterns" },
       { name: "Responsive & accessible", on: "site" },
       { name: "TanStack Query" },
@@ -93,7 +93,7 @@ export const siteGroups: SiteGroup[] = [
   },
   {
     label: "UI & design",
-    pick: ["design systems", "UI patterns", "Responsive & accessible"],
+    pick: ["Design systems", "UI patterns", "Responsive & accessible"],
   },
   { label: "Mobile", pick: ["Flutter", "Dart", "Riverpod"] },
   { label: "State & data", pick: ["TanStack Query", "Zustand", "Redux"] },
