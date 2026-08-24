@@ -5,7 +5,7 @@
 
 <Seo
   title="Echo Shih · Software Engineer"
-  description="Software engineer in Taipei. I build systems of record (project platforms, applicant tracking, client histories) in React, TypeScript, Supabase and Postgres."
+  description="Software engineer in Taipei. I build project platforms, applicant tracking and client histories: the software a business actually runs on. React, TypeScript, Supabase and Postgres."
   path="/"
 />
 

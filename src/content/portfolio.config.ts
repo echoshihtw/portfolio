@@ -51,9 +51,11 @@ export const heroConfig: {
   ],
 
   // Ownership leads, the shape of the work follows, stack last. The
-  // systems-of-record list is the same here and on the CV, because it
-  // answers "you have no experience in our domain" and that question gets
-  // asked in every screen. Stack mention matches Clio (the featured,
+  // list of what I build is the same here and on the CV, because it answers
+  // "you have no experience in our domain" and that question gets asked in
+  // every screen. "Systems of record" was the accurate term and the wrong
+  // register: it reads enterprise, and the startup reader this is aimed at
+  // skims it. The examples were always doing the explaining, so they lead now. Stack mention matches Clio (the featured,
   // in-production project the proof line is about) rather than unrelated
   // client work, since it's the one detail here most likely to specifically
   // land with a Supabase-caliber hiring manager.
@@ -64,7 +66,7 @@ export const heroConfig: {
   // writing down what broke is the blog, and the admitted mistake in the
   // proof line directly below.
   support:
-    "Software Engineer building systems of record: project platforms, applicant tracking, client histories. I secure them, keep them running after ship, and write down what broke. React, TypeScript, Supabase and Postgres.",
+    "Software Engineer on project platforms, applicant tracking and client histories: the software a business actually runs on. I secure them, keep them running after ship, and write down what broke. React, TypeScript, Supabase and Postgres.",
 
   // Two sentences, not a stat block: three figures in columns is a SaaS
   // landing-page pattern that invites comparison, and "entered by hand"
