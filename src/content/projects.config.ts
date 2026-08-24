@@ -34,7 +34,7 @@ export const projectsConfig: Projects = [
     ],
     resume: {
       descriptor: "salon operations platform, live since May 2025",
-      role: "Founder / Software Engineer",
+      role: "Founder",
       bullets: [
         "**React**, **Supabase**, **Postgres RLS**: multi-tenant from day one, per-member permissions",
         "603 clients and 2,694 service records, entered by hand by the owner",
@@ -78,7 +78,7 @@ export const projectsConfig: Projects = [
     ],
     resume: {
       descriptor: "personal financial-runway app, Flutter",
-      role: "Founder / Software Engineer",
+      role: "Founder",
       bullets: [
         "**Clean Architecture** across a **Melos** monorepo, **SQLCipher**-encrypted local storage",
         "7 languages and 6 currencies, built solo; running on Android",
