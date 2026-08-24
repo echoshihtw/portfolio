@@ -19,7 +19,7 @@
 
 # Summary
 
-Product engineer on systems of record: project platforms, applicant tracking, client histories. Strongest in the frontend, sole author of production interfaces in **React**, **TypeScript** and **Next.js**, and of the work underneath them: auth boundaries, permission models, message-driven services, and the release path. **Python**, **Postgres**, **Docker**.
+Product engineer on systems of record: project platforms, applicant tracking, client histories. Sole author of production interfaces in **React**, **TypeScript** and **Next.js**, and of the work underneath them: auth boundaries, permission models, event-driven modules over **RabbitMQ**, and the release path. **Python**, **Postgres**, **Docker**.
 
 # Experience
 
