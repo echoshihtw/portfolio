@@ -18,7 +18,7 @@ export const experience: ExperienceItem[] = [
       "Refactored the backend into the team's **event-driven modular monolith**, with modules communicating over **RabbitMQ** instead of importing each other, and set up the module template the team builds against. The direction was the team's; the refactor was mine, with **RabbitMQ** and **ArangoDB** new to me.",
       "Diagnosed a **RabbitMQ** RPC bug where a stale, uninitialised consumer round-robined into login lookups and failed every user's first attempt; fixed it with a fail-fast DB check before broker registration.",
       "Packaged deploys into a three-file runner folder (**Docker Compose**, Makefile, env) pulling the promoted image from **GHCR**: no source checkout, no dev dependencies, an ~80 MB download rather than a full build.",
-      "Given a requirement that layers stay independent, chose **Next.js App Router** with a **BFF security boundary**: server-managed auth, centralised **CSRF** protection, no backend credentials in browser JavaScript.",
+      "Given a requirement that layers stay independent, chose **Next.js App Router** with a **BFF security boundary**: server-managed authentication, centralised **CSRF** protection, no backend credentials in browser JavaScript.",
       "Designed the platform's authorisation model: organisation-level and project-scoped roles resolved into capability flags, so services never reimplement access logic."
     ]
   },

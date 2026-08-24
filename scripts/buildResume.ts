@@ -272,6 +272,14 @@ function buildPDF() {
         // identical to a locally built one. That is what makes the automatic
         // refresh safe: otherwise the two would overwrite each other forever.
         `mainfont=${process.env.RESUME_MAINFONT || "XCharter"}`,
+        "-V",
+        // Ligatures off, for resume parsers rather than for looks.
+        // XCharter sets "offline" as a single ffl glyph, and text
+        // extraction cannot map it back: the word comes out "of<glyph>ine",
+        // so a reader searching for "offline" misses it. The same trap
+        // waits on any ffi or ffl word, "efficient" and "workflow" among
+        // them. The visual cost is a hair of spacing.
+        "mainfontoptions=Ligatures=NoCommon",
       ],
       { stdio: "inherit" }
     );

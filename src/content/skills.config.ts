@@ -33,7 +33,7 @@ export const skillBuckets: SkillBucket[] = [
       { name: "Next.js" },
       { name: "Design systems" },
       { name: "UI patterns" },
-      { name: "Responsive & accessible", on: "site" },
+      { name: "Responsive & accessible" },
       { name: "TanStack Query" },
       { name: "Zustand" },
       { name: "Tailwind CSS" },
@@ -59,6 +59,7 @@ export const skillBuckets: SkillBucket[] = [
     label: "Infra & Quality",
     items: [
       { name: "Docker" },
+      { name: "CI/CD" },
       { name: "GitHub Actions" },
       { name: "GHCR" },
       { name: "AWS" },
@@ -107,7 +108,10 @@ export const siteGroups: SiteGroup[] = [
       "RabbitMQ",
     ],
   },
-  { label: "Infra & CI/CD", pick: ["Docker", "GitHub Actions", "GHCR", "AWS"] },
+  {
+    label: "Infra & CI/CD",
+    pick: ["Docker", "CI/CD", "GitHub Actions", "GHCR", "AWS"],
+  },
   { label: "Testing", pick: ["Vitest", "React Testing Library", "pytest"] },
   {
     label: "AI & Automation",
