@@ -49,7 +49,7 @@ export const skillBuckets: SkillBucket[] = [
       { name: "Python" },
       { name: "Node.js" },
       { name: "Postgres" },
-      { name: "ArangoDB" },
+      { name: "ArangoDB (document + graph)" },
       { name: "Supabase" },
       { name: "RabbitMQ" },
       { name: "SQLite" },
@@ -99,7 +99,13 @@ export const siteGroups: SiteGroup[] = [
   { label: "State & data", pick: ["TanStack Query", "Zustand", "Redux"] },
   {
     label: "Backend & Data",
-    pick: ["FastAPI", "Node.js", "Postgres", "ArangoDB", "RabbitMQ"],
+    pick: [
+      "FastAPI",
+      "Node.js",
+      "Postgres",
+      "ArangoDB (document + graph)",
+      "RabbitMQ",
+    ],
   },
   { label: "Infra & CI/CD", pick: ["Docker", "GitHub Actions", "GHCR", "AWS"] },
   { label: "Testing", pick: ["Vitest", "React Testing Library", "pytest"] },

@@ -19,7 +19,7 @@ export const experience: ExperienceItem[] = [
       "Diagnosed a **RabbitMQ** RPC bug where a stale, uninitialised consumer round-robined into login lookups and failed every user's first attempt; fixed it with a fail-fast DB check before broker registration.",
       "Packaged deploys into a three-file runner folder (**Docker Compose**, Makefile, env) pulling the promoted image from **GHCR**: no source checkout, no dev dependencies, an ~80 MB download rather than a full build.",
       "Given a requirement that layers stay independent, chose **Next.js App Router** with a **BFF security boundary**: server-managed auth, centralised **CSRF** protection, no backend credentials in browser JavaScript.",
-      "Designed the platform's authorisation model: organisation-level and project-scoped roles resolved into capability flags, so services never reimplement access logic. Tested with **Vitest** and **pytest**."
+      "Designed the platform's authorisation model: organisation-level and project-scoped roles resolved into capability flags, so services never reimplement access logic."
     ]
   },
   {
@@ -36,8 +36,7 @@ export const experience: ExperienceItem[] = [
     "date": "Taipei, Taiwan · Aug 2022 – May 2024",
     "highlights": [
       "Took over frontend delivery on a **B2B and B2C recruitment and ATS platform** in **React**, on a two-engineer team reporting to the CTO. Migrated it to **TypeScript** incrementally, while it kept shipping.",
-      "Wrote the **Server-Sent Events** channel the frontend consumed AI-generated drafts through.",
-      "Built job-opening filtering on the careers pages end to end: filter bar, sorting, the employer settings behind it, and a shared dropdown component with tests."
+      "Wrote the **Server-Sent Events** channel the frontend consumed AI-generated drafts through."
     ]
   },
   {
@@ -45,7 +44,7 @@ export const experience: ExperienceItem[] = [
     "role": "Software Engineer",
     "date": "Remote · 2020 – 2024",
     "highlights": [
-      "Built the **Next.js frontend for a Bitcoin coin-selection research tool** with a **BDK core maintainer** (2023), and fixed and optimised a **BigCommerce** storefront for Bdigital (2024)."
+      "Built the **Next.js frontend for a Bitcoin coin-selection research tool** with a **BDK core maintainer**. Freelance frontend work across fintech, e-commerce and research."
     ]
   }
 ];

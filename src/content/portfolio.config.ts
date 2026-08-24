@@ -29,14 +29,14 @@ export const heroConfig: {
 
   // Spells out what "end to end" means, layer by layer: named techniques
   // pulled from real project work, not category nouns any portfolio could
-  // claim. RLS and offline-first sync are Clio's; build-failing tests is
+  // claim. RLS and offline-first sync are Clio's; architecture tests in CI is
   // Clio's api-layer-only test; GHCR image deploys is the Lockerbie release
   // pipeline.
   owns: [
     "React 19 UI",
     "Postgres RLS",
     "Offline-first sync",
-    "Build-failing tests",
+    "Architecture tests in CI",
     "GHCR image deploys",
   ],
 

@@ -39,6 +39,7 @@ export const projectsConfig: Projects = [
         "**React**, **Supabase**, **Postgres RLS**: multi-tenant from day one, per-member permissions",
         "603 clients and 2,694 service records, entered by hand by the owner",
         "A build-failing test keeps database access inside the api layer",
+        "Reads work offline from cache on patchy salon Wi-Fi; Traditional Chinese first",
       ],
     },
     featured: true,

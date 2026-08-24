@@ -21,7 +21,7 @@ export const skillIcons: Record<string, string> = {
   Python: "simple-icons:python",
   "Node.js": "simple-icons:nodedotjs",
   Postgres: "simple-icons:postgresql",
-  ArangoDB: "simple-icons:arangodb",
+  "ArangoDB (document + graph)": "simple-icons:arangodb",
   Supabase: "simple-icons:supabase",
   RabbitMQ: "simple-icons:rabbitmq",
   SQLite: "simple-icons:sqlite",
