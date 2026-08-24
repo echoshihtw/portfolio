@@ -3,11 +3,12 @@
 % Headline = professional identity, not job level. Level is settled by the role
 % and the interview, so a self-assigned "Senior" only invites an argument before
 % anyone has read the experience. Swap per application:
-%   Senior vacancy                   -> Senior Software Engineer
-%   Senior full-stack vacancy        -> Senior Full-Stack Software Engineer
-%   General / international          -> Software Engineer   (default)
-%   Freelance / contract             -> Independent Software Engineer
-{\large Software Engineer · React · TypeScript · Next.js · Product Ownership}\\[3pt]
+%   General / international          -> Frontend Engineer   (default)
+%   Senior vacancy                   -> Senior Frontend Engineer
+%   Full-stack vacancy               -> Full-Stack Engineer
+%   Platform / infra vacancy         -> Software Engineer, Platform & Delivery
+%   Freelance / contract             -> Independent Frontend Engineer
+{\large Frontend Engineer · React · TypeScript · Next.js · Postgres · Docker}\\[3pt]
 % Two deliberate lines: availability first, then contacts. As one line it wrapped
 % and left the portfolio URL stranded on its own.
 {\small\color{muted}Taipei, Taiwan (UTC+8) · Remote · APAC hours or async · Available now}\\[1pt]
@@ -17,7 +18,7 @@
 
 # Summary
 
-Software engineer on systems of record: project platforms, applicant tracking, client histories. Designs them, builds them, ships them, and keeps them running. **React**, **TypeScript** and **Node.js**, with **Python** and **FastAPI** behind them.
+Frontend engineer on systems of record: project platforms, applicant tracking, client histories. Sole author of production frontends in **React**, **TypeScript** and **Next.js**, and of the work underneath them: auth boundaries, permission models, message-driven services, and the release path. **Python**, **Postgres**, **Docker**.
 
 # Experience
 
