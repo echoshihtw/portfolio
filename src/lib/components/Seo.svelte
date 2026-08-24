@@ -11,7 +11,7 @@
   export let title: string;
   /**
    * Overrides only the <title> tag. Search results want the literal terms
-   * someone would type — an error message, a tool name. Social cards and
+   * someone would type: an error message, a tool name. Social cards and
    * the schema headline keep `title`, which can stay evocative, because a
    * share is read by a human deciding whether it looks worth clicking.
    */
@@ -29,10 +29,10 @@
   $: displayTitle = seoTitle ?? title;
   $: fullTitle = displayTitle.includes(SITE_NAME)
     ? displayTitle
-    : `${displayTitle} — ${SITE_NAME}`;
+    : `${displayTitle} · ${SITE_NAME}`;
   $: socialTitle = title.includes(SITE_NAME)
     ? title
-    : `${title} — ${SITE_NAME}`;
+    : `${title} · ${SITE_NAME}`;
 
   // A post describes itself as a BlogPosting with an author; everything
   // else declares the Person/WebSite the pages belong to. Both carry the

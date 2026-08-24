@@ -2,12 +2,12 @@
 //
 // Skills used to be written twice: a markdown line in resume.md for the PDF,
 // and skillsConfig in portfolio.config.ts for the site. Editing one changed
-// one surface, silently — the note in buildResume.ts records the symptom
+// one surface, silently. The note in buildResume.ts records the symptom
 // ("the PDF changed, the site did not"), and the two lists had already drifted:
 // the site omitted SvelteKit while being built with it.
 //
 // So: `skillBuckets` is the source and matches the PDF's four headings, in
-// print order, because that is the constrained artefact — one page, and the
+// print order, because that is the constrained artefact: one page, and the
 // order is read by a human. `siteGroups` is a *view*: finer-grained labels for
 // the page, referring to skills by name. An unknown name throws at import, so
 // a rename cannot quietly blank a group the way the company join keys could.
@@ -23,8 +23,8 @@ export const skillBuckets: SkillBucket[] = [
   {
     label: "Frontend & UI",
     // Order is evidence, then value to a reader: the two things every posting
-    // scans for, the framework, then the judgment terms — which are the only
-    // entries here that are not a dependency — then libraries. Redux and
+    // scans for, the framework, then the judgment terms (the only
+    // entries here that are not a dependency), then libraries. Redux and
     // SvelteKit sit last for opposite reasons: Redux is production work that
     // is no longer current, SvelteKit is current but backed by side projects.
     items: [
@@ -131,7 +131,7 @@ export function resumeSkillLines(): string {
         .filter((i) => i.on !== "site")
         .map((i) => i.name)
         .join(" · ");
-      return `**${bucket.label}** — ${items}  `;
+      return `**${bucket.label}**: ${items}  `;
     })
     .join("\n");
 }

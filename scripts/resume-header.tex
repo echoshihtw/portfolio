@@ -2,7 +2,7 @@
 %
 % The constraint is hard: this must fit on exactly one page, and it must stay
 % comfortable to read. Those pull against each other, so the tuning below buys
-% space from margins, leading, and section gaps — never from font size, which
+% space from margins, leading, and section gaps, never from font size, which
 % is what actually costs readability.
 %
 % If it spills to a second page, cut a bullet before shrinking anything here.
@@ -56,7 +56,7 @@
 \usepackage{ragged2e}
 \RaggedRight
 
-% Widow/orphan control — a lone bullet stranded at a page or column edge is the
+% Widow/orphan control: a lone bullet stranded at a page or column edge is the
 % most common way a tight résumé starts looking sloppy.
 \widowpenalty=10000
 \clubpenalty=10000

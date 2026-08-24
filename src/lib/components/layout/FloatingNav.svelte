@@ -28,7 +28,7 @@
        from where you are standing: Blog is the one destination scrolling
        will never reach, Résumé is the conversion, top is the way back, and
        the toggle is the only theme control left on screen. Work, Projects
-       and Skills are the page you are already scrolling through — they were
+       and Skills are the page you are already scrolling through, and they were
        four of the six links and all of the crowding. -->
   <div class="floating-links">
     <a
@@ -65,7 +65,7 @@
 </nav>
 
 <style>
-  /* Docked at the top, same spot the header nav just vacated — the position
+  /* Docked at the top, same spot the header nav just vacated. The position
      itself is what makes this read as a continuation of that nav rather than
      a separate floating widget, so it drops down into place instead of
      rising from the bottom. Styling mirrors the header's mobile-tab-link

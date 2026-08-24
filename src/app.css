@@ -50,7 +50,7 @@ html {
 
    These are defaults, not overrides. They used to carry !important, because
    Svelte scopes a component's rules with an extra class and that out-specifies
-   a bare class here — so the shared sheet could only win by force. Winning by
+   a bare class here, so the shared sheet could only win by force. Winning by
    force is the wrong relationship: it silently beat two components that had
    asked for something else (a 4px hero button, a rounded-square social chip),
    and it beat the floating pill's font size, which is why that "mirrors the
@@ -210,7 +210,7 @@ code,
 }
 
 /* One-shot signal-scan cue, dark mode only (via --glow-strength), the first
-   time a section title scrolls into view — see sweepOnView action. */
+   time a section title scrolls into view. See sweepOnView action. */
 .section_title.sweep-in::after {
   content: "";
   position: absolute;
@@ -255,7 +255,7 @@ body {
 
 /* Blog post body: mdsvex compiles each post's markdown into its own Svelte
    component (see src/routes/blog/[slug]/+page.svelte), rendered via
-   <svelte:component> — its output doesn't inherit that page's scoped
+   <svelte:component>, so its output doesn't inherit that page's scoped
    styles, so the prose typography lives here globally instead. */
 .blog-prose h2 {
   font-size: 1.15rem;

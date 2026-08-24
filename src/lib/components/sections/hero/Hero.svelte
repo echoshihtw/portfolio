@@ -24,8 +24,8 @@
 
   // Every part renders its full text; the not-yet-typed tail is hidden with
   // visibility rather than removed. Slicing the DOM text made the headline
-  // re-wrap as it grew — "end to end" started on line one and jumped to line
-  // two mid-word — and the h1 grew a line at a time, shoving the whole page
+  // re-wrap as it grew: "end to end" started on line one and jumped to line
+  // two mid-word, and the h1 grew a line at a time, shoving the whole page
   // down twice during the 900ms. Laying out the final text from frame one
   // fixes the wrap and the shift together.
   $: visibleParts = heroConfig.headline.map((part, i) => {
@@ -248,7 +248,7 @@
   }
 
   /* Terminal cursor: invisible in light mode, blinks in dark mode via
-     --glow-strength — the "fun, cypherpunk" half of the metaphor. */
+     --glow-strength, the "fun, cypherpunk" half of the metaphor. */
   .term-cursor {
     color: var(--color-accent);
     opacity: var(--glow-strength, 0);
@@ -305,7 +305,7 @@
   }
 
   /* Boot-up cursor: only rendered mid-type (see isTyping in script), in
-     either theme — invisible/inert once typing finishes. Absolutely sized so
+     either theme, invisible and inert once typing finishes. Absolutely sized so
      it takes no width in the flow; with the ghost text holding the line, a
      caret that occupied space would nudge the wrap point as it moved. */
   .type-caret {
@@ -435,7 +435,7 @@
     color: var(--text-muted);
   }
 
-  /* capability strip — scannable in a glance, not reading. Mobile-first: a
+  /* capability strip: scannable in a glance, not reading. Mobile-first: a
      two-column grid with no separator is the base layout, since a flex-wrap
      line break would strand a "·" separator at the start of the next line
      ("· APIs & data models") below 640px. Wider viewports switch to a single

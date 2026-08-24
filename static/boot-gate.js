@@ -1,6 +1,6 @@
 // A once-per-session fake front gate before the real homepage: dark mode
 // gets a terminal boot sequence, light mode gets a name card being
-// presented — each matching that theme's own register. Neither
+// presented, each matching that theme's own register. Neither
 // auto-dismisses; both wait for the visitor to click the gate's CTA.
 // Skipped on repeat visits within the tab session and entirely under
 // prefers-reduced-motion.
@@ -29,7 +29,7 @@
   try {
     sessionStorage.setItem(KEY, "1");
   } catch (_error) {
-    // Ignore storage failures — worst case the gate replays.
+    // Ignore storage failures, worst case the gate replays.
   }
 
   let dismissed = false;
@@ -50,7 +50,7 @@
 
   // Each pre already reserves one line's height via line-height even
   // while empty, and the profile block's photo/name/role are always in
-  // the DOM at full size (only opacity/transform animate) — so typing
+  // the DOM at full size (only opacity/transform animate), so typing
   // into them and revealing the profile never shifts anything below.
 
   function typeLine(el, text) {
@@ -90,7 +90,7 @@
 
   // Used both for the initial dark-mode load and for switching into the
   // terminal variant via the toggle after the light card was already
-  // showing — in the latter case there's no reason to replay the typing
+  // showing. In the latter case there's no reason to replay the typing
   // animation, so it jumps straight to the finished state.
   function showTerminalFinal() {
     lineBootEl.textContent = "booting echo.dev ....";
@@ -130,7 +130,7 @@
       try {
         localStorage.setItem("echo-theme", nextTheme);
       } catch (_error) {
-        // Ignore storage failures — the toggle still works this visit.
+        // Ignore storage failures, the toggle still works this visit.
       }
 
       if (nextTheme === "light") {

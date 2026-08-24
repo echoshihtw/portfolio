@@ -8,7 +8,7 @@ type PostModule = {
 
 /**
  * Built from the same source the blog index reads, so a new post appears
- * here automatically and a draft never does — a sitemap listing URLs that
+ * here automatically and a draft never does. A sitemap listing URLs that
  * 404 is worse than no sitemap.
  */
 export function GET() {

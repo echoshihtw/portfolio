@@ -36,7 +36,7 @@ export function GET() {
       slug: path.replace("/src/posts/", "").replace(".md", ""),
       ...mod.metadata,
     }))
-    // Newest first — a feed is chronological, unlike the index, which is
+    // Newest first: a feed is chronological, unlike the index, which is
     // ordered editorially by `order`.
     .sort((a, b) => String(b.date).localeCompare(String(a.date)));
 
@@ -55,7 +55,7 @@ export function GET() {
   const body = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>${escapeXml(SITE_NAME)} — Working notes</title>
+    <title>${escapeXml(SITE_NAME)} · Working notes</title>
     <link>${SITE_ORIGIN}/blog</link>
     <description>What broke, what it actually turned out to be, and what I'd do differently.</description>
     <language>en</language>

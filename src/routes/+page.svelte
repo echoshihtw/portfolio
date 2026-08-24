@@ -4,8 +4,8 @@
 </script>
 
 <Seo
-  title="Echo Shih — Software Engineer"
-  description="Software engineer in Taipei. I build systems of record — project platforms, applicant tracking, client histories — in React, TypeScript, Supabase and Postgres."
+  title="Echo Shih · Software Engineer"
+  description="Software engineer in Taipei. I build systems of record (project platforms, applicant tracking, client histories) in React, TypeScript, Supabase and Postgres."
   path="/"
 />
 

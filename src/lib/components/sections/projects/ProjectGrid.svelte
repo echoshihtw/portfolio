@@ -25,7 +25,7 @@
 
 <style>
   /* Two columns, with the featured project spanning both. The projects are
-     not equals — one has users — and equal cards would spend a third of a
+     not equals (one has users) and equal cards would spend a third of a
      visitor's attention on an archived research tool. */
   .grid {
     display: grid;
