@@ -1,6 +1,6 @@
 # yaml-language-server: $schema=https://unpkg.com/@sveltia/cms/schema/sveltia-cms.json
 
-# Sveltia CMS — a git-based admin at /admin. Editing a post here commits
+# Sveltia CMS: a git-based admin at /admin. Editing a post here commits
 # markdown straight to this repo, which triggers the usual Vercel deploy.
 # No database and no server: the site stays adapter-static, and sign-in is
 # a personal access token held in the browser (see the backend note below).
@@ -10,14 +10,14 @@ backend:
   repo: echoshihtw/portfolio
   branch: main
   # No base_url on purpose. That property points at an OAuth proxy, and
-  # Sveltia's own docs say a single technical user doesn't need one —
+  # Sveltia's own docs say a single technical user doesn't need one.
   # "Sign In Using Access Token" on the login screen covers this case,
   # with no Cloudflare Worker and no GitHub OAuth App to maintain. It
   # links out to GitHub's token page with the right scopes preselected;
   # the token is kept in the browser's local storage.
   #
-  # If a proxy is ever wanted — the reason would be non-technical users
-  # needing to sign in — deploy sveltia/sveltia-cms-auth and add its URL
+  # If a proxy is ever wanted (the reason would be non-technical users
+  # needing to sign in) deploy sveltia/sveltia-cms-auth and add its URL
   # here as base_url. A base_url pointing at a host that does not exist
   # makes "Sign In with GitHub" fail, so leave it out rather than stub it.
 
@@ -45,7 +45,7 @@ collections:
           label: Search title,
           widget: string,
           required: false,
-          hint: "Optional. Overrides the browser/search-result title only — put the literal terms someone would type (an error message, a tool name) here. The heading and social cards keep the Title above.",
+          hint: "Optional. Overrides the browser/search-result title only. Put the literal terms someone would type (an error message, a tool name) here. The heading and social cards keep the Title above.",
         }
       - {
           name: date,
@@ -59,14 +59,14 @@ collections:
           name: excerpt,
           label: Excerpt,
           widget: text,
-          hint: "One line on the index — what the post is actually about, not a teaser.",
+          hint: "One line on the index: what the post is actually about, not a teaser.",
         }
       - {
           name: order,
           label: Display order,
           widget: number,
           value_type: int,
-          hint: "Editorial ranking on the index, lowest first. Not the date — a stronger older post can still lead.",
+          hint: "Editorial ranking on the index, lowest first. Not the date: a stronger older post can still lead.",
         }
       # Sveltia treats a field named `body` as the file's main content;
       # everything else above is frontmatter. `markdown` rather than

@@ -40,7 +40,7 @@
     try {
       sessionStorage.removeItem("echo-gate-seen");
     } catch (_error) {
-      // Ignore storage failures — the gate just won't replay.
+      // Ignore storage failures, the gate just won't replay.
     }
     location.reload();
   }
@@ -107,8 +107,8 @@
         >
           Blog
         </a>
-        <!-- Résumé was in the header only — the one surface that scrolls
-             away — so it left the page along with it. -->
+        <!-- Résumé was in the header only, the one surface that scrolls
+             away, so it left the page along with it. -->
         <a
           href="{base}/{heroConfig.resume}"
           target="_blank"

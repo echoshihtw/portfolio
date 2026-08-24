@@ -14,7 +14,7 @@
   let isHeaderVisible = true;
   const FLOATING_NAV_BOTTOM_OFFSET = 4;
   // The floating pill's job is to stand in for the header nav once it has
-  // actually scrolled out of view — driven by observing the header itself
+  // actually scrolled out of view, driven by observing the header itself
   // rather than a guessed scroll-pixel threshold, so it stays correct
   // regardless of header height.
   $: showFloatingNav = !isHeaderVisible && !isNearPageBottom;

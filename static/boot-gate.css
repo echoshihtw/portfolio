@@ -1,7 +1,7 @@
 /* Loaded as a blocking stylesheet, not from app.css: this has to be opaque
    before first paint, or the real page flashes through underneath for a
    frame. Dark mode gets a terminal boot sequence; light mode gets a name
-   card being presented — each matching that theme's own register. Neither
+   card being presented, each matching that theme's own register. Neither
    auto-dismisses; both wait for a click on the gate's CTA. */
 #boot-gate {
   position: fixed;
@@ -25,7 +25,7 @@
   pointer-events: none;
 }
 
-/* Theme toggle in the corner — a faithful port of the real header
+/* Theme toggle in the corner: a faithful port of the real header
    ThemeSwitch (src/lib/components/ThemeSwitch.svelte), not a
    reimplementation, so it looks and behaves identically. Positioned here
    since the gate is plain HTML/JS and can't import the Svelte component.
@@ -154,7 +154,7 @@
 }
 #boot-gate[data-variant="terminal"] .gate-theme-core::after {
   /* Flattened equivalent of rgba(237, 236, 232, 0.05) over the gate's
-     #0b0a17 background — the label's actual visible tint at this spot.
+     #0b0a17 background, the label's actual visible tint at this spot.
      Has to be opaque: a semi-transparent mask would let the core's blue
      show through instead of hiding it. */
   background: #16151f;
@@ -229,11 +229,11 @@
   color: #b8b8d4;
 }
 
-/* Background-removed headshot in a scanning reticle frame — the photo's
+/* Background-removed headshot in a scanning reticle frame. The photo's
    own backdrop was already near-black, so it was keyed to transparent
    (see the headshot-cutout.png generation notes) and sits directly on the
    gate's dark background instead of showing a cutout square. Fixed
-   square, not stretched — the source photo's aspect ratio stays intact. */
+   square, not stretched: the source photo's aspect ratio stays intact. */
 .terminal-photo-wrap {
   position: relative;
   flex: none;
@@ -326,7 +326,7 @@
     display: none;
   }
 }
-/* Dark mode: plain text, not a pill button — reads as a terminal prompt
+/* Dark mode: plain text, not a pill button: it reads as a terminal prompt
    rather than a UI control breaking the boot-sequence illusion. */
 #boot-gate[data-variant="terminal"] .card-enter {
   border: none;

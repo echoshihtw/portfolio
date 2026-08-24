@@ -41,7 +41,7 @@
 
          The toggle sits beside the link strip, not inside it. The strip
          scrolls horizontally on narrow phones, so anything in it scrolls out
-         of reach along with it — and an auto-margined last child pushes past
+         of reach along with it, and an auto-margined last child pushes past
          the container entirely, which put the toggle off-screen and gave the
          whole document a horizontal scroll at any width below 414px. -->
     <div class="nav-row">
@@ -75,7 +75,7 @@
         <!-- Opens the PDF rather than downloading it. This link is labelled
              "Résumé", not "Download résumé": a recruiter skims first and
              keeps it only if interested, and a forced download puts a file
-             on their disk before they know they want it — worse on a phone,
+             on their disk before they know they want it, and worse on a phone,
              where it lands in Downloads and they have to leave the browser
              to read it. The hero button is the one that says download and
              does it. -->
@@ -115,7 +115,7 @@
     border-radius: 2px;
   }
 
-  /* Carries the visual weight of a heading without the heading semantics —
+  /* Carries the visual weight of a heading without the heading semantics:
      the hero statement is the page's <h1>. */
   .site-name {
     font-family: "JetBrains Mono", monospace;

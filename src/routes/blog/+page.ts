@@ -25,7 +25,7 @@ export async function load() {
     })
     .filter((post) => !post.draft);
 
-  // order (frontmatter) is the editorial ranking, not date — a stronger
+  // order (frontmatter) is the editorial ranking, not date: a stronger
   // older post can outrank a weaker newer one. Falls back to date when
   // order is tied or unset.
   posts.sort((a, b) => {

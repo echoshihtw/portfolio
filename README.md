@@ -1,4 +1,4 @@
-# Portfolio — echoshihtw.github.io/portfolio
+# Portfolio: echoshihtw.github.io/portfolio
 
 SvelteKit site on GitHub Pages. `src/content/resume.md` is the source of truth
 for the résumé: one build makes the PDF and the experience data the site renders.
@@ -14,7 +14,7 @@ npm run build          # static site → build/
 npm run build-resume   # résumé → PDF + site data
 ```
 
-`build-resume` needs Pandoc and XeLaTeX — `brew install pandoc` and
+`build-resume` needs Pandoc and XeLaTeX: `brew install pandoc` and
 `brew install --cask mactex`. Missing locally, it skips the PDF; in CI it fails.
 
 ## Content
@@ -34,11 +34,11 @@ resume.md → npm run build-resume → src/lib/resumeData.ts   experience only
 ```
 
 Generated, never hand-edited: `src/lib/resumeData.ts`, `output/*`,
-`static/resume.pdf`. The last two aren't committed — the deploy builds them.
+`static/resume.pdf`. The last two aren't committed: the deploy builds them.
 
 ## Rules the build enforces
 
-- **Exactly one page.** Take space from margins, leading or wording — not font size.
+- **Exactly one page.** Take space from margins, leading or wording, not font size.
 - **ATS-readable.** No tables, columns, images or hyphenation; plain `#` headings.
 - **Company names join `resume.md` to `portfolio.config.ts`.** Rename one and the
   build fails, naming both lists.
@@ -49,7 +49,7 @@ Generated, never hand-edited: `src/lib/resumeData.ts`, `output/*`,
 both builds; only pushes deploy. Docs-only changes skip.
 
 The PDF is cached against its three sources, so TeX installs only when the résumé
-changed: ~2 min on a miss, ~25s otherwise. Node 24 matches local — npm 10 and 11
+changed: ~2 min on a miss, ~25s otherwise. Node 24 matches local: npm 10 and 11
 write lockfiles differently.
 
 ## Claims

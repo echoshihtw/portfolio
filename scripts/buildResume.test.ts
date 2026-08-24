@@ -17,7 +17,7 @@ A sentence about me.
 
 ## Acme Ltd (Group plc)
 
-Staff Engineer — Platform · _Taipei, Taiwan · Dec 2024 – Present_
+Staff Engineer, Platform · _Taipei, Taiwan · Dec 2024 – Present_
 
 - Did a thing with **bold** in it.
 - Did another thing.
@@ -30,7 +30,7 @@ Engineer · _Remote · Aug 2022 – May 2024_
 
 # Skills
 
-**Frontend** — React
+**Frontend**: React
 `;
 
 describe("extractSection", () => {
@@ -62,7 +62,7 @@ describe("parseExperience", () => {
   // Role, location and dates share one line to save vertical space on the
   // PDF. The site needs them apart, and the italic markers gone.
   it("splits role from date and drops the italic markers", () => {
-    expect(jobs[0].role).toBe("Staff Engineer — Platform");
+    expect(jobs[0].role).toBe("Staff Engineer, Platform");
     expect(jobs[0].date).toBe("Taipei, Taiwan · Dec 2024 – Present");
   });
 
@@ -78,7 +78,7 @@ describe("parseExperience", () => {
 describe("withProjects", () => {
   it("replaces the marker with one line per project that has a resumeLine", () => {
     const marker =
-      "<!-- generated from src/content/projects.config.ts — projects with a resumeLine -->";
+      "<!-- generated from src/content/projects.config.ts: projects with a resume block -->";
     const out = withProjects(`# Projects\n\n${marker}\n\n# Skills\n`);
 
     expect(out).not.toContain(marker);

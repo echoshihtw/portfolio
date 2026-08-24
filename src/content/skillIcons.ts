@@ -1,6 +1,6 @@
 // Maps a skill name to a simple-icons slug, for skills that have a
-// recognizable logo. Concept/judgment entries (design systems, UI patterns,
-// Responsive & accessible, etc.) intentionally have no icon — they render as
+// recognizable logo. Concept/judgment entries (Design systems, UI patterns,
+// Responsive & accessible, etc.) intentionally have no icon: they render as
 // plain text, same as before. Simple Icons render as a single currentColor
 // path, so every logo picks up one accent tint instead of each tool's own
 // brand color.
@@ -21,7 +21,7 @@ export const skillIcons: Record<string, string> = {
   Python: "simple-icons:python",
   "Node.js": "simple-icons:nodedotjs",
   Postgres: "simple-icons:postgresql",
-  ArangoDB: "simple-icons:arangodb",
+  "ArangoDB (document + graph)": "simple-icons:arangodb",
   Supabase: "simple-icons:supabase",
   RabbitMQ: "simple-icons:rabbitmq",
   SQLite: "simple-icons:sqlite",

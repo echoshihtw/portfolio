@@ -21,7 +21,7 @@ const config = {
   kit: {
     paths: {
       // One definition, not two. This was hardcoded to "/portfolio" while CI
-      // set a BASE_PATH the config never read — they agreed only because the
+      // set a BASE_PATH the config never read. They agreed only because the
       // repo happens to be named `portfolio`. On the custom domain the site is
       // served from the root, so empty is the default and the env var is the
       // escape hatch for a project-page build.

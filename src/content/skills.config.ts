@@ -2,12 +2,12 @@
 //
 // Skills used to be written twice: a markdown line in resume.md for the PDF,
 // and skillsConfig in portfolio.config.ts for the site. Editing one changed
-// one surface, silently — the note in buildResume.ts records the symptom
+// one surface, silently. The note in buildResume.ts records the symptom
 // ("the PDF changed, the site did not"), and the two lists had already drifted:
 // the site omitted SvelteKit while being built with it.
 //
 // So: `skillBuckets` is the source and matches the PDF's four headings, in
-// print order, because that is the constrained artefact — one page, and the
+// print order, because that is the constrained artefact: one page, and the
 // order is read by a human. `siteGroups` is a *view*: finer-grained labels for
 // the page, referring to skills by name. An unknown name throws at import, so
 // a rename cannot quietly blank a group the way the company join keys could.
@@ -23,17 +23,17 @@ export const skillBuckets: SkillBucket[] = [
   {
     label: "Frontend & UI",
     // Order is evidence, then value to a reader: the two things every posting
-    // scans for, the framework, then the judgment terms — which are the only
-    // entries here that are not a dependency — then libraries. Redux and
+    // scans for, the framework, then the judgment terms (the only
+    // entries here that are not a dependency), then libraries. Redux and
     // SvelteKit sit last for opposite reasons: Redux is production work that
     // is no longer current, SvelteKit is current but backed by side projects.
     items: [
       { name: "React" },
       { name: "TypeScript" },
       { name: "Next.js" },
-      { name: "design systems" },
+      { name: "Design systems" },
       { name: "UI patterns" },
-      { name: "Responsive & accessible", on: "site" },
+      { name: "Responsive & accessible" },
       { name: "TanStack Query" },
       { name: "Zustand" },
       { name: "Tailwind CSS" },
@@ -49,7 +49,7 @@ export const skillBuckets: SkillBucket[] = [
       { name: "Python" },
       { name: "Node.js" },
       { name: "Postgres" },
-      { name: "ArangoDB" },
+      { name: "ArangoDB (document + graph)" },
       { name: "Supabase" },
       { name: "RabbitMQ" },
       { name: "SQLite" },
@@ -59,6 +59,7 @@ export const skillBuckets: SkillBucket[] = [
     label: "Infra & Quality",
     items: [
       { name: "Docker" },
+      { name: "CI/CD" },
       { name: "GitHub Actions" },
       { name: "GHCR" },
       { name: "AWS" },
@@ -93,15 +94,24 @@ export const siteGroups: SiteGroup[] = [
   },
   {
     label: "UI & design",
-    pick: ["design systems", "UI patterns", "Responsive & accessible"],
+    pick: ["Design systems", "UI patterns", "Responsive & accessible"],
   },
   { label: "Mobile", pick: ["Flutter", "Dart", "Riverpod"] },
   { label: "State & data", pick: ["TanStack Query", "Zustand", "Redux"] },
   {
     label: "Backend & Data",
-    pick: ["FastAPI", "Node.js", "Postgres", "ArangoDB", "RabbitMQ"],
+    pick: [
+      "FastAPI",
+      "Node.js",
+      "Postgres",
+      "ArangoDB (document + graph)",
+      "RabbitMQ",
+    ],
   },
-  { label: "Infra & CI/CD", pick: ["Docker", "GitHub Actions", "GHCR", "AWS"] },
+  {
+    label: "Infra & CI/CD",
+    pick: ["Docker", "CI/CD", "GitHub Actions", "GHCR", "AWS"],
+  },
   { label: "Testing", pick: ["Vitest", "React Testing Library", "pytest"] },
   {
     label: "AI & Automation",
@@ -131,7 +141,7 @@ export function resumeSkillLines(): string {
         .filter((i) => i.on !== "site")
         .map((i) => i.name)
         .join(" · ");
-      return `**${bucket.label}** — ${items}  `;
+      return `**${bucket.label}**: ${items}  `;
     })
     .join("\n");
 }

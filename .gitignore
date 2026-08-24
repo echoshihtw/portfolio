@@ -13,7 +13,7 @@ vite.config.ts.timestamp-*
 /.cache/
 *.tsbuildinfo
 
-# Built by `npm run build-resume`. Not committed — the deploy builds them,
+# Built by `npm run build-resume`. Not committed: the deploy builds them,
 # so they cannot go stale.
 /output/
 /.resume-build/
@@ -32,5 +32,5 @@ vite.config.ts.timestamp-*
 .superpowers/
 
 # Working documents: specs, audits, notes. They are written for me, not for
-# readers of a public repo — that is how the portfolio audit leaked.
+# readers of a public repo, and that is how the portfolio audit leaked.
 /docs/

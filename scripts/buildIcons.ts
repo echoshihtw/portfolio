@@ -1,7 +1,7 @@
 // Bundles the icons the site actually uses, so no browser ever has to ask a
 // third party for one.
 //
-// @iconify/svelte resolves an unknown icon name over the network — every
+// @iconify/svelte resolves an unknown icon name over the network. Every
 // visitor was hitting api.iconify.design, with api.unisvg.com as a fallback.
 // That leaks the referrer, adds two hosts to the critical path, and makes the
 // icons silently disappear for anyone whose blocker covers those domains
@@ -63,7 +63,7 @@ let scanned = 0;
 
 for (const [prefix, names] of [...found].sort()) {
   const collection = loadCollection(prefix);
-  // Most `word:word` matches are not icons at all — CSS values, URLs, times.
+  // Most `word:word` matches are not icons at all: CSS values, URLs, times.
   // A prefix with no installed collection simply isn't one.
   if (!collection) continue;
 
@@ -87,7 +87,7 @@ for (const [prefix, names] of [...found].sort()) {
   }
 }
 
-// A name that resolves to nothing used to fail silently — the icon just never
+// A name that resolves to nothing used to fail silently: the icon just never
 // appeared, because the network lookup 404'd in the browser. Failing the build
 // instead turns a typo into something you find before it ships.
 if (missing.length) {
