@@ -33,13 +33,17 @@ function readResume() {
 /*
 --------------------------------------------------
 Projects come from projects.config.ts, so a fact lives in one place and is
-rendered twice: a card on the site, one line on the PDF. A project with no
-resumeLine is site-only — the page has room, one page of A4 does not.
+rendered twice: a card on the site, a block on the PDF. A project with no
+`resume` field is site-only: the page has room, A4 does not.
+
+Bullets, not a paragraph. A recruiter scans the CV rather than reading it, so
+the descriptor beside the name is what has to land: it is the only thing that
+earns the bullets a look. A dense sentence gets skipped whole.
 --------------------------------------------------
 */
 
 const SKILLS_MARKER =
-  "<!-- generated from src/content/skills.config.ts — items marked site-only are omitted -->";
+  "<!-- generated from src/content/skills.config.ts: items marked site-only are omitted -->";
 
 export function withSkills(markdown) {
   if (!markdown.includes(SKILLS_MARKER)) {
@@ -49,14 +53,29 @@ export function withSkills(markdown) {
 }
 
 const PROJECTS_MARKER =
-  "<!-- generated from src/content/projects.config.ts — projects with a resumeLine -->";
+  "<!-- generated from src/content/projects.config.ts: projects with a resume block -->";
 
 export function withProjects(markdown) {
+  // resumeLine was a single dense sentence per project. If one is still set,
+  // it is silently dropped by the renderer below, so fail instead, so a project
+  // cannot quietly vanish from the CV during the migration.
+  const stale = projectsConfig
+    .filter((p) => (p as { resumeLine?: string }).resumeLine)
+    .map((p) => p.name);
+  if (stale.length) {
+    throw new Error(
+      `projects.config: resumeLine is no longer rendered, use resume: ` +
+        `{ descriptor, role, bullets }, found on ${stale.join(", ")}`
+    );
+  }
+
   const lines = projectsConfig
-    .filter((p) => p.resumeLine)
-    .map(
-      (p) => `**${p.name}** — _Founder / Product Engineer_ · ${p.resumeLine}`
-    )
+    .filter((p) => p.resume)
+    .map((p) => {
+      const { descriptor, role, bullets } = p.resume;
+      const head = `**${p.name}**: ${descriptor} · _${role}_`;
+      return [head, "", ...bullets.map((b) => `- ${b}`)].join("\n");
+    })
     .join("\n\n");
 
   if (!markdown.includes(PROJECTS_MARKER)) {
@@ -167,8 +186,8 @@ function buildResumeData(markdown) {
 
   // Only what the site actually imports. Skills come from skills.config.ts
   // and projects from projects.config.ts; generating them here too produced
-  // exports nobody read. Skills used to be written twice — that is what made
-  // editing resume.md look broken, the PDF changing while the site did not —
+  // exports nobody read. Skills used to be written twice, which is what made
+  // editing resume.md look broken, the PDF changing while the site did not,
   // and skills.config.ts is now the single list behind both.
   // The site joins portfolio copy to experience by company name, and a
   // mismatch renders an empty card with no error. Fail here instead.
@@ -225,7 +244,7 @@ function buildHTML() {
       }
     );
   } catch {
-    console.warn("⚠️ Pandoc not installed — skipping HTML build");
+    console.warn("⚠️ Pandoc not installed, skipping HTML build");
   }
 }
 
@@ -251,7 +270,7 @@ function buildPDF() {
         // XCharter, not Charter: it is the same typeface design and ships
         // with TeX Live on both macOS and Ubuntu, so a CI-built PDF is
         // identical to a locally built one. That is what makes the automatic
-        // refresh safe — otherwise the two would overwrite each other forever.
+        // refresh safe: otherwise the two would overwrite each other forever.
         `mainfont=${process.env.RESUME_MAINFONT || "XCharter"}`,
       ],
       { stdio: "inherit" }
@@ -265,13 +284,13 @@ function buildPDF() {
     console.log(`✅ Synced static/${RESUME_FILENAME}`);
   } catch (error) {
     // Skipping is fine on a laptop without TeX. In CI it means the résumé
-    // silently stopped building, which is how this went unnoticed — so fail
+    // silently stopped building, which is how this went unnoticed, so fail
     // loudly there instead.
     if (process.env.CI) {
       console.error("❌ PDF build failed");
       throw error;
     }
-    console.warn("⚠️ Pandoc/xelatex not installed — skipping PDF build");
+    console.warn("⚠️ Pandoc/xelatex not installed, skipping PDF build");
   }
 }
 
