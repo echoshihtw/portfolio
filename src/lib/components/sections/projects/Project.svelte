@@ -7,11 +7,11 @@
   id="projects"
   class="w-full section_padding section_layout"
 >
-  <h3
+  <h2
     class="section_title"
     use:sweepOnView
   >
     #projects
-  </h3>
+  </h2>
   <Projects />
 </section>

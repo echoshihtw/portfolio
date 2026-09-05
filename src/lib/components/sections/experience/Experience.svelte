@@ -9,12 +9,12 @@
   id="work"
   class="section_padding section_layout"
 >
-  <h3
+  <h2
     class="section_title"
     use:sweepOnView
   >
     #work
-  </h3>
+  </h2>
 
   <div class="timeline">
     {#each experience as item}

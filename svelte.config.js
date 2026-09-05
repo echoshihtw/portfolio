@@ -3,6 +3,32 @@ import preprocess from "svelte-preprocess";
 import { vitePreprocess } from "@sveltejs/vite-plugin-svelte";
 import { mdsvex } from "mdsvex";
 
+// Code blocks scroll sideways when a line is long, and a scrollable region
+// that cannot take focus is unreachable by keyboard: WCAG 2.1.1, and axe
+// reports it as serious. tabindex="0" puts the block in the tab order so
+// arrow keys can scroll it. Done at build time so it covers every post,
+// including ones not written yet, rather than being remembered per post.
+function rehypeFocusableCodeBlocks() {
+  return (tree) => {
+    const visit = (node) => {
+      if (node.type === "element" && node.tagName === "pre") {
+        node.properties = { ...node.properties, tabindex: 0 };
+      }
+      // mdsvex hands the highlighter's output through as a raw HTML string,
+      // so the <pre> it produces is never an element node a visitor can
+      // match. Patch the string as well, and only when tabindex is absent.
+      if (node.type === "raw" && typeof node.value === "string") {
+        node.value = node.value.replace(
+          /<pre(?![^>]*tabindex)/g,
+          '<pre tabindex="0"'
+        );
+      }
+      for (const child of node.children ?? []) visit(child);
+    };
+    visit(tree);
+  };
+}
+
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
   // .md added alongside .svelte so blog posts (src/posts/*.md) compile as
@@ -12,7 +38,10 @@ const config = {
   // Consult https://kit.svelte.dev/docs/integrations#preprocessors
   // for more information about preprocessors
   preprocess: [
-    mdsvex({ extensions: [".md"] }),
+    mdsvex({
+      extensions: [".md"],
+      rehypePlugins: [rehypeFocusableCodeBlocks],
+    }),
     preprocess({
       postcss: true,
     }),
