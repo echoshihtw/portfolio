@@ -11,21 +11,24 @@
 // paints, with work from January 2026, so nothing here says "used to".
 export const aboutConfig = {
   kicker: "Chun-Yu (Echo) Shih",
-  // Echo's line. Capitalised and stopped to match the page, otherwise her
-  // words exactly.
+  // Echo's own words, from the moment she corrected an earlier draft:
+  // "just my creations". Two words, and deliberately not a claim.
   //
-  // It replaced "I have been painting since 2012.", which was the only place
-  // that date appeared, so the date moved into the first paragraph rather
-  // than leaving the page.
+  // It is the counterpart to the home page's "I own it, end to end." That
+  // page makes the professional argument; this one declines to make any.
+  // Several wittier lines were drafted and rejected on the way here: a joke
+  // in the largest type on the page argues for the person, and understating
+  // it does the same work without anyone having to be funny.
   //
-  // Split the way heroConfig.headline is split, so one word can take the
-  // accent italic. That treatment is the home page's, and using it here is
-  // what makes the two pages read as one site rather than two.
-  heading: [
-    { text: "Behind the screen and " },
-    { text: "matrix", accent: true },
-    { text: "." },
-  ] as { text: string; accent?: boolean }[],
+  // The date left the heading with the old sentence, so it sits in the
+  // first paragraph instead.
+  //
+  // Split the way heroConfig.headline is, so one word takes the accent
+  // italic and the glitch.
+  heading: [{ text: "Just " }, { text: "me", accent: true }, { text: "." }] as {
+    text: string;
+    accent?: boolean;
+  }[],
 
   story: [
     "I have been painting since 2012, mostly in Tainan. I studied Italian language and culture at Fu Jen Catholic University in Taipei, and after I finished I spent three months at Accademia del Giglio in Florence.",
