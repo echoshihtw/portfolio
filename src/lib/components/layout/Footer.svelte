@@ -108,10 +108,10 @@
              horizontal row. -->
         <a
           class="footer-nav-destination"
-          href="{base}/paintings"
-          aria-current={$page.route.id === "/paintings" ? "page" : undefined}
+          href="{base}/gallery"
+          aria-current={$page.route.id === "/gallery" ? "page" : undefined}
         >
-          Paintings
+          Art Gallery
         </a>
         <a
           class="footer-nav-destination"

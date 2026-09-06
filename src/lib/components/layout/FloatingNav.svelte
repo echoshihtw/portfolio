@@ -17,7 +17,7 @@
   // and quietly evaluating false. That is why aria-current never appeared
   // in the prerendered HTML on any page.
   $: isBlog = $page.route.id?.startsWith("/blog") ?? false;
-  $: isPaintings = $page.route.id === "/paintings";
+  $: isGallery = $page.route.id === "/gallery";
 </script>
 
 <!-- inert while hidden: this pill is only faded out, not removed, so without
@@ -38,11 +38,11 @@
        four of the six links and all of the crowding. -->
   <div class="floating-links">
     <a
-      href="{base}/paintings"
+      href="{base}/gallery"
       class="floating-link"
-      aria-current={isPaintings ? "page" : undefined}
+      aria-current={isGallery ? "page" : undefined}
     >
-      Paintings
+      Art Gallery
     </a>
     <a
       href="{base}/blog"

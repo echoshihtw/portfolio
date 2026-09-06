@@ -24,7 +24,7 @@
   // in the prerendered HTML on any page.
   // Route-level, so a post page marks Blog as current too.
   $: isBlog = $page.route.id?.startsWith("/blog") ?? false;
-  $: isPaintings = $page.route.id === "/paintings";
+  $: isGallery = $page.route.id === "/gallery";
   $: isHome = $page.route.id === "/";
 </script>
 
@@ -86,11 +86,11 @@
           aria-hidden="true"
         ></span>
         <a
-          href="{base}/paintings"
+          href="{base}/gallery"
           class="mobile-tab-link"
-          aria-current={isPaintings ? "page" : undefined}
+          aria-current={isGallery ? "page" : undefined}
         >
-          Paintings
+          Art Gallery
         </a>
         <a
           href="{base}/blog"
