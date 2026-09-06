@@ -2,6 +2,7 @@
   import { base } from "$app/paths";
   import Seo from "$lib/components/Seo.svelte";
   import PaintingWall from "$lib/components/sections/about/PaintingWall.svelte";
+  import Signature from "$lib/components/Signature.svelte";
   import { aboutConfig } from "../../content/about.config";
   import { derivativeName, WIDTHS } from "../../content/paintings.config";
 
@@ -55,6 +56,11 @@
       <span aria-hidden="true">→</span>
     </a>
   </section>
+
+  <!-- Where a painter signs the work: at the end, in the corner. -->
+  <div class="signed">
+    <Signature />
+  </div>
 </div>
 
 <style>
@@ -193,6 +199,18 @@
     padding: 0.55rem 1.1rem;
     color: var(--text-color);
     text-decoration: none;
+  }
+
+  .signed {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0 1rem 3rem;
+  }
+
+  @media (min-width: 768px) {
+    .signed {
+      padding: 0 2.5rem 3.5rem;
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
