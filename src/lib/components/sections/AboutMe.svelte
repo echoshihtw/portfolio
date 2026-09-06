@@ -156,24 +156,39 @@
     margin-top: 0.6rem;
   }
 
+  /* One button among three: the email is the conversion, so it is the
+     filled pill, and the other two are links beside it. Three outlined
+     pills in a row gave nothing the click. */
   .cta {
-    border: 1px solid var(--section-border);
-    border-radius: 999px;
-    padding: 0.55rem 1.15rem;
     color: var(--text-color);
     text-decoration: none;
     white-space: nowrap;
   }
 
-  /* One primary among three: the email is the conversion, the other two are
-     ways of putting it off. */
   .cta.primary {
-    border-color: var(--color-accent);
+    border: 1px solid var(--text-color);
+    border-radius: 999px;
+    padding: 0.55rem 1.15rem;
+    background: var(--text-color);
+    color: var(--color-bg);
   }
 
-  .cta:hover {
-    border-color: var(--color-accent);
-    background: color-mix(in srgb, var(--color-accent) 10%, transparent);
+  .cta:not(.primary) {
+    font-size: 0.76rem;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--section-border);
+    padding-bottom: 1px;
+    transition:
+      color 160ms ease,
+      border-color 160ms ease;
+  }
+
+  .cta:not(.primary):hover,
+  .cta:not(.primary):focus-visible {
+    transform: none;
+    box-shadow: none;
+    color: var(--text-color);
+    border-color: var(--text-color);
   }
 
   .jumps {
@@ -198,7 +213,7 @@
   .jumps a:hover,
   .jumps a:focus-visible {
     color: var(--text-color);
-    border-bottom-color: var(--color-accent);
+    border-bottom-color: var(--text-color);
   }
 
   .portrait {

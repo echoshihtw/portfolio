@@ -110,7 +110,7 @@
     width: 115%;
     aspect-ratio: 1;
     border-radius: 50%;
-    background: color-mix(in srgb, var(--color-accent) 6%, transparent);
+    background: color-mix(in srgb, var(--text-color) 4%, transparent);
     pointer-events: none;
     transition:
       transform 420ms cubic-bezier(0.2, 0.7, 0.2, 1),
@@ -135,7 +135,7 @@
   .card:hover::before,
   .card:focus-visible::before {
     transform: translate(-9%, 9%) scale(1.06);
-    background: color-mix(in srgb, var(--color-accent) 11%, transparent);
+    background: color-mix(in srgb, var(--text-color) 7%, transparent);
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -201,7 +201,7 @@
     font-size: 0.7rem;
     letter-spacing: 0.06em;
     text-transform: uppercase;
-    color: var(--color-accent);
+    color: var(--text-muted);
   }
 
   /* status */

@@ -137,13 +137,16 @@
     cursor: pointer;
     font-size: 0.74rem;
     letter-spacing: 0.03em;
-    color: var(--color-accent);
-    border-bottom: 1px solid transparent;
-    transition: border-color 160ms ease;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--section-border);
+    transition:
+      color 160ms ease,
+      border-color 160ms ease;
   }
 
   .expander:hover {
-    border-color: var(--color-accent);
+    color: var(--text-color);
+    border-color: var(--text-color);
   }
 
   .expander:focus-visible {

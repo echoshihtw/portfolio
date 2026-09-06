@@ -108,14 +108,14 @@
 }
 .gate-theme-label:hover {
   transform: translateY(-1px);
-  border-color: #b1552e;
+  border-color: #7d3320;
   background: rgba(255, 255, 255, 0.75);
   box-shadow:
     0 1px 0 rgba(255, 255, 255, 0.48) inset,
     0 6px 14px rgba(0, 0, 0, 0.08);
 }
 .gate-theme-input:focus-visible + .gate-theme-label {
-  outline: 2px solid #b1552e;
+  outline: 2px solid #7d3320;
   outline-offset: 2px;
 }
 .gate-theme-input:checked + .gate-theme-label {
@@ -394,7 +394,7 @@
   font-size: 0.66rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #b1552e;
+  color: #7d3320;
 }
 #boot-gate-card .card-name {
   font-family: "DM Serif Display", serif;
@@ -423,7 +423,7 @@
   transition: border-color 160ms ease;
 }
 #boot-gate-card .card-link:hover {
-  border-color: #b1552e;
+  border-color: #7d3320;
 }
 
 /* Shared CTA look, per-variant color override above/below. */
@@ -454,7 +454,7 @@
   transform: translateY(-1px);
 }
 .card-enter:focus-visible {
-  outline: 2px solid #b1552e;
+  outline: 2px solid #7d3320;
   outline-offset: 2px;
 }
 .card-enter .cta-arrow {

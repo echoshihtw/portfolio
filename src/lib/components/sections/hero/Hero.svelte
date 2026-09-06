@@ -127,13 +127,13 @@
         Download résumé <span class="cta-arrow">↓</span>
       </a>
       <a
-        class="hero-cta ghost"
+        class="hero-link mono"
         href={heroConfig.seeWorkHref}
       >
         See the work <span class="cta-arrow">→</span>
       </a>
       <a
-        class="hero-email mono"
+        class="hero-link mono"
         href="mailto:{heroConfig.email}"
       >
         {heroConfig.email}
@@ -221,7 +221,7 @@
     letter-spacing: 0.16em;
     text-transform: uppercase;
     font-weight: 500;
-    color: var(--color-accent);
+    color: var(--text-muted);
   }
 
   /* Quiet by design: a status badge in saturated green reads as a SaaS
@@ -534,15 +534,31 @@
     border-color: var(--text-color);
   }
 
-  .hero-cta.ghost {
-    border: 1px solid var(--section-border);
-    color: var(--text-color);
-    background: transparent;
+  /* One button, then links. Three pills in a row all asked for the click;
+     now the résumé is the button and the other two are ways past it. */
+  .hero-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.76rem;
+    letter-spacing: 0.02em;
+    color: var(--text-muted);
+    text-decoration: none;
+    border-bottom: 1px solid var(--section-border);
+    padding-bottom: 1px;
+    transition:
+      color 160ms ease,
+      border-color 160ms ease;
   }
 
-  .hero-cta.ghost:hover {
-    transform: translateY(-1px);
-    border-color: var(--color-accent);
+  .hero-link:hover,
+  .hero-link:focus-visible {
+    color: var(--text-color);
+    border-color: var(--text-color);
+  }
+
+  .hero-link:hover .cta-arrow {
+    transform: translate(2px, 0);
   }
 
   .cta-arrow {
@@ -555,19 +571,6 @@
 
   .hero-cta.primary:hover .cta-arrow {
     transform: translate(0, 2px);
-  }
-
-  .hero-email {
-    font-size: 0.76rem;
-    letter-spacing: 0.02em;
-    color: var(--color-accent);
-    text-decoration: none;
-    border-bottom: 1px solid transparent;
-    transition: border-color 160ms ease;
-  }
-
-  .hero-email:hover {
-    border-color: var(--color-accent);
   }
 
   @media (min-width: 768px) {

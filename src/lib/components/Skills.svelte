@@ -93,8 +93,8 @@
     flex: none;
     width: 0.9em;
     height: 0.9em;
-    color: var(--color-accent);
-    opacity: 0.85;
+    color: var(--text-muted);
+    opacity: 0.8;
   }
 
   .items-sep {

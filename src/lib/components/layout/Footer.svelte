@@ -205,25 +205,26 @@
     gap: 0.6rem;
   }
 
+  /* Links, not pills. The footer is the quiet end of the page and three
+     bordered buttons in a row were the loudest thing on it. */
   .footer-mail,
   .footer-source {
     font-family: "JetBrains Mono", monospace;
     font-size: 0.75rem;
     text-transform: uppercase;
-    border: 1px solid var(--section-border);
-    border-radius: 999px;
-    padding: 0.42rem 0.75rem;
+    border: 0;
+    border-bottom: 1px solid var(--section-border);
+    border-radius: 0;
+    padding: 0 0 2px;
     text-decoration: none;
-    color: var(--text-color);
-    background: var(--surface-bg);
+    color: var(--text-muted);
+    background: transparent;
     transition:
       border-color 160ms ease,
-      color 160ms ease,
-      background-color 160ms ease;
+      color 160ms ease;
   }
 
   .footer-source {
-    color: var(--color-accent);
     white-space: nowrap;
     display: flex;
     align-items: center;
@@ -258,7 +259,7 @@
 
   .footer-nav a:hover,
   .footer-nav a[aria-current="page"] {
-    color: var(--color-accent);
+    color: var(--text-color);
   }
 
   .footer-social-row {
@@ -283,13 +284,10 @@
   .footer-mail:hover,
   .footer-source:hover,
   .footer-social-link:hover {
-    border-color: var(--color-accent);
-    background: var(--color-bg);
-  }
-
-  .footer-mail:hover,
-  .footer-social-link:hover {
-    color: var(--color-accent);
+    border-color: var(--text-color);
+    color: var(--text-color);
+    transform: none;
+    box-shadow: none;
   }
 
   .footer-meta {

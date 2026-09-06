@@ -64,7 +64,7 @@
     --color-bg: #f7f5ee;
     --text-color: #14122a;
     --text-muted: #5b5870;
-    --color-accent: #b1552e;
+    --color-accent: #7d3320;
     --color-accent-strong: #14122a;
     --section-border: #ddd8c8;
     --surface-bg: #fcfbf5;

@@ -6,9 +6,14 @@
   --color-bg: #f7f5ee;
   --text-color: #14122a;
   --text-muted: #5b5870;
-  --color-accent: #b1552e;
+  /* The deep rust from the paintings, not the terracotta it replaced. Same
+     hue family, a third of the chroma and darker, so it reads as ink with
+     warmth in it rather than as orange. It is also on fewer things now:
+     the headline's italic, the availability dot, the timeline, the label
+     marks. Everything else that used to be accent is text or muted text. */
+  --color-accent: #7d3320;
   --color-accent-strong: #14122a;
-  --color-highlight: #b1552e;
+  --color-highlight: #7d3320;
   --section-border: #ddd8c8;
   --section-border-strong: #14122a;
   --surface-bg: #fcfbf5;
@@ -161,12 +166,12 @@ html {
 .footer-source:hover,
 .footer-social-link:hover {
   transform: translateY(-1px);
-  border-color: var(--color-accent);
+  border-color: var(--text-color);
   box-shadow:
     0 0 0 1px
       color-mix(
         in srgb,
-        var(--color-accent) calc(35% + 35% * var(--glow-strength)),
+        var(--color-accent) calc(70% * var(--glow-strength)),
         transparent
       ),
     0 0 calc(16px * var(--glow-strength))
