@@ -37,9 +37,17 @@ export const aboutMeConfig = {
   // The English line matters more than it looks for a remote hire: "the
   // working language in all my roles" is a fact about how she has actually
   // worked, not a self-assessed proficiency level.
+  //
+  // The remote clause is the one idea worth keeping from an older freelance
+  // pitch, which sold the languages as "bridging communication gaps between
+  // Asia and the Western world". Same point, stated as something checkable:
+  // resume.md lists Independent/Freelance as Remote 2020-2024 and
+  // SPIN.FASHION as Singapore, Remote. "Most of my career" was drafted and
+  // cut, because Find Recruiter and Lockerbie are both listed as Taipei and
+  // it would not have survived a reader with the CV open.
   story: [
     "My degree is in Italian language and culture, from Fu Jen Catholic University in Taipei.",
-    "Mandarin and Taiwanese are native. English has been the working language in every role I have had. I speak Italian.",
+    "Mandarin and Taiwanese are native. English has been the working language in every role I have had. I speak Italian, and I have worked remotely across time zones since 2020.",
   ],
 
   // The torn-paper edge from Echo's edited version, grafted onto the colour
