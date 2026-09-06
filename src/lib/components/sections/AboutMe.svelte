@@ -4,6 +4,7 @@
   import { closingConfig } from "../../../content/portfolio.config";
   import { calendlyUrl } from "$lib/contactLinks";
   import SectionHead from "$lib/components/SectionHead.svelte";
+  import { trackEmail } from "$lib/analytics";
 </script>
 
 <!-- The close, and the person, in one section. Keeps id="contact": the nav
@@ -35,6 +36,7 @@
           <a
             class="btn"
             href="mailto:{closingConfig.email}"
+            on:click={() => trackEmail("about")}
           >
             Email me <span
               class="cta-arrow"

@@ -5,6 +5,7 @@
   import { base } from "$app/paths";
   import { page } from "$app/stores";
   import { heroConfig } from "../../../content/portfolio.config";
+  import { trackResume } from "$lib/analytics";
 
   export let scrollPosition: number;
 
@@ -159,6 +160,7 @@
         target="_blank"
         rel="noreferrer noopener"
         class="tab"
+        on:click={() => trackResume("header")}
       >
         Résumé
       </a>

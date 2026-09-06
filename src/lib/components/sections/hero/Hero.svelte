@@ -3,6 +3,7 @@
   import { base } from "$app/paths";
   import { heroConfig } from "../../../../content/portfolio.config";
   import HeroDiagram from "./HeroDiagram.svelte";
+  import { trackEmail, trackResume } from "$lib/analytics";
 
   // Boot-up typing: runs once on first load, skipped entirely under
   // reduced-motion. Defaults to fully revealed so SSR/no-JS never see a
@@ -113,6 +114,7 @@
         <a
           class="btn"
           href="mailto:{heroConfig.email}"
+          on:click={() => trackEmail("hero")}
         >
           Email me <span class="cta-arrow">→</span>
         </a>
@@ -126,6 +128,7 @@
           class="link-cta"
           href="{base}/{heroConfig.resume}"
           download
+          on:click={() => trackResume("hero")}
         >
           Download résumé
         </a>

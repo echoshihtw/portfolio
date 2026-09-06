@@ -11,6 +11,7 @@
     instagramUrl,
     linkedInUrl,
   } from "$lib/contactLinks";
+  import { trackEmail, trackResume } from "$lib/analytics";
 
   const year = new Date().getFullYear();
   const socials = [
@@ -63,6 +64,7 @@
           <a
             href={email}
             class="link-cta"
+            on:click={() => trackEmail("footer")}
           >
             Email
           </a>
@@ -121,6 +123,7 @@
           href="{base}/{heroConfig.resume}"
           target="_blank"
           rel="noreferrer noopener"
+          on:click={() => trackResume("footer")}
         >
           Résumé
         </a>
