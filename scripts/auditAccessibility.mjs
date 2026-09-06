@@ -14,7 +14,12 @@ import { AxeBuilder } from "@axe-core/playwright";
 
 const ROOT = path.join(process.cwd(), "build");
 const PORT = 4319;
-const ROUTES = ["/", "/about", "/blog", "/blog/dont-fight-the-tools-defaults"];
+const ROUTES = [
+  "/",
+  "/paintings",
+  "/blog",
+  "/blog/dont-fight-the-tools-defaults",
+];
 const THEMES = ["dark", "light"];
 
 // WCAG 2.2 Level AA, the standard the site claims to meet.

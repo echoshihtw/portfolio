@@ -11,9 +11,13 @@
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
-  $: isBlog = $page.url.pathname.startsWith(`${base}/blog`);
-  $: isAbout = $page.url.pathname === `${base}/about`;
-  $: isHome = $page.url.pathname === (base || "/");
+  // Compare route ids, not paths against `base`. SvelteKit 2 resolves
+  // relative paths, so `base` is "." rather than "", and every
+  // `pathname === (base || "/")` in this file was comparing "/" with "."
+  // and quietly evaluating false. That is why aria-current never appeared
+  // in the prerendered HTML on any page.
+  $: isBlog = $page.route.id?.startsWith("/blog") ?? false;
+  $: isPaintings = $page.route.id === "/paintings";
 </script>
 
 <!-- inert while hidden: this pill is only faded out, not removed, so without
@@ -34,18 +38,11 @@
        four of the six links and all of the crowding. -->
   <div class="floating-links">
     <a
-      href={base || "/"}
+      href="{base}/paintings"
       class="floating-link"
-      aria-current={isHome ? "page" : undefined}
+      aria-current={isPaintings ? "page" : undefined}
     >
-      Home
-    </a>
-    <a
-      href="{base}/about"
-      class="floating-link"
-      aria-current={isAbout ? "page" : undefined}
-    >
-      About
+      Paintings
     </a>
     <a
       href="{base}/blog"

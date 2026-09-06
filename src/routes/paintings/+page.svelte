@@ -1,18 +1,18 @@
 <script lang="ts">
   import { base } from "$app/paths";
   import Seo from "$lib/components/Seo.svelte";
-  import PaintingWall from "$lib/components/sections/about/PaintingWall.svelte";
+  import PaintingWall from "$lib/components/sections/paintings/PaintingWall.svelte";
   import Signature from "$lib/components/Signature.svelte";
-  import { aboutConfig } from "../../content/about.config";
+  import { aboutConfig } from "../../content/paintingsPage.config";
 </script>
 
 <Seo
   title="Echo Shih · Paintings"
   description="Painting since 2012, mostly in Tainan. A degree in Italian language and culture, and three months at Accademia del Giglio in Florence."
-  path="/about"
+  path="/paintings"
 />
 
-<div class="about-page">
+<div class="paintings-page">
   <section class="story section_padding">
     <figure class="portrait">
       <img
@@ -78,7 +78,7 @@
      everything inside, including the wall, inherits the light set without
      knowing anything about the theme. --glow-strength at 0 is what turns
      off the dark mode glow and the scanline participation. */
-  .about-page {
+  .paintings-page {
     --color-bg: #f7f5ee;
     --text-color: #14122a;
     --text-muted: #5b5870;
@@ -99,9 +99,9 @@
   /* app.css swaps headings to JetBrains Mono in dark mode. Serif is this
      page's whole register, so it is overridden once here rather than as an
      exception scattered through the components. */
-  .about-page :global(h1),
-  .about-page :global(h2),
-  .about-page :global(h3) {
+  .paintings-page :global(h1),
+  .paintings-page :global(h2),
+  .paintings-page :global(h3) {
     font-family: "DM Serif Display", serif;
     font-weight: 400;
   }
@@ -160,7 +160,7 @@
     color: var(--color-accent);
   }
 
-  .about-page h1 {
+  .paintings-page h1 {
     margin: 0;
     /* Sized against the photograph beside it rather than against the
        viewport: the two are meant to read as one block. */
@@ -172,7 +172,7 @@
 
   /* The same treatment the home page gives its headline, so the two pages
      read as one site: one word in the accent, italic. */
-  .about-page h1 .accent {
+  .paintings-page h1 .accent {
     position: relative;
     color: var(--color-accent);
     font-style: italic;
@@ -220,14 +220,14 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .about-page h1 .accent:hover,
-    .about-page h1 .accent:hover::before,
-    .about-page h1 .accent:hover::after {
+    .paintings-page h1 .accent:hover,
+    .paintings-page h1 .accent:hover::before,
+    .paintings-page h1 .accent:hover::after {
       animation: none;
     }
 
-    .about-page h1 .accent:hover::before,
-    .about-page h1 .accent:hover::after {
+    .paintings-page h1 .accent:hover::before,
+    .paintings-page h1 .accent:hover::after {
       content: none;
     }
   }

@@ -12,15 +12,20 @@
   // any other route (e.g. /blog), the click has to actually navigate home
   // instead of being swallowed by preventDefault.
   function goTop(event: MouseEvent) {
-    if ($page.url.pathname !== (base || "/")) return;
+    if ($page.route.id !== "/") return;
     event.preventDefault();
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
+  // Compare route ids, not paths against `base`. SvelteKit 2 resolves
+  // relative paths, so `base` is "." rather than "", and every
+  // `pathname === (base || "/")` in this file was comparing "/" with "."
+  // and quietly evaluating false. That is why aria-current never appeared
+  // in the prerendered HTML on any page.
   // Route-level, so a post page marks Blog as current too.
-  $: isBlog = $page.url.pathname.startsWith(`${base}/blog`);
-  $: isAbout = $page.url.pathname === `${base}/about`;
-  $: isHome = $page.url.pathname === (base || "/");
+  $: isBlog = $page.route.id?.startsWith("/blog") ?? false;
+  $: isPaintings = $page.route.id === "/paintings";
+  $: isHome = $page.route.id === "/";
 </script>
 
 <!-- Not sticky: scrolls away with the page. The floating pill (driven by an
@@ -51,14 +56,27 @@
         aria-label="Main navigation"
         class="mobile-tabs"
       >
-        {#each tabs as tab}
+        <!-- Work, Projects, Skills and Contact are sections OF the home page, not
+             peers of it, so they appear only while you are on it. Anywhere
+             else they would be four links promising things this page does not
+             have; their slot becomes a single Home instead. -->
+        {#if isHome}
+          {#each tabs as tab}
+            <a
+              href={tabHref(tab.link, $page.url.pathname)}
+              class="mobile-tab-link"
+            >
+              {tab.name}
+            </a>
+          {/each}
+        {:else}
           <a
-            href={tabHref(tab.link, $page.url.pathname)}
+            href={base || "/"}
             class="mobile-tab-link"
           >
-            {tab.name}
+            Home
           </a>
-        {/each}
+        {/if}
         <!-- The four above are positions on this page; the two below are
              places you go. Rendered as one flat row they read as six peers,
              so clicking Blog does something categorically different from its
@@ -67,23 +85,12 @@
           class="nav-sep"
           aria-hidden="true"
         ></span>
-        <!-- Home leads the destinations because from anywhere else the four
-             anchors above are misleading: they read as sections of the page
-             you are on and are actually positions on the home page. This
-             names the direction they were quietly taking you. -->
         <a
-          href={base || "/"}
+          href="{base}/paintings"
           class="mobile-tab-link"
-          aria-current={isHome ? "page" : undefined}
+          aria-current={isPaintings ? "page" : undefined}
         >
-          Home
-        </a>
-        <a
-          href="{base}/about"
-          class="mobile-tab-link"
-          aria-current={isAbout ? "page" : undefined}
-        >
-          About
+          Paintings
         </a>
         <a
           href="{base}/blog"

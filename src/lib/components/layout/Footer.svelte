@@ -92,34 +92,31 @@
       <nav class="footer-nav">
         <p class="footer-title mono">Navigation</p>
 
-        {#each tabs as tab}
-          <a href={tabHref(tab.link, $page.url.pathname)}>{tab.name}</a>
-        {/each}
+        <!-- Work, Projects, Skills and Contact are sections OF the home page, not
+             peers of it, so they only appear while you are on it. Anywhere else
+             they would be four links promising things this page does not have.
+             Off the home page their slot becomes a single Home. -->
+        {#if $page.route.id === "/"}
+          {#each tabs as tab}
+            <a href={tabHref(tab.link, $page.url.pathname)}>{tab.name}</a>
+          {/each}
+        {:else}
+          <a href={base || "/"}>Home</a>
+        {/if}
         <!-- Same split as the header: sections of this page above, places
              you go below. A gap does here what the vertical rule does in a
              horizontal row. -->
         <a
           class="footer-nav-destination"
-          href={base || "/"}
-          aria-current={$page.url.pathname === (base || "/")
-            ? "page"
-            : undefined}
+          href="{base}/paintings"
+          aria-current={$page.route.id === "/paintings" ? "page" : undefined}
         >
-          Home
-        </a>
-        <a
-          class="footer-nav-destination"
-          href="{base}/about"
-          aria-current={$page.url.pathname === `${base}/about`
-            ? "page"
-            : undefined}
-        >
-          About
+          Paintings
         </a>
         <a
           class="footer-nav-destination"
           href="{base}/blog"
-          aria-current={$page.url.pathname.startsWith(`${base}/blog`)
+          aria-current={$page.route.id?.startsWith("/blog")
             ? "page"
             : undefined}
         >
