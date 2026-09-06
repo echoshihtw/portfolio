@@ -102,11 +102,13 @@ export const heroConfig: {
   // before there was pressure to) without a separate sentence. The second
   // sentence, an admitted mistake pulled from Clio's own project card,
   // is the one line here nobody else could have written.
-  // One sentence. The numbers are in the first highlight and the lesson is
-  // in the Clio study; this caption used to carry both, and the page said
-  // each three times.
+  // The caption under the hero figure. The figure is a drawing, and a
+  // drawing labelled "proof" is a claim it cannot make, so the caption says
+  // what it is and gives the two dates that are real: where Clio's records
+  // begin and when it went into daily use. The numbers are in the first
+  // highlight and the lesson is in the Clio study.
   proofLine:
-    "Clio, salon software I built for one owner, has been in daily use since May 2025.",
+    "A sketch, not a chart. Clio's records run from September 2024, and it has been in daily use at the salon since May 2025.",
 
   email: "echoshihtw@gmail.com",
   // The file is named on disk rather than renamed by a download attribute or

@@ -1,7 +1,8 @@
-<!-- An instrument, not an illustration: a 0 → 1 dial with a grid behind it,
-     the way a chart in a technical paper would be drawn. It says what the
-     headline says, without words, and it is drawn in the page's own tokens
-     so it follows the theme. Decorative to a screen reader. -->
+<!-- A sketch, not a chart. There is no data series behind the curve, and
+     the caption under it says so. What is real are the two dates on the
+     axis: where Clio's records start and when it went into daily use. Drawn
+     in the page's own tokens so it follows the theme. Decorative to a
+     screen reader; the caption carries the facts. -->
 <svg
   class="diagram"
   viewBox="0 0 320 240"
@@ -51,7 +52,7 @@
     y="212"
     class="tick"
   >
-    0
+    Sep 2024
   </text>
   <text
     x="286"
@@ -61,19 +62,12 @@
     1
   </text>
   <text
-    x="22"
-    y="28"
-    class="tick"
-  >
-    fig. 01
-  </text>
-  <text
     x="298"
     y="212"
     class="tick"
     text-anchor="end"
   >
-    t
+    now
   </text>
 
   <!-- One curve from nothing to something, still climbing after ship. -->
@@ -99,7 +93,7 @@
     y="48"
     class="tick"
   >
-    ship
+    May 2025
   </text>
 
   <!-- Markers -->

@@ -138,7 +138,7 @@
     <aside class="hero-aside">
       <HeroDiagram />
       <p class="hero-proof">
-        <span class="label">Proof</span>
+        <span class="label">fig. 01</span>
         {heroConfig.proofLine}
       </p>
     </aside>
