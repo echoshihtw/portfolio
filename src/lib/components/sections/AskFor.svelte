@@ -10,6 +10,7 @@
     "var(--sage)",
     "var(--highlight)",
     "var(--ink)",
+    "var(--muted)",
   ];
 </script>
 
@@ -23,7 +24,7 @@
     label="Requests"
     title="What people ask me for"
     id="ask-title"
-    note="The job as someone with the problem would put it, then what I did about it. Every line is checkable against the rest of this page."
+    note="The work as someone who needs it would name it, then the proof. Every line is checkable against the rest of this page."
   />
 
   <div class="body">
