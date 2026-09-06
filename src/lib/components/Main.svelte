@@ -4,6 +4,7 @@
   import Hero from "$lib/components/sections/hero/Hero.svelte";
   import Experience from "$lib/components/sections/experience/Experience.svelte";
   import AboutMe from "$lib/components/sections/AboutMe.svelte";
+  import AskFor from "$lib/components/sections/AskFor.svelte";
 </script>
 
 <div class="flex flex-col gap-2 md:gap-3 mb-24 w-full">
@@ -15,5 +16,6 @@
   <Experience />
   <Project />
   <Skills />
+  <AskFor />
   <AboutMe />
 </div>

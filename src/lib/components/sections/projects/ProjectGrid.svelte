@@ -10,9 +10,8 @@
 </script>
 
 <div class="grid">
-  {#each projectsConfig as project, i}
+  {#each projectsConfig as project}
     <ProjectCard
-      tone={i % 4}
       {project}
       onOpen={(p) => (open = p)}
     />
