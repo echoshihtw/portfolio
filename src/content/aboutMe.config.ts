@@ -56,9 +56,16 @@ export const aboutMeConfig = {
   // resume.md lists Independent/Freelance as Remote 2020-2024 and
   // SPIN.FASHION as Singapore, Remote. "Most of my career" was drafted and
   // cut, because Find Recruiter and Lockerbie are both listed as Taipei.
+  // Rewritten after a slop audit that these drafts failed. Both had the same
+  // shape: a colon followed by a three-part list, twice within four lines,
+  // which is the loudest tell there is. Neither used a contraction while her
+  // older copy is full of them ("The macOS build couldn't ship", "What I'd
+  // do differently"), so the page changed voice halfway down. "At some point
+  // I decided" went too: it is a hedge, and either the date is known or it
+  // is not worth gesturing at.
   story: [
-    "I started out working in restaurants, in customer relations, with a degree in Italian language and culture. At some point I decided I should be doing better with my time, and with what I am actually good at: observing, seeing patterns, and turning them into abstractions.",
-    "Mandarin and Taiwanese are native. English has been the working language in every role I have had. I speak Italian, and I have worked remotely across time zones since 2020.",
+    "I started out in restaurants, in customer relations, with a degree in Italian language and culture. What I'm good at is noticing things, and seeing the pattern underneath them. I decided I should spend my time on that instead.",
+    "Mandarin and Taiwanese are native. English is the working language in every job I've had. I speak Italian too, and I've worked across time zones since 2020.",
   ],
 
   // The torn-paper edge from Echo's edited version, grafted onto the colour

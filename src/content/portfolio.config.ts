@@ -134,7 +134,7 @@ export const closingConfig = {
   // evidenced by Clio being in daily use since May 2025, without a word
   // borrowed from ops. To a client that phrase was reassurance; to a hiring
   // team it reads as being handed the pager.
-  body: "The work I want is the part nobody has scoped yet: deciding what it should be, building it, and staying with it after it ships. Remote, from Taiwan.",
+  body: "The work I want is the part nobody's scoped yet. Work out what it should be, build it, then stay with it after it ships. Remote, from Taiwan.",
   email: "echoshihtw@gmail.com",
   resume: "Chun-Yu-Echo-Shih-Software-Engineer.pdf",
 };
