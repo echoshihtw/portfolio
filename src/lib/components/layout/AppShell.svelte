@@ -1,5 +1,4 @@
 <script lang="ts">
-  import FloatingNav from "./FloatingNav.svelte";
   import Footer from "./Footer.svelte";
   import Header from "./Header.svelte";
   import { onMount, type ComponentType } from "svelte";
@@ -9,23 +8,9 @@
   let scrollPosition: number;
   // Loaded on mount, so it is undefined for the first render.
   let ParticlesComponent: ComponentType | undefined;
-  let headerEl: HTMLElement | undefined;
-  let isNearPageBottom = false;
-  let isHeaderVisible = true;
-  const FLOATING_NAV_BOTTOM_OFFSET = 4;
-  // The floating pill's job is to stand in for the header nav once it has
-  // actually scrolled out of view, driven by observing the header itself
-  // rather than a guessed scroll-pixel threshold, so it stays correct
-  // regardless of header height.
-  $: showFloatingNav = !isHeaderVisible && !isNearPageBottom;
 
   function handleScroll() {
     const currentY = window.scrollY;
-    const doc = document.documentElement;
-    isNearPageBottom =
-      currentY + window.innerHeight >=
-      doc.scrollHeight - FLOATING_NAV_BOTTOM_OFFSET;
-
     scrollPosition = currentY;
   }
   onMount(async () => {
@@ -35,14 +20,6 @@
   onMount(() => {
     handleScroll();
     window.addEventListener("scroll", handleScroll);
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        isHeaderVisible = entry.isIntersecting;
-      },
-      { threshold: 0 }
-    );
-    if (headerEl) observer.observe(headerEl);
 
     void particlesInit(async (engine) => {
       // call this once per app
@@ -55,7 +32,6 @@
     return () => {
       // Cleanup listener when the component is unmounted
       window.removeEventListener("scroll", handleScroll);
-      observer.disconnect();
     };
   });
   let particlesConfig = {
@@ -105,11 +81,11 @@
     class="hidden dark:block "
     options={particlesConfig}
   />
-  <Header
-    {scrollPosition}
-    bind:headerEl
-  />
-  <FloatingNav isVisible={showFloatingNav} />
+  <!-- The header is sticky and condenses into a pill as the page scrolls.
+       There used to be a second FloatingNav component faded in by an
+       IntersectionObserver once this one left the viewport; one element
+       doing both jobs is what makes the change a transition. -->
+  <Header {scrollPosition} />
   <main class="max-w-[1400px] mx-auto">
     <div class="h-auto flex flex-col">
       <slot />
