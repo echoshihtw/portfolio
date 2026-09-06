@@ -48,5 +48,16 @@ export const aboutMeConfig = {
     height: 574,
   },
 
+  // One real action, because it is the only thing here that leaves the page.
   cta: { label: "See the paintings", href: "/gallery" },
+
+  // A quiet index for people who skim instead of scrolling. Deliberately not
+  // buttons: Work, Projects and Contact are further down this same page, and
+  // giving them the same weight as the one link that goes somewhere else
+  // would flatten the difference between them.
+  jumps: [
+    { label: "Work", href: "#work" },
+    { label: "Projects", href: "#projects" },
+    { label: "Contact", href: "#contact" },
+  ],
 } as const;

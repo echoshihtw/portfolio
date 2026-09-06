@@ -30,21 +30,30 @@
       {#each aboutMeConfig.story as paragraph}
         <p class="body">{paragraph}</p>
       {/each}
-      <a
-        class="cta mono"
-        href="{base}{aboutMeConfig.cta.href}"
-      >
-        {aboutMeConfig.cta.label}
-        <span aria-hidden="true">→</span>
-      </a>
+      <div class="actions">
+        <a
+          class="cta mono"
+          href="{base}{aboutMeConfig.cta.href}"
+        >
+          {aboutMeConfig.cta.label}
+          <span aria-hidden="true">→</span>
+        </a>
+
+        <ul class="jumps mono">
+          {#each aboutMeConfig.jumps as jump}
+            <li><a href={jump.href}>{jump.label}</a></li>
+          {/each}
+        </ul>
+      </div>
     </div>
   </div>
 </section>
 
 <style>
+  /* One hairline, above. Two rules turn a section into a banded widget that
+     reads as an insert rather than as part of the page. */
   .aboutme {
     border-top: 1px solid var(--section-border);
-    border-bottom: 1px solid var(--section-border);
   }
 
   /* An L, not two columns: the photograph holds the left and the text turns
@@ -117,13 +126,52 @@
     max-width: 60ch;
   }
 
+  /* One action and an index, not four peers. The button is the only thing
+     in this section that leaves the page; the three below it are further
+     down this one, so they are text and it is not. */
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.9rem 1.4rem;
+    margin-top: 0.5rem;
+  }
+
   .cta {
-    align-self: flex-start;
-    margin-top: 0.35rem;
-    border: 1px solid var(--section-border);
+    border: 1px solid var(--color-accent);
     border-radius: 999px;
-    padding: 0.55rem 1.1rem;
+    padding: 0.55rem 1.15rem;
     color: var(--text-color);
     text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .cta:hover {
+    background: color-mix(in srgb, var(--color-accent) 10%, transparent);
+  }
+
+  .jumps {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0 1rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+  }
+
+  .jumps a {
+    color: var(--text-muted);
+    text-decoration: none;
+    padding-bottom: 2px;
+    border-bottom: 1px solid transparent;
+  }
+
+  .jumps a:hover,
+  .jumps a:focus-visible {
+    color: var(--text-color);
+    border-bottom-color: var(--color-accent);
   }
 </style>
