@@ -4,9 +4,6 @@
   import PaintingWall from "$lib/components/sections/about/PaintingWall.svelte";
   import Signature from "$lib/components/Signature.svelte";
   import { aboutConfig } from "../../content/about.config";
-  import { WIDTHS } from "../../content/paintings.config";
-
-  const [small, large] = WIDTHS;
 </script>
 
 <Seo
@@ -28,12 +25,10 @@
 
       <figure class="portrait">
         <img
-          src="{base}/{aboutConfig.portrait.src}-{small}.jpg"
-          srcset="{base}/{aboutConfig.portrait
-            .src}-{small}.jpg {small}w, {base}/{aboutConfig.portrait
-            .src}-{large}.jpg {large}w"
-          sizes="(min-width: 860px) 22rem, 92vw"
+          src="{base}/{aboutConfig.portrait.src}"
           alt={aboutConfig.portrait.alt}
+          width="720"
+          height="964"
           draggable="false"
           decoding="async"
         />
@@ -164,30 +159,17 @@
     margin: 0;
   }
 
-  /* No frame, no shadow, no rounded box: the photograph dissolves into the
-     page instead of sitting on it. That works here because the wall behind
-     her is a warm off-white already close to this page's own ground, so the
-     two meet almost invisibly and it reads as printed rather than pasted.
-  
-     The ellipse is off-centre on purpose. She is on the right of the frame,
-     so a symmetric fade would eat her and keep the wall. These numbers were
-     chosen by compositing the fade against the real ground and looking at
-     it, not by guessing: centre 58%/45%, opaque out to 53% of the radius,
-     gone by 100%. */
+  /* Cut out of its background rather than framed: no border, no shadow, no
+     rounded box, because there is no rectangle left to give an edge to. She
+     stands on the page instead of sitting in a photograph on it.
+
+     An earlier version kept the whole scene and faded its edges with a
+     radial mask. That read as a vignette, which is a photograph pretending
+     not to have edges rather than one that has none. */
   .portrait img {
     display: block;
     width: 100%;
     height: auto;
-    -webkit-mask-image: radial-gradient(
-      ellipse 85% 71% at 58% 45%,
-      #000 53%,
-      transparent 100%
-    );
-    mask-image: radial-gradient(
-      ellipse 85% 71% at 58% 45%,
-      #000 53%,
-      transparent 100%
-    );
     -webkit-user-drag: none;
     user-select: none;
   }

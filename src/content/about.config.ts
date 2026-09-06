@@ -18,14 +18,20 @@ export const aboutConfig = {
     "The clay bust, the pasta painting and the charcoal head were made there. The ink drawing of a mouth was made on a plane, and the airport is Jakarta.",
   ],
 
-  // Not a headshot and not a studio shot: her, laughing, in front of a wall
-  // someone else drew on. This is the photograph the site was missing.
+  // Cut out of its background, so she stands on the page rather than sitting
+  // in a photograph on it. One asset at 720px: the slot is 22rem, so that
+  // already covers a 2x screen and a second width would be dead weight.
   //
-  // The date is the photo's own capture date. The place is not stated,
+  // Shipped as a JPEG composited onto this page's exact ground rather than
+  // a transparent PNG. The page holds one cream in both themes by design,
+  // so nothing needs to show through, and the PNG cost 627KB against 71KB
+  // for a file that looks the same.
+  //
+  // The date is the photograph's own capture date. The place is not stated,
   // because she has not confirmed it.
   portrait: {
-    src: "assets/echo-florence",
-    alt: "Echo laughing, holding a gelato, in front of a graffitied wall",
+    src: "assets/echo-florence.jpg",
+    alt: "Echo laughing, holding a gelato",
     caption: "October 2018",
   },
 
