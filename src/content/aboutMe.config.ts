@@ -22,16 +22,25 @@ export const aboutMeConfig = {
     accent?: boolean;
   }[],
 
-  // Awaiting Echo's own words. Deliberately empty rather than holding a
-  // draft: the section renders without prose, and nothing invented reaches
-  // the page in the meantime.
+  // Echo's own words, taken from the CV rather than written here.
   //
-  // What left with the old paragraphs, in case any of it should come back:
-  // painting since 2012, mostly in Tainan; a BA in Italian language and
-  // culture from Fu Jen Catholic University, Taipei; three months at
-  // Accademia del Giglio in Florence; and which pieces were made where.
-  // Those were the only places on the site carrying any of it.
-  story: [] as string[],
+  // Not the CV's summary paragraph: that is already the hero's support line
+  // almost verbatim, and repeating it two screens later would say nothing
+  // new. These two lines are the parts of resume.md that appear NOWHERE on
+  // the site: the degree (resume.md:66) and the languages beside it.
+  //
+  // They also answer "self-taught" without claiming it. A language degree
+  // sitting under a product-engineer hero says how she got here, and lets
+  // the reader draw the conclusion rather than being told. Say the word if
+  // it should be explicit instead.
+  //
+  // The English line matters more than it looks for a remote hire: "the
+  // working language in all my roles" is a fact about how she has actually
+  // worked, not a self-assessed proficiency level.
+  story: [
+    "My degree is in Italian language and culture, from Fu Jen Catholic University in Taipei.",
+    "Mandarin and Taiwanese are native. English has been the working language in every role I have had. I speak Italian.",
+  ],
 
   // The torn-paper edge from Echo's edited version, grafted onto the colour
   // of the untouched photograph (scripts/graft.swift: alpha from one image,
