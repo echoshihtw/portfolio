@@ -112,10 +112,10 @@ export const projectsConfig: Projects = [
     name: "Ming Mold 60th",
     subtitle:
       "A 60th anniversary gift for the family business: identity, card face, and the box it ships in",
-    why: "My family's mould manufacturer turned sixty in 2021, founded 1961. The gift had to say something about sixty years without being a plaque, and it had to be made in quantity: a commemorative EZ-card in a presentation box, for people who had worked there for decades.",
+    why: "My family's mould manufacturer turned sixty in 2021, founded 1961. The gift had to say something about sixty years without being a plaque, and it had to be made in quantity: a commemorative metro card in a presentation box, for people who had worked there for decades.",
     result:
       "Monogram to die-cut to a carton of finished boxes in under three months. The mark folds the company's existing M into the bowl of the 6 at one line weight throughout, which is what lets it hot-foil stamp: a mark that varies in weight fills in at the thin end. The card face is the original factory frontage as a line engraving, with the red sign left at full saturation and everything else dropped back, under 我們一起走過的一甲子, the sixty years we walked together. I drew the die-cut for the box too, so the physical construction is mine as well as the printed surfaces.",
-    stack: ["Illustrator", "Hot foil stamping", "Die-cut box", "EZ-card"],
+    stack: ["Illustrator", "Hot foil stamping", "Die-cut box", "Metro card"],
     shots: [
       {
         src: "assets/ming-mold/monogram.jpg",

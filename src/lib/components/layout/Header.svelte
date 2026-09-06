@@ -26,11 +26,30 @@
   $: isBlog = $page.route.id?.startsWith("/blog") ?? false;
   $: isGallery = $page.route.id === "/gallery";
   $: isHome = $page.route.id === "/";
+
+  let homeOpen = false;
+  const closeHome = () => (homeOpen = false);
+
+  // A menu that only closes by clicking its own trigger is a trap: people
+  // click away, or press escape, and expect it gone.
+  function onWindowKey(e: KeyboardEvent) {
+    if (e.key === "Escape") homeOpen = false;
+  }
+
+  function onWindowPointer(e: PointerEvent) {
+    if (!homeOpen) return;
+    if (!(e.target as HTMLElement).closest(".home-menu")) homeOpen = false;
+  }
 </script>
 
 <!-- Not sticky: scrolls away with the page. The floating pill (driven by an
      IntersectionObserver on this element, in AppShell) takes over navigation
      once this leaves the viewport, rather than two navs stacking. -->
+<svelte:window
+  on:keydown={onWindowKey}
+  on:pointerdown={onWindowPointer}
+/>
+
 <header
   class="w-full py-2 header-shell"
   bind:this={headerEl}
@@ -56,27 +75,53 @@
         aria-label="Main navigation"
         class="mobile-tabs"
       >
-        <!-- Work, Projects, Skills and Contact are sections OF the home page, not
-             peers of it, so they appear only while you are on it. Anywhere
-             else they would be four links promising things this page does not
-             have; their slot becomes a single Home instead. -->
-        {#if isHome}
-          {#each tabs as tab}
-            <a
-              href={tabHref(tab.link, $page.url.pathname)}
-              class="mobile-tab-link"
-            >
-              {tab.name}
-            </a>
-          {/each}
-        {:else}
-          <a
-            href={base || "/"}
-            class="mobile-tab-link"
+        <!-- Work, Projects, Skills and Contact are sections OF the home
+             page, so they sit inside it rather than beside it. Keeping them
+             in a menu also means this nav holds the same items on every
+             page: before, the row changed shape between routes and
+             everything after it moved. -->
+        <div class="home-menu">
+          <button
+            type="button"
+            class="mobile-tab-link home-trigger"
+            aria-expanded={homeOpen}
+            aria-controls="home-sections"
+            aria-current={isHome ? "page" : undefined}
+            on:click={() => (homeOpen = !homeOpen)}
           >
             Home
-          </a>
-        {/if}
+            <span
+              class="chev"
+              aria-hidden="true"
+            >
+              ▾
+            </span>
+          </button>
+          <ul
+            id="home-sections"
+            class="home-sections"
+            hidden={!homeOpen}
+          >
+            <li>
+              <a
+                href={base || "/"}
+                on:click={closeHome}
+              >
+                Top
+              </a>
+            </li>
+            {#each tabs as tab}
+              <li>
+                <a
+                  href={tabHref(tab.link, $page.url.pathname)}
+                  on:click={closeHome}
+                >
+                  {tab.name}
+                </a>
+              </li>
+            {/each}
+          </ul>
+        </div>
         <!-- The four above are positions on this page; the two below are
              places you go. Rendered as one flat row they read as six peers,
              so clicking Blog does something categorically different from its
@@ -196,6 +241,66 @@
 
   /* Divides the page's own sections from the links that leave it. Sized in
      em so it tracks the link text rather than a fixed pixel height. */
+  .home-menu {
+    position: relative;
+    display: inline-flex;
+  }
+
+  .home-trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    font: inherit;
+    color: inherit;
+  }
+
+  .chev {
+    font-size: 0.7em;
+    transition: transform 160ms ease;
+  }
+
+  .home-trigger[aria-expanded="true"] .chev {
+    transform: rotate(180deg);
+  }
+
+  .home-sections {
+    position: absolute;
+    top: calc(100% + 0.55rem);
+    left: 0;
+    z-index: 30;
+    margin: 0;
+    padding: 0.4rem;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    min-width: 9rem;
+    border: 1px solid var(--section-border);
+    border-radius: 6px;
+    background: var(--surface-bg);
+    box-shadow: 0 10px 26px rgb(20 18 42 / 0.16);
+  }
+
+  .home-sections a {
+    display: block;
+    padding: 0.4rem 0.6rem;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+
+  .home-sections a:hover,
+  .home-sections a:focus-visible {
+    background: color-mix(in srgb, var(--color-accent) 12%, transparent);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .chev {
+      transition: none;
+    }
+  }
+
   .nav-sep {
     flex: none;
     width: 1px;
