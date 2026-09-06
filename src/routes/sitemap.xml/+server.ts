@@ -25,6 +25,7 @@ export function GET() {
 
   const urls = [
     { loc: `${SITE_ORIGIN}/`, priority: "1.0" },
+    { loc: `${SITE_ORIGIN}/about`, priority: "0.8" },
     { loc: `${SITE_ORIGIN}/blog`, priority: "0.8" },
     ...posts.map((p) => ({
       loc: `${SITE_ORIGIN}/blog/${p.slug}`,
