@@ -203,15 +203,27 @@ code,
   animation: spin 5s linear infinite;
 }
 
+/* Section titles are landmarks: their job is to be found while scanning, not
+   to be read closely. They were failing at it four ways at once, and the
+   combination was worse than any one of them. 12.8px, uppercase, monospace
+   and 0.12em tracking each slow reading on their own; uppercase also removes
+   the word shapes an eye scans by, and wide tracking breaks the word into
+   parts. They were also SMALLER than the body text below them, which
+   inverts the hierarchy so the eye stops finding them at all.
+   
+   Still mono, still uppercase, because that register is the site's and these
+   are labels rather than headlines. Bigger than the body text now, at full
+   contrast, with the tracking pulled back to where it helps uppercase
+   without pulling the word apart. */
 .section_title {
   @apply font-light text-3xl sm:text-4xl;
   position: relative;
   overflow: hidden;
-  color: var(--text-muted);
-  letter-spacing: 0.12em;
+  color: var(--text-color);
+  letter-spacing: 0.09em;
   text-transform: uppercase;
-  font-size: 0.8rem;
-  margin-bottom: 0.6rem;
+  font-size: 0.95rem;
+  margin-bottom: 0.9rem;
 }
 
 /* One-shot signal-scan cue, dark mode only (via --glow-strength), the first
