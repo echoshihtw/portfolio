@@ -393,7 +393,7 @@
     display: block;
     width: 100%;
     height: auto;
-    background: var(--surface-bg);
+    background: var(--surface);
     /* Friction against casual copying, not protection: anything the browser
        draws can be screenshotted and these bytes are in the page. What this
        stops is dragging a picture to the desktop, which is most of it. */
@@ -468,7 +468,7 @@
     gap: 0.9rem;
     margin: 0 0 1.6rem;
     font-size: 0.9rem;
-    color: var(--text-muted);
+    color: var(--muted);
   }
 
   @media (min-width: 900px) and (pointer: fine) {
@@ -492,7 +492,7 @@
   }
 
   .work:focus-visible {
-    outline: 2px solid var(--color-accent);
+    outline: 2px solid var(--primary);
     outline-offset: 6px;
   }
 
@@ -509,7 +509,7 @@
     content: "";
     position: absolute;
     inset: -10px;
-    border: 1px dashed var(--color-accent);
+    border: 1px dashed var(--primary);
     pointer-events: none;
   }
 
@@ -552,7 +552,7 @@
     border-radius: 999px;
     cursor: pointer;
     background: rgb(247 245 238 / 0.82);
-    color: var(--text-muted);
+    color: var(--muted);
     box-shadow: 0 1px 4px rgb(28 22 14 / 0.22);
     opacity: 0;
     transition:
@@ -569,7 +569,7 @@
   /* Once it is on it stays visible: a favourite you cannot see is not one. */
   .heart[aria-pressed="true"] {
     opacity: 1;
-    color: var(--color-accent);
+    color: var(--primary);
   }
 
   .heart[aria-pressed="true"] svg path {
@@ -577,7 +577,7 @@
   }
 
   .heart:focus-visible {
-    outline: 2px solid var(--color-accent);
+    outline: 2px solid var(--primary);
     outline-offset: 2px;
   }
 

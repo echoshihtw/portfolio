@@ -34,7 +34,7 @@
     width: 11rem;
     /* From the asset's own 900x458, so the box never mis-shapes the ink. */
     aspect-ratio: 900 / 458;
-    background-color: var(--text-muted);
+    background-color: var(--muted);
     -webkit-mask-image: var(--sig);
     mask-image: var(--sig);
     -webkit-mask-size: contain;
