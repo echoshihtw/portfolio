@@ -33,7 +33,7 @@ export const heroConfig: {
   // of layers; resume.md keeps the swap list for postings that literally
   // say frontend.
   remoteOpen:
-    "Senior product engineer · UTC+8 · Remote from Taiwan · APAC hours or async",
+    "Product engineer · UTC+8 · Remote from Taiwan · APAC hours or async",
 
   // Spells out what "end to end" means, layer by layer: named techniques
   // pulled from real project work, not category nouns any portfolio could
@@ -52,7 +52,7 @@ export const heroConfig: {
   // claim ("people rely on" implies things never break). The signal remote
   // hiring screens hardest for is whether someone can be trusted without
   // oversight, not whether their software never fails.
-  // Redesign brief, 2026-09-06: the hero has to say senior product
+  // Redesign brief, 2026-09-06: the hero has to say product
   // engineer, React and TypeScript, developer experience, and zero to one,
   // in the first screen. The headline carries the zero-to-one claim and
   // the ownership after it; the support line carries the stack and the

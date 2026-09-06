@@ -7,7 +7,7 @@ import { githubUrl, linkedInUrl } from "$lib/contactLinks";
 export const SITE_ORIGIN = "https://echoshih.com";
 export const SITE_NAME = "Echo Shih";
 export const AUTHOR_NAME = "Echo Shih";
-export const AUTHOR_JOB_TITLE = "Senior Product Engineer";
+export const AUTHOR_JOB_TITLE = "Product Engineer";
 export const DEFAULT_OG_IMAGE = `${SITE_ORIGIN}/og-image.png`;
 
 /** Absolute URL for a path: canonical and og:url both require one. */
