@@ -26,9 +26,16 @@ export const aboutMeConfig = {
   //
   // The first line is the story she told on 2026-09-06: she started out in
   // restaurants doing customer relations, and decided she should be doing
-  // better with her time and with what she is really good at. Her motive,
-  // in her framing, not an inference. The wording is close to how she said
-  // it; the only words that are mine are the joins.
+  // better with her time and with what she is really good at, which is
+  // resolving problems. Her motive, in her framing, not an inference. The
+  // wording is close to how she said it; the only words that are mine are
+  // the joins.
+  //
+  // "Good at resolving problems" would be the most generic line on the site
+  // standing alone: everyone claims it. It survives here because the clause
+  // before it earns it. Customer relations IS resolving problems, so the
+  // sentence says she is doing the same thing she always did, for harder
+  // problems, rather than announcing a trait.
   //
   // The degree comes from resume.md:66, and the languages from the line
   // beside it. Not the CV's summary paragraph: that is already the hero's
@@ -46,7 +53,7 @@ export const aboutMeConfig = {
   // SPIN.FASHION as Singapore, Remote. "Most of my career" was drafted and
   // cut, because Find Recruiter and Lockerbie are both listed as Taipei.
   story: [
-    "I started out working in restaurants, in customer relations, with a degree in Italian language and culture. At some point I decided I should be doing better with my time, and with what I am actually good at.",
+    "I started out working in restaurants, in customer relations, with a degree in Italian language and culture. At some point I decided I should be doing better with my time, and with what I am actually good at, which is resolving problems.",
     "Mandarin and Taiwanese are native. English has been the working language in every role I have had. I speak Italian, and I have worked remotely across time zones since 2020.",
   ],
 
