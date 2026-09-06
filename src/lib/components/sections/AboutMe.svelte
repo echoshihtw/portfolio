@@ -11,7 +11,8 @@
      both point at it. -->
 <section
   id="contact"
-  class="aboutme section_padding section_band"
+  class="aboutme section_padding section_band corner-tr"
+  style="--band-bg: color-mix(in srgb, #e2b657 16%, var(--color-bg))"
 >
   <div class="wrap">
     <div class="text">

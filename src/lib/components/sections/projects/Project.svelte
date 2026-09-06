@@ -5,7 +5,8 @@
 
 <section
   id="projects"
-  class="w-full section_padding section_layout section_band"
+  class="w-full section_padding section_layout section_band corner-tl"
+  style="--band-bg: color-mix(in srgb, #b9cfe6 18%, var(--color-bg))"
 >
   <h2
     class="section_title"
