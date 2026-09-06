@@ -4,6 +4,7 @@
   import { closingConfig } from "../../../content/portfolio.config";
   import { calendlyUrl } from "$lib/contactLinks";
   import SectionHead from "$lib/components/SectionHead.svelte";
+  import Portrait from "$lib/components/Portrait.svelte";
   import { trackEmail } from "$lib/analytics";
 </script>
 
@@ -82,17 +83,14 @@
         </ul>
       </div>
 
-      <figure class="portrait">
-        <img
-          src="{base}/{aboutMeConfig.portrait.src}"
+      <div class="portrait-slot">
+        <Portrait
+          src={aboutMeConfig.portrait.src}
           alt={aboutMeConfig.portrait.alt}
           width={aboutMeConfig.portrait.width}
           height={aboutMeConfig.portrait.height}
-          draggable="false"
-          loading="lazy"
-          decoding="async"
         />
-      </figure>
+      </div>
     </div>
   </div>
 </section>
@@ -165,25 +163,12 @@
     border-bottom-color: var(--primary);
   }
 
-  .portrait {
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-2);
-    max-width: 20rem;
+  /* Capped so the picture is present without being the section. The
+     Portrait component leaves room for its own backing offset. */
+  .portrait-slot {
     width: 100%;
+    max-width: 22rem;
     justify-self: center;
-  }
-
-  /* A print with a thin edge: the same border and radius as a card. */
-  .portrait img {
-    display: block;
-    width: 100%;
-    height: auto;
-    border: var(--border-w) solid var(--border);
-    border-radius: var(--radius-md);
-    -webkit-user-drag: none;
-    user-select: none;
   }
 
   @media (min-width: 900px) {
@@ -195,11 +180,18 @@
       grid-column: 2;
     }
     .wrap {
-      grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
       gap: var(--space-8);
     }
-    .portrait {
+    .portrait-slot {
+      max-width: 30rem;
       justify-self: end;
+      align-self: start;
+      /* The PNG carries 199 transparent rows above the hair, out of 1435.
+         Pulling the box up by that much (199/1200 of the width, since a
+         percentage margin resolves against width) puts the visible top of
+         the silhouette level with the first line of the story. */
+      margin-top: -16.6%;
     }
   }
 </style>

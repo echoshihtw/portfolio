@@ -82,14 +82,13 @@ export const aboutMeConfig = {
   //
   // Transparent rather than flattened onto a page colour, because it now
   // sits on the home page, which has two themes.
-  // The full frame, not the torn-edge cutout: the site is rectangles with
-  // hairline borders now, and a photograph printed square sits on that
-  // grid. Cropped 4:5 from the original, the blank wall above her gone.
+  // A transparent PNG cut to an organic capsule, shown exactly as exported,
+  // with a flat cobalt capsule behind it. See Portrait.svelte.
   portrait: {
-    src: "assets/echo-florence.jpg",
-    alt: "Echo laughing, holding a gelato, in front of a graffitied wall in Florence",
-    width: 960,
-    height: 1203,
+    src: "assets/hero-a.png",
+    alt: "Echo laughing while holding a gelato",
+    width: 1200,
+    height: 1435,
   },
 
   // One real action, because it is the only thing here that leaves the page.
@@ -100,7 +99,7 @@ export const aboutMeConfig = {
   // giving them the same weight as the one link that goes somewhere else
   // would flatten the difference between them.
   jumps: [
-    { label: "Work", href: "#work" },
-    { label: "Projects", href: "#projects" },
+    { label: "Experience", href: "#work" },
+    { label: "Case studies", href: "#projects" },
   ],
 } as const;
