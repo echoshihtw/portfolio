@@ -56,10 +56,9 @@
     <Icon icon="ri:arrow-up-circle-line" />
   </button>
 
-  <div
-    class="floating-theme-toggle"
-    aria-label="Toggle theme"
-  >
+  <!-- No aria-label here: it is ignored on a div with no role, and the
+       switch inside carries its own name. -->
+  <div class="floating-theme-toggle">
     <ThemeSwitch id="theme-toggle-floating" />
   </div>
 </nav>

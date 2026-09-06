@@ -9,12 +9,12 @@
   id="skills"
   class="section_padding section_layout"
 >
-  <h3
+  <h2
     class="section_title"
     use:sweepOnView
   >
     #skills
-  </h3>
+  </h2>
 
   <div class="skills">
     {#each skillsConfig as group}

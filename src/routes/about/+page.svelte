@@ -40,7 +40,7 @@
   </section>
 
   <section class="section_padding">
-    <p class="section_title">{aboutConfig.galleryHeading}</p>
+    <h2 class="section_title">{aboutConfig.galleryHeading}</h2>
     <PaintingWall />
   </section>
 

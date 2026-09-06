@@ -23,11 +23,14 @@
     checked={darkMode}
     class="theme-input"
     on:change={toggleTheme}
+    aria-label="Toggle theme"
   />
+  <!-- The name goes on the input, not this label. ARIA prohibits aria-label
+       on a <label> with no role, so it was being dropped: axe reported it as
+       a serious violation on every page of the site. -->
   <label
     for={id}
     class="theme-label"
-    aria-label="Toggle theme"
   >
     <span class="theme-core" />
   </label>
