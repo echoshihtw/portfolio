@@ -76,10 +76,9 @@
     t
   </text>
 
-  <!-- The path from nothing to something: a step, then a curve that
-       keeps climbing after ship. -->
+  <!-- One curve from nothing to something, still climbing after ship. -->
   <path
-    d="M40 196 H96 V160 H140 C170 160 176 92 232 76 C256 70 272 62 292 56"
+    d="M40 196 C140 190 200 120 292 56"
     fill="none"
     stroke="var(--primary)"
     stroke-width="2"
@@ -88,15 +87,15 @@
   />
   <!-- Where it shipped -->
   <line
-    x1="140"
+    x1="145"
     y1="44"
-    x2="140"
+    x2="145"
     y2="200"
     stroke="var(--border)"
     stroke-dasharray="3 5"
   />
   <text
-    x="146"
+    x="151"
     y="48"
     class="tick"
   >
@@ -112,8 +111,8 @@
     fill="var(--ink)"
   />
   <circle
-    cx="140"
-    cy="160"
+    cx="145"
+    cy="163"
     r="5"
     fill="var(--highlight)"
     stroke="var(--ink)"
