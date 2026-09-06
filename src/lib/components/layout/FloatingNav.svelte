@@ -44,6 +44,10 @@
     >
       Art Gallery
     </a>
+    <span
+      class="floating-sep"
+      aria-hidden="true"
+    ></span>
     <a
       href="{base}/blog"
       class="floating-link"
@@ -157,6 +161,15 @@
     opacity: 0;
     pointer-events: none;
     transform: translateX(-50%) translateY(-16px);
+  }
+
+  /* Same job as the header's rule: the art is not one of the professional
+     destinations, and a flat row of three says it is. */
+  .floating-sep {
+    flex: none;
+    width: 1px;
+    height: 1.1em;
+    background: var(--section-border);
   }
 
   .floating-links {
