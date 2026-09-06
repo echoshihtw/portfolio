@@ -11,7 +11,7 @@
     class="section_title"
     use:sweepOnView
   >
-    #projects
+    Projects
   </h2>
   <Projects />
 </section>

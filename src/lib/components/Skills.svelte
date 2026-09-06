@@ -13,7 +13,7 @@
     class="section_title"
     use:sweepOnView
   >
-    #skills
+    Skills
   </h2>
 
   <div class="skills">
