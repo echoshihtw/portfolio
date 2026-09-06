@@ -22,10 +22,16 @@ export const aboutMeConfig = {
     accent?: boolean;
   }[],
 
-  story: [
-    "I have been painting since 2012, mostly in Tainan. I studied Italian language and culture at Fu Jen Catholic University in Taipei, and after I finished I spent three months at Accademia del Giglio in Florence.",
-    "The clay bust, the pasta painting and the charcoal head were made there. The ink drawing of a mouth was made on a plane, and the airport is Jakarta.",
-  ],
+  // Awaiting Echo's own words. Deliberately empty rather than holding a
+  // draft: the section renders without prose, and nothing invented reaches
+  // the page in the meantime.
+  //
+  // What left with the old paragraphs, in case any of it should come back:
+  // painting since 2012, mostly in Tainan; a BA in Italian language and
+  // culture from Fu Jen Catholic University, Taipei; three months at
+  // Accademia del Giglio in Florence; and which pieces were made where.
+  // Those were the only places on the site carrying any of it.
+  story: [] as string[],
 
   // The torn-paper edge from Echo's edited version, grafted onto the colour
   // of the untouched photograph (scripts/graft.swift: alpha from one image,

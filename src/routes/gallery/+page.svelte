@@ -16,7 +16,9 @@
   <section class="story section_padding">
     <!-- prettier-ignore -->
     <h1>{#each galleryConfig.heading as part}<span class:accent={part.accent} data-text={part.accent ? part.text : undefined}>{part.text}</span>{/each}</h1>
-    <p class="intro">{galleryConfig.intro}</p>
+    {#each galleryConfig.story as paragraph}
+      <p class="intro">{paragraph}</p>
+    {/each}
   </section>
 
   <section class="section_padding">
