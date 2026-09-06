@@ -25,7 +25,7 @@ export const aboutMeConfig = {
   // Hers, and only hers.
   //
   // The first line is the story she told on 2026-09-06: she started out in
-  // restaurants doing customer service, and decided she should be doing
+  // restaurants doing customer relations, and decided she should be doing
   // better with her time and with what she is really good at. Her motive,
   // in her framing, not an inference. The wording is close to how she said
   // it; the only words that are mine are the joins.
@@ -35,7 +35,7 @@ export const aboutMeConfig = {
   // support line almost verbatim.
   //
   // This is also what "self-taught" was reaching for in an earlier draft.
-  // A career that starts in customer service and arrives at Postgres row
+  // A career that starts in customer relations and arrives at Postgres row
   // level security says it without the word, and shows the turn rather than
   // asserting the trait.
   //
@@ -46,7 +46,7 @@ export const aboutMeConfig = {
   // SPIN.FASHION as Singapore, Remote. "Most of my career" was drafted and
   // cut, because Find Recruiter and Lockerbie are both listed as Taipei.
   story: [
-    "I started out working in restaurants, in customer service, with a degree in Italian language and culture. At some point I decided I should be doing better with my time, and with what I am actually good at.",
+    "I started out working in restaurants, in customer relations, with a degree in Italian language and culture. At some point I decided I should be doing better with my time, and with what I am actually good at.",
     "Mandarin and Taiwanese are native. English has been the working language in every role I have had. I speak Italian, and I have worked remotely across time zones since 2020.",
   ],
 
