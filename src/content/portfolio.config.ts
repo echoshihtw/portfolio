@@ -12,7 +12,7 @@ export const heroConfig: {
   owns: string[];
   proofLine: string;
   headline: HeadlinePart[];
-  support: string;
+  support: string[];
   email: string;
   resume: string;
   seeWorkHref: string;
@@ -25,7 +25,15 @@ export const heroConfig: {
   // zone and how far it stretches. Remote only: naming an on-site option
   // invited the wrong roles. Stated as fact rather than availability:
   // "open to" in front of it reads as asking.
-  remoteOpen: "UTC+8 · Remote from Taiwan · APAC hours or async",
+  // The title leads this line now. The site never said what role it wanted:
+  // a reader had to infer it from a résumé link. Adding the noun where
+  // someone already looks for logistics costs no space and removes the
+  // guess. "Product engineer" because it is the title these companies post
+  // and because the evidence here is scoping decisions rather than a list
+  // of layers; resume.md keeps the swap list for postings that literally
+  // say frontend.
+  remoteOpen:
+    "Product engineer · UTC+8 · Remote from Taiwan · APAC hours or async",
 
   // Spells out what "end to end" means, layer by layer: named techniques
   // pulled from real project work, not category nouns any portfolio could
@@ -65,8 +73,22 @@ export const heroConfig: {
   // boundary; keeping it running is Clio in daily use since May 2025;
   // writing down what broke is the blog, and the admitted mistake in the
   // proof line directly below.
-  support:
-    "Software Engineer on project platforms, applicant tracking and client histories: the software a business actually runs on. I secure them, keep them running after ship, and write down what broke. React, TypeScript, Supabase and Postgres.",
+  // Two lines, not one paragraph. This was three claims fused: what the work
+  // is, how it is done, and the stack. Split so a skimmer gets the first.
+  //
+  // "Software Engineer on" went because the title now sits in the line
+  // above, where it was appearing twice. The stack sentence went because the
+  // chip row directly below already carries it, more specifically: React 19,
+  // Postgres RLS, offline-first sync, architecture tests, GHCR deploys are
+  // what make her legible as one of these people, and a second, vaguer list
+  // above them was the fourth thing to read.
+  //
+  // The examples still lead, which was a deliberate call: they were always
+  // doing the explaining.
+  support: [
+    "Project platforms, applicant tracking, client histories: the software a business actually runs on.",
+    "I secure it, keep it running after ship, and write down what broke.",
+  ],
 
   // Two sentences, not a stat block: three figures in columns is a SaaS
   // landing-page pattern that invites comparison, and "entered by hand"

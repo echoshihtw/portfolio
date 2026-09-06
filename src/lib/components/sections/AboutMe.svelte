@@ -50,10 +50,33 @@
 </section>
 
 <style>
-  /* One hairline, above. Two rules turn a section into a banded widget that
-     reads as an insert rather than as part of the page. */
+  /* Its own ground, not its own rule.
+  
+     The hero above says "I own it, end to end." and this says "Just me."
+     Two large statements back to back compete, and the second was
+     undercutting the first before any evidence had arrived. Separating them
+     by surface rather than by shrinking one keeps both at full strength and
+     makes this read as a different KIND of thing rather than a second
+     headline.
+  
+     Full-bleed via a viewport-width trick, because the tint has to reach
+     both edges or it reads as a card sitting on the page. */
   .aboutme {
+    width: 100vw;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    background: var(--surface-bg);
     border-top: 1px solid var(--section-border);
+    border-bottom: 1px solid var(--section-border);
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+
+  @media (min-width: 860px) {
+    .aboutme {
+      padding-top: 4.5rem;
+      padding-bottom: 4.5rem;
+    }
   }
 
   /* An L, not two columns: the photograph holds the left and the text turns
@@ -104,10 +127,13 @@
     color: var(--color-accent);
   }
 
+  /* Deliberately below the hero's clamp(2.6rem, 7.5vw, 4.6rem). The hero
+     stays the page's loudest voice; this one is close enough to feel like
+     the same person speaking and quiet enough not to argue with it. */
   .aboutme h2 {
     margin: 0;
-    font-size: clamp(2.1rem, 5vw, 3.2rem);
-    line-height: 1.02;
+    font-size: clamp(1.9rem, 4.4vw, 2.9rem);
+    line-height: 1.04;
     letter-spacing: -0.02em;
   }
 

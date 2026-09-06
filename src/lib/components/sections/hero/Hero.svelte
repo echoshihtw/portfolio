@@ -99,7 +99,16 @@
       {#each visibleParts as part, i}<span class:accent={part.accent} data-text={part.accent ? part.fullText : undefined}>{part.text}{#if isTyping && i === caretIndex}<span class="type-caret typing" aria-hidden="true"></span>{/if}<span class="type-ghost" aria-hidden="true">{part.rest}</span></span>{/each}
     </h1>
 
-    <p class="hero-support">{heroConfig.support}</p>
+    <div class="hero-support-group">
+      {#each heroConfig.support as line, i}
+        <p
+          class="hero-support"
+          class:lead={i === 0}
+        >
+          {line}
+        </p>
+      {/each}
+    </div>
 
     <ul class="hero-owns">
       {#each heroConfig.owns as layer}
@@ -425,6 +434,23 @@
   }
 
   /* support / differentiator */
+  /* The two lines are one thought, so they sit closer to each other than to
+     anything else in the hero, whose flex gap would otherwise space them
+     like separate blocks. */
+  .hero-support-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+  }
+
+  /* The first line says what the work is and the second says how it is done,
+     so the first carries the page's text colour and the second stays muted.
+     Hierarchy inside the pair, rather than two equal greys. */
+  .hero-support.lead {
+    color: var(--text-color);
+    font-size: 1rem;
+  }
+
   .hero-support {
     margin: 0;
     max-width: 62ch;
