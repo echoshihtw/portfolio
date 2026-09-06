@@ -8,7 +8,7 @@
 
 <Seo
   title="Echo Shih · Paintings"
-  description="Painting since 2012, mostly in Tainan. A degree in Italian language and culture, and three months at Accademia del Giglio in Florence."
+  description="Painting since 2012, mostly at a desk or on the way somewhere. A degree in Italian language and culture, and three months at Accademia del Giglio in Florence."
   path="/gallery"
 />
 

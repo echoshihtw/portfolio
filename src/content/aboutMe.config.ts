@@ -74,7 +74,9 @@ export const aboutMeConfig = {
     "Mandarin and Taiwanese are native. English has been the working language in every job I've had, and I have Italian from the degree. I've worked across time zones since 2020.",
     // The bridge to the other half of the site, in Echo's own words,
     // 2026-09-07.
-    "I paint too, since 2012, mostly in Tainan and for a few months in Florence. One part logic, one part emotion.",
+    // Where: her words, 2026-09-07. Mostly at her desk or on the way
+    // somewhere, a train, a plane. Not Tainan.
+    "I paint too, since 2012. Mostly at my desk or on the way somewhere, on a train or a plane, and for a few months in Florence. One part logic, one part emotion.",
   ],
 
   // The torn-paper edge from Echo's edited version, grafted onto the colour

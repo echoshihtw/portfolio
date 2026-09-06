@@ -12,7 +12,7 @@ export const galleryConfig = {
   // pieces on the wall directly below it, and the first is why they exist
   // in Florence at all.
   story: [
-    "I have been painting since 2012, mostly in Tainan. I studied Italian language and culture at Fu Jen Catholic University in Taipei, and after I finished I spent three months at Accademia del Giglio in Florence.",
+    "I have been painting since 2012, mostly at my desk or on the way somewhere, on a train or a plane. I studied Italian language and culture at Fu Jen Catholic University in Taipei, and after I finished I spent three months at Accademia del Giglio in Florence.",
     "The clay bust, the pasta painting and the charcoal head were made there. The ink drawing of a mouth was made on a plane, and the airport is Jakarta.",
   ],
 
