@@ -27,6 +27,27 @@
      they live once here rather than in both blocks. */
   --radius-sm: 6px;
   --radius-md: 12px;
+  /* The one large step. A whole block, a band or a full-bleed image, takes
+     it on a single corner so the ground shows through there; the other
+     three corners stay square, or the block reads as a giant card. Scales
+     with the viewport so it is a corner on a phone and not a bite. */
+  --radius-lg: clamp(2rem, 6vw, 4.5rem);
+}
+
+/* One rounded corner, on anything. The seam idiom, generalised: put the
+   class on a block and that corner rounds by --radius-lg while the others
+   stay square. The bands use it; a hero image or a footer could. */
+.corner-tl {
+  border-radius: var(--radius-lg) 0 0 0;
+}
+.corner-tr {
+  border-radius: 0 var(--radius-lg) 0 0;
+}
+.corner-br {
+  border-radius: 0 0 var(--radius-lg) 0;
+}
+.corner-bl {
+  border-radius: 0 0 0 var(--radius-lg);
 }
 
 /* A full-bleed band.
@@ -36,16 +57,22 @@
    the ground under a whole section, which is what gives a long page rhythm
    without adding a single line of content.
    
+   The seam is a shape, not a line. One corner of the block is rounded, large,
+   and the other three are square, so the page ground shows through at that
+   corner and the band reads as a sheet laid over it rather than as a stripe
+   ruled off with two hairlines. Which corner is a .corner-* class on the
+   band, and they alternate down the page. The tint is per band (--band-bg),
+   taken from the same colour as the band's label, so a section's label and
+   its ground agree.
+   
    100vw with a half-width pull, because these sit inside a max-width column
    and the tint has to reach both edges or it reads as a card. Safe because
-   html and body already carry overflow-x: hidden. */
+   html and body clip horizontal overflow. */
 .section_band {
   width: 100vw;
   margin-left: 50%;
   transform: translateX(-50%);
-  background: var(--surface-bg);
-  border-top: 1px solid var(--section-border);
-  border-bottom: 1px solid var(--section-border);
+  background: var(--band-bg, var(--surface-bg));
 }
 
 /* The eyebrow that opens a section.
@@ -317,9 +344,15 @@ code,
   @apply flex flex-col gap-4 md:gap-5;
 }
 
+/* clip, not hidden. A hidden overflow makes body a scroll container, and a
+   sticky header sticks to the nearest scroll container, which is then body
+   rather than the viewport. Body itself never scrolls, so the header scrolled
+   away with the page and never floated. clip cuts the overflow without
+   creating a scroll container, and the full-bleed bands still get their
+   horizontal overflow removed. */
 html,
 body {
-  overflow-x: hidden;
+  overflow-x: clip;
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
