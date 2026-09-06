@@ -20,7 +20,9 @@ export type Highlight = {
 export const highlightsConfig: Highlight[] = [
   {
     // Clio: projects.config.ts, résumé project block.
-    title: "A first version, in front of real users",
+    // Was "A first version, in front of real users", which could be read
+    // as testing on people. The outcome is adoption, not exposure.
+    title: "Built from zero, in daily use",
     proof:
       "Clio, built for one salon owner and made multi-tenant from day one. In daily use since May 2025, with 603 clients and 2,694 service records the owner typed in by hand. No booking, no payments, no inventory, no marketing. The products she rejected had all of it.",
   },
