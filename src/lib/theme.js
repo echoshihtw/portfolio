@@ -14,7 +14,7 @@ function resolveInitialTheme() {
     return fromDom;
   }
 
-  return DARK;
+  return LIGHT;
 }
 
 export const theme = writable(resolveInitialTheme());
@@ -37,7 +37,7 @@ export function initializeTheme() {
   }
 
   /** @type {string} */
-  let nextTheme = DARK;
+  let nextTheme = LIGHT;
   try {
     const stored = localStorage.getItem(THEME_KEY);
     if (stored === LIGHT || stored === DARK) {

@@ -39,15 +39,15 @@
       crossorigin
     />
     <link
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,500;0,600;0,700;1,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
     <script>
       (() => {
         const key = "echo-theme";
-        // Always default to dark, regardless of OS preference. Light mode
-        // only applies once a visitor explicitly picks it here.
-        let theme = "dark";
+        // The cream system is the site; the ink theme is a choice. Default
+        // light regardless of OS preference, and remember a pick.
+        let theme = "light";
 
         try {
           const savedTheme = localStorage.getItem(key);
@@ -55,7 +55,7 @@
             theme = savedTheme;
           }
         } catch (_error) {
-          theme = "dark";
+          theme = "light";
         }
 
         document.documentElement.dataset.theme = theme;
@@ -127,7 +127,7 @@
           </div>
           <div class="gate-profile-info">
             <p class="gate-profile-name">Echo Shih</p>
-            <p class="gate-profile-role">Software Engineer</p>
+            <p class="gate-profile-role">Senior Product Engineer</p>
           </div>
         </div>
         <pre id="gate-line-systems"></pre>
@@ -145,7 +145,7 @@
         </div>
         <p class="card-eyebrow">Taipei, Taiwan</p>
         <p class="card-name">Echo Shih</p>
-        <p class="card-role">Software Engineer</p>
+        <p class="card-role">Senior Product Engineer</p>
         <div class="card-rule"></div>
         <a
           class="card-link"
