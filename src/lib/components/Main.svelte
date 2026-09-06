@@ -13,7 +13,7 @@
      after the studies for a while and read as a recap of them. -->
 <div class="page">
   <Hero />
-  <Highlights />
+  <!-- <Highlights /> -->
   <Experience />
   <Project />
   <Skills />
