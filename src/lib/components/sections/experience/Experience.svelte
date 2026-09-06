@@ -13,7 +13,7 @@
     class="section_title"
     use:sweepOnView
   >
-    #work
+    Professional experience
   </h2>
 
   <div class="timeline">
