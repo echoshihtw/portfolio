@@ -146,7 +146,7 @@ export const closingConfig = {
   // team it reads as being handed the pager.
   // "I like to untangle things" is Echo's own line, 2026-09-07. The rest
   // is the earlier version's facts behind it.
-  body: "I like to untangle things. Take the part nobody's scoped yet, work out what it should be, build it, and stay with it after it ships. Remote, from Taiwan.",
+  body: "I like to untangle things. Give me the part nobody's scoped yet and I'll work out what it should be, build it, and stay with it after it ships. Remote, from Taiwan.",
   email: "echoshihtw@gmail.com",
   resume: "Chun-Yu-Echo-Shih-Software-Engineer.pdf",
 };

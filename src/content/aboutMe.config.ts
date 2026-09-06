@@ -70,8 +70,8 @@ export const aboutMeConfig = {
   // I decided" went too: it is a hedge, and either the date is known or it
   // is not worth gesturing at.
   story: [
-    "I started out in restaurants, in customer relations, with a degree in Italian language and culture. What I'm good at is noticing things, and seeing the pattern underneath them. I decided I should spend my time on that instead.",
-    "Mandarin and Taiwanese are native. English is the working language in every job I've had. I speak Italian too, and I've worked across time zones since 2020.",
+    "I have a degree in Italian language and culture, and I started out in restaurants, in customer relations. What I'm good at is noticing things and the pattern under them. So that's what I spend my time on now.",
+    "Mandarin and Taiwanese are native. English has been the working language in every job I've had, and I have Italian from the degree. I've worked across time zones since 2020.",
     // The bridge to the other half of the site, in Echo's own words,
     // 2026-09-07.
     "I paint too, since 2012, mostly in Tainan and for a few months in Florence. One part logic, one part emotion.",
