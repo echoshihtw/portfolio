@@ -31,11 +31,15 @@ export const aboutMeConfig = {
   // wording is close to how she said it; the only words that are mine are
   // the joins.
   //
-  // "Good at resolving problems" would be the most generic line on the site
-  // standing alone: everyone claims it. It survives here because the clause
-  // before it earns it. Customer relations IS resolving problems, so the
-  // sentence says she is doing the same thing she always did, for harder
-  // problems, rather than announcing a trait.
+  // "Resolving problems" was the first answer and is gone, because everyone
+  // claims it. Observing, seeing patterns and abstraction are hers too, from
+  // the same conversation, and they are the specific version: they say HOW
+  // she resolves anything, which is the part nobody else's sentence has.
+  //
+  // The clause before them earns the whole thing. Customer relations is
+  // observation of people, so the sentence says she is doing what she always
+  // did against harder material, rather than announcing a trait she wants
+  // believed. "Turning them into" is a join; the rest is hers.
   //
   // The degree comes from resume.md:66, and the languages from the line
   // beside it. Not the CV's summary paragraph: that is already the hero's
@@ -53,7 +57,7 @@ export const aboutMeConfig = {
   // SPIN.FASHION as Singapore, Remote. "Most of my career" was drafted and
   // cut, because Find Recruiter and Lockerbie are both listed as Taipei.
   story: [
-    "I started out working in restaurants, in customer relations, with a degree in Italian language and culture. At some point I decided I should be doing better with my time, and with what I am actually good at, which is resolving problems.",
+    "I started out working in restaurants, in customer relations, with a degree in Italian language and culture. At some point I decided I should be doing better with my time, and with what I am actually good at: observing, seeing patterns, and turning them into abstractions.",
     "Mandarin and Taiwanese are native. English has been the working language in every role I have had. I speak Italian, and I have worked remotely across time zones since 2020.",
   ],
 
