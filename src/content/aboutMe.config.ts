@@ -72,12 +72,9 @@ export const aboutMeConfig = {
   story: [
     "I started out in restaurants, in customer relations, with a degree in Italian language and culture. What I'm good at is noticing things, and seeing the pattern underneath them. I decided I should spend my time on that instead.",
     "Mandarin and Taiwanese are native. English is the working language in every job I've had. I speak Italian too, and I've worked across time zones since 2020.",
-    ,
-    // The bridge to the other half of the site. Mirrors the gallery page,
-    // which ends with "The other half of this site is the software." Every
-    // fact here is one Echo gave: painting since 2012, mostly in Tainan,
-    // three months at Accademia del Giglio in Florence in 2018.
-    "The other half of this site is the paintings. I've been painting since 2012, mostly in Tainan, with three months in Florence in 2018. One part logic, one part emotion.",
+    // The bridge to the other half of the site, in Echo's own words,
+    // 2026-09-07.
+    "I paint too, since 2012, mostly in Tainan and for a few months in Florence. One part logic, one part emotion.",
   ],
 
   // The torn-paper edge from Echo's edited version, grafted onto the colour
