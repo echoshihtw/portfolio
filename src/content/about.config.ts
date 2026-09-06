@@ -33,18 +33,19 @@ export const aboutConfig = {
   ],
 
   // Cut out of its background, so she stands on the page rather than sitting
-  // in a photograph on it. One asset at 720px: the slot is 22rem, so that
-  // already covers a 2x screen and a second width would be dead weight.
+  // in a photograph on it.
   //
-  // Shipped as a JPEG composited onto this page's exact ground rather than
-  // a transparent PNG. The page holds one cream in both themes by design,
-  // so nothing needs to show through, and the PNG cost 627KB against 71KB
-  // for a file that looks the same.
+  // Genuinely transparent, not flattened onto the page colour, so the
+  // plaster grain shows through the gaps in the stipple. That costs: the
+  // torn edge is thousands of tiny alpha transitions, which is the one
+  // thing PNG compresses badly, and at full size it came to 957KB. Running
+  // the image visually smaller is what makes it affordable, 477KB at 480px
+  // wide, which covers the 15rem slot at 2x.
   //
   // No caption. The photograph is not evidence of anything and does not need
   // dating: it is her, and that is the whole job.
   portrait: {
-    src: "assets/echo-florence.jpg",
+    src: "assets/echo-florence.png",
     alt: "Echo laughing, holding a gelato, in front of a graffitied wall",
   },
 

@@ -24,8 +24,8 @@
         <img
           src="{base}/{aboutConfig.portrait.src}"
           alt={aboutConfig.portrait.alt}
-          width="719"
-          height="860"
+          width="480"
+          height="574"
           draggable="false"
           decoding="async"
         />
@@ -250,10 +250,11 @@
 
   @media (min-width: 900px) {
     .story-body {
-      grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
-      gap: 4rem;
-      /* The prose sits low against the mass of the photograph rather than
-         lining its first line up with the top of the image. */
+      /* The photograph is the smaller element now: a fixed narrow column
+         beside the prose rather than the dominant half of the row. It still
+         leads, because she is facing right and reads into the text. */
+      grid-template-columns: 15rem minmax(0, 1fr);
+      gap: 3.5rem;
       align-items: end;
     }
   }
@@ -262,18 +263,19 @@
     margin: 0;
   }
 
-  /* Bleeds past the section padding to the viewport edge. A rectangular
-     photograph could not do this without looking cropped; this one ends in
-     stipple, so it dissolves rather than stopping. */
-  @media (min-width: 900px) {
-    .portrait {
-      margin-left: -2.5rem;
-    }
+  /* On a phone it should not fill the screen either: a portrait photograph
+     at full width pushes the prose entirely below the fold. */
+  .portrait {
+    max-width: 15rem;
   }
 
-  @media (min-width: 1280px) {
+  /* Leans past the section padding rather than lining up with it. A
+     rectangular photograph could not do that without looking cropped; this
+     one ends in stipple, so it dissolves instead of stopping. */
+  @media (min-width: 900px) {
     .portrait {
-      margin-left: -4rem;
+      max-width: none;
+      margin-left: -1.75rem;
     }
   }
 
