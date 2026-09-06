@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { onMount } from "svelte";
+  import { onDestroy, onMount } from "svelte";
   import { base } from "$app/paths";
 
   /**
@@ -10,14 +10,13 @@
    * The backing is the image's own silhouette: an SVG path traced from the
    * PNG's alpha channel every 8 rows, in the image's coordinate space, so
    * it scales with the image and matches it to within a pixel or two at
-   * any size the page shows. Hovering the picture morphs that path into a
-   * shifted version of itself and back when the pointer leaves: the same
-   * points pushed along their outward normals by a slow wave, so it reads
-   * as the shape breathing rather than a different shape. SMIL rather than
-   * a CSS transition on `d`, because Safari does not animate `d` from CSS;
-   * started from pointer events by hand, because Chromium does not honour
-   * mouseenter as a SMIL begin. Under reduced motion the animations are
-   * not rendered at all.
+   * any size the page shows. The path morphs into a shifted version of
+   * itself and back: the same points pushed along their outward normals by
+   * a slow wave, so it reads as the shape breathing rather than becoming a
+   * different shape. It moves whenever the portrait is visible and pauses
+   * when it leaves the viewport. SMIL rather than a CSS transition on `d`,
+   * because Safari does not animate `d` from CSS. Under reduced motion the
+   * animation is not rendered at all.
    *
    * The PNG is 1200x1435. The explicit aspect ratio reserves its box before
    * the bytes arrive, so nothing shifts. It sits below the fold in the
@@ -34,23 +33,32 @@
     "M547 200 L1038 208 1064 216 1082 224 1096 232 1107 239 1118 247 1126 255 1134 263 1140 271 1147 279 1152 287 1156 295 1160 303 1165 311 1168 319 1170 327 1172 335 1174 343 1176 351 1177 360 1178 368 1179 376 1180 384 1180 392 1180 400 1180 408 1180 416 1180 424 1179 432 1179 440 1179 448 1179 456 1178 464 1178 472 1178 480 1177 488 1177 496 1177 504 1176 512 1176 520 1175 528 1176 536 1176 544 1175 552 1175 560 1175 568 1174 576 1174 584 1174 592 1173 600 1173 608 1173 616 1173 624 1172 632 1172 640 1172 648 1172 656 1172 664 1172 672 1172 680 1172 688 1171 696 1171 704 1171 712 1171 720 1172 728 1173 736 1173 744 1173 752 1173 760 1173 768 1173 776 1173 784 1173 792 1173 800 1173 808 1173 816 1173 824 1173 832 1173 840 1173 848 1173 856 1173 864 1173 872 1173 880 1173 888 1173 896 1173 904 1173 912 1173 920 1174 928 1173 936 1173 944 1173 952 1173 960 1173 968 1173 976 1173 984 1172 992 1172 1000 1172 1008 1172 1016 1172 1024 1172 1032 1172 1040 1172 1048 1172 1056 1172 1064 1172 1072 1172 1080 1172 1088 1172 1096 1172 1104 1172 1112 1173 1120 1173 1128 1173 1136 1174 1144 1174 1152 1174 1160 1174 1168 1175 1176 1175 1184 1175 1192 1176 1200 1175 1207 1174 1216 1175 1224 1174 1231 1172 1239 1172 1247 1170 1255 1168 1263 1167 1271 1164 1279 1161 1287 1158 1295 1154 1303 1150 1311 1145 1320 1139 1328 1133 1336 1126 1344 1117 1352 1107 1360 1095 1368 1080 1376 1061 1384 1031 1392 942 1400 809 1408 743 1412 625 1412 590 1408 553 1400 531 1392 515 1384 504 1376 495 1368 488 1360 483 1353 478 1345 474 1337 468 1329 463 1321 457 1314 450 1306 444 1298 437 1291 429 1283 421 1276 412 1269 403 1261 392 1254 379 1247 364 1240 346 1233 320 1225 296 1218 277 1210 260 1202 246 1195 232 1187 220 1179 209 1171 199 1163 189 1155 180 1146 173 1138 164 1130 158 1122 151 1114 144 1105 139 1097 133 1089 128 1080 123 1071 120 1063 115 1055 111 1046 108 1038 104 1029 102 1020 100 1012 97 1004 95 994 94 986 92 978 90 969 89 961 89 952 88 944 88 936 87 927 87 919 87 911 87 903 88 895 88 887 89 878 89 870 90 862 90 854 91 847 92 839 93 829 93 823 94 816 95 806 95 798 97 792 97 784 98 776 99 768 100 760 100 752 101 744 101 736 101 728 101 720 101 714 102 706 102 698 103 690 102 680 102 674 102 666 101 658 102 650 101 642 101 635 101 626 100 618 100 609 99 601 98 593 97 585 97 577 96 569 96 561 94 553 94 545 93 536 92 528 90 521 90 512 88 503 87 496 86 488 85 480 83 472 81 464 80 456 78 448 77 440 77 432 76 424 77 416 76 408 77 400 76 392 77 383 79 375 80 367 82 359 84 351 86 343 88 335 91 327 94 319 98 311 102 303 107 295 112 287 117 279 124 271 132 263 140 255 150 247 161 239 176 231 195 223 225 216 349 208 486 200 Z";
 
   let animate = true;
-  let toMorph: SVGAnimateElement | undefined;
-  let toRest: SVGAnimateElement | undefined;
+  let portrait: HTMLElement;
+  let backing: SVGSVGElement;
+  let observer: IntersectionObserver | undefined;
 
   onMount(() => {
     animate = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!animate || !("IntersectionObserver" in window)) return;
+
+    observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) backing?.unpauseAnimations();
+      else backing?.pauseAnimations();
+    });
+    observer.observe(portrait);
   });
 
-  const enter = () => toMorph?.beginElement();
-  const leave = () => toRest?.beginElement();
+  onDestroy(() => {
+    observer?.disconnect();
+  });
 </script>
 
 <figure
+  bind:this={portrait}
   class="portrait"
-  on:mouseenter={enter}
-  on:mouseleave={leave}
 >
   <svg
+    bind:this={backing}
     class="backing"
     viewBox="0 0 1200 1435"
     aria-hidden="true"
@@ -59,26 +67,14 @@
     <path d={REST}>
       {#if animate}
         <animate
-          bind:this={toMorph}
           attributeName="d"
-          begin="indefinite"
-          dur="0.55s"
-          fill="freeze"
+          begin="0s"
+          dur="6s"
+          repeatCount="indefinite"
           calcMode="spline"
-          keySplines="0.2 0.7 0.2 1"
-          from={REST}
-          to={MORPH}
-        />
-        <animate
-          bind:this={toRest}
-          attributeName="d"
-          begin="indefinite"
-          dur="0.55s"
-          fill="freeze"
-          calcMode="spline"
-          keySplines="0.2 0.7 0.2 1"
-          from={MORPH}
-          to={REST}
+          keyTimes="0; 0.5; 1"
+          keySplines="0.45 0 0.55 1; 0.45 0 0.55 1"
+          values={`${REST}; ${MORPH}; ${REST}`}
         />
       {/if}
     </path>
