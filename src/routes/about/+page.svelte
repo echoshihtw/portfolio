@@ -24,8 +24,8 @@
         <img
           src="{base}/{aboutConfig.portrait.src}"
           alt={aboutConfig.portrait.alt}
-          width="479"
-          height="573"
+          width="480"
+          height="574"
           draggable="false"
           decoding="async"
         />

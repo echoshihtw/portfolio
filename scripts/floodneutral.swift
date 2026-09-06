@@ -20,7 +20,11 @@ guard args.count >= 5 else {
     FileHandle.standardError.write("usage: floodneutral <in> <out.png> <minLuma> <maxChroma>\n".data(using: .utf8)!)
     exit(2)
 }
-let minLuma = Int(args[3]) ?? 190
+// Defaults suit nothing in particular: the chequer's two tones vary between
+// exports. One file's dark square was luma 206, another's was 142, and a
+// floor set for the first cleared only half the second's pattern, which
+// stopped the flood from crossing it. Probe the corners rather than assume.
+let minLuma = Int(args[3]) ?? 130
 let maxChroma = Int(args[4]) ?? 6
 
 let data = try Data(contentsOf: URL(fileURLWithPath: args[1]))
