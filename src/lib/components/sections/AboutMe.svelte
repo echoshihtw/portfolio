@@ -16,7 +16,7 @@
      point at it. -->
 <section
   id="contact"
-  class="aboutme section_padding"
+  class="aboutme section_padding section_band"
 >
   <div class="aboutme-wrap">
     <figure class="portrait">
@@ -79,24 +79,14 @@
 </section>
 
 <style>
-  /* Its own ground, not its own rule.
+  /* The band itself is .section_band in app.css: this was a second copy of
+     the same full-bleed trick, written before that class existed.
   
-     The hero above says "I own it, end to end." and this says "Just me."
-     Two large statements back to back compete, and the second was
-     undercutting the first before any evidence had arrived. Separating them
-     by surface rather than by shrinking one keeps both at full strength and
-     makes this read as a different KIND of thing rather than a second
-     headline.
-  
-     Full-bleed via a viewport-width trick, because the tint has to reach
-     both edges or it reads as a card sitting on the page. */
+     Why it is banded at all: the hero above says "I own it, end to end" and
+     this says "Just me." Two large statements back to back compete, and
+     separating them by ground rather than by shrinking one keeps both at
+     full strength. */
   .aboutme {
-    width: 100vw;
-    margin-left: 50%;
-    transform: translateX(-50%);
-    background: var(--surface-bg);
-    border-top: 1px solid var(--section-border);
-    border-bottom: 1px solid var(--section-border);
     padding-top: 3rem;
     padding-bottom: 3rem;
   }

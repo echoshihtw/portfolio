@@ -29,6 +29,40 @@
   --radius-md: 12px;
 }
 
+/* A full-bleed band.
+   
+   The page was one continuous cream scroll from the hero to the footer, so
+   every section began and ended in the same place: nowhere. A band changes
+   the ground under a whole section, which is what gives a long page rhythm
+   without adding a single line of content.
+   
+   100vw with a half-width pull, because these sit inside a max-width column
+   and the tint has to reach both edges or it reads as a card. Safe because
+   html and body already carry overflow-x: hidden. */
+.section_band {
+  width: 100vw;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  background: var(--surface-bg);
+  border-top: 1px solid var(--section-border);
+  border-bottom: 1px solid var(--section-border);
+}
+
+/* The eyebrow that opens a section. A pill rather than a bare label, so the
+   start of a section is a deliberate object instead of some small type that
+   happens to be above other type. Keeps the mono uppercase register, which
+   is the site's, and is what stops this reading as a badge from a SaaS
+   landing page. */
+.section_title {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--section-border);
+  border-radius: 999px;
+  padding: 0.34rem 0.8rem;
+  background: color-mix(in srgb, var(--color-accent) 8%, transparent);
+}
+
 html[data-theme="dark"] {
   --color-bg: #171233;
   --text-color: #eef0f5;
@@ -224,7 +258,7 @@ code,
   letter-spacing: 0.09em;
   text-transform: uppercase;
   font-size: 0.95rem;
-  margin-bottom: 0.9rem;
+  margin-bottom: 1.1rem;
 }
 
 /* One-shot signal-scan cue, dark mode only (via --glow-strength), the first

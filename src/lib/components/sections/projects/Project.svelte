@@ -5,7 +5,7 @@
 
 <section
   id="projects"
-  class="w-full section_padding section_layout"
+  class="w-full section_padding section_layout section_band"
 >
   <h2
     class="section_title"
