@@ -58,15 +58,16 @@
 
   .blog-kicker {
     margin: 0;
-    font-size: 0.72rem;
-    letter-spacing: 0.16em;
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    letter-spacing: var(--tracking-label);
     text-transform: uppercase;
-    color: var(--color-accent);
+    color: var(--muted);
   }
 
   h1 {
     margin: 0;
-    font-size: clamp(1.9rem, 4.5vw, 2.6rem);
+    font-size: var(--text-2xl);
   }
 
   .blog-intro {
@@ -115,14 +116,15 @@
   }
 
   .blog-list-title {
-    font-family: "DM Serif Display", serif;
-    font-size: 1.25rem;
-    color: var(--text-color);
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: var(--text-lg);
+    letter-spacing: var(--tracking-tight);
+    color: var(--ink);
   }
 
-  :global(html[data-theme="dark"]) .blog-list-title {
-    font-family: "JetBrains Mono", monospace;
-    font-weight: 500;
+  .blog-list-link:hover .blog-list-title {
+    color: var(--primary);
   }
 
   .blog-list-excerpt {

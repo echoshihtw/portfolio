@@ -58,10 +58,10 @@
 
   .blog-post-meta {
     margin: 0 0 0.4rem;
-    font-size: 0.72rem;
-    letter-spacing: 0.06em;
+    font-size: var(--text-xs);
+    letter-spacing: var(--tracking-label);
     text-transform: uppercase;
-    color: var(--color-accent);
+    color: var(--muted);
   }
 
   .blog-post-author {
@@ -70,7 +70,7 @@
 
   h1 {
     margin: 0 0 1.8rem;
-    font-size: clamp(1.8rem, 4.2vw, 2.4rem);
-    line-height: 1.2;
+    font-size: var(--text-2xl);
+    line-height: var(--leading-snug);
   }
 </style>
