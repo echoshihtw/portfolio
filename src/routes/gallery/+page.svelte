@@ -3,7 +3,7 @@
   import Seo from "$lib/components/Seo.svelte";
   import PaintingWall from "$lib/components/sections/paintings/PaintingWall.svelte";
   import Signature from "$lib/components/Signature.svelte";
-  import { aboutConfig } from "../../content/galleryPage.config";
+  import { galleryConfig } from "../../content/galleryPage.config";
 </script>
 
 <Seo
@@ -14,42 +14,22 @@
 
 <div class="gallery-page">
   <section class="story section_padding">
-    <figure class="portrait">
-      <img
-        src="{base}/{aboutConfig.portrait.src}"
-        alt={aboutConfig.portrait.alt}
-        width="480"
-        height="574"
-        draggable="false"
-        decoding="async"
-      />
-    </figure>
-
-    <div class="story-head">
-      <p class="kicker mono">{aboutConfig.kicker}</p>
-      <!-- prettier-ignore -->
-      <h1>{#each aboutConfig.heading as part}<span class:accent={part.accent} data-text={part.accent ? part.text : undefined}>{part.text}</span>{/each}</h1>
-    </div>
-
-    <div class="story-text">
-      {#each aboutConfig.story as paragraph}
-        <p class="body">{paragraph}</p>
-      {/each}
-    </div>
+    <!-- prettier-ignore -->
+    <h1>{#each galleryConfig.heading as part}<span class:accent={part.accent} data-text={part.accent ? part.text : undefined}>{part.text}</span>{/each}</h1>
+    <p class="intro">{galleryConfig.intro}</p>
   </section>
 
   <section class="section_padding">
-    <h2 class="section_title">{aboutConfig.galleryHeading}</h2>
     <PaintingWall />
   </section>
 
   <section class="section_padding closing">
-    <p>{aboutConfig.closing.text}</p>
+    <p>{galleryConfig.closing.text}</p>
     <a
       class="cta mono"
       href="{base}/"
     >
-      {aboutConfig.closing.linkLabel}
+      {galleryConfig.closing.linkLabel}
       <span aria-hidden="true">→</span>
     </a>
   </section>
@@ -106,58 +86,20 @@
     font-weight: 400;
   }
 
-  /* An L, not two columns.
-  
-     The photograph holds the left, spanning both rows. The name and the
-     heading sit beside its top, and the prose runs underneath them, so the
-     text wraps around the picture instead of standing next to it. Two equal
-     columns is what a layout does when nobody decided anything; this reads
-     as arranged.
-  
-     The photograph is on the left because she faces right in it. On the
-     right she looked off the page; here she looks into her own name. */
   .story {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    gap: 1.6rem 3rem;
-    max-width: 74rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    max-width: 68rem;
     margin: 0 auto;
   }
 
-  @media (min-width: 900px) {
-    .story {
-      grid-template-columns: 15rem minmax(0, 1fr);
-      grid-template-rows: auto auto;
-      align-items: start;
-    }
-
-    .portrait {
-      grid-row: 1 / span 2;
-      /* Leans past the section padding rather than lining up with it. A
-         rectangular photograph could not without looking cropped; this one
-         ends in torn paper, so it runs off instead of stopping. */
-      margin-left: -1.75rem;
-    }
-
-    .story-head {
-      align-self: end;
-    }
-  }
-
-  .story-head {
-    display: flex;
-    flex-direction: column;
-    gap: 0.7rem;
-    min-width: 0;
-  }
-
-  .kicker {
+  .intro {
     margin: 0;
-    font-size: 0.72rem;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    font-weight: 500;
-    color: var(--color-accent);
+    font-size: 1rem;
+    line-height: 1.7;
+    max-width: 56ch;
+    color: var(--text-muted);
   }
 
   .gallery-page h1 {
@@ -176,13 +118,6 @@
     position: relative;
     color: var(--color-accent);
     font-style: italic;
-  }
-
-  .body {
-    margin: 0;
-    font-size: 1.02rem;
-    line-height: 1.74;
-    max-width: 60ch;
   }
 
   /* No rule above this. The page is built out of torn edges and tape, so a
