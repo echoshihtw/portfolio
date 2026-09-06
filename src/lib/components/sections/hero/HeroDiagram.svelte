@@ -70,9 +70,10 @@
     now
   </text>
 
-  <!-- One curve from nothing to something, still climbing after ship. -->
+  <!-- Exponential: flat for most of the run, then steep. The ship marker
+       sits low on it on purpose; the rise comes after. -->
   <path
-    d="M40 196 C140 190 200 120 292 56"
+    d="M40 196 C200 196 278 160 292 56"
     fill="none"
     stroke="var(--primary)"
     stroke-width="2"
@@ -106,7 +107,7 @@
   />
   <circle
     cx="145"
-    cy="163"
+    cy="189"
     r="5"
     fill="var(--highlight)"
     stroke="var(--ink)"
