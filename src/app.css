@@ -288,8 +288,12 @@ code,
   }
 }
 
+/* Vertical rhythm. Sections sat 48px apart at desktop, which is a paragraph
+   gap, not a section gap: the page read as one long column with labels in
+   it. Roughly doubled, so each section has air above and below and the
+   bands read as places rather than stripes. Horizontal padding unchanged. */
 .section_padding {
-  @apply px-4 py-8 md:px-10 md:py-12;
+  @apply px-4 py-14 md:px-10 md:py-24;
 }
 
 /* Gap between a section title and its content: tight enough that the title

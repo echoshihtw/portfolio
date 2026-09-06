@@ -63,11 +63,19 @@
 </article>
 
 <style>
+  /* Same card as the project cards: no border, a soft shadow, the surface
+     tint. There were two card languages on the page, one bordered and one
+     not, and a reader notices that as "unfinished" without being able to say
+     why. No hover lift here, because this card is not one control: the
+     expander inside it is. */
   .card {
     background: var(--surface-bg);
-    border: 1px solid var(--section-border);
+    border: 0;
     border-radius: var(--radius-md);
-    padding: 1.3rem 1.5rem;
+    padding: 1.4rem 1.6rem;
+    box-shadow:
+      0 1px 2px rgb(20 18 42 / 0.06),
+      0 6px 16px rgb(20 18 42 / 0.05);
   }
 
   .meta {
