@@ -27,12 +27,11 @@
         <img
           src="{base}/{aboutConfig.portrait.src}"
           alt={aboutConfig.portrait.alt}
-          width="720"
-          height="964"
+          width="719"
+          height="789"
           draggable="false"
           decoding="async"
         />
-        <figcaption class="mono">{aboutConfig.portrait.caption}</figcaption>
       </figure>
     </div>
   </section>
@@ -174,20 +173,14 @@
     user-select: none;
   }
 
-  .portrait figcaption {
-    margin-top: 0.7rem;
-    font-size: 0.65rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-  }
-
+  /* No rule above this. The page is built out of torn edges and tape, so a
+     crisp 1px line before the signature was the one hard edge on it. */
   .closing {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     gap: 1rem;
-    border-top: 1px solid var(--section-border);
+    padding-top: 2.5rem;
   }
 
   .closing p {

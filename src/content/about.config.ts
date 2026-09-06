@@ -11,10 +11,16 @@
 // paints, with work from January 2026, so nothing here says "used to".
 export const aboutConfig = {
   kicker: "Chun-Yu (Echo) Shih",
-  heading: "I have been painting since 2012.",
+  // Echo's line. Capitalised and stopped to match the page, otherwise her
+  // words exactly.
+  //
+  // It replaced "I have been painting since 2012.", which was the only place
+  // that date appeared, so the date moved into the first paragraph rather
+  // than leaving the page.
+  heading: "Behind the screen and matrix.",
 
   story: [
-    "Mostly in Tainan. I studied Italian language and culture at Fu Jen Catholic University in Taipei, and after I finished I spent three months at Accademia del Giglio in Florence.",
+    "I have been painting since 2012, mostly in Tainan. I studied Italian language and culture at Fu Jen Catholic University in Taipei, and after I finished I spent three months at Accademia del Giglio in Florence.",
     "The clay bust, the pasta painting and the charcoal head were made there. The ink drawing of a mouth was made on a plane, and the airport is Jakarta.",
   ],
 
@@ -27,12 +33,11 @@ export const aboutConfig = {
   // so nothing needs to show through, and the PNG cost 627KB against 71KB
   // for a file that looks the same.
   //
-  // The date is the photograph's own capture date. The place is not stated,
-  // because she has not confirmed it.
+  // No caption. The photograph is not evidence of anything and does not need
+  // dating: it is her, and that is the whole job.
   portrait: {
     src: "assets/echo-florence.jpg",
-    alt: "Echo laughing, holding a gelato",
-    caption: "October 2018",
+    alt: "Echo laughing, holding a gelato, in front of a graffitied wall",
   },
 
   galleryHeading: "The work",
