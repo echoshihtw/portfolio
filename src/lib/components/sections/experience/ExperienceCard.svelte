@@ -13,9 +13,9 @@
 
   let expanded = false;
 
-  // Highlights carry **bold** markers from the résumé source. Splitting on the
-  // marker and letting Svelte render each part means no HTML string is ever
-  // built, so there is nothing to escape and nothing to inject.
+  // Highlights carry **bold** markers from the résumé source. Splitting on
+  // the marker and letting Svelte render each part means no HTML string is
+  // ever built, so there is nothing to escape and nothing to inject.
   const boldSegments = (v: string) =>
     v
       .split(/\*\*\s*([^*][\s\S]*?)\s*\*\*/g)
@@ -24,10 +24,12 @@
   $: cleanRole = item.role.replace(/\*\*/g, "").trim();
 </script>
 
-<article class="card">
-  <p class="meta">{item.date}</p>
-  <h3 class="role">{cleanRole}</h3>
-  <p class="company">{item.company}</p>
+<article class="card entry">
+  <header class="head">
+    <p class="label">{item.date}</p>
+    <h3 class="role">{cleanRole}</h3>
+    <p class="company">{item.company}</p>
+  </header>
 
   {#if copy}
     <p class="impact">{copy.impact}</p>
@@ -35,15 +37,21 @@
       <span class="p">{copy.proof.p}</span>
       {copy.proof.s}
     </p>
-    <p class="tech mono">{copy.techLine}</p>
+    <p class="tech label">{copy.techLine}</p>
   {/if}
 
   <button
-    class="expander mono"
+    class="expander link-cta"
     aria-expanded={expanded}
     on:click={() => (expanded = !expanded)}
   >
-    {expanded ? "Hide details ↑" : "Read the details ↓"}
+    {expanded ? "Hide details" : "Read the details"}
+    <span
+      class="cta-arrow"
+      aria-hidden="true"
+    >
+      {expanded ? "↑" : "↓"}
+    </span>
   </button>
 
   {#if expanded}
@@ -63,104 +71,89 @@
 </article>
 
 <style>
-  .card {
-    background: var(--surface-bg);
-    border: 1px solid var(--section-border);
-    border-radius: 4px;
-    padding: 1.3rem 1.5rem;
+  /* A .card from app.css: surface, thin border, no shadow. */
+  .entry {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding: var(--space-5) var(--space-5) var(--space-4);
   }
 
-  .meta {
+  .head {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+
+  .head .label {
     margin: 0;
-    font-family: "JetBrains Mono", monospace;
-    font-size: 0.7rem;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    color: var(--text-muted);
   }
 
   .role {
-    margin: 0.5rem 0 0;
-    font-family: "DM Serif Display", serif;
-    font-weight: 400;
-    font-size: 1.35rem;
-    line-height: 1.15;
-    color: var(--text-color);
+    margin: 0.2rem 0 0;
+    font-size: var(--text-xl);
+    line-height: var(--leading-snug);
   }
 
   .company {
-    margin: 0.2rem 0 0;
-    font-size: 0.85rem;
-    color: var(--text-muted);
+    margin: 0;
+    font-size: var(--text-sm);
+    color: var(--muted);
   }
 
   .impact {
-    margin: 0.95rem 0 0;
-    font-size: 0.97rem;
+    margin: var(--space-2) 0 0;
+    font-size: var(--text-base);
     line-height: 1.6;
-    color: var(--text-color);
+    max-width: 70ch;
   }
 
   .proof {
-    margin: 0.6rem 0 0;
-    font-size: 0.88rem;
-    line-height: 1.55;
-    color: var(--text-muted);
+    margin: 0;
+    font-size: var(--text-sm);
+    line-height: 1.6;
+    color: var(--muted);
+    max-width: 70ch;
   }
 
   .proof .p {
-    color: var(--text-color);
+    color: var(--ink);
     font-weight: 600;
   }
 
   .tech {
-    margin: 0.9rem 0 0;
-    font-size: 0.72rem;
+    margin: var(--space-1) 0 0;
+    text-transform: none;
     letter-spacing: 0.02em;
-    color: var(--text-muted);
-    opacity: 0.85;
   }
 
   .expander {
-    margin-top: 1rem;
-    padding: 0;
-    border: none;
-    background: none;
-    cursor: pointer;
-    font-size: 0.74rem;
-    letter-spacing: 0.03em;
-    color: var(--color-accent);
-    border-bottom: 1px solid transparent;
-    transition: border-color 160ms ease;
-  }
-
-  .expander:hover {
-    border-color: var(--color-accent);
-  }
-
-  .expander:focus-visible {
-    outline: 2px solid var(--color-accent);
-    outline-offset: 3px;
+    align-self: flex-start;
+    margin-top: var(--space-1);
   }
 
   .details {
-    margin: 0.9rem 0 0;
+    margin: var(--space-2) 0 0;
     padding-left: 1.1rem;
     list-style: disc;
-    color: var(--text-color);
-    line-height: 1.58;
     display: grid;
     gap: 0.35rem;
+    max-width: 72ch;
   }
 
   .details li {
     padding-left: 0.3rem;
-    font-size: 0.9rem;
-    color: var(--text-muted);
+    font-size: var(--text-sm);
+    line-height: 1.6;
+    color: var(--muted);
   }
 
   .details li :global(strong) {
     font-weight: 600;
-    color: var(--text-color);
+    color: var(--ink);
+  }
+
+  .details li::marker {
+    color: var(--primary);
   }
 </style>

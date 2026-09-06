@@ -12,7 +12,7 @@ export const heroConfig: {
   owns: string[];
   proofLine: string;
   headline: HeadlinePart[];
-  support: string;
+  support: string[];
   email: string;
   resume: string;
   seeWorkHref: string;
@@ -25,7 +25,15 @@ export const heroConfig: {
   // zone and how far it stretches. Remote only: naming an on-site option
   // invited the wrong roles. Stated as fact rather than availability:
   // "open to" in front of it reads as asking.
-  remoteOpen: "UTC+8 · Remote from Taiwan · APAC hours or async",
+  // The title leads this line now. The site never said what role it wanted:
+  // a reader had to infer it from a résumé link. Adding the noun where
+  // someone already looks for logistics costs no space and removes the
+  // guess. "Product engineer" because it is the title these companies post
+  // and because the evidence here is scoping decisions rather than a list
+  // of layers; resume.md keeps the swap list for postings that literally
+  // say frontend.
+  remoteOpen:
+    "Product engineer · UTC+8 · Remote from Taiwan · APAC hours or async",
 
   // Spells out what "end to end" means, layer by layer: named techniques
   // pulled from real project work, not category nouns any portfolio could
@@ -44,10 +52,15 @@ export const heroConfig: {
   // claim ("people rely on" implies things never break). The signal remote
   // hiring screens hardest for is whether someone can be trusted without
   // oversight, not whether their software never fails.
+  // Redesign brief, 2026-09-06: the hero has to say product
+  // engineer, React and TypeScript, developer experience, and zero to one,
+  // in the first screen. The headline carries the zero-to-one claim and
+  // the ownership after it; the support line carries the stack and the
+  // developer-experience work; the pill above carries the title.
   headline: [
-    { text: "I own it, " },
-    { text: "end to end", accent: true },
-    { text: "." },
+    { text: "Products from " },
+    { text: "0 → 1", accent: true },
+    { text: ", and the part after." },
   ],
 
   // Ownership leads, the shape of the work follows, stack last. The
@@ -65,8 +78,22 @@ export const heroConfig: {
   // boundary; keeping it running is Clio in daily use since May 2025;
   // writing down what broke is the blog, and the admitted mistake in the
   // proof line directly below.
-  support:
-    "Software Engineer on project platforms, applicant tracking and client histories: the software a business actually runs on. I secure them, keep them running after ship, and write down what broke. React, TypeScript, Supabase and Postgres.",
+  // Two lines, not one paragraph. This was three claims fused: what the work
+  // is, how it is done, and the stack. Split so a skimmer gets the first.
+  //
+  // "Software Engineer on" went because the title now sits in the line
+  // above, where it was appearing twice. The stack sentence went because the
+  // chip row directly below already carries it, more specifically: React 19,
+  // Postgres RLS, offline-first sync, architecture tests, GHCR deploys are
+  // what make her legible as one of these people, and a second, vaguer list
+  // above them was the fourth thing to read.
+  //
+  // The examples still lead, which was a deliberate call: they were always
+  // doing the explaining.
+  support: [
+    "React and TypeScript, and the tooling around them: the module template a team builds against, the release path, the tests that guard a boundary. Project platforms, applicant tracking, client histories, the software a business actually runs on.",
+    "I secure it, keep it running after ship, and write down what broke.",
+  ],
 
   // Two sentences, not a stat block: three figures in columns is a SaaS
   // landing-page pattern that invites comparison, and "entered by hand"
@@ -75,8 +102,13 @@ export const heroConfig: {
   // before there was pressure to) without a separate sentence. The second
   // sentence, an admitted mistake pulled from Clio's own project card,
   // is the one line here nobody else could have written.
+  // The caption under the hero figure. The figure is a drawing, and a
+  // drawing labelled "proof" is a claim it cannot make, so the caption says
+  // what it is and gives the two dates that are real: where Clio's records
+  // begin and when it went into daily use. The numbers are in the first
+  // highlight and the lesson is in the Clio study.
   proofLine:
-    "Built for one salon owner, engineered multi-tenant from day one. In daily use since May 2025, 603 clients and 2,694 records entered by hand. What I'd do differently: write the permission model down before building it, not after.",
+    "A sketch, not a chart. Clio's records run from September 2024, and it has been in daily use at the salon since May 2025.",
 
   email: "echoshihtw@gmail.com",
   // The file is named on disk rather than renamed by a download attribute or
@@ -91,9 +123,30 @@ export const heroConfig: {
 
 // The page's one call to action, at the end, so a reader who is convinced
 // does not have to scroll back up to act.
+//
+// No heading of its own any more. This used to be a separate "Want to talk?"
+// section directly after the personal one, which made the page end twice on
+// two low-density blocks about the same moment. They are one section now,
+// under "Just me.", and the body below does the inviting that the heading
+// used to.
 export const closingConfig = {
-  heading: "Want to talk?",
-  body: "If you have a problem nobody has scoped yet, and you need one person to build it and keep it running, that's the work. Remote, from Taiwan.",
+  // Rewritten 2026-09-06. The old line was "If you have a problem nobody has
+  // scoped yet, and you need one person to build it and keep it running,
+  // that's the work."
+  //
+  // Three things wrong with it. "it" pointed at "a problem", and you do not
+  // build a problem. "That's the work" never said whose. And it addressed a
+  // client, not an employer: "you have a problem, you need one person" is a
+  // freelance pitch, which is the audience this site had before it started
+  // saying product engineer.
+  //
+  // "Keep it running" became "stay with it after it ships". Same claim,
+  // evidenced by Clio being in daily use since May 2025, without a word
+  // borrowed from ops. To a client that phrase was reassurance; to a hiring
+  // team it reads as being handed the pager.
+  // "I like to untangle things" is Echo's own line, 2026-09-07. The rest
+  // is the earlier version's facts behind it.
+  body: "I like to untangle things. Give me the part nobody's scoped yet and I'll work out what it should be, build it, and stay with it after it ships. Remote, from Taiwan.",
   email: "echoshihtw@gmail.com",
   resume: "Chun-Yu-Echo-Shih-Software-Engineer.pdf",
 };

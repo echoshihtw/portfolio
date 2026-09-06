@@ -11,6 +11,7 @@
     instagramUrl,
     linkedInUrl,
   } from "$lib/contactLinks";
+  import { trackEmail, trackResume } from "$lib/analytics";
 
   const year = new Date().getFullYear();
   const socials = [
@@ -62,7 +63,8 @@
         <div class="footer-cta">
           <a
             href={email}
-            class="footer-mail"
+            class="link-cta"
+            on:click={() => trackEmail("footer")}
           >
             Email
           </a>
@@ -71,7 +73,7 @@
             href={calendlyUrl}
             target="_blank"
             rel="noreferrer noopener"
-            class="footer-source"
+            class="link-cta"
           >
             Book a call
             <Icon icon="mdi:arrow-top-right" />
@@ -81,7 +83,7 @@
             href={sourceUrl}
             target="_blank"
             rel="noreferrer noopener"
-            class="footer-source"
+            class="link-cta"
           >
             Source
             <Icon icon="mdi:arrow-top-right" />
@@ -92,16 +94,24 @@
       <nav class="footer-nav">
         <p class="footer-title mono">Navigation</p>
 
-        {#each tabs as tab}
-          <a href={tabHref(tab.link, $page.url.pathname)}>{tab.name}</a>
-        {/each}
+        <!-- Work, Projects, Skills and Contact are sections OF the home page, not
+             peers of it, so they only appear while you are on it. Anywhere else
+             they would be four links promising things this page does not have.
+             Off the home page their slot becomes a single Home. -->
+        {#if $page.route.id === "/"}
+          {#each tabs as tab}
+            <a href={tabHref(tab.link, $page.url.pathname)}>{tab.name}</a>
+          {/each}
+        {:else}
+          <a href={base || "/"}>Home</a>
+        {/if}
         <!-- Same split as the header: sections of this page above, places
              you go below. A gap does here what the vertical rule does in a
              horizontal row. -->
         <a
           class="footer-nav-destination"
           href="{base}/blog"
-          aria-current={$page.url.pathname.startsWith(`${base}/blog`)
+          aria-current={$page.route.id?.startsWith("/blog")
             ? "page"
             : undefined}
         >
@@ -113,8 +123,16 @@
           href="{base}/{heroConfig.resume}"
           target="_blank"
           rel="noreferrer noopener"
+          on:click={() => trackResume("footer")}
         >
           Résumé
+        </a>
+        <a
+          class="footer-nav-destination"
+          href="{base}/gallery"
+          aria-current={$page.route.id === "/gallery" ? "page" : undefined}
+        >
+          Art Gallery
         </a>
       </nav>
 
@@ -127,7 +145,7 @@
               href={social.url}
               target="_blank"
               rel="noreferrer noopener"
-              class="footer-social-link"
+              class="footer-social-link chip"
               aria-label={social.label}
             >
               <Icon icon={social.icon} />
@@ -147,7 +165,7 @@
 
       <button
         type="button"
-        class="footer-replay mono"
+        class="link-cta"
         on:click={replayGate}
       >
         Replay intro card
@@ -160,13 +178,13 @@
 
 <style>
   .footer-wrap {
-    padding: 3rem 1.2rem 2rem;
-    border-top: 1px solid var(--section-border);
-    background: var(--color-bg);
+    padding: var(--space-7) var(--space-4) var(--space-6);
+    border-top: var(--border-w) solid var(--border-strong);
+    background: var(--canvas);
   }
 
   .footer-shell {
-    max-width: 1400px;
+    max-width: var(--content-max);
     margin: 0 auto;
   }
 
@@ -178,47 +196,26 @@
 
   .footer-brand h2 {
     margin: 0.2rem 0 0.5rem;
-    font-family: "JetBrains Mono", monospace;
-    font-size: clamp(1.5rem, 3vw, 2rem);
-    color: var(--text-color);
+    font-size: var(--text-xl);
+    color: var(--ink);
   }
 
+  /* Wide enough that the links' 48px touch targets do not overlap. */
   .footer-cta {
     margin-top: 1rem;
     display: flex;
     flex-wrap: wrap;
-    gap: 0.6rem;
+    gap: 0.75rem 1.6rem;
   }
 
-  .footer-mail,
-  .footer-source {
-    font-family: "JetBrains Mono", monospace;
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    border: 1px solid var(--section-border);
-    border-radius: 999px;
-    padding: 0.42rem 0.75rem;
-    text-decoration: none;
-    color: var(--text-color);
-    background: var(--surface-bg);
-    transition:
-      border-color 160ms ease,
-      color 160ms ease,
-      background-color 160ms ease;
-  }
-
-  .footer-source {
-    color: var(--color-accent);
-    white-space: nowrap;
-    display: flex;
-    align-items: center;
-    gap: 0.3rem;
-  }
-
+  /* The three actions are .link-cta from app.css: links, not pills. The
+     footer is the quiet end of the page and three bordered buttons in a row
+     were the loudest thing on it. */
   .footer-title {
-    font-size: 0.72rem;
-    letter-spacing: 0.08em;
-    color: var(--text-muted);
+    font-size: var(--text-xs);
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
+    color: var(--muted);
     margin-bottom: 0.6rem;
   }
 
@@ -227,23 +224,26 @@
      brightness made the footer read as a different site's nav. */
   .footer-nav a {
     display: block;
-    font-family: "JetBrains Mono", monospace;
-    font-size: 0.72rem;
-    letter-spacing: 0.04em;
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    letter-spacing: 0.06em;
     text-transform: uppercase;
-    color: var(--text-muted);
+    color: var(--muted);
     text-decoration: none;
     margin-bottom: 0.5rem;
-    transition: color 160ms ease;
+    transition: color var(--dur-fast) ease;
   }
 
   .footer-nav-destination {
     margin-top: 0.85rem;
   }
 
-  .footer-nav a:hover,
+  .footer-nav a:hover {
+    color: var(--primary);
+  }
+
   .footer-nav a[aria-current="page"] {
-    color: var(--color-accent);
+    color: var(--ink);
   }
 
   .footer-social-row {
@@ -251,80 +251,43 @@
     gap: 0.5rem;
   }
 
+  /* A .chip from app.css, round. */
   .footer-social-link {
-    border: 1px solid var(--section-border);
-    padding: 0.45rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--text-color);
-    background: var(--surface-bg);
-    transition:
-      border-color 160ms ease,
-      color 160ms ease,
-      background-color 160ms ease;
-  }
-
-  .footer-mail:hover,
-  .footer-source:hover,
-  .footer-social-link:hover {
-    border-color: var(--color-accent);
-    background: var(--color-bg);
-  }
-
-  .footer-mail:hover,
-  .footer-social-link:hover {
-    color: var(--color-accent);
+    padding: 0;
+    border-radius: var(--radius-pill);
   }
 
   .footer-meta {
     margin-top: 2rem;
     padding-top: 1rem;
-    border-top: 1px solid var(--section-border);
+    border-top: var(--border-w) solid var(--border);
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: space-between;
     flex-wrap: wrap;
     gap: 0.5rem;
-    font-size: 0.75rem;
-    color: var(--text-muted);
+    font-size: var(--text-xs);
+    color: var(--muted);
   }
 
   .footer-status {
     display: flex;
     align-items: center;
-    gap: 0.4rem;
-    font-size: 0.75rem;
-    color: var(--text-muted);
+    gap: 0.5rem;
+    font-size: var(--text-xs);
+    color: var(--muted);
   }
 
   .status-dot {
-    width: 6px;
-    height: 6px;
+    width: 7px;
+    height: 7px;
     border-radius: 50%;
-    background: var(--color-accent);
-    box-shadow: 0 0 6px var(--color-accent);
+    background: var(--status-live);
   }
 
   /* A quiet utility link, not a CTA: same size/weight as the surrounding
      meta text so it doesn't compete with the actual footer actions. */
-  .footer-replay {
-    border: none;
-    background: none;
-    padding: 0;
-    font-size: 0.75rem;
-    color: var(--text-muted);
-    text-decoration: underline;
-    text-decoration-color: var(--section-border);
-    text-underline-offset: 2px;
-    cursor: pointer;
-    transition: color 160ms ease;
-  }
-
-  .footer-replay:hover {
-    color: var(--color-accent);
-  }
   @media (min-width: 768px) {
     .footer-wrap {
       padding-left: 2.5rem;
