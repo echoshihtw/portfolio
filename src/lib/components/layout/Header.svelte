@@ -216,39 +216,43 @@
     align-items: center;
     flex-wrap: wrap;
     gap: 0.6rem 1.1rem;
-    max-width: 1400px;
+    max-width: var(--content-max);
     margin: 0 auto;
-    padding: 0.75rem 1.5rem;
-    border: 1px solid transparent;
-    border-radius: 999px;
+    padding: 0.75rem 1rem;
+    border: var(--border-w) solid transparent;
+    border-radius: var(--radius-pill);
     background: transparent;
     transition:
-      max-width 340ms cubic-bezier(0.2, 0.7, 0.2, 1),
-      padding 340ms cubic-bezier(0.2, 0.7, 0.2, 1),
-      background-color 240ms ease,
-      border-color 240ms ease,
-      box-shadow 240ms ease;
+      max-width 340ms var(--ease-out),
+      padding 340ms var(--ease-out),
+      background-color var(--dur-base) ease,
+      border-color var(--dur-base) ease;
   }
 
+  @media (min-width: 768px) {
+    .bar {
+      padding: 0.75rem 2rem;
+    }
+  }
+
+  /* A pill with a hairline, opaque. No blur, no shadow: the thing that
+     separates it from the page is a 1px ink line. */
   .condensed .bar {
-    max-width: min(50rem, calc(100% - 1.5rem));
+    max-width: min(52rem, calc(100% - 1.5rem));
     padding: 0.45rem 0.9rem 0.45rem 1.1rem;
-    background: color-mix(in srgb, var(--surface-bg) 86%, transparent);
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
-    border-color: var(--section-border);
-    box-shadow: 0 10px 30px rgb(20 18 42 / 0.14);
+    background: var(--surface);
+    border-color: var(--border-strong);
   }
 
   /* Carries the visual weight of a heading without the heading semantics:
      the hero statement is the page's <h1>. Shrinks a step in the pill. */
   .site-name {
-    font-family: "JetBrains Mono", monospace;
+    font-family: var(--font-display);
     font-size: 1.15em;
-    font-weight: 500;
-    letter-spacing: 0.01em;
+    font-weight: 600;
+    letter-spacing: -0.01em;
     line-height: 1.2;
-    color: var(--text-color);
+    color: var(--ink);
     text-decoration: none;
     white-space: nowrap;
     transition:
@@ -261,11 +265,11 @@
   }
 
   .site-name:hover {
-    color: var(--color-accent);
+    color: var(--primary);
   }
 
   .site-name:focus-visible {
-    outline: 2px solid var(--color-accent);
+    outline: 2px solid var(--primary);
     outline-offset: 3px;
     border-radius: 2px;
   }
@@ -292,23 +296,23 @@
 
   .tab {
     flex: none;
-    font-family: "JetBrains Mono", monospace;
-    font-size: 0.72rem;
-    letter-spacing: 0.04em;
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    letter-spacing: 0.06em;
     text-transform: uppercase;
-    color: var(--text-muted);
+    color: var(--muted);
     text-decoration: none;
     white-space: nowrap;
-    transition: color 180ms ease;
+    transition: color var(--dur-fast) ease;
   }
 
   .tab:hover,
   .tab:focus-visible {
-    color: var(--color-accent);
+    color: var(--primary);
   }
 
   .tab[aria-current="page"] {
-    color: var(--text-color);
+    color: var(--ink);
   }
 
   /* Hidden at the top of the page rather than removed, so the pill does not
@@ -337,7 +341,7 @@
     width: 1px;
     height: 1.1em;
     margin: 0 -0.15rem;
-    background: var(--section-border);
+    background: var(--border);
   }
 
   /* No gap here: the list carries its own left margin, which tweens to
@@ -412,18 +416,18 @@
   .home-sections a {
     display: inline-block;
     padding: 0.15rem 0;
-    font-family: "JetBrains Mono", monospace;
-    font-size: 0.72rem;
-    letter-spacing: 0.04em;
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    letter-spacing: 0.06em;
     text-transform: uppercase;
-    color: color-mix(in srgb, var(--text-muted) 78%, transparent);
+    color: color-mix(in srgb, var(--muted) 78%, transparent);
     text-decoration: none;
-    transition: color 160ms ease;
+    transition: color var(--dur-fast) ease;
   }
 
   .home-sections a:hover,
   .home-sections a:focus-visible {
-    color: var(--color-accent);
+    color: var(--primary);
   }
 
   @media (prefers-reduced-motion: reduce) {

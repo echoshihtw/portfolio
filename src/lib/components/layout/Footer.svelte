@@ -175,13 +175,13 @@
 
 <style>
   .footer-wrap {
-    padding: 3rem 1.2rem 2rem;
-    border-top: 1px solid var(--section-border);
-    background: var(--color-bg);
+    padding: var(--space-7) var(--space-4) var(--space-6);
+    border-top: var(--border-w) solid var(--border-strong);
+    background: var(--canvas);
   }
 
   .footer-shell {
-    max-width: 1400px;
+    max-width: var(--content-max);
     margin: 0 auto;
   }
 
@@ -193,9 +193,8 @@
 
   .footer-brand h2 {
     margin: 0.2rem 0 0.5rem;
-    font-family: "JetBrains Mono", monospace;
-    font-size: clamp(1.5rem, 3vw, 2rem);
-    color: var(--text-color);
+    font-size: var(--text-xl);
+    color: var(--ink);
   }
 
   /* Wide enough that the links' 48px touch targets do not overlap. */
@@ -210,9 +209,10 @@
      footer is the quiet end of the page and three bordered buttons in a row
      were the loudest thing on it. */
   .footer-title {
-    font-size: 0.72rem;
-    letter-spacing: 0.08em;
-    color: var(--text-muted);
+    font-size: var(--text-xs);
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
+    color: var(--muted);
     margin-bottom: 0.6rem;
   }
 
@@ -221,23 +221,26 @@
      brightness made the footer read as a different site's nav. */
   .footer-nav a {
     display: block;
-    font-family: "JetBrains Mono", monospace;
-    font-size: 0.72rem;
-    letter-spacing: 0.04em;
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    letter-spacing: 0.06em;
     text-transform: uppercase;
-    color: var(--text-muted);
+    color: var(--muted);
     text-decoration: none;
     margin-bottom: 0.5rem;
-    transition: color 160ms ease;
+    transition: color var(--dur-fast) ease;
   }
 
   .footer-nav-destination {
     margin-top: 0.85rem;
   }
 
-  .footer-nav a:hover,
+  .footer-nav a:hover {
+    color: var(--primary);
+  }
+
   .footer-nav a[aria-current="page"] {
-    color: var(--text-color);
+    color: var(--ink);
   }
 
   .footer-social-row {
@@ -248,37 +251,36 @@
   /* A .chip from app.css, round. */
   .footer-social-link {
     padding: 0;
-    border-radius: 999px;
+    border-radius: var(--radius-pill);
   }
 
   .footer-meta {
     margin-top: 2rem;
     padding-top: 1rem;
-    border-top: 1px solid var(--section-border);
+    border-top: var(--border-w) solid var(--border);
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: space-between;
     flex-wrap: wrap;
     gap: 0.5rem;
-    font-size: 0.75rem;
-    color: var(--text-muted);
+    font-size: var(--text-xs);
+    color: var(--muted);
   }
 
   .footer-status {
     display: flex;
     align-items: center;
-    gap: 0.4rem;
-    font-size: 0.75rem;
-    color: var(--text-muted);
+    gap: 0.5rem;
+    font-size: var(--text-xs);
+    color: var(--muted);
   }
 
   .status-dot {
-    width: 6px;
-    height: 6px;
+    width: 7px;
+    height: 7px;
     border-radius: 50%;
-    background: var(--color-accent);
-    box-shadow: 0 0 6px var(--color-accent);
+    background: var(--status-live);
   }
 
   /* A quiet utility link, not a CTA: same size/weight as the surrounding
