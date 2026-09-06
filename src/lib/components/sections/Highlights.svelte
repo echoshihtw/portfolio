@@ -20,11 +20,11 @@
   aria-labelledby="highlights-title"
 >
   <SectionHead
-    number="04"
+    number="01"
     label="Highlights"
-    title="Six things worth knowing"
+    title="What to look at first"
     id="highlights-title"
-    note="Each one pulled from the work above, with its proof. Every line is checkable against the rest of this page."
+    note="Six things from the work below, each with its proof. Every line is checkable against the rest of this page."
   />
 
   <div class="body">

@@ -91,7 +91,7 @@ export const heroConfig: {
   // The examples still lead, which was a deliberate call: they were always
   // doing the explaining.
   support: [
-    "React and TypeScript, and the developer experience around them. Project platforms, applicant tracking, client histories: the software a business actually runs on.",
+    "React and TypeScript, and the tooling around them: the module template a team builds against, the release path, the tests that guard a boundary. Project platforms, applicant tracking, client histories, the software a business actually runs on.",
     "I secure it, keep it running after ship, and write down what broke.",
   ],
 
@@ -102,8 +102,11 @@ export const heroConfig: {
   // before there was pressure to) without a separate sentence. The second
   // sentence, an admitted mistake pulled from Clio's own project card,
   // is the one line here nobody else could have written.
+  // One sentence. The numbers are in the first highlight and the lesson is
+  // in the Clio study; this caption used to carry both, and the page said
+  // each three times.
   proofLine:
-    "Built for one salon owner, engineered multi-tenant from day one. In daily use since May 2025, 603 clients and 2,694 records entered by hand. What I'd do differently: write the permission model down before building it, not after.",
+    "Clio, salon software I built for one owner, has been in daily use since May 2025.",
 
   email: "echoshihtw@gmail.com",
   // The file is named on disk rather than renamed by a download attribute or

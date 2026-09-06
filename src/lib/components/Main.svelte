@@ -7,15 +7,16 @@
   import Highlights from "$lib/components/sections/Highlights.svelte";
 </script>
 
-<!-- Order is an argument. This site's job is engineering work, so the
-     evidence goes first and the person arrives after it: claim, proof,
-     proof, capabilities, who made it, let's talk. -->
+<!-- Order is an argument. The hero makes the claim, the highlights are the
+     abstract, and everything after them is the evidence: where I worked,
+     what I built, what I work with, who made it, let's talk. Highlights sat
+     after the studies for a while and read as a recap of them. -->
 <div class="page">
   <Hero />
+  <Highlights />
   <Experience />
   <Project />
   <Skills />
-  <Highlights />
   <AboutMe />
 </div>
 

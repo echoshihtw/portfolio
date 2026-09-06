@@ -9,7 +9,7 @@
   aria-labelledby="projects-title"
 >
   <SectionHead
-    number="02"
+    number="03"
     label="Case studies"
     title="What I've built"
     id="projects-title"

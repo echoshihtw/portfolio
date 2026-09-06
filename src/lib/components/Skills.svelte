@@ -11,7 +11,7 @@
   aria-labelledby="skills-title"
 >
   <SectionHead
-    number="03"
+    number="04"
     label="Toolkit"
     title="What I work with"
     id="skills-title"

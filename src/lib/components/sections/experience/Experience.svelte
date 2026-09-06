@@ -11,7 +11,7 @@
   aria-labelledby="work-title"
 >
   <SectionHead
-    number="01"
+    number="02"
     label="Experience"
     title="Where I've worked"
     id="work-title"
