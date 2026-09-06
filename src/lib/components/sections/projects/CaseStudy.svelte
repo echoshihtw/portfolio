@@ -300,6 +300,15 @@
     font-weight: 400;
   }
 
+  /* Justified, with hyphenation, so the three narrow columns hold a
+     straight right edge without opening rivers. */
+  .field p,
+  .decisions li {
+    text-align: justify;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+  }
+
   .field p {
     margin: 0;
     font-size: var(--text-sm);
@@ -315,20 +324,22 @@
     overflow: hidden;
   }
 
+  /* Flush with the other two columns: no list markers, so no reserved
+     gutter. A hairline between items does the counting. */
   .decisions {
     margin: 0;
-    padding-left: 1.2rem;
+    padding: 0;
+    list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 0.45rem;
     font-size: var(--text-sm);
     line-height: 1.55;
   }
 
-  .decisions li::marker {
-    font-family: var(--font-mono);
-    font-size: var(--text-xs);
-    color: var(--primary);
+  .decisions li + li {
+    margin-top: 0.45rem;
+    padding-top: 0.45rem;
+    border-top: var(--border-w) solid var(--border);
   }
 
   .more {
