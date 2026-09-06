@@ -11,6 +11,7 @@
   <h2
     class="section_title"
     id="ask-title"
+    style="--label-tint: color-mix(in srgb, #7d3320 24%, var(--color-bg))"
   >
     What people ask me for
   </h2>

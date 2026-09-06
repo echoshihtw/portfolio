@@ -11,9 +11,10 @@
 >
   <h2
     class="section_title"
+    style="--label-tint: color-mix(in srgb, #22402d 24%, var(--color-bg))"
     use:sweepOnView
   >
-    Skills
+    What I work with
   </h2>
 
   <div class="skills">

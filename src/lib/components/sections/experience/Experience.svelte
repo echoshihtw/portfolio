@@ -11,9 +11,10 @@
 >
   <h2
     class="section_title"
+    style="--label-tint: color-mix(in srgb, #e2b657 24%, var(--color-bg))"
     use:sweepOnView
   >
-    Experience
+    Where I've worked
   </h2>
 
   <div class="timeline">

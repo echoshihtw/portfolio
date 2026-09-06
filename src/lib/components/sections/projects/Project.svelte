@@ -9,9 +9,10 @@
 >
   <h2
     class="section_title"
+    style="--label-tint: color-mix(in srgb, #b9cfe6 24%, var(--color-bg))"
     use:sweepOnView
   >
-    Projects
+    What I've built
   </h2>
   <Projects />
 </section>

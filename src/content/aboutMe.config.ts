@@ -11,13 +11,19 @@
 // Every fact is hers, and the tense is present throughout: she still paints,
 // with work from January 2026, so nothing here says "used to".
 export const aboutMeConfig = {
-  kicker: "Chun-Yu (Echo) Shih",
+  // The eyebrow, in the reference's phrasing. The name itself is in the hero
+  // kicker at the top of the page, so it is not repeated here.
+  kicker: "Who I am",
 
   // Her own words, from the moment she corrected an earlier draft: "just my
   // creations". Two words, and deliberately not a claim. It is the
   // counterpart to the hero's "I own it, end to end" directly above: that
   // makes the professional argument, this declines to make any.
-  heading: [{ text: "Just " }, { text: "me", accent: true }, { text: "." }] as {
+  // The accent is the full stop, the way the reference sets "Pangram." and
+  // nothing else: a whole name in one weight, then one coloured mark to end
+  // it. The glitch that used to ride on "me" is gone with it; a glitching
+  // period is a period.
+  heading: [{ text: "Just me" }, { text: ".", accent: true }] as {
     text: string;
     accent?: boolean;
   }[],
