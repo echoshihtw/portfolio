@@ -12,6 +12,7 @@
   }
 
   $: isBlog = $page.url.pathname.startsWith(`${base}/blog`);
+  $: isAbout = $page.url.pathname === `${base}/about`;
 </script>
 
 <!-- inert while hidden: this pill is only faded out, not removed, so without
@@ -31,6 +32,13 @@
        and Skills are the page you are already scrolling through, and they were
        four of the six links and all of the crowding. -->
   <div class="floating-links">
+    <a
+      href="{base}/about"
+      class="floating-link"
+      aria-current={isAbout ? "page" : undefined}
+    >
+      About
+    </a>
     <a
       href="{base}/blog"
       class="floating-link"

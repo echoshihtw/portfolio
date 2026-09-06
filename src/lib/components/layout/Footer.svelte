@@ -100,6 +100,15 @@
              horizontal row. -->
         <a
           class="footer-nav-destination"
+          href="{base}/about"
+          aria-current={$page.url.pathname === `${base}/about`
+            ? "page"
+            : undefined}
+        >
+          About
+        </a>
+        <a
+          class="footer-nav-destination"
           href="{base}/blog"
           aria-current={$page.url.pathname.startsWith(`${base}/blog`)
             ? "page"

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { tabHref } from "./menuTabs.js";
+import { tabs, tabHref } from "./menuTabs.js";
 
 // `base` is "" in dev and in the Vercel build, so these read as absolute
 // paths. The GitHub Pages build set it, which is why the function exists.
@@ -11,16 +11,15 @@ describe("tabHref", () => {
   it("sends an anchor home first from another route", () => {
     expect(tabHref("#work", "/blog")).toBe("/#work");
   });
+});
 
-  it("gives a route the same href on the home page", () => {
-    expect(tabHref("/about", "/")).toBe("/about");
-  });
-
-  it("gives a route the same href from another route", () => {
-    expect(tabHref("/about", "/blog")).toBe("/about");
-  });
-
-  it("does not double the slash on a route", () => {
-    expect(tabHref("/about", "/blog")).not.toContain("//");
+describe("tabs", () => {
+  // tabHref only handles anchors, and the navs draw a rule between positions
+  // on this page and places you go. A route added here would break both: it
+  // would render as "//about" from /blog, and it would sit on the wrong side
+  // of that rule. Routes belong beside Blog.
+  it("holds only anchors, never routes", () => {
+    const routes = tabs.filter((tab) => !tab.link.startsWith("#"));
+    expect(routes).toEqual([]);
   });
 });

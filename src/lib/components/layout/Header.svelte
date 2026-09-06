@@ -19,6 +19,7 @@
 
   // Route-level, so a post page marks Blog as current too.
   $: isBlog = $page.url.pathname.startsWith(`${base}/blog`);
+  $: isAbout = $page.url.pathname === `${base}/about`;
 </script>
 
 <!-- Not sticky: scrolls away with the page. The floating pill (driven by an
@@ -65,6 +66,13 @@
           class="nav-sep"
           aria-hidden="true"
         ></span>
+        <a
+          href="{base}/about"
+          class="mobile-tab-link"
+          aria-current={isAbout ? "page" : undefined}
+        >
+          About
+        </a>
         <a
           href="{base}/blog"
           class="mobile-tab-link"
