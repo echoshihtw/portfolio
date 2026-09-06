@@ -28,7 +28,7 @@
           src="{base}/{aboutConfig.portrait.src}"
           alt={aboutConfig.portrait.alt}
           width="719"
-          height="789"
+          height="860"
           draggable="false"
           decoding="async"
         />
