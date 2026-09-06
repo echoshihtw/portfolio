@@ -367,6 +367,15 @@
     box-shadow: 0 10px 26px rgb(20 18 42 / 0.16);
   }
 
+  /* Author rules beat the browser's own [hidden] { display: none } no matter
+     the specificity, so the `display: flex` above was overriding the hidden
+     attribute and the menu was rendered open the whole time. The old nav
+     strip clipped it out of sight; removing the clip revealed it. This rule
+     is what makes `hidden` mean hidden. */
+  .home-sections[hidden] {
+    display: none;
+  }
+
   .home-sections a {
     display: block;
     padding: 0.4rem 0.6rem;
