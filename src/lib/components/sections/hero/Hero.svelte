@@ -2,10 +2,11 @@
   import { onMount } from "svelte";
   import { base } from "$app/paths";
   import { heroConfig } from "../../../../content/portfolio.config";
+  import HeroDiagram from "./HeroDiagram.svelte";
 
-  // Boot-up typing: runs once on first load in both themes, skipped entirely
-  // under reduced-motion. Defaults to fully revealed so SSR/no-JS never see
-  // a blank headline.
+  // Boot-up typing: runs once on first load, skipped entirely under
+  // reduced-motion. Defaults to fully revealed so SSR/no-JS never see a
+  // blank headline.
   const totalChars = heroConfig.headline.reduce(
     (sum, part) => sum + part.text.length,
     0
@@ -23,11 +24,8 @@
   let isTyping = false;
 
   // Every part renders its full text; the not-yet-typed tail is hidden with
-  // visibility rather than removed. Slicing the DOM text made the headline
-  // re-wrap as it grew: "end to end" started on line one and jumped to line
-  // two mid-word, and the h1 grew a line at a time, shoving the whole page
-  // down twice during the 900ms. Laying out the final text from frame one
-  // fixes the wrap and the shift together.
+  // visibility rather than removed, so the headline lays out its final
+  // shape from frame one and never re-wraps as it grows.
   $: visibleParts = heroConfig.headline.map((part, i) => {
     const shown = Math.max(
       0,
@@ -37,12 +35,9 @@
       text: part.text.slice(0, shown),
       rest: part.text.slice(shown),
       accent: part.accent,
-      fullText: part.text,
     };
   });
 
-  // The caret belongs after the last typed character, not after the ghost
-  // text, so it rides along with the part currently being typed.
   $: caretIndex = heroConfig.headline.findIndex(
     (part, i) =>
       revealCount >= partOffsets[i] &&
@@ -72,127 +67,101 @@
   });
 </script>
 
+<!-- Asymmetric: the argument on the left, an instrument on the right. The
+     text column is the wider one because it is the one that gets read. -->
 <section
   id="home"
-  class="hero-section section_padding"
+  class="hero section_padding"
 >
-  <div class="hero-wrap">
-    <div class="hero-top">
-      <p class="hero-kicker mono">{heroConfig.kicker}</p>
-      <span class="hero-avail mono">
-        <span
-          class="avail-dot"
-          aria-hidden="true"
-        />
-        {heroConfig.remoteOpen}
-        <span
-          class="term-cursor"
-          aria-hidden="true"
-        >
-          _
+  <div class="hero-grid">
+    <div class="hero-copy">
+      <div class="hero-top">
+        <p class="hero-kicker label">{heroConfig.kicker}</p>
+        <span class="pill hero-avail">
+          <span
+            class="marker marker-dot"
+            style="--marker: var(--accent)"
+            aria-hidden="true"
+          />
+          {heroConfig.remoteOpen}
         </span>
-      </span>
-    </div>
+      </div>
 
-    <h1 class="hero-headline">
-      <!-- prettier-ignore -->
-      {#each visibleParts as part, i}<span class:accent={part.accent} data-text={part.accent ? part.fullText : undefined}>{part.text}{#if isTyping && i === caretIndex}<span class="type-caret typing" aria-hidden="true"></span>{/if}<span class="type-ghost" aria-hidden="true">{part.rest}</span></span>{/each}
-    </h1>
+      <h1 class="hero-headline">
+        <!-- prettier-ignore -->
+        {#each visibleParts as part, i}<span class:accent={part.accent}>{part.text}{#if isTyping && i === caretIndex}<span class="type-caret typing" aria-hidden="true"></span>{/if}<span class="type-ghost" aria-hidden="true">{part.rest}</span></span>{/each}
+      </h1>
 
-    <div class="hero-support-group">
-      {#each heroConfig.support as line, i}
-        <p
-          class="hero-support"
-          class:lead={i === 0}
+      <div class="hero-support-group">
+        {#each heroConfig.support as line, i}
+          <p
+            class="hero-support"
+            class:lead={i === 0}
+          >
+            {line}
+          </p>
+        {/each}
+      </div>
+
+      <ul class="hero-owns">
+        {#each heroConfig.owns as layer}
+          <li class="pill">{layer}</li>
+        {/each}
+      </ul>
+
+      <div class="hero-links">
+        <a
+          class="btn"
+          href="mailto:{heroConfig.email}"
         >
-          {line}
-        </p>
-      {/each}
+          Email me <span class="cta-arrow">→</span>
+        </a>
+        <a
+          class="link-cta"
+          href={heroConfig.seeWorkHref}
+        >
+          See the case studies <span class="cta-arrow">↓</span>
+        </a>
+        <a
+          class="link-cta"
+          href="{base}/{heroConfig.resume}"
+          download
+        >
+          Download résumé
+        </a>
+      </div>
     </div>
 
-    <ul class="hero-owns">
-      {#each heroConfig.owns as layer}
-        <li>{layer}</li>
-      {/each}
-    </ul>
-
-    <p class="hero-proofline">{heroConfig.proofLine}</p>
-
-    <div class="hero-links">
-      <a
-        class="btn down"
-        href="{base}/{heroConfig.resume}"
-        download
-      >
-        Download résumé <span class="cta-arrow">↓</span>
-      </a>
-      <a
-        class="link-cta"
-        href={heroConfig.seeWorkHref}
-      >
-        See the work <span class="cta-arrow">→</span>
-      </a>
-      <a
-        class="link-cta"
-        href="mailto:{heroConfig.email}"
-      >
-        {heroConfig.email}
-      </a>
-    </div>
+    <aside class="hero-aside">
+      <HeroDiagram />
+      <p class="hero-proof">
+        <span class="label">Proof</span>
+        {heroConfig.proofLine}
+      </p>
+    </aside>
   </div>
 </section>
 
 <style>
-  .hero-section {
-    position: relative;
-    overflow: hidden;
-    min-height: 70vh;
+  .hero {
     display: grid;
-    /* minmax(0, 1fr), not 1fr: a grid track defaults to min-content, so a wide
-       child (the chip row, a long mono line) stretches the track past the
-       viewport instead of wrapping. With overflow:hidden that reads as text
-       cut off at the right edge on phones. */
     grid-template-columns: minmax(0, 1fr);
-    align-items: center;
-    isolation: isolate;
   }
 
-  .hero-section::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    background: radial-gradient(
-      120% 80% at 15% 0%,
-      rgba(200, 169, 126, 0.14),
-      transparent 55%
-    );
-    z-index: -2;
-  }
-
-  :global(html[data-theme="dark"]) .hero-section::before {
-    background: radial-gradient(
-      120% 80% at 15% 0%,
-      rgba(200, 169, 126, 0.1),
-      transparent 55%
-    );
-  }
-
-  .hero-wrap {
+  .hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-6);
     width: 100%;
-    min-width: 0;
-    max-width: min(74ch, 100%);
-    display: flex;
-    flex-direction: column;
-    gap: 1.05rem;
-    padding: 1rem;
-    animation: rise 620ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+    max-width: var(--content-max);
+    margin: 0 auto;
+    animation: rise var(--dur-slow) var(--ease-out) both;
   }
 
   @keyframes rise {
     from {
       opacity: 0;
-      transform: translateY(12px);
+      transform: translateY(10px);
     }
     to {
       opacity: 1;
@@ -200,129 +169,55 @@
     }
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    .hero-wrap {
-      animation: none;
-    }
+  .hero-copy {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    min-width: 0;
   }
 
-  /* top row */
   .hero-top {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 0.75rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-3);
   }
 
   .hero-kicker {
     margin: 0;
-    font-size: 0.72rem;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    font-weight: 500;
-    color: var(--text-muted);
   }
 
-  /* Quiet by design: a status badge in saturated green reads as a SaaS
-     product pill, not a personal introduction. Monochrome text with a thin
-     accent-colored dot keeps the information without the shouting. */
   .hero-avail {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.66rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    border: 1px solid var(--section-border);
-    border-radius: 999px;
-    padding: 0.3rem 0.75rem;
     max-width: 100%;
-    /* Wraps rather than nowrap: on a narrow phone this string is longer than
-       the viewport, and a nowrap pill forces the whole page to scroll
-       sideways. */
     white-space: normal;
     line-height: 1.5;
   }
 
-  .avail-dot {
-    flex: none;
-    width: 0.36rem;
-    height: 0.36rem;
-    border-radius: 999px;
-    background: var(--color-accent);
-    box-shadow: 0 0 0 3px
-      color-mix(in srgb, var(--color-accent) 16%, transparent);
-  }
-
-  /* Terminal cursor: invisible in light mode, blinks in dark mode via
-     --glow-strength, the "fun, cypherpunk" half of the metaphor. */
-  .term-cursor {
-    color: var(--color-accent);
-    opacity: var(--glow-strength, 0);
-    animation: cursor-blink calc(1.1s * var(--glow-strength, 0)) step-end
-      infinite;
-  }
-
-  @keyframes cursor-blink {
-    0%,
-    49% {
-      opacity: var(--glow-strength, 0);
-    }
-    50%,
-    100% {
-      opacity: 0;
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .term-cursor {
-      animation: none;
-    }
-  }
-
-  /* headline */
   .hero-headline {
-    margin: 0.3rem 0;
-    font-family: "DM Serif Display", serif;
-    font-weight: 400;
-    font-size: clamp(2.6rem, 7.5vw, 4.6rem);
-    line-height: 1.07;
-    letter-spacing: -0.015em;
-    color: var(--text-color);
-    max-width: 18ch;
+    margin: 0;
+    font-size: var(--text-3xl);
+    font-weight: 600;
+    line-height: var(--leading-tight);
+    letter-spacing: -0.03em;
+    max-width: 14ch;
   }
 
-  :global(html[data-theme="dark"]) .hero-headline {
-    font-family: "JetBrains Mono", monospace;
-    font-weight: 500;
-    letter-spacing: -0.01em;
-  }
-
+  /* The editorial moment: the key phrase in orange-red. */
   .hero-headline .accent {
-    color: var(--color-accent);
-    font-style: italic;
+    color: var(--accent-text);
     white-space: nowrap;
   }
 
-  /* The tail that hasn't been typed yet: present for layout, invisible to
-     eyes and to screen readers. This is what keeps the headline's wrap and
-     height fixed from the first frame. */
   .type-ghost {
     visibility: hidden;
   }
 
-  /* Boot-up cursor: only rendered mid-type (see isTyping in script), in
-     either theme, invisible and inert once typing finishes. Absolutely sized so
-     it takes no width in the flow; with the ghost text holding the line, a
-     caret that occupied space would nudge the wrap point as it moved. */
   .type-caret {
     display: inline-block;
     width: 0.5ch;
     height: 0.85em;
     margin: 0 -0.5ch 0 0.05em;
-    background: var(--color-accent);
+    background: var(--primary);
     opacity: 0;
     vertical-align: -0.1em;
   }
@@ -338,192 +233,89 @@
     }
   }
 
-  /* Hover glitch on the accent word, dark mode only: a brief RGB-split
-     jitter, ~200ms, not a repeating effect. */
-  :global(html[data-theme="dark"]) .hero-headline .accent {
-    position: relative;
-  }
-
-  :global(html[data-theme="dark"]) .hero-headline .accent:hover {
-    animation: glitch-shake 220ms steps(2, jump-none);
-  }
-
-  :global(html[data-theme="dark"]) .hero-headline .accent:hover::before,
-  :global(html[data-theme="dark"]) .hero-headline .accent:hover::after {
-    content: attr(data-text);
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    overflow: hidden;
-    font-style: italic;
-  }
-
-  :global(html[data-theme="dark"]) .hero-headline .accent:hover::before {
-    color: var(--color-highlight);
-    clip-path: inset(0 0 60% 0);
-    animation: glitch-shift-a 220ms steps(2, jump-none);
-  }
-
-  :global(html[data-theme="dark"]) .hero-headline .accent:hover::after {
-    color: #4dd6a8;
-    clip-path: inset(60% 0 0 0);
-    animation: glitch-shift-b 220ms steps(2, jump-none);
-  }
-
-  @keyframes glitch-shake {
-    0%,
-    100% {
-      transform: translate(0);
-    }
-    20% {
-      transform: translate(-2px, 1px);
-    }
-    40% {
-      transform: translate(2px, -1px);
-    }
-    60% {
-      transform: translate(-1px, -1px);
-    }
-    80% {
-      transform: translate(1px, 1px);
-    }
-  }
-
-  @keyframes glitch-shift-a {
-    0%,
-    100% {
-      transform: translate(0);
-    }
-    20% {
-      transform: translate(3px, 0);
-    }
-    50% {
-      transform: translate(-3px, 0);
-    }
-    80% {
-      transform: translate(2px, 0);
-    }
-  }
-
-  @keyframes glitch-shift-b {
-    0%,
-    100% {
-      transform: translate(0);
-    }
-    20% {
-      transform: translate(-3px, 0);
-    }
-    50% {
-      transform: translate(3px, 0);
-    }
-    80% {
-      transform: translate(-2px, 0);
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    :global(html[data-theme="dark"]) .hero-headline .accent:hover,
-    :global(html[data-theme="dark"]) .hero-headline .accent:hover::before,
-    :global(html[data-theme="dark"]) .hero-headline .accent:hover::after {
-      animation: none;
-    }
-    .type-caret.typing {
-      animation: none;
-    }
-  }
-
-  /* support / differentiator */
-  /* The two lines are one thought, so they sit closer to each other than to
-     anything else in the hero, whose flex gap would otherwise space them
-     like separate blocks. */
   .hero-support-group {
     display: flex;
     flex-direction: column;
-    gap: 0.45rem;
-  }
-
-  /* The first line says what the work is and the second says how it is done,
-     so the first carries the page's text colour and the second stays muted.
-     Hierarchy inside the pair, rather than two equal greys. */
-  .hero-support.lead {
-    color: var(--text-color);
-    font-size: 1rem;
+    gap: var(--space-2);
   }
 
   .hero-support {
     margin: 0;
-    max-width: 62ch;
-    font-family: "DM Sans", sans-serif;
-    font-size: 0.92rem;
-    letter-spacing: 0;
-    line-height: 1.7;
-    color: var(--text-muted);
+    max-width: 58ch;
+    font-size: var(--text-sm);
+    line-height: 1.65;
+    color: var(--muted);
   }
 
-  /* capability strip: scannable in a glance, not reading. Mobile-first: a
-     two-column grid with no separator is the base layout, since a flex-wrap
-     line break would strand a "·" separator at the start of the next line
-     ("· APIs & data models") below 640px. Wider viewports switch to a single
-     flex-wrap row with separators. */
+  .hero-support.lead {
+    font-size: var(--text-lg);
+    line-height: 1.5;
+    color: var(--ink);
+  }
+
+  /* Capability chips: the technical metadata of the person. */
   .hero-owns {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.5rem 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
     margin: 0;
     padding: 0;
     list-style: none;
   }
 
-  .hero-owns li {
-    font-family: "JetBrains Mono", monospace;
-    font-size: 0.68rem;
-    letter-spacing: 0.04em;
-    color: var(--text-muted);
-  }
-
-  @media (min-width: 640px) {
-    .hero-owns {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem 0.85rem;
-    }
-
-    .hero-owns li + li::before {
-      content: "·";
-      margin-right: 0.85rem;
-      color: var(--section-border);
-    }
-  }
-
-  .hero-proofline {
-    margin: 0.3rem 0 0;
-    padding-top: 0.9rem;
-    max-width: 60ch;
-    border-top: 1px solid var(--section-border);
-    font-size: 0.95rem;
-    line-height: 1.6;
-    color: var(--text-color);
-  }
-
-  /* actions */
   .hero-links {
-    margin-top: 0.7rem;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 0.9rem;
+    gap: var(--space-3) var(--space-5);
+    margin-top: var(--space-2);
   }
 
-  /* One button, then links: .btn and .link-cta from app.css. Three pills in
-     a row all asked for the click; now the résumé is the button and the
-     other two are ways past it. */
-  @media (min-width: 768px) {
-    .hero-section {
-      min-height: 78vh;
+  .hero-aside {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    align-self: end;
+    max-width: 24rem;
+  }
+
+  /* The caption under the figure. */
+  .hero-proof {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding-top: var(--space-3);
+    border-top: var(--border-w) solid var(--border);
+    font-size: var(--text-sm);
+    line-height: 1.6;
+    color: var(--ink);
+  }
+
+  @media (min-width: 640px) {
+    .hero-top {
+      flex-direction: row;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: var(--space-3) var(--space-4);
     }
-    .hero-wrap {
-      gap: 1.25rem;
+  }
+
+  @media (min-width: 900px) {
+    .hero {
+      min-height: 78vh;
+      align-items: center;
+    }
+
+    .hero-grid {
+      grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+      gap: var(--space-8);
+      align-items: end;
+    }
+
+    .hero-aside {
+      justify-self: end;
+      width: 100%;
     }
   }
 </style>

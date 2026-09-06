@@ -7,11 +7,10 @@
   import AskFor from "$lib/components/sections/AskFor.svelte";
 </script>
 
-<div class="flex flex-col mb-24 w-full">
-  <!-- Order is an argument. This site's job is engineering work, so the
-       evidence goes first and the person arrives after it: claim, proof,
-       proof, capabilities, who made it, let's talk. AboutMe sat second for
-       a while and pushed the first piece of evidence below two screens. -->
+<!-- Order is an argument. This site's job is engineering work, so the
+     evidence goes first and the person arrives after it: claim, proof,
+     proof, capabilities, who made it, let's talk. -->
+<div class="page">
   <Hero />
   <Experience />
   <Project />
@@ -19,3 +18,11 @@
   <AskFor />
   <AboutMe />
 </div>
+
+<style>
+  .page {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+</style>

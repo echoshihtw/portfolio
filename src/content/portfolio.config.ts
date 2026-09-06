@@ -33,7 +33,7 @@ export const heroConfig: {
   // of layers; resume.md keeps the swap list for postings that literally
   // say frontend.
   remoteOpen:
-    "Product engineer · UTC+8 · Remote from Taiwan · APAC hours or async",
+    "Senior product engineer · UTC+8 · Remote from Taiwan · APAC hours or async",
 
   // Spells out what "end to end" means, layer by layer: named techniques
   // pulled from real project work, not category nouns any portfolio could
@@ -52,10 +52,15 @@ export const heroConfig: {
   // claim ("people rely on" implies things never break). The signal remote
   // hiring screens hardest for is whether someone can be trusted without
   // oversight, not whether their software never fails.
+  // Redesign brief, 2026-09-06: the hero has to say senior product
+  // engineer, React and TypeScript, developer experience, and zero to one,
+  // in the first screen. The headline carries the zero-to-one claim and
+  // the ownership after it; the support line carries the stack and the
+  // developer-experience work; the pill above carries the title.
   headline: [
-    { text: "I own it, " },
-    { text: "end to end", accent: true },
-    { text: "." },
+    { text: "Products from " },
+    { text: "0 → 1", accent: true },
+    { text: ", and the part after." },
   ],
 
   // Ownership leads, the shape of the work follows, stack last. The
@@ -86,7 +91,7 @@ export const heroConfig: {
   // The examples still lead, which was a deliberate call: they were always
   // doing the explaining.
   support: [
-    "Project platforms, applicant tracking, client histories: the software a business actually runs on.",
+    "React and TypeScript, and the developer experience around them. Project platforms, applicant tracking, client histories: the software a business actually runs on.",
     "I secure it, keep it running after ship, and write down what broke.",
   ],
 

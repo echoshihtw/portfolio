@@ -13,9 +13,9 @@
 
   let expanded = false;
 
-  // Highlights carry **bold** markers from the résumé source. Splitting on the
-  // marker and letting Svelte render each part means no HTML string is ever
-  // built, so there is nothing to escape and nothing to inject.
+  // Highlights carry **bold** markers from the résumé source. Splitting on
+  // the marker and letting Svelte render each part means no HTML string is
+  // ever built, so there is nothing to escape and nothing to inject.
   const boldSegments = (v: string) =>
     v
       .split(/\*\*\s*([^*][\s\S]*?)\s*\*\*/g)
@@ -24,10 +24,12 @@
   $: cleanRole = item.role.replace(/\*\*/g, "").trim();
 </script>
 
-<article class="card">
-  <p class="meta">{item.date}</p>
-  <h3 class="role">{cleanRole}</h3>
-  <p class="company">{item.company}</p>
+<article class="card entry">
+  <header class="head">
+    <p class="label">{item.date}</p>
+    <h3 class="role">{cleanRole}</h3>
+    <p class="company">{item.company}</p>
+  </header>
 
   {#if copy}
     <p class="impact">{copy.impact}</p>
@@ -35,7 +37,7 @@
       <span class="p">{copy.proof.p}</span>
       {copy.proof.s}
     </p>
-    <p class="tech mono">{copy.techLine}</p>
+    <p class="tech label">{copy.techLine}</p>
   {/if}
 
   <button
@@ -69,95 +71,89 @@
 </article>
 
 <style>
-  /* Same card as the project cards: no border, a soft shadow, the surface
-     tint. There were two card languages on the page, one bordered and one
-     not, and a reader notices that as "unfinished" without being able to say
-     why. No hover lift here, because this card is not one control: the
-     expander inside it is. */
-  .card {
-    background: var(--surface-bg);
-    border: 0;
-    border-radius: var(--radius-md);
-    padding: 1.4rem 1.6rem;
-    box-shadow:
-      0 1px 2px rgb(20 18 42 / 0.06),
-      0 6px 16px rgb(20 18 42 / 0.05);
+  /* A .card from app.css: surface, thin border, no shadow. */
+  .entry {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding: var(--space-5) var(--space-5) var(--space-4);
   }
 
-  .meta {
+  .head {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+
+  .head .label {
     margin: 0;
-    font-family: "JetBrains Mono", monospace;
-    font-size: 0.7rem;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-  }
-
-  /* A .link-cta from app.css; only the spacing is local. */
-  .expander {
-    margin-top: 1rem;
   }
 
   .role {
-    margin: 0.5rem 0 0;
-    font-family: "DM Serif Display", serif;
-    font-weight: 400;
-    font-size: 1.35rem;
-    line-height: 1.15;
-    color: var(--text-color);
+    margin: 0.2rem 0 0;
+    font-size: var(--text-xl);
+    line-height: var(--leading-snug);
   }
 
   .company {
-    margin: 0.2rem 0 0;
-    font-size: 0.85rem;
-    color: var(--text-muted);
+    margin: 0;
+    font-size: var(--text-sm);
+    color: var(--muted);
   }
 
   .impact {
-    margin: 0.95rem 0 0;
-    font-size: 0.97rem;
+    margin: var(--space-2) 0 0;
+    font-size: var(--text-base);
     line-height: 1.6;
-    color: var(--text-color);
+    max-width: 70ch;
   }
 
   .proof {
-    margin: 0.6rem 0 0;
-    font-size: 0.88rem;
-    line-height: 1.55;
-    color: var(--text-muted);
+    margin: 0;
+    font-size: var(--text-sm);
+    line-height: 1.6;
+    color: var(--muted);
+    max-width: 70ch;
   }
 
   .proof .p {
-    color: var(--text-color);
+    color: var(--ink);
     font-weight: 600;
   }
 
   .tech {
-    margin: 0.9rem 0 0;
-    font-size: 0.72rem;
+    margin: var(--space-1) 0 0;
+    text-transform: none;
     letter-spacing: 0.02em;
-    color: var(--text-muted);
-    opacity: 0.85;
+  }
+
+  .expander {
+    align-self: flex-start;
+    margin-top: var(--space-1);
   }
 
   .details {
-    margin: 0.9rem 0 0;
+    margin: var(--space-2) 0 0;
     padding-left: 1.1rem;
     list-style: disc;
-    color: var(--text-color);
-    line-height: 1.58;
     display: grid;
     gap: 0.35rem;
+    max-width: 72ch;
   }
 
   .details li {
     padding-left: 0.3rem;
-    font-size: 0.9rem;
-    color: var(--text-muted);
+    font-size: var(--text-sm);
+    line-height: 1.6;
+    color: var(--muted);
   }
 
   .details li :global(strong) {
     font-weight: 600;
-    color: var(--text-color);
+    color: var(--ink);
+  }
+
+  .details li::marker {
+    color: var(--primary);
   }
 </style>

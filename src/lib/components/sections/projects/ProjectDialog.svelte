@@ -66,13 +66,13 @@
       <!-- Why it exists, what I decided, what happened. Labelled, because a
            visitor should not have to infer the structure from a paragraph. -->
       <section>
-        <h5 class="mono">Why</h5>
+        <h5>Constraint</h5>
         <p>{project.why}</p>
       </section>
 
       {#if project.highlights?.length}
         <section>
-          <h5 class="mono">How</h5>
+          <h5>Decisions</h5>
           <ul>
             {#each project.highlights as highlight}
               <li>{highlight}</li>
@@ -82,7 +82,7 @@
       {/if}
 
       <section>
-        <h5 class="mono">Result</h5>
+        <h5>Outcome</h5>
         <p>{project.result}</p>
       </section>
 
@@ -117,8 +117,7 @@
   }
 
   dialog::backdrop {
-    background: rgba(10, 10, 9, 0.55);
-    backdrop-filter: blur(2px);
+    background: rgb(23 23 20 / 0.6);
   }
 
   article {
@@ -137,9 +136,8 @@
 
   h3 {
     margin: 0;
-    font-family: "DM Serif Display", serif;
-    font-size: 1.7rem;
-    line-height: 1.1;
+    font-size: var(--text-2xl);
+    line-height: var(--leading-tight);
   }
 
   /* A .chip from app.css, square. */
@@ -150,15 +148,11 @@
     border-radius: var(--radius-sm);
   }
 
-  .close:hover {
-    color: var(--text-color);
-    border-color: var(--color-accent);
-  }
-
   .hook {
     margin: 0;
-    font-size: 1rem;
-    color: var(--color-accent);
+    font-size: var(--text-lg);
+    line-height: 1.45;
+    color: var(--muted);
   }
 
   .shots {
@@ -176,7 +170,7 @@
     scroll-snap-align: start;
     border-radius: var(--radius-sm);
     border: 1px solid var(--section-border);
-    background: #0b0f16;
+    background: var(--canvas);
   }
 
   .single {
@@ -193,10 +187,12 @@
 
   h5 {
     margin: 0;
-    font-size: 0.66rem;
-    letter-spacing: 0.1em;
+    font-family: var(--font-mono);
+    font-weight: 400;
+    font-size: var(--text-xs);
+    letter-spacing: var(--tracking-label);
     text-transform: uppercase;
-    color: var(--color-accent);
+    color: var(--primary);
   }
 
   section p {

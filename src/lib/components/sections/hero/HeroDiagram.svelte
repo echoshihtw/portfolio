@@ -1,0 +1,143 @@
+<!-- An instrument, not an illustration: a 0 → 1 dial with a grid behind it,
+     the way a chart in a technical paper would be drawn. It says what the
+     headline says, without words, and it is drawn in the page's own tokens
+     so it follows the theme. Decorative to a screen reader. -->
+<svg
+  class="diagram"
+  viewBox="0 0 320 240"
+  role="img"
+  aria-hidden="true"
+  focusable="false"
+>
+  <defs>
+    <pattern
+      id="hero-grid"
+      width="20"
+      height="20"
+      patternUnits="userSpaceOnUse"
+    >
+      <path
+        d="M20 0H0V20"
+        fill="none"
+        stroke="currentColor"
+        stroke-opacity="0.16"
+        stroke-width="1"
+      />
+    </pattern>
+  </defs>
+
+  <!-- Graph paper -->
+  <rect
+    x="0.5"
+    y="0.5"
+    width="319"
+    height="239"
+    rx="11"
+    fill="var(--surface)"
+    stroke="var(--border)"
+  />
+  <rect
+    x="1"
+    y="1"
+    width="318"
+    height="238"
+    rx="11"
+    fill="url(#hero-grid)"
+  />
+
+  <!-- Axis annotations -->
+  <text
+    x="22"
+    y="212"
+    class="tick"
+  >
+    0
+  </text>
+  <text
+    x="286"
+    y="54"
+    class="tick"
+  >
+    1
+  </text>
+  <text
+    x="22"
+    y="28"
+    class="tick"
+  >
+    fig. 01
+  </text>
+  <text
+    x="298"
+    y="212"
+    class="tick"
+    text-anchor="end"
+  >
+    t
+  </text>
+
+  <!-- The path from nothing to something: a step, then a curve that
+       keeps climbing after ship. -->
+  <path
+    d="M40 196 H96 V160 H140 C170 160 176 92 232 76 C256 70 272 62 292 56"
+    fill="none"
+    stroke="var(--primary)"
+    stroke-width="2"
+    stroke-linejoin="round"
+    stroke-linecap="round"
+  />
+  <!-- Where it shipped -->
+  <line
+    x1="140"
+    y1="44"
+    x2="140"
+    y2="200"
+    stroke="var(--border)"
+    stroke-dasharray="3 5"
+  />
+  <text
+    x="146"
+    y="48"
+    class="tick"
+  >
+    ship
+  </text>
+
+  <!-- Markers -->
+  <rect
+    x="36"
+    y="192"
+    width="8"
+    height="8"
+    fill="var(--ink)"
+  />
+  <circle
+    cx="140"
+    cy="160"
+    r="5"
+    fill="var(--highlight)"
+    stroke="var(--ink)"
+    stroke-width="1.5"
+  />
+  <circle
+    cx="292"
+    cy="56"
+    r="5.5"
+    fill="var(--accent)"
+  />
+</svg>
+
+<style>
+  .diagram {
+    display: block;
+    width: 100%;
+    height: auto;
+    color: var(--ink);
+  }
+
+  .tick {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    fill: var(--muted);
+  }
+</style>

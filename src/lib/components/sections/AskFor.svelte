@@ -1,132 +1,105 @@
 <script lang="ts">
   import { askForConfig } from "../../../content/askFor.config";
+  import SectionHead from "$lib/components/SectionHead.svelte";
+
+  // One marker colour per card, so the five read as five things told
+  // apart, without any card being a block of colour.
+  const markers = [
+    "var(--primary)",
+    "var(--accent)",
+    "var(--sage)",
+    "var(--highlight)",
+    "var(--ink)",
+  ];
 </script>
 
-<!-- Directly above the contact block, because it is for people who are about
-     to reach out: the last thing read before the email address. -->
 <section
   id="ask"
-  class="section_padding section_layout"
+  class="section_padding section_layout section_rule"
+  aria-labelledby="ask-title"
 >
-  <h2
-    class="section_title"
+  <SectionHead
+    number="04"
+    label="Requests"
+    title="What people ask me for"
     id="ask-title"
-    style="--label-tint: color-mix(in srgb, #7d3320 24%, var(--color-bg))"
-  >
-    What people ask me for
-  </h2>
+    note="The job as someone with the problem would put it, then what I did about it. Every line is checkable against the rest of this page."
+  />
 
-  <ul
-    class="cards"
-    aria-labelledby="ask-title"
-  >
-    {#each askForConfig as item, i}
-      <li class="card tone-{i % 5}">
-        <p class="need">{item.need}</p>
-        <p class="proof">{item.proof}</p>
-      </li>
-    {/each}
-  </ul>
+  <div class="body">
+    <ol class="cards">
+      {#each askForConfig as item, i}
+        <li class="card item">
+          <div class="item-head">
+            <span
+              class="marker"
+              style="--marker: {markers[i % markers.length]}"
+              aria-hidden="true"
+            />
+            <span class="label">{String(i + 1).padStart(2, "0")}</span>
+          </div>
+          <h3 class="need">{item.need}</h3>
+          <p class="proof">{item.proof}</p>
+        </li>
+      {/each}
+    </ol>
+  </div>
 </section>
 
 <style>
-  /* Colour blocks, no borders.
-  
-     The fills come from Echo's own paintings rather than from a reference
-     site: the indigo is the pasta painting's ground, the oxblood is the 2014
-     lips, the green sits behind the profile portrait, the ochre is what the
-     lips are painted on, and the blue is the seated figure's.
-  
-     Colour is doing categorical work here, which is the job it is good at:
-     five different things, told apart at a glance. It was on the project
-     cards for a while and competed with their content, because there the
-     words ARE the argument.
-  
-     Each tone redefines the theme tokens inside the card, so the rules below
-     never mention a card colour. */
-  .card.tone-0 {
-    --card-bg: #171233;
-    --text-color: #eef0f5;
-    --text-muted: #b8b8d4;
+  section {
+    max-width: var(--content-max);
+    margin: 0 auto;
+    width: 100%;
   }
 
-  .card.tone-1 {
-    --card-bg: #7d3320;
-    --text-color: #f7efe6;
-    --text-muted: #ddc6b6;
-  }
-
-  .card.tone-2 {
-    --card-bg: #22402d;
-    --text-color: #eef3ee;
-    --text-muted: #bed1c0;
-  }
-
-  .card.tone-3 {
-    --card-bg: #e2b657;
-    --text-color: #14122a;
-    --text-muted: #4a3f2a;
-  }
-
-  .card.tone-4 {
-    --card-bg: #b9cfe6;
-    --text-color: #14122a;
-    --text-muted: #3c4a5a;
+  .body {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(17rem, 100%), 1fr));
-    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(min(16rem, 100%), 1fr));
+    gap: var(--space-3);
     margin: 0;
     padding: 0;
     list-style: none;
   }
 
-  .card {
-    position: relative;
-    overflow: hidden;
+  .item {
     display: flex;
     flex-direction: column;
-    gap: 0.6rem;
-    padding: 1.3rem 1.35rem 1.4rem;
-    border-radius: var(--radius-md);
-    background: var(--card-bg);
-    color: var(--text-color);
+    gap: var(--space-3);
+    padding: var(--space-5);
   }
 
-  /* The same arc the project cards used to carry: a large soft circle parked
-     mostly outside the top-right corner, so what shows is one clean curve
-     rather than a gradient fading out. Nothing hovers here, these are not
-     controls, so it sits still. */
-  .card::before {
-    content: "";
-    position: absolute;
-    top: -55%;
-    right: -35%;
-    width: 115%;
-    aspect-ratio: 1;
-    border-radius: 50%;
-    background: rgb(255 255 255 / 0.07);
-    pointer-events: none;
-  }
-
-  .card > :global(*) {
-    position: relative;
+  .item-head {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
   }
 
   .need {
     margin: 0;
-    font-family: "DM Serif Display", serif;
-    font-size: 1.2rem;
-    line-height: 1.18;
-    color: var(--text-color);
+    font-size: var(--text-lg);
+    line-height: 1.25;
   }
 
   .proof {
     margin: 0;
-    font-size: 0.86rem;
+    font-size: var(--text-sm);
     line-height: 1.6;
-    color: var(--text-muted);
+    color: var(--muted);
+  }
+
+  @media (min-width: 900px) {
+    .body {
+      grid-template-columns: 7rem minmax(0, 1fr);
+      gap: var(--space-6);
+    }
+    .body > * {
+      grid-column: 2;
+    }
   }
 </style>

@@ -2,74 +2,104 @@
   import Icon from "@iconify/svelte";
   import { skillsConfig } from "../../content/portfolio.config";
   import { skillIcons } from "../../content/skillIcons";
-  import { sweepOnView } from "$lib/actions/sweepOnView";
+  import SectionHead from "$lib/components/SectionHead.svelte";
 </script>
 
 <section
   id="skills"
-  class="section_padding section_layout"
+  class="section_padding section_layout section_rule"
+  aria-labelledby="skills-title"
 >
-  <h2
-    class="section_title"
-    style="--label-tint: color-mix(in srgb, #22402d 24%, var(--color-bg))"
-    use:sweepOnView
-  >
-    What I work with
-  </h2>
+  <SectionHead
+    number="03"
+    label="Toolkit"
+    title="What I work with"
+    id="skills-title"
+  />
 
-  <div class="skills">
-    {#each skillsConfig as group}
-      <div class="row">
-        <p class="label mono">{group.label}</p>
-        <ul class="items">
-          {#each group.items as item, i}
-            <li>
-              {#if skillIcons[item]}
-                <Icon
-                  icon={skillIcons[item]}
-                  class="skill-icon"
-                  aria-hidden="true"
-                />
-              {/if}{item}{#if i < group.items.length - 1}<span
-                  class="items-sep"
+  <div class="body">
+    <!-- A specification table: one row per layer, ruled, the label in the
+         margin column. It is read by scanning, so nothing here is prose. -->
+    <table class="spec">
+      <tbody>
+        {#each skillsConfig as group, i}
+          <tr>
+            <th scope="row">
+              <span class="label">
+                <span
+                  class="idx"
                   aria-hidden="true"
                 >
-                  ·
-                </span>{/if}
-            </li>
-          {/each}
-        </ul>
-      </div>
-    {/each}
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                {group.label}
+              </span>
+            </th>
+            <td>
+              <ul class="items">
+                {#each group.items as item}
+                  <li>
+                    {#if skillIcons[item]}
+                      <Icon
+                        icon={skillIcons[item]}
+                        class="skill-icon"
+                        aria-hidden="true"
+                      />
+                    {/if}
+                    {item}
+                  </li>
+                {/each}
+              </ul>
+            </td>
+          </tr>
+        {/each}
+      </tbody>
+    </table>
   </div>
 </section>
 
 <style>
-  .skills {
+  section {
+    max-width: var(--content-max);
+    margin: 0 auto;
     width: 100%;
-    display: flex;
-    flex-direction: column;
   }
 
-  .row {
+  .body {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 0.3rem;
-    padding: 0.95rem 0.25rem;
-    border-top: 1px solid var(--section-border);
-    align-items: baseline;
+    grid-template-columns: minmax(0, 1fr);
   }
 
-  .row:last-child {
-    border-bottom: 1px solid var(--section-border);
+  .spec {
+    width: 100%;
+    border-collapse: collapse;
+    border-top: var(--border-w) solid var(--border);
+  }
+
+  tr {
+    border-bottom: var(--border-w) solid var(--border);
+  }
+
+  th,
+  td {
+    padding: var(--space-4) 0;
+    vertical-align: top;
+    text-align: left;
+  }
+
+  th {
+    font-weight: 400;
+    padding-right: var(--space-4);
+    white-space: nowrap;
   }
 
   .label {
-    margin: 0;
-    font-size: 0.7rem;
-    letter-spacing: 0.09em;
-    text-transform: uppercase;
-    color: var(--text-muted);
+    display: inline-flex;
+    gap: var(--space-3);
+  }
+
+  .idx {
+    color: var(--primary);
   }
 
   .items {
@@ -78,34 +108,47 @@
     list-style: none;
     display: flex;
     flex-wrap: wrap;
-    font-size: 0.95rem;
+    gap: 0.4rem 1.2rem;
+    font-size: var(--text-sm);
     line-height: 1.5;
-    color: var(--text-color);
   }
 
   .items li {
     display: inline-flex;
     align-items: center;
-    gap: 0.35rem;
+    gap: 0.4rem;
   }
 
   .items :global(.skill-icon) {
     flex: none;
-    width: 0.9em;
-    height: 0.9em;
-    color: var(--text-muted);
-    opacity: 0.8;
+    width: 0.95em;
+    height: 0.95em;
+    color: var(--muted);
   }
 
-  .items-sep {
-    margin: 0 0.5rem;
-    color: var(--section-border);
+  /* Stacked on a phone: the label above its row rather than beside it. */
+  @media (max-width: 639px) {
+    tr {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      padding: var(--space-3) 0;
+    }
+    th,
+    td {
+      padding: var(--space-1) 0;
+    }
   }
 
-  @media (min-width: 640px) {
-    .row {
-      grid-template-columns: 10rem 1fr;
-      gap: 0.4rem 1.5rem;
+  @media (min-width: 900px) {
+    .body {
+      grid-template-columns: 7rem minmax(0, 1fr);
+      gap: var(--space-6);
+    }
+    .body > * {
+      grid-column: 2;
+    }
+    th {
+      width: 14rem;
     }
   }
 </style>
