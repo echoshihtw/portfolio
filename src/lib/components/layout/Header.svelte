@@ -330,19 +330,26 @@
     display: inline-flex;
   }
 
+  /* A button dressed as a tab. No `font: inherit` here: the shorthand runs
+     after .tab and resets family and size to the body's, which is how HOME
+     came out in DM Sans at twice the size of the tabs beside it. Only the
+     button's own chrome is removed; the type comes from .tab. */
   .home-trigger {
     display: inline-flex;
     align-items: center;
     gap: 0.3rem;
+    padding: 0;
+    margin: 0;
     border: 0;
     background: transparent;
     cursor: pointer;
-    font: inherit;
-    color: inherit;
+    line-height: inherit;
   }
 
   .chev {
-    font-size: 0.7em;
+    font-size: 0.8em;
+    line-height: 1;
+    opacity: 0.7;
     transition: transform 160ms ease;
   }
 
@@ -376,15 +383,27 @@
     display: none;
   }
 
+  /* Same type as the tabs, so the menu reads as more of the nav rather than
+     a piece of the page that happens to hang off it. */
   .home-sections a {
     display: block;
-    padding: 0.4rem 0.6rem;
+    padding: 0.45rem 0.7rem;
     border-radius: var(--radius-sm);
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
     white-space: nowrap;
+    transition:
+      color 160ms ease,
+      background-color 160ms ease;
   }
 
   .home-sections a:hover,
   .home-sections a:focus-visible {
+    color: var(--text-color);
     background: color-mix(in srgb, var(--color-accent) 12%, transparent);
   }
 
