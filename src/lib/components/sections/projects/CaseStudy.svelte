@@ -1,19 +1,28 @@
 <script lang="ts">
+  import { slide } from "svelte/transition";
+  import { base } from "$app/paths";
   import type { Projects } from "$lib/types/types";
 
   type Project = Projects[number];
 
   export let project: Project;
   export let index: number;
-  export let onOpen: (project: Project) => void;
 
   const slug = (value: string) => value.toLowerCase().replace(/\s+/g, "-");
 
-  // Three decisions on the page; the rest wait in the full study.
-  $: decisions = project.highlights?.slice(0, 3) ?? [];
-  $: more = Math.max(0, (project.highlights?.length ?? 0) - decisions.length);
+  // Closed: three decisions and the first lines of the constraint and the
+  // outcome. Open: all of it, in place, plus the screenshots. The same
+  // expander the work entries use, so the page has one way of saying
+  // "there is more".
+  let expanded = false;
+
+  $: highlights = project.highlights ?? [];
+  $: decisions = expanded ? highlights : highlights.slice(0, 3);
+  $: more = Math.max(0, highlights.length - 3);
   $: number = String(index + 1).padStart(2, "0");
-  $: titleId = `case-${slug(project.name)}-title`;
+  $: id = slug(project.name);
+  $: titleId = `case-${id}-title`;
+  $: detailId = `case-${id}-detail`;
 </script>
 
 <!-- A research entry, not a card: number and metadata in the margin, the
@@ -71,10 +80,13 @@
       {/if}
     </header>
 
-    <div class="fields">
+    <div
+      class="fields"
+      id={detailId}
+    >
       <section class="field">
         <h4 class="label">Constraint</h4>
-        <p class="clamp">{project.why}</p>
+        <p class:clamp={!expanded}>{project.why}</p>
       </section>
 
       {#if decisions.length}
@@ -85,7 +97,7 @@
               <li>{d}</li>
             {/each}
           </ol>
-          {#if more > 0}
+          {#if !expanded && more > 0}
             <p class="more label">+{more} more in the full study</p>
           {/if}
         </section>
@@ -93,18 +105,50 @@
 
       <section class="field">
         <h4 class="label">Outcome</h4>
-        <p class="clamp">{project.result}</p>
+        <p class:clamp={!expanded}>{project.result}</p>
       </section>
     </div>
+
+    {#if expanded && project.shots?.length}
+      <!-- Height-capped, width auto: a phone portrait and a browser
+           landscape sit in the same strip without either being cropped. -->
+      <div
+        class="shots"
+        transition:slide|local={{ duration: 220 }}
+      >
+        {#each project.shots as shot}
+          <img
+            src="{base}/{shot.src}"
+            alt={shot.alt}
+            loading="lazy"
+          />
+        {/each}
+      </div>
+    {:else if expanded && project.file}
+      <img
+        class="single"
+        src="{base}/{project.file}"
+        alt="{project.name} preview"
+        loading="lazy"
+        transition:slide|local={{ duration: 220 }}
+      />
+    {/if}
 
     <div class="actions">
       <button
         type="button"
         class="link-cta"
-        on:click={() => onOpen(project)}
-        aria-label="Read the full study: {project.name}"
+        aria-expanded={expanded}
+        aria-controls={detailId}
+        on:click={() => (expanded = !expanded)}
       >
-        Read the full study <span class="cta-arrow">→</span>
+        {expanded ? "Close the study" : "Read the full study"}
+        <span
+          class="cta-arrow"
+          aria-hidden="true"
+        >
+          {expanded ? "↑" : "↓"}
+        </span>
       </button>
       {#if project.href}
         <a
@@ -291,6 +335,32 @@
     margin: 0;
     text-transform: none;
     letter-spacing: 0.02em;
+  }
+
+  .shots {
+    display: flex;
+    gap: var(--space-3);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: var(--space-1);
+  }
+
+  .shots img {
+    height: min(50vh, 26rem);
+    width: auto;
+    flex: none;
+    scroll-snap-align: start;
+    border: var(--border-w) solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--canvas);
+  }
+
+  .single {
+    width: 100%;
+    max-width: 48rem;
+    height: auto;
+    border: var(--border-w) solid var(--border);
+    border-radius: var(--radius-sm);
   }
 
   .actions {

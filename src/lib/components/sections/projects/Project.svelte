@@ -13,7 +13,7 @@
     label="Case studies"
     title="What I've built"
     id="projects-title"
-    note="Each one the same way: the constraint, the decisions, what happened. The full study has the screenshots and the rest of the decisions."
+    note="Each one the same way: the constraint, the decisions, what happened. Open a study for the rest of the decisions and the screenshots."
   />
   <Projects />
 </section>
