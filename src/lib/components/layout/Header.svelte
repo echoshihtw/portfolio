@@ -33,18 +33,30 @@
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
-  let homeOpen = false;
-  const closeHome = () => (homeOpen = false);
+  // The Home sections slide out horizontally, in the row, rather than
+  // dropping down. Three ways in: hover (mouse), focus (keyboard, tabbing
+  // into any of the links), and a tap on the trigger, which pins them open
+  // for touch, where there is no hover. All three are tracked here rather
+  // than left to :hover so aria-expanded tells the truth.
+  let hovered = false;
+  let focused = false;
+  let pinned = false;
+  $: homeOpen = hovered || focused || pinned;
+
+  function onMenuFocusOut(e: FocusEvent) {
+    const next = e.relatedTarget as Node | null;
+    focused = !!next && (e.currentTarget as HTMLElement).contains(next);
+  }
 
   // A menu that only closes by clicking its own trigger is a trap: people
   // click away, or press escape, and expect it gone.
   function onWindowKey(e: KeyboardEvent) {
-    if (e.key === "Escape") homeOpen = false;
+    if (e.key === "Escape") pinned = false;
   }
 
   function onWindowPointer(e: PointerEvent) {
-    if (!homeOpen) return;
-    if (!(e.target as HTMLElement).closest(".home-menu")) homeOpen = false;
+    if (!pinned) return;
+    if (!(e.target as HTMLElement).closest(".home-menu")) pinned = false;
   }
 </script>
 
@@ -53,10 +65,7 @@
   on:pointerdown={onWindowPointer}
 />
 
-<!-- Sticky, so it is always there to condense. The dropdown below hangs out
-     of this element, which means nothing in here may clip overflow: the old
-     nav strip scrolled horizontally, and a scrolling box clips vertically
-     too, which is why the menu opened and could not be seen. -->
+<!-- Sticky, so it is always there to condense. -->
 <header
   class="header"
   class:condensed
@@ -76,34 +85,40 @@
       class="tabs"
     >
       <!-- Work, Projects, Skills and Contact are sections OF the home page,
-           so they sit inside it rather than beside it. Keeping them in a menu
-           also means this nav holds the same items on every page. -->
-      <div class="home-menu">
+           so they sit inside it rather than beside it: hover Home and they
+           slide out in the row, then the rule, then the other pages. -->
+      <div
+        class="home-menu"
+        class:open={homeOpen}
+        on:pointerenter={(e) => (hovered = e.pointerType === "mouse")}
+        on:pointerleave={() => (hovered = false)}
+        on:focusin={() => (focused = true)}
+        on:focusout={onMenuFocusOut}
+      >
         <button
           type="button"
           class="tab home-trigger"
           aria-expanded={homeOpen}
           aria-controls="home-sections"
           aria-current={isHome ? "page" : undefined}
-          on:click={() => (homeOpen = !homeOpen)}
+          on:click={() => (pinned = !pinned)}
         >
           Home
           <span
             class="chev"
             aria-hidden="true"
           >
-            ▾
+            ▸
           </span>
         </button>
         <ul
           id="home-sections"
           class="home-sections"
-          hidden={!homeOpen}
         >
           <li>
             <a
               href={base || "/"}
-              on:click={closeHome}
+              on:click={() => (pinned = false)}
             >
               Top
             </a>
@@ -112,7 +127,7 @@
             <li>
               <a
                 href={tabHref(tab.link, $page.url.pathname)}
-                on:click={closeHome}
+                on:click={() => (pinned = false)}
               >
                 {tab.name}
               </a>
@@ -325,9 +340,11 @@
     background: var(--section-border);
   }
 
+  /* No gap here: the list carries its own left margin, which tweens to
+     zero with it, or a collapsed list would leave a gap before the rule. */
   .home-menu {
-    position: relative;
     display: inline-flex;
+    align-items: center;
   }
 
   /* A button dressed as a tab. No `font: inherit` here: the shorthand runs
@@ -350,61 +367,63 @@
     font-size: 0.8em;
     line-height: 1;
     opacity: 0.7;
-    transition: transform 160ms ease;
+    transition:
+      transform 200ms ease,
+      opacity 200ms ease;
   }
 
-  .home-trigger[aria-expanded="true"] .chev {
-    transform: rotate(180deg);
+  .open .chev {
+    transform: translateX(2px);
+    opacity: 0.35;
   }
 
+  /* The sections sit in the row, collapsed to nothing, and slide out to
+     the right of Home. max-width tweens where width: auto would not; the
+     overflow clip is horizontal only so nothing is cut vertically. A menu
+     that opens in the row moves the tabs after it, and that is the deal:
+     the alternative was a dropdown, and a dropdown over the hero was
+     asked away. */
   .home-sections {
-    position: absolute;
-    top: calc(100% + 0.55rem);
-    left: 0;
-    z-index: 30;
-    margin: 0;
-    padding: 0.4rem;
-    list-style: none;
     display: flex;
-    flex-direction: column;
-    min-width: 9rem;
-    border: 1px solid var(--section-border);
-    border-radius: var(--radius-sm);
-    background: var(--surface-bg);
-    box-shadow: 0 10px 26px rgb(20 18 42 / 0.16);
+    align-items: center;
+    gap: 0.5rem 0.9rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    max-width: 0;
+    margin-left: 0;
+    opacity: 0;
+    overflow: hidden clip;
+    white-space: nowrap;
+    transition:
+      max-width 320ms cubic-bezier(0.2, 0.7, 0.2, 1),
+      margin-left 320ms cubic-bezier(0.2, 0.7, 0.2, 1),
+      opacity 200ms ease;
   }
 
-  /* Author rules beat the browser's own [hidden] { display: none } no matter
-     the specificity, so the `display: flex` above was overriding the hidden
-     attribute and the menu was rendered open the whole time. The old nav
-     strip clipped it out of sight; removing the clip revealed it. This rule
-     is what makes `hidden` mean hidden. */
-  .home-sections[hidden] {
-    display: none;
+  .open .home-sections {
+    max-width: 30rem;
+    margin-left: 0.9rem;
+    opacity: 1;
   }
 
-  /* Same type as the tabs, so the menu reads as more of the nav rather than
-     a piece of the page that happens to hang off it. */
+  /* Same type as the tabs, one step quieter, so they read as Home's
+     contents rather than four more destinations. */
   .home-sections a {
-    display: block;
-    padding: 0.45rem 0.7rem;
-    border-radius: var(--radius-sm);
+    display: inline-block;
+    padding: 0.15rem 0;
     font-family: "JetBrains Mono", monospace;
     font-size: 0.72rem;
     letter-spacing: 0.04em;
     text-transform: uppercase;
-    color: var(--text-muted);
+    color: color-mix(in srgb, var(--text-muted) 78%, transparent);
     text-decoration: none;
-    white-space: nowrap;
-    transition:
-      color 160ms ease,
-      background-color 160ms ease;
+    transition: color 160ms ease;
   }
 
   .home-sections a:hover,
   .home-sections a:focus-visible {
-    color: var(--text-color);
-    background: color-mix(in srgb, var(--color-accent) 12%, transparent);
+    color: var(--color-accent);
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -412,7 +431,8 @@
     .site-name,
     .tab,
     .top-link,
-    .chev {
+    .chev,
+    .home-sections {
       transition: none;
     }
   }
