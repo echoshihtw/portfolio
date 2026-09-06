@@ -84,13 +84,13 @@
       class="fields"
       id={detailId}
     >
-      <section class="field">
+      <section class="field field-constraint">
         <h4 class="label">Constraint</h4>
         <p class:clamp={!expanded}>{project.why}</p>
       </section>
 
       {#if decisions.length}
-        <section class="field">
+        <section class="field field-decisions">
           <h4 class="label">Decisions</h4>
           <ol class="decisions">
             {#each decisions as d}
@@ -103,7 +103,7 @@
         </section>
       {/if}
 
-      <section class="field">
+      <section class="field field-outcome">
         <h4 class="label">Outcome</h4>
         <p class:clamp={!expanded}>{project.result}</p>
       </section>
@@ -381,10 +381,30 @@
     gap: var(--space-3) var(--space-5);
   }
 
+  /* Two columns, packed. Three equal columns left the short constraint
+     and outcome hanging beside a decisions list twice their height. Now
+     those two stack on the left and the decisions run the full height on
+     the right, so the block's bottom edge is level. Reading order in the
+     DOM stays constraint, decisions, outcome. */
   @media (min-width: 700px) {
     .fields {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: var(--space-5);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-5) var(--space-6);
+    }
+
+    .field-constraint {
+      grid-column: 1;
+      grid-row: 1;
+    }
+
+    .field-decisions {
+      grid-column: 2;
+      grid-row: 1 / span 2;
+    }
+
+    .field-outcome {
+      grid-column: 1;
+      grid-row: 2;
     }
   }
 
