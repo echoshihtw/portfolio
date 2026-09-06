@@ -4,7 +4,7 @@
   import Hero from "$lib/components/sections/hero/Hero.svelte";
   import Experience from "$lib/components/sections/experience/Experience.svelte";
   import AboutMe from "$lib/components/sections/AboutMe.svelte";
-  import AskFor from "$lib/components/sections/AskFor.svelte";
+  import Highlights from "$lib/components/sections/Highlights.svelte";
 </script>
 
 <!-- Order is an argument. This site's job is engineering work, so the
@@ -15,7 +15,7 @@
   <Experience />
   <Project />
   <Skills />
-  <AskFor />
+  <Highlights />
   <AboutMe />
 </div>
 
