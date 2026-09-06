@@ -22,31 +22,31 @@ export const aboutMeConfig = {
     accent?: boolean;
   }[],
 
-  // Echo's own words, taken from the CV rather than written here.
+  // Hers, and only hers.
   //
-  // Not the CV's summary paragraph: that is already the hero's support line
-  // almost verbatim, and repeating it two screens later would say nothing
-  // new. These two lines are the parts of resume.md that appear NOWHERE on
-  // the site: the degree (resume.md:66) and the languages beside it.
+  // The first line is the story she told on 2026-09-06: she started out in
+  // restaurants doing customer service, and decided she should be doing
+  // better with her time and with what she is really good at. Her motive,
+  // in her framing, not an inference. The wording is close to how she said
+  // it; the only words that are mine are the joins.
   //
-  // They also answer "self-taught" without claiming it. A language degree
-  // sitting under a product-engineer hero says how she got here, and lets
-  // the reader draw the conclusion rather than being told. Say the word if
-  // it should be explicit instead.
+  // The degree comes from resume.md:66, and the languages from the line
+  // beside it. Not the CV's summary paragraph: that is already the hero's
+  // support line almost verbatim.
   //
-  // The English line matters more than it looks for a remote hire: "the
-  // working language in all my roles" is a fact about how she has actually
-  // worked, not a self-assessed proficiency level.
+  // This is also what "self-taught" was reaching for in an earlier draft.
+  // A career that starts in customer service and arrives at Postgres row
+  // level security says it without the word, and shows the turn rather than
+  // asserting the trait.
   //
   // The remote clause is the one idea worth keeping from an older freelance
   // pitch, which sold the languages as "bridging communication gaps between
   // Asia and the Western world". Same point, stated as something checkable:
   // resume.md lists Independent/Freelance as Remote 2020-2024 and
   // SPIN.FASHION as Singapore, Remote. "Most of my career" was drafted and
-  // cut, because Find Recruiter and Lockerbie are both listed as Taipei and
-  // it would not have survived a reader with the CV open.
+  // cut, because Find Recruiter and Lockerbie are both listed as Taipei.
   story: [
-    "My degree is in Italian language and culture, from Fu Jen Catholic University in Taipei.",
+    "I started out working in restaurants, in customer service, with a degree in Italian language and culture. At some point I decided I should be doing better with my time, and with what I am actually good at.",
     "Mandarin and Taiwanese are native. English has been the working language in every role I have had. I speak Italian, and I have worked remotely across time zones since 2020.",
   ],
 
