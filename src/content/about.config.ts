@@ -35,18 +35,25 @@ export const aboutConfig = {
     "The clay bust, the pasta painting and the charcoal head were made there. The ink drawing of a mouth was made on a plane, and the airport is Jakarta.",
   ],
 
-  // Echo's own cut, with a torn paper edge.
+  // The torn-paper edge from Echo's edited version, grafted onto the colour
+  // of the untouched photograph (scripts/graft.swift: alpha from one image,
+  // RGB from the other, in pixel space).
   //
-  // It arrived as a PNG with NO alpha channel: the editor had drawn its
-  // transparency checkerboard into the pixels, so shipping it as supplied
-  // would have put a grey chequer on the page. scripts/floodneutral.swift
-  // keys it back out, flooding in from the border on "light AND perfectly
-  // neutral", which the drawn chequer is and the photographed paper is not.
+  // Both halves are here for a reason. The edited file had the edge she
+  // wanted but had also been re-rendered: comparing the same crop against
+  // the original showed sharper eyelashes and harder contrast, detail that
+  // was never photographed. The original has the colour but a rectangle.
+  // Taking the shape from one and the pixels from the other keeps both.
+  //
+  // The edited file also arrived with its transparency checkerboard painted
+  // into the pixels rather than in an alpha channel, so it is keyed first by
+  // scripts/floodneutral.swift, which floods in from the border on "light
+  // AND perfectly neutral": the drawn chequer is both, photographed paper is
+  // not.
   //
   // Transparent rather than flattened onto the page colour, so the plaster
-  // grain shows through. That costs: a torn edge is thousands of tiny alpha
-  // transitions, the one thing PNG compresses badly. Running the photograph
-  // visually small is what makes it affordable.
+  // grain shows through. A torn edge is thousands of tiny alpha transitions,
+  // the one thing PNG compresses badly, which is why it runs small.
   //
   portrait: {
     src: "assets/echo-florence.png",
