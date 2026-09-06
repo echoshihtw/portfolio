@@ -17,7 +17,15 @@ export const aboutConfig = {
   // It replaced "I have been painting since 2012.", which was the only place
   // that date appeared, so the date moved into the first paragraph rather
   // than leaving the page.
-  heading: "Behind the screen and matrix.",
+  //
+  // Split the way heroConfig.headline is split, so one word can take the
+  // accent italic. That treatment is the home page's, and using it here is
+  // what makes the two pages read as one site rather than two.
+  heading: [
+    { text: "Behind the screen and " },
+    { text: "matrix", accent: true },
+    { text: "." },
+  ] as { text: string; accent?: boolean }[],
 
   story: [
     "I have been painting since 2012, mostly in Tainan. I studied Italian language and culture at Fu Jen Catholic University in Taipei, and after I finished I spent three months at Accademia del Giglio in Florence.",
