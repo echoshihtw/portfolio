@@ -13,6 +13,7 @@
 
   $: isBlog = $page.url.pathname.startsWith(`${base}/blog`);
   $: isAbout = $page.url.pathname === `${base}/about`;
+  $: isHome = $page.url.pathname === (base || "/");
 </script>
 
 <!-- inert while hidden: this pill is only faded out, not removed, so without
@@ -32,6 +33,13 @@
        and Skills are the page you are already scrolling through, and they were
        four of the six links and all of the crowding. -->
   <div class="floating-links">
+    <a
+      href={base || "/"}
+      class="floating-link"
+      aria-current={isHome ? "page" : undefined}
+    >
+      Home
+    </a>
     <a
       href="{base}/about"
       class="floating-link"

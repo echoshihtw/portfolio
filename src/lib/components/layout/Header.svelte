@@ -20,6 +20,7 @@
   // Route-level, so a post page marks Blog as current too.
   $: isBlog = $page.url.pathname.startsWith(`${base}/blog`);
   $: isAbout = $page.url.pathname === `${base}/about`;
+  $: isHome = $page.url.pathname === (base || "/");
 </script>
 
 <!-- Not sticky: scrolls away with the page. The floating pill (driven by an
@@ -66,6 +67,17 @@
           class="nav-sep"
           aria-hidden="true"
         ></span>
+        <!-- Home leads the destinations because from anywhere else the four
+             anchors above are misleading: they read as sections of the page
+             you are on and are actually positions on the home page. This
+             names the direction they were quietly taking you. -->
+        <a
+          href={base || "/"}
+          class="mobile-tab-link"
+          aria-current={isHome ? "page" : undefined}
+        >
+          Home
+        </a>
         <a
           href="{base}/about"
           class="mobile-tab-link"
