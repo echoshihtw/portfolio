@@ -7,7 +7,16 @@
 
   export let isVisible = false;
 
-  function goTop() {
+  $: isHome = $page.route.id === "/";
+
+  // Scroll-to-top only makes sense on the one-page home. Anywhere else this
+  // control is a real link home, and the click has to be left alone so the
+  // anchor can navigate. Same guard the header's site name uses. Before this
+  // it was a button that always scrolled, which on /gallery or /blog meant
+  // the floating nav had no way home at all once the header scrolled away.
+  function goTop(event: MouseEvent) {
+    if (!isHome) return;
+    event.preventDefault();
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
@@ -32,7 +41,8 @@
   <!-- Deliberately not the header's six. This bar exists because the header
        scrolled away, so a slot is earned by being something you cannot get
        from where you are standing: Blog is the one destination scrolling
-       will never reach, Résumé is the conversion, top is the way back, and
+       will never reach, Résumé is the conversion, the round button is top on
+       the home page and home from anywhere else, and
        the toggle is the only theme control left on screen. Work, Projects
        and Skills are the page you are already scrolling through, and they were
        four of the six links and all of the crowding. -->
@@ -64,14 +74,21 @@
       Art Gallery
     </a>
   </div>
-  <button
-    type="button"
-    aria-label="Go to top"
+  <!-- One control, two jobs by route: "top" on the home page, "home" from
+       anywhere else. An anchor rather than a button so the off-home case is
+       a plain navigation that works without JavaScript. -->
+  <a
+    href={base || "/"}
+    aria-label={isHome ? "Go to top" : "Home"}
     class="floating-link floating-top-button"
     on:click={goTop}
   >
-    <Icon icon="ri:arrow-up-circle-line" />
-  </button>
+    {#if isHome}
+      <Icon icon="ri:arrow-up-circle-line" />
+    {:else}
+      <Icon icon="ri:home-4-line" />
+    {/if}
+  </a>
 
   <!-- No aria-label here: it is ignored on a div with no role, and the
        switch inside carries its own name. -->
