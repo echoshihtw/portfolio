@@ -144,7 +144,9 @@ export const closingConfig = {
   // evidenced by Clio being in daily use since May 2025, without a word
   // borrowed from ops. To a client that phrase was reassurance; to a hiring
   // team it reads as being handed the pager.
-  body: "The work I want is the part nobody's scoped yet. Work out what it should be, build it, then stay with it after it ships. Remote, from Taiwan.",
+  // "I like to untangle things" is Echo's own line, 2026-09-07. The rest
+  // is the earlier version's facts behind it.
+  body: "I like to untangle things. Take the part nobody's scoped yet, work out what it should be, build it, and stay with it after it ships. Remote, from Taiwan.",
   email: "echoshihtw@gmail.com",
   resume: "Chun-Yu-Echo-Shih-Software-Engineer.pdf",
 };
