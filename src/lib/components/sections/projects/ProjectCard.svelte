@@ -131,6 +131,14 @@
     color: var(--color-accent);
   }
 
+  /* Completed and handed over, as opposed to still running. Uses the accent
+     rather than the live green, because nothing about it is live. Without
+     this rule the badge renders in the default muted colour and nothing
+     errors: ProjectCard builds the class from the status string. */
+  .status-shipped {
+    color: var(--color-accent);
+  }
+
   .status-archived {
     color: var(--text-muted);
   }

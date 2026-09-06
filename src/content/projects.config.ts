@@ -105,4 +105,38 @@ export const projectsConfig: Projects = [
     linkLabel: "Source Code →",
     status: "Archived",
   },
+  {
+    // Last in the grid on purpose. A reader skimming for engineering signal
+    // should hit the software first; this earns its place by being evidence
+    // of shipping in a material none of the others touch.
+    name: "Ming Mold 60th",
+    subtitle:
+      "A 60th anniversary gift for the family business: identity, card face, and the box it ships in",
+    why: "My family's mould manufacturer turned sixty in 2021, founded 1961. The gift had to say something about sixty years without being a plaque, and it had to be made in quantity: a commemorative EZ-card in a presentation box, for people who had worked there for decades.",
+    result:
+      "Monogram to die-cut to a carton of finished boxes in under three months. The mark folds the company's existing M into the bowl of the 6 at one line weight throughout, which is what lets it hot-foil stamp: a mark that varies in weight fills in at the thin end. The card face is the original factory frontage as a line engraving, with the red sign left at full saturation and everything else dropped back, under 我們一起走過的一甲子, the sixty years we walked together. I drew the die-cut for the box too, so the physical construction is mine as well as the printed surfaces.",
+    stack: ["Illustrator", "Hot foil stamping", "Die-cut box", "EZ-card"],
+    shots: [
+      {
+        src: "assets/ming-mold/monogram.jpg",
+        alt: "The 60th anniversary monogram in gold on black, the company's M mark set inside the bowl of the 6",
+      },
+      {
+        src: "assets/ming-mold/card.jpg",
+        alt: "The card face: the factory frontage as a line engraving, the red MING MOLD Since 1961 sign at full saturation, brush calligraphy above",
+      },
+      {
+        src: "assets/ming-mold/colours.jpg",
+        alt: "Colourway exploration for the card face across warm grey, sage, teal and peach grounds",
+      },
+      {
+        src: "assets/ming-mold/box.jpg",
+        alt: "The opened presentation box, gold foil monogram on the lid, the finished card seated in the well",
+      },
+    ],
+    // No `resume` key, which is what keeps it off the one-page CV: that
+    // answers a software requisition. No `href` either: a commemorative
+    // gift has nowhere to send a reader.
+    status: "Shipped",
+  },
 ];

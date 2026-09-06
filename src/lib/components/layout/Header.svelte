@@ -86,21 +86,6 @@
           aria-hidden="true"
         ></span>
         <a
-          href="{base}/gallery"
-          class="mobile-tab-link"
-          aria-current={isGallery ? "page" : undefined}
-        >
-          Art Gallery
-        </a>
-        <!-- A second rule, because there are three kinds of thing here and
-             not two. Left of the first: where you are. Between the rules:
-             the other half of this site. Right of the second: the two
-             professional destinations. -->
-        <span
-          class="nav-sep"
-          aria-hidden="true"
-        ></span>
-        <a
           href="{base}/blog"
           class="mobile-tab-link"
           aria-current={isBlog ? "page" : undefined}
@@ -121,6 +106,22 @@
           class="mobile-tab-link"
         >
           Résumé
+        </a>
+        <!-- A second rule, because there are three kinds of thing here and
+             not two. Left of the first: where you are. Between the rules:
+             the two professional destinations. After the second: the other
+             half of this site, which is nobody's idea of a destination and
+             is the more interesting for sitting apart. -->
+        <span
+          class="nav-sep"
+          aria-hidden="true"
+        ></span>
+        <a
+          href="{base}/gallery"
+          class="mobile-tab-link"
+          aria-current={isGallery ? "page" : undefined}
+        >
+          Art Gallery
         </a>
       </nav>
 

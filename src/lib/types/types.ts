@@ -5,11 +5,17 @@ interface Project {
   // problem, the work and the evidence blurring into one paragraph.
   why: string;
   result: string;
-  href: string;
+  /** Optional: not every project has somewhere to send a reader. A physical
+   *  object delivered in 2021 has no URL, and a card that links nowhere is
+   *  better than one that links somewhere irrelevant. */
+  href?: string;
   stack: string[];
   file?: string;
   linkLabel?: string;
-  status: "Live" | "In Progress" | "Archived";
+  /** "Shipped" is for work completed and handed over rather than run: not
+   *  "Live", which implies something still serving traffic, and not
+   *  "Archived", which reads as abandoned. */
+  status: "Live" | "In Progress" | "Archived" | "Shipped";
   highlights?: string[];
   featured?: boolean;
   // One line for the résumé PDF. Present = it appears there; absent = the

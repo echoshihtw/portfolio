@@ -88,14 +88,16 @@
 
       <p class="tech mono">{project.stack.join("  ·  ")}</p>
 
-      <a
-        class="link mono"
-        href={project.href}
-        target="_blank"
-        rel="noreferrer noopener"
-      >
-        {project.linkLabel || "View"}
-      </a>
+      {#if project.href}
+        <a
+          class="link mono"
+          href={project.href}
+          target="_blank"
+          rel="noreferrer noopener"
+        >
+          {project.linkLabel || "View"}
+        </a>
+      {/if}
     </article>
   {/if}
 </dialog>

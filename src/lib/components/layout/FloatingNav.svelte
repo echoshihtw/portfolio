@@ -38,17 +38,6 @@
        four of the six links and all of the crowding. -->
   <div class="floating-links">
     <a
-      href="{base}/gallery"
-      class="floating-link"
-      aria-current={isGallery ? "page" : undefined}
-    >
-      Art Gallery
-    </a>
-    <span
-      class="floating-sep"
-      aria-hidden="true"
-    ></span>
-    <a
       href="{base}/blog"
       class="floating-link"
       aria-current={isBlog ? "page" : undefined}
@@ -62,6 +51,17 @@
       class="floating-link"
     >
       Résumé
+    </a>
+    <span
+      class="floating-sep"
+      aria-hidden="true"
+    ></span>
+    <a
+      href="{base}/gallery"
+      class="floating-link"
+      aria-current={isGallery ? "page" : undefined}
+    >
+      Art Gallery
     </a>
   </div>
   <button
