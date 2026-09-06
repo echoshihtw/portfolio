@@ -14,28 +14,27 @@
 
 <div class="about-page">
   <section class="story section_padding">
-    <p class="kicker mono">{aboutConfig.kicker}</p>
+    <figure class="portrait">
+      <img
+        src="{base}/{aboutConfig.portrait.src}"
+        alt={aboutConfig.portrait.alt}
+        width="480"
+        height="574"
+        draggable="false"
+        decoding="async"
+      />
+    </figure>
 
-    <!-- prettier-ignore -->
-    <h1>{#each aboutConfig.heading as part}<span class:accent={part.accent} data-text={part.accent ? part.text : undefined}>{part.text}</span>{/each}</h1>
+    <div class="story-head">
+      <p class="kicker mono">{aboutConfig.kicker}</p>
+      <!-- prettier-ignore -->
+      <h1>{#each aboutConfig.heading as part}<span class:accent={part.accent} data-text={part.accent ? part.text : undefined}>{part.text}</span>{/each}</h1>
+    </div>
 
-    <div class="story-body">
-      <figure class="portrait">
-        <img
-          src="{base}/{aboutConfig.portrait.src}"
-          alt={aboutConfig.portrait.alt}
-          width="480"
-          height="574"
-          draggable="false"
-          decoding="async"
-        />
-      </figure>
-
-      <div class="story-text">
-        {#each aboutConfig.story as paragraph}
-          <p class="body">{paragraph}</p>
-        {/each}
-      </div>
+    <div class="story-text">
+      {#each aboutConfig.story as paragraph}
+        <p class="body">{paragraph}</p>
+      {/each}
     </div>
   </section>
 
@@ -107,22 +106,49 @@
     font-weight: 400;
   }
 
-  /* An editorial hero rather than a two-column split.
+  /* An L, not two columns.
   
-     The heading runs full width above everything, so it reads as the page's
-     title rather than as a caption sitting beside a photograph. The image
-     and the prose share the row below it, weighted toward the image because
-     the image is the argument.
+     The photograph holds the left, spanning both rows. The name and the
+     heading sit beside its top, and the prose runs underneath them, so the
+     text wraps around the picture instead of standing next to it. Two equal
+     columns is what a layout does when nobody decided anything; this reads
+     as arranged.
   
-     The photograph is on the LEFT on purpose: she is facing right in it, and
-     with the image on the right she looked off the page. Now she looks into
-     the text. */
+     The photograph is on the left because she faces right in it. On the
+     right she looked off the page; here she looks into her own name. */
   .story {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.6rem 3rem;
+    max-width: 74rem;
+    margin: 0 auto;
+  }
+
+  @media (min-width: 900px) {
+    .story {
+      grid-template-columns: 15rem minmax(0, 1fr);
+      grid-template-rows: auto auto;
+      align-items: start;
+    }
+
+    .portrait {
+      grid-row: 1 / span 2;
+      /* Leans past the section padding rather than lining up with it. A
+         rectangular photograph could not without looking cropped; this one
+         ends in torn paper, so it runs off instead of stopping. */
+      margin-left: -1.75rem;
+    }
+
+    .story-head {
+      align-self: end;
+    }
+  }
+
+  .story-head {
     display: flex;
     flex-direction: column;
-    gap: 0.9rem;
-    max-width: 76rem;
-    margin: 0 auto;
+    gap: 0.7rem;
+    min-width: 0;
   }
 
   .kicker {
@@ -135,11 +161,12 @@
   }
 
   .about-page h1 {
-    margin: 0 0 1.6rem;
-    font-size: clamp(2.4rem, 7vw, 4.6rem);
-    line-height: 1.02;
-    letter-spacing: -0.02em;
-    max-width: 16ch;
+    margin: 0;
+    /* Sized against the photograph beside it rather than against the
+       viewport: the two are meant to read as one block. */
+    font-size: clamp(2.6rem, 6.5vw, 4.4rem);
+    line-height: 1;
+    letter-spacing: -0.025em;
     text-wrap: balance;
   }
 
@@ -149,155 +176,6 @@
     position: relative;
     color: var(--color-accent);
     font-style: italic;
-  }
-
-  /* The RGB-split glitch from the home page's headline, lifted verbatim in
-     shape and timing so the site has one glitch and not two.
-  
-     One deliberate difference: there it fires in dark mode only, because it
-     belongs to the terminal register. Here it fires always, on a page that
-     refuses dark mode entirely. That is the point. This is the painting
-     half of the site, and the one word allowed to behave like the other
-     half is the word "matrix".
-  
-     A brief jitter on hover, about 200ms. Not a loop: a glitch that never
-     stops is a screensaver. */
-  .about-page h1 .accent:hover {
-    animation: glitch-shake 220ms steps(2, jump-none);
-  }
-
-  .about-page h1 .accent:hover::before,
-  .about-page h1 .accent:hover::after {
-    content: attr(data-text);
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    overflow: hidden;
-    font-style: italic;
-  }
-
-  /* The dark theme's two accents, used here as the chromatic split. They
-     are the colours of the register this word is borrowing from. */
-  .about-page h1 .accent:hover::before {
-    color: #ff5c88;
-    clip-path: inset(0 0 60% 0);
-    animation: glitch-shift-a 220ms steps(2, jump-none);
-  }
-
-  .about-page h1 .accent:hover::after {
-    color: #4dd6a8;
-    clip-path: inset(60% 0 0 0);
-    animation: glitch-shift-b 220ms steps(2, jump-none);
-  }
-
-  @keyframes glitch-shake {
-    0%,
-    100% {
-      transform: translate(0);
-    }
-    20% {
-      transform: translate(-2px, 1px);
-    }
-    40% {
-      transform: translate(2px, -1px);
-    }
-    60% {
-      transform: translate(-1px, -1px);
-    }
-    80% {
-      transform: translate(1px, 1px);
-    }
-  }
-
-  @keyframes glitch-shift-a {
-    0%,
-    100% {
-      transform: translate(0);
-    }
-    20% {
-      transform: translate(3px, 0);
-    }
-    50% {
-      transform: translate(-3px, 0);
-    }
-    80% {
-      transform: translate(2px, 0);
-    }
-  }
-
-  @keyframes glitch-shift-b {
-    0%,
-    100% {
-      transform: translate(0);
-    }
-    20% {
-      transform: translate(-3px, 0);
-    }
-    50% {
-      transform: translate(3px, 0);
-    }
-    80% {
-      transform: translate(-2px, 0);
-    }
-  }
-
-  .story-body {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    gap: 2rem;
-  }
-
-  @media (min-width: 900px) {
-    .story-body {
-      /* The photograph is the smaller element now: a fixed narrow column
-         beside the prose rather than the dominant half of the row. It still
-         leads, because she is facing right and reads into the text. */
-      grid-template-columns: 15rem minmax(0, 1fr);
-      gap: 3.5rem;
-      align-items: end;
-    }
-  }
-
-  .portrait {
-    margin: 0;
-  }
-
-  /* On a phone it should not fill the screen either: a portrait photograph
-     at full width pushes the prose entirely below the fold. */
-  .portrait {
-    max-width: 15rem;
-  }
-
-  /* Leans past the section padding rather than lining up with it. A
-     rectangular photograph could not do that without looking cropped; this
-     one ends in stipple, so it dissolves instead of stopping. */
-  @media (min-width: 900px) {
-    .portrait {
-      max-width: none;
-      margin-left: -1.75rem;
-    }
-  }
-
-  /* Cut out of its background rather than framed: no border, no shadow, no
-     rounded box, because there is no rectangle left to give an edge to. An
-     earlier version faded a whole scene with a radial mask, which read as a
-     vignette: a photograph pretending not to have edges rather than one
-     that has none. */
-  .portrait img {
-    display: block;
-    width: 100%;
-    height: auto;
-    -webkit-user-drag: none;
-    user-select: none;
-  }
-
-  .story-text {
-    display: flex;
-    flex-direction: column;
-    gap: 1.05rem;
-    min-width: 0;
-    padding-bottom: 1.5rem;
   }
 
   .body {
