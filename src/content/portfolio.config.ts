@@ -113,8 +113,13 @@ export const heroConfig: {
 
 // The page's one call to action, at the end, so a reader who is convinced
 // does not have to scroll back up to act.
+//
+// No heading of its own any more. This used to be a separate "Want to talk?"
+// section directly after the personal one, which made the page end twice on
+// two low-density blocks about the same moment. They are one section now,
+// under "Just me.", and the body below does the inviting that the heading
+// used to.
 export const closingConfig = {
-  heading: "Want to talk?",
   body: "If you have a problem nobody has scoped yet, and you need one person to build it and keep it running, that's the work. Remote, from Taiwan.",
   email: "echoshihtw@gmail.com",
   resume: "Chun-Yu-Echo-Shih-Software-Engineer.pdf",

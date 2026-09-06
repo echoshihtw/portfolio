@@ -3,7 +3,6 @@
   import Skills from "$lib/components/Skills.svelte";
   import Hero from "$lib/components/sections/hero/Hero.svelte";
   import Experience from "$lib/components/sections/experience/Experience.svelte";
-  import Closing from "$lib/components/sections/Closing.svelte";
   import AboutMe from "$lib/components/sections/AboutMe.svelte";
 </script>
 
@@ -17,5 +16,4 @@
   <Project />
   <Skills />
   <AboutMe />
-  <Closing />
 </div>

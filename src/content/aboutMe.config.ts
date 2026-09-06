@@ -75,6 +75,5 @@ export const aboutMeConfig = {
   jumps: [
     { label: "Work", href: "#work" },
     { label: "Projects", href: "#projects" },
-    { label: "Contact", href: "#contact" },
   ],
 } as const;

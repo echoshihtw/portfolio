@@ -1,13 +1,21 @@
 <script lang="ts">
   import { base } from "$app/paths";
   import { aboutMeConfig } from "../../../content/aboutMe.config";
+  import { closingConfig } from "../../../content/portfolio.config";
+  import { calendlyUrl } from "$lib/contactLinks";
 </script>
 
-<!-- Sits directly under the hero. Home is the landing page, so the person
-     is introduced here rather than a click away: the hero above makes the
-     professional case, and this says who made it. -->
+<!-- The close, and the person, in one section.
+  
+     These were two blocks in a row: who she is, then a separate "Want to
+     talk?". Both are low-density and both are about the same moment, so
+     stacking them made the page end twice. Merged, it reads as one arc: who
+     this is, what she is good for, how to reach her.
+  
+     Keeps id="contact", because the nav, the hero and the floating pill all
+     point at it. -->
 <section
-  id="about"
+  id="contact"
   class="aboutme section_padding"
 >
   <div class="aboutme-wrap">
@@ -30,21 +38,42 @@
       {#each aboutMeConfig.story as paragraph}
         <p class="body">{paragraph}</p>
       {/each}
+      <p class="ask">{closingConfig.body}</p>
+
       <div class="actions">
         <a
-          class="cta mono"
-          href="{base}{aboutMeConfig.cta.href}"
+          class="cta primary"
+          href="mailto:{closingConfig.email}"
         >
-          {aboutMeConfig.cta.label}
-          <span aria-hidden="true">→</span>
+          {closingConfig.email}
         </a>
-
-        <ul class="jumps mono">
-          {#each aboutMeConfig.jumps as jump}
-            <li><a href={jump.href}>{jump.label}</a></li>
-          {/each}
-        </ul>
+        <a
+          class="cta mono"
+          href={calendlyUrl}
+          target="_blank"
+          rel="noreferrer noopener"
+        >
+          Book a call <span aria-hidden="true">→</span>
+        </a>
+        <a
+          class="cta mono"
+          href="{base}/{closingConfig.resume}"
+          download
+        >
+          Download résumé <span aria-hidden="true">↓</span>
+        </a>
       </div>
+
+      <!-- The one thing here that is not the ask, so it sits below it and
+           quieter. Contact left the index: this section is #contact. -->
+      <ul class="jumps mono">
+        <li>
+          <a href="{base}{aboutMeConfig.cta.href}">{aboutMeConfig.cta.label}</a>
+        </li>
+        {#each aboutMeConfig.jumps as jump}
+          <li><a href={jump.href}>{jump.label}</a></li>
+        {/each}
+      </ul>
     </div>
   </div>
 </section>
@@ -163,8 +192,15 @@
     margin-top: 0.5rem;
   }
 
+  .ask {
+    margin: 0.35rem 0 0;
+    font-size: 1rem;
+    line-height: 1.72;
+    max-width: 60ch;
+  }
+
   .cta {
-    border: 1px solid var(--color-accent);
+    border: 1px solid var(--section-border);
     border-radius: 999px;
     padding: 0.55rem 1.15rem;
     color: var(--text-color);
@@ -172,7 +208,14 @@
     white-space: nowrap;
   }
 
+  /* One primary among three: the email is the conversion, the other two are
+     ways of putting it off. */
+  .cta.primary {
+    border-color: var(--color-accent);
+  }
+
   .cta:hover {
+    border-color: var(--color-accent);
     background: color-mix(in srgb, var(--color-accent) 10%, transparent);
   }
 
