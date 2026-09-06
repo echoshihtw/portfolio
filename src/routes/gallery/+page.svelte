@@ -19,6 +19,9 @@
     {#each galleryConfig.story as paragraph}
       <p class="intro">{paragraph}</p>
     {/each}
+    <div class="signed">
+      <Signature />
+    </div>
   </section>
 
   <section class="section_padding">
@@ -40,11 +43,6 @@
       </span>
     </a>
   </section>
-
-  <!-- Where a painter signs the work: at the end, in the corner. -->
-  <div class="signed">
-    <Signature />
-  </div>
 </div>
 
 <style>
@@ -122,6 +120,7 @@
     align-items: center;
     gap: 1rem;
     padding-top: 2.5rem;
+    padding-bottom: 1rem;
   }
 
   .closing p {
@@ -132,13 +131,15 @@
   .signed {
     display: flex;
     justify-content: flex-end;
-    padding: 0 1rem 3rem;
+    width: 100%;
+    max-width: 56ch;
+    padding-top: 0.35rem;
   }
 
-  @media (min-width: 768px) {
-    .signed {
-      padding: 0 2.5rem 3.5rem;
-    }
+  .signed :global(.signature) {
+    width: 10rem;
+    transform: rotate(-4deg);
+    transform-origin: center;
   }
 
   @media (prefers-reduced-motion: reduce) {

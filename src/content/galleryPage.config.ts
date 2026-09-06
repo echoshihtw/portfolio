@@ -2,8 +2,8 @@
 // aboutMe.config.ts: this page is the work and nothing else.
 export const galleryConfig = {
   heading: [
-    { text: "The " },
-    { text: "work", accent: true },
+    { text: "Made by " },
+    { text: "hand", accent: true },
     { text: "." },
   ] as { text: string; accent?: boolean }[],
 
