@@ -35,18 +35,19 @@ export const aboutConfig = {
     "The clay bust, the pasta painting and the charcoal head were made there. The ink drawing of a mouth was made on a plane, and the airport is Jakarta.",
   ],
 
-  // Cut out of its background, so she stands on the page rather than sitting
-  // in a photograph on it.
+  // Echo's own cut, with a torn paper edge.
   //
-  // Genuinely transparent, not flattened onto the page colour, so the
-  // plaster grain shows through the gaps in the stipple. That costs: the
-  // torn edge is thousands of tiny alpha transitions, which is the one
-  // thing PNG compresses badly, and at full size it came to 957KB. Running
-  // the image visually smaller is what makes it affordable, 477KB at 480px
-  // wide, which covers the 15rem slot at 2x.
+  // It arrived as a PNG with NO alpha channel: the editor had drawn its
+  // transparency checkerboard into the pixels, so shipping it as supplied
+  // would have put a grey chequer on the page. scripts/floodneutral.swift
+  // keys it back out, flooding in from the border on "light AND perfectly
+  // neutral", which the drawn chequer is and the photographed paper is not.
   //
-  // No caption. The photograph is not evidence of anything and does not need
-  // dating: it is her, and that is the whole job.
+  // Transparent rather than flattened onto the page colour, so the plaster
+  // grain shows through. That costs: a torn edge is thousands of tiny alpha
+  // transitions, the one thing PNG compresses badly. Running the photograph
+  // visually small is what makes it affordable.
+  //
   portrait: {
     src: "assets/echo-florence.png",
     alt: "Echo laughing, holding a gelato, in front of a graffitied wall",
