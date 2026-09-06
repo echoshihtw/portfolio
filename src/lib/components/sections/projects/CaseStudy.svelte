@@ -26,7 +26,7 @@
 >
   <div class="margin">
     <span
-      class="num section-num"
+      class="num label"
       aria-hidden="true"
     >
       {number}
@@ -144,7 +144,7 @@
   .featured .num {
     color: var(--ink);
     background: var(--highlight);
-    padding: 0 0.2em;
+    padding: 0.1rem 0.35rem;
     border-radius: 3px;
   }
 
@@ -154,9 +154,10 @@
     gap: var(--space-4);
   }
 
+  /* Same tick as the work entries: a small mono index in the margin. */
   .num {
-    font-size: var(--text-num);
     align-self: flex-start;
+    color: var(--muted);
   }
 
   .meta {
@@ -228,18 +229,20 @@
     gap: var(--space-2);
   }
 
+  /* Same scale as a work entry: the role size for the name, the company
+     size for the line under it. The two sections read as one list. */
   .name {
     margin: 0;
-    font-size: var(--text-2xl);
-    line-height: var(--leading-tight);
+    font-size: var(--text-xl);
+    line-height: var(--leading-snug);
   }
 
   .hook {
     margin: 0;
-    font-size: var(--text-lg);
-    line-height: 1.45;
+    font-size: var(--text-sm);
+    line-height: 1.6;
     color: var(--muted);
-    max-width: 44ch;
+    max-width: 60ch;
   }
 
   .fields {
@@ -316,7 +319,7 @@
     .study {
       grid-template-columns: 7rem minmax(0, 1fr);
       gap: var(--space-6);
-      padding: var(--space-7) 0;
+      padding: var(--space-6) 0;
     }
 
     .margin {
