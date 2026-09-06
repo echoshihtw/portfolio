@@ -33,11 +33,15 @@
       <p class="ask">{closingConfig.body}</p>
 
       <div class="actions">
+        <!-- A button says what happens, so "Email me" and not the address:
+             the address is in the hero and the footer for anyone copying
+             it. No résumé here: the hero's button and the nav both have it,
+             and a third copy made this row the busiest thing on the page. -->
         <a
           class="cta primary"
           href="mailto:{closingConfig.email}"
         >
-          {closingConfig.email}
+          Email me <span aria-hidden="true">→</span>
         </a>
         <a
           class="cta mono"
@@ -45,14 +49,7 @@
           target="_blank"
           rel="noreferrer noopener"
         >
-          Book a call <span aria-hidden="true">→</span>
-        </a>
-        <a
-          class="cta mono"
-          href="{base}/{closingConfig.resume}"
-          download
-        >
-          Download résumé <span aria-hidden="true">↓</span>
+          Book a call <span aria-hidden="true">↗</span>
         </a>
       </div>
 
@@ -152,8 +149,8 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 0.9rem 1.2rem;
-    margin-top: 0.6rem;
+    gap: 0.9rem 1.4rem;
+    margin-top: 0.8rem;
   }
 
   /* One button among three: the email is the conversion, so it is the
@@ -166,14 +163,20 @@
   }
 
   .cta.primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
     border: 1px solid var(--text-color);
     border-radius: 999px;
-    padding: 0.55rem 1.15rem;
+    padding: 0.6rem 1.2rem;
     background: var(--text-color);
     color: var(--color-bg);
   }
 
   .cta:not(.primary) {
+    /* The shared .cta rule is a pill; a pill radius on a text link bends
+       the underline up at both ends. */
+    border-radius: 0;
     font-size: 0.76rem;
     color: var(--text-muted);
     border-bottom: 1px solid var(--section-border);
@@ -201,6 +204,9 @@
     list-style: none;
     font-size: 0.72rem;
     letter-spacing: 0.06em;
+    /* Further from the button than the button is from the text, so the row
+       reads as a footnote to the section and not as more buttons. */
+    margin-top: 1.1rem;
   }
 
   .jumps a {
