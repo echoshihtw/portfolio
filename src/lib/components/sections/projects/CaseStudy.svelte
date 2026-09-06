@@ -82,6 +82,7 @@
 
     <div
       class="fields"
+      class:no-decisions={!decisions.length}
       id={detailId}
     >
       <section class="field field-constraint">
@@ -405,6 +406,13 @@
     .field-outcome {
       grid-column: 1;
       grid-row: 2;
+    }
+
+    /* No decisions: the outcome takes the right column instead of leaving
+       it empty. */
+    .no-decisions .field-outcome {
+      grid-column: 2;
+      grid-row: 1;
     }
   }
 

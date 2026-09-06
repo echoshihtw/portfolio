@@ -95,7 +95,7 @@ export const projectsConfig: Projects = [
     file: "assets/echology.png",
     why: "Coin selection is the algorithm that decides which coins a transaction spends. It sets the fee. Its trade-offs only surface as numbers (waste, fee, feerate deviation), and only under one exact set of inputs. Hold the inputs still and the behaviour becomes comparable.",
     result:
-      "Built the frontend with a core maintainer of the Bitcoin Dev Kit: construct a UTXO set, run it against a spend scenario, and read the resulting metrics side by side. Archived.",
+      "Built the frontend with a core maintainer of the Bitcoin Dev Kit. You construct a UTXO set, run it against a spend scenario, and read the metrics side by side. Archived.",
     stack: ["Next.js", "TypeScript", "Tailwind CSS"],
     highlights: [
       "Manual UTXO selection, so the input set is a controlled variable rather than whatever the wallet happened to hold",
@@ -111,11 +111,18 @@ export const projectsConfig: Projects = [
     // of shipping in a material none of the others touch.
     name: "Ming Mold 60th",
     subtitle:
-      "A 60th anniversary gift for the family business: identity, card face, and the box it ships in",
+      "A 60th anniversary gift for the family business, from the identity to the box it ships in",
     why: "My family's mould manufacturer turned sixty in 2021, founded 1961. The gift had to say something about sixty years without being a plaque, and it had to be made in quantity: a commemorative metro card in a presentation box, for people who had worked there for decades.",
+    // The decisions were sitting inside the result paragraph; split out so
+    // this study has the same three fields as the others. Same sentences.
     result:
-      "Monogram to die-cut to a carton of finished boxes in under three months. The mark folds the company's existing M into the bowl of the 6 at one line weight throughout, which is what lets it hot-foil stamp: a mark that varies in weight fills in at the thin end. The card face is the original factory frontage as a line engraving, with the red sign left at full saturation and everything else dropped back, under 我們一起走過的一甲子, the sixty years we walked together. I drew the die-cut for the box too, so the physical construction is mine as well as the printed surfaces.",
+      "Monogram to die-cut to a carton of finished boxes in under three months, for people who had worked there for decades.",
     stack: ["Illustrator", "Hot foil stamping", "Die-cut box", "Metro card"],
+    highlights: [
+      "The mark folds the company's existing M into the bowl of the 6 at one line weight throughout, which is what lets it hot-foil stamp. A mark that varies in weight fills in at the thin end",
+      "The card face is the original factory frontage as a line engraving, with the red sign left at full saturation and everything else dropped back, under 我們一起走過的一甲子, the sixty years we walked together",
+      "I drew the die-cut for the box too, so the physical construction is mine as well as the printed surfaces",
+    ],
     shots: [
       {
         src: "assets/ming-mold/monogram.jpg",
