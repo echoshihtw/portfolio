@@ -18,12 +18,15 @@ export const aboutConfig = {
     "The clay bust, the pasta painting and the charcoal head were made there. The ink drawing of a mouth was made on a plane, and the airport is Jakarta.",
   ],
 
-  // Her hands at the table, brush in one and palette knife in the other.
-  // It replaced an older shot of the same subject that was only 750px wide.
+  // Not a headshot and not a studio shot: her, laughing, in front of a wall
+  // someone else drew on. This is the photograph the site was missing.
+  //
+  // The date is the photo's own capture date. The place is not stated,
+  // because she has not confirmed it.
   portrait: {
-    id: "working",
-    alt: "Echo's hands at a table, a brush in one and a palette knife in the other, working on a purple and blue painting",
-    caption: "Taipei, January 2026",
+    src: "assets/echo-florence",
+    alt: "Echo laughing, holding a gelato, in front of a graffitied wall",
+    caption: "October 2018",
   },
 
   galleryHeading: "The work",

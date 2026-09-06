@@ -4,9 +4,9 @@
   import PaintingWall from "$lib/components/sections/about/PaintingWall.svelte";
   import Signature from "$lib/components/Signature.svelte";
   import { aboutConfig } from "../../content/about.config";
-  import { derivativeName, WIDTHS } from "../../content/paintings.config";
+  import { WIDTHS } from "../../content/paintings.config";
 
-  const [, large] = WIDTHS;
+  const [small, large] = WIDTHS;
 </script>
 
 <Seo
@@ -28,10 +28,11 @@
 
       <figure class="portrait">
         <img
-          src="{base}/assets/paintings/{derivativeName(
-            aboutConfig.portrait.id,
-            large
-          )}"
+          src="{base}/{aboutConfig.portrait.src}-{small}.jpg"
+          srcset="{base}/{aboutConfig.portrait
+            .src}-{small}.jpg {small}w, {base}/{aboutConfig.portrait
+            .src}-{large}.jpg {large}w"
+          sizes="(min-width: 860px) 22rem, 92vw"
           alt={aboutConfig.portrait.alt}
           draggable="false"
           decoding="async"
@@ -161,14 +162,32 @@
 
   .portrait {
     margin: 0;
-    transform: rotate(1.2deg);
   }
 
+  /* No frame, no shadow, no rounded box: the photograph dissolves into the
+     page instead of sitting on it. That works here because the wall behind
+     her is a warm off-white already close to this page's own ground, so the
+     two meet almost invisibly and it reads as printed rather than pasted.
+  
+     The ellipse is off-centre on purpose. She is on the right of the frame,
+     so a symmetric fade would eat her and keep the wall. These numbers were
+     chosen by compositing the fade against the real ground and looking at
+     it, not by guessing: centre 58%/45%, opaque out to 53% of the radius,
+     gone by 100%. */
   .portrait img {
     display: block;
     width: 100%;
     height: auto;
-    box-shadow: 0 12px 30px rgb(28 22 14 / 0.16);
+    -webkit-mask-image: radial-gradient(
+      ellipse 85% 71% at 58% 45%,
+      #000 53%,
+      transparent 100%
+    );
+    mask-image: radial-gradient(
+      ellipse 85% 71% at 58% 45%,
+      #000 53%,
+      transparent 100%
+    );
     -webkit-user-drag: none;
     user-select: none;
   }
@@ -210,12 +229,6 @@
   @media (min-width: 768px) {
     .signed {
       padding: 0 2.5rem 3.5rem;
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .portrait {
-      transform: none;
     }
   }
 </style>

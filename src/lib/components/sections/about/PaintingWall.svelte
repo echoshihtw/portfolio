@@ -6,10 +6,9 @@
     WIDTHS,
     type Painting,
   } from "../../../../content/paintings.config";
-  import { aboutConfig } from "../../../../content/about.config";
-
-  // The working photograph opens the page, so it is not repeated on the wall.
-  const works = paintingsConfig.filter((p) => p.id !== aboutConfig.portrait.id);
+  // The manifest is the wall: the opening photograph is a separate asset,
+  // not an entry here, so nothing has to be filtered out.
+  const works = paintingsConfig;
 
   // How wide a piece runs inside its column. Three buckets, not measurements:
   // nothing on the page may claim these are shown at their true relative

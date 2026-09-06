@@ -174,12 +174,4 @@ export const paintingsConfig: Painting[] = [
     crop: [0.05, 0.08, 0.85, 0.88],
     scale: "paper",
   },
-  {
-    id: "working",
-    source: "IMG_6749.jpg",
-    medium: "Photograph",
-    alt: "Echo's hands at a table, a brush in one and a palette knife in the other, working on a purple and blue painting",
-    crop: [0, 0, 1, 0.85],
-    scale: "paper",
-  },
 ];
