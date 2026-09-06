@@ -173,10 +173,13 @@
     justify-self: center;
   }
 
+  /* A print with a thin edge: the same border and radius as a card. */
   .portrait img {
     display: block;
     width: 100%;
     height: auto;
+    border: var(--border-w) solid var(--border);
+    border-radius: var(--radius-md);
     -webkit-user-drag: none;
     user-select: none;
   }
