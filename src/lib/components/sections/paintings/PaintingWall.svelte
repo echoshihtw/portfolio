@@ -341,25 +341,40 @@
      column rather than across, which is right for a wall. */
   .wall {
     column-count: 1;
-    column-gap: 2.6rem;
+    column-gap: 2.2rem;
   }
 
-  @media (min-width: 700px) {
+  /* Column count climbs with the width, so a piece stays roughly the size
+     of a sheet held at arm's length rather than a poster. Four columns at a
+     laptop width, five on a wide screen. */
+  @media (min-width: 560px) {
     .wall {
       column-count: 2;
     }
   }
 
-  @media (min-width: 1080px) {
+  @media (min-width: 860px) {
     .wall {
       column-count: 3;
+    }
+  }
+
+  @media (min-width: 1140px) {
+    .wall {
+      column-count: 4;
+    }
+  }
+
+  @media (min-width: 1500px) {
+    .wall {
+      column-count: 5;
     }
   }
 
   .work {
     position: relative;
     break-inside: avoid;
-    margin: 0 0 2.6rem;
+    margin: 0 0 2.2rem;
     display: flex;
     flex-direction: column;
     transform: rotate(var(--tilt));

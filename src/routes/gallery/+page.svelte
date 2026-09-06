@@ -78,12 +78,18 @@
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.055'/%3E%3C/svg%3E");
   }
 
+  /* The same measure as the home page: every section sits inside the
+     content width, centred, so the wall never runs wider than the work. */
+  .gallery-page > section {
+    width: 100%;
+    max-width: var(--content-max);
+    margin: 0 auto;
+  }
+
   .story {
     display: flex;
     flex-direction: column;
     gap: 0.9rem;
-    max-width: 68rem;
-    margin: 0 auto;
   }
 
   .intro {
