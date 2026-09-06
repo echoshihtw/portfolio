@@ -120,7 +120,21 @@ export const heroConfig: {
 // under "Just me.", and the body below does the inviting that the heading
 // used to.
 export const closingConfig = {
-  body: "If you have a problem nobody has scoped yet, and you need one person to build it and keep it running, that's the work. Remote, from Taiwan.",
+  // Rewritten 2026-09-06. The old line was "If you have a problem nobody has
+  // scoped yet, and you need one person to build it and keep it running,
+  // that's the work."
+  //
+  // Three things wrong with it. "it" pointed at "a problem", and you do not
+  // build a problem. "That's the work" never said whose. And it addressed a
+  // client, not an employer: "you have a problem, you need one person" is a
+  // freelance pitch, which is the audience this site had before it started
+  // saying product engineer.
+  //
+  // "Keep it running" became "stay with it after it ships". Same claim,
+  // evidenced by Clio being in daily use since May 2025, without a word
+  // borrowed from ops. To a client that phrase was reassurance; to a hiring
+  // team it reads as being handed the pager.
+  body: "The work I want is the part nobody has scoped yet: deciding what it should be, building it, and staying with it after it ships. Remote, from Taiwan.",
   email: "echoshihtw@gmail.com",
   resume: "Chun-Yu-Echo-Shih-Software-Engineer.pdf",
 };
