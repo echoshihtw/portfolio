@@ -66,7 +66,7 @@
   .card {
     background: var(--surface-bg);
     border: 1px solid var(--section-border);
-    border-radius: 4px;
+    border-radius: var(--radius-md);
     padding: 1.3rem 1.5rem;
   }
 

@@ -278,7 +278,7 @@
     flex-direction: column;
     min-width: 9rem;
     border: 1px solid var(--section-border);
-    border-radius: 6px;
+    border-radius: var(--radius-sm);
     background: var(--surface-bg);
     box-shadow: 0 10px 26px rgb(20 18 42 / 0.16);
   }
@@ -286,7 +286,7 @@
   .home-sections a {
     display: block;
     padding: 0.4rem 0.6rem;
-    border-radius: 4px;
+    border-radius: var(--radius-sm);
     white-space: nowrap;
   }
 

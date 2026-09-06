@@ -17,11 +17,16 @@
      the light one at 3.22, which is what axe caught. */
   --status-live: #3d7f50;
   --timeline-rule: #d3cdb9;
-  --project-card-bg: #171233;
-  --project-card-border: #34305e;
-  --project-card-text: #eef0f5;
-  --project-card-muted: #b8b8d4;
   --glow-strength: 0;
+
+  /* A radius scale, because there were six of them (2, 4, 6, 8, 10, 12) with
+     no relationship to each other, which is what makes a set of components
+     read as assembled rather than designed. Two steps and a pill is enough
+     for a site this size: controls and small surfaces take sm, anything that
+     is a card takes md, and buttons stay full pills. Not theme-dependent, so
+     they live once here rather than in both blocks. */
+  --radius-sm: 6px;
+  --radius-md: 12px;
 }
 
 html[data-theme="dark"] {
@@ -36,10 +41,6 @@ html[data-theme="dark"] {
   --surface-bg: #1d1840;
   --status-live: #4a9d63;
   --timeline-rule: #3a3568;
-  --project-card-bg: #1d1840;
-  --project-card-border: #3a3568;
-  --project-card-text: #eef0f5;
-  --project-card-muted: #b8b8d4;
   --glow-strength: 1;
 }
 
@@ -325,7 +326,7 @@ body {
   margin: 0 0 1.8rem;
   padding: 1.1rem 1.2rem;
   border: 1px solid var(--section-border);
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   background: color-mix(in srgb, var(--surface-bg) 55%, transparent);
   overflow-x: auto;
   font-size: 0.78rem;

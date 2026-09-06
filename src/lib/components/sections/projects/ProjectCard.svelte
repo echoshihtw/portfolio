@@ -6,6 +6,11 @@
   export let project: Project;
   export let onOpen: (project: Project) => void;
 
+  /** Which of the four card colours this one takes. Cycled by position in
+   *  the grid rather than chosen per project, so adding a project never
+   *  means picking a colour. */
+  export let tone: number = 0;
+
   const slug = (value: string) => value.toLowerCase().replace(/\s+/g, "-");
 </script>
 
@@ -13,7 +18,7 @@
      it for free, and the whole card is one target rather than a link buried
      inside text. -->
 <button
-  class="card"
+  class="card tone-{tone}"
   class:featured={project.featured}
   on:click={() => onOpen(project)}
 >
@@ -39,7 +44,48 @@
 </button>
 
 <style>
+  /* Colour blocks, no borders.
+  
+     The fills are taken from Echo's own paintings rather than from a
+     reference site: the indigo is the pasta painting's ground, the oxblood
+     is the 2014 lips, the green is behind the profile portrait, and the
+     ochre is what the lips are painted on. The two halves of this site now
+     share a palette instead of only a nav.
+  
+     Each tone redefines the theme tokens INSIDE the card, so every child
+     rule keeps using --text-color and --text-muted and none of them had to
+     learn about card colours. */
+  .card.tone-0 {
+    --card-bg: #171233;
+    --text-color: #eef0f5;
+    --text-muted: #b8b8d4;
+    --color-accent: #4dd6a8;
+  }
+
+  .card.tone-1 {
+    --card-bg: #7d3320;
+    --text-color: #f7efe6;
+    --text-muted: #ddc6b6;
+    --color-accent: #f0c98a;
+  }
+
+  .card.tone-2 {
+    --card-bg: #22402d;
+    --text-color: #eef3ee;
+    --text-muted: #bed1c0;
+    --color-accent: #e8c46a;
+  }
+
+  .card.tone-3 {
+    --card-bg: #e2b657;
+    --text-color: #14122a;
+    --text-muted: #4a3f2a;
+    --color-accent: #6a2a19;
+  }
+
   .card {
+    position: relative;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
@@ -49,19 +95,71 @@
     text-align: left;
     font: inherit;
     color: inherit;
-    background: var(--surface-bg);
-    border: 1px solid var(--section-border);
-    border-radius: 4px;
+    background: var(--card-bg);
+    color: var(--text-color);
+    border: 0;
+    /* 4px reads as a square with the corners filed off. 12px is enough to be
+       a deliberate radius, which is what makes a block of colour read as a
+       card rather than as a filled rectangle. */
+    border-radius: var(--radius-md);
     cursor: pointer;
     transition:
-      border-color 160ms ease,
-      transform 160ms ease;
+      transform 200ms ease,
+      box-shadow 200ms ease;
+  }
+
+  /* A soft arc sweeping out of the top-right corner, a shade lighter than
+     the card itself. It is the one borrowed idea here, and it is what stops
+     a flat fill looking flat: the corner has a curve in it before anything
+     is hovered.
+  
+     Drawn as a huge circle parked mostly outside the card, so the part that
+     shows is a single clean curve rather than a gradient fading out. Sits
+     under the content and never takes a pointer event. */
+  .card::before {
+    content: "";
+    position: absolute;
+    top: -55%;
+    right: -35%;
+    width: 115%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: rgb(255 255 255 / 0.07);
+    pointer-events: none;
+    transition:
+      transform 420ms cubic-bezier(0.2, 0.7, 0.2, 1),
+      background-color 240ms ease;
+  }
+
+  .card > :global(*) {
+    position: relative;
   }
 
   .card:hover,
   .card:focus-visible {
-    border-color: var(--color-accent);
-    transform: translateY(-2px);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgb(20 18 42 / 0.18);
+  }
+
+  /* The interaction is the corner, not the card. The arc drifts down and in
+     and warms slightly, so something moves without the whole block
+     jumping. */
+  .card:hover::before,
+  .card:focus-visible::before {
+    transform: translate(-9%, 9%) scale(1.06);
+    background: rgb(255 255 255 / 0.13);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .card,
+    .card::before {
+      transition: none;
+    }
+
+    .card:hover::before,
+    .card:focus-visible::before {
+      transform: none;
+    }
   }
 
   .card.featured {

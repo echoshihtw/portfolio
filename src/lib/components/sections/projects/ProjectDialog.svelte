@@ -111,7 +111,7 @@
     margin: auto 0 0;
     padding: 0;
     border: 1px solid var(--section-border);
-    border-radius: 10px 10px 0 0;
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
     background: var(--surface-bg);
     color: var(--text-color);
   }
@@ -149,7 +149,7 @@
     color: var(--text-muted);
     background: none;
     border: 1px solid var(--section-border);
-    border-radius: 4px;
+    border-radius: var(--radius-sm);
     cursor: pointer;
   }
 
@@ -177,14 +177,14 @@
     width: auto;
     flex: none;
     scroll-snap-align: start;
-    border-radius: 4px;
+    border-radius: var(--radius-sm);
     border: 1px solid var(--section-border);
     background: #0b0f16;
   }
 
   .single {
     width: 100%;
-    border-radius: 4px;
+    border-radius: var(--radius-sm);
     border: 1px solid var(--section-border);
   }
 
@@ -241,7 +241,7 @@
       width: min(46rem, calc(100vw - 2rem));
       max-width: none;
       margin: auto;
-      border-radius: 6px;
+      border-radius: var(--radius-sm);
     }
   }
 </style>
