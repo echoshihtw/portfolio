@@ -62,7 +62,7 @@
         <div class="footer-cta">
           <a
             href={email}
-            class="footer-mail"
+            class="link-cta"
           >
             Email
           </a>
@@ -71,7 +71,7 @@
             href={calendlyUrl}
             target="_blank"
             rel="noreferrer noopener"
-            class="footer-source"
+            class="link-cta"
           >
             Book a call
             <Icon icon="mdi:arrow-top-right" />
@@ -81,7 +81,7 @@
             href={sourceUrl}
             target="_blank"
             rel="noreferrer noopener"
-            class="footer-source"
+            class="link-cta"
           >
             Source
             <Icon icon="mdi:arrow-top-right" />
@@ -142,7 +142,7 @@
               href={social.url}
               target="_blank"
               rel="noreferrer noopener"
-              class="footer-social-link"
+              class="footer-social-link chip"
               aria-label={social.label}
             >
               <Icon icon={social.icon} />
@@ -162,7 +162,7 @@
 
       <button
         type="button"
-        class="footer-replay mono"
+        class="link-cta"
         on:click={replayGate}
       >
         Replay intro card
@@ -198,39 +198,17 @@
     color: var(--text-color);
   }
 
+  /* Wide enough that the links' 48px touch targets do not overlap. */
   .footer-cta {
     margin-top: 1rem;
     display: flex;
     flex-wrap: wrap;
-    gap: 0.6rem;
+    gap: 0.75rem 1.6rem;
   }
 
-  /* Links, not pills. The footer is the quiet end of the page and three
-     bordered buttons in a row were the loudest thing on it. */
-  .footer-mail,
-  .footer-source {
-    font-family: "JetBrains Mono", monospace;
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    border: 0;
-    border-bottom: 1px solid var(--section-border);
-    border-radius: 0;
-    padding: 0 0 2px;
-    text-decoration: none;
-    color: var(--text-muted);
-    background: transparent;
-    transition:
-      border-color 160ms ease,
-      color 160ms ease;
-  }
-
-  .footer-source {
-    white-space: nowrap;
-    display: flex;
-    align-items: center;
-    gap: 0.3rem;
-  }
-
+  /* The three actions are .link-cta from app.css: links, not pills. The
+     footer is the quiet end of the page and three bordered buttons in a row
+     were the loudest thing on it. */
   .footer-title {
     font-size: 0.72rem;
     letter-spacing: 0.08em;
@@ -267,27 +245,10 @@
     gap: 0.5rem;
   }
 
+  /* A .chip from app.css, round. */
   .footer-social-link {
-    border: 1px solid var(--section-border);
-    padding: 0.45rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--text-color);
-    background: var(--surface-bg);
-    transition:
-      border-color 160ms ease,
-      color 160ms ease,
-      background-color 160ms ease;
-  }
-
-  .footer-mail:hover,
-  .footer-source:hover,
-  .footer-social-link:hover {
-    border-color: var(--text-color);
-    color: var(--text-color);
-    transform: none;
-    box-shadow: none;
+    padding: 0;
+    border-radius: 999px;
   }
 
   .footer-meta {
@@ -322,22 +283,6 @@
 
   /* A quiet utility link, not a CTA: same size/weight as the surrounding
      meta text so it doesn't compete with the actual footer actions. */
-  .footer-replay {
-    border: none;
-    background: none;
-    padding: 0;
-    font-size: 0.75rem;
-    color: var(--text-muted);
-    text-decoration: underline;
-    text-decoration-color: var(--section-border);
-    text-underline-offset: 2px;
-    cursor: pointer;
-    transition: color 160ms ease;
-  }
-
-  .footer-replay:hover {
-    color: var(--color-accent);
-  }
   @media (min-width: 768px) {
     .footer-wrap {
       padding-left: 2.5rem;

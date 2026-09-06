@@ -247,7 +247,7 @@
   you leave them.
   <button
     type="button"
-    class="reset mono"
+    class="reset chip mono"
     on:click={reset}
   >
     Reset
@@ -462,19 +462,13 @@
     }
   }
 
+  /* A .chip from app.css, pill-shaped and small. */
   .reset {
-    border: 1px solid var(--section-border);
     background: transparent;
-    color: var(--text-color);
     border-radius: 999px;
-    padding: 0.3rem 0.85rem;
-    font-size: 0.68rem;
+    padding: 0 1rem;
+    font-size: 0.72rem;
     letter-spacing: 0.04em;
-    cursor: pointer;
-  }
-
-  .reset:hover {
-    border-color: var(--color-accent);
   }
 
   .work.reorderable {

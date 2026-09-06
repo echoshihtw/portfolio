@@ -120,20 +120,20 @@
 
     <div class="hero-links">
       <a
-        class="hero-cta primary"
+        class="btn down"
         href="{base}/{heroConfig.resume}"
         download
       >
         Download résumé <span class="cta-arrow">↓</span>
       </a>
       <a
-        class="hero-link mono"
+        class="link-cta"
         href={heroConfig.seeWorkHref}
       >
         See the work <span class="cta-arrow">→</span>
       </a>
       <a
-        class="hero-link mono"
+        class="link-cta"
         href="mailto:{heroConfig.email}"
       >
         {heroConfig.email}
@@ -515,64 +515,9 @@
     gap: 0.9rem;
   }
 
-  .hero-cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    padding: 0.6rem 1.1rem;
-    text-decoration: none;
-    transition:
-      transform 160ms ease,
-      border-color 160ms ease,
-      background-color 160ms ease,
-      box-shadow 160ms ease;
-  }
-
-  .hero-cta.primary {
-    background: var(--text-color);
-    color: var(--color-bg);
-    border-color: var(--text-color);
-  }
-
-  /* One button, then links. Three pills in a row all asked for the click;
-     now the résumé is the button and the other two are ways past it. */
-  .hero-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.3rem;
-    font-size: 0.76rem;
-    letter-spacing: 0.02em;
-    color: var(--text-muted);
-    text-decoration: none;
-    border-bottom: 1px solid var(--section-border);
-    padding-bottom: 1px;
-    transition:
-      color 160ms ease,
-      border-color 160ms ease;
-  }
-
-  .hero-link:hover,
-  .hero-link:focus-visible {
-    color: var(--text-color);
-    border-color: var(--text-color);
-  }
-
-  .hero-link:hover .cta-arrow {
-    transform: translate(2px, 0);
-  }
-
-  .cta-arrow {
-    transition: transform 160ms ease;
-  }
-
-  .hero-cta:hover .cta-arrow {
-    transform: translate(2px, 0);
-  }
-
-  .hero-cta.primary:hover .cta-arrow {
-    transform: translate(0, 2px);
-  }
-
+  /* One button, then links: .btn and .link-cta from app.css. Three pills in
+     a row all asked for the click; now the résumé is the button and the
+     other two are ways past it. */
   @media (min-width: 768px) {
     .hero-section {
       min-height: 78vh;

@@ -39,11 +39,17 @@
   {/if}
 
   <button
-    class="expander mono"
+    class="expander link-cta"
     aria-expanded={expanded}
     on:click={() => (expanded = !expanded)}
   >
-    {expanded ? "Hide details ↑" : "Read the details ↓"}
+    {expanded ? "Hide details" : "Read the details"}
+    <span
+      class="cta-arrow"
+      aria-hidden="true"
+    >
+      {expanded ? "↑" : "↓"}
+    </span>
   </button>
 
   {#if expanded}
@@ -87,6 +93,11 @@
     color: var(--text-muted);
   }
 
+  /* A .link-cta from app.css; only the spacing is local. */
+  .expander {
+    margin-top: 1rem;
+  }
+
   .role {
     margin: 0.5rem 0 0;
     font-family: "DM Serif Display", serif;
@@ -127,31 +138,6 @@
     letter-spacing: 0.02em;
     color: var(--text-muted);
     opacity: 0.85;
-  }
-
-  .expander {
-    margin-top: 1rem;
-    padding: 0;
-    border: none;
-    background: none;
-    cursor: pointer;
-    font-size: 0.74rem;
-    letter-spacing: 0.03em;
-    color: var(--text-muted);
-    border-bottom: 1px solid var(--section-border);
-    transition:
-      color 160ms ease,
-      border-color 160ms ease;
-  }
-
-  .expander:hover {
-    color: var(--text-color);
-    border-color: var(--text-color);
-  }
-
-  .expander:focus-visible {
-    outline: 2px solid var(--color-accent);
-    outline-offset: 3px;
   }
 
   .details {

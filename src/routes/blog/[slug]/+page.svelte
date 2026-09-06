@@ -27,7 +27,7 @@
 <article class="section_padding blog-post">
   <div class="blog-post-wrap">
     <a
-      class="blog-back mono"
+      class="blog-back link-cta"
       href="{base}/blog"
     >
       ← Working notes
@@ -51,18 +51,9 @@
     margin: 0 auto;
   }
 
+  /* A .link-cta from app.css; only the spacing is local. */
   .blog-back {
-    display: inline-block;
     margin-bottom: 1.5rem;
-    font-size: 0.76rem;
-    letter-spacing: 0.02em;
-    color: var(--text-muted);
-    text-decoration: none;
-    transition: color 160ms ease;
-  }
-
-  .blog-back:hover {
-    color: var(--color-accent);
   }
 
   .blog-post-meta {

@@ -118,7 +118,7 @@
 
   .theme-label:hover {
     transform: translateY(-1px);
-    border-color: var(--color-accent);
+    border-color: var(--text-muted);
     background: rgba(255, 255, 255, 0.75);
     box-shadow:
       0 1px 0 rgba(255, 255, 255, 0.48) inset,

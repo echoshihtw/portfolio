@@ -130,56 +130,178 @@ html {
   scroll-padding-top: 5rem;
 }
 
-/* Shared button/pill treatment: pill radius, mono label, one hover language,
-   and a tiny halo+core glow on hover echoing the favicon's neon-tube mark
-   (soft blur wash + tight bright ring). Glow is near-invisible in light mode
-   and reads as the "fun" dark-mode glow via --glow-strength.
+/* Buttons and calls to action. Three kinds, and every one on the site is
+   one of them:
 
-   These are defaults, not overrides. They used to carry !important, because
-   Svelte scopes a component's rules with an extra class and that out-specifies
-   a bare class here, so the shared sheet could only win by force. Winning by
-   force is the wrong relationship: it silently beat two components that had
-   asked for something else (a 4px hero button, a rounded-square social chip),
-   and it beat the floating pill's font size, which is why that "mirrors the
-   header exactly" for months while measuring half a pixel off. Now a
-   component that states a value gets it. */
-.hero-cta,
-.cta,
-.footer-mail,
-.footer-source,
-.footer-social-link {
+   .btn       the one filled pill a section gets. Ink on the page ground, a
+              mono label, an arrow that moves on hover.
+   .link-cta  a text link that acts. Mono, muted, a hairline underline; both
+              go to full text colour on hover. Works on <a> and <button>.
+   .chip      a small bordered control: a close, a reset, a social icon.
+
+   Hover is the same story in all three: the thing goes to the text colour.
+   The accent is not a hover colour, anywhere. The glow on .btn is scaled by
+   --glow-strength, so it exists in dark mode and not in light.
+
+   The numbers follow Material's button spec: 40px tall, a 48px touch
+   target (the text link and the chips extend theirs with a pseudo-element
+   so the visual stays small), 8px between label and icon, and state layers
+   rather than only a lift: hover mixes 8% of the label colour into the
+   fill, press 12%. One filled button per group; never two side by side.
+
+   These are defaults, not overrides. Svelte scopes a component's rules with
+   an extra class, so a component that states a value gets it; these carry
+   no !important. */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 2.5rem;
+  padding: 0.55rem 1.25rem;
+  border: 1px solid var(--text-color);
   border-radius: 999px;
+  background: var(--text-color);
+  color: var(--color-bg);
   font-family: "JetBrains Mono", monospace;
   font-size: 0.75rem;
   letter-spacing: 0.03em;
+  line-height: 1.2;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
   transition:
-    border-color 160ms ease,
-    background-color 160ms ease,
-    color 160ms ease,
     transform 160ms ease,
     box-shadow 160ms ease;
 }
 
-.hero-cta:hover,
-.cta:hover,
-.footer-mail:hover,
-.footer-source:hover,
-.footer-social-link:hover {
+.btn:hover,
+.btn:focus-visible {
   transform: translateY(-1px);
+  background: color-mix(in srgb, var(--color-bg) 8%, var(--text-color));
+  box-shadow: 0 0 calc(16px * var(--glow-strength))
+    color-mix(
+      in srgb,
+      var(--color-accent) calc(30% * var(--glow-strength)),
+      transparent
+    );
+}
+
+.btn:active {
+  transform: none;
+  background: color-mix(in srgb, var(--color-bg) 12%, var(--text-color));
+}
+
+.link-cta {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0 0 1px;
+  border: 0;
+  border-bottom: 1px solid var(--section-border);
+  border-radius: 0;
+  background: none;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.76rem;
+  letter-spacing: 0.02em;
+  line-height: 1.4;
+  color: var(--text-muted);
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    color 160ms ease,
+    border-color 160ms ease;
+}
+
+/* The touch target, invisible: reaches 48px tall around a 20px link. */
+.link-cta::after {
+  content: "";
+  position: absolute;
+  inset: -0.85rem -0.5rem;
+}
+
+.link-cta:hover,
+.link-cta:focus-visible {
+  color: var(--text-color);
   border-color: var(--text-color);
-  box-shadow:
-    0 0 0 1px
-      color-mix(
-        in srgb,
-        var(--color-accent) calc(70% * var(--glow-strength)),
-        transparent
-      ),
-    0 0 calc(16px * var(--glow-strength))
-      color-mix(
-        in srgb,
-        var(--color-accent) calc(30% * var(--glow-strength)),
-        transparent
-      );
+}
+
+.link-cta:active {
+  color: var(--text-color);
+  opacity: 0.8;
+}
+
+.chip {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.5rem;
+  min-height: 2.5rem;
+  border: 1px solid var(--section-border);
+  background: var(--surface-bg);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition:
+    border-color 160ms ease,
+    color 160ms ease,
+    background-color 160ms ease;
+}
+
+.chip::after {
+  content: "";
+  position: absolute;
+  inset: -0.25rem;
+}
+
+.chip:hover,
+.chip:focus-visible {
+  border-color: var(--text-color);
+  color: var(--text-color);
+  background: color-mix(in srgb, var(--text-color) 8%, var(--surface-bg));
+}
+
+.chip:active {
+  background: color-mix(in srgb, var(--text-color) 12%, var(--surface-bg));
+}
+
+.btn:focus-visible,
+.link-cta:focus-visible,
+.chip:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+/* The arrow inside any of them nudges the way it points. */
+.cta-arrow {
+  display: inline-block;
+  transition: transform 160ms ease;
+}
+
+.btn:hover .cta-arrow,
+.link-cta:hover .cta-arrow {
+  transform: translateX(2px);
+}
+
+.btn.down:hover .cta-arrow,
+.link-cta.down:hover .cta-arrow {
+  transform: translateY(2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn,
+  .link-cta,
+  .chip,
+  .cta-arrow {
+    transition: none;
+  }
+  .btn:hover,
+  .btn:hover .cta-arrow,
+  .link-cta:hover .cta-arrow {
+    transform: none;
+  }
 }
 
 * {

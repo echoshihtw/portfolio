@@ -28,11 +28,16 @@
   <section class="section_padding closing">
     <p>{galleryConfig.closing.text}</p>
     <a
-      class="cta mono"
+      class="btn"
       href="{base}/"
     >
       {galleryConfig.closing.linkLabel}
-      <span aria-hidden="true">→</span>
+      <span
+        class="cta-arrow"
+        aria-hidden="true"
+      >
+        →
+      </span>
     </a>
   </section>
 
@@ -135,13 +140,6 @@
   .closing p {
     margin: 0;
     font-size: 1.02rem;
-  }
-
-  .cta {
-    border: 1px solid var(--section-border);
-    padding: 0.55rem 1.1rem;
-    color: var(--text-color);
-    text-decoration: none;
   }
 
   .signed {

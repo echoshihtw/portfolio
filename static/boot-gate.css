@@ -432,13 +432,16 @@
   align-items: center;
   gap: 0.4rem;
   margin-top: 1.3rem;
-  padding: 0.55rem 1.05rem;
+  /* Same numbers as .btn in app.css, which is not loaded yet when this
+     renders. */
+  min-height: 2.5rem;
+  padding: 0.55rem 1.25rem;
   border: 1px solid #14122a;
   border-radius: 999px;
   background: #14122a;
-  color: #fcfbf5;
+  color: #f7f5ee;
   font-family: "JetBrains Mono", ui-monospace, monospace;
-  font-size: 0.74rem;
+  font-size: 0.75rem;
   letter-spacing: 0.03em;
   cursor: pointer;
   opacity: 0;

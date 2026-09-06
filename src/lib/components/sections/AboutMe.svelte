@@ -38,18 +38,28 @@
              it. No résumé here: the hero's button and the nav both have it,
              and a third copy made this row the busiest thing on the page. -->
         <a
-          class="cta primary"
+          class="btn"
           href="mailto:{closingConfig.email}"
         >
-          Email me <span aria-hidden="true">→</span>
+          Email me <span
+            class="cta-arrow"
+            aria-hidden="true"
+          >
+            →
+          </span>
         </a>
         <a
-          class="cta mono"
+          class="link-cta"
           href={calendlyUrl}
           target="_blank"
           rel="noreferrer noopener"
         >
-          Book a call <span aria-hidden="true">↗</span>
+          Book a call <span
+            class="cta-arrow"
+            aria-hidden="true"
+          >
+            ↗
+          </span>
         </a>
       </div>
 
@@ -153,47 +163,8 @@
     margin-top: 0.8rem;
   }
 
-  /* One button among three: the email is the conversion, so it is the
-     filled pill, and the other two are links beside it. Three outlined
-     pills in a row gave nothing the click. */
-  .cta {
-    color: var(--text-color);
-    text-decoration: none;
-    white-space: nowrap;
-  }
-
-  .cta.primary {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    border: 1px solid var(--text-color);
-    border-radius: 999px;
-    padding: 0.6rem 1.2rem;
-    background: var(--text-color);
-    color: var(--color-bg);
-  }
-
-  .cta:not(.primary) {
-    /* The shared .cta rule is a pill; a pill radius on a text link bends
-       the underline up at both ends. */
-    border-radius: 0;
-    font-size: 0.76rem;
-    color: var(--text-muted);
-    border-bottom: 1px solid var(--section-border);
-    padding-bottom: 1px;
-    transition:
-      color 160ms ease,
-      border-color 160ms ease;
-  }
-
-  .cta:not(.primary):hover,
-  .cta:not(.primary):focus-visible {
-    transform: none;
-    box-shadow: none;
-    color: var(--text-color);
-    border-color: var(--text-color);
-  }
-
+  /* One button, one link: .btn and .link-cta from app.css. The email is the
+     conversion, so it is the filled pill. */
   .jumps {
     display: flex;
     flex-wrap: wrap;

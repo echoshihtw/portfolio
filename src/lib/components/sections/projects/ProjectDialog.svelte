@@ -32,7 +32,7 @@
       <header>
         <h3 id="project-dialog-title">{project.name}</h3>
         <button
-          class="close mono"
+          class="close chip"
           on:click={() => dialog.close()}
           aria-label="Close"
         >
@@ -90,7 +90,7 @@
 
       {#if project.href}
         <a
-          class="link mono"
+          class="link link-cta"
           href={project.href}
           target="_blank"
           rel="noreferrer noopener"
@@ -142,15 +142,12 @@
     line-height: 1.1;
   }
 
+  /* A .chip from app.css, square. */
   .close {
     flex: none;
-    padding: 0.2rem 0.45rem;
+    padding: 0;
     font-size: 0.85rem;
-    color: var(--text-muted);
-    background: none;
-    border: 1px solid var(--section-border);
     border-radius: var(--radius-sm);
-    cursor: pointer;
   }
 
   .close:hover {
@@ -226,14 +223,9 @@
     color: var(--text-muted);
   }
 
+  /* A .link-cta from app.css; only the placement is local. */
   .link {
     align-self: start;
-    font-size: 0.75rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--color-accent);
-    text-decoration: none;
-    border-bottom: 1px solid currentColor;
   }
 
   @media (min-width: 640px) {
