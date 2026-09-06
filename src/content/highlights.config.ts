@@ -22,38 +22,38 @@ export const highlightsConfig: Highlight[] = [
     // Clio: projects.config.ts, résumé project block.
     title: "A first version, in front of real users",
     proof:
-      "Clio, built for one salon owner and engineered multi-tenant from day one. In daily use since May 2025, with 603 clients and 2,694 service records entered by hand. No booking, no payments, no inventory, no marketing. The products she rejected had all of it.",
+      "Clio, built for one salon owner and made multi-tenant from day one. In daily use since May 2025, with 603 clients and 2,694 service records the owner typed in by hand. No booking, no payments, no inventory, no marketing. The products she rejected had all of it.",
   },
   {
     // Lockerbie and Find Recruiter: resume.md.
     title: "A frontend one person owns, in React and TypeScript",
     proof:
-      "Sole author of the Next.js frontend on an internal project platform, one of two engineers. Before that, took over a recruiting platform's React frontend on a two-engineer team and migrated it to TypeScript incrementally, while it kept shipping.",
+      "Sole author of the Next.js frontend on an internal project platform, one of two engineers. Before that I took over a recruiting platform's React frontend on a two-person team and moved it to TypeScript incrementally, while it kept shipping.",
   },
   {
     // Lockerbie BFF and authorisation model: resume.md. Clio RLS and the
     // policy audit: projects.config.ts.
     title: "A security boundary put in before it was needed",
     proof:
-      "A BFF in front of the backend, with server-managed authentication, centralised CSRF protection and no credentials in browser JavaScript. Organisation and project roles resolved into capability flags, so no service reimplements access. On Clio, Postgres row level security and an audit of my own policies.",
+      "A BFF in front of the backend. Authentication stays on the server, CSRF is handled in one place, and no backend credential reaches the browser. Roles resolve into capability flags, so no service reimplements access. On Clio, Postgres row level security, and I audit my own policies.",
   },
   {
     // Lockerbie deploy packaging: resume.md. SPIN.FASHION release steps:
     // experience copy.
     title: "Production somebody else can run",
     proof:
-      "Deploys packaged into a three-file runner folder that pulls the promoted image from GHCR. No source checkout and no dev dependencies, an 80 MB download instead of a build. The release steps for the macOS app are written down.",
+      "Deploys are a three-file runner folder that pulls the promoted image from GHCR. No source checkout, no dev dependencies, an 80 MB download instead of a build. The release steps for the macOS app are written down.",
   },
   {
     // SPIN.FASHION: resume.md. release-please: the published post.
-    title: "A release that would not ship, shipped",
+    title: "A release that wouldn't ship, shipped",
     proof:
-      "Cleared macOS code-signing, notarisation and auto-update on an Electron app that could not go out. Traced a release pipeline crash to the tool's own internal model rather than its configuration, and switched to the release type that never had that assumption.",
+      "Cleared macOS code-signing, notarisation and auto-update on an Electron app that couldn't go out. Lost most of a day to a release pipeline crash that turned out to be the tool's design, not my config, and switched to a release type that never had the problem.",
   },
   {
     // RabbitMQ bug: resume.md. Architecture test: projects.config.ts.
-    title: "The bug the tests missed, found and kept out",
+    title: "The login bug the tests missed",
     proof:
-      "A stale RabbitMQ consumer was failing every user's first login. Diagnosed it and fixed it with a fail-fast check before broker registration. On Clio, only the api layer may reach the database, and a test fails the build if anything else imports it.",
+      "A stale RabbitMQ consumer was failing every user's first login. Found it, and fixed it with a fail-fast check before the consumer registers with the broker. On Clio, only the api layer may reach the database, and a test fails the build if anything else imports it.",
   },
 ];
