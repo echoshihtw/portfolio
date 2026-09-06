@@ -21,7 +21,6 @@
      reader can compare down the page. -->
 <article
   class="study"
-  class:featured={project.featured}
   aria-labelledby={titleId}
 >
   <div class="margin">
@@ -140,15 +139,8 @@
     border-bottom: var(--border-w) solid var(--border);
   }
 
-  /* The one with users gets a yellow index: the page's single highlight. */
-  .featured .num {
-    color: var(--ink);
-    background: var(--highlight);
-    padding: 0.1rem 0.35rem;
-    border-radius: 3px;
-  }
-
   .margin {
+    position: relative;
     display: flex;
     flex-direction: column;
     gap: var(--space-4);
@@ -315,10 +307,16 @@
     }
   }
 
+  /* Indented to the same edge as the work cards: the section number's
+     column, then the tick's column, then the entry. The tick sits in the
+     gutter, out of the flow, exactly where the work list puts its own. */
   @media (min-width: 900px) {
+    /* 7rem number column + 2rem gap + 3rem tick column + 1rem gap: the
+       work card's left edge, to the pixel. */
     .study {
-      grid-template-columns: 7rem minmax(0, 1fr);
+      grid-template-columns: 11rem minmax(0, 1fr);
       gap: var(--space-6);
+      margin-left: 13rem;
       padding: var(--space-6) 0;
     }
 
@@ -326,6 +324,12 @@
       position: sticky;
       top: 5rem;
       align-self: start;
+    }
+
+    .num {
+      position: absolute;
+      left: -4rem;
+      top: 0.2rem;
     }
   }
 </style>
