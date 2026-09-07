@@ -23,6 +23,7 @@
   $: id = slug(project.name);
   $: titleId = `case-${id}-title`;
   $: detailId = `case-${id}-detail`;
+  $: role = project.role ?? project.resume?.role;
 </script>
 
 <!-- A research entry, not a card: number and metadata in the margin, the
@@ -32,6 +33,29 @@
   class="study"
   aria-labelledby={titleId}
 >
+  <!-- First in the DOM so that on a phone, where the grid is one column,
+       the name leads and the metadata follows it. On the wide layout the
+       grid places it beside the margin, above the body. -->
+  <header class="head">
+    <h3
+      id={titleId}
+      class="name"
+    >
+      <!-- The number, for the phone layout, where the margin has no
+           gutter to put it in. Decorative, like the one in the margin. -->
+      <span
+        class="num-inline label"
+        aria-hidden="true"
+      >
+        {number}
+      </span>
+      {project.name}
+    </h3>
+    {#if project.subtitle}
+      <p class="hook">{project.subtitle}</p>
+    {/if}
+  </header>
+
   <div class="margin">
     <span
       class="num label"
@@ -50,13 +74,13 @@
           {project.status}
         </dd>
       </div>
-      {#if project.resume?.role}
+      {#if role}
         <div>
           <dt class="label">Role</dt>
-          <dd>{project.resume.role}</dd>
+          <dd>{role}</dd>
         </div>
       {/if}
-      <div>
+      <div class="stack-row">
         <dt class="label">Stack</dt>
         <dd class="stack">
           {#each project.stack as tech}
@@ -68,18 +92,6 @@
   </div>
 
   <div class="body">
-    <header class="head">
-      <h3
-        id={titleId}
-        class="name"
-      >
-        {project.name}
-      </h3>
-      {#if project.subtitle}
-        <p class="hook">{project.subtitle}</p>
-      {/if}
-    </header>
-
     <div
       class="fields"
       class:no-decisions={!decisions.length}
@@ -191,23 +203,42 @@
     gap: var(--space-4);
   }
 
-  /* Same tick as the work entries: a small mono index in the margin. */
+  /* Same tick as the work entries: a small mono index in the margin. On
+     a phone it sits in the name instead, and the margin's copy is hidden
+     (the two are never both shown). */
   .num {
+    display: none;
     align-self: flex-start;
     color: var(--muted);
   }
 
+  .num-inline {
+    display: inline-block;
+    margin-right: 0.6rem;
+    vertical-align: 0.35em;
+    color: var(--muted);
+  }
+
+  /* On a phone the facts run in a row rather than a column: label and
+     value side by side, status and role sharing a line, the stack on the
+     line after. Four short facts on two lines rather than eight. */
   .meta {
     margin: 0;
     display: flex;
-    flex-direction: column;
-    gap: var(--space-3);
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--space-2) var(--space-4);
   }
 
   .meta > div {
     display: flex;
-    flex-direction: column;
-    gap: 0.3rem;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.3rem 0.6rem;
+  }
+
+  .meta > .stack-row {
+    flex-basis: 100%;
   }
 
   .meta dt {
@@ -316,11 +347,13 @@
     line-height: 1.6;
   }
 
-  /* Three lines on the page, all of it in the study. */
+  /* A few lines on the page, all of it in the study. Six in the narrow
+     single column, where four cut most sentences in half; four once the
+     fields sit in two wider columns. */
   .clamp {
     display: -webkit-box;
-    -webkit-line-clamp: 4;
-    line-clamp: 4;
+    -webkit-line-clamp: 6;
+    line-clamp: 6;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
@@ -388,6 +421,11 @@
      the right, so the block's bottom edge is level. Reading order in the
      DOM stays constraint, decisions, outcome. */
   @media (min-width: 700px) {
+    .clamp {
+      -webkit-line-clamp: 4;
+      line-clamp: 4;
+    }
+
     .fields {
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: var(--space-5) var(--space-6);
@@ -424,21 +462,53 @@
        work card's left edge, to the pixel. */
     .study {
       grid-template-columns: 11rem minmax(0, 1fr);
-      gap: var(--space-6);
+      grid-template-rows: auto minmax(0, 1fr);
+      gap: var(--space-5) var(--space-6);
       margin-left: 13rem;
       padding: var(--space-6) 0;
     }
 
+    /* Head above body in the right column, the margin down the left
+       beside both: the same picture as when the head lived in the body. */
+    .head {
+      grid-column: 2;
+      grid-row: 1;
+    }
+
+    .body {
+      grid-column: 2;
+      grid-row: 2;
+    }
+
     .margin {
+      grid-column: 1;
+      grid-row: 1 / span 2;
       position: sticky;
       top: 5rem;
       align-self: start;
     }
 
     .num {
+      display: block;
       position: absolute;
       left: -4rem;
       top: 0.2rem;
+    }
+
+    .num-inline {
+      display: none;
+    }
+
+    /* Back to the column: one fact under another, label over value. */
+    .meta {
+      flex-direction: column;
+      align-items: stretch;
+      gap: var(--space-3);
+    }
+
+    .meta > div {
+      flex-direction: column;
+      gap: 0.3rem;
     }
   }
 </style>

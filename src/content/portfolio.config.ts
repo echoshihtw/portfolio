@@ -63,52 +63,51 @@ export const heroConfig: {
     { text: ", and the part after." },
   ],
 
-  // Ownership leads, the shape of the work follows, stack last. The
-  // list of what I build is the same here and on the CV, because it answers
-  // "you have no experience in our domain" and that question gets asked in
-  // every screen. "Systems of record" was the accurate term and the wrong
-  // register: it reads enterprise, and the startup reader this is aimed at
-  // skims it. The examples were always doing the explaining, so they lead now. Stack mention matches Clio (the featured,
-  // in-production project the proof line is about) rather than unrelated
-  // client work, since it's the one detail here most likely to specifically
-  // land with a Supabase-caliber hiring manager.
+  // The examples lead. The list of what I build is the same here and on
+  // the CV, because it answers "you have no experience in our domain" and
+  // that question gets asked in every screen. "Systems of record" was the
+  // accurate term and the wrong register: it reads enterprise, and the
+  // startup reader this is aimed at skims it. The examples were always
+  // doing the explaining, so they go first, and the tooling underneath
+  // them second, in the order the résumé summary uses.
   //
-  // The three verbs are each evidenced elsewhere on the page, which is the
-  // only reason they earn a line: securing is Clio's RLS and the BFF
-  // boundary; keeping it running is Clio in daily use since May 2025;
-  // writing down what broke is the blog, and the admitted mistake in the
-  // proof line directly below.
-  // Two lines, not one paragraph. This was three claims fused: what the work
-  // is, how it is done, and the stack. Split so a skimmer gets the first.
+  // No stack in the sentence. The chip row directly below carries it,
+  // more specifically: React 19, Postgres RLS, offline-first sync,
+  // architecture tests, GHCR deploys are what make her legible as one of
+  // these people, and "React and TypeScript" above them was the same
+  // thing said vaguer, and the first five words on the page. It had crept
+  // back after being cut once for the same reason; cut again 2026-09-07.
+  // "Actually" went with it: "the software a business actually runs on"
+  // argues against an objection nobody raised. The résumé summary still
+  // has the word; that is Echo's call.
   //
-  // "Software Engineer on" went because the title now sits in the line
-  // above, where it was appearing twice. The stack sentence went because the
-  // chip row directly below already carries it, more specifically: React 19,
-  // Postgres RLS, offline-first sync, architecture tests, GHCR deploys are
-  // what make her legible as one of these people, and a second, vaguer list
-  // above them was the fourth thing to read.
+  // Two sentences, not one paragraph. This was three claims fused: what
+  // the work is, how it is done, and the stack. Split so a skimmer gets
+  // the first.
   //
-  // The examples still lead, which was a deliberate call: they were always
-  // doing the explaining.
+  // The three verbs in the second line are each evidenced elsewhere on
+  // the page, which is the only reason they earn a line: securing is
+  // Clio's RLS and the BFF boundary; keeping it running is Clio in daily
+  // use since May 2025; writing down what broke is the blog, and the
+  // admitted mistake in the Clio study.
   support: [
-    "React and TypeScript, and the tooling around them: the module template a team builds against, the release path, the tests that guard a boundary. Project platforms, applicant tracking, client histories, the software a business actually runs on.",
+    "Project platforms, applicant tracking, client histories: the software a business runs on. Underneath it, the module template a team builds against, the release path, and the tests that guard a boundary.",
     "I secure it, keep it running after ship, and write down what broke.",
   ],
 
-  // Two sentences, not a stat block: three figures in columns is a SaaS
-  // landing-page pattern that invites comparison, and "entered by hand"
-  // carries what a number can't. "Engineered multi-tenant from day one"
-  // folds in the origin story (built for one owner, architected for scale
-  // before there was pressure to) without a separate sentence. The second
-  // sentence, an admitted mistake pulled from Clio's own project card,
-  // is the one line here nobody else could have written.
   // The caption under the hero figure. The figure is a drawing, and a
-  // drawing labelled "proof" is a claim it cannot make, so the caption says
-  // what it is and gives the two dates that are real: where Clio's records
-  // begin and when it went into daily use. The numbers are in the first
-  // highlight and the lesson is in the Clio study.
+  // drawing labelled "proof" is a claim it cannot make, so the caption
+  // opens by saying what it is. Then the proof, in two sentences: a product
+  // decision, and what the user did. The redesign had cut this down to two
+  // dates; the earlier line's "entered by hand" came back on 2026-09-07
+  // because it is the one fact here that is the user's verdict rather than
+  // Echo's claim, and "the two minutes" is the decision that says she
+  // builds for how someone feels without saying so. Not a stat block:
+  // figures in columns invite comparison, and "by hand" carries what a
+  // number can't. No dates: the figure already labels September 2024 and
+  // May 2025. The counts and the lesson stay in the Clio study.
   proofLine:
-    "A sketch, not a chart. Clio's records run from September 2024, and it has been in daily use at the salon since May 2025.",
+    "A sketch, not a chart. Clio covers the two minutes before a client sits down, and stops. The owner typed a year of appointments in by hand.",
 
   email: "echoshihtw@gmail.com",
   // The file is named on disk rather than renamed by a download attribute or
