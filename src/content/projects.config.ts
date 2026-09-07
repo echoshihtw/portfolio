@@ -105,6 +105,8 @@ export const projectsConfig: Projects = [
     linkLabel: "Source Code →",
     status: "Archived",
   },
+  // Ming Mold 60th is hidden for now. Uncomment to restore.
+  /*
   {
     // Last in the grid on purpose. A reader skimming for engineering signal
     // should hit the software first; this earns its place by being evidence
@@ -146,4 +148,5 @@ export const projectsConfig: Projects = [
     // gift has nowhere to send a reader.
     status: "Shipped",
   },
+  */
 ];
