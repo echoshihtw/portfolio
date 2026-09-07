@@ -23,6 +23,9 @@ interface Project {
   /** Present means the project earns space on the one-page CV. A project
    *  without it is site-only. Bullets rather than a paragraph because a
    *  recruiter scans: the descriptor is what earns the bullets a read. */
+  /** The role on the case study, for a project that is not on the résumé.
+      A project with a résumé block gets its role from there. */
+  role?: string;
   resume?: {
     /** What it is, in a few words: the part that gets scanned. */
     descriptor: string;

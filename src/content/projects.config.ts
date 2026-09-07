@@ -97,6 +97,7 @@ export const projectsConfig: Projects = [
     result:
       "Built the frontend with a core maintainer of the Bitcoin Dev Kit. You construct a UTXO set, run it against a spend scenario, and read the metrics side by side. Archived.",
     stack: ["Next.js", "TypeScript", "Tailwind CSS"],
+    role: "UI/UX designer and frontend engineer",
     highlights: [
       "You pick the UTXOs by hand, so the input set is a controlled variable instead of whatever the wallet happened to hold",
       "Spend scenarios and fee rates are adjustable, because selection behaviour diverges at the extremes",
