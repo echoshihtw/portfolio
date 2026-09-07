@@ -16,6 +16,27 @@
   // and an IntersectionObserver; now it is a class.
   $: condensed = scrollPosition > 80;
 
+  // The header is sticky, so any change to its height moves the page under
+  // it. In the pill the Home sections open on a second line inside the bar,
+  // which makes the bar taller: the header's own height is held at what it
+  // measured before condensing, and the taller pill overlaps the page
+  // instead of pushing it. The second line's height is measured too, so the
+  // pill grows by exactly that much, wrapped or not.
+  let headerHeight = 0;
+  let lockedHeight = 0;
+  $: if (!condensed) lockedHeight = headerHeight;
+  // borderBoxSize, not clientHeight: Svelte's clientHeight binding measures
+  // through an injected iframe and sets position: relative on a static
+  // element to host it, which would pin the list in the row for good.
+  let sectionsBox: { blockSize: number }[] | undefined;
+  $: sectionsHeight = sectionsBox?.[0]?.blockSize ?? 0;
+
+  // The second line is indented to sit under Home, its parent. Its
+  // containing block is the bar, so that offset is the site name's width
+  // plus the row gap, and the name is measured for it.
+  let nameBox: { inlineSize: number }[] | undefined;
+  $: nameWidth = nameBox?.[0]?.inlineSize ?? 0;
+
   // Compare route ids, not paths against `base`. SvelteKit 2 resolves
   // relative paths, so `base` is "." rather than "", and every
   // `pathname === (base || "/")` in this file was comparing "/" with "."
@@ -70,6 +91,11 @@
 <header
   class="header"
   class:condensed
+  class:home-open={homeOpen}
+  style:height={condensed && lockedHeight ? `${lockedHeight}px` : null}
+  style:--sections-h="{sectionsHeight}px"
+  style:--name-w="{nameWidth}px"
+  bind:clientHeight={headerHeight}
 >
   <div class="bar">
     <!-- Not an <h1>: the hero statement is the page's single heading. -->
@@ -77,6 +103,7 @@
       href={base || "/"}
       on:click={goTop}
       class="site-name"
+      bind:borderBoxSize={nameBox}
     >
       Echo Shih
     </a>
@@ -86,8 +113,10 @@
       class="tabs"
     >
       <!-- Work, Projects, Skills and Contact are sections OF the home page,
-           so they sit inside it rather than beside it: hover Home and they
-           slide out in the row, then the rule, then the other pages. -->
+           so they sit inside it rather than beside it. In the full bar,
+           hover Home and they slide out in the row, then the rule, then the
+           other pages. In the pill they take a second line under the row
+           instead; see the note on .condensed .home-sections. -->
       <div
         class="home-menu"
         class:open={homeOpen}
@@ -115,6 +144,7 @@
         <ul
           id="home-sections"
           class="home-sections"
+          bind:borderBoxSize={sectionsBox}
         >
           <li>
             <a
@@ -214,6 +244,7 @@
      the whole trick: it is the same row of the same items, given a pill
      around it. */
   .bar {
+    position: relative;
     display: flex;
     align-items: center;
     flex-wrap: wrap;
@@ -238,10 +269,20 @@
   }
 
   /* A pill with a hairline, opaque. No blur, no shadow: the thing that
-     separates it from the page is a 1px ink line. */
+     separates it from the page is a 1px ink line.
+
+     The radius is the closed pill's half-height, spelled out (padding,
+     border, half the theme toggle) rather than left at 999px. Left there,
+     it follows the height: open on two lines the ends became semicircles
+     twice the size, both rows of text sat on the curve, and the inset to
+     the border no longer matched the closed state. Pinned, the closed
+     state is the same pill and the open state is a rounded rectangle with
+     the same corners, so the padding reads the same in both. */
   .condensed .bar {
+    --pill-pad: 0.45rem;
     max-width: min(52rem, calc(100% - 1.5rem));
-    padding: 0.45rem 0.9rem 0.45rem 1.1rem;
+    padding: var(--pill-pad) 0.9rem var(--pill-pad) 1.1rem;
+    border-radius: calc(var(--pill-pad) + var(--border-w) + 1.125rem);
     background: var(--surface);
     border-color: var(--border-strong);
   }
@@ -413,6 +454,83 @@
     opacity: 1;
   }
 
+  /* In the pill the row has no room to give. Opened in-row, the sections
+     wrapped the tools onto a second line, the header grew, and the page
+     shifted under it. So once condensed they take a second line of their
+     own, under the row, and the pill grows down to hold them by exactly
+     their height. They are out of flow so the first line does not
+     re-centre, and the header height is held (see the script) so the page
+     does not move. Not a dropdown: still the one pill, one line taller. */
+  .condensed.home-open .bar {
+    padding-bottom: calc(var(--pill-pad) + var(--sections-h, 0px));
+  }
+
+  /* Stretched to the full row so the trigger's box meets the second line
+     with no strip of .tabs between them: the list is a descendant of
+     .home-menu, so the pointer can travel from Home straight down into it
+     without ever leaving the menu, and it stays open on the way. */
+  .condensed .tabs,
+  .condensed .home-menu {
+    align-self: stretch;
+  }
+
+  /* Anchored to the pill's bottom padding rather than under the nav, so on
+     a phone, where the row wraps and the tools take a line of their own,
+     the list still lands below everything. Inset by the pill's horizontal
+     padding, and padded to the height of the first row, so the two rows
+     read as equals and the pill's top and bottom margins match. */
+  .condensed .home-sections {
+    position: absolute;
+    bottom: var(--pill-pad);
+    left: 1.1rem;
+    right: 0.9rem;
+    flex-wrap: wrap;
+    gap: 0.2rem 0.9rem;
+    max-width: none;
+    margin-left: 0;
+    padding: 0.3rem 0;
+    overflow: visible;
+    white-space: normal;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-3px);
+    transition:
+      opacity 180ms ease,
+      transform 260ms var(--ease-out),
+      visibility 0s linear 260ms;
+  }
+
+  .condensed .open .home-sections {
+    visibility: visible;
+    opacity: 1;
+    transform: none;
+    transition-delay: 0s;
+  }
+
+  /* The tools ride the pill's centre line: shifted down by half the second
+     line, in step with the padding, so they sit centred in the taller pill
+     rather than stranded on its first line. From the tablet width up only,
+     where the pill is one row; on a phone the row wraps and the tools
+     already have a line of their own below the tabs. The second line stops
+     short of the tools' column so a wrapped list never runs under them. */
+  .tools {
+    transition: transform 340ms var(--ease-out);
+  }
+
+  @media (min-width: 768px) {
+    .condensed.home-open .tools {
+      transform: translateY(calc(var(--sections-h, 0px) / 2));
+    }
+
+    /* Indented to its parent: the left edge lines up with Home, which
+       is one row gap past the site name. Below this width the nav wraps
+       under the name and Home is already at the pill's left edge. */
+    .condensed .home-sections {
+      left: calc(1.1rem + var(--name-w, 0px) + 1.1rem);
+      right: 6.5rem;
+    }
+  }
+
   /* Same type as the tabs, one step quieter, so they read as Home's
      contents rather than four more destinations. */
   .home-sections a {
@@ -437,6 +555,7 @@
     .site-name,
     .tab,
     .top-link,
+    .tools,
     .chev,
     .home-sections {
       transition: none;
