@@ -6,6 +6,7 @@
   import { page } from "$app/stores";
   import { heroConfig } from "../../../content/portfolio.config";
   import { trackResume } from "$lib/analytics";
+  import { onMount } from "svelte";
 
   export let scrollPosition: number;
 
@@ -16,15 +17,33 @@
   // and an IntersectionObserver; now it is a class.
   $: condensed = scrollPosition > 80;
 
+  // Two ways for the Home sections to open. In the row, sliding out to the
+  // right of Home, which is the full-width bar on a desktop. Or stacked, on
+  // a second line under the row, which is the pill anywhere and the bar
+  // too on a phone, where the row has no room for anything to slide into.
+  // The phone gets the same behaviour as the desktop pill, not a third one.
+  let narrow = false;
+  onMount(() => {
+    const mq = window.matchMedia("(max-width: 767.98px)");
+    const sync = () => (narrow = mq.matches);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  });
+  $: stacked = condensed || narrow;
+
   // The header is sticky, so any change to its height moves the page under
   // it. In the pill the Home sections open on a second line inside the bar,
   // which makes the bar taller: the header's own height is held at what it
   // measured before condensing, and the taller pill overlaps the page
   // instead of pushing it. The second line's height is measured too, so the
-  // pill grows by exactly that much, wrapped or not.
+  // pill grows by exactly that much, wrapped or not. Measured only while
+  // closed: at the top of a phone page the bar grows in flow when open, the
+  // ordinary thing for a header at the top of a page, and that height must
+  // not be the one the pill is later held at.
   let headerHeight = 0;
   let lockedHeight = 0;
-  $: if (!condensed) lockedHeight = headerHeight;
+  $: if (!condensed && !homeOpen) lockedHeight = headerHeight;
   // borderBoxSize, not clientHeight: Svelte's clientHeight binding measures
   // through an injected iframe and sets position: relative on a static
   // element to host it, which would pin the list in the row for good.
@@ -55,8 +74,7 @@
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
-  // The Home sections slide out horizontally, in the row, rather than
-  // dropping down. Three ways in: hover (mouse), focus (keyboard, tabbing
+  // Three ways in: hover (mouse), focus (keyboard, tabbing
   // into any of the links), and a tap on the trigger, which pins them open
   // for touch, where there is no hover. All three are tracked here rather
   // than left to :hover so aria-expanded tells the truth.
@@ -91,6 +109,7 @@
 <header
   class="header"
   class:condensed
+  class:stacked
   class:home-open={homeOpen}
   style:height={condensed && lockedHeight ? `${lockedHeight}px` : null}
   style:--sections-h="{sectionsHeight}px"
@@ -115,8 +134,8 @@
       <!-- Work, Projects, Skills and Contact are sections OF the home page,
            so they sit inside it rather than beside it. In the full bar,
            hover Home and they slide out in the row, then the rule, then the
-           other pages. In the pill they take a second line under the row
-           instead; see the note on .condensed .home-sections. -->
+           other pages. In the pill, and on a phone, they take a second line
+           under the row instead; see the note on .stacked .home-sections. -->
       <div
         class="home-menu"
         class:open={homeOpen}
@@ -244,6 +263,9 @@
      the whole trick: it is the same row of the same items, given a pill
      around it. */
   .bar {
+    --pill-pad: 0.75rem;
+    --pad-l: 1rem;
+    --pad-r: 1rem;
     position: relative;
     display: flex;
     align-items: center;
@@ -251,7 +273,7 @@
     gap: 0.6rem 1.1rem;
     max-width: var(--content-max);
     margin: 0 auto;
-    padding: 0.75rem 1rem;
+    padding: var(--pill-pad) var(--pad-r) var(--pill-pad) var(--pad-l);
     border: var(--border-w) solid transparent;
     border-radius: var(--radius-pill);
     background: transparent;
@@ -264,7 +286,19 @@
 
   @media (min-width: 768px) {
     .bar {
-      padding: 0.75rem 2rem;
+      --pad-l: 2rem;
+      --pad-r: 2rem;
+    }
+  }
+
+  /* On a phone the bar is two rows by design rather than by wrapping: the
+     name and the tools on the first, the tabs on a line of their own under
+     them. Before, the three wrapped into three rows with the tools
+     stranded at the bottom right. */
+  @media (max-width: 767.98px) {
+    .tabs {
+      order: 3;
+      flex-basis: 100%;
     }
   }
 
@@ -280,8 +314,10 @@
      the same corners, so the padding reads the same in both. */
   .condensed .bar {
     --pill-pad: 0.45rem;
+    --pad-l: 1.1rem;
+    --pad-r: 0.9rem;
     max-width: min(52rem, calc(100% - 1.5rem));
-    padding: var(--pill-pad) 0.9rem var(--pill-pad) 1.1rem;
+    padding: var(--pill-pad) var(--pad-r) var(--pill-pad) var(--pad-l);
     border-radius: calc(var(--pill-pad) + var(--border-w) + 1.125rem);
     background: var(--surface);
     border-color: var(--border-strong);
@@ -424,6 +460,18 @@
     opacity: 0.35;
   }
 
+  /* The arrow points where the sections go. In the row, right, and a
+     nudge further right when open. Stacked, the same glyph turned to point
+     down at the line below, and up once it is there. */
+  .stacked .chev {
+    transform: rotate(90deg);
+  }
+
+  .stacked .open .chev {
+    transform: rotate(-90deg);
+    opacity: 0.35;
+  }
+
   /* The sections sit in the row, collapsed to nothing, and slide out to
      the right of Home. max-width tweens where width: auto would not; the
      overflow clip is horizontal only so nothing is cut vertically. A menu
@@ -456,12 +504,14 @@
 
   /* In the pill the row has no room to give. Opened in-row, the sections
      wrapped the tools onto a second line, the header grew, and the page
-     shifted under it. So once condensed they take a second line of their
-     own, under the row, and the pill grows down to hold them by exactly
+     shifted under it. So once stacked they take a second line of their
+     own, under the row, and the bar grows down to hold them by exactly
      their height. They are out of flow so the first line does not
-     re-centre, and the header height is held (see the script) so the page
-     does not move. Not a dropdown: still the one pill, one line taller. */
-  .condensed.home-open .bar {
+     re-centre, and in the pill the header height is held (see the script)
+     so the page does not move. Not a dropdown: still the one pill, one
+     line taller. On a phone the same rules apply to the bar at the top of
+     the page, where growing in flow is the ordinary thing. */
+  .stacked.home-open .bar {
     padding-bottom: calc(var(--pill-pad) + var(--sections-h, 0px));
   }
 
@@ -469,21 +519,21 @@
      with no strip of .tabs between them: the list is a descendant of
      .home-menu, so the pointer can travel from Home straight down into it
      without ever leaving the menu, and it stays open on the way. */
-  .condensed .tabs,
-  .condensed .home-menu {
+  .stacked .tabs,
+  .stacked .home-menu {
     align-self: stretch;
   }
 
-  /* Anchored to the pill's bottom padding rather than under the nav, so on
-     a phone, where the row wraps and the tools take a line of their own,
-     the list still lands below everything. Inset by the pill's horizontal
-     padding, and padded to the height of the first row, so the two rows
-     read as equals and the pill's top and bottom margins match. */
-  .condensed .home-sections {
+  /* Anchored to the bar's bottom padding rather than under the nav, so it
+     lands below everything however the rows above it are laid out. Inset
+     by the bar's own horizontal padding, and padded to the height of the
+     first row, so the rows read as equals and the top and bottom margins
+     match. */
+  .stacked .home-sections {
     position: absolute;
     bottom: var(--pill-pad);
-    left: 1.1rem;
-    right: 0.9rem;
+    left: var(--pad-l);
+    right: var(--pad-r);
     flex-wrap: wrap;
     gap: 0.2rem 0.9rem;
     max-width: none;
@@ -500,7 +550,7 @@
       visibility 0s linear 260ms;
   }
 
-  .condensed .open .home-sections {
+  .stacked .open .home-sections {
     visibility: visible;
     opacity: 1;
     transform: none;
@@ -510,23 +560,23 @@
   /* The tools ride the pill's centre line: shifted down by half the second
      line, in step with the padding, so they sit centred in the taller pill
      rather than stranded on its first line. From the tablet width up only,
-     where the pill is one row; on a phone the row wraps and the tools
-     already have a line of their own below the tabs. The second line stops
-     short of the tools' column so a wrapped list never runs under them. */
+     where the pill is one row; on a phone the tools share the first row
+     with the name and stay there. The second line stops short of the
+     tools' column so a wrapped list never runs under them. */
   .tools {
     transition: transform 340ms var(--ease-out);
   }
 
   @media (min-width: 768px) {
-    .condensed.home-open .tools {
+    .stacked.home-open .tools {
       transform: translateY(calc(var(--sections-h, 0px) / 2));
     }
 
     /* Indented to its parent: the left edge lines up with Home, which
-       is one row gap past the site name. Below this width the nav wraps
-       under the name and Home is already at the pill's left edge. */
-    .condensed .home-sections {
-      left: calc(1.1rem + var(--name-w, 0px) + 1.1rem);
+       is one row gap past the site name. Below this width the tabs have
+       a row of their own and Home is already at the bar's left edge. */
+    .stacked .home-sections {
+      left: calc(var(--pad-l) + var(--name-w, 0px) + 1.1rem);
       right: 6.5rem;
     }
   }
