@@ -355,10 +355,10 @@
   }
 
   /* On a phone the tabs take a line of their own under the name, and the
-     tools a line under that, at the right. Three rows, by design rather
-     than by wrapping. After the rule above on purpose: same specificity,
-     and the later one wins. The tools were briefly moved up beside the
-     name and asked back to where they were. */
+     tools are not here at all: the theme toggle and the way to the top
+     live in the footer instead, where a phone has room for them. Two
+     rows, by design rather than by wrapping. After the rule above on
+     purpose: same specificity, and the later one wins. */
   @media (max-width: 767.98px) {
     .tabs {
       flex: 0 0 100%;
@@ -371,6 +371,14 @@
     gap: 0.6rem;
     flex: none;
     margin-left: auto;
+  }
+
+  /* Not on a phone: the footer has them. After the rule above, since the
+     later of two equal selectors wins. */
+  @media (max-width: 767.98px) {
+    .tools {
+      display: none;
+    }
   }
 
   .tab {
@@ -560,9 +568,9 @@
   /* The tools ride the pill's centre line: shifted down by half the second
      line, in step with the padding, so they sit centred in the taller pill
      rather than stranded on its first line. From the tablet width up only,
-     where the pill is one row; on a phone the tools have a row of their
-     own and the sections open below it. The second line stops short of
-     the tools' column so a wrapped list never runs under them. */
+     where the pill is one row; on a phone the tools are in the footer.
+     The second line stops short of the tools' column so a wrapped list
+     never runs under them. */
   .tools {
     transition: transform 340ms var(--ease-out);
   }
