@@ -291,17 +291,6 @@
     }
   }
 
-  /* On a phone the bar is two rows by design rather than by wrapping: the
-     name and the tools on the first, the tabs on a line of their own under
-     them. Before, the three wrapped into three rows with the tools
-     stranded at the bottom right. */
-  @media (max-width: 767.98px) {
-    .tabs {
-      order: 3;
-      flex-basis: 100%;
-    }
-  }
-
   /* A pill with a hairline, opaque. No blur, no shadow: the thing that
      separates it from the page is a 1px ink line.
 
@@ -363,6 +352,17 @@
     gap: 0.5rem 1rem;
     flex: 1 1 auto;
     min-width: 0;
+  }
+
+  /* On a phone the tabs take a line of their own under the name, and the
+     tools a line under that, at the right. Three rows, by design rather
+     than by wrapping. After the rule above on purpose: same specificity,
+     and the later one wins. The tools were briefly moved up beside the
+     name and asked back to where they were. */
+  @media (max-width: 767.98px) {
+    .tabs {
+      flex: 0 0 100%;
+    }
   }
 
   .tools {
@@ -560,9 +560,9 @@
   /* The tools ride the pill's centre line: shifted down by half the second
      line, in step with the padding, so they sit centred in the taller pill
      rather than stranded on its first line. From the tablet width up only,
-     where the pill is one row; on a phone the tools share the first row
-     with the name and stay there. The second line stops short of the
-     tools' column so a wrapped list never runs under them. */
+     where the pill is one row; on a phone the tools have a row of their
+     own and the sections open below it. The second line stops short of
+     the tools' column so a wrapped list never runs under them. */
   .tools {
     transition: transform 340ms var(--ease-out);
   }
