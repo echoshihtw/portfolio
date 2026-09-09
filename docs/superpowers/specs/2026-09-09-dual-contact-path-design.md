@@ -19,6 +19,8 @@ The block then presents two paths:
 
 This preserves the existing `#contact` anchor and avoids adding a second ending to the homepage. The visitor sees the same professional evidence—experience and case studies—before choosing an action.
 
+The hero routes visitors into that evidence. Replace its generic `Email me` action with `See experience`, linking to `#work`. Keep `Download résumé` as the immediate recruiter shortcut. Remove the separate case-study link from the hero; the page flows from experience into case studies without skipping the professional ownership evidence.
+
 ## Content
 
 The shared introduction states the through-line without repeating the hero:
@@ -48,20 +50,33 @@ Use only the current design system in `src/app.css` and established component co
 
 The two paths receive equal visual width. Hiring remains primary through content order: it appears first and carries the résumé action.
 
+Each path is a horizontal image-and-copy card, following the useful structural principle in the Pangram reference without copying its brand language:
+
+- a 44% tonal illustration field on the left;
+- a 56% concise copy and action field on the right;
+- a blue field for `Join your team` and an orange-red field for `Build your product`, derived with `color-mix()` from the existing theme tokens;
+- a restrained halftone texture over the illustration field;
+- the existing card radius, with the established large asymmetric corner on the second card.
+
+The role illustration is wordless: three people supported by shared foundation layers. The project illustration is also wordless: a dashed empty circle and arrow becoming one finished product panel, representing zero to one. Both use the same minimal line weight and monochrome treatment. Card text, not diagram labels, explains the meaning.
+
+Light mode uses restrained color mixes so the cards do not compete with the blue-backed portrait. Dark mode uses the same component rules and theme-token substitution, with mixes adjusted only as required for surface separation and contrast.
+
 ## Source and component changes
 
-- `src/content/portfolio.config.ts`: replace the single closing body with structured heading, introduction, and two path definitions. Keep the email and résumé filename in configuration.
-- `src/lib/components/sections/AboutMe.svelte`: render the closing heading and two responsive paths after the personal content. Import and track résumé downloads. Remove the local Calendly dependency.
+- `src/content/portfolio.config.ts`: replace the single closing body with structured heading, introduction, and two path definitions. Keep the email and résumé filename in configuration. Point the hero’s primary flow at `#work`.
+- `src/lib/components/sections/AboutMe.svelte`: render the closing heading and two responsive image-and-copy paths after the personal content. Import and track résumé downloads. Remove the local Calendly dependency.
+- `src/lib/components/sections/hero/Hero.svelte`: replace the email-first action group with `See experience` and `Download résumé`; remove unused email tracking from this component.
 - No new route, component, dependency, or page section.
 - Do not modify generated résumé outputs as part of this change.
 
 ## Accessibility and behavior
 
 - Use a heading below the section's existing `h2` so the outline remains ordered.
-- Use ordinary links for email, résumé, and Clio; do not make the cards themselves clickable.
+- Make each card one descriptive email link with its visible action text included in the accessible name. Keep résumé and Clio as separate secondary links below their corresponding cards; do not nest links.
 - Give email links complete `mailto:` URLs with encoded subjects.
 - Preserve visible keyboard focus through the existing link/button styles.
-- Keep path labels meaningful without relying on color or position.
+- Keep path labels meaningful without relying on color, position, or illustration.
 - On narrow screens, stack the employment path before the project path.
 
 ## Verification
@@ -72,7 +87,7 @@ The two paths receive equal visual width. Hiring remains primary through content
 
 ## Out of scope
 
-- Redesigning the hero or other homepage sections.
+- Redesigning the hero beyond its action hierarchy.
 - Adding separate hiring or services pages.
 - Adding a contact form, CRM, scheduling flow, or new analytics service.
 - Rewriting the résumé or experience content in this change.
