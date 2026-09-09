@@ -27,12 +27,12 @@ Product engineer on project platforms, applicant tracking and client histories: 
 
 Full-Stack Engineer, Internal Platform · _Taipei, Taiwan · Dec 2024 – Jul 2026_
 
-- Built and ran an early-stage internal project-management platform for the **UK construction sector**, to **ISO 19650** principles. One of two engineers, sole author of the **Next.js / TypeScript** frontend.
-- Refactored the backend into the team's **event-driven modular monolith**, with modules communicating over **RabbitMQ** instead of importing each other, and set up the module template the team builds against. The direction was the team's; the refactor was mine, with **RabbitMQ** and **ArangoDB** new to me.
-- Diagnosed a **RabbitMQ** RPC bug where a stale, uninitialised consumer round-robined into login lookups and failed every user's first attempt; fixed it with a fail-fast DB check before broker registration.
-- Packaged deploys into a three-file runner folder (**Docker Compose**, Makefile, env) pulling the promoted image from **GHCR**: no source checkout, no dev dependencies, an ~80 MB download rather than a full build.
+- One of two engineers on an early-stage internal platform for the **UK construction sector** (**ISO 19650**). Owned the **Next.js / TypeScript** frontend, wrote the specification the team builds against, and held scope to it until the first phase shipped.
 - Given a requirement that layers stay independent, chose **Next.js App Router** with a **BFF security boundary**: server-managed authentication, centralised **CSRF** protection, no backend credentials in browser JavaScript.
 - Designed the platform's authorisation model: organisation-level and project-scoped roles resolved into capability flags, so services never reimplement access logic.
+- Refactored the backend into the team's **event-driven modular monolith**, with modules communicating over **RabbitMQ** instead of importing each other. The direction was the team's; the refactor was mine.
+- Set up the module template, the **CI** quality gate and the build-once, promote-once release pipeline the team builds against, and brought a new engineer to shipping independently in two months, pairing along the way.
+- Diagnosed a **RabbitMQ** RPC bug where a stale, uninitialised consumer round-robined into login lookups and failed every user's first attempt; fixed it with a fail-fast DB check before broker registration.
 
 ## SPIN.FASHION by Lablaco
 
@@ -44,7 +44,7 @@ Full Stack Engineer & Founding Partner · _Singapore · Remote · Aug 2024 – O
 
 Software Engineer · _Taipei, Taiwan · Aug 2022 – May 2024_
 
-- Took over frontend delivery on a **B2B and B2C recruitment and ATS platform** in **React** and **Redux-Saga**, on a two-engineer team reporting to the CTO. Migrated it to **TypeScript** incrementally, while it kept shipping.
+- Took over frontend delivery on a **B2B and B2C recruitment and ATS platform** in **React** and **Redux-Saga**, on a two-engineer team reporting to the CTO. Migrated it to **TypeScript** incrementally while it kept shipping, and authored around 100 of its shared components.
 - Wrote the **Server-Sent Events** channel the frontend consumed AI-generated drafts through.
 
 ## Independent / Freelance Engineering
