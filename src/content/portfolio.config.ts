@@ -193,7 +193,7 @@ export const experiencePortfolio: Record<
   },
   "Find Recruiter": {
     impact:
-      "Took the frontend over on a recruiting and ATS platform used by employers, agencies and individual headhunters, on a two-engineer product team reporting to the CTO.",
+      "Led frontend delivery on a recruiting and ATS platform used by employers, agencies and individual headhunters, on a two-engineer product team reporting to the CTO.",
     proof: {
       p: "A large production React codebase kept regressing on types.",
       s: "Migrated a large React codebase to TypeScript incrementally, while it kept shipping.",
