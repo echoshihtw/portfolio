@@ -190,8 +190,11 @@ html[data-theme="dark"] .gate-enter {
   opacity: 0;
 }
 
+/* Ink, not primary: the header control's moon is drawn in ink since the
+   redesign, and the gate's had stayed on the old accent. Same disc with a
+   bite out of it, same colour, so the two toggles read as one control. */
 .gate-theme-input:checked + .gate-theme-label .gate-theme-core {
-  background: var(--gate-primary);
+  background: var(--gate-ink);
 }
 
 .gate-theme-input:checked + .gate-theme-label .gate-theme-core::after {
