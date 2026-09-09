@@ -121,6 +121,13 @@ where they differ, this list is what was built.
   zero. Title "Hire me for a project", kicker "Contract, or founding partner",
   and copy naming all three shapes, with Clio and SPIN.FASHION as the two ends
   of the range.
+- **Both cards take the same radius on all four corners.** The draft gave the
+  second card "the established large asymmetric corner". Built that way it did
+  not line up: the `.corner-br` utility sets one big corner by zeroing the
+  other three, so the pair read as two different shapes, and that corner is
+  `clamp(2rem, 6vw, 4.5rem)`, which resizes with the viewport. The utility is
+  for a full-width block with the ground showing behind it, not for one of two
+  cards side by side.
 - **"Book a call" leaves the close**, as the draft said; Calendly stays in the
   global footer.
 
