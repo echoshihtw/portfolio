@@ -1,5 +1,6 @@
 <script lang="ts">
   import Icon from "@iconify/svelte";
+  import ThemeSwitch from "../ThemeSwitch.svelte";
   import { base } from "$app/paths";
   import { page } from "$app/stores";
   import { tabs, tabHref } from "$lib/menuTabs";
@@ -36,6 +37,18 @@
   ];
 
   const sourceUrl = "https://github.com/echoshihtw/portfolio";
+
+  // The header's theme toggle and go-to-top are hidden on a phone, where
+  // the bar has no room for them, and shown here instead. Same top
+  // behaviour as the header's: a smooth scroll on the one-page home, a
+  // real link home from anywhere else.
+  $: isHome = $page.route.id === "/";
+
+  function goTop(event: MouseEvent) {
+    if (!isHome) return;
+    event.preventDefault();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
 
   function replayGate() {
     try {
@@ -172,6 +185,19 @@
       </button>
 
       <p class="mono">© {year} Echo Shih</p>
+
+      <!-- Phone only; on wider screens these are in the header. -->
+      <div class="footer-tools">
+        <a
+          href={base || "/"}
+          class="footer-top"
+          aria-label={isHome ? "Go to top" : "Home"}
+          on:click={goTop}
+        >
+          <Icon icon={isHome ? "ri:arrow-up-circle-line" : "ri:home-4-line"} />
+        </a>
+        <ThemeSwitch id="footer-theme-toggle" />
+      </div>
     </div>
   </div>
 </footer>
@@ -279,6 +305,36 @@
     color: var(--muted);
   }
 
+  .footer-tools {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-top: 0.5rem;
+  }
+
+  /* The same round chip as the toggle beside it, so the two read as a
+     pair. */
+  .footer-top {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border: var(--border-w) solid var(--border);
+    border-radius: var(--radius-pill);
+    font-size: 1.1rem;
+    color: var(--muted);
+    transition:
+      color var(--dur-fast) ease,
+      border-color var(--dur-fast) ease;
+  }
+
+  .footer-top:hover,
+  .footer-top:focus-visible {
+    color: var(--primary);
+    border-color: var(--primary);
+  }
+
   .status-dot {
     width: 7px;
     height: 7px;
@@ -302,6 +358,10 @@
     .footer-meta {
       flex-direction: row;
       align-items: center;
+    }
+
+    .footer-tools {
+      display: none;
     }
   }
 </style>
