@@ -91,3 +91,45 @@ Light mode uses restrained color mixes so the cards do not compete with the blue
 - Adding separate hiring or services pages.
 - Adding a contact form, CRM, scheduling flow, or new analytics service.
 - Rewriting the résumé or experience content in this change.
+
+## Decisions on review, 2026-09-09
+
+Reviewed with Echo before implementation. The sections above are the draft;
+where they differ, this list is what was built.
+
+- **Two doors confirmed.** Echo is open to employment, to contract work and
+  to a founding-partner seat, so the close has a real second audience rather
+  than a hedge.
+- **The shared intro line is cut.** "I work on operational software: defining
+  what it should hold, building it, and establishing the foundations…" is a
+  colon followed by a three-part list, the pattern this page's own slop audit
+  named as the loudest tell, and it restated the hero. The heading and the two
+  cards carry it instead.
+- **Flat cards. No illustrations, no colour fields, no halftone.** The site's
+  vocabulary is a hairline, flat surfaces and mono labels; tinted panels would
+  have been the only marketing-shaped thing on the page, and the two proposed
+  diagrams (three people over shared layers; a zero-to-one arrow) are the kind
+  of stock image any consultancy could use. The second card takes the site's
+  existing one-big-corner utility, nothing new.
+- **The hero keeps its actions.** "Email me", "See the case studies" and
+  "Download résumé" all stay. Hiring is the primary goal, and a reader
+  convinced at the top should not have to reach the bottom of the page to
+  write. The hero's email now carries the role subject, so all three email
+  links on the site state their intent.
+- **The second door is wider than "Build your product".** Contract work is as
+  often a scoped piece on a product that already exists as a product from
+  zero. Title "Hire me for a project", kicker "Contract, or founding partner",
+  and copy naming all three shapes, with Clio and SPIN.FASHION as the two ends
+  of the range.
+- **"Book a call" leaves the close**, as the draft said; Calendly stays in the
+  global footer.
+
+## Verification performed
+
+`npm run check`, eslint and prettier clean. 37 unit tests pass, including a
+new `src/content/closingPaths.test.ts` covering the config shape: two paths,
+hiring first, distinct email subjects, and the hero's subject in step with the
+role path. Production build succeeds. `npm run audit:a11y` reports no WCAG 2.2
+AA violations across 8 page renders. Rendered and measured at 1200px and 390px:
+cards equal width side by side, stacked on the phone with employment first, all
+four actions resolving to the intended destinations.
