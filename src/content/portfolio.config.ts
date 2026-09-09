@@ -184,7 +184,7 @@ export const experiencePortfolio: Record<
     // not a paraphrase. The product name is the employer's, so it stays out;
     // employer names are fine here, the things built under them are not.
     impact:
-      "Full stack engineer and founding partner on the in-store desktop app, working remotely across time zones.",
+      "Full stack engineer and founding partner on the in-store desktop app, working remotely across time zones. I co-ran the team's scrum with the CTO.",
     proof: {
       p: "The macOS build couldn't ship.",
       s: "Fixed code-signing, notarisation and auto-update. The desktop app shipped, and the release steps are written down.",

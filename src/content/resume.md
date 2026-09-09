@@ -38,7 +38,7 @@ Full-Stack Engineer, Internal Platform · _Taipei, Taiwan · Dec 2024 – Jul 20
 
 Full Stack Engineer & Founding Partner · _Singapore · Remote · Aug 2024 – Oct 2024_
 
-- Founding partner on the in-store desktop app. Cleared the **macOS code-signing, notarisation and auto-update** work blocking release, shipped the **Electron** app, and wrote the release steps down.
+- Founding partner on the in-store desktop app; co-ran the team's scrum with the CTO. Cleared the **macOS code-signing, notarisation and auto-update** work blocking release, shipped the **Electron** app, and wrote the release steps down.
 
 ## Find Recruiter
 
