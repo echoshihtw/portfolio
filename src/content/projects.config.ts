@@ -36,7 +36,7 @@ export const projectsConfig: Projects = [
       descriptor: "salon operations platform, live since May 2025",
       role: "Founder",
       bullets: [
-        "**React**, **Supabase**, **Postgres RLS**: multi-tenant from day one, per-member permissions",
+        "React, Supabase, **Postgres RLS**: multi-tenant from day one, per-member permissions",
         "603 clients and 2,694 service records, entered by hand by the owner",
         "A build-failing test keeps database access inside the api layer",
         "Reads work offline from cache on patchy salon Wi-Fi; Traditional Chinese first",
@@ -80,7 +80,7 @@ export const projectsConfig: Projects = [
       descriptor: "personal financial-runway app, Flutter",
       role: "Founder",
       bullets: [
-        "**Clean Architecture** across a **Melos** monorepo, **SQLCipher**-encrypted local storage",
+        "**Clean Architecture** across a Melos monorepo, SQLCipher-encrypted local storage",
         "7 languages and 6 currencies, built solo; running on Android",
       ],
     },
