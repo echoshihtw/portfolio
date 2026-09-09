@@ -264,6 +264,10 @@ function buildPDF() {
         // Tight résumé layout: narrow margins, 10pt, compact lists/sections.
         "-H",
         path.join(ROOT, "scripts", "resume-header.tex"),
+        // Company and role lines become one \cventry each (dates at the
+        // right margin). PDF only; the markdown shape the site parses stays.
+        "--lua-filter",
+        path.join(ROOT, "scripts", "resume-entry.lua"),
         "-V",
         "fontsize=10pt",
         "-V",

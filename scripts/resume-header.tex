@@ -46,6 +46,27 @@
 \titlespacing*{\section}{0pt}{6pt}{3pt}
 \titlespacing*{\subsection}{0pt}{6pt}{2pt}
 
+% A job's heading, two lines that scan like a table without being one: the
+% company bold at the left with the dates at the right margin, then the role
+% with the location after it, both quieter. scripts/resume-entry.lua emits
+% this in place of the "## Company" heading and the line under it, for the
+% PDF only. \hbox to \linewidth rather than \hfill in a paragraph: under
+% \RaggedRight the last line's fill would share the stretch and the dates
+% would stop short of the margin. Arguments: company, dates, role, location.
+% \parskip is zeroed inside, or each of the three \par would add its own
+% 1.2pt on top of the spacing set here, which is what pushed Education off
+% the page the first time.
+\newcommand{\cventry}[4]{%
+  \par\begingroup\setlength{\parskip}{0pt}%
+  \vspace{5pt}%
+  \noindent\hbox to \linewidth{%
+    {\normalsize\bfseries\color{ink}#1}\hfil{\small\color{muted}#2}}%
+  \par\vspace{1pt}%
+  \noindent{\normalsize\color{ink}#3}%
+  \ifx\relax#4\relax\else{\small\color{muted}\ \textperiodcentered\ #4}\fi%
+  \par\endgroup%
+}
+
 \setlength{\parskip}{1.2pt}
 \setlength{\parindent}{0pt}
 \setlength{\emergencystretch}{2em}
