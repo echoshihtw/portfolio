@@ -14,12 +14,12 @@ export const experience: ExperienceItem[] = [
     "role": "Full-Stack Engineer, Internal Platform",
     "date": "Taipei, Taiwan · Dec 2024 – Jul 2026",
     "highlights": [
-      "One of two engineers on an early-stage internal platform for the **UK construction sector** (**ISO 19650**). Owned the **Next.js / TypeScript** frontend, wrote the specification the team builds against, and held scope to it until the first phase shipped.",
-      "Given a requirement that layers stay independent, chose **Next.js App Router** with a **BFF security boundary**: server-managed authentication, centralised **CSRF** protection, no backend credentials in browser JavaScript.",
+      "One of two engineers on an early-stage internal platform for the **UK construction sector** (ISO 19650). Owned the Next.js / TypeScript frontend, wrote the specification the team builds against, and held scope to it until the first phase shipped.",
+      "Given a requirement that layers stay independent, chose Next.js App Router with a **BFF security boundary**: server-managed authentication, centralised CSRF protection, no backend credentials in browser JavaScript.",
       "Designed the platform's authorisation model: organisation-level and project-scoped roles resolved into capability flags, so services never reimplement access logic.",
-      "Refactored the backend into the team's **event-driven modular monolith**, with modules communicating over **RabbitMQ** instead of importing each other. The direction was the team's; the refactor was mine.",
-      "Set up the module template, the **CI** quality gate and the build-once, promote-once release pipeline the team builds against, and brought a new engineer to shipping independently in two months, pairing along the way.",
-      "Diagnosed a **RabbitMQ** RPC bug where a stale, uninitialised consumer round-robined into login lookups and failed every user's first attempt; fixed it with a fail-fast DB check before broker registration."
+      "Refactored the backend into the team's **event-driven modular monolith**, with modules communicating over RabbitMQ instead of importing each other. The direction was the team's; the refactor was mine.",
+      "Set up the module template, the CI quality gate and the **build-once, promote-once release pipeline** the team builds against, and brought a new engineer to shipping independently in two months, pairing along the way.",
+      "Diagnosed a **RabbitMQ RPC bug** where a stale, uninitialised consumer round-robined into login lookups and failed every user's first attempt; fixed it with a fail-fast DB check before broker registration."
     ]
   },
   {
@@ -27,7 +27,7 @@ export const experience: ExperienceItem[] = [
     "role": "Full Stack Engineer & Founding Partner",
     "date": "Singapore · Remote · Aug 2024 – Oct 2024",
     "highlights": [
-      "Founding partner on the in-store desktop app; co-ran the team's scrum with the CTO. Cleared the **macOS code-signing, notarisation and auto-update** work blocking release, shipped the **Electron** app, and wrote the release steps down."
+      "Founding partner on the in-store desktop app; co-ran the team's scrum with the CTO. Cleared the **macOS code-signing, notarisation and auto-update** work blocking release, shipped the Electron app, and wrote the release steps down."
     ]
   },
   {
@@ -35,7 +35,7 @@ export const experience: ExperienceItem[] = [
     "role": "Software Engineer",
     "date": "Taipei, Taiwan · Aug 2022 – May 2024",
     "highlights": [
-      "Took over frontend delivery on a **B2B and B2C recruitment and ATS platform** in **React** and **Redux-Saga**, on a two-engineer team reporting to the CTO. Migrated it to **TypeScript** incrementally while it kept shipping, and authored around 100 of its shared components.",
+      "Took over frontend delivery on a **B2B and B2C recruitment and ATS platform** in React and Redux-Saga, on a two-engineer team reporting to the CTO. Migrated it to TypeScript incrementally while it kept shipping, and authored around 100 of its shared components.",
       "Wrote the **Server-Sent Events** channel the frontend consumed AI-generated drafts through."
     ]
   },
@@ -44,7 +44,7 @@ export const experience: ExperienceItem[] = [
     "role": "Software Engineer",
     "date": "Remote · 2020 – 2024",
     "highlights": [
-      "Built the **Next.js frontend for a Bitcoin coin-selection research tool** with a **BDK core maintainer**. Freelance frontend work across fintech, e-commerce and research."
+      "Built the Next.js frontend for a **Bitcoin coin-selection research tool** with a BDK core maintainer. Freelance frontend work across fintech, e-commerce and research."
     ]
   }
 ];
