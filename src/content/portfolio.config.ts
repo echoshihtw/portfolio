@@ -14,6 +14,9 @@ export const heroConfig: {
   headline: HeadlinePart[];
   support: string[];
   email: string;
+  /** The subject a recruiter's message arrives with, so intent is visible
+      before the message is opened. The close's two doors set their own. */
+  emailSubject: string;
   resume: string;
   seeWorkHref: string;
 } = {
@@ -117,6 +120,7 @@ export const heroConfig: {
   // indistinguishable from every other one. /resume.pdf still redirects here,
   // for the CVs already sent out carrying that URL.
   resume: "Chun-Yu-Echo-Shih-Software-Engineer.pdf",
+  emailSubject: "Product engineering role",
   seeWorkHref: "#projects",
 };
 
@@ -148,7 +152,44 @@ export const closingConfig = {
   body: "I like to untangle things. Give me the part nobody's scoped yet and I'll work out what it should be, build it, and stay with it after it ships. Remote, from Taiwan.",
   email: "echoshihtw@gmail.com",
   resume: "Chun-Yu-Echo-Shih-Software-Engineer.pdf",
-};
+
+  // The fork at the end of the page, 2026-09-09. Echo is open to a role, to
+  // contract work, and to a founding-partner seat, so the close offers two
+  // doors rather than one. Hiring stays first and carries the résumé.
+  //
+  // Two things in the design draft were cut. An intro line ("I work on
+  // operational software: defining what it should hold, building it, and
+  // establishing the foundations…"): a colon and a three-part list, the
+  // pattern this page's own slop audit named, restating the hero. And
+  // tinted illustration fields with a halftone, which would have been the
+  // only marketing-shaped thing on the site.
+  //
+  // The second door is deliberately wider than the draft's "Build your
+  // product". Contract work is as often a scoped piece on a product that
+  // already exists as a product from zero, and the copy names both ends
+  // with the evidence for each.
+  heading: "Available for a role or a project.",
+  paths: [
+    {
+      key: "role",
+      kicker: "Employment",
+      title: "Join your team",
+      copy: "One engineer who owns the interface, the boundaries under it and the release path, and stays with it after it ships.",
+      action: "Discuss a role",
+      subject: "Product engineering role",
+      secondary: { label: "Download résumé", resume: true },
+    },
+    {
+      key: "project",
+      kicker: "Contract, or founding partner",
+      title: "Hire me for a project",
+      copy: "A scoped piece of work on the product you have, something new from zero, or a founding-partner seat. Clio and SPIN.FASHION are the two ends of that range.",
+      action: "Discuss a project",
+      subject: "Product project",
+      secondary: { label: "See the case studies", href: "#projects" },
+    },
+  ],
+} as const;
 
 // Skills live in skills.config.ts: one list, rendered to the PDF and to the
 // page. Re-exported here so the Skills component's import does not move.

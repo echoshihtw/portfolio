@@ -2,10 +2,12 @@
   import { base } from "$app/paths";
   import { aboutMeConfig } from "../../../content/aboutMe.config";
   import { closingConfig } from "../../../content/portfolio.config";
-  import { calendlyUrl } from "$lib/contactLinks";
   import SectionHead from "$lib/components/SectionHead.svelte";
   import Portrait from "$lib/components/Portrait.svelte";
-  import { trackEmail } from "$lib/analytics";
+  import { trackEmail, trackResume } from "$lib/analytics";
+
+  const mailto = (subject: string) =>
+    `mailto:${closingConfig.email}?subject=${encodeURIComponent(subject)}`;
 </script>
 
 <!-- The close, and the person, in one section. Keeps id="contact": the nav
@@ -30,36 +32,6 @@
         {/each}
 
         <p class="ask">{closingConfig.body}</p>
-
-        <div class="actions">
-          <!-- A button says what happens. The address is in the hero and
-               the footer for anyone copying it. -->
-          <a
-            class="btn"
-            href="mailto:{closingConfig.email}"
-            on:click={() => trackEmail("about")}
-          >
-            Email me <span
-              class="cta-arrow"
-              aria-hidden="true"
-            >
-              →
-            </span>
-          </a>
-          <a
-            class="link-cta"
-            href={calendlyUrl}
-            target="_blank"
-            rel="noreferrer noopener"
-          >
-            Book a call <span
-              class="cta-arrow"
-              aria-hidden="true"
-            >
-              ↗
-            </span>
-          </a>
-        </div>
 
         <ul class="jumps">
           <li>
@@ -91,6 +63,70 @@
           height={aboutMeConfig.portrait.height}
         />
       </div>
+    </div>
+
+    <!-- The fork at the end: a role, or a project. Two flat cards of equal
+         width, hiring first and carrying the résumé. Each card's email
+         states its own subject, so the intent is visible before the message
+         is opened. "Book a call" left with the old single action; Calendly
+         is in the footer. -->
+    <div class="paths-block">
+      <h3
+        class="paths-title"
+        id="paths-title"
+      >
+        {closingConfig.heading}
+      </h3>
+      <ul
+        class="paths"
+        aria-labelledby="paths-title"
+      >
+        {#each closingConfig.paths as path, i}
+          <li
+            class="path card"
+            class:corner-br={i === 1}
+          >
+            <p class="label">{path.kicker}</p>
+            <h4 class="path-title">{path.title}</h4>
+            <p class="path-copy">{path.copy}</p>
+            <div class="path-actions">
+              <a
+                class="btn"
+                href={mailto(path.subject)}
+                on:click={() =>
+                  trackEmail(
+                    path.key === "role" ? "about-role" : "about-project"
+                  )}
+              >
+                {path.action}
+                <span
+                  class="cta-arrow"
+                  aria-hidden="true"
+                >
+                  →
+                </span>
+              </a>
+              {#if "resume" in path.secondary}
+                <a
+                  class="link-cta"
+                  href="{base}/{closingConfig.resume}"
+                  download
+                  on:click={() => trackResume("about")}
+                >
+                  {path.secondary.label}
+                </a>
+              {:else}
+                <a
+                  class="link-cta"
+                  href={path.secondary.href}
+                >
+                  {path.secondary.label}
+                </a>
+              {/if}
+            </div>
+          </li>
+        {/each}
+      </ul>
     </div>
   </div>
 </section>
@@ -133,14 +169,6 @@
     color: var(--muted);
   }
 
-  .actions {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: var(--space-3) var(--space-5);
-    margin-top: var(--space-2);
-  }
-
   /* Further from the button than the button is from the text, so the row
      reads as a footnote and not as more buttons. */
   .jumps {
@@ -171,9 +199,77 @@
     justify-self: center;
   }
 
+  /* The close. Its own rule above it, so it reads as the end of the page
+     rather than more of the story. */
+  .paths-block {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    margin-top: var(--space-7);
+    padding-top: var(--space-6);
+    border-top: var(--border-w) solid var(--border);
+  }
+
+  .paths-title {
+    margin: 0;
+    font-size: var(--text-lg);
+    line-height: var(--leading-snug);
+  }
+
+  .paths {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-4);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  /* The same card as everywhere else on the page. The second takes the one
+     big corner the site gives a closing block; no colour, no illustration. */
+  .path {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding: var(--space-5);
+  }
+
+  .path .label {
+    margin: 0;
+  }
+
+  .path-title {
+    margin: 0;
+    font-size: var(--text-lg);
+    line-height: var(--leading-snug);
+  }
+
+  .path-copy {
+    margin: 0;
+    font-size: var(--text-sm);
+    line-height: 1.6;
+    color: var(--muted);
+    max-width: 44ch;
+  }
+
+  /* Pushed to the bottom so the two cards' actions sit level however long
+     the copy above them runs. */
+  .path-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3) var(--space-5);
+    margin-top: auto;
+    padding-top: var(--space-2);
+  }
+
   @media (min-width: 900px) {
     .body {
       grid-template-columns: 7rem minmax(0, 1fr);
+      gap: var(--space-6);
+    }
+    .paths {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: var(--space-6);
     }
     .body > * {

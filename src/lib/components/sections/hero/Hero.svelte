@@ -113,7 +113,9 @@
       <div class="hero-links">
         <a
           class="btn"
-          href="mailto:{heroConfig.email}"
+          href="mailto:{heroConfig.email}?subject={encodeURIComponent(
+            heroConfig.emailSubject
+          )}"
           on:click={() => trackEmail("hero")}
         >
           Email me <span class="cta-arrow">→</span>
