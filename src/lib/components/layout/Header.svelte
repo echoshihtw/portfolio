@@ -369,11 +369,10 @@
     min-width: 0;
   }
 
-  /* On a phone the tabs take a line of their own under the name, and the
-     tools are not here at all: the theme toggle and the way to the top
-     live in the footer instead, where a phone has room for them. Two
-     rows, by design rather than by wrapping. After the rule above on
-     purpose: same specificity, and the later one wins.
+  /* On a phone the tabs take a line of their own under the name and the
+     theme toggle, which sits at the right of the name's row as it does on
+     desktop. Two rows, by design rather than by wrapping. After the rule
+     above on purpose: same specificity, and the later one wins.
 
      The pill is one row. The name collapses as the bar condenses (Home is
      right there, and the name is back at the top of the page), the tabs
@@ -382,6 +381,7 @@
      pill by three pixels and a 390px phone's by 73. */
   @media (max-width: 767.98px) {
     .tabs {
+      order: 1;
       flex: 0 0 100%;
     }
 
@@ -406,14 +406,6 @@
     gap: 0.6rem;
     flex: none;
     margin-left: auto;
-  }
-
-  /* Not on a phone: the footer has them. After the rule above, since the
-     later of two equal selectors wins. */
-  @media (max-width: 767.98px) {
-    .tools {
-      display: none;
-    }
   }
 
   .tab {
@@ -457,6 +449,23 @@
     max-width: 2rem;
     opacity: 1;
     pointer-events: auto;
+  }
+
+  /* On a phone the pill has no tools at all: the toggle leaves with the
+     name as the bar condenses, and the go-to-top never arrives, since the
+     footer has one. The negative margin swallows the bar gap in front of
+     the empty tools, so the pill's right padding stays what it is. After
+     the rule above, since the later of two equal selectors wins. */
+  @media (max-width: 767.98px) {
+    .condensed .tools {
+      margin-left: -1.1rem;
+    }
+
+    .condensed .top-link {
+      max-width: 0;
+      opacity: 0;
+      pointer-events: none;
+    }
   }
 
   /* The toggle's seat. Collapses in both dimensions as the bar condenses,
