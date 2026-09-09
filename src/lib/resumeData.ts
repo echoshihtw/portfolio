@@ -14,7 +14,7 @@ export const experience: ExperienceItem[] = [
     "role": "Full-Stack Engineer, Internal Platform",
     "date": "Taipei, Taiwan · Dec 2024 – Jul 2026",
     "highlights": [
-      "Built and ran an early-stage internal project-management platform for the **UK construction sector**, to **ISO 19650** principles. One of two engineers, sole author of the **Next.js / TypeScript** frontend.",
+      "Built and ran an early-stage internal project-management platform for the **UK construction sector**, to **ISO 19650** principles. One of two engineers, sole author of the **Next.js / TypeScript** frontend; brought the second engineer into the codebase through daily pairing.",
       "Refactored the backend into the team's **event-driven modular monolith**, with modules communicating over **RabbitMQ** instead of importing each other, and set up the module template the team builds against. The direction was the team's; the refactor was mine, with **RabbitMQ** and **ArangoDB** new to me.",
       "Diagnosed a **RabbitMQ** RPC bug where a stale, uninitialised consumer round-robined into login lookups and failed every user's first attempt; fixed it with a fail-fast DB check before broker registration.",
       "Packaged deploys into a three-file runner folder (**Docker Compose**, Makefile, env) pulling the promoted image from **GHCR**: no source checkout, no dev dependencies, an ~80 MB download rather than a full build.",
