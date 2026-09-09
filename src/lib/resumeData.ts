@@ -35,7 +35,7 @@ export const experience: ExperienceItem[] = [
     "role": "Software Engineer",
     "date": "Taipei, Taiwan · Aug 2022 – May 2024",
     "highlights": [
-      "Took over frontend delivery on a **B2B and B2C recruitment and ATS platform** in React and Redux-Saga, on a two-engineer team reporting to the CTO. Migrated it to TypeScript incrementally while it kept shipping, and authored around 100 of its shared components.",
+      "Led frontend delivery on a **B2B and B2C recruitment and ATS platform** in React and Redux-Saga, on a two-engineer team reporting to the CTO. Migrated it to TypeScript incrementally while it kept shipping, and authored around 100 of its shared components.",
       "Wrote the **Server-Sent Events** channel the frontend consumed AI-generated drafts through."
     ]
   },
