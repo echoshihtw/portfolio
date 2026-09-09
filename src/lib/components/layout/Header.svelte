@@ -330,9 +330,17 @@
     color: var(--ink);
     text-decoration: none;
     white-space: nowrap;
+    /* max-width and overflow so the phone pill can collapse it; on wider
+       screens the cap is never reached. */
+    max-width: 20rem;
+    overflow: hidden;
     transition:
       color 180ms ease,
-      font-size 340ms cubic-bezier(0.2, 0.7, 0.2, 1);
+      font-size 340ms cubic-bezier(0.2, 0.7, 0.2, 1),
+      max-width 340ms var(--ease-out),
+      margin-right 340ms var(--ease-out),
+      opacity 200ms ease,
+      visibility 0s linear 0s;
   }
 
   .condensed .site-name {
@@ -365,10 +373,30 @@
      tools are not here at all: the theme toggle and the way to the top
      live in the footer instead, where a phone has room for them. Two
      rows, by design rather than by wrapping. After the rule above on
-     purpose: same specificity, and the later one wins. */
+     purpose: same specificity, and the later one wins.
+
+     The pill is one row. The name collapses as the bar condenses (Home is
+     right there, and the name is back at the top of the page), the tabs
+     move up beside its empty seat, and the row gap tightens a step: at
+     0.7rem the tabs measure 259px, which clears a 320px phone's 262px of
+     pill by three pixels and a 390px phone's by 73. */
   @media (max-width: 767.98px) {
     .tabs {
       flex: 0 0 100%;
+    }
+
+    .condensed .tabs {
+      flex: 1 1 auto;
+      gap: 0.5rem 0.7rem;
+    }
+
+    .condensed .site-name {
+      max-width: 0;
+      margin-right: -1.1rem;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition-delay: 0s, 0s, 0s, 0s, 0s, 340ms;
     }
   }
 
