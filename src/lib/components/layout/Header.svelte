@@ -243,7 +243,12 @@
           <Icon icon="ri:home-4-line" />
         {/if}
       </a>
-      <ThemeSwitch id="theme-toggle" />
+      <!-- In the full-width bar only. Theme is chosen on arrival, at the
+           gate or here; the pill that follows the reader down the page is
+           for getting around, and the toggle was the widest thing in it. -->
+      <span class="theme-slot">
+        <ThemeSwitch id="theme-toggle" />
+      </span>
     </div>
   </div>
 </header>
@@ -295,7 +300,8 @@
      separates it from the page is a 1px ink line.
 
      The radius is the closed pill's half-height, spelled out (padding,
-     border, half the theme toggle) rather than left at 999px. Left there,
+     border, half the row, which the go-to-top control sets) rather than
+     left at 999px. Left there,
      it follows the height: open on two lines the ends became semicircles
      twice the size, both rows of text sat on the curve, and the inset to
      the border no longer matched the closed state. Pinned, the closed
@@ -305,9 +311,10 @@
     --pill-pad: 0.45rem;
     --pad-l: 1.1rem;
     --pad-r: 0.9rem;
+    --row-h: 1.75rem;
     max-width: min(52rem, calc(100% - 1.5rem));
     padding: var(--pill-pad) var(--pad-r) var(--pill-pad) var(--pad-l);
-    border-radius: calc(var(--pill-pad) + var(--border-w) + 1.125rem);
+    border-radius: calc(var(--pill-pad) + var(--border-w) + var(--row-h) / 2);
     background: var(--surface);
     border-color: var(--border-strong);
   }
@@ -418,9 +425,38 @@
   }
 
   .condensed .top-link {
+    height: var(--row-h);
     max-width: 2rem;
     opacity: 1;
     pointer-events: auto;
+  }
+
+  /* The toggle's seat. Collapses in both dimensions as the bar condenses,
+     so the pill's row is the go-to-top's height and not the toggle's, and
+     the negative margin swallows the tools gap so the pill's right padding
+     stays what it is. Hidden, not just transparent: out of the tab order
+     and the accessibility tree while it is out of sight. */
+  .theme-slot {
+    display: inline-flex;
+    overflow: hidden;
+    max-width: 2.25rem;
+    max-height: 2.25rem;
+    transition:
+      max-width 340ms var(--ease-out),
+      max-height 340ms var(--ease-out),
+      margin-left 340ms var(--ease-out),
+      opacity 200ms ease,
+      visibility 0s linear 0s;
+  }
+
+  .condensed .theme-slot {
+    max-width: 0;
+    max-height: 0;
+    margin-left: -0.6rem;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition-delay: 0s, 0s, 0s, 0s, 340ms;
   }
 
   .sep {
@@ -585,7 +621,7 @@
        a row of their own and Home is already at the bar's left edge. */
     .stacked .home-sections {
       left: calc(var(--pad-l) + var(--name-w, 0px) + 1.1rem);
-      right: 6.5rem;
+      right: 4rem;
     }
   }
 
@@ -614,6 +650,7 @@
     .tab,
     .top-link,
     .tools,
+    .theme-slot,
     .chev,
     .home-sections {
       transition: none;
