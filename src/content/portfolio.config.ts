@@ -209,21 +209,28 @@ export const experiencePortfolio: Record<
     // set by my lead. I learned it and implemented it in production. What I chose:
     // the App Router + BFF boundary, and the deploy packaging below.
     //
-    // That sharing of credit belongs here and in the résumé's RabbitMQ bullet,
-    // which says the direction was the team's. It used to end this paragraph
-    // too: "we worked out the module structure together so the pattern was
-    // ours rather than mine", cut 2026-09-11. It was a claim about who gets
-    // the credit rather than about what happened, and it took back the fact
-    // in front of it. The outcome says more and is checkable: the résumé's
-    // own bullet already carries it.
+    // That sharing of credit belongs here and in the résumé's RabbitMQ
+    // bullet, which says the direction was the team's. It used to end this
+    // paragraph too: "we worked out the module structure together so the
+    // pattern was ours rather than mine", cut 2026-09-11. It was a claim
+    // about who gets the credit rather than about what happened, and it took
+    // back the fact in front of it.
+    //
+    // The card shows this paragraph and the proof always, and the résumé
+    // bullets in the expander, so anything said in both is said twice to
+    // the same reader. So this paragraph carries only what the bullets do
+    // not: the platform in one line, and the deploy packaging. Onboarding
+    // the second engineer went with the cut above, since bullet five has it
+    // with the same two-month outcome. The stack went too: the tech line
+    // below is three words away.
     impact:
-      "An early-stage internal project-management platform (Next.js frontend, FastAPI integration), built and operated as one of two engineers. Packaged deploys into a three-file runner folder that pulls the promoted image from GHCR, so running production needs no source checkout and no dev dependencies. I brought our second engineer into the codebase, pairing along the way, and two months later they were shipping independently.",
+      "An early-stage internal project-management platform, built and operated as one of two engineers. Packaged deploys into a three-file runner folder that pulls the promoted image from GHCR, so running production needs no source checkout and no dev dependencies.",
     // The constraint was my lead's: layers independent, no direct
     // browser-to-backend access. The way of meeting it was mine. No "before"
     // state to fix either: the boundary was there from the start.
     proof: {
       p: "The layers had to stay independent: no direct browser-to-backend calls.",
-      s: "Chose Next.js App Router and put a BFF security boundary in front: server-managed authentication, centralised CSRF protection, no backend credentials in browser JavaScript.",
+      s: "Chose Next.js App Router with a BFF security boundary in front, so no backend credential ever reaches browser JavaScript.",
     },
     techLine:
       "Next.js · TanStack Query · FastAPI · ArangoDB · RabbitMQ · Docker · GHCR",
