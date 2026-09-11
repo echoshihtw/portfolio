@@ -18,7 +18,7 @@ export const experience: ExperienceItem[] = [
       "Given a requirement that layers stay independent, chose Next.js App Router with a **BFF security boundary**: server-managed authentication, centralised CSRF protection, no backend credentials in browser JavaScript.",
       "Designed the platform's authorisation model: organisation-level and project-scoped roles resolved into capability flags, so services never reimplement access logic.",
       "Refactored the backend into the team's **event-driven modular monolith**, with modules communicating over RabbitMQ instead of importing each other.",
-      "Set up the module template, the CI quality gate and the **build-once, promote-once release pipeline** the team builds against, and brought a new engineer to shipping independently in two months, pairing along the way.",
+      "Set up the module template, the CI quality gate and the **build-once, promote-once release pipeline** the team builds against, and brought a new engineer to shipping independently in two months.",
       "Diagnosed a **RabbitMQ RPC bug** where a stale, uninitialised consumer round-robined into login lookups and failed every user's first attempt; fixed it with a fail-fast DB check before broker registration."
     ]
   },

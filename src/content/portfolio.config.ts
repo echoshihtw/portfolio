@@ -218,13 +218,18 @@ export const experiencePortfolio: Record<
     //
     // The card shows this paragraph and the proof always, and the résumé
     // bullets in the expander, so anything said in both is said twice to
-    // the same reader. So this paragraph carries only what the bullets do
-    // not: the platform in one line, and the deploy packaging. Onboarding
-    // the second engineer went with the cut above, since bullet five has it
-    // with the same two-month outcome. The stack went too: the tech line
-    // below is three words away.
+    // the same reader. The stack went for that reason: the tech line below
+    // is three words away.
+    //
+    // Bringing a second engineer up is the leadership evidence on this
+    // card, so it stays here in the visible half rather than only in bullet
+    // five, where a reader who does not expand would never find it. The two
+    // now take different angles: this one is how it was done, pairing on
+    // the conventions and the review flow before feature work; the bullet
+    // is the pipeline, with the outcome. "Pairing along the way" appeared
+    // word for word in both and now appears in neither.
     impact:
-      "An early-stage internal project-management platform, built and operated as one of two engineers. Packaged deploys into a three-file runner folder that pulls the promoted image from GHCR, so running production needs no source checkout and no dev dependencies.",
+      "An early-stage internal project-management platform, built and operated as one of two engineers. Brought our second engineer into the codebase by pairing on the conventions and the review flow before the feature work started, and two months later they were shipping independently. Packaged deploys into a three-file runner folder that pulls the promoted image from GHCR, so running production needs no source checkout and no dev dependencies.",
     // The constraint was my lead's: layers independent, no direct
     // browser-to-backend access. The way of meeting it was mine. No "before"
     // state to fix either: the boundary was there from the start.
