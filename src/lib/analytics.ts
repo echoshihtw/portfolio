@@ -15,7 +15,8 @@ import { track } from "@vercel/analytics";
  * the same résumé link sits in four places, and knowing that people take it
  * from the header rather than the hero would change where it goes.
  */
-export type CtaPlace = "hero" | "about" | "header" | "footer";
+export type CtaPlace =
+  "hero" | "about" | "about-role" | "about-project" | "header" | "footer";
 
 /**
  * `track` is client-only. A click handler cannot fire during prerender, so

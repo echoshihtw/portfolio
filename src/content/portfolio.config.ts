@@ -14,6 +14,9 @@ export const heroConfig: {
   headline: HeadlinePart[];
   support: string[];
   email: string;
+  /** The subject a recruiter's message arrives with, so intent is visible
+      before the message is opened. The close's two doors set their own. */
+  emailSubject: string;
   resume: string;
   seeWorkHref: string;
 } = {
@@ -117,6 +120,7 @@ export const heroConfig: {
   // indistinguishable from every other one. /resume.pdf still redirects here,
   // for the CVs already sent out carrying that URL.
   resume: "Chun-Yu-Echo-Shih-Software-Engineer.pdf",
+  emailSubject: "Product engineering role",
   seeWorkHref: "#projects",
 };
 
@@ -148,7 +152,44 @@ export const closingConfig = {
   body: "I like to untangle things. Give me the part nobody's scoped yet and I'll work out what it should be, build it, and stay with it after it ships. Remote, from Taiwan.",
   email: "echoshihtw@gmail.com",
   resume: "Chun-Yu-Echo-Shih-Software-Engineer.pdf",
-};
+
+  // The fork at the end of the page, 2026-09-09. Echo is open to a role, to
+  // contract work, and to a founding-partner seat, so the close offers two
+  // doors rather than one. Hiring stays first and carries the résumé.
+  //
+  // Two things in the design draft were cut. An intro line ("I work on
+  // operational software: defining what it should hold, building it, and
+  // establishing the foundations…"): a colon and a three-part list, the
+  // pattern this page's own slop audit named, restating the hero. And
+  // tinted illustration fields with a halftone, which would have been the
+  // only marketing-shaped thing on the site.
+  //
+  // The second door is deliberately wider than the draft's "Build your
+  // product". Contract work is as often a scoped piece on a product that
+  // already exists as a product from zero, and the copy names both ends
+  // with the evidence for each.
+  heading: "Available for a role or a project.",
+  paths: [
+    {
+      key: "role",
+      kicker: "Employment",
+      title: "Join your team",
+      copy: "One engineer who owns the interface, the boundaries under it and the release path, and stays with it after it ships.",
+      action: "Discuss a role",
+      subject: "Product engineering role",
+      secondary: { label: "Download résumé", resume: true },
+    },
+    {
+      key: "project",
+      kicker: "Contract, or founding partner",
+      title: "Hire me for a project",
+      copy: "A scoped piece of work on the product you have, something new from zero, or a founding-partner seat. Clio and SPIN.FASHION are the two ends of that range.",
+      action: "Discuss a project",
+      subject: "Product project",
+      secondary: { label: "See the case studies", href: "#projects" },
+    },
+  ],
+} as const;
 
 // Skills live in skills.config.ts: one list, rendered to the PDF and to the
 // page. Re-exported here so the Skills component's import does not move.
@@ -167,24 +208,57 @@ export const experiencePortfolio: Record<
     // Scope note: the modular-monolith / RabbitMQ / ArangoDB direction was the team's,
     // set by my lead. I learned it and implemented it in production. What I chose:
     // the App Router + BFF boundary, and the deploy packaging below.
+    //
+    // That sharing of credit belongs here and in the résumé's RabbitMQ
+    // bullet, which says the direction was the team's. It used to end this
+    // paragraph too: "we worked out the module structure together so the
+    // pattern was ours rather than mine", cut 2026-09-11. It was a claim
+    // about who gets the credit rather than about what happened, and it took
+    // back the fact in front of it.
+    //
+    // The card shows this paragraph and the proof always, and the résumé
+    // bullets in the expander, so anything said in both is said twice to
+    // the same reader. The stack went for that reason: the tech line below
+    // is three words away.
+    //
+    // Bringing a second engineer up is the leadership evidence on this
+    // card, so it stays here in the visible half rather than only in bullet
+    // five, where a reader who does not expand would never find it. The two
+    // now take different angles: this one is how it was done, pairing on
+    // the conventions and the review flow before feature work; the bullet
+    // is the pipeline, with the outcome. "Pairing along the way" appeared
+    // word for word in both and now appears in neither.
+    //
+    // Opens on the verb, 2026-09-11. The heading above already says
+    // Lockerbie and "Internal Platform", so the old opening spent its first
+    // eight words on what the reader had just read. "Built and operated"
+    // is also the hero's "0 → 1, and the part after" in two words, which
+    // makes the page argue one thing rather than two. The domain came back
+    // with it: an "internal project-management platform" could be anyone's,
+    // and the UK construction sector could not.
     impact:
-      "An early-stage internal project-management platform (Next.js frontend, FastAPI integration), built and operated as one of two engineers. Packaged deploys into a three-file runner folder that pulls the promoted image from GHCR, so running production needs no source checkout and no dev dependencies. I brought our second engineer into the codebase, pairing along the way, and we worked out the module structure together so the pattern was ours rather than mine.",
+      "Built and operated an early-stage internal platform for the UK construction sector, as one of two engineers. Brought our second engineer into the codebase by pairing on the conventions and the review flow before the feature work started, and two months later they were shipping independently. Packaged deploys into a three-file runner folder that pulls the promoted image from GHCR, so running production needs no source checkout and no dev dependencies.",
     // The constraint was my lead's: layers independent, no direct
     // browser-to-backend access. The way of meeting it was mine. No "before"
     // state to fix either: the boundary was there from the start.
     proof: {
       p: "The layers had to stay independent: no direct browser-to-backend calls.",
-      s: "Chose Next.js App Router and put a BFF security boundary in front: server-managed authentication, centralised CSRF protection, no backend credentials in browser JavaScript.",
+      s: "Chose Next.js App Router with a BFF security boundary in front, so no backend credential ever reaches browser JavaScript.",
     },
     techLine:
       "Next.js · TanStack Query · FastAPI · ArangoDB · RabbitMQ · Docker · GHCR",
   },
   "SPIN.FASHION by Lablaco": {
     // Agreed title was Full Stack Engineer & Founding Partner: use it as agreed,
-    // not a paraphrase. The product name is the employer's, so it stays out;
-    // employer names are fine here, the things built under them are not.
+    // not a paraphrase. The card renders it verbatim as its own heading, from
+    // the role line in resume.md, so this paragraph no longer opens with it:
+    // that was eight words spent on what the reader had just read, the same
+    // thing the Lockerbie card was doing. The product name is the employer's,
+    // so it stays out; employer names are fine here, the things built under
+    // them are not. "I co-ran" lost its subject too, since the other three
+    // cards imply theirs.
     impact:
-      "Full stack engineer and founding partner on the in-store desktop app, working remotely across time zones. I co-ran the team's scrum with the CTO.",
+      "Co-ran the team's scrum with the CTO on the in-store desktop app, working remotely across time zones.",
     proof: {
       p: "The macOS build couldn't ship.",
       s: "Fixed code-signing, notarisation and auto-update. The desktop app shipped, and the release steps are written down.",
@@ -202,8 +276,15 @@ export const experiencePortfolio: Record<
       "React · TypeScript · Redux-Saga · Firebase · Server-Sent Events · Google Analytics · Sentry",
   },
   "Independent / Freelance Engineering": {
+    // Was "Full-stack product work across fintech, research, e-commerce, and
+    // creative industries", four domains and no anchor, which the CV archive
+    // note calls the weakest line on the résumé. The bullets now name two
+    // real clients with dates, so this says the shape and the span and lets
+    // them carry the evidence. "Creative industries" went with it: that was
+    // freelance video editing, off-domain for an engineering CV. "Research"
+    // went too, since the proof below calls the Bitcoin work a research tool.
     impact:
-      "Full-stack product work across fintech, research, e-commerce, and creative industries. Remote, 2020–2024.",
+      "Shipped frontends and fixed UX for clients in fintech and e-commerce, remote, 2020 to 2024.",
     proof: {
       p: "A Bitcoin coin-selection research tool needed a frontend.",
       s: "Built the frontend in Next.js alongside a BDK core maintainer: UTXO coin-control, fee scenarios, selection metrics.",
