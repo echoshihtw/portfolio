@@ -44,7 +44,8 @@ export const experience: ExperienceItem[] = [
     "role": "Software Engineer",
     "date": "Remote · 2020 – 2024",
     "highlights": [
-      "Built the Next.js frontend for a **Bitcoin coin-selection research tool** with a BDK core maintainer. Freelance frontend work across fintech, e-commerce and research."
+      "Built the Next.js frontend for a **Bitcoin coin-selection research tool** with a BDK core maintainer, April 2023.",
+      "Bug fixing and UX on a **BigCommerce** storefront for Bdigital, June to August 2024, in vanilla JavaScript, HTML and CSS."
     ]
   }
 ];

@@ -271,8 +271,15 @@ export const experiencePortfolio: Record<
       "React · TypeScript · Redux-Saga · Firebase · Server-Sent Events · Google Analytics · Sentry",
   },
   "Independent / Freelance Engineering": {
+    // Was "Full-stack product work across fintech, research, e-commerce, and
+    // creative industries", four domains and no anchor, which the CV archive
+    // note calls the weakest line on the résumé. The bullets now name two
+    // real clients with dates, so this says the shape and the span and lets
+    // them carry the evidence. "Creative industries" went with it: that was
+    // freelance video editing, off-domain for an engineering CV. "Research"
+    // went too, since the proof below calls the Bitcoin work a research tool.
     impact:
-      "Full-stack product work across fintech, research, e-commerce, and creative industries. Remote, 2020–2024.",
+      "Frontend and UX for clients in fintech and e-commerce, remote, 2020 to 2024.",
     proof: {
       p: "A Bitcoin coin-selection research tool needed a frontend.",
       s: "Built the frontend in Next.js alongside a BDK core maintainer: UTXO coin-control, fee scenarios, selection metrics.",
