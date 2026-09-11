@@ -250,10 +250,15 @@ export const experiencePortfolio: Record<
   },
   "SPIN.FASHION by Lablaco": {
     // Agreed title was Full Stack Engineer & Founding Partner: use it as agreed,
-    // not a paraphrase. The product name is the employer's, so it stays out;
-    // employer names are fine here, the things built under them are not.
+    // not a paraphrase. The card renders it verbatim as its own heading, from
+    // the role line in resume.md, so this paragraph no longer opens with it:
+    // that was eight words spent on what the reader had just read, the same
+    // thing the Lockerbie card was doing. The product name is the employer's,
+    // so it stays out; employer names are fine here, the things built under
+    // them are not. "I co-ran" lost its subject too, since the other three
+    // cards imply theirs.
     impact:
-      "Full stack engineer and founding partner on the in-store desktop app, working remotely across time zones. I co-ran the team's scrum with the CTO.",
+      "Co-ran the team's scrum with the CTO on the in-store desktop app, working remotely across time zones.",
     proof: {
       p: "The macOS build couldn't ship.",
       s: "Fixed code-signing, notarisation and auto-update. The desktop app shipped, and the release steps are written down.",
@@ -279,7 +284,7 @@ export const experiencePortfolio: Record<
     // freelance video editing, off-domain for an engineering CV. "Research"
     // went too, since the proof below calls the Bitcoin work a research tool.
     impact:
-      "Frontend and UX for clients in fintech and e-commerce, remote, 2020 to 2024.",
+      "Shipped frontends and fixed UX for clients in fintech and e-commerce, remote, 2020 to 2024.",
     proof: {
       p: "A Bitcoin coin-selection research tool needed a frontend.",
       s: "Built the frontend in Next.js alongside a BDK core maintainer: UTXO coin-control, fee scenarios, selection metrics.",
