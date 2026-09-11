@@ -228,8 +228,16 @@ export const experiencePortfolio: Record<
     // the conventions and the review flow before feature work; the bullet
     // is the pipeline, with the outcome. "Pairing along the way" appeared
     // word for word in both and now appears in neither.
+    //
+    // Opens on the verb, 2026-09-11. The heading above already says
+    // Lockerbie and "Internal Platform", so the old opening spent its first
+    // eight words on what the reader had just read. "Built and operated"
+    // is also the hero's "0 → 1, and the part after" in two words, which
+    // makes the page argue one thing rather than two. The domain came back
+    // with it: an "internal project-management platform" could be anyone's,
+    // and the UK construction sector could not.
     impact:
-      "An early-stage internal project-management platform, built and operated as one of two engineers. Brought our second engineer into the codebase by pairing on the conventions and the review flow before the feature work started, and two months later they were shipping independently. Packaged deploys into a three-file runner folder that pulls the promoted image from GHCR, so running production needs no source checkout and no dev dependencies.",
+      "Built and operated an early-stage internal platform for the UK construction sector, as one of two engineers. Brought our second engineer into the codebase by pairing on the conventions and the review flow before the feature work started, and two months later they were shipping independently. Packaged deploys into a three-file runner folder that pulls the promoted image from GHCR, so running production needs no source checkout and no dev dependencies.",
     // The constraint was my lead's: layers independent, no direct
     // browser-to-backend access. The way of meeting it was mine. No "before"
     // state to fix either: the boundary was there from the start.
