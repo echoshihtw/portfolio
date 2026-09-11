@@ -208,8 +208,16 @@ export const experiencePortfolio: Record<
     // Scope note: the modular-monolith / RabbitMQ / ArangoDB direction was the team's,
     // set by my lead. I learned it and implemented it in production. What I chose:
     // the App Router + BFF boundary, and the deploy packaging below.
+    //
+    // That sharing of credit belongs here and in the résumé's RabbitMQ bullet,
+    // which says the direction was the team's. It used to end this paragraph
+    // too: "we worked out the module structure together so the pattern was
+    // ours rather than mine", cut 2026-09-11. It was a claim about who gets
+    // the credit rather than about what happened, and it took back the fact
+    // in front of it. The outcome says more and is checkable: the résumé's
+    // own bullet already carries it.
     impact:
-      "An early-stage internal project-management platform (Next.js frontend, FastAPI integration), built and operated as one of two engineers. Packaged deploys into a three-file runner folder that pulls the promoted image from GHCR, so running production needs no source checkout and no dev dependencies. I brought our second engineer into the codebase, pairing along the way, and we worked out the module structure together so the pattern was ours rather than mine.",
+      "An early-stage internal project-management platform (Next.js frontend, FastAPI integration), built and operated as one of two engineers. Packaged deploys into a three-file runner folder that pulls the promoted image from GHCR, so running production needs no source checkout and no dev dependencies. I brought our second engineer into the codebase, pairing along the way, and two months later they were shipping independently.",
     // The constraint was my lead's: layers independent, no direct
     // browser-to-backend access. The way of meeting it was mine. No "before"
     // state to fix either: the boundary was there from the start.
