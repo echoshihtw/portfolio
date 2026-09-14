@@ -3,17 +3,18 @@
   import { base } from "$app/paths";
 
   /**
-   * The portrait: a transparent PNG cut to an organic capsule, shown
-   * exactly as exported, with a flat cobalt capsule behind it offset to the
-   * bottom right.
+   * The portrait: a photograph clipped to an organic capsule, with a flat
+   * cobalt capsule behind it offset to the bottom right, like a printed
+   * sticker whose colour plate is a touch out of register.
    *
-   * The backing is the image's own silhouette: an SVG path traced from the
-   * PNG's alpha channel every 8 rows, in the image's coordinate space, so
-   * it scales with the image and matches it to within a pixel or two at
-   * any size the page shows. The path morphs into a shifted version of
-   * itself and back: the same points pushed along their outward normals by
-   * a slow wave, so it reads as the shape breathing rather than becoming a
-   * different shape. It moves whenever the portrait is visible and pauses
+   * One outline does both jobs. As a clipPath it cuts the photograph; as a
+   * filled path it is the backing. The same path morphs into a shifted
+   * version of itself and back, the points pushed along their outward
+   * normals by a slow wave, and both the clip and the backing follow it in
+   * step, so the whole sticker breathes rather than the photo sitting
+   * still while a shape moves behind it. The photograph is served as a
+   * plain rectangle; the shape lives in the path, not in the file, so a
+   * new photo needs no alpha work. It moves whenever the portrait is visible and pauses
    * when it leaves the viewport. SMIL rather than a CSS transition on `d`,
    * because Safari does not animate `d` from CSS. Under reduced motion the
    * animation is not rendered at all.
@@ -33,6 +34,9 @@
       rather than living here; see src/content/portrait.silhouette.ts. */
   export let rest: string;
   export let morph: string;
+
+  // One id per instance, so two portraits on a page would not share a clip.
+  const clipId = `portrait-clip-${Math.random().toString(36).slice(2, 8)}`;
 
   let animate = true;
   let portrait: HTMLElement;
@@ -67,6 +71,35 @@
     aria-hidden="true"
     focusable="false"
   >
+    <defs>
+      <!-- The same outline, as a clip for the photograph. objectBoundingBox
+           units so it fits the <img>'s own box at any rendered size; the
+           scale brings the path's pixel coordinates into 0..1. Same values
+           and timing as the backing below, so the two breathe as one
+           printed sticker rather than as two layers sliding. -->
+      <clipPath
+        id={clipId}
+        clipPathUnits="objectBoundingBox"
+      >
+        <path
+          d={rest}
+          transform="scale({1 / width} {1 / height})"
+        >
+          {#if animate}
+            <animate
+              attributeName="d"
+              begin="0s"
+              dur="6s"
+              repeatCount="indefinite"
+              calcMode="spline"
+              keyTimes="0; 0.5; 1"
+              keySplines="0.45 0 0.55 1; 0.45 0 0.55 1"
+              values={`${rest}; ${morph}; ${rest}`}
+            />
+          {/if}
+        </path>
+      </clipPath>
+    </defs>
     <path d={rest}>
       {#if animate}
         <animate
@@ -90,6 +123,7 @@
     loading="lazy"
     decoding="async"
     draggable="false"
+    style:clip-path="url(#{clipId})"
   />
 </figure>
 

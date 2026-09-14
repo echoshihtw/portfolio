@@ -1,16 +1,16 @@
-// The portrait's own outline, traced from the PNG's alpha channel every
-// eight rows in the image's coordinate space, so the backing behind it
-// scales with the image and matches it at any size. `rest` is the trace;
-// `morph` is the same points pushed a few pixels along their outward
-// normals by a slow wave, so the backing breathes rather than becoming a
-// different shape.
-//
-// The PNG is a square studio photograph cut to an organic capsule: an
-// ellipse that nearly fills the frame, sitting a little low so the head
-// has air, with two slow wobbles so it reads as cut by hand. The capsule
-// is baked into the alpha channel rather than clipped in CSS, so the
-// component shows the file exactly as exported, the same contract the
-// previous portrait had. Regenerate both if the image changes.
+// The portrait's outline, and the only place its shape is defined. The
+// photograph is served as a plain rectangle; this path is applied to it as
+// an animated clip and drawn behind it as the cobalt backing, so the photo
+// and its shadow breathe as one shape. `rest` is the shape: an organic
+// capsule that sits entirely inside the frame so no edge of it is ever the
+// frame's straight edge, an ellipse above for the head and a squarer curve
+// below that stays wide through the shoulders and only rounds off near the
+// bottom, with two slow wobbles so it reads as cut by hand. `morph` is the
+// same points pushed a few pixels along their outward normals by a slow
+// three-lobed wave. Both are polylines in the image's own pixel space,
+// 960 square, and must keep identical point counts or the browser will not
+// interpolate between them. A new photo of the same proportions needs no
+// change here at all.
 export const portraitSilhouette = {
   rest: "M504 66 L548 72 573 78 592 84 608 90 622 96 635 102 647 108 657 114 667 120 677 126 686 132 694 138 703 144 711 150 718 156 726 162 733 168 740 174 747 180 754 186 760 192 767 198 773 204 779 210 785 216 792 222 798 228 804 234 809 240 815 246 821 252 826 258 832 264 837 270 843 276 848 282 853 288 858 294 863 300 868 306 872 312 877 318 881 324 885 330 889 336 893 342 897 348 901 354 904 360 908 366 911 372 914 378 917 384 920 390 922 396 925 402 927 408 929 414 931 420 933 426 935 432 936 438 938 444 939 450 940 456 941 462 942 468 943 474 944 480 944 486 945 492 945 498 945 504 945 510 945 516 945 522 945 528 945 534 945 540 945 546 945 552 944 558 944 564 944 570 943 576 943 582 943 588 942 594 942 600 941 606 940 612 940 618 939 624 938 630 938 636 937 642 936 648 935 654 934 660 933 666 932 672 931 678 930 684 928 690 927 696 926 702 924 708 923 714 921 720 920 726 918 732 916 738 914 744 912 750 910 756 908 762 905 768 903 774 900 780 897 786 894 792 891 798 887 804 884 810 880 816 875 822 871 828 866 834 861 840 856 846 850 852 843 858 836 864 829 870 820 876 811 882 800 888 788 894 774 900 758 906 737 912 709 918 653 924 308 930 262 930 205 924 179 918 160 912 146 906 133 900 123 894 114 888 105 882 98 876 92 870 86 864 81 858 76 852 71 846 67 840 63 834 60 828 57 822 54 816 51 810 49 804 47 798 45 792 43 786 41 780 40 774 38 768 37 762 36 756 35 750 34 744 33 738 33 732 32 726 32 720 32 714 31 708 31 702 31 696 31 690 31 684 31 678 32 672 32 666 32 660 33 654 33 648 33 642 34 636 34 630 35 624 36 618 36 612 37 606 37 600 38 594 39 588 39 582 40 576 40 570 41 564 41 558 42 552 43 546 43 540 43 534 44 528 44 522 45 516 45 510 45 504 45 498 45 492 46 486 46 480 46 474 47 468 47 462 48 456 48 450 49 444 49 438 50 432 51 426 52 420 53 414 53 408 54 402 56 396 57 390 58 384 59 378 61 372 63 366 64 360 66 354 68 348 70 342 72 336 74 330 76 324 79 318 81 312 84 306 87 300 90 294 93 288 96 282 100 276 103 270 107 264 111 258 115 252 119 246 124 240 129 234 134 228 139 222 144 216 150 210 155 204 162 198 168 192 175 186 182 180 189 174 196 168 204 162 213 156 222 150 231 144 240 138 250 132 261 126 272 120 284 114 297 108 310 102 325 96 341 90 360 84 381 78 408 72 455 66 Z",
   morph:

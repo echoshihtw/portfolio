@@ -91,10 +91,12 @@ export const aboutMeConfig = {
   // A transparent PNG cut to an organic capsule, shown exactly as exported,
   // with a flat cobalt capsule behind it. See Portrait.svelte.
   // Served at the size the page shows it (at most 460 CSS px, so 960 for
-  // a 2x screen) as a WebP with alpha, 2.4 MB down to a few dozen KB. The
-  // filename names the person, the alt names her again in words, and the
-  // width and height reserve the box: what an image on a personal site
-  // needs for a search engine to attach it to the right name.
+  // a 2x screen) as a plain rectangular WebP, 33 KB against the 1.5 MB
+  // before; the capsule shape is a clip path, not the file, so the photo
+  // carries no alpha and needs no cutting out. The filename names the
+  // person, the alt names her again in words, and the width and height
+  // reserve the box: what an image on a personal site needs for a search
+  // engine to attach it to the right name.
   portrait: {
     src: "assets/echo-shih-portrait.webp",
     alt: "Echo Shih, a studio portrait against a dark background.",
