@@ -93,6 +93,8 @@
           alt={aboutMeConfig.portrait.alt}
           width={aboutMeConfig.portrait.width}
           height={aboutMeConfig.portrait.height}
+          rest={aboutMeConfig.portrait.rest}
+          morph={aboutMeConfig.portrait.morph}
         />
       </div>
     </div>
@@ -398,11 +400,10 @@
       max-width: 30rem;
       justify-self: end;
       align-self: start;
-      /* The PNG carries 199 transparent rows above the hair, out of 1435.
-         Pulling the box up by that much (199/1200 of the width, since a
-         percentage margin resolves against width) puts the visible top of
-         the silhouette level with the first line of the story. */
-      margin-top: -16.6%;
+      /* The previous PNG carried 199 transparent rows above the hair and
+         was pulled up by that much to sit level with the first line of the
+         story. This one is opaque from its first row, so it sits where the
+         grid puts it. */
     }
   }
 </style>

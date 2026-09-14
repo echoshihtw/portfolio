@@ -1,3 +1,4 @@
+import { portraitSilhouette } from "./portrait.silhouette";
 // The personal half of the landing page. Home is where people arrive, so
 // this is where Echo is introduced: the engineering hero makes the
 // professional case above it, and this says who made it.
@@ -89,11 +90,17 @@ export const aboutMeConfig = {
   // sits on the home page, which has two themes.
   // A transparent PNG cut to an organic capsule, shown exactly as exported,
   // with a flat cobalt capsule behind it. See Portrait.svelte.
+  // Served at the size the page shows it (at most 460 CSS px, so 960 for
+  // a 2x screen) as a WebP with alpha, 2.4 MB down to a few dozen KB. The
+  // filename names the person, the alt names her again in words, and the
+  // width and height reserve the box: what an image on a personal site
+  // needs for a search engine to attach it to the right name.
   portrait: {
-    src: "assets/hero-a.png",
-    alt: "Echo laughing while holding a gelato",
-    width: 1200,
-    height: 1435,
+    src: "assets/echo-shih-portrait.webp",
+    alt: "Echo Shih, a studio portrait against a dark background.",
+    width: 960,
+    height: 960,
+    ...portraitSilhouette,
   },
 
   // One real action, because it is the only thing here that leaves the page.
