@@ -264,11 +264,12 @@
   }
 
   /* One radius on all four corners, so the two cards line up at rest. The
-     second briefly took the site's .corner-br utility, which sets one big
-     corner by zeroing the other three, and the pair read as two different
-     shapes. The big corner is worth having, though, so it moved to hover:
-     one corner opens to --radius-lg, the site's own large corner, and the
-     script above picks which one each time.
+     second briefly took a .corner-br utility the stylesheet used to carry,
+     which set one big corner by zeroing the other three, and the pair read
+     as two different shapes. That utility applied to nothing in the end and
+     has been removed. The big corner was worth keeping, so it moved to
+     hover: one corner opens to --radius-lg, the site's own large corner,
+     and the script above picks which one each time.
 
      Two colours, from the pair the palette already has: blue, which on
      this site means "you can click this", and the orange-red that gets one
