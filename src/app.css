@@ -24,6 +24,11 @@
   --primary: #3155d9;
   --primary-ink: #ffffff;
   --accent: #f15a3a;
+  /* The ink that goes on an accent fill. A literal, and the same one in both
+     themes on purpose: --primary-ink flips white to near-black between them,
+     but the accent fill is light in both, so its text has to be dark in
+     both. 5.4:1 on the light theme's fill, 7.2:1 on the dark theme's. */
+  --accent-ink: #171714;
   /* The same orange for type. #f15a3a is a fill colour: on cream it is
      2.9:1, under the 3:1 that large text needs, so words take this one. */
   --accent-text: #dc4a2b;
@@ -373,6 +378,24 @@ canvas {
 .btn-ink:focus-visible {
   background: color-mix(in srgb, var(--canvas) 8%, var(--ink));
   border-color: color-mix(in srgb, var(--canvas) 8%, var(--ink));
+}
+
+/* The accent variant: for a button that names a different path from the one
+   blue means. Mirrors .btn-ink's steps exactly, so the two behave alike. */
+.btn-accent {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+.btn-accent:hover,
+.btn-accent:focus-visible {
+  background: color-mix(in srgb, var(--accent-ink) 8%, var(--accent));
+  border-color: color-mix(in srgb, var(--accent-ink) 8%, var(--accent));
+}
+
+.btn-accent:active {
+  background: color-mix(in srgb, var(--accent-ink) 12%, var(--accent));
 }
 
 .btn-ink:active {

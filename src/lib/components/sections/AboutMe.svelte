@@ -4,10 +4,14 @@
   import { closingConfig } from "../../../content/portfolio.config";
   import SectionHead from "$lib/components/SectionHead.svelte";
   import Portrait from "$lib/components/Portrait.svelte";
+  import { mailtoWithSubject } from "$lib/contactLinks";
   import { trackEmail, trackResume } from "$lib/analytics";
 
-  const mailto = (subject: string) =>
-    `mailto:${closingConfig.email}?subject=${encodeURIComponent(subject)}`;
+  // Both of a card's actions report the same place, so the résumé download
+  // can be attributed to the door it was taken from rather than to the
+  // section. Built from the key so a third path needs no edit here.
+  const placeOf = (key: (typeof closingConfig.paths)[number]["key"]) =>
+    `about-${key}` as const;
 
   // One corner of a card opens up while it is hovered, and which corner is
   // drawn fresh each time, so the pair never settles into a fixed shape.
@@ -17,11 +21,24 @@
   const CORNERS = ["tl", "tr", "br", "bl"] as const;
   type Corner = (typeof CORNERS)[number];
 
-  let openCorner: (Corner | null)[] = [null, null];
+  // Empty, not a literal pair: the length belongs to the config, and a
+  // missing entry omits the attribute exactly as a null one would.
+  let openCorner: (Corner | null)[] = [];
 
   function openRandomCorner(index: number) {
     const choices = CORNERS.filter((corner) => corner !== openCorner[index]);
     openCorner[index] = choices[Math.floor(Math.random() * choices.length)];
+  }
+
+  // focusin bubbles, so tabbing from a card's button to its secondary link
+  // fired this again and picked a different corner halfway through the
+  // transition. Only a focus arriving from outside the card counts as
+  // arriving at it.
+  function onCardFocusIn(event: FocusEvent, index: number) {
+    const from = event.relatedTarget;
+    const card = event.currentTarget as HTMLElement;
+    if (from instanceof Node && card.contains(from)) return;
+    openRandomCorner(index);
   }
 </script>
 
@@ -107,7 +124,7 @@
             data-corner={openCorner[i]}
             on:pointerenter={(event) =>
               event.pointerType === "mouse" && openRandomCorner(i)}
-            on:focusin={() => openRandomCorner(i)}
+            on:focusin={(event) => onCardFocusIn(event, i)}
           >
             <p class="label">{path.kicker}</p>
             <h4 class="path-title">{path.title}</h4>
@@ -115,11 +132,9 @@
             <div class="path-actions">
               <a
                 class="btn"
-                href={mailto(path.subject)}
-                on:click={() =>
-                  trackEmail(
-                    path.key === "role" ? "about-role" : "about-project"
-                  )}
+                class:btn-accent={path.key === "project"}
+                href={mailtoWithSubject(closingConfig.email, path.subject)}
+                on:click={() => trackEmail(placeOf(path.key))}
               >
                 {path.action}
                 <span
@@ -134,7 +149,7 @@
                   class="link-cta"
                   href="{base}/{closingConfig.resume}"
                   download
-                  on:click={() => trackResume("about")}
+                  on:click={() => trackResume(placeOf(path.key))}
                 >
                   {path.secondary.label}
                 </a>
@@ -328,30 +343,6 @@
   .path .label {
     margin: 0;
     color: var(--tint-text);
-  }
-
-  /* The project button in the accent, matching its card. Its ink is the
-     one literal in this file: --primary-ink is white in the light theme
-     and near-black in the dark one, but the accent fill is light in both,
-     so the text on it has to be dark in both. 5.4:1 in light, 7.2:1 in
-     dark, and the two mixes below keep it above 4.5:1 while pressed.
-     Hover and active mirror .btn's own steps so the two buttons behave
-     identically, only in different colours. */
-  .path-project .btn {
-    --accent-ink: #171714;
-    border-color: var(--accent);
-    background: var(--accent);
-    color: var(--accent-ink);
-  }
-
-  .path-project .btn:hover,
-  .path-project .btn:focus-visible {
-    background: color-mix(in srgb, var(--accent-ink) 8%, var(--accent));
-    border-color: color-mix(in srgb, var(--accent-ink) 8%, var(--accent));
-  }
-
-  .path-project .btn:active {
-    background: color-mix(in srgb, var(--accent-ink) 12%, var(--accent));
   }
 
   /* The secondary link too, so the pair is consistent top to bottom. */

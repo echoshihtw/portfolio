@@ -6,6 +6,13 @@
 
 type HeadlinePart = { text: string; accent?: boolean };
 
+// The hero's email and the close's first door are the same door: someone
+// writing from the top of the page is asking about a role. One value, read
+// by both, rather than the same string typed twice and a test to keep them
+// equal. Declared up here because heroConfig is defined long before
+// closingConfig, so heroConfig cannot reach into it.
+const ROLE_SUBJECT = "Product engineering role";
+
 export const heroConfig: {
   kicker: string;
   remoteOpen: string;
@@ -15,7 +22,8 @@ export const heroConfig: {
   support: string[];
   email: string;
   /** The subject a recruiter's message arrives with, so intent is visible
-      before the message is opened. The close's two doors set their own. */
+      before the message is opened. Shared with the close's first door,
+      which is the same door. */
   emailSubject: string;
   resume: string;
   seeWorkHref: string;
@@ -120,7 +128,7 @@ export const heroConfig: {
   // indistinguishable from every other one. /resume.pdf still redirects here,
   // for the CVs already sent out carrying that URL.
   resume: "Chun-Yu-Echo-Shih-Software-Engineer.pdf",
-  emailSubject: "Product engineering role",
+  emailSubject: ROLE_SUBJECT,
   seeWorkHref: "#projects",
 };
 
@@ -176,7 +184,7 @@ export const closingConfig = {
       title: "Join your team",
       copy: "One engineer who owns the interface, the boundaries under it and the release path, and stays with it after it ships.",
       action: "Discuss a role",
-      subject: "Product engineering role",
+      subject: ROLE_SUBJECT,
       secondary: { label: "Download résumé", resume: true },
     },
     {
