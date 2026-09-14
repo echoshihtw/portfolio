@@ -1,4 +1,5 @@
 import { githubUrl, linkedInUrl } from "$lib/contactLinks";
+import { aboutMeConfig } from "../content/aboutMe.config";
 
 // One definition of the site's canonical origin. Page-specific SEO tags
 // live in each route's <svelte:head> rather than app.html, because that
@@ -25,6 +26,10 @@ const personSchema = {
   alternateName: "Chun-Yu Shih",
   url: SITE_ORIGIN,
   jobTitle: AUTHOR_JOB_TITLE,
+  // The About portrait, read from the one place it is declared. Person.image
+  // is what lets an engine attach a face to the entity, and it is the same
+  // file the page shows, so the two can never disagree.
+  image: absoluteUrl(aboutMeConfig.portrait.src),
   sameAs: [linkedInUrl, githubUrl],
   address: {
     "@type": "PostalAddress",

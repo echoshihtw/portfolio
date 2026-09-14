@@ -3,6 +3,7 @@
   import { base } from "$app/paths";
   import { heroConfig } from "../../../../content/portfolio.config";
   import HeroDiagram from "./HeroDiagram.svelte";
+  import { mailtoWithSubject } from "$lib/contactLinks";
   import { trackEmail, trackResume } from "$lib/analytics";
 
   // Boot-up typing: runs once on first load, skipped entirely under
@@ -113,9 +114,7 @@
       <div class="hero-links">
         <a
           class="btn"
-          href="mailto:{heroConfig.email}?subject={encodeURIComponent(
-            heroConfig.emailSubject
-          )}"
+          href={mailtoWithSubject(heroConfig.email, heroConfig.emailSubject)}
           on:click={() => trackEmail("hero")}
         >
           Email me <span class="cta-arrow">→</span>

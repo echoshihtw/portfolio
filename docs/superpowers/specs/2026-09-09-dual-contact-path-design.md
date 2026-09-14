@@ -140,3 +140,22 @@ role path. Production build succeeds. `npm run audit:a11y` reports no WCAG 2.2
 AA violations across 8 page renders. Rendered and measured at 1200px and 390px:
 cards equal width side by side, stacked on the phone with employment first, all
 four actions resolving to the intended destinations.
+
+## Decisions on review, 2026-09-14
+
+Echo asked for a designer's read on whether the two cards fit the page, then
+asked for what did not fit to be fixed.
+
+- **The tinted fills are removed.** Every other surface on the site is flat
+  with a hairline; the two tinted cards were the only filled colour blocks,
+  and side by side with a kicker, a title, a blurb, a button and a link they
+  were structurally a pricing page's plan picker. They also stacked a blue
+  field and an orange field directly under the cobalt portrait, and the
+  orange card read louder than the blue, which put the eye on the secondary
+  door first, against the stated priority. The kicker and the button now
+  carry each path's colour on their own; the buttons stay blue and accent.
+- **The kicker is balanced.** "Contract, or founding partner", a fragment
+  with a comma beside a one-word "Employment", becomes "Contract or
+  partnership".
+- **Kept as they were:** the heading, the placement, the copy, the random
+  corner on hover, and the two email subjects.

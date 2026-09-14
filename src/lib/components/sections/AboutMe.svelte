@@ -4,10 +4,14 @@
   import { closingConfig } from "../../../content/portfolio.config";
   import SectionHead from "$lib/components/SectionHead.svelte";
   import Portrait from "$lib/components/Portrait.svelte";
+  import { mailtoWithSubject } from "$lib/contactLinks";
   import { trackEmail, trackResume } from "$lib/analytics";
 
-  const mailto = (subject: string) =>
-    `mailto:${closingConfig.email}?subject=${encodeURIComponent(subject)}`;
+  // Both of a card's actions report the same place, so the résumé download
+  // can be attributed to the door it was taken from rather than to the
+  // section. Built from the key so a third path needs no edit here.
+  const placeOf = (key: (typeof closingConfig.paths)[number]["key"]) =>
+    `about-${key}` as const;
 
   // One corner of a card opens up while it is hovered, and which corner is
   // drawn fresh each time, so the pair never settles into a fixed shape.
@@ -17,11 +21,24 @@
   const CORNERS = ["tl", "tr", "br", "bl"] as const;
   type Corner = (typeof CORNERS)[number];
 
-  let openCorner: (Corner | null)[] = [null, null];
+  // Empty, not a literal pair: the length belongs to the config, and a
+  // missing entry omits the attribute exactly as a null one would.
+  let openCorner: (Corner | null)[] = [];
 
   function openRandomCorner(index: number) {
     const choices = CORNERS.filter((corner) => corner !== openCorner[index]);
     openCorner[index] = choices[Math.floor(Math.random() * choices.length)];
+  }
+
+  // focusin bubbles, so tabbing from a card's button to its secondary link
+  // fired this again and picked a different corner halfway through the
+  // transition. Only a focus arriving from outside the card counts as
+  // arriving at it.
+  function onCardFocusIn(event: FocusEvent, index: number) {
+    const from = event.relatedTarget;
+    const card = event.currentTarget as HTMLElement;
+    if (from instanceof Node && card.contains(from)) return;
+    openRandomCorner(index);
   }
 </script>
 
@@ -76,6 +93,8 @@
           alt={aboutMeConfig.portrait.alt}
           width={aboutMeConfig.portrait.width}
           height={aboutMeConfig.portrait.height}
+          rest={aboutMeConfig.portrait.rest}
+          morph={aboutMeConfig.portrait.morph}
         />
       </div>
     </div>
@@ -107,7 +126,7 @@
             data-corner={openCorner[i]}
             on:pointerenter={(event) =>
               event.pointerType === "mouse" && openRandomCorner(i)}
-            on:focusin={() => openRandomCorner(i)}
+            on:focusin={(event) => onCardFocusIn(event, i)}
           >
             <p class="label">{path.kicker}</p>
             <h4 class="path-title">{path.title}</h4>
@@ -115,11 +134,9 @@
             <div class="path-actions">
               <a
                 class="btn"
-                href={mailto(path.subject)}
-                on:click={() =>
-                  trackEmail(
-                    path.key === "role" ? "about-role" : "about-project"
-                  )}
+                class:btn-accent={path.key === "project"}
+                href={mailtoWithSubject(closingConfig.email, path.subject)}
+                on:click={() => trackEmail(placeOf(path.key))}
               >
                 {path.action}
                 <span
@@ -134,7 +151,7 @@
                   class="link-cta"
                   href="{base}/{closingConfig.resume}"
                   download
-                  on:click={() => trackResume("about")}
+                  on:click={() => trackResume(placeOf(path.key))}
                 >
                   {path.secondary.label}
                 </a>
@@ -249,20 +266,24 @@
   }
 
   /* One radius on all four corners, so the two cards line up at rest. The
-     second briefly took the site's .corner-br utility, which sets one big
-     corner by zeroing the other three, and the pair read as two different
-     shapes. The big corner is worth having, though, so it moved to hover:
-     one corner opens to --radius-lg, the site's own large corner, and the
-     script above picks which one each time.
+     second briefly took a .corner-br utility the stylesheet used to carry,
+     which set one big corner by zeroing the other three, and the pair read
+     as two different shapes. That utility applied to nothing in the end and
+     has been removed. The big corner was worth keeping, so it moved to
+     hover: one corner opens to --radius-lg, the site's own large corner,
+     and the script above picks which one each time.
 
      Two colours, from the pair the palette already has: blue, which on
      this site means "you can click this", and the orange-red that gets one
-     editorial moment a page. Here they tell the two doors apart, card,
-     label and button. The tint is 8% of the surface so the cards stay flat
-     and quiet, and the label and button carry the colour where it is a
-     word or a control rather than a field. Both tokens are defined in each
-     theme, so the pair holds in light and dark, and every foreground below
-     was measured against its own background rather than eyeballed. */
+     editorial moment a page. They tell the two doors apart through the
+     label and the button only. The cards themselves are the same flat
+     surface with a hairline as every other card on the site. They briefly
+     carried an 8% tint each, and side by side, with a kicker, a title, a
+     blurb, a button and a link, two tinted cards are a pricing page's plan
+     picker, the one marketing shape this page had otherwise avoided. The
+     tints also stacked a blue field and an orange field under the cobalt
+     portrait, and the orange one read louder than the blue, which put the
+     eye on the secondary door first. Removed 2026-09-14. */
   .path {
     --tint: var(--primary);
     --tint-text: var(--primary);
@@ -276,8 +297,6 @@
     padding: var(--space-5);
     border-radius: var(--corner-tl) var(--corner-tr) var(--corner-br)
       var(--corner-bl);
-    background: color-mix(in srgb, var(--tint) 8%, var(--surface));
-    border-color: color-mix(in srgb, var(--tint) 30%, var(--border));
     transition:
       border-radius 300ms var(--ease-out),
       border-color var(--dur-fast) ease;
@@ -315,11 +334,12 @@
   }
 
   /* --accent-text, not --accent: the fill orange is 2.9:1 on cream, under
-     what type needs, and the palette keeps a darker one for words. Even
-     that one is only 3.56:1 on this card's tinted ground, so it is taken
-     three quarters of the way to the ink: 5.3:1 in light, 7.1:1 in dark.
-     Mixing toward --ink darkens on the light theme and lightens on the
-     dark one, which is the direction each needs. */
+     what type needs, and the palette keeps a darker one for words. That
+     one is made for larger text: on the surface it is 3.9:1, under the
+     4.5:1 this small mono label needs, so it is taken three quarters of
+     the way to the ink. Mixing toward --ink darkens on the light theme and
+     lightens on the dark one, the direction each needs. The audit caught
+     the plain token failing; this is not a guess. */
   .path-project {
     --tint: var(--accent);
     --tint-text: color-mix(in srgb, var(--accent-text) 75%, var(--ink));
@@ -328,30 +348,6 @@
   .path .label {
     margin: 0;
     color: var(--tint-text);
-  }
-
-  /* The project button in the accent, matching its card. Its ink is the
-     one literal in this file: --primary-ink is white in the light theme
-     and near-black in the dark one, but the accent fill is light in both,
-     so the text on it has to be dark in both. 5.4:1 in light, 7.2:1 in
-     dark, and the two mixes below keep it above 4.5:1 while pressed.
-     Hover and active mirror .btn's own steps so the two buttons behave
-     identically, only in different colours. */
-  .path-project .btn {
-    --accent-ink: #171714;
-    border-color: var(--accent);
-    background: var(--accent);
-    color: var(--accent-ink);
-  }
-
-  .path-project .btn:hover,
-  .path-project .btn:focus-visible {
-    background: color-mix(in srgb, var(--accent-ink) 8%, var(--accent));
-    border-color: color-mix(in srgb, var(--accent-ink) 8%, var(--accent));
-  }
-
-  .path-project .btn:active {
-    background: color-mix(in srgb, var(--accent-ink) 12%, var(--accent));
   }
 
   /* The secondary link too, so the pair is consistent top to bottom. */
@@ -406,11 +402,10 @@
       max-width: 30rem;
       justify-self: end;
       align-self: start;
-      /* The PNG carries 199 transparent rows above the hair, out of 1435.
-         Pulling the box up by that much (199/1200 of the width, since a
-         percentage margin resolves against width) puts the visible top of
-         the silhouette level with the first line of the story. */
-      margin-top: -16.6%;
+      /* The previous PNG carried 199 transparent rows above the hair and
+         was pulled up by that much to sit level with the first line of the
+         story. This one is opaque from its first row, so it sits where the
+         grid puts it. */
     }
   }
 </style>

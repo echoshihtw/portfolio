@@ -24,6 +24,11 @@
   --primary: #3155d9;
   --primary-ink: #ffffff;
   --accent: #f15a3a;
+  /* The ink that goes on an accent fill. A literal, and the same one in both
+     themes on purpose: --primary-ink flips white to near-black between them,
+     but the accent fill is light in both, so its text has to be dark in
+     both. 5.4:1 on the light theme's fill, 7.2:1 on the dark theme's. */
+  --accent-ink: #171714;
   /* The same orange for type. #f15a3a is a fill colour: on cream it is
      2.9:1, under the 3:1 that large text needs, so words take this one. */
   --accent-text: #dc4a2b;
@@ -32,15 +37,11 @@
   --status-live: #4f6e4a;
   --status-progress: #735809;
 
-  /* Legacy names, aliased. Older rules read these; nothing new should. */
-  --color-bg: var(--canvas);
-  --text-color: var(--ink);
+  /* Legacy names, aliased. Older rules read these three; nothing new
+     should, and the five nothing read at all are gone. */
   --text-muted: var(--muted);
   --surface-bg: var(--surface);
   --section-border: var(--border);
-  --section-border-strong: var(--border-strong);
-  --color-accent: var(--primary);
-  --timeline-rule: var(--border);
 
   /* Type. A neo-grotesque with some character for headings, a neutral
      humanist sans for reading, a mono for anything that is data. */
@@ -76,7 +77,8 @@
   --content-max: 1200px;
 
   /* Radius. Controls and small surfaces take sm, cards take md, buttons
-     are pills, and one large corner exists for a whole block. */
+     are pills, and lg is the one large corner, opened on a single corner
+     of a block rather than all four. */
   --radius-sm: 6px;
   --radius-md: 12px;
   --radius-pill: 999px;
@@ -247,18 +249,6 @@ canvas {
   border-radius: var(--radius-md);
 }
 
-.card-interactive {
-  transition:
-    border-color var(--dur-fast) ease,
-    transform var(--dur-base) var(--ease-out);
-}
-
-.card-interactive:hover,
-.card-interactive:focus-visible {
-  border-color: var(--border-strong);
-  transform: translateY(-1px);
-}
-
 /* A small bordered pill for a tag or a status. */
 .pill {
   display: inline-flex;
@@ -295,21 +285,6 @@ canvas {
   border: 0;
   border-top: var(--border-w) solid var(--border);
   margin: 0;
-}
-
-/* One rounded corner, on anything: a whole block takes --radius-lg on a
-   single corner so the ground shows through there. */
-.corner-tl {
-  border-radius: var(--radius-lg) 0 0 0;
-}
-.corner-tr {
-  border-radius: 0 var(--radius-lg) 0 0;
-}
-.corner-br {
-  border-radius: 0 0 var(--radius-lg) 0;
-}
-.corner-bl {
-  border-radius: 0 0 0 var(--radius-lg);
 }
 
 /* ==========================================================================
@@ -373,6 +348,24 @@ canvas {
 .btn-ink:focus-visible {
   background: color-mix(in srgb, var(--canvas) 8%, var(--ink));
   border-color: color-mix(in srgb, var(--canvas) 8%, var(--ink));
+}
+
+/* The accent variant: for a button that names a different path from the one
+   blue means. Mirrors .btn-ink's steps exactly, so the two behave alike. */
+.btn-accent {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+.btn-accent:hover,
+.btn-accent:focus-visible {
+  background: color-mix(in srgb, var(--accent-ink) 8%, var(--accent));
+  border-color: color-mix(in srgb, var(--accent-ink) 8%, var(--accent));
+}
+
+.btn-accent:active {
+  background: color-mix(in srgb, var(--accent-ink) 12%, var(--accent));
 }
 
 .btn-ink:active {
@@ -517,7 +510,6 @@ canvas {
     scroll-behavior: auto !important;
   }
   .btn:hover,
-  .card-interactive:hover,
   .btn:hover .cta-arrow,
   .link-cta:hover .cta-arrow {
     transform: none;
