@@ -275,12 +275,15 @@
 
      Two colours, from the pair the palette already has: blue, which on
      this site means "you can click this", and the orange-red that gets one
-     editorial moment a page. Here they tell the two doors apart, card,
-     label and button. The tint is 8% of the surface so the cards stay flat
-     and quiet, and the label and button carry the colour where it is a
-     word or a control rather than a field. Both tokens are defined in each
-     theme, so the pair holds in light and dark, and every foreground below
-     was measured against its own background rather than eyeballed. */
+     editorial moment a page. They tell the two doors apart through the
+     label and the button only. The cards themselves are the same flat
+     surface with a hairline as every other card on the site. They briefly
+     carried an 8% tint each, and side by side, with a kicker, a title, a
+     blurb, a button and a link, two tinted cards are a pricing page's plan
+     picker, the one marketing shape this page had otherwise avoided. The
+     tints also stacked a blue field and an orange field under the cobalt
+     portrait, and the orange one read louder than the blue, which put the
+     eye on the secondary door first. Removed 2026-09-14. */
   .path {
     --tint: var(--primary);
     --tint-text: var(--primary);
@@ -294,8 +297,6 @@
     padding: var(--space-5);
     border-radius: var(--corner-tl) var(--corner-tr) var(--corner-br)
       var(--corner-bl);
-    background: color-mix(in srgb, var(--tint) 8%, var(--surface));
-    border-color: color-mix(in srgb, var(--tint) 30%, var(--border));
     transition:
       border-radius 300ms var(--ease-out),
       border-color var(--dur-fast) ease;
@@ -333,11 +334,12 @@
   }
 
   /* --accent-text, not --accent: the fill orange is 2.9:1 on cream, under
-     what type needs, and the palette keeps a darker one for words. Even
-     that one is only 3.56:1 on this card's tinted ground, so it is taken
-     three quarters of the way to the ink: 5.3:1 in light, 7.1:1 in dark.
-     Mixing toward --ink darkens on the light theme and lightens on the
-     dark one, which is the direction each needs. */
+     what type needs, and the palette keeps a darker one for words. That
+     one is made for larger text: on the surface it is 3.9:1, under the
+     4.5:1 this small mono label needs, so it is taken three quarters of
+     the way to the ink. Mixing toward --ink darkens on the light theme and
+     lightens on the dark one, the direction each needs. The audit caught
+     the plain token failing; this is not a guess. */
   .path-project {
     --tint: var(--accent);
     --tint-text: color-mix(in srgb, var(--accent-text) 75%, var(--ink));

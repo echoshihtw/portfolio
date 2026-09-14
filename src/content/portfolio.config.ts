@@ -189,7 +189,7 @@ export const closingConfig = {
     },
     {
       key: "project",
-      kicker: "Contract, or founding partner",
+      kicker: "Contract or partnership",
       title: "Hire me for a project",
       copy: "A scoped piece of work on the product you have, something new from zero, or a founding-partner seat. Clio and SPIN.FASHION are the two ends of that range.",
       action: "Discuss a project",
