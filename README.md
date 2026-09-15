@@ -50,6 +50,10 @@ both builds and the accessibility audit. `quality.yml` runs them on every pull
 request (docs-only changes skip), `release-pr.yml` on every push to `staging`,
 and `release.yml` on the merge commit that lands on `main`.
 
+The PDF is cached against its three sources, so TeX installs only when the résumé
+changed: ~2 min on a miss, ~25s otherwise. Node 24 matches local: npm 10 and 11
+write lockfiles differently.
+
 ## Releasing
 
 Feature branches merge into `staging`, the default branch. Each push to it
@@ -60,10 +64,6 @@ Test the staging preview on Vercel, then merge that PR with **Create a merge
 commit**, never squash. `release.yml` refuses a squash, then semantic-release
 tags the release and writes the GitHub Release. Vercel deploys `main` to
 production on its own.
-
-The PDF is cached against its three sources, so TeX installs only when the résumé
-changed: ~2 min on a miss, ~25s otherwise. Node 24 matches local: npm 10 and 11
-write lockfiles differently.
 
 ## Claims
 

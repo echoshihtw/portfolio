@@ -5,6 +5,10 @@ name: Verify
 # the release PR's commit), and release.yml for the merge commit on main.
 # Concurrency lives in the callers: a group here would let them cancel each
 # other.
+#
+# Vercel is the only live deploy. Pages served the project URL for CVs already
+# sent out, but that URL now redirects to echoshih.com (src/app.html), so its
+# last GitHub Pages deploy stays frozen rather than being rebuilt on every push.
 
 on:
   workflow_call:
