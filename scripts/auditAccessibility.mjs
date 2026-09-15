@@ -3,9 +3,15 @@
 //
 // axe catches perhaps a third of what matters, so this is a floor and not a
 // pass mark. The things it cannot see, keyboard order, focus visibility and
-// heading structure, are asserted in e2e/accessibility.spec.ts.
+// heading structure, were checked by hand when this was added and are not
+// automated yet.
 //
-//   npm run build && npm run audit:a11y
+// Runs in CI after the site build (.github/workflows/ci.yml). Locally:
+//
+//   npm run build-resume && npm run build && npm run audit:a11y
+//
+// ROUTES is a hand-written list: add a route or a blog post and it must be
+// added here, or "every route" quietly stops being true.
 import http from "node:http";
 import fs from "node:fs";
 import path from "node:path";

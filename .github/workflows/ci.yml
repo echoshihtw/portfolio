@@ -135,5 +135,18 @@ jobs:
       # Vercel builds and deploys separately with its own default base (the
       # site serves from the root there). This build just has to succeed, and
       # nothing consumes its output, so it uses the same default.
+      # The audit drives a real browser over the built site. Only Chromium,
+      # with its system libraries; timeout-minutes for the same reason as the
+      # TeX step above: a stalled download should fail, not wait six hours.
+      - name: Install Chromium for the audit
+        timeout-minutes: 5
+        run: npx playwright install --with-deps chromium
+
       - name: Build site
         run: npm run build
+
+      # axe over every route in both themes, against WCAG 2.2 AA. Fails the
+      # job on any violation. Unconditional on purpose: a check behind a cache
+      # condition is indistinguishable from a check that stopped running.
+      - name: Accessibility audit
+        run: npm run audit:a11y
