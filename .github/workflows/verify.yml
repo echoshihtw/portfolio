@@ -1,26 +1,16 @@
-name: CI
+name: Verify
 
-# One job: verify on every pull request and every push to main. Vercel is the
-# only live deploy now. Pages served the project URL for CVs already sent
-# out, but that URL now redirects to echoshih.com (src/app.html), so its last
-# GitHub Pages deploy stays frozen rather than being rebuilt on every push.
+# The one definition of "is this code good?". quality.yml calls it for pull
+# requests, release-pr.yml for every push to staging (those checks attach to
+# the release PR's commit), and release.yml for the merge commit on main.
+# Concurrency lives in the callers: a group here would let them cancel each
+# other.
+
 on:
-  push:
-    branches: [main]
-    paths-ignore:
-      - "README.md"
-      - "docs/**"
-      - ".githooks/**"
-  pull_request:
-    branches: [main]
-  workflow_dispatch:
+  workflow_call:
 
 permissions:
   contents: read
-
-concurrency:
-  group: ci-${{ github.ref }}
-  cancel-in-progress: true
 
 jobs:
   build:
