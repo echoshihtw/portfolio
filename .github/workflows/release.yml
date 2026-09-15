@@ -1,0 +1,69 @@
+name: Release
+
+# guard -> verify -> release, on every push to main.
+#
+# The merge commit that lands is verified on its own terms before it is
+# tagged: it is a different artefact from what the PR checks tested.
+#
+# No deploy job. Vercel deploys main to production through its own git
+# integration, independently of this workflow, so a failing verify stops the
+# tag but not the deploy.
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  guard:
+    name: Guard
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 2 # enough to see HEAD's parents
+
+      # A squash collapses staging into one commit whose subject is the PR
+      # title, so semantic-release would only ever see that title. Enforced
+      # here, in seconds, because disabling squash repo-wide would also block
+      # squashing feature branches into staging.
+      - name: Refuse a squashed release
+        run: |
+          parents=$(git rev-list --parents -n 1 HEAD | wc -w)
+          if [ "$parents" -lt 3 ]; then
+            echo "::error::main received a non-merge commit. Merge staging into main with 'Create a merge commit', never squash."
+            exit 1
+          fi
+          echo "OK: merge commit, semantic-release sees the real history."
+
+  verify:
+    needs: guard
+    uses: ./.github/workflows/verify.yml
+
+  release:
+    needs: verify
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0 # semantic-release needs full history
+          persist-credentials: false
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - run: npm ci --prefer-offline --no-audit
+
+      # Cuts a tag and a GitHub Release. Nothing is committed to main.
+      - name: Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npx semantic-release
