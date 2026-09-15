@@ -29,16 +29,18 @@ export const projectsConfig: Projects = [
       // where to look. The judgment survives; the map does not.
       "I audit my own access policies, and every change since launch gets a written review",
       "Only the api layer may reach the database. A test fails the build if anything else imports it",
-      // Verified against salon-admin on 2026-09-14. Reads: every successful
+      // Verified against clio-app main on 2026-09-15. Reads: every successful
       // query is snapshotted to localStorage per user and restored when the
       // browser goes offline, with a banner showing when the snapshot was
-      // taken (src/lib/offlineCache.ts, src/context/OfflineContext.tsx). A
-      // failed write shows an error toast and the Save button reads Loading
-      // while in flight. It used to say "writes wait instead of failing
-      // silently": there is no queue, mutations have no retry, and eighteen
-      // direct Supabase writes bypass the mutation hook. The wait is filed
-      // as an issue on the Clio repo; the copy says what the code does.
-      "The salon has patchy Wi-Fi. Reads work offline from the last snapshot, stamped with when it was taken, and a failed write says so",
+      // taken (src/lib/offlineCache.ts, src/context/OfflineContext.tsx).
+      // Writes: since clio-app #116, every save goes through useMutation, and
+      // a transient failure (network error, 5xx, 408, 429) retries up to three
+      // times at 1s, 2s and 4s; a real error fails at once with a toast
+      // (src/lib/queryClient.ts). It does not say writes "survive" a flaky
+      // connection: nothing queues a write across a refresh, and a retry after
+      // a lost response can duplicate a create until device-generated ids ship
+      // (clio-app #100). The durable queue is designed in clio-app #115.
+      "The salon has patchy Wi-Fi. Reads work offline from the last snapshot, stamped with when it was taken. A save retries a dropped connection, and a failed one says so",
       "Records live in a hosted database, so the failure that started all this can't happen again",
     ],
     resume: {
