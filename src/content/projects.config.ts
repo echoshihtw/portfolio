@@ -47,13 +47,13 @@ export const projectsConfig: Projects = [
     status: "Live",
   },
   {
-    name: "Runway",
+    name: "Financial Runway",
     subtitle:
-      "Personal finance measured the way a company measures itself: how long can you sustain yourself?",
-    why: "I was planning a study trip and couldn't answer the one question it rested on: how long can I sustain myself? Budget apps tell you where the money went. I needed to know how much time was left. A person has an opening balance, a burn rate and months remaining, the same as a company.",
+      "Personal finance measured the way a company measures itself: how many months does your money cover?",
+    why: "I was planning a study trip and couldn't answer the one question it rested on: how many months would my money cover? Budget apps tell you where the money went. I needed to know how much time was left. A person has an opening balance, monthly costs and months remaining, the same as a company.",
     result:
-      "I use it. Running on Android, in seven languages and six currencies, built solo. iOS is in progress: the release workflows exist but no tag has been cut, so nothing is on TestFlight or Play yet. One user isn't validation. I built the model before I knew whether anyone else wanted it, which is the wrong order, so the next thing I do here is put it in front of people, not add features.",
-    href: "https://github.com/echoshihtw/survival-optimiser",
+      "I use it. Built solo, in six languages and six currencies. The first App Store release, as Financial Runway, is planned for September 2026. One user isn't validation. I built the model before I knew whether anyone else wanted it, which is the wrong order, so the next thing I do here is put it in front of people, not add features.",
+    href: "https://github.com/echoshihtw/runway",
     shots: [
       {
         src: "assets/runway/dashboard.png",
@@ -68,20 +68,20 @@ export const projectsConfig: Projects = [
         alt: "Runway subscriptions: monthly and yearly totals with per-item cadence",
       },
     ],
-    stack: ["Flutter", "Dart", "Riverpod", "Drift", "SQLCipher"],
+    stack: ["Flutter", "Dart", "Riverpod", "Drift", "SQLCipher", "RevenueCat"],
     highlights: [
-      "A goal is a number of months, not an amount of money. The question was never how much I had, it was how long it lasts",
-      "Burn takes the worse of what you spent and what you budgeted. Reality wins when you overspend, and the budget holds the floor when you don't",
-      "Safety fund and investable money are separate pockets with an adaptive buffer, so spare cash can't quietly become next month's rent",
+      "A goal is a number of months, not an amount of money. The question was never how much I had, it was how many months it covers",
+      "Logged spending uses up its budget instead of adding to it. Monthly costs only rise when a budget is overspent, so a lunch never counts twice",
+      "Runway counts from today. The rest of this month costs what's left of its budget, not a whole month that's already partly paid",
       "The layers are separate Dart packages and can't import each other. A boundary violation is a compile error",
-      "Financial data never leaves the device. Encrypted on-device storage, no account, no server",
+      "Financial data never leaves the device. The app checks the database is actually encrypted every time it opens, instead of trusting the build settings",
     ],
     resume: {
-      descriptor: "personal financial-runway app, Flutter",
+      descriptor: "personal finance app, Flutter",
       role: "Founder",
       bullets: [
         "**Clean Architecture** across a Melos monorepo, SQLCipher-encrypted local storage",
-        "7 languages and 6 currencies, built solo; running on Android",
+        "6 languages and 6 currencies, built solo; first App Store release planned for September 2026",
       ],
     },
     linkLabel: "Source Code →",
