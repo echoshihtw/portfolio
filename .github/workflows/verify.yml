@@ -44,12 +44,17 @@ jobs:
       # A glob cannot go stale when a new input file is added next to the
       # others. It over-invalidates when site-only copy changes, which costs
       # two minutes of TeX; under-invalidating costs a wrong PDF.
+      # The same went for scripts: the key named resume-header.tex but not
+      # resume-entry.lua, which lays out every job entry, so a layout change
+      # reused the old PDF and skipped the one-page check below. scripts/resume-*
+      # covers the header, the filter and the TeX package list; the pandoc pin
+      # is named because a different typesetter can change the page count.
       - name: Restore built résumé
         id: resume
         uses: actions/cache@v6
         with:
           path: static/*.pdf
-          key: resume-${{ hashFiles('src/content/**', 'scripts/buildResume.ts', 'scripts/resume-header.tex') }}
+          key: resume-${{ hashFiles('src/content/**', 'scripts/buildResume.ts', 'scripts/resume-*', 'scripts/pandoc-version.txt') }}
 
       # texlive-fonts-extra is about a gigabyte and it is not optional: the
       # résumé sets mainfont=XCharter, and Debian ships XCharter only there.
