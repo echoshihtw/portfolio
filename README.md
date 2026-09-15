@@ -45,12 +45,25 @@ Generated, never hand-edited: `src/lib/resumeData.ts`, `output/*`,
 
 ## CI
 
-`.github/workflows/ci.yml`. PRs and pushes to `main` run install, check, test and
-both builds; only pushes deploy. Docs-only changes skip.
+The checks live in `.github/workflows/verify.yml`: install, lint, check, test,
+both builds and the accessibility audit. `quality.yml` runs them on every pull
+request (docs-only changes skip), `release-pr.yml` on every push to `staging`,
+and `release.yml` on the merge commit that lands on `main`.
 
 The PDF is cached against its three sources, so TeX installs only when the résumé
 changed: ~2 min on a miss, ~25s otherwise. Node 24 matches local: npm 10 and 11
 write lockfiles differently.
+
+## Releasing
+
+Feature branches merge into `staging`, the default branch. Each push to it
+opens or updates one `staging` to `main` PR titled `chore(release): vX.Y.Z`,
+computed from Conventional Commits (`feat` minor, `fix`/`perf` patch,
+`BREAKING CHANGE` major; `content`, `style` and the rest cut no version).
+Test the staging preview on Vercel, then merge that PR with **Create a merge
+commit**, never squash. `release.yml` refuses a squash, then semantic-release
+tags the release and writes the GitHub Release. Vercel deploys `main` to
+production on its own.
 
 ## Claims
 
