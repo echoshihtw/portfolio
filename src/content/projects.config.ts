@@ -47,7 +47,7 @@ export const projectsConfig: Projects = [
     status: "Live",
   },
   {
-    name: "Runway",
+    name: "Financial Runway",
     subtitle:
       "Personal finance measured the way a company measures itself: how many months does your money cover?",
     why: "I was planning a study trip and couldn't answer the one question it rested on: how many months would my money cover? Budget apps tell you where the money went. I needed to know how much time was left. A person has an opening balance, monthly costs and months remaining, the same as a company.",
@@ -77,7 +77,7 @@ export const projectsConfig: Projects = [
       "Financial data never leaves the device. The app checks the database is actually encrypted every time it opens, instead of trusting the build settings",
     ],
     resume: {
-      descriptor: "personal financial-runway app, Flutter",
+      descriptor: "personal finance app, Flutter",
       role: "Founder",
       bullets: [
         "**Clean Architecture** across a Melos monorepo, SQLCipher-encrypted local storage",
