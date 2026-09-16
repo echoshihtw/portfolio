@@ -10,7 +10,7 @@ type ExperienceItem = {
 
 export const experience: ExperienceItem[] = [
   {
-    "company": "Lockerbie Technology (Musaeum Ltd, UK group)",
+    "company": "Lockerbie Technology",
     "role": "Full-Stack Engineer, Internal Platform",
     "date": "Taipei, Taiwan · Dec 2024 – Jul 2026",
     "highlights": [

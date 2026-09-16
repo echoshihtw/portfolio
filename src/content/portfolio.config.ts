@@ -212,7 +212,7 @@ export const experiencePortfolio: Record<
   string,
   { impact: string; proof: { p: string; s: string }; techLine: string }
 > = {
-  "Lockerbie Technology (Musaeum Ltd, UK group)": {
+  "Lockerbie Technology": {
     // Scope note: the modular-monolith / RabbitMQ / ArangoDB direction was the team's,
     // set by my lead. I learned it and implemented it in production. What I chose:
     // the App Router + BFF boundary, and the deploy packaging below.

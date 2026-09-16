@@ -132,7 +132,17 @@ pairing on the conventions before feature work, and independent two months
 later. This bullet does not need it either way, since a week becoming two days
 is the sharper evidence that the template worked. -->
 
-## Lockerbie Technology (Musaeum Ltd, UK group)
+<!-- The company line names the employer and stops. It used to read
+"Lockerbie Technology (Musaeum Ltd, UK group)", which asked the reader to hold
+two company names before the first bullet and helped them verify nothing: the
+Companies House record for MUSAEUM LIMITED (11412164, England) does not mention
+Echo, and the employing entity, 台灣洛克比科技有限公司 (UBN 93722827, Taipei,
+established January 2024), is registered in Chinese with no English name. The
+UK signal a reader wants is in bullet one, where it is about the work: an
+early-stage platform for the UK construction sector. The legal names belong on
+background-check forms, not here. -->
+
+## Lockerbie Technology
 
 Full-Stack Engineer, Internal Platform · _Taipei, Taiwan · Dec 2024 – Jul 2026_
 
