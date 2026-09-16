@@ -131,7 +131,15 @@ Experience Parser
 export function parseExperience(section) {
   const entries = [];
 
-  const blocks = section.split("## ").filter(Boolean);
+  // Strip HTML comments before splitting. resume.md documents why each line
+  // reads as it does, but an entry's first three non-blank lines are its
+  // company, role and date, so a comment anywhere under "# Experience" is
+  // parsed as one of those and ships to the site as a card. A comment
+  // containing "## " splits into phantom entries on top of that.
+  const blocks = section
+    .replace(/<!--[\s\S]*?-->/g, "")
+    .split("## ")
+    .filter((block) => block.trim());
 
   blocks.forEach((block) => {
     const lines = block

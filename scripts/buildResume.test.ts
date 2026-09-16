@@ -33,6 +33,19 @@ Engineer · _Remote · Aug 2022 – May 2024_
 **Frontend**: React
 `;
 
+// resume.md carries provenance comments throughout, and one under
+// "# Experience" used to be parsed as a company, role and date.
+const RESUME_WITH_COMMENT = `# Experience
+
+<!-- Why these bullets are ordered this way, mentioning a ## heading. -->
+
+## Acme Ltd
+
+Staff Engineer · _Taipei · Dec 2024 – Present_
+
+- Did a thing.
+`;
+
 describe("extractSection", () => {
   it("returns a section's body without the heading", () => {
     expect(extractSection("Summary", RESUME)).toBe("A sentence about me.");
@@ -91,5 +104,18 @@ describe("withProjects", () => {
     expect(() => withProjects("# Projects\n\n# Skills\n")).toThrow(
       /missing the projects marker/
     );
+  });
+});
+
+describe("parseExperience with comments", () => {
+  it("ignores HTML comments instead of parsing them as entries", () => {
+    const entries = parseExperience(
+      extractSection("Experience", RESUME_WITH_COMMENT)
+    );
+
+    expect(entries).toHaveLength(1);
+    expect(entries[0].company).toBe("Acme Ltd");
+    expect(entries[0].role).toBe("Staff Engineer");
+    expect(entries[0].date).toBe("Taipei · Dec 2024 – Present");
   });
 });
