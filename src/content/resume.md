@@ -32,27 +32,33 @@ The opening line is the only one that is not bait, and it is deliberate: the
 keyword filter and the six-second skim both need a role and a stack, and one
 line is cheap insurance that costs the hooks nothing.
 
-The two hooks are Echo's own pick from a longer list. Both are before-and-after
-states, not percentages. A day to five minutes is 99% and a week to two days is
-60%, and both were drafted and cut: a percentage is the easiest figure on a CV
-to inflate, so experienced readers discount it, while "a day became five
-minutes, run by someone who is not an engineer" is checkable and cannot be
-argued with.
+The second line names the work and lets the bullets prove it. A draft on
+2026-09-16 put the two figures here instead, opening "a deployment went from a
+full day to five minutes" and "a backend task went from a week to two days".
+Rendered, that was the mistake: those are the bold openings of bullets two and
+three, about ten lines further down the same page, so the reader met each claim
+twice within a few centimetres and the summary read as padding. Checking the
+copy in the files hid it, because they are different files. Check the PDF.
 
-The third line is what stops the numbers reading as tooling wins. Without it the
-question is "which CI provider"; with it, both numbers point at a diagnosis and
-the question becomes how she worked out that was the problem. That is the same
-skill the About page calls noticing the pattern under things, and it plants
-"what was actually on the machine" for the GHCR and tagged-image answer.
+The figures stay in the bullets, where the before-and-after sits around them,
+and the summary keeps only "five minutes", the most arresting of them, attached
+to the fact a reader cannot argue with: the person running it is not an
+engineer. The three clauses are still hooks, so an interviewer still asks about
+the template, the release and the access model. They just no longer announce
+sentences the reader is about to meet in bold.
 
-Known trade: opening with numbers from one job leans the document on Lockerbie,
-and Find Recruiter's TypeScript migration gets no hook. -->
+The register is the document's, not a letter's. "On the platform I shipped this
+year" was the only first person on the page, and every bullet uses the implied
+subject: Owned, Set up, Designed, Diagnosed. It also went stale by January and
+spent four words clearing its throat before the first fact. The diagnosis line
+that followed it, "nobody could tell where code went, or what was actually on
+the machine", went with it: conversational, and it sat in the most formal place
+on the page, directly above Experience. It also promised one cause and then
+gave two. -->
 
 Product engineer on the software a business runs on: React, TypeScript and Next.js in front, Python, Postgres and Docker behind.
 
-On the platform I shipped this year, a deployment went from a full day to five minutes, and the person who runs it now is not an engineer. A backend task went from a week to two days.
-
-Both came from the same thing: nobody could tell where code went, or what was actually on the machine.
+Builds the delivery path as well as the product: the module template a team builds against, the release a non-engineer runs in five minutes, the access model no service has to reimplement.
 
 # Experience
 
