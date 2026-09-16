@@ -66,7 +66,7 @@ the machine", went with it: conversational, and it sat in the most formal place
 on the page, directly above Experience. It also promised one cause and then
 gave two. -->
 
-Product engineer on the software a business runs on: React, TypeScript and Next.js in front, Python, Postgres and Docker behind.
+Product engineer on the software a business runs on: React, TypeScript, Next.js in front; Python, Postgres, Docker behind.
 
 Builds the delivery path as well as the product: the module template a team builds against, the release a non-engineer runs in five minutes, the access model no service has to reimplement.
 
@@ -159,24 +159,23 @@ background-check forms, not here. -->
 
 Full-Stack Engineer, Internal Platform · _Taipei, Taiwan · Dec 2024 – Jul 2026_
 
-- One of two engineers on an early-stage internal platform for the **UK construction sector** (ISO 19650). Owned the Next.js / TypeScript frontend, wrote the specification the team built against, and held scope to it until phase one shipped on the agreed July 2026 date.
-- **A backend task went from a week to two days.** Before there was a module template, every task opened with an argument about where code goes. Refactored the backend into the team's **event-driven modular monolith**, seven modules organised by business domain rather than by layer and communicating over RabbitMQ instead of importing each other, then set up the module template, the CI quality gate and a shared Postman collection. Modules were reused rather than re-debated, and a failing build named what broke.
-- **A deployment went from a full day to five minutes, run by someone who is not an engineer.** The first took a day: a non-technical stakeholder cloning the repo onto Ubuntu over SSH, resolving missing packages by hand. Replaced it with a **build-once, promote-once release pipeline** across frontend and backend, staging and production: a one-time `.env` and compose file, then `make run` pulls a tagged image from GHCR, and merging staging to main builds and tags it.
-- **Permission changes stopped being a redesign.** Access rules were scattered across the services, so every change meant re-reasoning the whole flow. Designed one **role-to-capability map** to replace them: seven organisation-level and project-scoped roles resolving into 26 capability flags. Adding a role means one entry, read against the others, and the super-admin role is derived from them so it cannot drift. A service reads a flag; it never reimplements the rule.
-- Given a requirement that layers stay independent, chose Next.js App Router with a **BFF security boundary**: server-managed authentication, centralised CSRF protection, no backend credentials in browser JavaScript.
+- One of two engineers on an early-stage internal platform for the **UK construction sector** (ISO 19650). Owned the Next.js / TypeScript frontend, wrote the spec, held scope to it. Phase one shipped on its agreed July 2026 date.
+- **A backend task went from a week to two days.** Every task used to start with an argument about where code goes. Refactored the backend into the team's **event-driven modular monolith**, seven business-domain modules over RabbitMQ, then set up the module template, the CI quality gate and a shared Postman collection.
+- **A deployment went from a full day to five minutes, run by someone who is not an engineer.** It meant a non-technical stakeholder cloning the repo onto Ubuntu over SSH, fixing missing packages by hand. Replaced with a **build-once, promote-once release pipeline**: one `.env` and compose file, then `make run` pulls the image GHCR built and tagged on merge to main. Frontend and backend, staging and production.
+- **Permission changes stopped being a redesign.** Scattered rules meant re-reasoning the whole flow on every change. Designed one **role-to-capability map**: seven organisation-level and project-scoped roles into 26 capability flags. A new role is one entry, read against the others; super-admin derives from them, so it cannot drift. A service reads a flag, never the rule. Behind a **BFF security boundary** on Next.js App Router: server-managed auth, centralised CSRF, no backend credentials in the browser.
 - Diagnosed a **RabbitMQ RPC bug** where a stale, uninitialised consumer round-robined into login lookups and failed every user's first attempt; fixed with a fail-fast DB check before broker registration.
 
 ## SPIN.FASHION by Lablaco
 
 Full Stack Engineer & Founding Partner · _Singapore · Remote · Aug 2024 – Oct 2024_
 
-- Founding partner on the in-store desktop app; co-ran the team's scrum with the CTO. Cleared the **macOS code-signing, notarisation and auto-update** work blocking release, shipped the Electron app, and wrote the release steps down.
+- Founding partner on the in-store desktop app; co-ran the scrum with the CTO. Cleared the **macOS code-signing, notarisation and auto-update** work blocking release, shipped the Electron app, documented the release steps.
 
 ## Find Recruiter
 
 Software Engineer · _Taipei, Taiwan · Aug 2022 – May 2024_
 
-- Led frontend delivery on a **B2B and B2C recruitment and ATS platform** in React and Redux-Saga, on a two-engineer team reporting to the CTO. Migrated it to TypeScript incrementally while it kept shipping, and authored around 100 of its shared components.
+- Led frontend delivery on a **B2B and B2C recruitment and ATS platform** in React and Redux-Saga, two engineers reporting to the CTO. Planned the TypeScript migration in steps, so it shipped without breaking, and authored around 100 shared components.
 - Wrote the **Server-Sent Events** channel the frontend consumed AI-generated drafts through.
 
 ## Independent / Freelance Engineering
@@ -205,5 +204,13 @@ Software Engineer · _Remote · 2020 – 2024 · side projects and short contrac
 
 # Education
 
+<!-- Two lines, deliberately. Merging the degree and the languages onto one
+line was tried on 2026-09-16 for the one-page pass and reverted: combined they
+run about 137 characters against a measure of roughly 95, so the paragraph
+wrapped to two lines anyway and left a bolded "Languages" stranded mid-line.
+Same height, worse reading. Shortening it enough to fit would mean dropping
+"working language, all roles", which is the part a hiring reader needs. -->
+
+CS50's Introduction to Cybersecurity, HarvardX · in progress, 2026  
 B.A. Italian Language and Culture, Fu Jen Catholic University, Taipei · 2018  
 **Languages**: Mandarin, Taiwanese (native) · English (working language, all roles) · Italian
