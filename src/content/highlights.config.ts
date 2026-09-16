@@ -42,9 +42,19 @@ export const highlightsConfig: Highlight[] = [
   {
     // Lockerbie deploy packaging: resume.md. SPIN.FASHION release steps:
     // experience copy.
+    //
+    // Rewritten 2026-09-16 around what changed rather than what was built.
+    // This said "a three-file runner folder that pulls the promoted image
+    // from GHCR. No source checkout, no dev dependencies, an 80 MB download
+    // instead of a build", which is four facts about a mechanism and no
+    // before state, so a reader had nothing to measure it against. The
+    // résumé bullet now carries the day and the five minutes, and the title
+    // was already promising exactly this: somebody else can run it. The
+    // 80 MB went because it is the one number here that argues for the
+    // mechanism rather than for the person doing the deploying.
     title: "Production somebody else can run",
     proof:
-      "Deploys are a three-file runner folder that pulls the promoted image from GHCR. No source checkout, no dev dependencies, an 80 MB download instead of a build. The release steps for the macOS app are written down.",
+      "A deployment used to take a day: clone the repo onto Ubuntu over SSH, then resolve whatever was missing on the machine. Now it is five minutes, and the person running it is not an engineer. A tagged image from GHCR, a compose file, and one command. The release steps for the macOS app are written down.",
   },
   {
     // SPIN.FASHION: resume.md. release-please: the published post.
