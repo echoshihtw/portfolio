@@ -15,9 +15,8 @@ export const experience: ExperienceItem[] = [
     "date": "Taipei, Taiwan · Dec 2024 – Jul 2026",
     "highlights": [
       "One of two engineers on an early-stage internal platform for the **UK construction sector** (ISO 19650). Owned the Next.js / TypeScript frontend, wrote the specification the team built against, and held scope to it until phase one shipped on the agreed July 2026 date.",
-      "**A backend task went from a week to two days.** Before there was a module template, every task opened with an argument about where code goes. Set up the template, the CI quality gate and a shared Postman collection, so modules were reused rather than re-debated and a failing build named what broke.",
+      "**A backend task went from a week to two days.** Before there was a module template, every task opened with an argument about where code goes. Refactored the backend into the team's **event-driven modular monolith**, seven modules organised by business domain rather than by layer and communicating over RabbitMQ instead of importing each other, then set up the module template, the CI quality gate and a shared Postman collection. Modules were reused rather than re-debated, and a failing build named what broke.",
       "**A deployment went from a full day to five minutes, run by someone who is not an engineer.** The first took a day: a non-technical stakeholder cloning the repo onto Ubuntu over SSH, resolving missing packages by hand. Replaced it with a **build-once, promote-once release pipeline** across frontend and backend, staging and production: a one-time `.env` and compose file, then `make run` pulls a tagged image from GHCR, and merging staging to main builds and tags it.",
-      "Refactored the backend into the team's **event-driven modular monolith**: seven modules organised by business domain rather than by layer, communicating over RabbitMQ instead of importing each other, so changing part of the system does not mean holding all of it in your head.",
       "**Permission changes stopped being a redesign.** Access rules were scattered across the services, so every change meant re-reasoning the whole flow. Designed one **role-to-capability map** to replace them: seven organisation-level and project-scoped roles resolving into 26 capability flags. Adding a role means one entry, read against the others, and the super-admin role is derived from them so it cannot drift. A service reads a flag; it never reimplements the rule.",
       "Given a requirement that layers stay independent, chose Next.js App Router with a **BFF security boundary**: server-managed authentication, centralised CSRF protection, no backend credentials in browser JavaScript.",
       "Diagnosed a **RabbitMQ RPC bug** where a stale, uninitialised consumer round-robined into login lookups and failed every user's first attempt; fixed with a fail-fast DB check before broker registration."
@@ -43,7 +42,7 @@ export const experience: ExperienceItem[] = [
   {
     "company": "Independent / Freelance Engineering",
     "role": "Software Engineer",
-    "date": "Remote · 2020 – 2024",
+    "date": "Remote · 2020 – 2024 · side projects and short contracts",
     "highlights": [
       "Built the Next.js frontend for a **Bitcoin coin-selection research tool** with a BDK core maintainer, July to August 2023.",
       "Bug fixing and UX on a **BigCommerce** storefront for Bdigital, June to August 2024, in vanilla JavaScript, HTML and CSS."
