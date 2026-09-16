@@ -50,7 +50,7 @@ export const projectsConfig: Projects = [
         // as well, and wrapped, which cost the page the line the swap was
         // meant to be free of. The why is already on the project card above,
         // in full; the CV states what it does and who it is for.
-        "Exports clients, visits and hair profiles as CSV, so the owner can take her records out",
+        "CSV export of clients, visits and hair profiles, so her records stay portable, not locked in",
         "Reads work offline from cache on patchy salon Wi-Fi; Traditional Chinese first",
       ],
     },
