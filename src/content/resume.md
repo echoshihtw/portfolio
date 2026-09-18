@@ -212,10 +212,29 @@ line and no more.
 
 It does not close the 2018 to 2020 gap, which was the reason it came up on
 2026-09-18. Oct 2021 to Mar 2022 sits between the freelance work starting in
-2020 and Find Recruiter in Aug 2022. The two years after graduating are still
-unaccounted for on the page, deliberately: a CV that explains a gap invites
-more scrutiny than one that simply leaves the dates to speak. That answer
-belongs in the interview.
+2020 and Find Recruiter in Aug 2022.
+
+Those two years are accounted for and deliberately not printed. Echo was
+working in restaurants, in customer relations. Decided on 2026-09-18: nothing
+on the CV, the full story everywhere else.
+
+The entry would cost two to three lines, because every Experience entry
+renders a company line and a role line before any bullet, and this page has no
+slack; it would be paid for out of Lockerbie or Clio. The risk it defends
+against is small: the gap predates the engineering career entirely, the dates
+run continuously from 2020, and a screener reading top-down has formed a view
+long before reaching 2018. A CV that explains a gap invites more scrutiny than
+one that lets the dates speak.
+
+"Customer relations" without the restaurants was considered and rejected the
+same day. It is the kind of unfalsifiable phrase this document removes
+elsewhere, it contradicts the About page, which says restaurants in Echo's own
+words, and it sands off the only part anyone would remember. Either the whole
+fact or none of it; on the CV, none.
+
+Where it does belong: the About page, which tells it with a point, and the
+interview, where "customer relations is observing people, and I do the same
+thing against systems now" is a strong answer to a question worth being asked.
 
 Paying for the line: "on Next.js App Router" came out of the BFF bullet. The
 substance is carried by the boundary, the server-managed auth and the
