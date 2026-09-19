@@ -114,13 +114,23 @@ export const heroConfig: {
   // and it was sitting only in the PDF, which is the artefact fewer people
   // open.
   //
-  // "I wrote every line", not "sole author" and not "own". Echo's own
-  // correction, 2026-09-19: she wrote every line of that frontend, which is a
-  // stronger and rarer fact than ownership, and harder to wave away. "Sole
-  // author" was drafted first and strained, because it governed two objects
-  // here and a release pipeline is not authored; "own" fixed the grammar by
-  // trading the stronger claim for a vaguer one. Two verbs, each with the
-  // right object, in the first person the line below already uses.
+  // "I build", present tense, no intensifier. Three drafts got here. "Sole
+  // author" strained: it governed two objects and a release pipeline is not
+  // authored. "I wrote every line" is true, and Echo writes every line of
+  // that frontend, but "every" was the one word on the page working to
+  // impress, and a reader discounts it in a thought: two engineers, so of
+  // course one of them wrote the frontend. It also sat immediately before the
+  // page's most checkable fact, which made the contrast visible.
+  //
+  // Present tense because the line below is present tense, so the paragraph
+  // no longer changes voice halfway through. First person because the site
+  // speaks in Echo's voice throughout and the About page is first person;
+  // dropping the pronoun here would leave the next sentence stranded and make
+  // the page sound like the document that already exists one click away.
+  //
+  // The sole-authorship claim lives in resume.md, where it governs only the
+  // frontend and a recruiter is scanning for scope. Claim on the CV,
+  // demonstrate on the site: two registers, two readers.
   //
   // resume.md keeps "Sole author of the Next.js / TypeScript frontend". Same
   // fact, and there it governs only the frontend, in the register a recruiter
@@ -132,7 +142,7 @@ export const heroConfig: {
   // more specifically. Still two lines rather than one paragraph, so a
   // skimmer gets the first.
   support: [
-    "Project platforms, applicant tracking, client histories: the software a business runs on. I wrote every line of the frontend, and built the delivery path under it: the module template a team builds against, the release a non-engineer runs in five minutes.",
+    "Project platforms, applicant tracking, client histories: the software a business runs on. I build the frontend, and the delivery path under it: the module template a team builds against, the release a non-engineer runs in five minutes.",
     "I secure it, keep it running after ship, and write down what broke.",
   ],
 
