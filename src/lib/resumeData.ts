@@ -17,7 +17,7 @@ export const experience: ExperienceItem[] = [
       "**Sole author of the Next.js / TypeScript frontend** on an early-stage internal platform for the **UK construction sector** (ISO 19650), one of two engineers. Wrote the spec and held scope to it; phase one shipped on its agreed July 2026 date.",
       "**A backend task went from a week to two days.** Every task used to start with an argument about where code goes. Refactored the backend into the team's **event-driven modular monolith**, seven business-domain modules over RabbitMQ, then set up the module template, the CI quality gate and a shared Postman collection.",
       "**A deployment went from a full day to five minutes, run by someone who is not an engineer.** It meant a non-technical stakeholder cloning the repo onto Ubuntu over SSH, fixing missing packages by hand. Replaced with a **build-once, promote-once release pipeline**: one `.env` and compose file, then `make run` pulls the image GHCR built and tagged on merge to main. Frontend and backend, staging and production.",
-      "**Permission changes stopped being a redesign.** Scattered rules meant re-reasoning the whole flow each time. Designed one **role-to-capability map**: seven organisation-level and project-scoped roles into 26 capability flags. A new role is one entry read against the others; super-admin derives from them, so it cannot drift. Services read a flag, never the rule. Behind a **BFF security boundary**: server-managed auth, centralised CSRF, no backend credentials in the browser.",
+      "**Permission changes stopped being a redesign.** Scattered rules meant re-reasoning the whole flow. Designed one **role-to-capability map**: seven organisation-level and project-scoped roles into 26 capability flags. A new role is one entry read against the others, and super-admin derives from them, so it cannot drift. Services read a flag, never the rule. Behind a **BFF security boundary**: server-managed auth, centralised CSRF, no backend credentials in the browser.",
       "Diagnosed a **RabbitMQ RPC bug** where a stale, uninitialised consumer round-robined into login lookups and failed every user's first attempt; fixed with a fail-fast DB check before broker registration."
     ]
   },
@@ -34,7 +34,7 @@ export const experience: ExperienceItem[] = [
     "role": "Software Engineer",
     "date": "Taipei, Taiwan · Aug 2022 – May 2024",
     "highlights": [
-      "Led frontend delivery on a **B2B and B2C recruitment and ATS platform** in React and Redux-Saga, two engineers under the CTO. Planned the TypeScript migration in steps so it shipped without breaking, authoring around 100 shared components.",
+      "Led the frontend of a **B2B and B2C recruitment and ATS platform** in React and Redux-Saga, two engineers under the CTO. Planned the TypeScript migration in steps so it shipped without breaking, authoring 100 shared components.",
       "Wrote the **Server-Sent Events** channel the frontend consumed AI-generated drafts through."
     ]
   },
