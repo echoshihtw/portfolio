@@ -70,13 +70,34 @@ spent four words clearing its throat before the first fact. The diagnosis line
 that followed it, "nobody could tell where code went, or what was actually on
 the machine", went with it: conversational, and it sat in the most formal place
 on the page, directly above Experience. It also promised one cause and then
-gave two. -->
+gave two.
+
+That register held until 2026-09-19, when a third paragraph arrived in the
+first person: "I came to engineering from customer relations. I build for the
+person at the other end." It is the only sentence on the page nobody else could
+write, and it is why someone forwards a CV rather than filing it. The voice is
+now split by position rather than mixed: first person in the summary, implied
+subject in the bullets, where a recruiter is scanning for scope.
+
+The page was full, so the line was paid for: the opening lost "in front" and
+"behind" and fits one line, the access-model clause moved to the bullet that
+already carries it, two bullets were recast, and Mobile & Desktop became
+site-only.
+
+"I build for the person at the other end", not "what I do is notice the pattern
+under a mess and remove it". The first draft named a cognitive habit, which
+every engineer claims and none evidences, and it answered the question the
+sentence before it opens, leaving an interviewer nothing to ask. The aim was to
+signal the people side of a non-technical background, and pattern recognition
+is not that. This says it outright, and the page has already earned it three
+times over: a release a non-engineer runs, a year of records the owner typed by
+hand, and a product built around the two minutes before a client sits down. -->
 
 Product engineer on the software a business runs on: React, TypeScript, Next.js, Python, Postgres, Docker.
 
 I build the frontend and the delivery path under it: the module template a team builds against, the release a non-engineer runs in five minutes.
 
-I came to engineering from customer relations. What I do is notice the pattern under a mess and remove it.
+I came to engineering from customer relations. I build for the person at the other end.
 
 # Experience
 
