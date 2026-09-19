@@ -71,37 +71,37 @@ export const aboutMeConfig = {
   // I decided" went too: it is a hedge, and either the date is known or it
   // is not worth gesturing at.
   story: [
-    "I have a degree in Italian language and culture, and I started out in restaurants, in customer relations. What I'm good at is noticing things and the pattern under them. So that's what I spend my time on now.",
-    // Why she writes software, supplied by Echo on 2026-09-19 and awaiting her
-    // approval of the wording. Her words, in order: "this is really why i
-    // started coding, all those bad and really hard to use tools", then the
-    // correction "not particularly 'the tools were bad', just can be better ux
-    // ui", then "i like things being intuitive and natural, without much
-    // explanation, better self explanatory" and "im the real user, and i think
-    // for them".
+    // Three beats, not five, after Echo said the paragraphs read as
+    // individuals: degree and languages, then the software, then painting.
+    // Each reaches back one word instead of being introduced, so the links
+    // are inside the sentences rather than in connective tissue.
     //
-    // The rule at the top of this file still stands: a motive line is asked
-    // for, not written. The difference is that this motive was volunteered and
-    // then refined, three times, which is as close to dictation as anything
-    // else on this page. Echo approved this wording on 2026-09-19. It stays in
-    // the constructive register she corrected to: the software could be
-    // better, not the software was bad.
+    // "The software we used" picks up the job named at the end of the
+    // paragraph above, so the break becomes the turn. "I paint too" is her own
+    // hinge: too, as in as well as all that. A bridge sentence was drafted
+    // ("What I kept noticing was the software") and cut on 2026-09-19: the
+    // jump from restaurants to software is stronger with nothing in between,
+    // because it explains a connection the reader makes in the gap anyway.
     //
-    // "Software you don't have to be taught", not "things that explain
-    // themselves", and not simple, intuitive or natural. Those four are the
-    // adjectives every UX-adjacent CV reaches for and none of them can be
-    // checked. This one is the user's version rather than the designer's: in a
-    // restaurant someone sits you down and trains you on the till, and if the
-    // software needs that, it failed. It implies the manual, the onboarding
-    // and the colleague showing you the workaround without naming any of them,
-    // and it is the same voice as the résumé's "I was the user first".
-    "The software I used at work could have been better, and I could see how. That is why I started writing it. I like software you don't have to be taught.",
-    "Mandarin and Taiwanese are native. English has been the working language in every job I've had, and I have Italian from the degree. I've worked across time zones since 2020.",
-    // The bridge to the other half of the site, in Echo's own words,
-    // 2026-09-07.
-    // Where: her words, 2026-09-07. Mostly at her desk or on the way
-    // somewhere, a train, a plane. Not Tainan.
-    "I paint too, since 2012. Mostly at my desk or on the way somewhere, on a train or a plane, and for a few months in Florence. One part logic, one part emotion.",
+    // Languages moved up to sit with the degree. As their own paragraph in the
+    // middle they were the one block that is not a step in the sequence, which
+    // is what made the section read as a list.
+    //
+    // Register is hers: casual, short, fragments, "could've". Three composed
+    // sentences were written and rejected the same day, "so most of what I
+    // build gets explained to someone who wasn't in the room", "ideas into
+    // something you can see", and a line interpreting customer relations as
+    // "working out what someone means before they've found the words for it".
+    // The last one is the clearest case of the rule at the top of this file:
+    // it assigned a meaning to her work that she never gave.
+    //
+    // No timezone line. "Remote since 2020" was drafted and caught by Echo as
+    // false: Lockerbie was on-site at a coworking space. "Across time zones
+    // since 2020" is the true version and had no home in three beats; the
+    // closing section already ends on "Remote, from Taiwan".
+    "BA in Italian language and culture. Mandarin and Taiwanese are native, English at work. Then restaurants, customer relations.",
+    "The software we used could've been better, and I could see how. So I started writing it. I like software you don't have to be taught.",
+    "I paint too, since 2012. At my desk, on trains and planes, a few months in Florence. One part logic, one part emotion.",
   ],
 
   // The torn-paper edge from Echo's edited version, grafted onto the colour
