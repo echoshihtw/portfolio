@@ -32,12 +32,24 @@ export const skillBuckets: SkillBucket[] = [
       { name: "TypeScript" },
       { name: "Next.js" },
       { name: "Design systems" },
-      { name: "UI patterns" },
-      { name: "Responsive & accessible" },
+      // Site only from 2026-09-16, with MUI below. "UI patterns" names
+      // nothing a posting screens for or an interviewer asks about, and it
+      // cannot be falsified, which is the kind of phrase the rest of the CV
+      // avoids. "Responsive & accessible" is a baseline expectation, and
+      // claiming it as a skill faintly implies it is optional; the repo runs
+      // an axe audit on every build, which is better evidence than the words.
+      // Both stay on the site, where siteGroups picks them by name.
+      //
+      // The trade, stated so it is a decision and not an oversight: each term
+      // removed is one an ATS keyword filter cannot match, and "responsive"
+      // and "accessible" do appear in job descriptions. The bet is that a
+      // human reading a tight list beats a filter matching a long one.
+      { name: "UI patterns", on: "site" },
+      { name: "Responsive & accessible", on: "site" },
       { name: "TanStack Query" },
       { name: "Zustand" },
       { name: "Tailwind CSS" },
-      { name: "MUI" },
+      { name: "MUI", on: "site" },
       { name: "Redux" },
       { name: "SvelteKit" },
     ],
@@ -68,7 +80,16 @@ export const skillBuckets: SkillBucket[] = [
       { name: "pytest" },
       // Personal local tooling used while delivering work, not team
       // infrastructure. Named plainly; no tool a reader would have to look up.
-      { name: "Claude Code" },
+      //
+      // Site only from 2026-09-16. On the CV it sat in a line of things
+      // configured or written against (Docker, GHCR, pytest) and was the one
+      // entry that was an editor, which made the list read as padded. It is
+      // also table stakes now, so it screens nobody out, and a minority of
+      // reviewers read it as a question about working without it. On the site
+      // it keeps the company it earns: Skills, Hooks and Plugins, which are
+      // things built rather than used. Not deleted: siteGroups picks it by
+      // name, and an unknown name throws at import.
+      { name: "Claude Code", on: "site" },
       { name: "Skills", on: "site" },
       { name: "Hooks", on: "site" },
       { name: "Plugins", on: "site" },

@@ -212,7 +212,7 @@ export const experiencePortfolio: Record<
   string,
   { impact: string; proof: { p: string; s: string }; techLine: string }
 > = {
-  "Lockerbie Technology (Musaeum Ltd, UK group)": {
+  "Lockerbie Technology": {
     // Scope note: the modular-monolith / RabbitMQ / ArangoDB direction was the team's,
     // set by my lead. I learned it and implemented it in production. What I chose:
     // the App Router + BFF boundary, and the deploy packaging below.
@@ -229,13 +229,40 @@ export const experiencePortfolio: Record<
     // the same reader. The stack went for that reason: the tech line below
     // is three words away.
     //
+    // The deploy packaging went for the same reason on 2026-09-16. This
+    // paragraph used to end with the three-file runner folder and the GHCR
+    // image, which is now the résumé's third Lockerbie bullet, told better:
+    // a day became five minutes, and the person who runs it is not an
+    // engineer. Two tellings of one story, and this was the weaker one,
+    // because it described the mechanism and never said what changed.
+    //
     // Bringing a second engineer up is the leadership evidence on this
-    // card, so it stays here in the visible half rather than only in bullet
-    // five, where a reader who does not expand would never find it. The two
-    // now take different angles: this one is how it was done, pairing on
-    // the conventions and the review flow before feature work; the bullet
-    // is the pipeline, with the outcome. "Pairing along the way" appeared
-    // word for word in both and now appears in neither.
+    // card, so it stays here in the visible half, whole: the how, by pairing
+    // on the conventions and the review flow first, and the outcome two
+    // months later. The résumé bullet no longer mentions it at all. On
+    // 2026-09-16 the restructured template bullet ended "brought a new
+    // engineer to shipping independently in two months", which is this
+    // sentence's outcome in almost its own words, and the card shows it to
+    // every reader while the bullet sits behind an expander. So the split
+    // that used to divide how from outcome is gone; one surface tells it.
+    // The bullet keeps a week becoming two days, which is sharper evidence
+    // that the template worked than onboarding time is.
+    //
+    // "Brought the other", not "brought our second engineer": the opening
+    // sentence already says one of two engineers, so naming the second one
+    // again stated the team size twice in sixty words. The pronoun refers
+    // back instead, and both facts survive.
+    //
+    // The two numbers were added the same day, in Echo's wording and Echo's
+    // order. Before that this paragraph carried neither: 42 words, 27 of
+    // them mentoring, and a reader who never expanded the card left with no
+    // figure at all, while the résumé had been restructured to lead with
+    // exactly those two. The alternative drafted against it spent its extra
+    // words on the mechanism ("once there was a module template and a CI
+    // gate to build against") and dropped the mentoring sentence to afford
+    // them. This keeps all three facts, and ends on the numbers rather than
+    // opening with them, so the last thing read before the proof block is
+    // the measurable part.
     //
     // Opens on the verb, 2026-09-11. The heading above already says
     // Lockerbie and "Internal Platform", so the old opening spent its first
@@ -245,16 +272,37 @@ export const experiencePortfolio: Record<
     // with it: an "internal project-management platform" could be anyone's,
     // and the UK construction sector could not.
     impact:
-      "Built and operated an early-stage internal platform for the UK construction sector, as one of two engineers. Brought our second engineer into the codebase by pairing on the conventions and the review flow before the feature work started, and two months later they were shipping independently. Packaged deploys into a three-file runner folder that pulls the promoted image from GHCR, so running production needs no source checkout and no dev dependencies.",
-    // The constraint was my lead's: layers independent, no direct
-    // browser-to-backend access. The way of meeting it was mine. No "before"
-    // state to fix either: the boundary was there from the start.
+      "Built and operated an early-stage internal platform for the UK construction sector, as one of two engineers. Brought the other to shipping independently in two months by pairing on the conventions and the review flow first. A backend task went from a week to two days, and a deployment from a full day to five minutes for a non-engineer.",
+    // The constraint was my lead's, in Echo's words on 2026-09-16: frontend
+    // and backend stay separate, and neither accesses the other directly.
+    // The way of meeting it was mine. No "before" state to fix either: the
+    // boundary was there from the start.
+    //
+    // The line used to read "no direct browser-to-backend calls", which is
+    // one direction and describes the browser rather than the two services.
+    // The constraint is mutual, so the line says so.
+    //
+    // That attribution is recorded here and nowhere else. "A requirement from
+    // my lead" was drafted into the problem line on 2026-09-16 and cut the
+    // same day: it buys credibility from one kind of reader and sounds like
+    // self-diminishment to another, and the file already keeps the record
+    // straight. The line states the constraint and stops.
+    //
+    // This block is also the only architecture judgement visible before a
+    // click, now that the résumé's BFF and RBAC bullet sits fifth. The
+    // impact paragraph above carries delivery; this carries the decision, so
+    // the card makes two arguments rather than one twice.
     proof: {
-      p: "The layers had to stay independent: no direct browser-to-backend calls.",
-      s: "Chose Next.js App Router with a BFF security boundary in front, so no backend credential ever reaches browser JavaScript.",
+      p: "Frontend and backend stay separate, neither reaching the other directly.",
+      s: "A BFF between them: the browser talks to the frontend's own server, and it talks to the backend, so no backend credential ever reaches browser JavaScript.",
     },
+    // App Router is named here rather than in the proof sentence above, which
+    // used to open "Chose Next.js App Router with". The tech line was already
+    // carrying Next.js, so the framework was on the card twice and the proof
+    // spent its first four words on it. Naming the router here keeps the
+    // specificity and gives the proof back to the decision.
     techLine:
-      "Next.js · TanStack Query · FastAPI · ArangoDB · RabbitMQ · Docker · GHCR",
+      "Next.js App Router · TanStack Query · FastAPI · ArangoDB · RabbitMQ · Docker · GHCR",
   },
   "SPIN.FASHION by Lablaco": {
     // Agreed title was Full Stack Engineer & Founding Partner: use it as agreed,

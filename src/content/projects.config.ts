@@ -47,10 +47,29 @@ export const projectsConfig: Projects = [
       descriptor: "salon operations platform, live since May 2025",
       role: "Founder",
       bullets: [
-        "React, Supabase, **Postgres RLS**: multi-tenant from day one, per-member permissions",
-        "603 clients and 2,694 service records, entered by hand by the owner",
-        "A build-failing test keeps database access inside the api layer",
-        "Reads work offline from cache on patchy salon Wi-Fi; Traditional Chinese first",
+        // Two bullets folded into one for the one-page cut, 2026-09-16. Both
+        // facts survive: multi-tenancy on RLS is the technical claim, the
+        // hand-entered records are the adoption evidence, and they belong in
+        // the same breath anyway. "React" went: it is in Skills, and the site
+        // card lists the stack in full.
+        "Multi-tenant on **Postgres RLS** from day one. 603 clients and 2,694 service records, entered by hand by the owner",
+        // Swapped in for the api-layer architecture test on 2026-09-16, after
+        // checking the résumé's claims against salon-admin. The test is real
+        // and still enforced, and it stays in the highlights above; it is the
+        // most internal of the four bullets, and export is the most on-theme
+        // feature in the product. Clio exists because a hard drive died and
+        // took years of records with it, so letting the owner take her records
+        // out is the origin story answered. Shipped in #93, #94, #114.
+        //
+        // One line, not two. The longer draft named the dead hard drive here
+        // as well, and wrapped, which cost the page the line the swap was
+        // meant to be free of. The why is already on the project card above,
+        // in full; the CV states what it does and who it is for.
+        "CSV export of clients, visits and hair profiles, so her records stay portable, not locked in",
+        // "Reads work offline from cache on patchy salon Wi-Fi; Traditional
+        // Chinese first" was cut in the one-page pass. Both facts are on the
+        // project card above, where the Wi-Fi has the salon around it to make
+        // sense of; on the CV it was the least load-bearing of the four.
       ],
     },
     featured: true,
@@ -91,7 +110,10 @@ export const projectsConfig: Projects = [
       descriptor: "personal finance app, Flutter",
       role: "Founder",
       bullets: [
-        "**Clean Architecture** across a Melos monorepo, SQLCipher-encrypted local storage",
+        // "Clean Architecture across a Melos monorepo, SQLCipher-encrypted
+        // local storage" was cut for the one-page pass: it is the only line in
+        // Projects that names a pattern rather than a result, and the card on
+        // the site carries it with the reasoning attached.
         "6 languages and 6 currencies, built solo; first App Store release planned for September 2026",
       ],
     },
