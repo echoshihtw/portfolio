@@ -34,3 +34,7 @@ vite.config.ts.timestamp-*
 # Working documents: specs, audits, notes. They are written for me, not for
 # readers of a public repo, and that is how the portfolio audit leaked.
 /docs/
+
+# Playwright: browser-test output, regenerated on every run.
+/test-results/
+/playwright-report/
