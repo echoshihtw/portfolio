@@ -132,6 +132,14 @@ export const heroConfig: {
   // frontend and a recruiter is scanning for scope. Claim on the CV,
   // demonstrate on the site: two registers, two readers.
   //
+  // The figure here is the week that became two days, not the five minutes.
+  // The first draft took the five minutes and put it on the home page for the
+  // third time: the highlights carry it, the Lockerbie card carries it, and
+  // the hero made three. It also left this line and the résumé summary a comma
+  // apart, so anyone who read the page and then opened the PDF met the same
+  // sentence twice. Two facts, two surfaces: the hero takes the template and
+  // the week, the card and the highlight keep the deploy and the five minutes.
+  //
   // resume.md keeps "Sole author of the Next.js / TypeScript frontend". Same
   // fact, and there it governs only the frontend, in the register a recruiter
   // scans for scope.
@@ -142,7 +150,7 @@ export const heroConfig: {
   // more specifically. Still two lines rather than one paragraph, so a
   // skimmer gets the first.
   support: [
-    "Project platforms, applicant tracking, client histories: the software a business runs on. I build the frontend, and the delivery path under it: the module template a team builds against, the release a non-engineer runs in five minutes.",
+    "Project platforms, applicant tracking, client histories: the software a business runs on. I build the frontend, and the delivery path under it: the module template a team builds against, the CI gate that turned a week of work into two days.",
     "I secure it, keep it running after ship, and write down what broke.",
   ],
 

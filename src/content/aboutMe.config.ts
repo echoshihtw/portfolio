@@ -72,6 +72,20 @@ export const aboutMeConfig = {
   // is not worth gesturing at.
   story: [
     "I have a degree in Italian language and culture, and I started out in restaurants, in customer relations. What I'm good at is noticing things and the pattern under them. So that's what I spend my time on now.",
+    // Why she writes software, supplied by Echo on 2026-09-19 and awaiting her
+    // approval of the wording. Her words, in order: "this is really why i
+    // started coding, all those bad and really hard to use tools", then the
+    // correction "not particularly 'the tools were bad', just can be better ux
+    // ui", then "i like things being intuitive and natural, without much
+    // explanation, better self explanatory" and "im the real user, and i think
+    // for them".
+    //
+    // The rule at the top of this file still stands: a motive line is asked
+    // for, not written. The difference is that this motive was volunteered and
+    // then refined, twice, which is as close to dictation as anything else on
+    // this page. It stays in the constructive register she corrected to: the
+    // software could be better, not the software was bad.
+    "The software I used at work could have been better, and I could see how. That is why I started writing it. I like things that explain themselves.",
     "Mandarin and Taiwanese are native. English has been the working language in every job I've had, and I have Italian from the degree. I've worked across time zones since 2020.",
     // The bridge to the other half of the site, in Echo's own words,
     // 2026-09-07.
