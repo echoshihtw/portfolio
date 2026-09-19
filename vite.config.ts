@@ -1,5 +1,8 @@
 import { sveltekit } from "@sveltejs/kit/vite";
-import { defineConfig } from "vite";
+// defineConfig comes from vitest/config, not vite: the vite one types
+// UserConfigExport without `test`, so svelte-check rejects the block below
+// even though vitest reads it fine.
+import { defineConfig } from "vitest/config";
 
 export default defineConfig({
   build: {
