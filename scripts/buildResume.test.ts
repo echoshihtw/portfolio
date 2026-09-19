@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   extractSection,
   parseExperience,
+  withHeadline,
   withProjects,
 } from "./buildResume.js";
 
@@ -117,5 +118,26 @@ describe("parseExperience with comments", () => {
     expect(entries[0].company).toBe("Acme Ltd");
     expect(entries[0].role).toBe("Staff Engineer");
     expect(entries[0].date).toBe("Taipei · Dec 2024 – Present");
+  });
+});
+
+// The headline is aimed per application, so an unset variable must leave the
+// file's own default alone, and a set one must not eat the stack after it.
+describe("withHeadline", () => {
+  const HEADER = `{\\large Product Engineer · React · TypeScript · Next.js}\\\\[3pt]`;
+
+  it("leaves the markdown untouched when nothing is set", () => {
+    delete process.env.RESUME_HEADLINE;
+    expect(withHeadline(HEADER)).toBe(HEADER);
+  });
+
+  it("replaces only the role, keeping the stack", () => {
+    process.env.RESUME_HEADLINE = "Frontend Engineer";
+    const out = withHeadline(HEADER);
+    delete process.env.RESUME_HEADLINE;
+
+    expect(out).toContain("Frontend Engineer");
+    expect(out).not.toContain("Product Engineer");
+    expect(out).toContain("React · TypeScript · Next.js");
   });
 });
