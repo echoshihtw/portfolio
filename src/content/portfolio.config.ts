@@ -132,13 +132,18 @@ export const heroConfig: {
   // frontend and a recruiter is scanning for scope. Claim on the CV,
   // demonstrate on the site: two registers, two readers.
   //
-  // The figure here is the week that became two days, not the five minutes.
-  // The first draft took the five minutes and put it on the home page for the
-  // third time: the highlights carry it, the Lockerbie card carries it, and
-  // the hero made three. It also left this line and the résumé summary a comma
-  // apart, so anyone who read the page and then opened the PDF met the same
-  // sentence twice. Two facts, two surfaces: the hero takes the template and
-  // the week, the card and the highlight keep the deploy and the five minutes.
+  // The deploy figure lives here, above the fold, and nowhere else on this
+  // page. Two rounds to get the allocation right. The first draft repeated the
+  // five minutes a third time; the second moved it out of the hero and swapped
+  // in "the CI gate that turned a week of work into two days", which is a good
+  // number wearing jargon: "CI gate" means nothing to the recruiters who read
+  // only this screen. The deploy is visual, surprising, and the same thesis as
+  // the summary and the About page, that the person at the other end is the
+  // point.
+  //
+  // Each figure now appears once on the page: the deploy here, the week in the
+  // Lockerbie card with the template story it belongs to, and the highlight
+  // carries the mechanism without repeating either number.
   //
   // resume.md keeps "Sole author of the Next.js / TypeScript frontend". Same
   // fact, and there it governs only the frontend, in the register a recruiter
@@ -150,7 +155,7 @@ export const heroConfig: {
   // more specifically. Still two lines rather than one paragraph, so a
   // skimmer gets the first.
   support: [
-    "Project platforms, applicant tracking, client histories: the software a business runs on. I build the frontend, and the delivery path under it: the module template a team builds against, the CI gate that turned a week of work into two days.",
+    "Project platforms, applicant tracking, client histories: the software a business runs on. I build the frontend, and the delivery path under it: the module template a team builds against, the release a non-engineer runs in five minutes.",
     "I secure it, keep it running after ship, and write down what broke.",
   ],
 
@@ -320,7 +325,7 @@ export const experiencePortfolio: Record<
     // with it: an "internal project-management platform" could be anyone's,
     // and the UK construction sector could not.
     impact:
-      "Built and operated an early-stage internal platform for the UK construction sector, as one of two engineers. Brought the other to shipping independently in two months by pairing on the conventions and the review flow first. A backend task went from a week to two days, and a deployment from a full day to five minutes for a non-engineer.",
+      "Built and operated an early-stage internal platform for the UK construction sector, as one of two engineers. Brought the other to shipping independently in two months by pairing on the conventions and the review flow first. A backend task went from a week to two days.",
     // The constraint was my lead's, in Echo's words on 2026-09-16: frontend
     // and backend stay separate, and neither accesses the other directly.
     // The way of meeting it was mine. No "before" state to fix either: the

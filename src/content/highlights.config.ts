@@ -54,7 +54,7 @@ export const highlightsConfig: Highlight[] = [
     // mechanism rather than for the person doing the deploying.
     title: "Production somebody else can run",
     proof:
-      "A deployment used to take a day: clone the repo onto Ubuntu over SSH, then resolve whatever was missing on the machine. Now it is five minutes, and the person running it is not an engineer. A tagged image from GHCR, a compose file, and one command. The release steps for the macOS app are written down.",
+      "A deployment used to mean cloning the repo onto Ubuntu over SSH and resolving whatever was missing on the machine. Now it is a tagged image from GHCR, a compose file and one command, run by someone who is not an engineer. The release steps for the macOS app are written down.",
   },
   {
     // SPIN.FASHION: resume.md. release-please: the published post.
