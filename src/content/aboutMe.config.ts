@@ -82,10 +82,20 @@ export const aboutMeConfig = {
     //
     // The rule at the top of this file still stands: a motive line is asked
     // for, not written. The difference is that this motive was volunteered and
-    // then refined, twice, which is as close to dictation as anything else on
-    // this page. It stays in the constructive register she corrected to: the
-    // software could be better, not the software was bad.
-    "The software I used at work could have been better, and I could see how. That is why I started writing it. I like things that explain themselves.",
+    // then refined, three times, which is as close to dictation as anything
+    // else on this page. Echo approved this wording on 2026-09-19. It stays in
+    // the constructive register she corrected to: the software could be
+    // better, not the software was bad.
+    //
+    // "Software you don't have to be taught", not "things that explain
+    // themselves", and not simple, intuitive or natural. Those four are the
+    // adjectives every UX-adjacent CV reaches for and none of them can be
+    // checked. This one is the user's version rather than the designer's: in a
+    // restaurant someone sits you down and trains you on the till, and if the
+    // software needs that, it failed. It implies the manual, the onboarding
+    // and the colleague showing you the workaround without naming any of them,
+    // and it is the same voice as the résumé's "I was the user first".
+    "The software I used at work could have been better, and I could see how. That is why I started writing it. I like software you don't have to be taught.",
     "Mandarin and Taiwanese are native. English has been the working language in every job I've had, and I have Italian from the degree. I've worked across time zones since 2020.",
     // The bridge to the other half of the site, in Echo's own words,
     // 2026-09-07.
