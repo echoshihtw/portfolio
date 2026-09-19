@@ -149,3 +149,15 @@ jobs:
       # condition is indistinguishable from a check that stopped running.
       - name: Accessibility audit
         run: npm run audit:a11y
+
+      # Browser assertions against the same build the audit just used. Each
+      # one was written from a bug that actually shipped, not from a coverage
+      # target: overflow at phone widths, no third-party requests beyond the
+      # font host, the headline holding its layout while it types, the untyped
+      # tail staying hidden from screen readers.
+      #
+      # Runs here rather than in a job of its own because this one has already
+      # installed Chromium and built the site. A separate job would pay for
+      # both again to assert against the same artifact.
+      - name: Browser tests
+        run: npm run test:e2e
