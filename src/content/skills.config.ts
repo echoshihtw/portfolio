@@ -96,13 +96,19 @@ export const skillBuckets: SkillBucket[] = [
     ],
   },
   {
+    // Site only from 2026-09-19. The category cost a line on a page that had
+    // none, and it is the one bucket where the CV would have been claiming
+    // depth it cannot defend in an interview: Flutter and Dart come from
+    // Financial Runway and Tauri from a side project. The frameworks are
+    // still visible where they have context, in the Runway and SPIN entries,
+    // and on the site, which has room to say what was built with them.
     label: "Mobile & Desktop",
     items: [
-      { name: "Flutter" },
-      { name: "Dart" },
+      { name: "Flutter", on: "site" },
+      { name: "Dart", on: "site" },
       { name: "Riverpod", on: "site" },
-      { name: "Tauri" },
-      { name: "Electron" },
+      { name: "Tauri", on: "site" },
+      { name: "Electron", on: "site" },
     ],
   },
 ];
@@ -156,15 +162,19 @@ if (unknown.length) {
 
 /** Bold-label markdown lines for the résumé's Skills section. */
 export function resumeSkillLines(): string {
-  return skillBuckets
-    .map((bucket) => {
-      const items = bucket.items
-        .filter((i) => i.on !== "site")
-        .map((i) => i.name)
-        .join(" · ");
-      return `**${bucket.label}**: ${items}  `;
-    })
-    .join("\n");
+  return (
+    skillBuckets
+      .map((bucket) => ({
+        label: bucket.label,
+        items: bucket.items.filter((i) => i.on !== "site").map((i) => i.name),
+      }))
+      // A bucket whose every item is site-only has nothing to say on the CV.
+      // Without this it still printed its label and a colon, costing a line of
+      // a page that has none and reading as a category someone forgot to fill.
+      .filter((bucket) => bucket.items.length > 0)
+      .map((bucket) => `**${bucket.label}**: ${bucket.items.join(" · ")}  `)
+      .join("\n")
+  );
 }
 
 /** What the site's Skills section renders. */

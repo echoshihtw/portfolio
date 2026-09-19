@@ -101,8 +101,61 @@ export const heroConfig: {
   // Clio's RLS and the BFF boundary; keeping it running is Clio in daily
   // use since May 2025; writing down what broke is the blog, and the
   // admitted mistake in the Clio study.
+  // Realigned with the résumé on 2026-09-19. The CV was rewritten to lead
+  // with ownership and with what got faster; this line still opened on
+  // "underneath it, the module template ... and the tests that guard a
+  // boundary", so the two surfaces made different arguments about the same
+  // person. Whoever reads both reads a document and a page that do not agree
+  // on what the work was.
+  //
+  // What changed: the ownership arrives here as it does in the summary, and
+  // the release path becomes the figure rather than the noun. "The release a
+  // non-engineer runs in five minutes" is the most arresting fact available
+  // and it was sitting only in the PDF, which is the artefact fewer people
+  // open.
+  //
+  // "I build", present tense, no intensifier. Three drafts got here. "Sole
+  // author" strained: it governed two objects and a release pipeline is not
+  // authored. "I wrote every line" is true, and Echo writes every line of
+  // that frontend, but "every" was the one word on the page working to
+  // impress, and a reader discounts it in a thought: two engineers, so of
+  // course one of them wrote the frontend. It also sat immediately before the
+  // page's most checkable fact, which made the contrast visible.
+  //
+  // Present tense because the line below is present tense, so the paragraph
+  // no longer changes voice halfway through. First person because the site
+  // speaks in Echo's voice throughout and the About page is first person;
+  // dropping the pronoun here would leave the next sentence stranded and make
+  // the page sound like the document that already exists one click away.
+  //
+  // The sole-authorship claim lives in resume.md, where it governs only the
+  // frontend and a recruiter is scanning for scope. Claim on the CV,
+  // demonstrate on the site: two registers, two readers.
+  //
+  // The deploy figure lives here, above the fold, and nowhere else on this
+  // page. Two rounds to get the allocation right. The first draft repeated the
+  // five minutes a third time; the second moved it out of the hero and swapped
+  // in "the CI gate that turned a week of work into two days", which is a good
+  // number wearing jargon: "CI gate" means nothing to the recruiters who read
+  // only this screen. The deploy is visual, surprising, and the same thesis as
+  // the summary and the About page, that the person at the other end is the
+  // point.
+  //
+  // Each figure now appears once on the page: the deploy here, the week in the
+  // Lockerbie card with the template story it belongs to, and the highlight
+  // carries the mechanism without repeating either number.
+  //
+  // resume.md keeps "Sole author of the Next.js / TypeScript frontend". Same
+  // fact, and there it governs only the frontend, in the register a recruiter
+  // scans for scope.
+  //
+  // What did not change: the domains still lead, because "you have no
+  // experience in our domain" is asked in every screen and the examples are
+  // what answer it. No stack in the sentence; the chip row below carries it
+  // more specifically. Still two lines rather than one paragraph, so a
+  // skimmer gets the first.
   support: [
-    "Project platforms, applicant tracking, client histories: the software a business runs on. Underneath it, the module template a team builds against, the release path, and the tests that guard a boundary.",
+    "Project platforms, applicant tracking, client histories: the software a business runs on. I build the frontend, and the delivery path under it: the module template a team builds against, the release a non-engineer runs in five minutes.",
     "I secure it, keep it running after ship, and write down what broke.",
   ],
 
@@ -272,7 +325,7 @@ export const experiencePortfolio: Record<
     // with it: an "internal project-management platform" could be anyone's,
     // and the UK construction sector could not.
     impact:
-      "Built and operated an early-stage internal platform for the UK construction sector, as one of two engineers. Brought the other to shipping independently in two months by pairing on the conventions and the review flow first. A backend task went from a week to two days, and a deployment from a full day to five minutes for a non-engineer.",
+      "Built and operated an early-stage internal platform for the UK construction sector, as one of two engineers. Brought the other to shipping independently in two months by pairing on the conventions and the review flow first. A backend task went from a week to two days.",
     // The constraint was my lead's, in Echo's words on 2026-09-16: frontend
     // and backend stay separate, and neither accesses the other directly.
     // The way of meeting it was mine. No "before" state to fix either: the
