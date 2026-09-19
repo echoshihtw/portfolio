@@ -581,12 +581,38 @@ canvas {
   line-height: 1.6;
 }
 
+/* Inside a block the tint would be a box within a box, and the padding would
+   push the first line out of line with the rest. */
 .blog-prose pre code {
   font-family: var(--font-mono);
   color: var(--ink);
+  padding: 0;
+  border-radius: 0;
+  background: none;
+  font-size: inherit;
+  overflow-wrap: normal;
 }
 
+/* Inline code: web-app@0.1.0, package.json, an error string mid-sentence.
+   A mono font on its own did not separate these from the prose around them,
+   which was the readability problem: at 0.9em, mono beside a sans paragraph
+   reads as a font wobble rather than as a quoted identifier. The tint is kept
+   light because some sentences carry four of them and should not turn into a
+   row of buttons.
+
+   The tint is mixed from --ink rather than --surface, which sits close enough
+   to the page that it would be invisible, and mixing from the ink means it
+   inverts with the theme for free. */
 .blog-prose code {
   font-family: var(--font-mono);
-  font-size: 0.9em;
+  font-size: 0.88em;
+  /* Horizontal padding is kept tight: at 0.34em the chip pushed the full
+     stop and the possessive apostrophe away from the word, so "package.json's"
+     read as "package.json 's". */
+  padding: 0.08em 0.18em;
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--ink) 7%, transparent);
+  /* One of these is the full text of a TypeError. It should break rather
+     than push the paragraph sideways on a phone. */
+  overflow-wrap: anywhere;
 }
