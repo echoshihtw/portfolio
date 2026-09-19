@@ -84,20 +84,34 @@ The page was full, so the line was paid for: the opening lost "in front" and
 already carries it, two bullets were recast, and Mobile & Desktop became
 site-only.
 
-"I build for the person at the other end", not "what I do is notice the pattern
-under a mess and remove it". The first draft named a cognitive habit, which
-every engineer claims and none evidences, and it answered the question the
-sentence before it opens, leaving an interviewer nothing to ask. The aim was to
-signal the people side of a non-technical background, and pattern recognition
-is not that. This says it outright, and the page has already earned it three
-times over: a release a non-engineer runs, a year of records the owner typed by
-hand, and a product built around the two minutes before a client sits down. -->
+"I was the user first." Three drafts to get to six words.
+
+"What I do is notice the pattern under a mess and remove it" named a cognitive
+habit every engineer claims and none evidences, and it answered the question
+the sentence before it opens, leaving an interviewer nothing to ask. "I build
+for the person at the other end" was true and stated the consequence, which the
+page already demonstrates three times without help: a release a non-engineer
+runs, a year of records the owner typed by hand, a product scoped to the two
+minutes before a client sits down.
+
+This one gives the reason instead of the conclusion. Echo came to engineering
+from years of using software that could have been better, so her judgement
+about it is earned rather than asserted, and "hire their own users" is the
+signal the companies she is aiming at respond to.
+
+It also leaves the loop open, which is the summary's whole job: a reader has to
+ask "the user of what", and that is a question she wants asked.
+
+What it deliberately does not say: intuitive, natural, self-explanatory. Those
+are Echo's actual values, stated on 2026-09-19, and they are also the three
+adjectives every UX-adjacent CV uses and none can check. The belief is better
+served by the evidence above than by naming it. -->
 
 Product engineer on the software a business runs on: React, TypeScript, Next.js, Python, Postgres, Docker.
 
 I build the frontend and the delivery path under it: the module template a team builds against, the release a non-engineer runs in five minutes.
 
-I came to engineering from customer relations. I build for the person at the other end.
+I came to engineering from customer relations. I was the user first.
 
 # Experience
 
