@@ -71,7 +71,7 @@ export const aboutMeConfig = {
   // I decided" went too: it is a hedge, and either the date is known or it
   // is not worth gesturing at.
   story: [
-    "I have a degree in Italian language and culture, and I started out in restaurants, in customer relations. What I'm good at is noticing things and the pattern under them. So that's what I spend my time on now.",
+    "I have a degree in Italian language and culture, and I started out in restaurants, in customer relations. What I'm good at is noticing things and the pattern under them.",
     // Why she writes software, supplied by Echo on 2026-09-19 and awaiting her
     // approval of the wording. Her words, in order: "this is really why i
     // started coding, all those bad and really hard to use tools", then the
@@ -87,6 +87,22 @@ export const aboutMeConfig = {
     // the constructive register she corrected to: the software could be
     // better, not the software was bad.
     //
+    // The opening four words are a bridge, added 2026-09-19 because the
+    // paragraphs each stood on their own and Echo wanted a story that links.
+    // It is the only sentence here not taken from something she said, and it
+    // is built from her own word: the paragraph above ends on noticing, so
+    // this one begins by naming what she noticed. That turns the motive into
+    // the consequence of the paragraph before it rather than a new topic.
+    //
+    // "So that's what I spend my time on now" left the first paragraph for the
+    // same reason: with the bridge in place the two sentences said the same
+    // thing twice, and ending on "the pattern under them" leaves the reader
+    // leaning forward instead of being told.
+    //
+    // Painting stays last, Echo's call the same day. Moving it up next to this
+    // paragraph was proposed and declined: the section's one link out is "See
+    // the paintings", so the painting paragraph sits directly above it.
+    //
     // "Software you don't have to be taught", not "things that explain
     // themselves", and not simple, intuitive or natural. Those four are the
     // adjectives every UX-adjacent CV reaches for and none of them can be
@@ -95,7 +111,7 @@ export const aboutMeConfig = {
     // software needs that, it failed. It implies the manual, the onboarding
     // and the colleague showing you the workaround without naming any of them,
     // and it is the same voice as the résumé's "I was the user first".
-    "The software I used at work could have been better, and I could see how. That is why I started writing it. I like software you don't have to be taught.",
+    "What I kept noticing was the software. It could have been better, and I could see how, so I started writing it. I like software you don't have to be taught.",
     "Mandarin and Taiwanese are native. English has been the working language in every job I've had, and I have Italian from the degree. I've worked across time zones since 2020.",
     // The bridge to the other half of the site, in Echo's own words,
     // 2026-09-07.
