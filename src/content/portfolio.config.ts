@@ -101,8 +101,38 @@ export const heroConfig: {
   // Clio's RLS and the BFF boundary; keeping it running is Clio in daily
   // use since May 2025; writing down what broke is the blog, and the
   // admitted mistake in the Clio study.
+  // Realigned with the résumé on 2026-09-19. The CV was rewritten to lead
+  // with ownership and with what got faster; this line still opened on
+  // "underneath it, the module template ... and the tests that guard a
+  // boundary", so the two surfaces made different arguments about the same
+  // person. Whoever reads both reads a document and a page that do not agree
+  // on what the work was.
+  //
+  // What changed: the ownership arrives here as it does in the summary, and
+  // the release path becomes the figure rather than the noun. "The release a
+  // non-engineer runs in five minutes" is the most arresting fact available
+  // and it was sitting only in the PDF, which is the artefact fewer people
+  // open.
+  //
+  // "I wrote every line", not "sole author" and not "own". Echo's own
+  // correction, 2026-09-19: she wrote every line of that frontend, which is a
+  // stronger and rarer fact than ownership, and harder to wave away. "Sole
+  // author" was drafted first and strained, because it governed two objects
+  // here and a release pipeline is not authored; "own" fixed the grammar by
+  // trading the stronger claim for a vaguer one. Two verbs, each with the
+  // right object, in the first person the line below already uses.
+  //
+  // resume.md keeps "Sole author of the Next.js / TypeScript frontend". Same
+  // fact, and there it governs only the frontend, in the register a recruiter
+  // scans for scope.
+  //
+  // What did not change: the domains still lead, because "you have no
+  // experience in our domain" is asked in every screen and the examples are
+  // what answer it. No stack in the sentence; the chip row below carries it
+  // more specifically. Still two lines rather than one paragraph, so a
+  // skimmer gets the first.
   support: [
-    "Project platforms, applicant tracking, client histories: the software a business runs on. Underneath it, the module template a team builds against, the release path, and the tests that guard a boundary.",
+    "Project platforms, applicant tracking, client histories: the software a business runs on. I wrote every line of the frontend, and built the delivery path under it: the module template a team builds against, the release a non-engineer runs in five minutes.",
     "I secure it, keep it running after ship, and write down what broke.",
   ],
 
