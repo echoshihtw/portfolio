@@ -320,7 +320,6 @@ Main
 --------------------------------------------------
 */
 
-
 // The headline is a professional identity, not a job level, and the right one
 // depends on the posting: a frontend vacancy should meet "Frontend Engineer",
 // not the general default. resume.md lists the options above the line.
@@ -341,10 +340,7 @@ export function withHeadline(markdown) {
     return markdown;
   }
 
-  return markdown.replace(
-    /^\{\\large [^·}]+( ·)/m,
-    `{\\large ${headline}$1`
-  );
+  return markdown.replace(/^\{\\large [^·}]+( ·)/m, `{\\large ${headline}$1`);
 }
 
 function run() {
