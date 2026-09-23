@@ -97,7 +97,7 @@ export const projectsConfig: Projects = [
       // Shipaton is not named. It explains the deadline rather than the product,
       // and naming a competition invites "how did you do" before there is an
       // answer. If she places, that is a fact worth adding.
-      "I use it. Built solo, in six languages and six currencies. One user isn\'t validation. I built the model before I knew whether anyone else wanted it, which is the wrong order, so the work since has been the other half: a landing page, store screenshots, and getting it into the App Store.",
+      "I use it. Built solo, in six languages and six currencies. One user isn't validation. I built the model before I knew whether anyone else wanted it, which is the wrong order, so the work since has been the other half: a landing page, store screenshots, and getting it into the App Store.",
     // The product page, not the repository. Runway got a marketing site on
     // 2026-09-23 (runway #228, published to gh-pages by #229), and a visitor
     // who wants to know what the app is should not have to read a monorepo to
