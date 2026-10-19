@@ -15,6 +15,10 @@
 
   // How far the tape has been pulled, in px. Past PULL it comes off.
   const PULL = 90;
+  // These wait for the CSS to finish: the tape's 0.35s peel, and the
+  // sheet's fold (0.2s delay plus 0.6s).
+  const PEEL_MS = 400;
+  const FOLD_MS = 820;
   let dx = 0;
   let dy = 0;
   let dragging = false;
@@ -56,11 +60,16 @@
     requestAnimationFrame(step);
   }
 
-  function unfold() {
+  let story: HTMLElement;
+
+  async function unfold() {
     dx = dy = 0;
     dragging = false;
     open = true;
     countUp();
+    // The tape has just come off, so focus moves to what it opened.
+    await tick();
+    story?.focus({ preventScroll: true });
   }
 
   function peel() {
@@ -69,7 +78,7 @@
     setTimeout(() => {
       peeling = false;
       unfold();
-    }, 400);
+    }, PEEL_MS);
   }
 
   let section: HTMLElement;
@@ -84,7 +93,7 @@
       open = false;
     } else {
       folding = true;
-      await new Promise((r) => setTimeout(r, 820));
+      await new Promise((r) => setTimeout(r, FOLD_MS));
       folding = false;
       open = false;
     }
@@ -217,6 +226,7 @@
             aria-label="Pull the tape to open the Runway story. Press Enter, or use the arrow keys to pull it."
             aria-expanded={open}
             aria-controls="runway-story"
+            tabindex={open ? -1 : 0}
             style={tapeStyle}
             on:click={onTapeClick}
             on:keydown={onTapeKey}
@@ -325,6 +335,10 @@
       <div
         id="runway-story"
         class="story"
+        tabindex="-1"
+        role="region"
+        aria-label="The Runway story"
+        bind:this={story}
       >
         <div class="compare">
           <div class="budget">
@@ -889,6 +903,10 @@
 
   /* --- Unfolded: the story ------------------------------------------ */
 
+  .story:focus {
+    outline: none;
+  }
+
   .story {
     display: flex;
     flex-direction: column;
@@ -1142,6 +1160,9 @@
   }
 
   .acc {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
     color: var(--rw-mint);
   }
 
