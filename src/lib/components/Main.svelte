@@ -5,6 +5,7 @@
   import SelectedWork from "$lib/components/sections/selected-work/SelectedWork.svelte";
   import Experience from "$lib/components/sections/experience/Experience.svelte";
   import AboutMe from "$lib/components/sections/AboutMe.svelte";
+  import Contact from "$lib/components/sections/Contact.svelte";
 </script>
 
 <!-- Order is an argument. The hero makes the claim, Runway shows one
@@ -17,6 +18,7 @@
   <Project />
   <Skills />
   <AboutMe />
+  <Contact />
 </div>
 
 <style>

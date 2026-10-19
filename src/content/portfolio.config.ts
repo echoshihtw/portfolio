@@ -79,70 +79,20 @@ export const heroConfig: {
   emailSubject: ROLE_SUBJECT,
 };
 
-// The page's one call to action, at the end, so a reader who is convinced
-// does not have to scroll back up to act.
-//
-// No heading of its own any more. This used to be a separate "Want to talk?"
-// section directly after the personal one, which made the page end twice on
-// two low-density blocks about the same moment. They are one section now,
-// under "Just me.", and the body below does the inviting that the heading
-// used to.
+// The Contact section at the end, so a reader who is convinced does not
+// have to scroll back up to act. One door (Email me) and the résumé, then
+// a subject for each kind of message.
 export const closingConfig = {
-  // Rewritten 2026-09-06. The old line was "If you have a problem nobody has
-  // scoped yet, and you need one person to build it and keep it running,
-  // that's the work."
-  //
-  // Three things wrong with it. "it" pointed at "a problem", and you do not
-  // build a problem. "That's the work" never said whose. And it addressed a
-  // client, not an employer: "you have a problem, you need one person" is a
-  // freelance pitch, which is the audience this site had before it started
-  // saying product engineer.
-  //
-  // "Keep it running" became "stay with it after it ships". Same claim,
-  // evidenced by Clio being in daily use since May 2025, without a word
-  // borrowed from ops. To a client that phrase was reassurance; to a hiring
-  // team it reads as being handed the pager.
-  // "I like to untangle things" is Echo's own line, 2026-09-07. The rest
-  // is the earlier version's facts behind it.
   body: "I like to untangle things. Give me the part nobody's scoped yet and I'll work out what it should be, build it, and stay with it after it ships. Remote, from Taiwan.",
   email: "echoshihtw@gmail.com",
   resume: "Chun-Yu-Echo-Shih-Software-Engineer.pdf",
-
-  // The fork at the end of the page, 2026-09-09. Echo is open to a role, to
-  // contract work, and to a founding-partner seat, so the close offers two
-  // doors rather than one. Hiring stays first and carries the résumé.
-  //
-  // Two things in the design draft were cut. An intro line ("I work on
-  // operational software: defining what it should hold, building it, and
-  // establishing the foundations…"): a colon and a three-part list, the
-  // pattern this page's own slop audit named, restating the hero. And
-  // tinted illustration fields with a halftone, which would have been the
-  // only marketing-shaped thing on the site.
-  //
-  // The second door is deliberately wider than the draft's "Build your
-  // product". Contract work is as often a scoped piece on a product that
-  // already exists as a product from zero, and the copy names both ends
-  // with the evidence for each.
-  heading: "Available for a role or a project.",
+  heading: "Available for a role or a project",
+  // One door, then a subject for each kind of message, so the inbox shows
+  // which one it is before the message is opened.
+  ways: "For a role, a project, or a founding-partner seat. Or start with a subject:",
   paths: [
-    {
-      key: "role",
-      kicker: "Employment",
-      title: "Join your team",
-      copy: "One engineer who owns the interface, the boundaries under it and the release path, and stays with it after it ships.",
-      action: "Discuss a role",
-      subject: ROLE_SUBJECT,
-      secondary: { label: "Download résumé", resume: true },
-    },
-    {
-      key: "project",
-      kicker: "Contract or partnership",
-      title: "Hire me for a project",
-      copy: "A scoped piece of work on the product you have, something new from zero, or a founding-partner seat. Clio and SPIN.FASHION are the two ends of that range.",
-      action: "Discuss a project",
-      subject: "Product project",
-      secondary: { label: "See the case studies", href: "#projects" },
-    },
+    { key: "role", label: "about a role", subject: ROLE_SUBJECT },
+    { key: "project", label: "about a project", subject: "Product project" },
   ],
 } as const;
 
