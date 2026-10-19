@@ -45,6 +45,9 @@ export const projectsConfig: Projects = [
       // (clio-app #100). The durable queue is designed in clio-app #115.
       "The salon has patchy Wi-Fi. Reads work offline from the last snapshot, stamped with when it was taken. A save retries a dropped connection, and a failed one says so",
       "Records live in a hosted database, so the failure that started all this can't happen again",
+      // From the @echoshihtw/clio-brand README: shared by clio-web and
+      // clio-app, released with semantic-release. The demo here installs it.
+      "The brand is one package the landing page and the app both install, so a colour changes in one place and ships as a release. This page installs it too",
     ],
     resume: {
       descriptor: "salon operations platform, live since May 2025",
