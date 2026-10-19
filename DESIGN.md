@@ -39,6 +39,15 @@ Two layouts, so sections line up:
 On a phone both stack. The name or label comes first, then the lead object,
 so the lead never appears without context.
 
+## Phones
+
+A phone page stays short. Anything longer than a few lines (the résumé
+details of a job, a project's full notes) opens in a sheet: the browser's own
+`<dialog>`, rising from the bottom, closed by Escape, a tap outside or its
+close button, with focus returned to the button that opened it. The Runway
+story is the one exception: it unfolds in place, because the unfold is the
+show.
+
 ## Scrapbook touches
 
 Each medium has one job.
