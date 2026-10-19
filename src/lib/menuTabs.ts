@@ -9,7 +9,6 @@ export const tabs: MenuTabs = [
   { name: "Selected work", link: "#selected-work" },
   { name: "Experience", link: "#work" },
   { name: "More projects", link: "#projects" },
-  { name: "Toolkit", link: "#skills" },
   // Points at the closing section, not the footer: #footer scrolled past the
   // one call to action on the page.
   { name: "Contact", link: "#contact" },

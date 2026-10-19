@@ -100,10 +100,6 @@ export const closingConfig = {
   ],
 } as const;
 
-// Skills live in skills.config.ts: one list, rendered to the PDF and to the
-// page. Re-exported here so the Skills component's import does not move.
-export { skillsConfig } from "./skills.config.js";
-
 // Distilled experience copy, keyed by company (matches resumeData `experience`).
 // The full formal bullets stay in resume.md and show in the "details" expander.
 // Each entry is one short paragraph with the problem and the fix inside it,

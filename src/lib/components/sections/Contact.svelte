@@ -18,7 +18,7 @@
   aria-labelledby="contact-title"
 >
   <SectionHead
-    number="06"
+    number="05"
     title={closingConfig.heading}
     id="contact-title"
   />

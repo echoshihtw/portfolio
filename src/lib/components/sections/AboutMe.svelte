@@ -20,7 +20,7 @@
   aria-labelledby="about-title"
 >
   <SectionHead
-    number="05"
+    number="04"
     title="Who I am"
     id="about-title"
   />

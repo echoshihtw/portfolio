@@ -34,7 +34,7 @@ Two layouts, so sections line up:
 | Layout         | Columns on a wide screen | Used by                                |
 | -------------- | ------------------------ | -------------------------------------- |
 | Lead and notes | lead 7, notes 5          | Selected work, More projects, Who I am |
-| List           | label 3, body 9          | Where I've worked, What I work with    |
+| List           | label 3, body 9          | Where I've worked                      |
 
 Contact, the close, is the one centred section: its words lead, the door sits
 under them, and its drawing sits in the empty paper beside
@@ -51,6 +51,9 @@ details of a job, a project's full notes) opens in a sheet: the browser's own
 close button, with focus returned to the button that opened it. The Runway
 story is the one exception: it unfolds in place, because the unfold is the
 show.
+
+The stack lives beside the work it was used for, on each job and project. The
+site has no skills list of its own; the full list is in the résumé.
 
 ## Scrapbook touches
 
