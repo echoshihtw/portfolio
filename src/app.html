@@ -45,9 +45,10 @@
     <script>
       (() => {
         const key = "echo-theme";
-        // Start new visitors in the ink theme and remember either choice.
-        // The saved preference wins regardless of OS preference.
-        let theme = "dark";
+        // Start new visitors on paper, the theme the scrapbook is drawn
+        // for, and remember either choice. The saved preference wins
+        // regardless of OS preference.
+        let theme = "light";
 
         try {
           const savedTheme = localStorage.getItem(key);
@@ -55,7 +56,7 @@
             theme = savedTheme;
           }
         } catch (_error) {
-          theme = "dark";
+          theme = "light";
         }
 
         document.documentElement.dataset.theme = theme;
