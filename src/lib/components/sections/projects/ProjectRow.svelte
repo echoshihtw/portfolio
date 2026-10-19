@@ -79,7 +79,9 @@
         name="{project.name} decisions"
       >
         <!-- A region with a name and a tab stop, so the sideways scroll on a
-             wide screen works from the keyboard too. -->
+             wide screen works from the keyboard too. A scrolling region must be
+             focusable (WCAG 2.1.1), which the lint rule below does not know. -->
+        <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
         <div
           class="scroller"
           role="region"
