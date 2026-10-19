@@ -24,8 +24,8 @@
   />
 
   <div class="close">
-    <!-- Her brush-face drawing, printed into the paper like the hero's
-         sketch: the lead object, faded on every edge. -->
+    <!-- Her brush-face drawing, printed faintly behind the words, the way
+         the hero's sketch sits behind the headline. -->
     <img
       class="print"
       src="{base}/assets/paintings/brush-face-640.webp"
@@ -37,6 +37,7 @@
     />
 
     <div class="notes">
+      <p class="lead">{closingConfig.lead}</p>
       <p class="body">{closingConfig.body}</p>
       <div class="actions">
         <a
@@ -82,11 +83,15 @@
     width: 100%;
   }
 
+  /* The close is the one centred section (DESIGN.md): the words lead, the
+     door sits under them, and the drawing stays behind. */
   .close {
     position: relative;
+    isolation: isolate;
     display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    gap: var(--space-6);
+    justify-items: center;
+    padding: var(--space-7) 0 var(--space-6);
+    text-align: center;
   }
 
   .print {
@@ -96,19 +101,30 @@
   .notes {
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: var(--space-5);
   }
 
-  .body {
+  .lead {
     margin: 0;
-    max-width: 34ch;
-    font-size: var(--text-xl);
-    line-height: 1.4;
+    font-family: var(--font-display);
+    font-size: var(--text-2xl);
+    font-weight: 500;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+  }
+
+  .body {
+    margin: calc(var(--space-3) * -1) 0 0;
+    max-width: 44ch;
+    font-size: var(--text-lg);
+    line-height: 1.5;
   }
 
   .actions {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     gap: var(--space-3);
   }
 
@@ -118,20 +134,22 @@
 
   .ways {
     margin: 0;
-    max-width: 52ch;
+    max-width: 46ch;
     font-size: var(--text-sm);
     line-height: 1.8;
     color: var(--muted);
   }
 
-  /* From a tablet up the drawing takes the lead column, printed into the
-     paper; on a phone the close is just the words and the door. */
   @media (min-width: 768px) {
     .print {
       display: block;
-      width: 100%;
-      max-width: 22rem;
+      position: absolute;
+      z-index: -1;
+      top: 50%;
+      left: 50%;
+      width: min(26rem, 60%);
       height: auto;
+      transform: translate(-50%, -50%);
       mix-blend-mode: var(--print-blend);
       opacity: var(--print-opacity);
       filter: var(--print-filter);
@@ -147,18 +165,7 @@
         rgba(0, 0, 0, 0.4) 58%,
         transparent 100%
       );
-    }
-  }
-
-  @media (min-width: 900px) {
-    .close {
-      grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
-      gap: var(--space-7);
-      align-items: center;
-    }
-
-    .print {
-      justify-self: center;
+      pointer-events: none;
     }
   }
 </style>

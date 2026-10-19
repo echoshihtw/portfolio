@@ -83,7 +83,8 @@ export const heroConfig: {
 // have to scroll back up to act. One door (Email me) and the résumé, then
 // a subject for each kind of message.
 export const closingConfig = {
-  body: "I like to untangle things. Give me the part nobody's scoped yet and I'll work out what it should be, build it, and stay with it after it ships. Remote, from Taiwan.",
+  lead: "I like to untangle things.",
+  body: "Give me the part nobody's scoped yet and I'll work out what it should be, build it, and stay with it after it ships. Remote, from Taiwan.",
   email: "echoshihtw@gmail.com",
   resume: "Chun-Yu-Echo-Shih-Software-Engineer.pdf",
   heading: "Available for a role or a project",
