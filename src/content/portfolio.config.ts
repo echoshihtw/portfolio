@@ -93,7 +93,7 @@ export const closingConfig = {
   ways: "For a role, a project, or a founding-partner seat. Or start with a subject:",
   // A note to her future team: what she brings, then what she hopes for,
   // in her words from the 2026-10-19 interview and her reply after it.
-  team: "A note for my future team: I'll work remote, write the plan down, tell you when a bug is mine, and stay with my part until it ships. I'm hoping for a team where everyone is that responsible and reliable.",
+  team: "I'll work remote, write the plan down, tell you when a bug is mine, and stay with my part until it ships. I'm hoping for a team where everyone is that responsible and reliable.",
   paths: [
     { key: "role", label: "about a role", subject: ROLE_SUBJECT },
     { key: "project", label: "about a project", subject: "Product project" },
