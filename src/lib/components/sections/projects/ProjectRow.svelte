@@ -347,6 +347,35 @@
     color: var(--paper-ink);
   }
 
+  /* Between 900 and 1199px the lead column is at its narrowest, so the
+     back sets its text a step smaller to keep every decision on the card. */
+  @media (min-width: 900px) and (max-width: 1199.98px) {
+    .back {
+      gap: var(--space-2);
+      padding: 1.1rem 1.25rem 1rem;
+    }
+
+    .back .decisions {
+      gap: 0.25rem;
+    }
+
+    .back .decisions li {
+      font-size: 0.78rem;
+      line-height: 1.5;
+    }
+  }
+
+  @media (min-width: 900px) and (max-width: 1023.98px) {
+    .back {
+      padding: 0.9rem 1.1rem 0.8rem;
+    }
+
+    .back .decisions li {
+      font-size: 0.74rem;
+      line-height: 1.45;
+    }
+  }
+
   .flipped .front {
     transform: rotateY(-180deg);
   }
