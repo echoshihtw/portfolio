@@ -6,7 +6,7 @@ order: 3
 draft: true
 ---
 
-Claude Code wrote most of Financial Runway. That's the only reason it got built in the time I had, and it's also where most of the bugs came from. When you're not typing every line, checking is the whole job. Two of the things I checked late are below, with the pull requests, because the repository is public and anyone can look.
+I built Financial Runway with Claude and ChatGPT writing most of the code, so checking it was most of my job. Two of the things I checked late are below, with the pull requests, because the repository is public and anyone can look.
 
 ## The setting I got wrong twice
 
