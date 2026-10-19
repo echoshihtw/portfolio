@@ -80,30 +80,13 @@ export const projectsConfig: Projects = [
     name: "Financial Runway",
     subtitle:
       "Personal finance measured the way a company measures itself: how many months does your money cover?",
-    why: "I was planning a study trip and couldn't answer the one question it rested on: how many months would my money cover? Budget apps tell you where the money went. I needed to know how much time was left. A person has an opening balance, monthly costs and months remaining, the same as a company.",
+    why: "I was planning two years abroad on savings and couldn't answer the one question it rested on: how many months would my money cover? Budget apps tell you where the money went. I needed to know how much time was left. A person has an opening balance, monthly costs and months remaining, the same as a company.",
+    // Live on the App Store since 2026-10-04 (id6778675088). The admission
+    // stays: the model came before any user, and the work since is the other half.
     result:
-      // No date, deliberately, from 2026-09-23. "Planned for September 2026" had
-      // seven days left on it and would have read as a missed deadline from the
-      // first of October. The release is going out around Shipaton, and whether
-      // the competition or the store comes first is not settled, so any specific
-      // claim here would age badly.
-      //
-      // The admission stays and the follow-through is new. The card used to end
-      // on "the next thing I do here is put it in front of people", which had
-      // become untrue in the good way: the landing page, the store screenshots
-      // and the release automation all shipped. A confession is worth something;
-      // a confession with the fix under way is worth more.
-      //
-      // Shipaton is not named. It explains the deadline rather than the product,
-      // and naming a competition invites "how did you do" before there is an
-      // answer. If she places, that is a fact worth adding.
-      "I use it. Built solo, in six languages and six currencies. One user isn't validation. I built the model before I knew whether anyone else wanted it, which is the wrong order, so the work since has been the other half: a landing page, store screenshots, and getting it into the App Store.",
-    // The product page, not the repository. Runway got a marketing site on
-    // 2026-09-23 (runway #228, published to gh-pages by #229), and a visitor
-    // who wants to know what the app is should not have to read a monorepo to
-    // find out. The App Store badge there says "coming soon", so status stays
-    // In Progress and the résumé line still says the release is planned.
-    // Source is one click away from the page for anyone who wants it.
+      "I use it. Built solo, in six languages and six currencies. One user isn't validation. I built the model before I knew whether anyone else wanted it, which is the wrong order, so the work since has been the other half: a landing page, store screenshots, and the App Store, where it is now.",
+    // The product page, not the repository: it opens on what the app does and
+    // puts the App Store download first.
     href: "https://echoshihtw.github.io/runway/",
     shots: [
       {
@@ -135,11 +118,11 @@ export const projectsConfig: Projects = [
         // local storage" was cut for the one-page pass: it is the only line in
         // Projects that names a pattern rather than a result, and the card on
         // the site carries it with the reasoning attached.
-        "6 languages and 6 currencies, built solo; landing page live, shipping to the App Store",
+        "6 languages and 6 currencies, built solo; live on the App Store",
       ],
     },
     linkLabel: "See the app →",
-    status: "In Progress",
+    status: "Live",
   },
   {
     name: "Echology",
