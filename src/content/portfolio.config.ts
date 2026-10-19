@@ -91,8 +91,9 @@ export const closingConfig = {
   // One door, then a subject for each kind of message, so the inbox shows
   // which one it is before the message is opened.
   ways: "For a role, a project, or a founding-partner seat. Or start with a subject:",
-  // The team she wants, in her words from the 2026-10-19 interview.
-  team: "I work best on a remote team that writes its plans down, where a bug is a fact, not a personal attack, and everyone owns their part.",
+  // A note to her future team: what she brings, then what she hopes for,
+  // in her words from the 2026-10-19 interview and her reply after it.
+  team: "A note for my future team: I'll work remote, write the plan down, tell you when a bug is mine, and stay with my part until it ships. I'm hoping for a team where everyone is that responsible and reliable.",
   paths: [
     { key: "role", label: "about a role", subject: ROLE_SUBJECT },
     { key: "project", label: "about a project", subject: "Product project" },
