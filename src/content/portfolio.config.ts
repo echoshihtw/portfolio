@@ -93,7 +93,7 @@ export const closingConfig = {
   ways: "For a role, a project, or a founding-partner seat. Or start with a subject:",
   // How she works, said plainly: she keeps her work clean (her words,
   // 2026-10-19), and what that means in practice.
-  team: "I work remote, and I try to keep my work clean: the plan written down and my own bugs named. Tell me when I miss something; I'd rather fix it with you than around you.",
+  team: "I work remote. I write things down so anyone can pick up where I left off, and I ask for review early, because the team usually sees what I miss. Tell me, and we'll fix it together.",
   paths: [
     { key: "role", label: "about a role", subject: ROLE_SUBJECT },
     { key: "project", label: "about a project", subject: "Product project" },
