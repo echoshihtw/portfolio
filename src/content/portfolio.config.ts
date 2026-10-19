@@ -84,7 +84,7 @@ export const heroConfig: {
 // a subject for each kind of message.
 export const closingConfig = {
   lead: "I like to untangle things.",
-  body: "Give me the part nobody's scoped yet and I'll work out what it should be, build it, and stay with it after it ships. Remote, from Taiwan.",
+  body: "Give me the part nobody's scoped yet and I'll work out what it should be, build it, and stay with it after it ships.",
   email: "echoshihtw@gmail.com",
   resume: "Chun-Yu-Echo-Shih-Software-Engineer.pdf",
   heading: "Available for a role or a project",
@@ -93,7 +93,7 @@ export const closingConfig = {
   ways: "For a role, a project, or a founding-partner seat. Or start with a subject:",
   // How she works, said plainly: she keeps her work clean (her words,
   // 2026-10-19), and what that means in practice.
-  team: "I work remote, and I like to write things down so anyone can pick up where I left off. I share work early, because the team usually sees what I miss, so tell me, and we'll fix it together.",
+  team: "I work remote from Taiwan, and I like to write things down so anyone can pick up where I left off. I share work early, because the team usually sees what I miss, so tell me, and we'll fix it together.",
   paths: [
     { key: "role", label: "about a role", subject: ROLE_SUBJECT },
     { key: "project", label: "about a project", subject: "Product project" },
