@@ -1308,15 +1308,6 @@
     margin: 0;
   }
 
-  .sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip: rect(0 0 0 0);
-    white-space: nowrap;
-  }
-
   @media (max-width: 899.98px) {
     .pull-hint {
       left: auto;

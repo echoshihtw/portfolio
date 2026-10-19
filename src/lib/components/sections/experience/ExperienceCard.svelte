@@ -29,14 +29,12 @@
 <!-- Who and when on the left, where the eye scans; the story on the right. -->
 <article class="entry">
   <header class="head">
-    <div class="who">
-      <h3 class="company">{item.company}</h3>
-      <p class="role">{cleanRole}</p>
-      <p class="label">
-        {#each dateParts as part, i}{#if i > 0}{" · "}{/if}
-          <span class="nb">{part}</span>{/each}
-      </p>
-    </div>
+    <h3 class="company">{item.company}</h3>
+    <p class="role">{cleanRole}</p>
+    <p class="label">
+      {#each dateParts as part, i}{#if i > 0}{" · "}{/if}
+        <span class="nb">{part}</span>{/each}
+    </p>
   </header>
 
   <div class="story">
@@ -54,6 +52,7 @@
       on:click={() => (expanded = !expanded)}
     >
       {expanded ? "Hide details" : "Read the details"}
+      <span class="sr-only">: {item.company}</span>
       <span
         class="cta-arrow"
         aria-hidden="true"
@@ -92,7 +91,7 @@
     margin: 0;
   }
 
-  .who {
+  .head {
     display: flex;
     flex-direction: column;
     gap: var(--space-1);
