@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { slide } from "svelte/transition";
+  import Reveal from "$lib/components/Reveal.svelte";
 
   export let item: {
     company: string;
@@ -9,8 +9,6 @@
   };
   export let copy:
     { story: string; note?: string; techLine: string } | undefined = undefined;
-
-  let expanded = false;
 
   // Highlights carry **bold** markers from the résumé source. Splitting on
   // the marker and letting Svelte render each part means no HTML string is
@@ -46,26 +44,11 @@
       <p class="tech label">{copy.techLine}</p>
     {/if}
 
-    <button
-      class="expander link-cta"
-      aria-expanded={expanded}
-      on:click={() => (expanded = !expanded)}
+    <Reveal
+      label="Read the details"
+      name={item.company}
     >
-      {expanded ? "Hide details" : "Read the details"}
-      <span class="sr-only">: {item.company}</span>
-      <span
-        class="cta-arrow"
-        aria-hidden="true"
-      >
-        {expanded ? "↑" : "↓"}
-      </span>
-    </button>
-
-    {#if expanded}
-      <ul
-        class="details"
-        transition:slide|local={{ duration: 220 }}
-      >
+      <ul class="details">
         {#each item.highlights as h}
           <li>
             {#each boldSegments(h) as seg}{#if seg.bold}<strong>
@@ -74,7 +57,7 @@
           </li>
         {/each}
       </ul>
-    {/if}
+    </Reveal>
   </div>
 </article>
 
@@ -140,11 +123,6 @@
     margin: var(--space-1) 0 0;
     text-transform: none;
     letter-spacing: 0.02em;
-  }
-
-  .expander {
-    align-self: flex-start;
-    margin-top: var(--space-1);
   }
 
   .details {

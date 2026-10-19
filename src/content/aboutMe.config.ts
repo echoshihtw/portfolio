@@ -72,6 +72,6 @@ export const aboutMeConfig = {
   // would flatten the difference between them.
   jumps: [
     { label: "Experience", href: "#work" },
-    { label: "Case studies", href: "#projects" },
+    { label: "More projects", href: "#projects" },
   ],
 } as const;

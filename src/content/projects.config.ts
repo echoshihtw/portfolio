@@ -1,16 +1,19 @@
 import type { Projects } from "../lib/types/types.js";
 
-// Each card answers: what problem existed, what I decided, how I know it works.
-// Not a stack inventory: the tech is listed in `stack` below each card, so the
-// highlights can carry judgment instead of tool names.
+// One entry per project. More projects shows the short notes (`note`, `fact`,
+// `story`) and keeps the engineering decisions in `highlights`, behind "Read
+// the decisions". The résumé reads only `name` and `resume`. The tech is
+// listed in `stack`, so the highlights can carry judgment, not tool names.
 export const projectsConfig: Projects = [
   {
     name: "Clio",
-    subtitle:
-      "Salon operations software, in daily use at a Tainan salon since May 2025",
-    why: "A friend's hard drive died and took years of salon records with it. She'd tried the existing software and found all of it too complicated. She didn't need more features. She needed the two minutes before a client sits down: who they are, what was done last time, what it cost.",
-    result:
-      "The owner typed a year of past appointments in by hand. People don't migrate their own history into software they're still evaluating. In daily use at the salon since May 2025, with 603 clients, 2,694 service records, and history entered back to September 2024. What I'd do differently: write the permission model down before building it, not after.",
+    statusLine: "In daily use · early access",
+    note: "She's back. You remember.",
+    fact: "In use at a Tainan salon since May 2025. The owner typed 603 clients in by hand.",
+    story: [
+      "A quick CV of the client, for the two minutes before the client sits down: how long since her last visit, what was done last time, any special hair situation, the curl she likes.",
+      "No booking, no payments. She didn't need them, yet. I never taught the owner to use it; she only comes to me when she forgets her password, or when a bug of mine stops her saving.",
+    ],
     href: "https://cliohq.app",
     stack: [
       "React 19",
@@ -67,24 +70,18 @@ export const projectsConfig: Projects = [
         // in full; the CV states what it does and who it is for.
         "CSV export of clients, visits and hair profiles, so her records stay portable, not locked in",
         // "Reads work offline from cache on patchy salon Wi-Fi; Traditional
-        // Chinese first" was cut in the one-page pass. Both facts are on the
-        // project card above, where the Wi-Fi has the salon around it to make
-        // sense of; on the CV it was the least load-bearing of the four.
+        // Chinese first" was cut in the one-page pass. The Wi-Fi fact is in
+        // the highlights above, where the salon is around it to make sense
+        // of; on the CV it was the least load-bearing of the four.
       ],
     },
-    featured: true,
     linkLabel: "Live →",
     status: "Live",
   },
   {
     name: "Financial Runway",
-    subtitle:
-      "Personal finance measured the way a company measures itself: how many months does your money cover?",
-    why: "I was planning two years abroad on savings and couldn't answer the one question it rested on: how many months would my money cover? Budget apps tell you where the money went. I needed to know how much time was left. A person has an opening balance, monthly costs and months remaining, the same as a company.",
-    // Live on the App Store since 2026-10-04 (id6778675088). The admission
-    // stays: the model came before any user, and the work since is the other half.
-    result:
-      "I use it. Built solo, in six languages and six currencies. One user isn't validation. I built the model before I knew whether anyone else wanted it, which is the wrong order, so the work since has been the other half: a landing page, store screenshots, and the App Store, where it is now.",
+    // Live on the App Store since 2026-10-04 (id6778675088). Shown in its own
+    // Selected work section (selectedWork.config.ts), not in More projects.
     // The product page, not the repository: it opens on what the app does and
     // puts the App Store download first.
     href: "https://echoshihtw.github.io/runway/",
@@ -112,15 +109,15 @@ export const projectsConfig: Projects = [
   },
   {
     name: "Echology",
-    subtitle:
-      "A demo wallet for studying how Bitcoin coin-selection algorithms behave",
+    statusLine: "Archived · 2023",
+    story: [
+      "A demo wallet for comparing Bitcoin coin-selection algorithms, built with a core maintainer of the Bitcoin Dev Kit.",
+    ],
     href: "https://github.com/evanlinjin/echology",
     file: "assets/echology.png",
-    why: "Coin selection is the algorithm that decides which coins a transaction spends, and it sets the fee. Its trade-offs only show up as numbers (waste, fee, feerate deviation), and only for one exact set of inputs. If you hold the inputs still, you can compare the algorithms.",
-    result:
-      "Built the frontend with a core maintainer of the Bitcoin Dev Kit. You construct a UTXO set, run it against a spend scenario, and read the metrics side by side. Archived.",
+    fileAlt:
+      "Echology: choosing a coin selection algorithm, Branch and Bound, scored on waste, with a fallback and an excess strategy",
     stack: ["Next.js", "TypeScript", "Tailwind CSS"],
-    role: "UI/UX designer and frontend engineer",
     highlights: [
       "You pick the UTXOs by hand, so the input set is a controlled variable instead of whatever the wallet happened to hold",
       "Spend scenarios and fee rates are adjustable, because selection behaviour diverges at the extremes",
