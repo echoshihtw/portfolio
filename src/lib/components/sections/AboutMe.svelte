@@ -51,14 +51,17 @@
 >
   <SectionHead
     number="05"
-    label="Who I am"
-    title="Just me."
+    title="Who I am"
     id="contact-title"
   />
 
   <div class="body">
     <div class="wrap">
       <div class="text">
+        <p class="just-me">
+          Just me
+          <span class="dot">.</span>
+        </p>
         {#each aboutMeConfig.story as paragraph}
           <p class="story">{paragraph}</p>
         {/each}
@@ -188,6 +191,21 @@
     grid-template-columns: minmax(0, 1fr);
     gap: var(--space-6);
     align-items: start;
+  }
+
+  /* The section's real headline, set large: the row above only says where
+     you are. */
+  .just-me {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: var(--text-2xl);
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.035em;
+  }
+
+  .just-me .dot {
+    color: var(--primary);
   }
 
   .text {

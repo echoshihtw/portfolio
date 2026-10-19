@@ -174,7 +174,7 @@
 
   @media (min-width: 900px) {
     .entry {
-      grid-template-columns: minmax(0, 3fr) minmax(0, 8fr);
+      grid-template-columns: minmax(0, 3fr) minmax(0, 9fr);
       gap: var(--space-7);
     }
 

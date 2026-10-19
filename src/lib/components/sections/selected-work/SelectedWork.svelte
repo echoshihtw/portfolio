@@ -5,6 +5,7 @@
   import { heroConfig } from "../../../../content/portfolio.config";
   import { mailtoWithSubject } from "$lib/contactLinks";
   import { parseAmount, runway } from "$lib/runway";
+  import SectionHead from "$lib/components/SectionHead.svelte";
 
   // Folded, Runway is a print taped into the scrapbook. Pull the tape (drag
   // it, tap it, or press Enter or the arrow keys on it) and the section
@@ -160,7 +161,7 @@
   class="world section_rule"
   class:open
   class:folding
-  aria-labelledby="work-title"
+  aria-labelledby="selected-work-title"
 >
   <div
     class="star rw-coral"
@@ -189,14 +190,13 @@
   />
 
   <div class="mark">
-    <span class="label">01</span>
-    <h2
-      id="work-title"
-      class="label"
+    <SectionHead
+      number="01"
+      title="Selected work"
+      id="selected-work-title"
     >
-      Selected work <span class="sr-only">: Financial Runway</span>
-    </h2>
-    <span class="label mark-end">On the App Store</span>
+      <span slot="end">On the App Store</span>
+    </SectionHead>
   </div>
 
   <div class="inner">
@@ -474,7 +474,7 @@
     width: 100%;
     max-width: var(--content-max);
     margin: 0 auto;
-    padding-bottom: var(--space-5);
+    padding-bottom: var(--space-2);
     transition: color 0.6s ease;
   }
 
@@ -524,29 +524,17 @@
     color: var(--rw-cream);
   }
 
+  /* The shared row sits on the page, above the navy sheet, and needs none
+     of the section's top padding. */
   .mark {
-    display: grid;
-    grid-template-columns: auto minmax(0, 1fr) auto;
-    gap: var(--space-5);
-    align-items: baseline;
-    padding: var(--space-4);
-  }
-
-  .mark h2 {
-    margin: 0;
-    white-space: nowrap;
-    color: var(--ink);
-  }
-
-  .mark-end {
-    text-align: right;
+    padding: var(--section-y) var(--space-4) 0;
   }
 
   .inner {
     display: flex;
     flex-direction: column;
     gap: var(--space-7);
-    padding: var(--space-6) var(--space-4) var(--space-6);
+    padding: var(--space-7) var(--space-4) var(--space-6);
   }
 
   .hand {
@@ -802,7 +790,7 @@
     position: absolute;
     z-index: 0;
     left: -1rem;
-    bottom: -3rem;
+    bottom: -1.75rem;
     width: 16rem;
     height: 4.6rem;
     color: var(--ink);
@@ -1320,6 +1308,12 @@
       display: none;
     }
 
+    /* Open, the pull hint is gone and the sticker would touch the sheet's
+       edge; this keeps the same air above the print as below it. */
+    .world.open .inner {
+      padding-top: calc(var(--space-7) + var(--space-4));
+    }
+
     .pull-hint .narrow {
       display: inline;
     }
@@ -1335,11 +1329,18 @@
     }
 
     .mark {
-      padding: var(--space-4) var(--space-6);
+      padding: var(--section-y) var(--space-6) 0;
+    }
+
+    /* Grows with the width, so the space under the print matches the
+       space above it from 900px to 1440px. */
+    .world {
+      padding-bottom: clamp(2rem, 7.4vw - 2.16rem, 4.5rem);
     }
 
     .inner {
-      padding: 4.5rem 5rem 2.5rem;
+      /* Even space above and below the print when folded. */
+      padding: 0.5rem 5rem 2.5rem;
       margin: 0 2.5rem;
       gap: 3.5rem;
     }

@@ -252,17 +252,6 @@ canvas {
   white-space: nowrap;
 }
 
-/* The number that opens a section: large, light, in the display face. */
-.section-num {
-  font-family: var(--font-display);
-  font-size: var(--text-num);
-  font-weight: 500;
-  line-height: 1;
-  letter-spacing: var(--tracking-tight);
-  color: var(--muted);
-  font-variant-numeric: tabular-nums;
-}
-
 /* A rounded rectangle with a thin ink border. No shadow, ever. Interactive
    cards darken the border and lift a pixel. */
 .card {

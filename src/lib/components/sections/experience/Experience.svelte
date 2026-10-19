@@ -3,6 +3,9 @@
   import { experiencePortfolio } from "../../../../content/portfolio.config";
   import SectionHead from "$lib/components/SectionHead.svelte";
   import ExperienceCard from "./ExperienceCard.svelte";
+  import { base } from "$app/paths";
+  import { heroConfig } from "../../../../content/portfolio.config";
+  import { trackResume } from "$lib/analytics";
 </script>
 
 <section
@@ -12,10 +15,20 @@
 >
   <SectionHead
     number="02"
-    label="Experience"
     title="Where I've worked"
     id="work-title"
-  />
+  >
+    <a
+      slot="end"
+      class="link-cta"
+      href="{base}/{heroConfig.resume}"
+      target="_blank"
+      rel="noreferrer noopener"
+      on:click={() => trackResume("experience")}
+    >
+      Full history in the résumé ↗
+    </a>
+  </SectionHead>
 
   <div class="body">
     <ol class="timeline">

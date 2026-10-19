@@ -16,7 +16,13 @@ import { track } from "@vercel/analytics";
  * from the header rather than the hero would change where it goes.
  */
 export type CtaPlace =
-  "hero" | "about" | "about-role" | "about-project" | "header" | "footer";
+  | "hero"
+  | "about"
+  | "about-role"
+  | "about-project"
+  | "header"
+  | "footer"
+  | "experience";
 
 /**
  * `track` is client-only. A click handler cannot fire during prerender, so

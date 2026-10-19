@@ -10,10 +10,8 @@
 >
   <SectionHead
     number="03"
-    label="Case studies"
-    title="What I've built"
+    title="More projects"
     id="projects-title"
-    note="Each one the same way: the constraint, the decisions, what happened. Open a study for the rest of the decisions and the screenshots."
   />
   <Projects />
 </section>
