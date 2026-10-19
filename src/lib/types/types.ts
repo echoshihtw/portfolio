@@ -1,40 +1,37 @@
 interface Project {
   name: string;
-  subtitle?: string;
-  // The dialog reads why -> how -> result. Splitting these apart stops the
-  // problem, the work and the evidence blurring into one paragraph.
-  why: string;
-  result: string;
-  /** Optional: not every project has somewhere to send a reader. A physical
-   *  object delivered in 2021 has no URL, and a card that links nowhere is
-   *  better than one that links somewhere irrelevant. */
+  /** The mono line beside the name, e.g. "In daily use · early access". */
+  statusLine?: string;
+  /** Her one handwritten line for the project, in Sharpie. */
+  note?: string;
+  /** The proof, set first and in weight. */
+  fact?: string;
+  /** The short notes. On a phone they open in a sheet. */
+  story?: string[];
+  /** Optional: not every project has somewhere to send a reader. */
   href?: string;
   stack: string[];
+  /** The lead image, for a project that has no live demo, and what it shows. */
   file?: string;
+  fileAlt?: string;
+  /** The image's own size, so its space is kept before it loads. */
+  fileSize?: { width: number; height: number };
   linkLabel?: string;
   /** "Shipped" is for work completed and handed over rather than run: not
    *  "Live", which implies something still serving traffic, and not
    *  "Archived", which reads as abandoned. */
   status: "Live" | "In Progress" | "Archived" | "Shipped";
+  /** The engineering decisions, behind "Read the decisions". */
   highlights?: string[];
-  featured?: boolean;
-  // One line for the résumé PDF. Present = it appears there; absent = the
-  // project is site-only. The one-page limit means this is a real choice.
   /** Present means the project earns space on the one-page CV. A project
    *  without it is site-only. Bullets rather than a paragraph because a
    *  recruiter scans: the descriptor is what earns the bullets a read. */
-  /** The role on the case study, for a project that is not on the résumé.
-      A project with a résumé block gets its role from there. */
-  role?: string;
   resume?: {
     /** What it is, in a few words: the part that gets scanned. */
     descriptor: string;
     role: string;
     bullets: string[];
   };
-  // Screenshots for the dialog, shown at their natural aspect ratio: phone
-  // portraits and browser landscapes side by side, none of them cropped.
-  shots?: { src: string; alt: string }[];
 }
 
 interface MenuTab {

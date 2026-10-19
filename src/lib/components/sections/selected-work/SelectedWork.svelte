@@ -5,6 +5,7 @@
   import { heroConfig } from "../../../../content/portfolio.config";
   import { mailtoWithSubject } from "$lib/contactLinks";
   import { parseAmount, runway } from "$lib/runway";
+  import SectionHead from "$lib/components/SectionHead.svelte";
 
   // Folded, Runway is a print taped into the scrapbook. Pull the tape (drag
   // it, tap it, or press Enter or the arrow keys on it) and the section
@@ -15,10 +16,11 @@
 
   // How far the tape has been pulled, in px. Past PULL it comes off.
   const PULL = 90;
-  // These wait for the CSS to finish: the tape's 0.35s peel, and the
-  // sheet's fold (0.2s delay plus 0.6s).
-  const PEEL_MS = 400;
-  const FOLD_MS = 820;
+  // These wait for the CSS to finish: the tape's peel (--motion-medium) and
+  // the fold, where the sheet waits 0.15s for the blocks, then takes
+  // --motion-long.
+  const PEEL_MS = 350;
+  const FOLD_MS = 650;
   let dx = 0;
   let dy = 0;
   let dragging = false;
@@ -160,7 +162,7 @@
   class="world section_rule"
   class:open
   class:folding
-  aria-labelledby="work-title"
+  aria-labelledby="selected-work-title"
 >
   <div
     class="star rw-coral"
@@ -189,14 +191,13 @@
   />
 
   <div class="mark">
-    <span class="label">01</span>
-    <h2
-      id="work-title"
-      class="label"
+    <SectionHead
+      number="01"
+      title="Selected work"
+      id="selected-work-title"
     >
-      Selected work <span class="sr-only">: Financial Runway</span>
-    </h2>
-    <span class="label mark-end">On the App Store</span>
+      <span slot="end">On the App Store</span>
+    </SectionHead>
   </div>
 
   <div class="inner">
@@ -474,7 +475,7 @@
     width: 100%;
     max-width: var(--content-max);
     margin: 0 auto;
-    padding-bottom: var(--space-5);
+    padding-bottom: var(--space-2);
     transition: color 0.6s ease;
   }
 
@@ -497,9 +498,9 @@
     visibility: hidden;
     clip-path: circle(0% at 50% 14%);
     transition:
-      clip-path 0.9s cubic-bezier(0.6, 0, 0.2, 1),
+      clip-path var(--motion-xlong) var(--motion-enter),
       opacity 0.3s ease,
-      visibility 0s linear 0.9s;
+      visibility 0s linear var(--motion-xlong);
   }
 
   .world.open::before {
@@ -507,7 +508,7 @@
     visibility: visible;
     clip-path: circle(150% at 50% 14%);
     transition:
-      clip-path 0.9s cubic-bezier(0.6, 0, 0.2, 1),
+      clip-path var(--motion-xlong) var(--motion-enter),
       opacity 0.2s ease,
       visibility 0s;
   }
@@ -515,38 +516,26 @@
   .world.folding::before {
     clip-path: circle(0% at 50% 14%);
     transition:
-      clip-path 0.6s cubic-bezier(0.6, 0, 0.4, 1) 0.2s,
-      opacity 0.2s ease 0.7s,
-      visibility 0s linear 0.8s;
+      clip-path var(--motion-long) var(--motion-exit) 0.15s,
+      opacity 0.15s ease 0.5s,
+      visibility 0s linear 0.65s;
   }
 
   .world.open .inner {
     color: var(--rw-cream);
   }
 
+  /* The shared row sits on the page, above the navy sheet, and needs none
+     of the section's top padding. */
   .mark {
-    display: grid;
-    grid-template-columns: auto minmax(0, 1fr) auto;
-    gap: var(--space-5);
-    align-items: baseline;
-    padding: var(--space-4);
-  }
-
-  .mark h2 {
-    margin: 0;
-    white-space: nowrap;
-    color: var(--ink);
-  }
-
-  .mark-end {
-    text-align: right;
+    padding: var(--section-y) var(--space-4) 0;
   }
 
   .inner {
     display: flex;
     flex-direction: column;
     gap: var(--space-7);
-    padding: var(--space-6) var(--space-4) var(--space-6);
+    padding: var(--space-7) var(--space-4) var(--space-6);
   }
 
   .hand {
@@ -583,7 +572,7 @@
       0 2px 0 rgba(0, 0, 0, 0.05),
       0 10px 24px rgba(60, 40, 10, 0.12);
     transform: rotate(2deg) scale(1.03);
-    transition: transform 0.55s cubic-bezier(0.2, 0.8, 0.2, 1);
+    transition: transform var(--motion-long) var(--motion-enter);
   }
 
   .poster.open {
@@ -641,8 +630,8 @@
       )
       0 10px / 100% 24px no-repeat;
     transition:
-      transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
-      opacity 0.35s ease;
+      transform var(--motion-medium) var(--motion-exit),
+      opacity var(--motion-medium) ease;
   }
 
   .tapebtn:active {
@@ -802,7 +791,7 @@
     position: absolute;
     z-index: 0;
     left: -1rem;
-    bottom: -3rem;
+    bottom: -1.75rem;
     width: 16rem;
     height: 4.6rem;
     color: var(--ink);
@@ -915,7 +904,7 @@
 
   .story > * {
     transform-origin: top center;
-    animation: unfold 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+    animation: unfold var(--motion-long) var(--motion-enter) both;
   }
 
   .story > :nth-child(2) {
@@ -943,7 +932,7 @@
 
   /* Folding back: the reverse, last block first. */
   .world.folding .story > * {
-    animation: fold 0.4s cubic-bezier(0.5, 0, 0.75, 0) both;
+    animation: fold 0.3s var(--motion-exit) both;
   }
   .world.folding .story > :nth-last-child(2) {
     animation-delay: 0.04s;
@@ -1222,7 +1211,8 @@
   }
 
   .world.open .screen {
-    animation: fan 0.8s cubic-bezier(0.2, 0.9, 0.25, 1.15) 0.9s both;
+    animation: fan 0.8s cubic-bezier(0.2, 0.9, 0.25, 1.15) var(--motion-xlong)
+      both;
   }
 
   @keyframes fan {
@@ -1320,6 +1310,12 @@
       display: none;
     }
 
+    /* Open, the pull hint is gone and the sticker would touch the sheet's
+       edge; this keeps the same air above the print as below it. */
+    .world.open .inner {
+      padding-top: calc(var(--space-7) + var(--space-4));
+    }
+
     .pull-hint .narrow {
       display: inline;
     }
@@ -1335,11 +1331,18 @@
     }
 
     .mark {
-      padding: var(--space-4) var(--space-6);
+      padding: var(--section-y) var(--space-6) 0;
+    }
+
+    /* Grows with the width, so the space under the print matches the
+       space above it from 900px to 1440px. */
+    .world {
+      padding-bottom: clamp(2rem, 7.4vw - 2.16rem, 4.5rem);
     }
 
     .inner {
-      padding: 4.5rem 5rem 2.5rem;
+      /* Even space above and below the print when folded. */
+      padding: 0.5rem 5rem 2.5rem;
       margin: 0 2.5rem;
       gap: 3.5rem;
     }

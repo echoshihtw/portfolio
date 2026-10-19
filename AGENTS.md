@@ -139,6 +139,7 @@ Agents should:
 - avoid heavy dependencies unless clearly justified
 - update automation scripts instead of editing generated files by hand
 - preserve existing architecture unless explicitly asked to redesign
+- check every visual change against `DESIGN.md`: one row, one lead object and the touch budget per section
 
 ## Design Philosophy
 

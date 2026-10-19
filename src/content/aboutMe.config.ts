@@ -12,30 +12,13 @@ import { portraitSilhouette } from "./portrait.silhouette";
 // Every fact is hers, and the tense is present throughout: she still paints,
 // with work from January 2026, so nothing here says "used to".
 export const aboutMeConfig = {
-  // The eyebrow, in the reference's phrasing. The name itself is in the hero
-  // kicker at the top of the page, so it is not repeated here.
-  kicker: "Who I am",
-
-  // Her own words, from the moment she corrected an earlier draft: "just my
-  // creations". Two words, and deliberately not a claim. It is the
-  // counterpart to the hero's "I own it, end to end" directly above: that
-  // makes the professional argument, this declines to make any.
-  // The accent is the full stop, the way the reference sets "Pangram." and
-  // nothing else: a whole name in one weight, then one coloured mark to end
-  // it. The glitch that used to ride on "me" is gone with it; a glitching
-  // period is a period.
-  heading: [{ text: "Just me" }, { text: ".", accent: true }] as {
-    text: string;
-    accent?: boolean;
-  }[],
-
   // Hers, and only hers: every fact and motive is one she gave, in the voice
   // interview on 2026-10-19 and before it. Three beats: where she started,
   // the software that started it, painting. Casual register, contractions.
   story: [
     "BA in Italian language and culture. Mandarin and Taiwanese are native, English at work. Then restaurants, and work as a teaching and research assistant.",
     "That work came with software. Logging my hours, entering students' scores, applying for a research budget. All of it outdated, and all of it needed a manual. Bad design is still what interests me most, so now I write the software.",
-    "I paint too. Private lessons in high school, and I wanted to go to art school. I studied Italian instead, then took painting classes in Florence for three months. Since 2012, mostly at my desk or on a train. One part logic, one part emotion.",
+    "I paint too. Private lessons in high school, and I wanted to go to art school. I studied Italian instead, then took painting classes in Florence for three months. Since 2012, mostly at my desk or on a train.",
   ],
 
   // The torn-paper edge from Echo's edited version, grafted onto the colour
@@ -66,12 +49,10 @@ export const aboutMeConfig = {
   // One real action, because it is the only thing here that leaves the page.
   cta: { label: "See the paintings", href: "/gallery" },
 
-  // A quiet index for people who skim instead of scrolling. Deliberately not
-  // buttons: Work, Projects and Contact are further down this same page, and
-  // giving them the same weight as the one link that goes somewhere else
-  // would flatten the difference between them.
-  jumps: [
-    { label: "Experience", href: "#work" },
-    { label: "Case studies", href: "#projects" },
-  ],
+  // One of her paintings, taped in as the way to the gallery: the section's
+  // one piece of tape. An id into paintings.config.ts, which holds its file,
+  // size and description.
+  paintingId: "profile",
+  // The size of its 640px file, so its space is kept before it loads.
+  paintingSize: { width: 640, height: 640 },
 } as const;

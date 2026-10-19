@@ -65,15 +65,19 @@
     overflow: hidden;
   }
 
+  /* Lifted so the dense rows of seats sit beside the headline, in empty
+     paper, and the words below it stay on clean ground. Phones leave it
+     out: the hero there is already full. */
   .print {
+    display: none;
     position: absolute;
     right: -3rem;
-    top: 0;
+    top: -11rem;
     width: min(66vw, 60rem);
     height: auto;
     object-fit: cover;
     mix-blend-mode: var(--print-blend);
-    opacity: 0.24;
+    opacity: var(--print-opacity);
     filter: var(--print-filter);
     -webkit-mask-image: radial-gradient(
       ellipse 55% 55% at 62% 55%,
@@ -161,6 +165,12 @@
 
   .hero-links .btn {
     justify-content: center;
+  }
+
+  @media (min-width: 768px) {
+    .print {
+      display: block;
+    }
   }
 
   @media (min-width: 900px) {

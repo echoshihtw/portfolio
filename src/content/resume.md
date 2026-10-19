@@ -243,7 +243,7 @@ Software Engineer · _Remote · 2020 – 2024 · side projects and short contrac
 
 # Skills
 
-<!-- generated from src/content/skills.config.ts: items marked site-only are omitted -->
+<!-- generated from src/content/skills.config.ts -->
 
 # Education
 
