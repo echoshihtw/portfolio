@@ -27,6 +27,8 @@
           <img
             src="{base}/{project.file}"
             alt={project.fileAlt ?? ""}
+            width={project.fileSize?.width}
+            height={project.fileSize?.height}
             loading="lazy"
           />
         </div>
@@ -76,11 +78,20 @@
         label="Read the decisions"
         name="{project.name} decisions"
       >
-        <ul class="decisions">
-          {#each project.highlights as decision}
-            <li>{decision}</li>
-          {/each}
-        </ul>
+        <!-- A region with a name and a tab stop, so the sideways scroll on a
+             wide screen works from the keyboard too. -->
+        <div
+          class="scroller"
+          role="region"
+          aria-label="{project.name} decisions"
+          tabindex="0"
+        >
+          <ul class="decisions">
+            {#each project.highlights as decision}
+              <li>{decision}</li>
+            {/each}
+          </ul>
+        </div>
       </Reveal>
     {/if}
   </div>
@@ -185,6 +196,51 @@
 
   .decisions li::marker {
     color: var(--brush);
+  }
+
+  /* On a wide screen the decisions open as one row that scrolls sideways,
+     so opening them adds one short row to the page, not a tall list. On a
+     phone they stay a list, in the sheet. The right edge fades to say
+     there is more. */
+  @media (min-width: 768px) {
+    .scroller {
+      overflow-x: auto;
+      overscroll-behavior-x: contain;
+      scroll-snap-type: x mandatory;
+      padding-bottom: var(--space-2);
+      -webkit-mask-image: linear-gradient(to right, #000 85%, transparent);
+      mask-image: linear-gradient(to right, #000 85%, transparent);
+    }
+
+    .scroller:focus-visible {
+      outline: 2px solid var(--primary);
+      outline-offset: 4px;
+      border-radius: var(--radius-sm);
+    }
+
+    .decisions {
+      grid-auto-flow: column;
+      grid-auto-columns: minmax(13rem, 15rem);
+      gap: 0;
+      max-width: none;
+      padding: 0;
+      list-style: none;
+    }
+
+    .decisions li {
+      scroll-snap-align: start;
+      padding: 0 var(--space-4);
+      border-left: var(--border-w) solid var(--border);
+    }
+
+    .decisions li:first-child {
+      padding-left: 0;
+      border-left: 0;
+    }
+
+    .decisions li:last-child {
+      margin-right: 4rem;
+    }
   }
 
   /* The story shows in place on a wide page and in a sheet on a phone. */

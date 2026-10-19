@@ -14,6 +14,8 @@ interface Project {
   /** The lead image, for a project that has no live demo, and what it shows. */
   file?: string;
   fileAlt?: string;
+  /** The image's own size, so its space is kept before it loads. */
+  fileSize?: { width: number; height: number };
   linkLabel?: string;
   /** "Shipped" is for work completed and handed over rather than run: not
    *  "Live", which implies something still serving traffic, and not

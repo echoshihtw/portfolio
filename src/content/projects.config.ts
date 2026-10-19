@@ -115,6 +115,7 @@ export const projectsConfig: Projects = [
     ],
     href: "https://github.com/evanlinjin/echology",
     file: "assets/echology.png",
+    fileSize: { width: 2952, height: 1996 },
     fileAlt:
       "Echology: choosing a coin selection algorithm, Branch and Bound, scored on waste, with a fallback and an excess strategy",
     stack: ["Next.js", "TypeScript", "Tailwind CSS"],
