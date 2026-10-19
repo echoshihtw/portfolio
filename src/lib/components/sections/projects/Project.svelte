@@ -28,6 +28,7 @@
         <ProjectRow
           {project}
           mark={clioMark}
+          brand={{ paper: "var(--clio-paper)", ink: "var(--clio-ink)" }}
         >
           <ClioDemo slot="lead" />
         </ProjectRow>

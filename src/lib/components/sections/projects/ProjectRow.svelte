@@ -11,6 +11,9 @@
   export let project: Projects[number];
   /** The project's own logo, shown beside its name. */
   export let mark: string | undefined = undefined;
+  /** The product's own paper and ink for its card's back, so both sides of
+      the card match. Without it the back is the site's paper. */
+  export let brand: { paper: string; ink: string } | undefined = undefined;
 
   // On a wide screen "Read the decisions" turns the lead object over: the
   // decisions are written on its back, at the same size, so nothing on the
@@ -56,6 +59,8 @@
   <div
     class="lead flip"
     class:flipped
+    style:--back-paper={brand?.paper}
+    style:--back-ink={brand?.ink}
   >
     <div
       class="face front"
@@ -295,7 +300,7 @@
   }
 
   .back {
-    --paper-ink: #1a1a1a;
+    --paper-ink: var(--back-ink, #1a1a1a);
     position: absolute;
     inset: 0;
     display: flex;
@@ -303,7 +308,7 @@
     gap: var(--space-3);
     padding: 1.5rem 1.6rem 1.2rem;
     overflow-y: auto;
-    background: #fffdf8;
+    background: var(--back-paper, #fffdf8);
     color: var(--paper-ink);
     border-radius: 10px;
     box-shadow:
@@ -318,7 +323,7 @@
 
   .back .label {
     margin: 0;
-    color: #5f5d57;
+    color: color-mix(in srgb, var(--paper-ink) 68%, transparent);
   }
 
   .back .decisions {
@@ -326,7 +331,7 @@
   }
 
   .back .decisions li {
-    color: #3a3833;
+    color: color-mix(in srgb, var(--paper-ink) 85%, transparent);
   }
 
   /* Her orange tick, as on the rest of the page. */
