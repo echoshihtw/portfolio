@@ -3,6 +3,10 @@
   import SectionHead from "$lib/components/SectionHead.svelte";
   import ProjectRow from "./ProjectRow.svelte";
   import ClioDemo from "./ClioDemo.svelte";
+  // Read from the brand package, never copied, so a new mark arrives with
+  // the next upgrade. Imported here, not in the content config, because the
+  // résumé build reads that config with plain Node.
+  import clioMark from "@echoshihtw/clio-brand/logo/clio-single-ink-master.svg?url";
 
   // Runway has its own section above, so it is not repeated here.
   const projects = projectsConfig.filter((p) => p.name !== "Financial Runway");
@@ -21,7 +25,10 @@
   <div class="rows">
     {#each projects as project}
       {#if project.name === "Clio"}
-        <ProjectRow {project}>
+        <ProjectRow
+          {project}
+          mark={clioMark}
+        >
           <ClioDemo slot="lead" />
         </ProjectRow>
       {:else}

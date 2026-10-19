@@ -94,16 +94,18 @@
 </div>
 
 <style>
-  /* Paper stays paper in both themes. */
+  /* Clio's own card: its brand paper and ink from @echoshihtw/clio-brand,
+     the same in both themes. Grey is a blend of the two, as the brand
+     asks, never a new colour. */
   .demo {
-    --paper-ink: #1a1a1a;
-    --paper-grey: #5f5d57;
+    --paper-ink: var(--clio-ink);
+    --paper-grey: color-mix(in srgb, var(--clio-ink) 68%, var(--clio-paper));
     position: relative;
     display: flex;
     flex-direction: column;
     gap: var(--space-3);
     padding: 1.25rem 1.1rem 1.1rem;
-    background: #fffdf8;
+    background: var(--clio-paper);
     color: var(--paper-ink);
     border-radius: 10px;
     box-shadow:
@@ -122,9 +124,10 @@
     width: 4.5rem;
     height: 1.25rem;
     transform: rotate(-24deg);
+    /* Clio pink: the brand's colour for memory, used once. */
     background: repeating-linear-gradient(
       45deg,
-      rgba(143, 221, 170, 0.9) 0 8px,
+      color-mix(in srgb, var(--clio-pink) 92%, transparent) 0 8px,
       rgba(255, 255, 255, 0.85) 8px 16px
     );
   }
@@ -135,7 +138,7 @@
     padding: 0 1rem;
     border: 1.5px solid var(--paper-ink);
     border-radius: 12px;
-    background: #ffffff;
+    background: var(--clio-paper);
     color: var(--paper-ink);
     font: inherit;
     font-size: 1rem;
@@ -143,7 +146,7 @@
 
   .search:focus-visible,
   .pick:focus-visible {
-    outline: 2px solid #1f6b45;
+    outline: 2px solid var(--clio-ink);
     outline-offset: 3px;
   }
 
@@ -156,17 +159,21 @@
   .pick {
     min-height: 44px;
     padding: 0 1rem;
-    border: 1.5px solid #8a867d;
+    border: 1.5px solid
+      color-mix(in srgb, var(--clio-ink) 45%, var(--clio-paper));
     border-radius: 999px;
-    background: #fffdf8;
+    background: var(--clio-paper);
     color: var(--paper-ink);
     font: inherit;
     font-size: 0.875rem;
     cursor: pointer;
   }
 
+  /* Pink is Clio's colour for memory: the client she's bringing back.
+     Always a fill under ink text, which reads at about 9:1. */
   .pick[aria-pressed="true"] {
     border-color: var(--paper-ink);
+    background: var(--clio-pink);
   }
 
   .result {
@@ -178,9 +185,9 @@
     flex-direction: column;
     gap: var(--space-3);
     padding: var(--space-4);
-    border: 1px solid #e3ded3;
+    border: 1px solid color-mix(in srgb, var(--clio-ink) 12%, var(--clio-paper));
     border-radius: 12px;
-    background: #ffffff;
+    background: var(--clio-paper);
   }
 
   .who {
@@ -196,7 +203,7 @@
     width: 2.5rem;
     height: 2.5rem;
     border-radius: 50%;
-    background: #ece9e1;
+    background: color-mix(in srgb, var(--clio-pink) 45%, var(--clio-paper));
     font-weight: 600;
   }
 
@@ -239,7 +246,7 @@
   .note {
     padding: var(--space-2) var(--space-3);
     border-radius: 8px;
-    background: #f6f4ee;
+    background: color-mix(in srgb, var(--clio-pink) 28%, var(--clio-paper));
     font-size: 0.94rem;
   }
 
@@ -248,7 +255,8 @@
     place-items: center;
     min-height: 13.5rem;
     margin: 0;
-    border: 1.5px dashed #d9d6ce;
+    border: 1.5px dashed
+      color-mix(in srgb, var(--clio-ink) 20%, var(--clio-paper));
     border-radius: 12px;
     color: var(--paper-grey);
     text-align: center;

@@ -9,6 +9,8 @@
   // first, then the lead, then the notes; the longer notes and the
   // decisions open in a sheet there.
   export let project: Projects[number];
+  /** The project's own logo, shown beside its name. */
+  export let mark: string | undefined = undefined;
 
   // On a wide screen "Read the decisions" turns the lead object over: the
   // decisions are written on its back, at the same size, so nothing on the
@@ -36,7 +38,16 @@
   bind:this={article}
 >
   <div class="name-line">
-    <h3>{project.name}</h3>
+    <h3>
+      {#if mark}
+        <span
+          class="mark"
+          style="--mark: url('{mark}')"
+          aria-hidden="true"
+        />
+      {/if}
+      {project.name}
+    </h3>
     {#if project.statusLine}
       <span class="label">{project.statusLine}</span>
     {/if}
@@ -165,9 +176,23 @@
   }
 
   h3 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
     margin: 0;
     font-size: var(--text-xl);
     font-weight: 600;
+  }
+
+  /* The project's own logo, drawn as a mask so it takes the page's ink in
+     both themes, as her signature does. */
+  .mark {
+    flex: none;
+    width: 1.1em;
+    aspect-ratio: 300 / 330;
+    background-color: currentColor;
+    -webkit-mask: var(--mark) center / contain no-repeat;
+    mask: var(--mark) center / contain no-repeat;
   }
 
   .notes {
