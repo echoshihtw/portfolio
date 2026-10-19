@@ -317,7 +317,7 @@ canvas {
    .link-cta  a text link that acts, on <a> or <button>.
    .chip      a small bordered control: a close, a reset, a social icon.
 
-   Numbers follow Material's button spec: 40px tall, 48px touch targets
+   Numbers follow Material's button spec, at 44px tall, and 48px touch targets
    (text links and chips extend theirs with a pseudo-element so the visual
    stays small), 8px between label and icon, state layers on hover and
    press rather than only a lift. One filled button per group.
@@ -327,7 +327,7 @@ canvas {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  min-height: 2.5rem;
+  min-height: 2.75rem;
   padding: 0.55rem 1.25rem;
   border: var(--border-w) solid var(--primary);
   border-radius: var(--radius-sm);

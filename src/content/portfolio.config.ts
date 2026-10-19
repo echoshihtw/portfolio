@@ -13,6 +13,9 @@ type HeadlinePart = { text: string; accent?: boolean; brush?: boolean };
 // equal. Declared up here because heroConfig is defined long before
 // closingConfig, so heroConfig cannot reach into it.
 const ROLE_SUBJECT = "Product engineering role";
+// One address and one résumé file for every door on the page.
+const EMAIL = "echoshihtw@gmail.com";
+const RESUME = "Chun-Yu-Echo-Shih-Software-Engineer.pdf";
 
 export const heroConfig: {
   remoteOpen: string;
@@ -68,14 +71,14 @@ export const heroConfig: {
     "Web and app, end to end. Frontend first, and the structure under it that keeps a team consistent.",
   ],
 
-  email: "echoshihtw@gmail.com",
+  email: EMAIL,
   // The file is named on disk rather than renamed by a download attribute or
   // a Content-Disposition header, so it carries my name whichever way it is
   // taken: opened in a tab and saved with cmd-S, right-click-saved, or pulled
   // by an ATS. "resume.pdf" in a recruiter's downloads folder is
   // indistinguishable from every other one. /resume.pdf still redirects here,
   // for the CVs already sent out carrying that URL.
-  resume: "Chun-Yu-Echo-Shih-Software-Engineer.pdf",
+  resume: RESUME,
   emailSubject: ROLE_SUBJECT,
 };
 
@@ -85,8 +88,8 @@ export const heroConfig: {
 export const closingConfig = {
   lead: "I like to untangle things.",
   body: "Give me the part nobody's scoped yet and I'll work out what it should be, build it, and stay with it after it ships.",
-  email: "echoshihtw@gmail.com",
-  resume: "Chun-Yu-Echo-Shih-Software-Engineer.pdf",
+  email: EMAIL,
+  resume: RESUME,
   heading: "Available for a role or a project",
   // One door, then a subject for each kind of message, so the inbox shows
   // which one it is before the message is opened.
