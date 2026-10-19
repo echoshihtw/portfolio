@@ -242,6 +242,16 @@ canvas {
   color: var(--muted);
 }
 
+/* Read by screen readers, not shown: what the eye gets from context. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
 /* The number that opens a section: large, light, in the display face. */
 .section-num {
   font-family: var(--font-display);

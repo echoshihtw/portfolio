@@ -19,14 +19,8 @@
 
   <div class="body">
     <ol class="timeline">
-      {#each experience as item, i}
+      {#each experience as item}
         <li class="entry">
-          <span
-            class="tick label"
-            aria-hidden="true"
-          >
-            {String(i + 1).padStart(2, "0")}
-          </span>
           <ExperienceCard
             {item}
             copy={experiencePortfolio[item.company]}
@@ -52,25 +46,20 @@
   }
 
   .timeline {
-    position: relative;
     margin: 0;
     padding: 0;
     list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-4);
   }
 
+  /* Jobs meet at a hairline, not inside boxes. */
   .entry {
-    position: relative;
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    gap: var(--space-2);
+    padding: var(--space-6) 0;
+    border-top: var(--border-w) solid var(--border);
   }
 
-  /* A small index in the margin, ruled like an instrument scale. */
-  .tick {
-    color: var(--muted);
+  .entry:first-child {
+    border-top: 0;
+    padding-top: var(--space-4);
   }
 
   @media (min-width: 900px) {
@@ -81,16 +70,6 @@
 
     .body > * {
       grid-column: 2;
-    }
-
-    .entry {
-      grid-template-columns: 3rem minmax(0, 1fr);
-      gap: var(--space-4);
-      align-items: start;
-    }
-
-    .tick {
-      padding-top: 1.45rem;
     }
   }
 </style>
