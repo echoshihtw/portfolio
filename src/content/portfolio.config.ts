@@ -4,7 +4,8 @@
 //
 // Guardrails: facts, not noise · warmth via specificity · no clichés.
 
-type HeadlinePart = { text: string; accent?: boolean };
+// brush: the word the oil stroke sits under. accent: the blue full stop.
+type HeadlinePart = { text: string; accent?: boolean; brush?: boolean };
 
 // The hero's email and the close's first door are the same door: someone
 // writing from the top of the page is asking about a role. One value, read
@@ -14,10 +15,8 @@ type HeadlinePart = { text: string; accent?: boolean };
 const ROLE_SUBJECT = "Product engineering role";
 
 export const heroConfig: {
-  kicker: string;
   remoteOpen: string;
   owns: string[];
-  proofLine: string;
   headline: HeadlinePart[];
   support: string[];
   email: string;
@@ -26,12 +25,7 @@ export const heroConfig: {
       which is the same door. */
   emailSubject: string;
   resume: string;
-  seeWorkHref: string;
 } = {
-  // Hierarchy: kicker = who and where · headline = value delivered ·
-  // support = role and capabilities. The title lives in the support line only,
-  // so it isn't stated twice three lines apart.
-  kicker: "Chun-Yu (Echo) Shih · Taipei, Taiwan",
   // Taipei-based, so the first thing an overseas recruiter needs is the time
   // zone and how far it stretches. Remote only: naming an on-site option
   // invited the wrong roles. Stated as fact rather than availability:
@@ -62,30 +56,17 @@ export const heroConfig: {
   // Her own line, from the voice interview on 2026-10-19: "I make software
   // you don't have to learn." The accent is the full stop, as in "Just me."
   headline: [
-    { text: "I make software you don't have to learn" },
+    { text: "I make software you don't have to " },
+    { text: "learn", brush: true },
     { text: ".", accent: true },
   ],
 
   // "Web and app" and "end to end" are hers; "frontend first" keeps her own
   // answer to what she does, and the structure line is the refactor she is
-  // proudest of. The title pill above says product engineer.
+  // proudest of. The line above it says product engineer.
   support: [
     "Web and app, end to end. Frontend first, and the structure under it that keeps a team consistent.",
   ],
-
-  // The caption under the hero figure. The figure is a drawing, and a
-  // drawing labelled "proof" is a claim it cannot make, so the caption
-  // opens by saying what it is. Then the proof, in two sentences: a product
-  // decision, and what the user did. The redesign had cut this down to two
-  // dates; the earlier line's "entered by hand" came back on 2026-09-07
-  // because it is the one fact here that is the user's verdict rather than
-  // Echo's claim, and "the two minutes" is the decision that says she
-  // builds for how someone feels without saying so. Not a stat block:
-  // figures in columns invite comparison, and "by hand" carries what a
-  // number can't. No dates: the figure already labels September 2024 and
-  // May 2025. The counts and the lesson stay in the Clio study.
-  proofLine:
-    "A sketch, not a chart. Clio covers the two minutes before a client sits down, and stops. The owner typed a year of appointments in by hand.",
 
   email: "echoshihtw@gmail.com",
   // The file is named on disk rather than renamed by a download attribute or
@@ -96,7 +77,6 @@ export const heroConfig: {
   // for the CVs already sent out carrying that URL.
   resume: "Chun-Yu-Echo-Shih-Software-Engineer.pdf",
   emailSubject: ROLE_SUBJECT,
-  seeWorkHref: "#projects",
 };
 
 // The page's one call to action, at the end, so a reader who is convinced

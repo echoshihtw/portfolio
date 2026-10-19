@@ -88,20 +88,6 @@ export const projectsConfig: Projects = [
     // The product page, not the repository: it opens on what the app does and
     // puts the App Store download first.
     href: "https://echoshihtw.github.io/runway/",
-    shots: [
-      {
-        src: "assets/runway/dashboard.png",
-        alt: "Runway dashboard: 12 months remaining, caution state, cash and run-out date",
-      },
-      {
-        src: "assets/runway/ledger.png",
-        alt: "Runway ledger: opening balance, income and expenses for the month",
-      },
-      {
-        src: "assets/runway/subscriptions.png",
-        alt: "Runway subscriptions: monthly and yearly totals with per-item cadence",
-      },
-    ],
     stack: ["Flutter", "Dart", "Riverpod", "Drift", "SQLCipher", "RevenueCat"],
     highlights: [
       "A goal is a number of months, not an amount of money. The question was never how much I had, it was how many months it covers",

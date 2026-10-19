@@ -7,6 +7,7 @@ import type { MenuTabs } from "$lib/types/types";
 // a table of contents rather than a second vocabulary for the same things.
 export const tabs: MenuTabs = [
   // { name: "Highlights", link: "#highlights" },
+  { name: "Selected work", link: "#selected-work" },
   { name: "Experience", link: "#work" },
   { name: "Case studies", link: "#projects" },
   { name: "Toolkit", link: "#skills" },
