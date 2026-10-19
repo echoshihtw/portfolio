@@ -169,11 +169,12 @@
     cursor: pointer;
   }
 
-  /* Pink is Clio's colour for memory: the client she's bringing back.
-     Always a fill under ink text, which reads at about 9:1. */
+  /* Clio's buttons are ink with paper text. Pink stays for memory: the
+     avatar, the stylist notes and the tape. */
   .pick[aria-pressed="true"] {
-    border-color: var(--paper-ink);
-    background: var(--clio-pink);
+    border-color: var(--clio-ink);
+    background: var(--clio-ink);
+    color: var(--clio-paper);
   }
 
   .result {
