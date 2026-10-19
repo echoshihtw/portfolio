@@ -93,35 +93,39 @@
   <body data-sveltekit-preload-data="hover">
     <div
       id="boot-gate"
+      role="dialog"
+      aria-modal="true"
       aria-label="Portfolio introduction"
     >
-      <header class="gate-masthead">
+      <div class="gate-masthead">
         <p>PORTFOLIO / 2026</p>
         <div class="gate-theme-switch">
           <input
             type="checkbox"
             id="boot-gate-theme-toggle"
             class="gate-theme-input"
+            aria-label="Dark theme"
           />
           <label
             for="boot-gate-theme-toggle"
             class="gate-theme-label"
-            aria-label="Toggle theme"
           >
             <span class="gate-theme-core"></span>
           </label>
         </div>
-      </header>
+      </div>
 
-      <main class="gate-cover">
-        <p
-          class="gate-name"
-          aria-label="Echo Shih"
-        >
+      <div class="gate-cover">
+        <p class="gate-name">
           <span>Echo</span>
           <span>
             Shih
-            <span class="gate-accent">.</span>
+            <span
+              class="gate-accent"
+              aria-hidden="true"
+            >
+              .
+            </span>
           </span>
         </p>
 
@@ -136,9 +140,14 @@
             <span aria-hidden="true">→</span>
           </button>
         </div>
-      </main>
+      </div>
     </div>
     <script src="%sveltekit.assets%/boot-gate.js"></script>
-    <div style="display: contents">%sveltekit.body%</div>
+    <div
+      id="app"
+      style="display: contents"
+    >
+      %sveltekit.body%
+    </div>
   </body>
 </html>
