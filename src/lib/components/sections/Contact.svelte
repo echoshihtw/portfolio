@@ -24,8 +24,8 @@
   />
 
   <div class="close">
-    <!-- Her brush-face drawing, printed faintly behind the words, the way
-         the hero's sketch sits behind the headline. -->
+    <!-- Her brush-face drawing, printed into the empty paper beside the
+         words, the way the hero's sketch sits beside the headline. -->
     <img
       class="print"
       src="{base}/assets/paintings/brush-face-640.webp"
@@ -149,16 +149,18 @@
     color: var(--muted);
   }
 
-  @media (min-width: 768px) {
+  /* Only where there is empty paper beside the words, so it never sits
+     behind them. */
+  @media (min-width: 1200px) {
     .print {
       display: block;
       position: absolute;
       z-index: -1;
       top: 50%;
-      left: 50%;
-      width: min(26rem, 60%);
+      right: 0;
+      width: min(20rem, 24%);
       height: auto;
-      transform: translate(-50%, -50%);
+      transform: translateY(-50%) rotate(4deg);
       mix-blend-mode: var(--print-blend);
       opacity: var(--print-opacity);
       filter: var(--print-filter);

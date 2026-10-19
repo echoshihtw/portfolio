@@ -37,7 +37,8 @@ Two layouts, so sections line up:
 | List           | label 3, body 9          | Where I've worked, What I work with    |
 
 Contact, the close, is the one centred section: its words lead, the door sits
-under them, and its drawing stays faint behind.
+under them, and its drawing sits in the empty paper beside
+them, never behind them.
 
 On a phone both stack. The name or label comes first, then the lead object,
 so the lead never appears without context.
