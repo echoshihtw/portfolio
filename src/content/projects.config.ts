@@ -1,16 +1,19 @@
 import type { Projects } from "../lib/types/types.js";
 
-// Each card answers: what problem existed, what I decided, how I know it works.
-// Not a stack inventory: the tech is listed in `stack` below each card, so the
-// highlights can carry judgment instead of tool names.
+// One entry per project. More projects shows the short notes (`note`, `fact`,
+// `story`) and keeps the engineering decisions in `highlights`, behind "Read
+// the decisions". The résumé reads only `name` and `resume`. The tech is
+// listed in `stack`, so the highlights can carry judgment, not tool names.
 export const projectsConfig: Projects = [
   {
     name: "Clio",
-    subtitle:
-      "Salon operations software, in daily use at a Tainan salon since May 2025",
-    why: "A friend's hard drive died and took years of salon records with it. She'd tried the existing software and found all of it too complicated. She didn't need more features. She needed the two minutes before a client sits down: who they are, what was done last time, what it cost.",
-    result:
-      "The owner typed a year of past appointments in by hand. People don't migrate their own history into software they're still evaluating. In daily use at the salon since May 2025, with 603 clients, 2,694 service records, and history entered back to September 2024. What I'd do differently: write the permission model down before building it, not after.",
+    statusLine: "Early access",
+    note: "She's back. You remember.",
+    fact: "In use at a Tainan salon since May 2025. The owner typed 603 clients in by hand.",
+    story: [
+      "A quick CV of the client, for the two minutes before she sits down: how long since her last visit, what was done last time, any special hair situation, the curl she likes.",
+      "No booking, no payments. The owner didn't need them, yet. I never taught her to use it; she only comes to me when she forgets her password, or when a bug of mine stops her saving.",
+    ],
     href: "https://cliohq.app",
     stack: [
       "React 19",
@@ -21,14 +24,14 @@ export const projectsConfig: Projects = [
       "Tailwind",
     ],
     highlights: [
-      "No booking, no payments, no inventory, no marketing. The products she rejected had all of it. Clio covers the two minutes before a client sits down, and stops",
-      "Each salon is isolated in the database itself. The app doesn't have to remember to filter",
+      "The products she had tried did everything. Clio covers the two minutes before a client sits down, and stops",
+      "Each salon is isolated in the database itself, so the app never has to remember to filter",
       "Tightened the permission defaults without locking out existing staff. The migration writes the intended values before the code stops assuming them",
       // The specifics of the flaw I found stay off a public page: this is a live
       // product holding real people's records, and naming a past weakness names
       // where to look. The judgment survives; the map does not.
-      "I audit my own access policies, and every change since launch gets a written review",
-      "Only the api layer may reach the database. A test fails the build if anything else imports it",
+      "Every access policy gets my own audit, and every change since launch a written review",
+      "Only the API layer may reach the database. A test fails the build if anything else imports it",
       // Verified against clio-app main on 2026-09-15. Reads: every successful
       // query is snapshotted to localStorage per user and restored when the
       // browser goes offline, with a banner showing when the snapshot was
@@ -41,7 +44,10 @@ export const projectsConfig: Projects = [
       // a lost response can duplicate a create until device-generated ids ship
       // (clio-app #100). The durable queue is designed in clio-app #115.
       "The salon has patchy Wi-Fi. Reads work offline from the last snapshot, stamped with when it was taken. A save retries a dropped connection, and a failed one says so",
-      "Records live in a hosted database, so the failure that started all this can't happen again",
+      "Records live in a hosted database, so a dead hard drive can't take them",
+      // From the @echoshihtw/clio-brand README: shared by clio-web and
+      // clio-app, released with semantic-release. The demo here installs it.
+      "The brand is one package the landing page and the app both install, so a colour changes in one place and ships as a release. This page installs it too",
     ],
     resume: {
       descriptor: "salon operations platform, live since May 2025",
@@ -67,58 +73,21 @@ export const projectsConfig: Projects = [
         // in full; the CV states what it does and who it is for.
         "CSV export of clients, visits and hair profiles, so her records stay portable, not locked in",
         // "Reads work offline from cache on patchy salon Wi-Fi; Traditional
-        // Chinese first" was cut in the one-page pass. Both facts are on the
-        // project card above, where the Wi-Fi has the salon around it to make
-        // sense of; on the CV it was the least load-bearing of the four.
+        // Chinese first" was cut in the one-page pass. The Wi-Fi fact is in
+        // the highlights above, where the salon is around it to make sense
+        // of; on the CV it was the least load-bearing of the four.
       ],
     },
-    featured: true,
-    linkLabel: "Live →",
+    linkLabel: "cliohq.app",
     status: "Live",
   },
   {
     name: "Financial Runway",
-    subtitle:
-      "Personal finance measured the way a company measures itself: how many months does your money cover?",
-    why: "I was planning a study trip and couldn't answer the one question it rested on: how many months would my money cover? Budget apps tell you where the money went. I needed to know how much time was left. A person has an opening balance, monthly costs and months remaining, the same as a company.",
-    result:
-      // No date, deliberately, from 2026-09-23. "Planned for September 2026" had
-      // seven days left on it and would have read as a missed deadline from the
-      // first of October. The release is going out around Shipaton, and whether
-      // the competition or the store comes first is not settled, so any specific
-      // claim here would age badly.
-      //
-      // The admission stays and the follow-through is new. The card used to end
-      // on "the next thing I do here is put it in front of people", which had
-      // become untrue in the good way: the landing page, the store screenshots
-      // and the release automation all shipped. A confession is worth something;
-      // a confession with the fix under way is worth more.
-      //
-      // Shipaton is not named. It explains the deadline rather than the product,
-      // and naming a competition invites "how did you do" before there is an
-      // answer. If she places, that is a fact worth adding.
-      "I use it. Built solo, in six languages and six currencies. One user isn't validation. I built the model before I knew whether anyone else wanted it, which is the wrong order, so the work since has been the other half: a landing page, store screenshots, and getting it into the App Store.",
-    // The product page, not the repository. Runway got a marketing site on
-    // 2026-09-23 (runway #228, published to gh-pages by #229), and a visitor
-    // who wants to know what the app is should not have to read a monorepo to
-    // find out. The App Store badge there says "coming soon", so status stays
-    // In Progress and the résumé line still says the release is planned.
-    // Source is one click away from the page for anyone who wants it.
+    // Live on the App Store since 2026-10-04 (id6778675088). Shown in its own
+    // Selected work section (selectedWork.config.ts), not in More projects.
+    // The product page, not the repository: it opens on what the app does and
+    // puts the App Store download first.
     href: "https://echoshihtw.github.io/runway/",
-    shots: [
-      {
-        src: "assets/runway/dashboard.png",
-        alt: "Runway dashboard: 12 months remaining, caution state, cash and run-out date",
-      },
-      {
-        src: "assets/runway/ledger.png",
-        alt: "Runway ledger: opening balance, income and expenses for the month",
-      },
-      {
-        src: "assets/runway/subscriptions.png",
-        alt: "Runway subscriptions: monthly and yearly totals with per-item cadence",
-      },
-    ],
     stack: ["Flutter", "Dart", "Riverpod", "Drift", "SQLCipher", "RevenueCat"],
     highlights: [
       "A goal is a number of months, not an amount of money. The question was never how much I had, it was how many months it covers",
@@ -135,29 +104,30 @@ export const projectsConfig: Projects = [
         // local storage" was cut for the one-page pass: it is the only line in
         // Projects that names a pattern rather than a result, and the card on
         // the site carries it with the reasoning attached.
-        "6 languages and 6 currencies, built solo; landing page live, shipping to the App Store",
+        "6 languages and 6 currencies, built solo; live on the App Store",
       ],
     },
     linkLabel: "See the app →",
-    status: "In Progress",
+    status: "Live",
   },
   {
     name: "Echology",
-    subtitle:
-      "A demo wallet for studying how Bitcoin coin-selection algorithms behave",
+    statusLine: "Archived · 2023",
+    story: [
+      "I designed and built the frontend of a demo wallet for comparing Bitcoin coin-selection algorithms, the rules that decide which coins a payment spends. Built with a core maintainer of the Bitcoin Dev Kit.",
+    ],
     href: "https://github.com/evanlinjin/echology",
     file: "assets/echology.png",
-    why: "Coin selection is the algorithm that decides which coins a transaction spends, and it sets the fee. Its trade-offs only show up as numbers (waste, fee, feerate deviation), and only for one exact set of inputs. If you hold the inputs still, you can compare the algorithms.",
-    result:
-      "Built the frontend with a core maintainer of the Bitcoin Dev Kit. You construct a UTXO set, run it against a spend scenario, and read the metrics side by side. Archived.",
+    fileSize: { width: 2952, height: 1996 },
+    fileAlt:
+      "Echology: choosing a coin-selection algorithm, Branch and Bound, scored on waste, with a fallback and an excess strategy",
     stack: ["Next.js", "TypeScript", "Tailwind CSS"],
-    role: "UI/UX designer and frontend engineer",
     highlights: [
       "You pick the UTXOs by hand, so the input set is a controlled variable instead of whatever the wallet happened to hold",
       "Spend scenarios and fee rates are adjustable, because selection behaviour diverges at the extremes",
-      "Waste, fee and feerate deviation are shown as separate figures. One combined total hides which trade-off moved",
+      "Waste, fee and fee rate deviation are shown as separate figures. One combined total hides which trade-off moved",
     ],
-    linkLabel: "Source Code →",
+    linkLabel: "Source code →",
     status: "Archived",
   },
   // Ming Mold 60th is hidden for now. Uncomment to restore.

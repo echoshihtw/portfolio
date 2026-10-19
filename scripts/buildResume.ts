@@ -42,8 +42,7 @@ earns the bullets a look. A dense sentence gets skipped whole.
 --------------------------------------------------
 */
 
-const SKILLS_MARKER =
-  "<!-- generated from src/content/skills.config.ts: items marked site-only are omitted -->";
+const SKILLS_MARKER = "<!-- generated from src/content/skills.config.ts -->";
 
 export function withSkills(markdown) {
   if (!markdown.includes(SKILLS_MARKER)) {
@@ -194,9 +193,7 @@ function buildResumeData(markdown) {
 
   // Only what the site actually imports. Skills come from skills.config.ts
   // and projects from projects.config.ts; generating them here too produced
-  // exports nobody read. Skills used to be written twice, which is what made
-  // editing resume.md look broken, the PDF changing while the site did not,
-  // and skills.config.ts is now the single list behind both.
+  // exports nobody read.
   // The site joins portfolio copy to experience by company name, and a
   // mismatch renders an empty card with no error. Fail here instead.
   const companies = experience.map((e) => e.company);

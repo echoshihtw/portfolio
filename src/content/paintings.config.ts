@@ -6,7 +6,7 @@
 // are committed. Point PAINTINGS_SRC at the originals to regenerate.
 //
 // Captions are the medium, plus a place and a year only where they are
-// known from the work itself. File dates are not years.
+// known from the work or from Echo. File dates are not years.
 
 export type Painting = {
   id: string;
@@ -15,7 +15,7 @@ export type Painting = {
   medium: string;
   /** Only where Echo has confirmed it. */
   place?: string;
-  /** Only where the work itself carries one. */
+  /** Only where the work carries one or Echo has confirmed it. */
   year?: string;
   /** Describes the work. These are not decorative images. */
   alt: string;
@@ -74,7 +74,7 @@ export const paintingsConfig: Painting[] = [
   {
     id: "reclining",
     source: "IMG_5095.jpg",
-    medium: "Oil",
+    medium: "Oil on canvas",
     alt: "Oil painting of a reclining figure, hand to the face, ochre and brown against a warm yellow ground",
     crop: [0, 0, 1, 0.86],
     scale: "canvas",
@@ -129,6 +129,7 @@ export const paintingsConfig: Painting[] = [
     id: "swirl-card",
     source: "IMG_1715.jpg",
     medium: "Pen and ink on card",
+    year: "2015",
     alt: "A small square of dense curvilinear pen pattern with lettering worked into the swirls",
     crop: [0.1, 0.3, 0.78, 0.55],
     scale: "card",
@@ -137,6 +138,7 @@ export const paintingsConfig: Painting[] = [
     id: "heart",
     source: "IMG_6752.jpg",
     medium: "Watercolour, acrylic and pastel on paper",
+    year: "2026",
     alt: "An orange and yellow heart on a purple and blue wash, red spatter around it",
     crop: [0.02, 0.01, 0.96, 0.98],
     scale: "paper",
@@ -161,7 +163,8 @@ export const paintingsConfig: Painting[] = [
   {
     id: "male-portrait",
     source: "IMG_4502.jpeg",
-    medium: "Acrylic",
+    medium: "Acrylic on paper",
+    place: "Florence",
     alt: "Acrylic portrait of a seated man, chin resting on his hand, painted in reds and pinks",
     crop: [0.09, 0.1, 0.78, 0.85],
     scale: "paper",
@@ -170,6 +173,7 @@ export const paintingsConfig: Painting[] = [
     id: "seated-figure",
     source: "IMG_4517.jpeg",
     medium: "Acrylic on tan paper",
+    place: "Florence",
     alt: "Acrylic painting of a seated figure in blue and pink on tan paper",
     crop: [0.05, 0.08, 0.85, 0.88],
     scale: "paper",

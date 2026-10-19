@@ -1,6 +1,7 @@
 <script lang="ts">
   import Icon from "@iconify/svelte";
   import ThemeSwitch from "../ThemeSwitch.svelte";
+  import Signature from "../Signature.svelte";
   import { base } from "$app/paths";
   import { page } from "$app/stores";
   import { tabs, tabHref } from "$lib/menuTabs";
@@ -38,10 +39,9 @@
 
   const sourceUrl = "https://github.com/echoshihtw/portfolio";
 
-  // The header's theme toggle and go-to-top are hidden on a phone, where
-  // the bar has no room for them, and shown here instead. Same top
-  // behaviour as the header's: a smooth scroll on the one-page home, a
-  // real link home from anywhere else.
+  // The header's theme toggle is hidden on a phone, where the bar has no
+  // room for it, and shown here instead, beside go-to-top: a smooth scroll
+  // on the one-page home, a real link home from anywhere else.
   $: isHome = $page.route.id === "/";
 
   function goTop(event: MouseEvent) {
@@ -71,7 +71,7 @@
              below: the bottom bar already carries the location and
              timezone, and the blurb restated the hero headline. By the
              time a reader is down here they know what I do. -->
-        <h2>Echo Shih</h2>
+        <h2 class="footer-sign"><Signature /></h2>
 
         <div class="footer-cta">
           <a
@@ -102,6 +102,18 @@
             <Icon icon="mdi:arrow-top-right" />
           </a>
         </div>
+        <!-- A photo of her room in Florence: a caption, not a claim about
+             where the site was made. -->
+        <figure class="room">
+          <img
+            src="{base}/assets/florence-room.webp"
+            alt="Her room in Florence at night: a desk under a lamp, with paints and a painting propped by the window"
+            width="300"
+            height="400"
+            loading="lazy"
+          />
+          <figcaption>my room in Florence</figcaption>
+        </figure>
       </section>
 
       <nav class="footer-nav">
@@ -145,7 +157,7 @@
           href="{base}/gallery"
           aria-current={$page.route.id === "/gallery" ? "page" : undefined}
         >
-          Art Gallery
+          Gallery
         </a>
       </nav>
 
@@ -218,6 +230,38 @@
     display: grid;
     grid-template-columns: 1fr;
     gap: 1.6rem;
+  }
+
+  .footer-sign :global(.signature) {
+    width: 6rem;
+    background-color: var(--ink);
+    opacity: 1;
+  }
+
+  /* A small taped print of her room. Paper stays paper in both themes. */
+  .room {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    width: 6.5rem;
+    margin: var(--space-5) 0 0;
+    padding: 0.35rem 0.35rem 0.5rem;
+    background: #fffdf8;
+    box-shadow: 0 6px 14px rgba(60, 40, 10, 0.14);
+    transform: rotate(-3deg);
+  }
+
+  .room img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .room figcaption {
+    font-family: var(--font-hand);
+    font-size: 0.78rem;
+    line-height: 1.2;
+    color: #4a4740;
   }
 
   .footer-brand h2 {
