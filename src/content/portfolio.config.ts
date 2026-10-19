@@ -59,104 +59,18 @@ export const heroConfig: {
     "GHCR image deploys",
   ],
 
-  // States scope of responsibility as a plain fact rather than a reliability
-  // claim ("people rely on" implies things never break). The signal remote
-  // hiring screens hardest for is whether someone can be trusted without
-  // oversight, not whether their software never fails.
-  // Redesign brief, 2026-09-06: the hero has to say product
-  // engineer, React and TypeScript, developer experience, and zero to one,
-  // in the first screen. The headline carries the zero-to-one claim and
-  // the ownership after it; the support line carries the stack and the
-  // developer-experience work; the pill above carries the title.
+  // Her own line, from the voice interview on 2026-10-19: "I make software
+  // you don't have to learn." The accent is the full stop, as in "Just me."
   headline: [
-    { text: "Products from " },
-    { text: "0 → 1", accent: true },
-    { text: ", and the part after." },
+    { text: "I make software you don't have to learn" },
+    { text: ".", accent: true },
   ],
 
-  // The examples lead. The list of what I build is the same here and on
-  // the CV, because it answers "you have no experience in our domain" and
-  // that question gets asked in every screen. "Systems of record" was the
-  // accurate term and the wrong register: it reads enterprise, and the
-  // startup reader this is aimed at skims it. The examples were always
-  // doing the explaining, so they go first, and the tooling underneath
-  // them second, in the order the résumé summary uses.
-  //
-  // No stack in the sentence. The chip row directly below carries it,
-  // more specifically: React 19, Postgres RLS, offline-first sync,
-  // architecture tests, GHCR deploys are what make her legible as one of
-  // these people, and "React and TypeScript" above them was the same
-  // thing said vaguer, and the first five words on the page. It had crept
-  // back after being cut once for the same reason; cut again 2026-09-07.
-  // "Actually" went with it: "the software a business actually runs on"
-  // argues against an objection nobody raised. The résumé summary still
-  // has the word; that is Echo's call.
-  //
-  // Two sentences, not one paragraph. This was three claims fused: what
-  // the work is, how it is done, and the stack. Split so a skimmer gets
-  // the first.
-  //
-  // The three verbs in the second line are each evidenced elsewhere on
-  // the page, which is the only reason they earn a line: securing is
-  // Clio's RLS and the BFF boundary; keeping it running is Clio in daily
-  // use since May 2025; writing down what broke is the blog, and the
-  // admitted mistake in the Clio study.
-  // Realigned with the résumé on 2026-09-19. The CV was rewritten to lead
-  // with ownership and with what got faster; this line still opened on
-  // "underneath it, the module template ... and the tests that guard a
-  // boundary", so the two surfaces made different arguments about the same
-  // person. Whoever reads both reads a document and a page that do not agree
-  // on what the work was.
-  //
-  // What changed: the ownership arrives here as it does in the summary, and
-  // the release path becomes the figure rather than the noun. "The release a
-  // non-engineer runs in five minutes" is the most arresting fact available
-  // and it was sitting only in the PDF, which is the artefact fewer people
-  // open.
-  //
-  // "I build", present tense, no intensifier. Three drafts got here. "Sole
-  // author" strained: it governed two objects and a release pipeline is not
-  // authored. "I wrote every line" is true, and Echo writes every line of
-  // that frontend, but "every" was the one word on the page working to
-  // impress, and a reader discounts it in a thought: two engineers, so of
-  // course one of them wrote the frontend. It also sat immediately before the
-  // page's most checkable fact, which made the contrast visible.
-  //
-  // Present tense because the line below is present tense, so the paragraph
-  // no longer changes voice halfway through. First person because the site
-  // speaks in Echo's voice throughout and the About page is first person;
-  // dropping the pronoun here would leave the next sentence stranded and make
-  // the page sound like the document that already exists one click away.
-  //
-  // The sole-authorship claim lives in resume.md, where it governs only the
-  // frontend and a recruiter is scanning for scope. Claim on the CV,
-  // demonstrate on the site: two registers, two readers.
-  //
-  // The deploy figure lives here, above the fold, and nowhere else on this
-  // page. Two rounds to get the allocation right. The first draft repeated the
-  // five minutes a third time; the second moved it out of the hero and swapped
-  // in "the CI gate that turned a week of work into two days", which is a good
-  // number wearing jargon: "CI gate" means nothing to the recruiters who read
-  // only this screen. The deploy is visual, surprising, and the same thesis as
-  // the summary and the About page, that the person at the other end is the
-  // point.
-  //
-  // Each figure now appears once on the page: the deploy here, the week in the
-  // Lockerbie card with the template story it belongs to, and the highlight
-  // carries the mechanism without repeating either number.
-  //
-  // resume.md keeps "Sole author of the Next.js / TypeScript frontend". Same
-  // fact, and there it governs only the frontend, in the register a recruiter
-  // scans for scope.
-  //
-  // What did not change: the domains still lead, because "you have no
-  // experience in our domain" is asked in every screen and the examples are
-  // what answer it. No stack in the sentence; the chip row below carries it
-  // more specifically. Still two lines rather than one paragraph, so a
-  // skimmer gets the first.
+  // "Web and app" and "end to end" are hers; "frontend first" keeps her own
+  // answer to what she does, and the structure line is the refactor she is
+  // proudest of. The title pill above says product engineer.
   support: [
-    "Project platforms, applicant tracking, client histories: the software a business runs on. I build the frontend, and the delivery path under it: the module template a team builds against, the release a non-engineer runs in five minutes.",
-    "I secure it, keep it running after ship, and write down what broke.",
+    "Web and app, end to end. Frontend first, and the structure under it that keeps a team consistent.",
   ],
 
   // The caption under the hero figure. The figure is a drawing, and a
@@ -319,9 +233,7 @@ export const experiencePortfolio: Record<
     //
     // Opens on the verb, 2026-09-11. The heading above already says
     // Lockerbie and "Internal Platform", so the old opening spent its first
-    // eight words on what the reader had just read. "Built and operated"
-    // is also the hero's "0 → 1, and the part after" in two words, which
-    // makes the page argue one thing rather than two. The domain came back
+    // eight words on what the reader had just read. The domain came back
     // with it: an "internal project-management platform" could be anyone's,
     // and the UK construction sector could not.
     impact:
