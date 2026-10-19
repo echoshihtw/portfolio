@@ -10,12 +10,18 @@
    *
    * `label` is the link text; `name` says what it is about, so each link
    * has its own name for a screen reader and the sheet has a title.
+   *
+   * `inline={false}` leaves the wide-screen copy to the parent, which binds
+   * `open` and `phone` and places it elsewhere in its own layout.
    */
   export let label: string;
   export let name: string;
-
-  let open = false;
-  let phone = false;
+  export let inline = true;
+  /** What the link says while the detail is open on a wide screen. */
+  export let openLabel = "Hide";
+  export let openArrow = "↑";
+  export let open = false;
+  export let phone = false;
 
   onMount(() => {
     const mq = window.matchMedia("(max-width: 767.98px)");
@@ -33,13 +39,13 @@
   aria-haspopup={phone ? "dialog" : undefined}
   on:click={() => (open = !open)}
 >
-  {open && !phone ? "Hide" : label}
+  {open && !phone ? openLabel : label}
   <span class="sr-only">: {name}</span>
   <span
     class="cta-arrow"
     aria-hidden="true"
   >
-    {phone ? "↑" : open ? "↑" : "↓"}
+    {phone ? "↑" : open ? openArrow : "↓"}
   </span>
 </button>
 
@@ -50,7 +56,7 @@
   >
     <slot />
   </Sheet>
-{:else if open}
+{:else if open && inline}
   <div
     class="inline"
     transition:slide|local={{ duration: 220 }}

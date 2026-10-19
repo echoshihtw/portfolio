@@ -69,6 +69,20 @@ is the show.
 than one tilt per section, or decoration that repeats what a word already
 says.
 
+## Motion
+
+Material 3's scale, as tokens in `src/app.css`. Arriving slows down at the
+end (`--motion-enter`); leaving speeds up (`--motion-exit`) and is always
+quicker than arriving.
+
+| Token             | Length | Used for                                           |
+| ----------------- | ------ | -------------------------------------------------- |
+| `--motion-medium` | 350ms  | turning a card back, the tape peeling              |
+| `--motion-long`   | 500ms  | turning a card over, a story block, folding Runway |
+| `--motion-xlong`  | 800ms  | the one big moment: Runway's sheet unfolding       |
+
+Reduced motion swaps every one of these for an instant change.
+
 ## Colour
 
 - **Ink and paper** for everything that informs.

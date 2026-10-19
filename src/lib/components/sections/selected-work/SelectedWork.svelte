@@ -16,10 +16,11 @@
 
   // How far the tape has been pulled, in px. Past PULL it comes off.
   const PULL = 90;
-  // These wait for the CSS to finish: the tape's 0.35s peel, and the
-  // sheet's fold (0.2s delay plus 0.6s).
-  const PEEL_MS = 400;
-  const FOLD_MS = 820;
+  // These wait for the CSS to finish: the tape's peel (--motion-medium) and
+  // the fold, where the sheet waits 0.15s for the blocks, then takes
+  // --motion-long.
+  const PEEL_MS = 350;
+  const FOLD_MS = 650;
   let dx = 0;
   let dy = 0;
   let dragging = false;
@@ -497,9 +498,9 @@
     visibility: hidden;
     clip-path: circle(0% at 50% 14%);
     transition:
-      clip-path 0.9s cubic-bezier(0.6, 0, 0.2, 1),
+      clip-path var(--motion-xlong) var(--motion-enter),
       opacity 0.3s ease,
-      visibility 0s linear 0.9s;
+      visibility 0s linear var(--motion-xlong);
   }
 
   .world.open::before {
@@ -507,7 +508,7 @@
     visibility: visible;
     clip-path: circle(150% at 50% 14%);
     transition:
-      clip-path 0.9s cubic-bezier(0.6, 0, 0.2, 1),
+      clip-path var(--motion-xlong) var(--motion-enter),
       opacity 0.2s ease,
       visibility 0s;
   }
@@ -515,9 +516,9 @@
   .world.folding::before {
     clip-path: circle(0% at 50% 14%);
     transition:
-      clip-path 0.6s cubic-bezier(0.6, 0, 0.4, 1) 0.2s,
-      opacity 0.2s ease 0.7s,
-      visibility 0s linear 0.8s;
+      clip-path var(--motion-long) var(--motion-exit) 0.15s,
+      opacity 0.15s ease 0.5s,
+      visibility 0s linear 0.65s;
   }
 
   .world.open .inner {
@@ -571,7 +572,7 @@
       0 2px 0 rgba(0, 0, 0, 0.05),
       0 10px 24px rgba(60, 40, 10, 0.12);
     transform: rotate(2deg) scale(1.03);
-    transition: transform 0.55s cubic-bezier(0.2, 0.8, 0.2, 1);
+    transition: transform var(--motion-long) var(--motion-enter);
   }
 
   .poster.open {
@@ -629,8 +630,8 @@
       )
       0 10px / 100% 24px no-repeat;
     transition:
-      transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
-      opacity 0.35s ease;
+      transform var(--motion-medium) var(--motion-exit),
+      opacity var(--motion-medium) ease;
   }
 
   .tapebtn:active {
@@ -903,7 +904,7 @@
 
   .story > * {
     transform-origin: top center;
-    animation: unfold 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+    animation: unfold var(--motion-long) var(--motion-enter) both;
   }
 
   .story > :nth-child(2) {
@@ -931,7 +932,7 @@
 
   /* Folding back: the reverse, last block first. */
   .world.folding .story > * {
-    animation: fold 0.4s cubic-bezier(0.5, 0, 0.75, 0) both;
+    animation: fold 0.3s var(--motion-exit) both;
   }
   .world.folding .story > :nth-last-child(2) {
     animation-delay: 0.04s;
@@ -1210,7 +1211,8 @@
   }
 
   .world.open .screen {
-    animation: fan 0.8s cubic-bezier(0.2, 0.9, 0.25, 1.15) 0.9s both;
+    animation: fan 0.8s cubic-bezier(0.2, 0.9, 0.25, 1.15) var(--motion-xlong)
+      both;
   }
 
   @keyframes fan {

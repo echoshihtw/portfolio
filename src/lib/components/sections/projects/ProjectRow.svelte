@@ -1,5 +1,6 @@
 <script lang="ts">
   import { base } from "$app/paths";
+  import { tick } from "svelte";
   import Reveal from "$lib/components/Reveal.svelte";
   import type { Projects } from "$lib/types/types";
 
@@ -9,10 +10,31 @@
   // decisions open in a sheet there.
   export let project: Projects[number];
 
+  // On a wide screen "Read the decisions" turns the lead object over: the
+  // decisions are written on its back, at the same size, so nothing on the
+  // page moves. On a phone they open in a sheet instead.
+  let decisionsOpen = false;
+  let phone = false;
+  let article: HTMLElement;
+  let back: HTMLElement;
+
+  $: flipped = decisionsOpen && !phone;
+  $: if (flipped) tick().then(() => back?.focus({ preventScroll: true }));
+
+  async function turnBack() {
+    decisionsOpen = false;
+    await tick();
+    // The decisions toggle is the last Reveal in the notes.
+    [...article.querySelectorAll<HTMLElement>(".reveal")].pop()?.focus();
+  }
+
   $: linkText = project.linkLabel?.replace(/\s*→\s*$/, "") || "Visit";
 </script>
 
-<article class="row">
+<article
+  class="row"
+  bind:this={article}
+>
   <div class="name-line">
     <h3>{project.name}</h3>
     {#if project.statusLine}
@@ -20,20 +42,54 @@
     {/if}
   </div>
 
-  <div class="lead">
-    <slot name="lead">
-      {#if project.file}
-        <div class="frame">
-          <img
-            src="{base}/{project.file}"
-            alt={project.fileAlt ?? ""}
-            width={project.fileSize?.width}
-            height={project.fileSize?.height}
-            loading="lazy"
-          />
-        </div>
-      {/if}
-    </slot>
+  <div
+    class="lead flip"
+    class:flipped
+  >
+    <div
+      class="face front"
+      inert={flipped || undefined}
+    >
+      <slot name="lead">
+        {#if project.file}
+          <div class="frame">
+            <img
+              src="{base}/{project.file}"
+              alt={project.fileAlt ?? ""}
+              width={project.fileSize?.width}
+              height={project.fileSize?.height}
+              loading="lazy"
+            />
+          </div>
+        {/if}
+      </slot>
+    </div>
+    {#if project.highlights?.length && !phone}
+      <div
+        class="face back"
+        id="{project.name}-decisions"
+        tabindex="-1"
+        bind:this={back}
+        inert={!flipped || undefined}
+        aria-hidden={!flipped}
+        aria-label="{project.name} decisions"
+        role="region"
+      >
+        <p class="label">How it's built</p>
+        <ul class="decisions">
+          {#each project.highlights as decision}
+            <li>{decision}</li>
+          {/each}
+        </ul>
+        <button
+          type="button"
+          class="link-cta turn"
+          on:click={turnBack}
+        >
+          Turn it back ↺
+        </button>
+      </div>
+    {/if}
   </div>
 
   <div class="notes">
@@ -77,23 +133,17 @@
       <Reveal
         label="Read the decisions"
         name="{project.name} decisions"
+        inline={false}
+        openLabel="Turn it back"
+        openArrow="↺"
+        bind:open={decisionsOpen}
+        bind:phone
       >
-        <!-- A region with a name and a tab stop, so the sideways scroll on a
-             wide screen works from the keyboard too. A scrolling region must be
-             focusable (WCAG 2.1.1), which the lint rule below does not know. -->
-        <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
-        <div
-          class="scroller"
-          role="region"
-          aria-label="{project.name} decisions"
-          tabindex="0"
-        >
-          <ul class="decisions">
-            {#each project.highlights as decision}
-              <li>{decision}</li>
-            {/each}
-          </ul>
-        </div>
+        <ul class="decisions">
+          {#each project.highlights as decision}
+            <li>{decision}</li>
+          {/each}
+        </ul>
       </Reveal>
     {/if}
   </div>
@@ -200,48 +250,84 @@
     color: var(--brush);
   }
 
-  /* On a wide screen the decisions open as one row that scrolls sideways,
-     so opening them adds one short row to the page, not a tall list. On a
-     phone they stay a list, in the sheet. The right edge fades to say
-     there is more. */
-  @media (min-width: 768px) {
-    .scroller {
-      overflow-x: auto;
-      overscroll-behavior-x: contain;
-      scroll-snap-type: x mandatory;
-      padding-bottom: var(--space-2);
-      -webkit-mask-image: linear-gradient(to right, #000 85%, transparent);
-      mask-image: linear-gradient(to right, #000 85%, transparent);
-    }
+  /* The lead and its back share one place. The back is laid over the front
+     at the same size and scrolls inside if it has more to say, so turning
+     it over never changes the page's height. */
+  .flip {
+    position: relative;
+    perspective: 1600px;
+  }
 
-    .scroller:focus-visible {
-      outline: 2px solid var(--primary);
-      outline-offset: 4px;
-      border-radius: var(--radius-sm);
-    }
+  .face {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    /* Turning back is the exit: quicker, and speeding up. */
+    transition: transform var(--motion-medium) var(--motion-exit);
+  }
 
-    .decisions {
-      grid-auto-flow: column;
-      grid-auto-columns: minmax(13rem, 15rem);
-      gap: 0;
-      max-width: none;
-      padding: 0;
-      list-style: none;
-    }
+  .flipped .face {
+    transition: transform var(--motion-long) var(--motion-enter);
+  }
 
-    .decisions li {
-      scroll-snap-align: start;
-      padding: 0 var(--space-4);
-      border-left: var(--border-w) solid var(--border);
-    }
+  .back {
+    --paper-ink: #1a1a1a;
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding: 1.5rem 1.6rem 1.2rem;
+    overflow-y: auto;
+    background: #fffdf8;
+    color: var(--paper-ink);
+    border-radius: 10px;
+    box-shadow:
+      0 2px 0 rgba(0, 0, 0, 0.04),
+      0 12px 28px rgba(60, 40, 10, 0.12);
+    transform: rotateY(180deg);
+  }
 
-    .decisions li:first-child {
-      padding-left: 0;
-      border-left: 0;
-    }
+  .back:focus {
+    outline: none;
+  }
 
-    .decisions li:last-child {
-      margin-right: 4rem;
+  .back .label {
+    margin: 0;
+    color: #5f5d57;
+  }
+
+  .back .decisions {
+    padding-left: 1.4rem;
+  }
+
+  .back .decisions li {
+    color: #3a3833;
+  }
+
+  /* Her orange tick, as on the rest of the page. */
+  .back .decisions li::marker {
+    content: "✓  ";
+    color: var(--brush);
+    font-weight: 600;
+  }
+
+  .back .turn {
+    margin-top: auto;
+    align-self: flex-start;
+    color: var(--paper-ink);
+  }
+
+  .flipped .front {
+    transform: rotateY(-180deg);
+  }
+
+  .flipped .back {
+    transform: rotateY(0deg);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .face {
+      transition: none;
     }
   }
 

@@ -101,6 +101,14 @@
   --dur-base: 220ms;
   --dur-slow: 420ms;
   --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+
+  /* The site's moving parts, on Material 3's motion scale. Things arrive
+     slowing down and leave speeding up, and leaving is always quicker. */
+  --motion-enter: cubic-bezier(0.05, 0.7, 0.1, 1);
+  --motion-exit: cubic-bezier(0.3, 0, 0.8, 0.15);
+  --motion-medium: 350ms;
+  --motion-long: 500ms;
+  --motion-xlong: 800ms;
 }
 
 /* The ink theme. Same system, the ground and the ink swap, and blue and
