@@ -135,11 +135,11 @@ html[data-theme="dark"] {
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 5rem;
+  scroll-padding-top: 1rem;
 }
 
-/* clip, not hidden. A hidden overflow makes body a scroll container, and a
-   sticky header sticks to the nearest scroll container, which is then body
+/* clip, not hidden. A hidden overflow makes body a scroll container, and
+   anything sticky sticks to the nearest scroll container, which is then body
    rather than the viewport. clip cuts the overflow without creating one. */
 html,
 body {
