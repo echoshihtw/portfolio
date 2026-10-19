@@ -16,11 +16,15 @@
 
   let open = false;
   let menu: HTMLElement;
+  let menuButton: HTMLButtonElement;
 
   // A menu that only closes from its own button is a trap: people press
   // Escape or tap away and expect it gone.
   function onWindowKey(e: KeyboardEvent) {
-    if (e.key === "Escape") open = false;
+    if (e.key !== "Escape" || !open) return;
+    open = false;
+    // The link that had focus is about to be hidden; keep focus in the nav.
+    if (menu.contains(document.activeElement)) menuButton.focus();
   }
 
   function onWindowPointer(e: PointerEvent) {
@@ -52,6 +56,7 @@
     <button
       type="button"
       class="menu-button"
+      bind:this={menuButton}
       aria-expanded={open}
       aria-controls="main-links"
       on:click={() => (open = !open)}
@@ -129,7 +134,9 @@
   }
 
   .logo {
-    display: block;
+    display: flex;
+    align-items: center;
+    min-height: 44px;
     border-radius: var(--radius-sm);
   }
 
