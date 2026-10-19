@@ -41,9 +41,9 @@ describe("validateManifest", () => {
   });
 
   it("accepts corners instead of a crop", () => {
-    const { crop: _crop, ...rest } = ok;
     const flat = {
-      ...rest,
+      ...ok,
+      crop: undefined,
       corners: [
         [0.1, 0.2],
         [0.8, 0.1],
@@ -75,7 +75,7 @@ describe("validateManifest", () => {
         [number, number],
       ],
     };
-    const { crop: _crop, ...neither } = { ...ok, id: "neither" };
+    const neither = { ...ok, id: "neither", crop: undefined };
     expect(validateManifest([both, neither])).toEqual([
       "both: needs exactly one of crop or corners",
       "neither: needs exactly one of crop or corners",
@@ -83,9 +83,9 @@ describe("validateManifest", () => {
   });
 
   it("rejects a corner outside the photo", () => {
-    const { crop: _crop, ...rest } = ok;
     const bad = {
-      ...rest,
+      ...ok,
+      crop: undefined,
       id: "bad",
       corners: [
         [0, 0],
