@@ -484,7 +484,7 @@
       grid-column: 1;
       grid-row: 1 / span 2;
       position: sticky;
-      top: 5rem;
+      top: var(--space-5);
       align-self: start;
     }
 

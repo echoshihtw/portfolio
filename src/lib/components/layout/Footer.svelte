@@ -38,10 +38,9 @@
 
   const sourceUrl = "https://github.com/echoshihtw/portfolio";
 
-  // The header's theme toggle and go-to-top are hidden on a phone, where
-  // the bar has no room for them, and shown here instead. Same top
-  // behaviour as the header's: a smooth scroll on the one-page home, a
-  // real link home from anywhere else.
+  // The header's theme toggle is hidden on a phone, where the bar has no
+  // room for it, and shown here instead, beside go-to-top: a smooth scroll
+  // on the one-page home, a real link home from anywhere else.
   $: isHome = $page.route.id === "/";
 
   function goTop(event: MouseEvent) {
@@ -145,7 +144,7 @@
           href="{base}/gallery"
           aria-current={$page.route.id === "/gallery" ? "page" : undefined}
         >
-          Art Gallery
+          Gallery
         </a>
       </nav>
 
