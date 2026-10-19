@@ -1,6 +1,5 @@
 <script lang="ts">
   import { slide } from "svelte/transition";
-  import KeepsakeCard from "./KeepsakeCard.svelte";
 
   export let item: {
     company: string;
@@ -9,8 +8,7 @@
     highlights: string[];
   };
   export let copy:
-    | { story: string; note?: string; techLine: string; keepsake?: boolean }
-    | undefined = undefined;
+    { story: string; note?: string; techLine: string } | undefined = undefined;
 
   let expanded = false;
 
@@ -30,10 +28,7 @@
 
 <!-- Who and when on the left, where the eye scans; the story on the right. -->
 <article class="entry">
-  <header
-    class="head"
-    class:with-keepsake={copy?.keepsake}
-  >
+  <header class="head">
     <div class="who">
       <h3 class="company">{item.company}</h3>
       <p class="role">{cleanRole}</p>
@@ -42,9 +37,6 @@
           <span class="nb">{part}</span>{/each}
       </p>
     </div>
-    {#if copy?.keepsake}
-      <KeepsakeCard />
-    {/if}
   </header>
 
   <div class="story">
@@ -104,14 +96,6 @@
     display: flex;
     flex-direction: column;
     gap: var(--space-1);
-  }
-
-  /* On a phone the card sits beside the name, not under it. */
-  .head.with-keepsake {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    gap: var(--space-4);
-    align-items: start;
   }
 
   .nb {
@@ -193,10 +177,6 @@
     .entry {
       grid-template-columns: minmax(0, 3fr) minmax(0, 8fr);
       gap: var(--space-7);
-    }
-
-    .head.with-keepsake {
-      display: block;
     }
 
     .company {

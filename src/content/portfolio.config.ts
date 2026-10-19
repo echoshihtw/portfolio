@@ -155,10 +155,9 @@ export { skillsConfig } from "./skills.config.js";
 // Each entry is one short paragraph with the problem and the fix inside it,
 // then the stack. Written in résumé voice: implied subject, no "I".
 // `note` is her one handwritten aside on the page, so only one entry has it.
-// `keepsake` shows her real business card from that job; it is the only one.
 export const experiencePortfolio: Record<
   string,
-  { story: string; note?: string; techLine: string; keepsake?: boolean }
+  { story: string; note?: string; techLine: string }
 > = {
   "Lockerbie Technology": {
     story:
@@ -177,7 +176,6 @@ export const experiencePortfolio: Record<
       "Led frontend delivery on a recruiting and ATS platform, on a two-engineer team. Moved a production React codebase to TypeScript while it kept shipping.",
     techLine:
       "React · TypeScript · Redux-Saga · Firebase · Server-Sent Events · Google Analytics · Sentry",
-    keepsake: true,
   },
   "Independent / Freelance Engineering": {
     story:
