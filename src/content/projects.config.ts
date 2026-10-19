@@ -114,20 +114,20 @@ export const projectsConfig: Projects = [
     name: "Echology",
     statusLine: "Archived · 2023",
     story: [
-      "A demo wallet for comparing Bitcoin coin-selection algorithms, built with a core maintainer of the Bitcoin Dev Kit.",
+      "I designed and built the frontend of a demo wallet for comparing Bitcoin coin-selection algorithms, the rules that decide which coins a payment spends. Built with a core maintainer of the Bitcoin Dev Kit.",
     ],
     href: "https://github.com/evanlinjin/echology",
     file: "assets/echology.png",
     fileSize: { width: 2952, height: 1996 },
     fileAlt:
-      "Echology: choosing a coin selection algorithm, Branch and Bound, scored on waste, with a fallback and an excess strategy",
+      "Echology: choosing a coin-selection algorithm, Branch and Bound, scored on waste, with a fallback and an excess strategy",
     stack: ["Next.js", "TypeScript", "Tailwind CSS"],
     highlights: [
       "You pick the UTXOs by hand, so the input set is a controlled variable instead of whatever the wallet happened to hold",
       "Spend scenarios and fee rates are adjustable, because selection behaviour diverges at the extremes",
-      "Waste, fee and feerate deviation are shown as separate figures. One combined total hides which trade-off moved",
+      "Waste, fee and fee rate deviation are shown as separate figures. One combined total hides which trade-off moved",
     ],
-    linkLabel: "Source Code →",
+    linkLabel: "Source code →",
     status: "Archived",
   },
   // Ming Mold 60th is hidden for now. Uncomment to restore.
