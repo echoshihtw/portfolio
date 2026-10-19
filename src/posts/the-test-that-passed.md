@@ -6,7 +6,7 @@ order: 3
 draft: true
 ---
 
-I built Financial Runway with Claude and ChatGPT writing most of the code, so checking it was most of my job. Two of the things I checked late are below, with the pull requests, because the repository is public and anyone can look.
+I vibe-coded Financial Runway with Claude and ChatGPT, so checking it was most of my job. Two of the things I checked late are below, with the pull requests, because the repository is public and anyone can look.
 
 ## The setting I got wrong twice
 
