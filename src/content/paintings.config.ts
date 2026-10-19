@@ -74,7 +74,7 @@ export const paintingsConfig: Painting[] = [
   {
     id: "reclining",
     source: "IMG_5095.jpg",
-    medium: "Oil",
+    medium: "Oil on canvas",
     alt: "Oil painting of a reclining figure, hand to the face, ochre and brown against a warm yellow ground",
     crop: [0, 0, 1, 0.86],
     scale: "canvas",
@@ -161,7 +161,7 @@ export const paintingsConfig: Painting[] = [
   {
     id: "male-portrait",
     source: "IMG_4502.jpeg",
-    medium: "Acrylic",
+    medium: "Acrylic on paper",
     alt: "Acrylic portrait of a seated man, chin resting on his hand, painted in reds and pinks",
     crop: [0.09, 0.1, 0.78, 0.85],
     scale: "paper",
