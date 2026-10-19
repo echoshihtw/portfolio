@@ -7,12 +7,12 @@ import type { Projects } from "../lib/types/types.js";
 export const projectsConfig: Projects = [
   {
     name: "Clio",
-    statusLine: "In daily use · early access",
+    statusLine: "Early access",
     note: "She's back. You remember.",
     fact: "In use at a Tainan salon since May 2025. The owner typed 603 clients in by hand.",
     story: [
-      "A quick CV of the client, for the two minutes before the client sits down: how long since her last visit, what was done last time, any special hair situation, the curl she likes.",
-      "No booking, no payments. She didn't need them, yet. I never taught the owner to use it; she only comes to me when she forgets her password, or when a bug of mine stops her saving.",
+      "A quick CV of the client, for the two minutes before she sits down: how long since her last visit, what was done last time, any special hair situation, the curl she likes.",
+      "No booking, no payments. The owner didn't need them, yet. I never taught her to use it; she only comes to me when she forgets her password, or when a bug of mine stops her saving.",
     ],
     href: "https://cliohq.app",
     stack: [
@@ -24,14 +24,14 @@ export const projectsConfig: Projects = [
       "Tailwind",
     ],
     highlights: [
-      "No booking, no payments, no inventory, no marketing. The products she rejected had all of it. Clio covers the two minutes before a client sits down, and stops",
-      "Each salon is isolated in the database itself. The app doesn't have to remember to filter",
+      "The products she had tried did everything. Clio covers the two minutes before a client sits down, and stops",
+      "Each salon is isolated in the database itself, so the app never has to remember to filter",
       "Tightened the permission defaults without locking out existing staff. The migration writes the intended values before the code stops assuming them",
       // The specifics of the flaw I found stay off a public page: this is a live
       // product holding real people's records, and naming a past weakness names
       // where to look. The judgment survives; the map does not.
-      "I audit my own access policies, and every change since launch gets a written review",
-      "Only the api layer may reach the database. A test fails the build if anything else imports it",
+      "Every access policy gets my own audit, and every change since launch a written review",
+      "Only the API layer may reach the database. A test fails the build if anything else imports it",
       // Verified against clio-app main on 2026-09-15. Reads: every successful
       // query is snapshotted to localStorage per user and restored when the
       // browser goes offline, with a banner showing when the snapshot was
@@ -44,7 +44,7 @@ export const projectsConfig: Projects = [
       // a lost response can duplicate a create until device-generated ids ship
       // (clio-app #100). The durable queue is designed in clio-app #115.
       "The salon has patchy Wi-Fi. Reads work offline from the last snapshot, stamped with when it was taken. A save retries a dropped connection, and a failed one says so",
-      "Records live in a hosted database, so the failure that started all this can't happen again",
+      "Records live in a hosted database, so a dead hard drive can't take them",
       // From the @echoshihtw/clio-brand README: shared by clio-web and
       // clio-app, released with semantic-release. The demo here installs it.
       "The brand is one package the landing page and the app both install, so a colour changes in one place and ships as a release. This page installs it too",
@@ -78,7 +78,7 @@ export const projectsConfig: Projects = [
         // of; on the CV it was the least load-bearing of the four.
       ],
     },
-    linkLabel: "Live →",
+    linkLabel: "cliohq.app",
     status: "Live",
   },
   {
