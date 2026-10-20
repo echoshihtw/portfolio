@@ -336,3 +336,21 @@ test.describe("Echology", () => {
     await expect(list).not.toContainText("UTXO");
   });
 });
+
+test.describe("Footer", () => {
+  test.beforeEach(({ page }) => skipGate(page));
+
+  // The header comes back on scroll up, so the footer points elsewhere only.
+  test("links only to the other pages, and says nothing filler", async ({
+    page,
+  }) => {
+    await page.goto("/");
+    const nav = page.locator("footer .footer-nav");
+    await expect(nav.getByRole("link")).toHaveText([
+      "Blog",
+      "Gallery",
+      "Résumé",
+    ]);
+    await expect(page.locator("footer")).not.toContainText("Built with");
+  });
+});

@@ -4,7 +4,6 @@
   import Signature from "../Signature.svelte";
   import { base } from "$app/paths";
   import { page } from "$app/stores";
-  import { tabs, tabHref } from "$lib/menuTabs";
   import { heroConfig } from "../../../content/portfolio.config";
   import {
     calendlyUrl,
@@ -14,6 +13,12 @@
     linkedInUrl,
   } from "$lib/contactLinks";
   import { trackEmail, trackResume } from "$lib/analytics";
+
+  const AVAILABILITY = [
+    "Available remote",
+    "Taiwan, UTC+8",
+    "APAC hours or async",
+  ];
 
   const year = new Date().getFullYear();
   const socials = [
@@ -107,22 +112,13 @@
       <nav class="footer-nav">
         <p class="footer-title mono">Navigation</p>
 
-        <!-- Work, Projects, Skills and Contact are sections OF the home page, not
-             peers of it, so they only appear while you are on it. Anywhere else
-             they would be four links promising things this page does not have.
-             Off the home page their slot becomes a single Home. -->
-        {#if $page.route.id === "/"}
-          {#each tabs as tab}
-            <a href={tabHref(tab.link, $page.url.pathname)}>{tab.name}</a>
-          {/each}
-        {:else}
+        <!-- The other pages only: the header returns on any scroll up, so
+             this page's own sections need no second list. Off the home page,
+             Home leads. -->
+        {#if $page.route.id !== "/"}
           <a href={base || "/"}>Home</a>
         {/if}
-        <!-- Same split as the header: sections of this page above, places
-             you go below. A gap does here what the vertical rule does in a
-             horizontal row. -->
         <a
-          class="footer-nav-destination"
           href="{base}/blog"
           aria-current={$page.route.id?.startsWith("/blog")
             ? "page"
@@ -130,8 +126,12 @@
         >
           Blog
         </a>
-        <!-- Résumé was in the header only, the one surface that scrolls
-             away, so it left the page along with it. -->
+        <a
+          href="{base}/gallery"
+          aria-current={$page.route.id === "/gallery" ? "page" : undefined}
+        >
+          Gallery
+        </a>
         <a
           href="{base}/{heroConfig.resume}"
           target="_blank"
@@ -139,13 +139,6 @@
           on:click={() => trackResume("footer")}
         >
           Résumé
-        </a>
-        <a
-          class="footer-nav-destination"
-          href="{base}/gallery"
-          aria-current={$page.route.id === "/gallery" ? "page" : undefined}
-        >
-          Gallery
         </a>
       </nav>
 
@@ -171,10 +164,12 @@
     <div class="footer-meta">
       <div class="footer-status mono">
         <span class="status-dot"></span>
-        Available for remote work · Taipei, UTC+8 · APAC hours or async
+        <!-- Each fact stays whole; lines break only between them. -->
+        {#each AVAILABILITY as fact, i}<span class="fact">
+            {fact}{i < AVAILABILITY.length - 1 ? " ·" : ""}
+          </span>
+          {" "}{/each}
       </div>
-
-      <p class="footer-built mono">Built with SvelteKit & TypeScript</p>
 
       <button
         type="button"
@@ -205,7 +200,7 @@
 <style>
   .footer-wrap {
     padding: var(--space-7) 0 var(--space-6);
-    border-top: var(--border-w) solid var(--border-strong);
+    border-top: var(--border-w) solid var(--border);
     background: var(--canvas);
   }
 
@@ -270,10 +265,6 @@
     transition: color var(--dur-fast) ease;
   }
 
-  .footer-nav-destination {
-    margin-top: 0.85rem;
-  }
-
   .footer-nav a:hover {
     color: var(--primary);
   }
@@ -307,10 +298,16 @@
     color: var(--muted);
   }
 
+  .footer-status .fact {
+    white-space: nowrap;
+  }
+
+  /* Wraps between facts, never inside one. */
   .footer-status {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.15rem 0.5rem;
     font-size: var(--text-xs);
     color: var(--muted);
   }
