@@ -109,7 +109,7 @@
   {/each}
 </ul>
 
-<!-- svelte-ignore a11y-click-events-have-key-events a11y-no-noninteractive-element-interactions -->
+<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
 <dialog
   class="viewer"
   bind:this={viewer}
