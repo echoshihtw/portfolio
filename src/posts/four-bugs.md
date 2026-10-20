@@ -1,37 +1,33 @@
 ---
-title: "Four bugs, found by photographing the app"
+title: "Screenshots found what 260 tests missed"
 date: "2026-08-21"
-excerpt: "260 tests were passing. Four screenshots of a demo salon found four bugs anyway: two of them cosmetic, two of them a test that looked like coverage without providing it, and a component that had quietly been handed responsibility for something outside it."
+excerpt: "260 tests passed. Four screenshots of Clio found four bugs."
 order: 2
 draft: true
 ---
 
-260 tests were passing. I took four screenshots of a demo salon anyway, and found four bugs that every one of those tests had missed.
+Clio is a salon app. One salon in Tainan has used it since May 2025, with 603 real clients in it. 260 tests were passing. I took four screenshots of a demo salon anyway, and found four bugs.
 
-Two were small: an org name truncating mid-character because a component had hand-copied a shared label width and gotten the number wrong, and a currency label reading NTD$4,400 NTD because a prefix got added twice. Both were real, both shipped, both were one-line fixes once seen. Neither one taught me anything, because carelessness caught late isn't a story, just an apology.
+Two were small. A salon name was cut off mid-character, because a component had copied a shared width and got the number wrong. A price read NTD$4,400 NTD, because the currency was added twice. One-line fixes, once seen.
 
-The other two were different. Each looked, from the code, like it was already handled. Each wasn't.
+Two weren't.
 
-## A test that measured coverage without providing it
+## A test that couldn't fail
 
-Switch the app to English, and the visit history still rendered dates as 西元2026年07月25日 (週六). Two cards above it, a birthday field in the same screen formatted correctly.
+Switch Clio to English, and the visit history still showed dates as 西元2026年07月25日 (週六). Two cards above it, a birthday in the same screen was formatted correctly.
 
-There were two definitions of "format a date" in the codebase: a shared helper that takes a language argument, and a one-off (a moment call plus a hand-written Chinese-only mapper) that doesn't. Nobody had reason to look at the second one, because it worked; it just always produced the same output regardless of what language you asked for.
+There were two ways to format a date in the code: a shared helper that takes a language, and an older one that doesn't. The older one always gave the same Chinese output, whatever language you asked for.
 
-The part worth keeping: the existing test for this component had an i18n mock that returned only the translation function, never a language. There was never a code path in the test suite where the language could have mattered. The test wasn't wrong: it ran, it passed, it looked like i18n coverage sitting right there in the test file. It was incomplete in a way that was indistinguishable from complete, until you asked the one question the mock had quietly made unaskable.
+The test for that screen had a mock for translations. It returned the translate function, and never a language. So the language could not matter anywhere in the test. It ran, it passed, and it looked like coverage. It could never fail, so it proved nothing.
 
-Fixing the bug meant fixing the mock first, giving it a language to lie about, before I could write an assertion that had any chance of failing. Then came a dedicated formatter for visit dates (which keep the weekday, because a salon reads its history by day of week), the general-purpose one left alone, and the hand-written mapper deleted along with the codebase's last use of moment.
+I fixed the mock first, giving it a language, so the test could fail. Then I wrote a formatter for visit dates that keeps the weekday, because a salon reads its history by day of the week, and deleted the old one, along with the last use of moment in the codebase.
 
-## A component that had been handed a responsibility nobody assigned it
+## A table that knew how to delete a person
 
-The client list has a filter row: designer, start date, end date. "Delete client" was the fourth item in that row, with the same visual weight as three things that narrow a list, except this one doesn't narrow anything, it deletes a person and their entire visit history. It sat in keyboard tab order between two date pickers, on a screen where the design system calls for one primary destructive action at most.
+The client list has a filter row: designer, start date, end date. "Delete client" was the fourth item in it, looking like a filter. It deletes a person and their whole visit history. It sat in the tab order between two date pickers.
 
-The placement bug was the visible half. The other half was in the component itself: the records table, a component whose job is to render rows, had been given a client ID, a client name, and a callback for when the client is deleted. Nothing in the table's own responsibility needs any of that. It had accumulated the ability to delete the very thing it was displaying, one prop at a time, because each addition looked small next to the one before it.
+That was the visible half. The other half was the records table. Its job is to show rows, but it had been given the client's ID, the client's name and a callback for deleting them. It had learned to delete the thing it was showing, one prop at a time, each small.
 
-Moving the button to the bottom of the client's own page, as a quiet action below everything else, also meant the table lost three props and a hook it never should have needed. The UX fix and the boundary fix turned out to be the same fix, which is usually a sign the placement was wrong for the same reason the ownership was.
+I moved the button to the bottom of the client's own page, as a quiet action below everything else. The table lost three props and a hook it never needed. The UX fix and the code fix were the same fix.
 
-## What both of these actually are
-
-A mock that returns a function but not a language. A table that knows how to delete a person. Neither one announces itself as broken: both pass their tests, both render, both look, from a distance, like exactly what they claim to be. The gap wasn't between working and not working. It was between what the interface said it did and what it had quietly been asked to do instead.
-
-Screenshots caught these because a screenshot doesn't consult the interface: it shows the output. That's a narrower fix than it sounds like: it doesn't mean test less carefully, it means occasionally check whether the thing you're trusting to prove correctness is still measuring the dimension you think it is.
+A screenshot doesn't read the code. It shows what the screen does.
