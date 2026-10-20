@@ -123,16 +123,16 @@
   >
     <div class="item">
       <div class="focal">
-        <span class="pair">
-          <span class="committed">
-            <span class="label">Committed</span>
-            {money(s.rent + s.subscriptions)}
-          </span>
-          <span class="living">
-            <span class="label">Living left</span>
-            {money(now.livingLeft)}
-          </span>
-        </span>
+        <dl class="ledger">
+          <div>
+            <dt>Rent & bills</dt>
+            <dd>{money(s.rent + s.subscriptions)}</dd>
+          </div>
+          <div class="living">
+            <dt>Left to spend</dt>
+            <dd>{money(now.livingLeft)}</dd>
+          </div>
+        </dl>
         <!-- prettier-ignore -->
         <div class="spend-line" class:critical={now.months < 3} aria-live="polite"><span class="spend-months">{now.months}</span> months</div>
         {#if now.over}
@@ -516,21 +516,44 @@
     color: var(--muted);
   }
 
-  /* The spending card: what is committed, what is left to live on, and
+  /* The spending card: rent and bills, what is left to live on, and
      the months, which hold still until the living budget runs out. */
   .focal {
     display: grid;
-    place-content: center;
+    align-content: center;
     justify-items: center;
     gap: var(--space-2);
     height: var(--focal-h);
   }
 
-  .committed {
+  /* Read like a receipt: label left, amount right, one row each. */
+  .ledger {
+    display: grid;
+    gap: var(--space-1);
+    width: 100%;
+    margin: 0;
+    font-family: var(--font-mono);
+  }
+
+  .ledger div {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-3);
+    padding-bottom: var(--space-1);
+    border-bottom: 1px solid var(--border);
     color: var(--muted);
   }
 
-  .living {
+  .ledger dt {
+    font-size: var(--text-sm);
+  }
+
+  .ledger dd {
+    margin: 0;
+    font-weight: 600;
+  }
+
+  .ledger .living {
     color: var(--runway-mint);
   }
 
