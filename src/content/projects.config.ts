@@ -1,16 +1,19 @@
 import type { Projects } from "../lib/types/types.js";
 
-// Each card answers: what problem existed, what I decided, how I know it works.
-// Not a stack inventory: the tech is listed in `stack` below each card, so the
-// highlights can carry judgment instead of tool names.
+// One entry per project. More projects shows the short notes (`note`, `fact`,
+// `story`) and keeps the engineering decisions in `highlights`, behind "Read
+// the decisions". The résumé reads only `name` and `resume`. The tech is
+// listed in `stack`, so the highlights can carry judgment, not tool names.
 export const projectsConfig: Projects = [
   {
     name: "Clio",
-    subtitle:
-      "Salon operations software, in daily use at a Tainan salon since May 2025",
-    why: "A friend's hard drive died and took years of salon records with it. She'd tried the existing software and found all of it too complicated. She didn't need more features. She needed the two minutes before a client sits down: who they are, what was done last time, what it cost.",
-    result:
-      "The owner typed a year of past appointments in by hand. People don't migrate their own history into software they're still evaluating. In daily use at the salon since May 2025, with 603 clients, 2,694 service records, and history entered back to September 2024. What I'd do differently: write the permission model down before building it, not after.",
+    statusLine: "Early access",
+    figure: "603",
+    fact: "clients, typed in by hand by a Tainan salon owner. In use since May 2025.",
+    story: [
+      "A quick CV of the client, for the two minutes before she sits down: how long since her last visit, what was done last time, any special hair situation, the curl she likes.",
+      "No booking, no payments. The owner didn't need them, yet. I never taught her to use it; she only comes to me when she forgets her password, or when a bug of mine stops her saving.",
+    ],
     href: "https://cliohq.app",
     stack: [
       "React 19",
@@ -20,90 +23,101 @@ export const projectsConfig: Projects = [
       "TanStack Query",
       "Tailwind",
     ],
+    // Four, as many as anyone holds in mind at once. Each leads with the
+    // decision in bold, then why it matters to the salon. Every fact is from
+    // the earlier list or the résumé: RLS isolation, the offline snapshot and
+    // retries (verified against clio-app main on 2026-09-15: reads restore
+    // from a per-user localStorage snapshot with its time; a transient save
+    // failure retries three times, a real one fails at once with a toast;
+    // nothing queues a write across a refresh), hosted records, CSV export.
     highlights: [
-      "No booking, no payments, no inventory, no marketing. The products she rejected had all of it. Clio covers the two minutes before a client sits down, and stops",
-      "Each salon is isolated in the database itself. The app doesn't have to remember to filter",
-      "Tightened the permission defaults without locking out existing staff. The migration writes the intended values before the code stops assuming them",
-      // The specifics of the flaw I found stay off a public page: this is a live
-      // product holding real people's records, and naming a past weakness names
-      // where to look. The judgment survives; the map does not.
-      "I audit my own access policies, and every change since launch gets a written review",
-      "Only the api layer may reach the database. A test fails the build if anything else imports it",
-      "The salon has patchy Wi-Fi. Reads work offline from cache, and writes wait instead of failing silently",
-      "Records live in a hosted database, so the failure that started all this can't happen again",
+      "**It does one job.** The apps she'd tried did everything. Clio covers the two minutes before a client sits down, and stops.",
+      "**No salon can see another's clients.** The database itself keeps them apart, so a forgotten filter can't leak a record.",
+      "**It works on the salon's patchy Wi-Fi.** It reads from the last snapshot, stamped with its time. A save retries, and a failed one says so.",
+      "**Her records can't be lost.** They live in a hosted database, and she can export every client and visit at any time.",
     ],
     resume: {
       descriptor: "salon operations platform, live since May 2025",
       role: "Founder",
       bullets: [
-        "React, Supabase, **Postgres RLS**: multi-tenant from day one, per-member permissions",
-        "603 clients and 2,694 service records, entered by hand by the owner",
-        "A build-failing test keeps database access inside the api layer",
-        "Reads work offline from cache on patchy salon Wi-Fi; Traditional Chinese first",
+        // Two bullets folded into one for the one-page cut, 2026-09-16. Both
+        // facts survive: multi-tenancy on RLS is the technical claim, the
+        // hand-entered records are the adoption evidence, and they belong in
+        // the same breath anyway. "React" went: it is in Skills, and the site
+        // card lists the stack in full.
+        "Multi-tenant on **Postgres RLS** from day one. 603 clients and 2,694 service records, entered by hand by the owner",
+        // Swapped in for the api-layer architecture test on 2026-09-16, after
+        // checking the résumé's claims against salon-admin. The test is real
+        // and still enforced, and it stays in the highlights above; it is the
+        // most internal of the four bullets, and export is the most on-theme
+        // feature in the product. Clio exists because a hard drive died and
+        // took years of records with it, so letting the owner take her records
+        // out is the origin story answered. Shipped in #93, #94, #114.
+        //
+        // One line, not two. The longer draft named the dead hard drive here
+        // as well, and wrapped, which cost the page the line the swap was
+        // meant to be free of. The why is already on the project card above,
+        // in full; the CV states what it does and who it is for.
+        "CSV export of clients, visits and hair profiles, so her records stay portable, not locked in",
+        // "Reads work offline from cache on patchy salon Wi-Fi; Traditional
+        // Chinese first" was cut in the one-page pass. The Wi-Fi fact is in
+        // the highlights above, where the salon is around it to make sense
+        // of; on the CV it was the least load-bearing of the four.
       ],
     },
-    featured: true,
-    linkLabel: "Live →",
+    linkLabel: "cliohq.app",
     status: "Live",
   },
   {
-    name: "Runway",
-    subtitle:
-      "Personal finance measured the way a company measures itself: how long can you sustain yourself?",
-    why: "I was planning a study trip and couldn't answer the one question it rested on: how long can I sustain myself? Budget apps tell you where the money went. I needed to know how much time was left. A person has an opening balance, a burn rate and months remaining, the same as a company.",
-    result:
-      "I use it. Running on Android, in seven languages and six currencies, built solo. iOS is in progress: the release workflows exist but no tag has been cut, so nothing is on TestFlight or Play yet. One user isn't validation. I built the model before I knew whether anyone else wanted it, which is the wrong order, so the next thing I do here is put it in front of people, not add features.",
-    href: "https://github.com/echoshihtw/survival-optimiser",
-    shots: [
-      {
-        src: "assets/runway/dashboard.png",
-        alt: "Runway dashboard: 12 months remaining, caution state, cash and run-out date",
-      },
-      {
-        src: "assets/runway/ledger.png",
-        alt: "Runway ledger: opening balance, income and expenses for the month",
-      },
-      {
-        src: "assets/runway/subscriptions.png",
-        alt: "Runway subscriptions: monthly and yearly totals with per-item cadence",
-      },
-    ],
-    stack: ["Flutter", "Dart", "Riverpod", "Drift", "SQLCipher"],
+    name: "Financial Runway",
+    // Live on the App Store since 2026-10-04 (id6778675088). Shown in its own
+    // Selected work section (selectedWork.config.ts), not in More projects.
+    // The product page, not the repository: it opens on what the app does and
+    // puts the App Store download first.
+    href: "https://echoshihtw.github.io/runway/",
+    stack: ["Flutter", "Dart", "Riverpod", "Drift", "SQLCipher", "RevenueCat"],
     highlights: [
-      "A goal is a number of months, not an amount of money. The question was never how much I had, it was how long it lasts",
-      "Burn takes the worse of what you spent and what you budgeted. Reality wins when you overspend, and the budget holds the floor when you don't",
-      "Safety fund and investable money are separate pockets with an adaptive buffer, so spare cash can't quietly become next month's rent",
+      "A goal is a number of months, not an amount of money. The question was never how much I had, it was how many months it covers",
+      "Logged spending uses up its budget instead of adding to it. Monthly costs only rise when a budget is overspent, so a lunch never counts twice",
+      "Runway counts from today. The rest of this month costs what's left of its budget, not a whole month that's already partly paid",
       "The layers are separate Dart packages and can't import each other. A boundary violation is a compile error",
-      "Financial data never leaves the device. Encrypted on-device storage, no account, no server",
+      "Financial data never leaves the device. The app checks the database is actually encrypted every time it opens, instead of trusting the build settings",
     ],
     resume: {
-      descriptor: "personal financial-runway app, Flutter",
+      descriptor: "personal finance app, Flutter",
       role: "Founder",
       bullets: [
-        "**Clean Architecture** across a Melos monorepo, SQLCipher-encrypted local storage",
-        "7 languages and 6 currencies, built solo; running on Android",
+        // "Clean Architecture across a Melos monorepo, SQLCipher-encrypted
+        // local storage" was cut for the one-page pass: it is the only line in
+        // Projects that names a pattern rather than a result, and the card on
+        // the site carries it with the reasoning attached.
+        "6 languages and 6 currencies, built solo; live on the App Store",
       ],
     },
-    linkLabel: "Source Code →",
-    status: "In Progress",
+    linkLabel: "See the app →",
+    status: "Live",
   },
   {
     name: "Echology",
-    subtitle:
-      "A demo wallet for studying how Bitcoin coin-selection algorithms behave",
+    statusLine: "Archived · 2023",
+    story: [
+      "I designed and built the frontend of a demo wallet for comparing Bitcoin coin-selection algorithms, the rules that decide which coins a payment spends. Built with a core maintainer of the Bitcoin Dev Kit.",
+    ],
     href: "https://github.com/evanlinjin/echology",
     file: "assets/echology.png",
-    why: "Coin selection is the algorithm that decides which coins a transaction spends, and it sets the fee. Its trade-offs only show up as numbers (waste, fee, feerate deviation), and only for one exact set of inputs. If you hold the inputs still, you can compare the algorithms.",
-    result:
-      "Built the frontend with a core maintainer of the Bitcoin Dev Kit. You construct a UTXO set, run it against a spend scenario, and read the metrics side by side. Archived.",
+    fileSize: { width: 2952, height: 1996 },
+    fileAlt:
+      "Echology: choosing a coin-selection algorithm, Branch and Bound, scored on waste, with a fallback and an excess strategy",
     stack: ["Next.js", "TypeScript", "Tailwind CSS"],
-    role: "UI/UX designer and frontend engineer",
+    // The same three facts as before, in plain words: hand-picked inputs
+    // (UTXOs) held constant, adjustable scenarios and fee rates, separate
+    // waste, fee and fee-rate-deviation figures.
     highlights: [
-      "You pick the UTXOs by hand, so the input set is a controlled variable instead of whatever the wallet happened to hold",
-      "Spend scenarios and fee rates are adjustable, because selection behaviour diverges at the extremes",
-      "Waste, fee and feerate deviation are shown as separate figures. One combined total hides which trade-off moved",
+      "**You choose the coins.** Picking the inputs by hand keeps them the same between runs, so only the algorithm changes.",
+      "**You set the fees and the scenario.** The algorithms only behave differently at the extremes, so you can push them there.",
+      "**Each cost is its own number.** Waste, fee and fee-rate deviation are shown apart, because one total hides which trade-off moved.",
     ],
-    linkLabel: "Source Code →",
+    linkLabel: "Source code →",
     status: "Archived",
   },
   // Ming Mold 60th is hidden for now. Uncomment to restore.

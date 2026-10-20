@@ -8,7 +8,9 @@
 backend:
   name: github
   repo: echoshihtw/portfolio
-  branch: main
+  # staging, like every other change: a CMS save reaches production with
+  # the next release PR instead of skipping it.
+  branch: staging
   # No base_url on purpose. That property points at an OAuth proxy, and
   # Sveltia's own docs say a single technical user doesn't need one.
   # "Sign In Using Access Token" on the login screen covers this case,

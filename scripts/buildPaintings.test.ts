@@ -40,6 +40,70 @@ describe("validateManifest", () => {
     ]);
   });
 
+  it("accepts corners instead of a crop", () => {
+    const flat = {
+      ...ok,
+      crop: undefined,
+      corners: [
+        [0.1, 0.2],
+        [0.8, 0.1],
+        [0.9, 0.7],
+        [0.2, 0.8],
+      ] as [
+        [number, number],
+        [number, number],
+        [number, number],
+        [number, number],
+      ],
+    };
+    expect(validateManifest([flat])).toEqual([]);
+  });
+
+  it("rejects an entry with both a crop and corners, or neither", () => {
+    const both = {
+      ...ok,
+      id: "both",
+      corners: [
+        [0, 0],
+        [1, 0],
+        [1, 1],
+        [0, 1],
+      ] as [
+        [number, number],
+        [number, number],
+        [number, number],
+        [number, number],
+      ],
+    };
+    const neither = { ...ok, id: "neither", crop: undefined };
+    expect(validateManifest([both, neither])).toEqual([
+      "both: needs exactly one of crop or corners",
+      "neither: needs exactly one of crop or corners",
+    ]);
+  });
+
+  it("rejects a corner outside the photo", () => {
+    const bad = {
+      ...ok,
+      crop: undefined,
+      id: "bad",
+      corners: [
+        [0, 0],
+        [1.2, 0],
+        [1, 1],
+        [0, 1],
+      ] as [
+        [number, number],
+        [number, number],
+        [number, number],
+        [number, number],
+      ],
+    };
+    expect(validateManifest([bad])).toEqual([
+      "bad: a corner lies outside the photo",
+    ]);
+  });
+
   it("rejects an empty alt", () => {
     expect(validateManifest([{ ...ok, id: "bad", alt: "" }])).toEqual([
       "bad: alt is required",

@@ -48,7 +48,7 @@ html[data-theme="dark"] #boot-gate {
 .gate-role {
   margin: 0;
   color: var(--gate-muted);
-  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-family: "Geist Mono", ui-monospace, monospace;
   font-size: 0.72rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -63,7 +63,7 @@ html[data-theme="dark"] #boot-gate {
 .gate-name {
   align-self: center;
   margin: 0;
-  font-family: "Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif;
+  font-family: "Geist", "Helvetica Neue", Arial, sans-serif;
   font-size: clamp(4.5rem, 15vw, 12rem);
   font-weight: 700;
   letter-spacing: -0.075em;
@@ -97,7 +97,7 @@ html[data-theme="dark"] #boot-gate {
   border-radius: 999px;
   background: var(--gate-primary);
   color: #fff;
-  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-family: "Geist Mono", ui-monospace, monospace;
   font-size: 0.75rem;
   letter-spacing: 0.03em;
   cursor: pointer;

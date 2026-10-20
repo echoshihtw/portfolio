@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   extractSection,
   parseExperience,
+  withHeadline,
   withProjects,
 } from "./buildResume.js";
 
@@ -31,6 +32,19 @@ Engineer · _Remote · Aug 2022 – May 2024_
 # Skills
 
 **Frontend**: React
+`;
+
+// resume.md carries provenance comments throughout, and one under
+// "# Experience" used to be parsed as a company, role and date.
+const RESUME_WITH_COMMENT = `# Experience
+
+<!-- Why these bullets are ordered this way, mentioning a ## heading. -->
+
+## Acme Ltd
+
+Staff Engineer · _Taipei · Dec 2024 – Present_
+
+- Did a thing.
 `;
 
 describe("extractSection", () => {
@@ -91,5 +105,39 @@ describe("withProjects", () => {
     expect(() => withProjects("# Projects\n\n# Skills\n")).toThrow(
       /missing the projects marker/
     );
+  });
+});
+
+describe("parseExperience with comments", () => {
+  it("ignores HTML comments instead of parsing them as entries", () => {
+    const entries = parseExperience(
+      extractSection("Experience", RESUME_WITH_COMMENT)
+    );
+
+    expect(entries).toHaveLength(1);
+    expect(entries[0].company).toBe("Acme Ltd");
+    expect(entries[0].role).toBe("Staff Engineer");
+    expect(entries[0].date).toBe("Taipei · Dec 2024 – Present");
+  });
+});
+
+// The headline is aimed per application, so an unset variable must leave the
+// file's own default alone, and a set one must not eat the stack after it.
+describe("withHeadline", () => {
+  const HEADER = `{\\large Product Engineer · React · TypeScript · Next.js}\\\\[3pt]`;
+
+  it("leaves the markdown untouched when nothing is set", () => {
+    delete process.env.RESUME_HEADLINE;
+    expect(withHeadline(HEADER)).toBe(HEADER);
+  });
+
+  it("replaces only the role, keeping the stack", () => {
+    process.env.RESUME_HEADLINE = "Frontend Engineer";
+    const out = withHeadline(HEADER);
+    delete process.env.RESUME_HEADLINE;
+
+    expect(out).toContain("Frontend Engineer");
+    expect(out).not.toContain("Product Engineer");
+    expect(out).toContain("React · TypeScript · Next.js");
   });
 });

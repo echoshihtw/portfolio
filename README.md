@@ -1,6 +1,6 @@
-# Portfolio: echoshihtw.github.io/portfolio
+# Portfolio
 
-SvelteKit site on GitHub Pages. `src/content/resume.md` is the source of truth
+SvelteKit site, static, deployed by Vercel. `src/content/resume.md` is the source of truth
 for the résumé: one build makes the PDF and the experience data the site renders.
 
 ## Commands
@@ -19,11 +19,13 @@ npm run build-resume   # résumé → PDF + site data
 
 ## Content
 
-| File                          | Holds                             | Feeds                                        |
-| ----------------------------- | --------------------------------- | -------------------------------------------- |
-| `content/resume.md`           | summary, experience, skills       | PDF + the site's experience cards            |
-| `content/projects.config.ts`  | projects                          | site card; PDF line if it has a `resumeLine` |
-| `content/portfolio.config.ts` | hero, per-role copy, skills strip | site                                         |
+| File                              | Holds                        | Feeds                                  |
+| --------------------------------- | ---------------------------- | -------------------------------------- |
+| `src/content/resume.md`           | summary, experience          | PDF + the site's experience cards      |
+| `src/content/projects.config.ts`  | projects                     | site card; PDF line if it has `resume` |
+| `src/content/portfolio.config.ts` | hero, per-role copy, closing | site                                   |
+| `src/content/skills.config.ts`    | skills                       | PDF and site                           |
+| `src/posts/*.md`                  | blog posts                   | `/blog`                                |
 
 The résumé is formal and ATS-oriented, the site conversational. The overlap is
 deliberate.
@@ -36,6 +38,20 @@ resume.md → npm run build-resume → src/lib/resumeData.ts   experience only
 Generated, never hand-edited: `src/lib/resumeData.ts`, `output/*`,
 `static/resume.pdf`. The last two aren't committed: the deploy builds them.
 
+## Common tasks
+
+Every change goes the same way: a branch, a pull request into `staging`, then
+the release PR into `main`.
+
+- **Change résumé or site copy.** Edit the file in the table above, run
+  `npm run build-resume`, and read the PDF itself, page by page.
+- **Write a blog post.** In the CMS at `/admin`, or as a file in `src/posts/`.
+  Add `draft: true` to keep it off `/blog` until it is ready.
+- **CMS sign-in expired.** At `/admin`, choose "Sign In Using Access Token"
+  and make a new token on the page it links to. The token lives in the browser.
+- **Check before a PR.** `npm run verify`: lint, type check and tests in one.
+  CI runs the same and more.
+
 ## Rules the build enforces
 
 - **Exactly one page.** Take space from margins, leading or wording, not font size.
@@ -45,12 +61,25 @@ Generated, never hand-edited: `src/lib/resumeData.ts`, `output/*`,
 
 ## CI
 
-`.github/workflows/ci.yml`. PRs and pushes to `main` run install, check, test and
-both builds; only pushes deploy. Docs-only changes skip.
+The checks live in `.github/workflows/verify.yml`: install, lint, check, test,
+both builds and the accessibility audit. `quality.yml` runs them on every pull
+request (docs-only changes skip), `release-pr.yml` on every push to `staging`,
+and `release.yml` on the merge commit that lands on `main`.
 
 The PDF is cached against its three sources, so TeX installs only when the résumé
 changed: ~2 min on a miss, ~25s otherwise. Node 24 matches local: npm 10 and 11
 write lockfiles differently.
+
+## Releasing
+
+Feature branches merge into `staging`, the default branch. Each push to it
+opens or updates one `staging` to `main` PR titled `chore(release): vX.Y.Z`,
+computed from Conventional Commits (`feat` minor, `fix`/`perf` patch,
+`BREAKING CHANGE` major; `content`, `style` and the rest cut no version).
+Test the staging preview on Vercel, then merge that PR with **Create a merge
+commit**, never squash. `release.yml` refuses a squash, then semantic-release
+tags the release and writes the GitHub Release. Vercel deploys `main` to
+production on its own.
 
 ## Claims
 

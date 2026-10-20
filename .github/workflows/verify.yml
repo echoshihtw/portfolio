@@ -1,26 +1,20 @@
-name: CI
+name: Verify
 
-# One job: verify on every pull request and every push to main. Vercel is the
-# only live deploy now. Pages served the project URL for CVs already sent
-# out, but that URL now redirects to echoshih.com (src/app.html), so its last
-# GitHub Pages deploy stays frozen rather than being rebuilt on every push.
+# The one definition of "is this code good?". quality.yml calls it for pull
+# requests, release-pr.yml for every push to staging (those checks attach to
+# the release PR's commit), and release.yml for the merge commit on main.
+# Concurrency lives in the callers: a group here would let them cancel each
+# other.
+#
+# Vercel is the only live deploy. Pages served the project URL for CVs already
+# sent out, but that URL now redirects to echoshih.com (src/app.html), so its
+# last GitHub Pages deploy stays frozen rather than being rebuilt on every push.
+
 on:
-  push:
-    branches: [main]
-    paths-ignore:
-      - "README.md"
-      - "docs/**"
-      - ".githooks/**"
-  pull_request:
-    branches: [main]
-  workflow_dispatch:
+  workflow_call:
 
 permissions:
   contents: read
-
-concurrency:
-  group: ci-${{ github.ref }}
-  cancel-in-progress: true
 
 jobs:
   build:
@@ -50,12 +44,17 @@ jobs:
       # A glob cannot go stale when a new input file is added next to the
       # others. It over-invalidates when site-only copy changes, which costs
       # two minutes of TeX; under-invalidating costs a wrong PDF.
+      # The same went for scripts: the key named resume-header.tex but not
+      # resume-entry.lua, which lays out every job entry, so a layout change
+      # reused the old PDF and skipped the one-page check below. scripts/resume-*
+      # covers the header, the filter and the TeX package list; the pandoc pin
+      # is named because a different typesetter can change the page count.
       - name: Restore built résumé
         id: resume
         uses: actions/cache@v6
         with:
           path: static/*.pdf
-          key: resume-${{ hashFiles('src/content/**', 'scripts/buildResume.ts', 'scripts/resume-header.tex') }}
+          key: resume-${{ hashFiles('src/content/**', 'scripts/buildResume.ts', 'scripts/resume-*', 'scripts/pandoc-version.txt') }}
 
       # texlive-fonts-extra is about a gigabyte and it is not optional: the
       # résumé sets mainfont=XCharter, and Debian ships XCharter only there.
@@ -135,5 +134,30 @@ jobs:
       # Vercel builds and deploys separately with its own default base (the
       # site serves from the root there). This build just has to succeed, and
       # nothing consumes its output, so it uses the same default.
+      # The audit drives a real browser over the built site. Only Chromium,
+      # with its system libraries; timeout-minutes for the same reason as the
+      # TeX step above: a stalled download should fail, not wait six hours.
+      - name: Install Chromium for the audit
+        timeout-minutes: 5
+        run: npx playwright install --with-deps chromium
+
       - name: Build site
         run: npm run build
+
+      # axe over every route in both themes, against WCAG 2.2 AA. Fails the
+      # job on any violation. Unconditional on purpose: a check behind a cache
+      # condition is indistinguishable from a check that stopped running.
+      - name: Accessibility audit
+        run: npm run audit:a11y
+
+      # Browser assertions against the same build the audit just used. Each
+      # one was written from a bug that actually shipped, not from a coverage
+      # target: overflow at phone widths, no third-party requests beyond the
+      # font host, the headline holding its layout while it types, the untyped
+      # tail staying hidden from screen readers.
+      #
+      # Runs here rather than in a job of its own because this one has already
+      # installed Chromium and built the site. A separate job would pay for
+      # both again to assert against the same artifact.
+      - name: Browser tests
+        run: npm run test:e2e

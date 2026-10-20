@@ -21,3 +21,6 @@ src/lib/resumeData.ts
 _bmad
 output
 static/resume.pdf
+
+test-results/
+playwright-report/

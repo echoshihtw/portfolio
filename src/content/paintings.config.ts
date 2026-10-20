@@ -6,7 +6,7 @@
 // are committed. Point PAINTINGS_SRC at the originals to regenerate.
 //
 // Captions are the medium, plus a place and a year only where they are
-// known from the work itself. File dates are not years.
+// known from the work or from Echo. File dates are not years.
 
 export type Painting = {
   id: string;
@@ -15,12 +15,24 @@ export type Painting = {
   medium: string;
   /** Only where Echo has confirmed it. */
   place?: string;
-  /** Only where the work itself carries one. */
+  /** Only where the work carries one or Echo has confirmed it. */
   year?: string;
   /** Describes the work. These are not decorative images. */
   alt: string;
   /** [x, y, w, h] as fractions of the source, from the top-left. */
-  crop: [number, number, number, number];
+  crop?: [number, number, number, number];
+  /**
+   * For a painting photographed at an angle, instead of `crop`: its four
+   * corners in the photo, top-left, top-right, bottom-right, bottom-left,
+   * as [x, y] fractions from the top-left. The build flattens it to a true
+   * rectangle. Each entry has exactly one of `crop` or `corners`.
+   */
+  corners?: [
+    [number, number],
+    [number, number],
+    [number, number],
+    [number, number],
+  ];
   /**
    * Roughly how big the real object is, which drives how wide it renders.
    * A hand-sized card shown as large as a canvas is a lie about the work.
@@ -68,13 +80,18 @@ export const paintingsConfig: Painting[] = [
     source: "IMG_1727.jpg",
     medium: "Coloured pencil on card",
     alt: "A small card with a red heart with a face on it, black ground, blue rays behind",
-    crop: [0.12, 0.12, 0.75, 0.72],
+    corners: [
+      [0.085, 0.245],
+      [0.812, 0.143],
+      [0.938, 0.728],
+      [0.228, 0.79],
+    ],
     scale: "card",
   },
   {
     id: "reclining",
     source: "IMG_5095.jpg",
-    medium: "Oil",
+    medium: "Oil on canvas",
     alt: "Oil painting of a reclining figure, hand to the face, ochre and brown against a warm yellow ground",
     crop: [0, 0, 1, 0.86],
     scale: "canvas",
@@ -105,7 +122,12 @@ export const paintingsConfig: Painting[] = [
     medium: "Oil on canvas",
     place: "Florence",
     alt: "Oil painting of a figure suspended over a bowl of pasta, a red triangle behind, two hands grating cheese as the light source",
-    crop: [0.02, 0.01, 0.86, 0.97],
+    corners: [
+      [0.033, 0.069],
+      [0.82, 0.064],
+      [0.831, 0.802],
+      [0.119, 0.861],
+    ],
     scale: "canvas",
   },
   {
@@ -129,14 +151,21 @@ export const paintingsConfig: Painting[] = [
     id: "swirl-card",
     source: "IMG_1715.jpg",
     medium: "Pen and ink on card",
+    year: "2015",
     alt: "A small square of dense curvilinear pen pattern with lettering worked into the swirls",
-    crop: [0.1, 0.3, 0.78, 0.55],
+    corners: [
+      [0.153, 0.411],
+      [0.812, 0.314],
+      [0.921, 0.711],
+      [0.264, 0.809],
+    ],
     scale: "card",
   },
   {
     id: "heart",
     source: "IMG_6752.jpg",
     medium: "Watercolour, acrylic and pastel on paper",
+    year: "2026",
     alt: "An orange and yellow heart on a purple and blue wash, red spatter around it",
     crop: [0.02, 0.01, 0.96, 0.98],
     scale: "paper",
@@ -161,17 +190,29 @@ export const paintingsConfig: Painting[] = [
   {
     id: "male-portrait",
     source: "IMG_4502.jpeg",
-    medium: "Acrylic",
+    medium: "Acrylic on paper",
+    place: "Florence",
     alt: "Acrylic portrait of a seated man, chin resting on his hand, painted in reds and pinks",
-    crop: [0.09, 0.1, 0.78, 0.85],
+    corners: [
+      [0.052, 0.15],
+      [0.93, 0.142],
+      [0.933, 1.0],
+      [0.047, 1.0],
+    ],
     scale: "paper",
   },
   {
     id: "seated-figure",
     source: "IMG_4517.jpeg",
     medium: "Acrylic on tan paper",
+    place: "Florence",
     alt: "Acrylic painting of a seated figure in blue and pink on tan paper",
-    crop: [0.05, 0.08, 0.85, 0.88],
+    corners: [
+      [0.126, 0.126],
+      [0.886, 0.1],
+      [0.933, 0.967],
+      [0.055, 0.967],
+    ],
     scale: "paper",
   },
 ];

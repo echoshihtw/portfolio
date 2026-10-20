@@ -5,7 +5,18 @@
 % space from margins, leading, and section gaps, never from font size, which
 % is what actually costs readability.
 %
-% If it spills to a second page, cut a bullet before shrinking anything here.
+% If it spills to a second page, rewrite before you delete. Echo's rule,
+% 2026-09-16, and it works: six lines came back that day from rephrasing
+% alone, with no fact lost. Trimming words rarely helps, because a few
+% characters do not cross a wrap boundary; recasting a sentence does. Look for
+% a bullet whose last line holds one or two words and cut ~15 characters from
+% that bullet. Only when rewriting is exhausted, cut a bullet. Shrinking
+% anything below is the last resort, not the first.
+%
+% Measure with PDFKit, never with mdls: Spotlight metadata is cached and
+% reported one page while the file still had two. scripts/ has no tool for
+% this; a six-line Swift file using PDFDocument gives pageCount and the full
+% text, which also catches a line silently pushed onto a second page.
 
 \usepackage[left=0.5in,right=0.5in,top=0.34in,bottom=0.26in]{geometry}
 

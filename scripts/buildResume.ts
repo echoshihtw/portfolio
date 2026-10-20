@@ -42,8 +42,7 @@ earns the bullets a look. A dense sentence gets skipped whole.
 --------------------------------------------------
 */
 
-const SKILLS_MARKER =
-  "<!-- generated from src/content/skills.config.ts: items marked site-only are omitted -->";
+const SKILLS_MARKER = "<!-- generated from src/content/skills.config.ts -->";
 
 export function withSkills(markdown) {
   if (!markdown.includes(SKILLS_MARKER)) {
@@ -131,7 +130,15 @@ Experience Parser
 export function parseExperience(section) {
   const entries = [];
 
-  const blocks = section.split("## ").filter(Boolean);
+  // Strip HTML comments before splitting. resume.md documents why each line
+  // reads as it does, but an entry's first three non-blank lines are its
+  // company, role and date, so a comment anywhere under "# Experience" is
+  // parsed as one of those and ships to the site as a card. A comment
+  // containing "## " splits into phantom entries on top of that.
+  const blocks = section
+    .replace(/<!--[\s\S]*?-->/g, "")
+    .split("## ")
+    .filter((block) => block.trim());
 
   blocks.forEach((block) => {
     const lines = block
@@ -186,9 +193,7 @@ function buildResumeData(markdown) {
 
   // Only what the site actually imports. Skills come from skills.config.ts
   // and projects from projects.config.ts; generating them here too produced
-  // exports nobody read. Skills used to be written twice, which is what made
-  // editing resume.md look broken, the PDF changing while the site did not,
-  // and skills.config.ts is now the single list behind both.
+  // exports nobody read.
   // The site joins portfolio copy to experience by company name, and a
   // mismatch renders an empty card with no error. Fail here instead.
   const companies = experience.map((e) => e.company);
@@ -312,6 +317,29 @@ Main
 --------------------------------------------------
 */
 
+// The headline is a professional identity, not a job level, and the right one
+// depends on the posting: a frontend vacancy should meet "Frontend Engineer",
+// not the general default. resume.md lists the options above the line.
+//
+// Swapping it by hand meant it never got swapped, so RESUME_HEADLINE overrides
+// the role part for one build, the way RESUME_MAINFONT already overrides the
+// font:
+//
+//   RESUME_HEADLINE='Frontend Engineer' npm run build-resume
+//
+// Only the role changes; the stack after the first separator is untouched, so
+// a targeted build cannot silently drop the keywords. The substitution happens
+// on the composed copy, never on resume.md, so nothing is left modified after
+// an aimed build and the default is whatever the file says.
+export function withHeadline(markdown) {
+  const headline = process.env.RESUME_HEADLINE?.trim();
+  if (!headline) {
+    return markdown;
+  }
+
+  return markdown.replace(/^\{\\large [^·}]+( ·)/m, `{\\large ${headline}$1`);
+}
+
 function run() {
   console.log("🚀 Building resume pipeline...");
 
@@ -322,7 +350,7 @@ function run() {
   buildResumeData(markdown);
 
   // pandoc reads the composed copy, never the source
-  fs.writeFileSync(BUILD_MD, withSkills(withProjects(markdown)));
+  fs.writeFileSync(BUILD_MD, withHeadline(withSkills(withProjects(markdown))));
 
   buildHTML();
   buildPDF();

@@ -43,7 +43,18 @@ export function validateManifest(items: Painting[]): string[] {
 
     if (!item.alt.trim()) problems.push(`${item.id}: alt is required`);
 
-    const [x, y, w, h] = item.crop;
+    if (!item.crop === !item.corners) {
+      problems.push(`${item.id}: needs exactly one of crop or corners`);
+      continue;
+    }
+
+    if (item.corners) {
+      const outside = item.corners.flat().some((n) => n < 0 || n > 1);
+      if (outside) problems.push(`${item.id}: a corner lies outside the photo`);
+      continue;
+    }
+
+    const [x, y, w, h] = item.crop!;
     if (x + w > 1) {
       problems.push(
         `${item.id}: crop runs off the right edge (x + w = ${round(x + w)})`
@@ -86,8 +97,10 @@ function main() {
           TOOL,
           source,
           path.join(OUT_DIR, derivativeName(item.id, width)),
-          ...item.crop.map(String),
           String(width),
+          ...(item.corners
+            ? ["corners", ...item.corners.flat().map(String)]
+            : ["crop", ...item.crop!.map(String)]),
         ],
         { stdio: "inherit" }
       );

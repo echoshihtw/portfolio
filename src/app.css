@@ -11,13 +11,50 @@
    whole page by redefining a dozen lines.
    ========================================================================== */
 
+/* Geist and Geist Mono, Latin subset, served from /fonts. Each file is
+   variable, so one file covers every weight the site uses. */
+@font-face {
+  font-family: "Geist";
+  src: url("/fonts/geist-latin.woff2") format("woff2");
+  font-weight: 400 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Geist Mono";
+  src: url("/fonts/geist-mono-latin.woff2") format("woff2");
+  font-weight: 400 500;
+  font-display: swap;
+}
+
+/* Arial sized to Geist's own metrics, for the rare moment before the
+   preloaded file is ready. */
+@font-face {
+  font-family: "Geist Fallback";
+  src: local("Arial");
+  ascent-override: 95.94%;
+  descent-override: 28.16%;
+  line-gap-override: 0%;
+  size-adjust: 104.76%;
+}
+
 :root {
-  /* Colour: warm cream and dark ink carry the page. Blue is what you can
-     click. Orange-red and yellow are editorial, one moment each. Sage is
-     for the one status that means "running". */
-  --canvas: #f3f0e8;
-  --ink: #171714;
-  --surface: #faf8f2;
+  /* Colour, from her paintings: off-white paper, green-black ink, oxide red
+     for one word. Runway's indigo and mint are its own; Clio's colours come
+     from @echoshihtw/clio-brand. */
+  --canvas: #fbfaf7;
+  --smoke: #efefec;
+  --ink: #0a150f;
+  --surface: #ffffff;
+  --runway-indigo: #262c4c;
+  --runway-mint: #8fddaa;
+  /* Runway's debt gold and critical rose, from its design_system tokens. */
+  --runway-gold: #cb9a3e;
+  --runway-rose: #e8829e;
+  /* Runway's band keeps its own text colours in both themes. */
+  --runway-paper: #f2efe8;
+  --runway-ink: #0a150f;
+  --clio-number: var(--clio-ink);
   --border: rgb(23 23 20 / 0.18);
   --border-strong: var(--ink);
   --muted: rgb(23 23 20 / 0.62);
@@ -31,11 +68,14 @@
   --accent-ink: #171714;
   /* The same orange for type. #f15a3a is a fill colour: on cream it is
      2.9:1, under the 3:1 that large text needs, so words take this one. */
-  --accent-text: #dc4a2b;
+  --accent-text: #8d391e;
   --highlight: #f2c94c;
-  --sage: #a8b5a2;
   --status-live: #4f6e4a;
-  --status-progress: #735809;
+  /* How her ink prints sit in the page. On paper they multiply into it; on
+     the ink theme they turn to chalk lines instead. */
+  --print-blend: multiply;
+  --print-filter: saturate(1.3) contrast(1.3);
+  --print-opacity: 0.24;
 
   /* Legacy names, aliased. Older rules read these three; nothing new
      should, and the five nothing read at all are gone. */
@@ -43,11 +83,10 @@
   --surface-bg: var(--surface);
   --section-border: var(--border);
 
-  /* Type. A neo-grotesque with some character for headings, a neutral
-     humanist sans for reading, a mono for anything that is data. */
-  --font-display: "Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif;
-  --font-body: "IBM Plex Sans", "Segoe UI", Roboto, sans-serif;
-  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  /* Type. Geist for everything read, its mono for anything that is data. */
+  --font-display: "Geist", "Geist Fallback", Arial, sans-serif;
+  --font-body: "Geist", "Geist Fallback", Arial, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
 
   --text-xs: 0.72rem;
   --text-sm: 0.84rem;
@@ -56,7 +95,6 @@
   --text-xl: 1.5rem;
   --text-2xl: clamp(1.9rem, 1.3rem + 2.4vw, 2.7rem);
   --text-3xl: clamp(2.6rem, 1.4rem + 5.2vw, 5rem);
-  --text-num: clamp(2.4rem, 1.5rem + 3vw, 4rem);
 
   --leading-tight: 1.02;
   --leading-snug: 1.2;
@@ -76,13 +114,12 @@
   --section-y: clamp(3.5rem, 2rem + 6vw, 7rem);
   --content-max: 1200px;
 
-  /* Radius. Controls and small surfaces take sm, cards take md, buttons
-     are pills, and lg is the one large corner, opened on a single corner
+  /* Radius. Controls, buttons and small surfaces take sm, cards take md,
+     tags are pills, and lg is the one large corner, opened on a single corner
      of a block rather than all four. */
   --radius-sm: 6px;
   --radius-md: 12px;
   --radius-pill: 999px;
-  --radius-lg: clamp(2rem, 6vw, 4.5rem);
 
   /* Border. Thin and dark, never a shadow. */
   --border-w: 1px;
@@ -90,27 +127,37 @@
   /* Motion. Short, one easing, and nothing loops. */
   --dur-fast: 140ms;
   --dur-base: 220ms;
-  --dur-slow: 420ms;
   --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+
+  /* The site's moving parts, on Material 3's motion scale. Things arrive
+     slowing down and leave speeding up, and leaving is always quicker. */
+  --motion-enter: cubic-bezier(0.05, 0.7, 0.1, 1);
+  --motion-exit: cubic-bezier(0.3, 0, 0.8, 0.15);
+  --motion-medium: 350ms;
+  --motion-long: 500ms;
 }
 
 /* The ink theme. Same system, the ground and the ink swap, and blue and
    orange come up a step so they clear contrast on dark. No other rule in
    the site mentions the theme. */
 html[data-theme="dark"] {
-  --canvas: #171714;
-  --ink: #f3f0e8;
-  --surface: #1f1f1b;
+  /* Charcoal, no colour cast: light mode's paper and smoke, inverted. */
+  --canvas: #131312;
+  --smoke: #232321;
+  --ink: #f0eee8;
+  --surface: #232321;
+  --clio-number: #f0eee8;
   --border: rgb(243 240 232 / 0.2);
   --muted: rgb(243 240 232 / 0.66);
   --primary: #8aa1f2;
   --primary-ink: #171714;
   --accent: #f6836a;
-  --accent-text: #f6836a;
+  --accent-text: #e07a4f;
   --highlight: #f2c94c;
-  --sage: #a8b5a2;
   --status-live: #a8b5a2;
-  --status-progress: #f2c94c;
+  --print-blend: screen;
+  --print-filter: invert(1) contrast(1.2);
+  --print-opacity: 0.16;
 }
 
 /* ==========================================================================
@@ -123,11 +170,11 @@ html[data-theme="dark"] {
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 5rem;
+  scroll-padding-top: 1rem;
 }
 
-/* clip, not hidden. A hidden overflow makes body a scroll container, and a
-   sticky header sticks to the nearest scroll container, which is then body
+/* clip, not hidden. A hidden overflow makes body a scroll container, and
+   anything sticky sticks to the nearest scroll container, which is then body
    rather than the viewport. clip cuts the overflow without creating one. */
 html,
 body {
@@ -230,15 +277,14 @@ canvas {
   color: var(--muted);
 }
 
-/* The number that opens a section: large, light, in the display face. */
-.section-num {
-  font-family: var(--font-display);
-  font-size: var(--text-num);
-  font-weight: 500;
-  line-height: 1;
-  letter-spacing: var(--tracking-tight);
-  color: var(--muted);
-  font-variant-numeric: tabular-nums;
+/* Read by screen readers, not shown: what the eye gets from context. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 
 /* A rounded rectangle with a thin ink border. No shadow, ever. Interactive
@@ -290,12 +336,13 @@ canvas {
 /* ==========================================================================
    Buttons and calls to action
 
-   .btn       the one filled pill a group gets. Blue, since blue is what
-              you can click on this site.
+   .btn       the one filled button a group gets. Blue, since blue is what
+              you can click on this site; -ink and -accent recolour it, and
+              -line is the outline second action beside it.
    .link-cta  a text link that acts, on <a> or <button>.
    .chip      a small bordered control: a close, a reset, a social icon.
 
-   Numbers follow Material's button spec: 40px tall, 48px touch targets
+   Numbers follow Material's button spec, at 44px tall, and 48px touch targets
    (text links and chips extend theirs with a pseudo-element so the visual
    stays small), 8px between label and icon, state layers on hover and
    press rather than only a lift. One filled button per group.
@@ -305,16 +352,15 @@ canvas {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  min-height: 2.5rem;
+  min-height: 2.75rem;
   padding: 0.55rem 1.25rem;
   border: var(--border-w) solid var(--primary);
-  border-radius: var(--radius-pill);
+  border-radius: var(--radius-sm);
   background: var(--primary);
   color: var(--primary-ink);
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
+  font-family: var(--font-body);
+  font-size: 0.94rem;
   font-weight: 500;
-  letter-spacing: 0.02em;
   line-height: 1.2;
   text-decoration: none;
   white-space: nowrap;
@@ -370,6 +416,19 @@ canvas {
 
 .btn-ink:active {
   background: color-mix(in srgb, var(--canvas) 12%, var(--ink));
+}
+
+/* The outline variant: the second action beside a filled one. */
+.btn-line {
+  border-color: var(--ink);
+  background: transparent;
+  color: var(--ink);
+}
+
+.btn-line:hover,
+.btn-line:focus-visible {
+  background: color-mix(in srgb, var(--ink) 6%, transparent);
+  border-color: var(--ink);
 }
 
 .link-cta {
@@ -470,6 +529,11 @@ canvas {
   transform: translateY(2px);
 }
 
+/* The page behind an open dialog holds still. */
+html:has(dialog[open]) {
+  overflow: hidden;
+}
+
 /* ==========================================================================
    Layout
    ========================================================================== */
@@ -491,9 +555,10 @@ canvas {
   gap: var(--space-5);
 }
 
-/* Sections meet at a hairline, not a band. */
-.section_rule {
-  border-top: var(--border-w) solid var(--border);
+/* The quiet alternate ground: smoke behind every other section. */
+.section_smoke {
+  /* Full width even inside a capped section, and only sideways. */
+  border-image: linear-gradient(var(--smoke) 0 0) fill 0 / /0 100vmax;
 }
 
 /* ==========================================================================
@@ -581,12 +646,38 @@ canvas {
   line-height: 1.6;
 }
 
+/* Inside a block the tint would be a box within a box, and the padding would
+   push the first line out of line with the rest. */
 .blog-prose pre code {
   font-family: var(--font-mono);
   color: var(--ink);
+  padding: 0;
+  border-radius: 0;
+  background: none;
+  font-size: inherit;
+  overflow-wrap: normal;
 }
 
+/* Inline code: web-app@0.1.0, package.json, an error string mid-sentence.
+   A mono font on its own did not separate these from the prose around them,
+   which was the readability problem: at 0.9em, mono beside a sans paragraph
+   reads as a font wobble rather than as a quoted identifier. The tint is kept
+   light because some sentences carry four of them and should not turn into a
+   row of buttons.
+
+   The tint is mixed from --ink rather than --surface, which sits close enough
+   to the page that it would be invisible, and mixing from the ink means it
+   inverts with the theme for free. */
 .blog-prose code {
   font-family: var(--font-mono);
-  font-size: 0.9em;
+  font-size: 0.88em;
+  /* Horizontal padding is kept tight: at 0.34em the chip pushed the full
+     stop and the possessive apostrophe away from the word, so "package.json's"
+     read as "package.json 's". */
+  padding: 0.08em 0.18em;
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--ink) 7%, transparent);
+  /* One of these is the full text of a TypeError. It should break rather
+     than push the paragraph sideways on a phone. */
+  overflow-wrap: anywhere;
 }
