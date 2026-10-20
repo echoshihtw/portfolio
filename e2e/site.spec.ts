@@ -205,3 +205,13 @@ test.describe("Runway", () => {
     await expect(pair).not.toHaveClass(/solo/);
   });
 });
+
+test.describe("Hero", () => {
+  test.beforeEach(({ page }) => skipGate(page));
+
+  // The signature is not readable as a name, so the hero types it.
+  test("says whose page this is", async ({ page }) => {
+    await page.goto("/");
+    await expect(page.locator("#home")).toContainText("Echo Shih");
+  });
+});

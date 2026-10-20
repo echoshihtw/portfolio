@@ -22,7 +22,13 @@
   />
 
   <div class="hero-grid">
-    <p class="label hero-where">{heroConfig.remoteOpen}</p>
+    <!-- Each fact stays whole; lines break only between them. -->
+    <p class="label hero-where">
+      {#each heroConfig.remoteOpen as fact, i}<span class="fact">
+          {fact}{i < heroConfig.remoteOpen.length - 1 ? " ·" : ""}
+        </span>
+        {" "}{/each}
+    </p>
 
     <h1 class="hero-headline">
       <!-- prettier-ignore -->
@@ -107,6 +113,10 @@
 
   .hero-where {
     margin: 0;
+  }
+
+  .hero-where .fact {
+    white-space: nowrap;
   }
 
   .hero-headline {

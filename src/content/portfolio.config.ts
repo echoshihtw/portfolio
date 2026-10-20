@@ -18,7 +18,7 @@ const EMAIL = "echoshihtw@gmail.com";
 const RESUME = "Chun-Yu-Echo-Shih-Software-Engineer.pdf";
 
 export const heroConfig: {
-  remoteOpen: string;
+  remoteOpen: string[];
   owns: string[];
   headline: HeadlinePart[];
   support: string[];
@@ -40,7 +40,8 @@ export const heroConfig: {
   // and because the evidence here is scoping decisions rather than a list
   // of layers; resume.md keeps the swap list for postings that literally
   // say frontend.
-  remoteOpen: "Product engineer · UTC+8 · Remote from Taiwan",
+  // Her name first: the signature in the header is not readable as one.
+  remoteOpen: ["Echo Shih", "Product engineer", "UTC+8", "Remote from Taiwan"],
 
   // Things she made true, not tools she touched. Each is shown lower on the
   // page: Clio's RLS, Runway's package boundaries, Lockerbie's BFF.
