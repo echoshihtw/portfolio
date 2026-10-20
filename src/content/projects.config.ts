@@ -8,8 +8,8 @@ export const projectsConfig: Projects = [
   {
     name: "Clio",
     statusLine: "Early access",
-    note: "She's back. You remember.",
-    fact: "In use at a Tainan salon since May 2025. The owner typed 603 clients in by hand.",
+    figure: "603",
+    fact: "clients, typed in by hand by a Tainan salon owner. In use since May 2025.",
     story: [
       "A quick CV of the client, for the two minutes before she sits down: how long since her last visit, what was done last time, any special hair situation, the curl she likes.",
       "No booking, no payments. The owner didn't need them, yet. I never taught her to use it; she only comes to me when she forgets her password, or when a bug of mine stops her saving.",

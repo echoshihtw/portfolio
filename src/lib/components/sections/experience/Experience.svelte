@@ -10,7 +10,7 @@
 
 <section
   id="work"
-  class="section_padding section_layout section_rule"
+  class="section_padding section_layout section_smoke"
   aria-labelledby="work-title"
 >
   <SectionHead

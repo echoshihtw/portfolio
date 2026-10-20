@@ -100,15 +100,13 @@ export const closingConfig = {
 // The full formal bullets stay in resume.md and show in the "details" expander.
 // Each entry is one short paragraph with the problem and the fix inside it,
 // then the stack. Written in résumé voice: implied subject, no "I".
-// `note` is her one handwritten aside on the page, so only one entry has it.
 export const experiencePortfolio: Record<
   string,
-  { story: string; note?: string; techLine: string }
+  { story: string; techLine: string }
 > = {
   "Lockerbie Technology": {
     story:
-      "Built and operated an early-stage internal platform for the UK construction sector, as one of two engineers. Brought the other to shipping independently in two months. A backend task went from a week to two days.",
-    note: "a BFF between frontend and backend, so no credential reaches the browser",
+      "Built and operated an early-stage internal platform for the UK construction sector, as one of two engineers. Brought the other to shipping independently in two months. A backend task went from a week to two days. A BFF between frontend and backend keeps every credential out of the browser.",
     techLine:
       "Next.js App Router · TanStack Query · FastAPI · ArangoDB · RabbitMQ · Docker · GHCR",
   },

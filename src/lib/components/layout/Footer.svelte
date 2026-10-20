@@ -102,18 +102,6 @@
             <Icon icon="mdi:arrow-top-right" />
           </a>
         </div>
-        <!-- A photo of her room in Florence: a caption, not a claim about
-             where the site was made. -->
-        <figure class="room">
-          <img
-            src="{base}/assets/florence-room.webp"
-            alt="Her room in Florence at night: a desk under a lamp, with paints and a painting propped by the window"
-            width="300"
-            height="400"
-            loading="lazy"
-          />
-          <figcaption>my room in Florence</figcaption>
-        </figure>
       </section>
 
       <nav class="footer-nav">
@@ -236,32 +224,6 @@
     width: 6rem;
     background-color: var(--ink);
     opacity: 1;
-  }
-
-  /* A small taped print of her room. Paper stays paper in both themes. */
-  .room {
-    display: inline-flex;
-    flex-direction: column;
-    gap: 0.4rem;
-    width: 6.5rem;
-    margin: var(--space-5) 0 0;
-    padding: 0.35rem 0.35rem 0.5rem;
-    background: #fffdf8;
-    box-shadow: 0 6px 14px rgba(60, 40, 10, 0.14);
-    transform: rotate(-3deg);
-  }
-
-  .room img {
-    display: block;
-    width: 100%;
-    height: auto;
-  }
-
-  .room figcaption {
-    font-family: var(--font-hand);
-    font-size: 0.78rem;
-    line-height: 1.2;
-    color: #4a4740;
   }
 
   .footer-brand h2 {

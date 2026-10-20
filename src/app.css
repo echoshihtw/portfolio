@@ -531,6 +531,14 @@ canvas {
   gap: var(--space-5);
 }
 
+/* The quiet alternate ground: smoke behind every other section. */
+.section_smoke {
+  background: var(--smoke);
+  /* Full width even inside a capped section. */
+  box-shadow: 0 0 0 100vmax var(--smoke);
+  clip-path: inset(0 -100vmax);
+}
+
 /* Sections meet at a hairline, not a band. */
 .section_rule {
   border-top: var(--border-w) solid var(--border);

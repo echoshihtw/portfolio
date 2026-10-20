@@ -24,18 +24,6 @@
   />
 
   <div class="close">
-    <!-- Her brush-face drawing, printed into the empty paper beside the
-         words, the way the hero's sketch sits beside the headline. -->
-    <img
-      class="print"
-      src="{base}/assets/paintings/brush-face-640.webp"
-      alt=""
-      aria-hidden="true"
-      width="640"
-      height="754"
-      loading="lazy"
-    />
-
     <div class="notes">
       <p class="lead">{closingConfig.lead}</p>
       <p class="body">{closingConfig.body}</p>
@@ -95,10 +83,6 @@
     text-align: center;
   }
 
-  .print {
-    display: none;
-  }
-
   .notes {
     display: flex;
     flex-direction: column;
@@ -147,36 +131,5 @@
     font-size: var(--text-sm);
     line-height: 1.7;
     color: var(--muted);
-  }
-
-  /* Only where there is empty paper beside the words, so it never sits
-     behind them. */
-  @media (min-width: 1200px) {
-    .print {
-      display: block;
-      position: absolute;
-      z-index: -1;
-      top: 50%;
-      right: 0;
-      width: min(20rem, 24%);
-      height: auto;
-      transform: translateY(-50%) rotate(4deg);
-      mix-blend-mode: var(--print-blend);
-      opacity: var(--print-opacity);
-      filter: var(--print-filter);
-      -webkit-mask-image: radial-gradient(
-        ellipse 48% 48% at 50% 46%,
-        #000 25%,
-        rgba(0, 0, 0, 0.4) 58%,
-        transparent 100%
-      );
-      mask-image: radial-gradient(
-        ellipse 48% 48% at 50% 46%,
-        #000 25%,
-        rgba(0, 0, 0, 0.4) 58%,
-        transparent 100%
-      );
-      pointer-events: none;
-    }
   }
 </style>
