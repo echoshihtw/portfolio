@@ -233,3 +233,25 @@ test.describe("Where I've worked", () => {
     await expect(links.first()).toHaveClass(/quiet/);
   });
 });
+
+test.describe("Header", () => {
+  test.beforeEach(({ page }) => skipGate(page));
+
+  // Out of the way while reading down; back as soon as you scroll up.
+  test("hides while scrolling down and returns on scroll up", async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 1280, height: 800 });
+    await page.goto("/");
+    const header = page.locator("header.header");
+    const top = () => header.evaluate((el) => el.getBoundingClientRect().top);
+
+    await page.mouse.wheel(0, 1500);
+    await page.waitForTimeout(600);
+    expect(await top()).toBeLessThan(-10);
+
+    await page.mouse.wheel(0, -300);
+    await page.waitForTimeout(600);
+    expect(await top()).toBe(0);
+  });
+});

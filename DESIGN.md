@@ -64,7 +64,8 @@ visual, one hint under it, a heading and one line.
 
 ## Motion
 
-Nothing moves on its own. Things move only when someone taps: a sheet rises, a
+Nothing moves on its own. The header steps aside while you scroll down and
+returns on any scroll up. Things move only when someone taps: a sheet rises, a
 card turns. Reduced motion swaps every movement for an instant change.
 
 ## Checks for every change

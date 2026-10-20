@@ -32,15 +32,34 @@
   }
 
   const email = mailtoWithSubject(heroConfig.email, heroConfig.emailSubject);
+
+  // Out of the way while reading down, back on any scroll up. Never hidden
+  // near the top, while the menu is open, or while it holds focus.
+  let tucked = false;
+  let lastY = 0;
+  let header: HTMLElement;
+  function onScroll() {
+    const y = window.scrollY;
+    const down = y > lastY;
+    lastY = y;
+    if (open || header.contains(document.activeElement)) return;
+    tucked = down && y > header.offsetHeight * 2;
+  }
 </script>
 
 <svelte:window
   on:keydown={onWindowKey}
   on:pointerdown={onWindowPointer}
+  on:scroll={onScroll}
 />
 
 <!-- Not an <h1>: the hero statement is the page's single heading. -->
-<header class="header">
+<header
+  class="header"
+  class:tucked
+  bind:this={header}
+  on:focusin={() => (tucked = false)}
+>
   <a
     href={base || "/"}
     class="logo"
@@ -123,6 +142,12 @@
 
 <style>
   .header {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    /* Full width behind a capped bar, so content never shows beside it. */
+    border-image: linear-gradient(var(--canvas) 0 0) fill 0 / 0 / 0 100vmax;
+    transition: transform var(--motion-medium, 350ms) var(--motion-enter, ease);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -131,6 +156,16 @@
     max-width: var(--content-max);
     margin: 0 auto;
     padding: var(--space-4);
+  }
+
+  .tucked {
+    transform: translateY(-100%);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .header {
+      transition: none;
+    }
   }
 
   .logo {
