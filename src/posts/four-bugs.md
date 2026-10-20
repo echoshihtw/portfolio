@@ -6,9 +6,9 @@ order: 2
 draft: true
 ---
 
-Clio is a salon app. One salon in Tainan has used it since May 2025, with 603 real clients in it. 260 tests were passing. I took four screenshots of a demo salon anyway, and found four bugs.
+Clio is a salon app. One salon in Tainan has used it since May 2025, with more than 600 real clients in it. 260 tests were passing. I took four screenshots of a demo salon anyway, and found four bugs.
 
-Two were small. A salon name was cut off mid-character, because a component had copied a shared width and got the number wrong. A price read NTD$4,400 NTD, because the currency was added twice. One-line fixes, once seen.
+Two were small. A salon name was cut off mid-character, because a component had copied a shared width and got the number wrong. A price read NTD$4,400 NTD, because the currency was added twice. One-line fixes, once seen. Carelessness caught late isn't a story, just an apology.
 
 Two weren't.
 
@@ -18,9 +18,32 @@ Switch Clio to English, and the visit history still showed dates as 西元2026�
 
 There were two ways to format a date in the code: a shared helper that takes a language, and an older one that doesn't. The older one always gave the same Chinese output, whatever language you asked for.
 
-The test for that screen had a mock for translations. It returned the translate function, and never a language. So the language could not matter anywhere in the test. It ran, it passed, and it looked like coverage. It could never fail, so it proved nothing.
+The test for that screen had a mock for translations. It returned the translate function, and never a language:
 
-I fixed the mock first, giving it a language, so the test could fail. Then I wrote a formatter for visit dates that keeps the weekday, because a salon reads its history by day of the week, and deleted the old one, along with the last use of moment in the codebase.
+```ts
+jest.mock("react-i18next", () => ({
+  useTranslation: () => ({ t: (key: string) => key }),
+}));
+```
+
+So the language could not matter anywhere in the test. It ran, it passed, and it looked like coverage. It could never fail, so it proved nothing.
+
+I fixed the mock first, giving it a language to lie about, so the test could fail:
+
+```ts
+jest.mock("react-i18next", () => ({
+  useTranslation: () => ({
+    t: (key: string) => key,
+    i18n: {
+      get language() {
+        return mockLanguage;
+      },
+    },
+  }),
+}));
+```
+
+Then I wrote a formatter for visit dates that keeps the weekday, because a salon reads its history by day of the week, and deleted the old one, along with the last use of moment in the codebase.
 
 ## A table that knew how to delete a person
 
