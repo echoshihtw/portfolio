@@ -9,6 +9,11 @@
   // first, then the lead, then the notes; the longer notes and the
   // decisions open in a sheet there.
   export let project: Projects[number];
+
+  // A decision may open with **its claim**, which is set in bold.
+  const LEAD = /^\*\*(.+?)\*\*\s*/;
+  const lead = (d: string) => d.match(LEAD)?.[1] ?? "";
+  const rest = (d: string) => d.replace(LEAD, "");
   /** The project's own logo, shown beside its name. */
   export let mark: string | undefined = undefined;
   /** The product's own paper and ink for its card's back, so both sides of
@@ -102,7 +107,8 @@
         <p class="label">How it's built</p>
         <ul class="decisions">
           {#each project.highlights as decision}
-            <li>{decision}</li>
+            <!-- prettier-ignore -->
+            <li>{#if lead(decision)}<strong>{lead(decision)}</strong> {/if}{rest(decision)}</li>
           {/each}
         </ul>
         <button
@@ -171,7 +177,8 @@
       >
         <ul class="decisions">
           {#each project.highlights as decision}
-            <li>{decision}</li>
+            <!-- prettier-ignore -->
+            <li>{#if lead(decision)}<strong>{lead(decision)}</strong> {/if}{rest(decision)}</li>
           {/each}
         </ul>
       </Reveal>

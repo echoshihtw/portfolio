@@ -297,3 +297,22 @@ test.describe("Phone", () => {
     expect(small).toEqual([]);
   });
 });
+
+test.describe("Clio", () => {
+  test.beforeEach(({ page }) => skipGate(page));
+
+  // Four decisions, each a bold claim and one line on why it matters.
+  test("states four decisions, each led by what it does", async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 900 });
+    await page.goto("/");
+    const list = page
+      .locator("#projects .row")
+      .first()
+      .locator(".decisions")
+      .first();
+    await expect(list.locator("li")).toHaveCount(4);
+    await expect(list.locator("li strong").first()).toHaveText(
+      "It does one job."
+    );
+  });
+});
