@@ -17,13 +17,16 @@ export const selectedWorkConfig = {
   // The headline runway uses the store screenshot's numbers. The calculator
   // starts elsewhere, so it shows another state, not the same 12.
   lead: { cash: "34,336", cost: "2,803" },
-  // The spending card: committed costs, what is left of the living budget,
-  // and a lunch to log. Six lunches fit; the seventh goes over.
+  // The spending card: the store screenshot's costs (rent and fixed 1,450,
+  // subscriptions and loans 253, living budget 1,100: 2,803 a month), late
+  // in a tighter month. Cash sits just above three months, so six lunches
+  // fit the budget and the seventh, $15 over, drops it to two.
   spend: {
-    cash: 8400,
-    rent: 1500,
-    subscriptions: 100,
-    living: 1200,
+    example: "Example: end of the month",
+    cash: 8420,
+    rent: 1450,
+    subscriptions: 253,
+    living: 1100,
     livingLeft: 90,
     lunch: 15,
     title: "Spending what you planned costs you nothing.",

@@ -124,6 +124,7 @@
   >
     <div class="item">
       <div class="focal">
+        <p class="example">{s.example}</p>
         <dl class="ledger">
           <div>
             <dt>Rent & bills</dt>
@@ -351,7 +352,7 @@
   /* One frame for every card: the focal point on top, then a heading and
      one line. About four things to take in, never more. */
   .item {
-    --focal-h: 11rem;
+    --focal-h: 12rem;
     flex: 0 0 auto;
     display: flex;
     flex-direction: column;
@@ -525,6 +526,15 @@
     justify-items: center;
     gap: var(--space-2);
     height: var(--focal-h);
+  }
+
+  .example {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: var(--text-xs, 0.72rem);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
   }
 
   /* Read like a receipt: label left, amount right, one row each. */
