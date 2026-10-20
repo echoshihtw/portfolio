@@ -44,7 +44,7 @@
               work.id,
               large
             )} {large}w"
-            sizes="(min-width: 860px) 30vw, 90vw"
+            sizes="(min-width: 860px) 30vw, (min-width: 560px) 45vw, 90vw"
             alt={work.alt}
             style="max-width: {FILL[work.scale]}; max-height: {FILL[
               work.scale
@@ -72,6 +72,13 @@
     margin: 0;
     padding: 0;
     list-style: none;
+  }
+
+  /* Two columns from a phone held sideways, so a frame fits one screen. */
+  @media (min-width: 560px) {
+    .wall {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
 
   @media (min-width: 860px) {
