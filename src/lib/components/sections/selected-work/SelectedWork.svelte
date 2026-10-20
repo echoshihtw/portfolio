@@ -93,7 +93,8 @@
           <a
             class="btn btn-mint"
             href={c.appStore}
-            rel="noopener"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             Try it on the App Store <span aria-hidden="true">↗</span>
           </a>
