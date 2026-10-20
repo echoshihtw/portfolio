@@ -38,8 +38,8 @@ that.
 
 ## Every section
 
-1. **The row.** `SectionHead`: the number, the title in mono, at most one quiet
-   link on the right.
+1. **The row.** `SectionHead`: the number and the title together, in mono, at
+   most one quiet link on the right.
 2. **One lead object.** The thing the section is about.
 3. **Notes.** Short text beside or under it. The proof first, and the largest.
 4. **At most one link out.**
