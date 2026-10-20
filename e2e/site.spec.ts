@@ -171,6 +171,9 @@ test.describe("Runway", () => {
     await page.goto("/");
     const strip = page.getByRole("region", { name: "How it thinks" });
     await expect(strip.locator(":scope > *")).toHaveCount(3);
+    await expect(strip.locator(":scope > *").first()).toContainText(
+      /type your own numbers/i
+    );
 
     const debt = strip.getByRole("button", { name: /debt/i });
     await expect(debt).toHaveAttribute("aria-pressed", "false");

@@ -120,7 +120,6 @@
     on:scroll={onScroll}
   >
     <div class="item calc">
-      <p class="label">Your turn</p>
       <div class="inputs">
         <label>
           I have $
@@ -141,6 +140,12 @@
           />
         </label>
       </div>
+      <span
+        class="hint"
+        aria-hidden="true"
+      >
+        Type your own numbers
+      </span>
       <p
         class="answer"
         aria-live="polite"
@@ -528,8 +533,8 @@
     display: grid;
   }
 
-  .calc .label {
-    margin: 0 0 var(--space-3);
+  .calc .hint {
+    margin-top: var(--space-2);
     color: var(--runway-ink);
   }
 
