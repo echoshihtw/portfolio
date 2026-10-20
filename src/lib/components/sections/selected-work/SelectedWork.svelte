@@ -20,8 +20,16 @@
   $: unit =
     result.months === null ? "" : result.months === 1 ? "month" : "months";
 
+  // A click keeps a decision on; a mouse hovering only previews it. Touch
+  // and keyboard skip the preview and go straight to the click.
   let debtHidden = false;
   let breathing = false;
+  let previewDebt = false;
+  let previewCalm = false;
+  const mouse = (e: PointerEvent) => e.pointerType === "mouse";
+
+  $: debtShown = debtHidden || previewDebt;
+  $: calmShown = breathing || previewCalm;
 
   // Which card is in view, for the counter on narrow screens.
   let strip: HTMLElement;
@@ -138,12 +146,15 @@
     <div class="item">
       <button
         class="tap"
+        aria-label="Hide the debt: cash {c.debt.cash}, owed {c.debt.owed}"
         aria-pressed={debtHidden}
         on:click={() => (debtHidden = !debtHidden)}
+        on:pointerenter={(e) => (previewDebt = mouse(e))}
+        on:pointerleave={() => (previewDebt = false)}
       >
         <span
           class="pair"
-          class:solo={debtHidden}
+          class:solo={debtShown}
         >
           <span class="cash">
             <span class="label">Cash</span>
@@ -154,10 +165,15 @@
             {c.debt.owed}
           </span>
         </span>
-        <span class="hint">
+        <span
+          class="hint"
+          aria-hidden="true"
+        >
           {debtHidden
             ? "Without the debt, it looks rich"
-            : "Tap to hide the debt"}
+            : previewDebt
+              ? "Click to keep it hidden"
+              : "Tap to hide the debt"}
         </span>
       </button>
       <h4>{c.debt.title}</h4>
@@ -167,20 +183,28 @@
     <div class="item">
       <button
         class="tap"
+        aria-label="Let the {c.calm.status} badge breathe"
         aria-pressed={breathing}
         on:click={() => (breathing = !breathing)}
+        on:pointerenter={(e) => (previewCalm = mouse(e))}
+        on:pointerleave={() => (previewCalm = false)}
       >
         <span
           class="badge"
-          class:on={breathing}
+          class:on={calmShown}
         >
           <i aria-hidden="true" />
           {c.calm.status}
         </span>
-        <span class="hint">
+        <span
+          class="hint"
+          aria-hidden="true"
+        >
           {breathing
             ? "A resting heartbeat, never faster"
-            : "Tap to see it breathe"}
+            : previewCalm
+              ? "Click to keep it breathing"
+              : "Tap to see it breathe"}
         </span>
       </button>
       <h4>{c.calm.title}</h4>
@@ -347,6 +371,17 @@
     gap: var(--space-2);
     border-radius: var(--radius-md);
     cursor: pointer;
+  }
+
+  /* Only the cards you can play with answer the mouse. */
+  @media (hover: hover) and (pointer: fine) {
+    .item:has(.tap) {
+      transition: border-color var(--motion-medium, 350ms);
+    }
+
+    .item:has(.tap:hover) {
+      border-color: color-mix(in srgb, var(--runway-paper) 55%, transparent);
+    }
   }
 
   .tap:focus-visible {

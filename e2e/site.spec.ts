@@ -179,4 +179,23 @@ test.describe("Runway", () => {
     await debt.click();
     await expect(debt).toHaveAttribute("aria-pressed", "false");
   });
+
+  // Hover previews a decision without committing to it; a click keeps it.
+  test("hovering a decision previews it, and leaving puts it back", async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 1280, height: 900 });
+    await page.goto("/");
+    const strip = page.getByRole("region", { name: "How it thinks" });
+    const debt = strip.getByRole("button", { name: /debt/i });
+    const pair = debt.locator(".pair");
+
+    await debt.hover();
+    await expect(pair).toHaveClass(/solo/);
+    await expect(debt).toHaveAttribute("aria-pressed", "false");
+    await expect(debt).toContainText(/click to keep/i);
+
+    await page.mouse.move(0, 0);
+    await expect(pair).not.toHaveClass(/solo/);
+  });
 });
