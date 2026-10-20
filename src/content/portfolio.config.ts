@@ -81,7 +81,7 @@ export const heroConfig: {
 // a subject for each kind of message.
 export const closingConfig = {
   lead: "I like to untangle things.",
-  body: "Give me the part nobody's scoped yet and I'll work out what it should be, build it, and keep it easy to maintain and scale.",
+  body: "Give me the part nobody's scoped yet and I'll work out what it should be, build it, and keep it simple enough for anyone to change.",
   email: EMAIL,
   resume: RESUME,
   heading: "Available for a role or a project",
