@@ -95,6 +95,22 @@ test.describe("every page", () => {
     expect([...external]).toEqual([]);
   });
 
+  // The calm studio has no handwriting face anywhere.
+  test("uses no handwriting face", async ({ page }) => {
+    const found: string[] = [];
+    for (const path of PAGES) {
+      await page.goto(path);
+      const hand = await page.evaluate(
+        () =>
+          [...document.querySelectorAll("body *")].filter((el) =>
+            getComputedStyle(el).fontFamily.includes("Permanent Marker")
+          ).length
+      );
+      if (hand) found.push(`${path}: ${hand}`);
+    }
+    expect(found).toEqual([]);
+  });
+
   // Icons used to fail silently: an unknown name 404'd at the icon API and the
   // element rendered as an empty gap. simple-icons has no `riverpod` and no
   // `zustand`, and both chips shipped like that for months. Icons are bundled

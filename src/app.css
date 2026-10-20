@@ -37,12 +37,8 @@
      2.9:1, under the 3:1 that large text needs, so words take this one. */
   --accent-text: #8d391e;
   --highlight: #f2c94c;
-  --sage: #a8b5a2;
   --status-live: #4f6e4a;
   --status-progress: #735809;
-  /* The oil stroke under the hero's last word: the brush, and its light. */
-  --brush: #b4451b;
-  --brush-light: #d2652c;
   /* How her ink prints sit in the page. On paper they multiply into it; on
      the ink theme they turn to chalk lines instead. */
   --print-blend: multiply;
@@ -55,12 +51,10 @@
   --surface-bg: var(--surface);
   --section-border: var(--border);
 
-  /* Type. Geist for everything read, its mono for anything that is data,
-     and a marker for what she writes by hand: notes, never headings. */
+  /* Type. Geist for everything read, its mono for anything that is data. */
   --font-display: "Geist", "Helvetica Neue", Arial, sans-serif;
   --font-body: "Geist", "Segoe UI", Roboto, sans-serif;
   --font-mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
-  --font-hand: "Permanent Marker", "Comic Sans MS", cursive;
 
   --text-xs: 0.72rem;
   --text-sm: 0.84rem;
@@ -131,11 +125,8 @@ html[data-theme="dark"] {
   --accent: #f6836a;
   --accent-text: #d9693f;
   --highlight: #f2c94c;
-  --sage: #a8b5a2;
   --status-live: #a8b5a2;
   --status-progress: #f2c94c;
-  --brush: #e0703f;
-  --brush-light: #f08a55;
   --print-blend: screen;
   --print-filter: invert(1) contrast(1.2);
   --print-opacity: 0.16;

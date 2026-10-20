@@ -207,7 +207,7 @@
 
   .links a:hover,
   .links a[aria-current="page"] {
-    text-decoration-color: var(--brush);
+    text-decoration-color: var(--accent-text);
   }
 
   /* The theme switch sits in the footer on a phone. */
