@@ -190,6 +190,10 @@ test.describe("Runway", () => {
     await expect(months).toHaveText("3");
     await lunch.click();
     await expect(months).toHaveText("2");
+    // The button changes its job, not its place, so focus stays on it.
+    await expect(
+      strip.getByRole("button", { name: /start over/i })
+    ).toBeFocused();
 
     const debt = strip.getByRole("button", { name: /debt/i });
     await expect(debt).toHaveAttribute("aria-pressed", "false");
@@ -247,6 +251,23 @@ test.describe("Where I've worked", () => {
 
 test.describe("Header", () => {
   test.beforeEach(({ page }) => skipGate(page));
+
+  // A nav jump lands the section's title below the header, not under it.
+  test("lands each nav jump below the header", async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto("/");
+    await page.getByRole("button", { name: /menu/i }).click();
+    await page
+      .locator("header.header")
+      .getByRole("link", { name: "Work" })
+      .click();
+    await page.waitForTimeout(900);
+    const header = await page.locator("header.header").boundingBox();
+    const title = await page
+      .locator("#selected-work .section-head")
+      .boundingBox();
+    expect(title!.y).toBeGreaterThanOrEqual(header!.y + header!.height);
+  });
 
   // Out of the way while reading down; back as soon as you scroll up.
   test("hides while scrolling down and returns on scroll up", async ({
@@ -397,5 +418,18 @@ test.describe("Gallery", () => {
     await page.keyboard.press("ArrowLeft");
     await page.keyboard.press("ArrowLeft");
     await expect(count).toHaveText(/^2 \/ /);
+  });
+
+  // Quick presses each move one painting, never back or twice.
+  test("moves one painting per press, even when pressed quickly", async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 1280, height: 800 });
+    await page.goto("/gallery");
+    await page.locator(".wall .frame").nth(2).click();
+    const count = page.getByRole("dialog").locator(".viewer-count");
+    await expect(count).toHaveText(/^3 \//);
+    for (let i = 0; i < 3; i++) await page.keyboard.press("ArrowRight");
+    await expect(count).toHaveText(/^6 \//);
   });
 });

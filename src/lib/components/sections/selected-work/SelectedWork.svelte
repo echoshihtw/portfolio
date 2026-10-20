@@ -137,21 +137,13 @@
         </dl>
         <!-- prettier-ignore -->
         <div class="spend-line" class:critical={now.months < 3} aria-live="polite"><span class="spend-months">{now.months}</span> months</div>
-        {#if now.over}
-          <button
-            class="log"
-            on:click={() => (spent = 0)}
-          >
-            Start over
-          </button>
-        {:else}
-          <button
-            class="log"
-            on:click={() => (spent += s.lunch)}
-          >
-            Log a {money(s.lunch)} lunch
-          </button>
-        {/if}
+        <!-- One button that changes its job, so focus stays on it. -->
+        <button
+          class="log"
+          on:click={() => (spent = now.over ? 0 : spent + s.lunch)}
+        >
+          {now.over ? "Start over" : `Log a ${money(s.lunch)} lunch`}
+        </button>
       </div>
       <h4>{s.title}</h4>
       <p>{s.body}</p>

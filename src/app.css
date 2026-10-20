@@ -529,6 +529,11 @@ canvas {
   transform: translateY(2px);
 }
 
+/* The page behind an open dialog holds still. */
+html:has(dialog[open]) {
+  overflow: hidden;
+}
+
 /* ==========================================================================
    Layout
    ========================================================================== */

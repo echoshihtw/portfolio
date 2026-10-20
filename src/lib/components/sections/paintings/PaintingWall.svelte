@@ -41,10 +41,25 @@
   async function open(i: number, e: MouseEvent) {
     e.preventDefault();
     opener = e.currentTarget as HTMLElement;
-    viewer.showModal();
     at = i;
+    viewer.showModal();
     await tick();
-    track.scrollTo({ left: i * track.clientWidth, behavior: "instant" });
+    snap();
+  }
+
+  // Back onto the current painting without animating: on opening, and
+  // after a rotation or resize changes the slide width.
+  function snap() {
+    track.scrollTo({ left: at * track.clientWidth, behavior: "instant" });
+  }
+
+  // The count is read aloud once a move settles, not on every frame.
+  let spoken = 0;
+  let settle: ReturnType<typeof setTimeout>;
+  $: {
+    clearTimeout(settle);
+    const now = at;
+    settle = setTimeout(() => (spoken = now), 300);
   }
 
   function go(step: number) {
@@ -73,6 +88,8 @@
       viewer.close();
   }
 </script>
+
+<svelte:window on:resize={() => viewer?.open && snap()} />
 
 <ul class="wall">
   {#each works as work, i (work.id)}
@@ -116,8 +133,15 @@
   aria-label="Paintings"
   on:click={onClick}
   on:keydown={onKey}
-  on:close={() => opener?.focus()}
+  on:close={() => opener?.focus({ preventScroll: true })}
 >
+  <button
+    type="button"
+    class="viewer-btn viewer-close"
+    on:click={() => viewer.close()}
+  >
+    Close
+  </button>
   <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
   <div
     class="track"
@@ -154,9 +178,15 @@
     </button>
     <span
       class="viewer-count"
-      aria-live="polite"
+      aria-hidden="true"
     >
       {at + 1} / {works.length}
+    </span>
+    <span
+      class="sr-only"
+      aria-live="polite"
+    >
+      Painting {spoken + 1} of {works.length}
     </span>
     <button
       type="button"
@@ -168,13 +198,6 @@
       ›
     </button>
   </div>
-  <button
-    type="button"
-    class="viewer-btn viewer-close"
-    on:click={() => viewer.close()}
-  >
-    Close
-  </button>
 </dialog>
 
 <style>
