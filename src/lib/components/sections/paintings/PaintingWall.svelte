@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { tick } from "svelte";
   import { base } from "$app/paths";
   import {
     derivativeName,
@@ -29,32 +30,58 @@
   const details = (work: Painting) =>
     [work.place, work.year].filter(Boolean).join(", ");
 
-  // One painting, large, over the wall. The browser's own modal dialog
+  // The paintings, large, side by side over the wall: swipe, the arrow
+  // keys or the buttons move between them. The browser's own modal dialog
   // keeps focus inside, closes on Escape, and hands focus back.
   let viewer: HTMLDialogElement;
-  let shown: Painting | null = null;
+  let track: HTMLElement;
+  let at = 0;
   let opener: HTMLElement | null = null;
 
-  function open(work: Painting, e: MouseEvent) {
+  async function open(i: number, e: MouseEvent) {
     e.preventDefault();
     opener = e.currentTarget as HTMLElement;
-    shown = work;
     viewer.showModal();
+    at = i;
+    await tick();
+    track.scrollTo({ left: i * track.clientWidth, behavior: "instant" });
   }
 
-  function close() {
-    viewer.close();
+  function go(step: number) {
+    const i = Math.min(works.length - 1, Math.max(0, at + step));
+    track.scrollTo({ left: i * track.clientWidth });
+    at = i;
+  }
+
+  function onScroll() {
+    at = Math.round(track.scrollLeft / track.clientWidth);
+  }
+
+  function onKey(e: KeyboardEvent) {
+    if (e.key === "ArrowRight") go(1);
+    else if (e.key === "ArrowLeft") go(-1);
+    else return;
+    e.preventDefault();
+  }
+
+  // Only a tap on the background closes it, never one on a painting.
+  function onClick(e: MouseEvent) {
+    if (
+      e.target === viewer ||
+      (e.target as HTMLElement).classList.contains("slide")
+    )
+      viewer.close();
   }
 </script>
 
 <ul class="wall">
-  {#each works as work (work.id)}
+  {#each works as work, i (work.id)}
     <li>
       <figure>
         <a
           class="frame"
           href={src(work.id, large)}
-          on:click={(e) => open(work, e)}
+          on:click={(e) => open(i, e)}
         >
           <img
             src={src(work.id, small)}
@@ -86,74 +113,146 @@
 <dialog
   class="viewer"
   bind:this={viewer}
-  aria-label={shown ? shown.medium : "Painting"}
-  on:click={close}
+  aria-label="Paintings"
+  on:click={onClick}
+  on:keydown={onKey}
   on:close={() => opener?.focus()}
 >
-  {#if shown}
-    <img
-      src={src(shown.id, large)}
-      alt={shown.alt}
-    />
-    <p class="viewer-caption">
-      <span class="medium">{shown.medium}</span>
-      {#if details(shown)}<span class="details">{details(shown)}</span>{/if}
-    </p>
+  <div
+    class="track"
+    bind:this={track}
+    on:scroll={onScroll}
+  >
+    {#each works as work}
+      <figure class="slide">
+        <img
+          src={src(work.id, large)}
+          alt={work.alt}
+          loading="lazy"
+          decoding="async"
+        />
+        <figcaption>
+          <span class="medium">{work.medium}</span>
+          {#if details(work)}<span class="details">{details(work)}</span>{/if}
+        </figcaption>
+      </figure>
+    {/each}
+  </div>
+  <div class="viewer-bar">
     <button
       type="button"
-      class="viewer-close"
-      on:click={close}
+      class="viewer-btn step"
+      aria-label="Previous painting"
+      disabled={at === 0}
+      on:click={() => go(-1)}
     >
-      Close
+      ‹
     </button>
-  {/if}
+    <span
+      class="viewer-count"
+      aria-live="polite"
+    >
+      {at + 1} / {works.length}
+    </span>
+    <button
+      type="button"
+      class="viewer-btn step"
+      aria-label="Next painting"
+      disabled={at === works.length - 1}
+      on:click={() => go(1)}
+    >
+      ›
+    </button>
+  </div>
+  <button
+    type="button"
+    class="viewer-btn viewer-close"
+    on:click={() => viewer.close()}
+  >
+    Close
+  </button>
 </dialog>
 
 <style>
-  /* Full screen, the painting whole on the wall's own paper. A tap
-     anywhere closes it, as does Escape or the button. */
+  /* Full screen on the wall's own paper. Each painting is one snapping
+     slide, whole, with its label under it. */
   .viewer {
     width: 100vw;
     max-width: none;
     height: 100dvh;
     max-height: none;
     margin: 0;
-    padding: var(--space-6) var(--space-4) var(--space-5);
+    padding: 0;
     border: 0;
     background: var(--canvas);
     color: var(--ink);
-    cursor: zoom-out;
   }
 
   .viewer[open] {
     display: grid;
     grid-template-rows: minmax(0, 1fr) auto;
-    justify-items: center;
-    gap: var(--space-3);
   }
 
   .viewer::backdrop {
     background: var(--canvas);
   }
 
-  .viewer img {
+  .track {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+  }
+
+  .track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .slide {
+    flex: 0 0 100%;
+    display: grid;
+    grid-template-rows: minmax(0, 1fr) auto;
+    justify-items: center;
+    gap: var(--space-3);
+    margin: 0;
+    padding: var(--space-7) var(--space-4) var(--space-2);
+    scroll-snap-align: center;
+    cursor: zoom-out;
+  }
+
+  .slide img {
     width: 100%;
     height: 100%;
     object-fit: contain;
+    cursor: default;
   }
 
-  .viewer-caption {
+  .slide figcaption {
     display: flex;
     flex-wrap: wrap;
     gap: 0 var(--space-3);
-    margin: 0;
     font-size: var(--text-sm);
   }
 
-  .viewer-close {
-    position: absolute;
-    top: var(--space-3);
-    right: var(--space-3);
+  .viewer-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-4);
+    padding: var(--space-2) 0 var(--space-4);
+  }
+
+  .viewer-count {
+    min-width: 4.5em;
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--muted);
+  }
+
+  .viewer-btn {
+    min-width: 44px;
     min-height: 44px;
     padding: 0 var(--space-4);
     border: 1px solid var(--border);
@@ -163,6 +262,28 @@
     font-family: var(--font-mono);
     font-size: var(--text-sm);
     cursor: pointer;
+  }
+
+  .viewer-btn:disabled {
+    opacity: 0.35;
+    cursor: default;
+  }
+
+  .step {
+    padding: 0;
+    font-size: 1.2rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .track {
+      scroll-behavior: auto;
+    }
+  }
+
+  .viewer-close {
+    position: absolute;
+    top: var(--space-3);
+    right: var(--space-3);
   }
 
   .wall {

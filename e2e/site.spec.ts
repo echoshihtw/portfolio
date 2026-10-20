@@ -373,4 +373,18 @@ test.describe("Gallery", () => {
     await expect(view).toBeHidden();
     await expect(first).toBeFocused();
   });
+
+  // In the view, the paintings sit side by side: the arrows move between them.
+  test("moves between paintings with the arrow keys", async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 800 });
+    await page.goto("/gallery");
+    await page.locator(".wall .frame").nth(2).click();
+    const count = page.getByRole("dialog").locator(".viewer-count");
+    await expect(count).toHaveText(/^3 \/ \d+$/);
+    await page.keyboard.press("ArrowRight");
+    await expect(count).toHaveText(/^4 \/ /);
+    await page.keyboard.press("ArrowLeft");
+    await page.keyboard.press("ArrowLeft");
+    await expect(count).toHaveText(/^2 \/ /);
+  });
 });
