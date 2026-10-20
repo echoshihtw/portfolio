@@ -34,11 +34,4 @@ interface Project {
   };
 }
 
-interface MenuTab {
-  /** Human label, shown as-is. Both navs render this, with no stripping. */
-  name: string;
-  link: string;
-}
-
-export type MenuTabs = MenuTab[];
 export type Projects = Project[];

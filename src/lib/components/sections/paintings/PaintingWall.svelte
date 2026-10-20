@@ -28,6 +28,23 @@
   // The medium first, then place and year where they are known.
   const details = (work: Painting) =>
     [work.place, work.year].filter(Boolean).join(", ");
+
+  // One painting, large, over the wall. The browser's own modal dialog
+  // keeps focus inside, closes on Escape, and hands focus back.
+  let viewer: HTMLDialogElement;
+  let shown: Painting | null = null;
+  let opener: HTMLElement | null = null;
+
+  function open(work: Painting, e: MouseEvent) {
+    e.preventDefault();
+    opener = e.currentTarget as HTMLElement;
+    shown = work;
+    viewer.showModal();
+  }
+
+  function close() {
+    viewer.close();
+  }
 </script>
 
 <ul class="wall">
@@ -37,6 +54,7 @@
         <a
           class="frame"
           href={src(work.id, large)}
+          on:click={(e) => open(work, e)}
         >
           <img
             src={src(work.id, small)}
@@ -64,7 +82,89 @@
   {/each}
 </ul>
 
+<!-- svelte-ignore a11y-click-events-have-key-events a11y-no-noninteractive-element-interactions -->
+<dialog
+  class="viewer"
+  bind:this={viewer}
+  aria-label={shown ? shown.medium : "Painting"}
+  on:click={close}
+  on:close={() => opener?.focus()}
+>
+  {#if shown}
+    <img
+      src={src(shown.id, large)}
+      alt={shown.alt}
+    />
+    <p class="viewer-caption">
+      <span class="medium">{shown.medium}</span>
+      {#if details(shown)}<span class="details">{details(shown)}</span>{/if}
+    </p>
+    <button
+      type="button"
+      class="viewer-close"
+      on:click={close}
+    >
+      Close
+    </button>
+  {/if}
+</dialog>
+
 <style>
+  /* Full screen, the painting whole on the wall's own paper. A tap
+     anywhere closes it, as does Escape or the button. */
+  .viewer {
+    width: 100vw;
+    max-width: none;
+    height: 100dvh;
+    max-height: none;
+    margin: 0;
+    padding: var(--space-6) var(--space-4) var(--space-5);
+    border: 0;
+    background: var(--canvas);
+    color: var(--ink);
+    cursor: zoom-out;
+  }
+
+  .viewer[open] {
+    display: grid;
+    grid-template-rows: minmax(0, 1fr) auto;
+    justify-items: center;
+    gap: var(--space-3);
+  }
+
+  .viewer::backdrop {
+    background: var(--canvas);
+  }
+
+  .viewer img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .viewer-caption {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 var(--space-3);
+    margin: 0;
+    font-size: var(--text-sm);
+  }
+
+  .viewer-close {
+    position: absolute;
+    top: var(--space-3);
+    right: var(--space-3);
+    min-height: 44px;
+    padding: 0 var(--space-4);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-pill);
+    background: var(--canvas);
+    color: var(--ink);
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    cursor: pointer;
+  }
+
   .wall {
     display: grid;
     grid-template-columns: 1fr;

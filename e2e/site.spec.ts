@@ -354,3 +354,23 @@ test.describe("Footer", () => {
     await expect(page.locator("footer")).not.toContainText("Built with");
   });
 });
+
+test.describe("Gallery", () => {
+  test.beforeEach(({ page }) => skipGate(page));
+
+  // A painting opens over the wall and closes back to the same spot.
+  test("opens a painting in place, and closes back to the wall", async ({
+    page,
+  }) => {
+    await page.goto("/gallery");
+    const first = page.locator(".wall .frame").first();
+    await first.scrollIntoViewIfNeeded();
+    await first.click();
+    const view = page.getByRole("dialog");
+    await expect(view).toBeVisible();
+    await expect(page).toHaveURL(/\/gallery$/);
+    await page.keyboard.press("Escape");
+    await expect(view).toBeHidden();
+    await expect(first).toBeFocused();
+  });
+});
