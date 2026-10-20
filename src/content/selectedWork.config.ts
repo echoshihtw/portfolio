@@ -15,9 +15,20 @@ export const selectedWorkConfig = {
   price: "US$3.99",
   priceFacts: ["no subscription", "no account, no bank login"],
   // The headline runway uses the store screenshot's numbers. The calculator
-  // starts elsewhere, in caution, so it shows another state, not the same 12.
+  // starts elsewhere, so it shows another state, not the same 12.
   lead: { cash: "34,336", cost: "2,803" },
-  calculator: { cash: "8,400", cost: "2,800" },
+  // The spending card: committed costs, what is left of the living budget,
+  // and a lunch to log. Six lunches fit; the seventh goes over.
+  spend: {
+    cash: 8400,
+    rent: 1500,
+    subscriptions: 100,
+    living: 1200,
+    livingLeft: 90,
+    lunch: 15,
+    title: "Spending what you planned costs you nothing.",
+    body: "Your months fall only when you go over.",
+  },
   // Her words, cut to the one line a visitor reads.
   quote: "I built something I would use.",
   // The two decisions a visitor can try, with the store screenshot's figures.

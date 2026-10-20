@@ -2,24 +2,26 @@
   import { onMount } from "svelte";
   import { base } from "$app/paths";
   import { selectedWorkConfig as c } from "../../../../content/selectedWork.config";
-  import { parseAmount, runway } from "$lib/runway";
+  import { parseAmount, runway, spend } from "$lib/runway";
   import SectionHead from "$lib/components/SectionHead.svelte";
 
-  let cash = c.calculator.cash;
-  let cost = c.calculator.cost;
-
   const today = new Date();
-  // The headline number comes from the same function the calculator uses.
+  // The headline number comes from the same rules as the cards.
   const lead = runway(
     parseAmount(c.lead.cash),
     parseAmount(c.lead.cost),
     today
   );
 
-  $: result = runway(parseAmount(cash), parseAmount(cost), today);
-  $: monthsText = result.months === null ? "∞" : String(result.months);
-  $: unit =
-    result.months === null ? "" : result.months === 1 ? "month" : "months";
+  const s = c.spend;
+  const plan = {
+    cash: s.cash,
+    monthly: s.rent + s.subscriptions + s.living,
+    livingLeft: s.livingLeft,
+  };
+  let spent = 0;
+  $: now = spend(plan, spent);
+  const money = (n: number) => "$" + n.toLocaleString("en");
 
   // A click keeps a decision on; a mouse hovering only previews it. Touch
   // and keyboard skip the preview and go straight to the click.
@@ -119,41 +121,38 @@
     bind:this={strip}
     on:scroll={onScroll}
   >
-    <div class="item calc">
-      <div class="inputs">
-        <label>
-          I have $
-          <input
-            type="text"
-            inputmode="numeric"
-            autocomplete="off"
-            bind:value={cash}
-          />
-        </label>
-        <label>
-          A month costs me $
-          <input
-            type="text"
-            inputmode="numeric"
-            autocomplete="off"
-            bind:value={cost}
-          />
-        </label>
+    <div class="item">
+      <div class="focal">
+        <span class="pair">
+          <span class="committed">
+            <span class="label">Committed</span>
+            {money(s.rent + s.subscriptions)}
+          </span>
+          <span class="living">
+            <span class="label">Living left</span>
+            {money(now.livingLeft)}
+          </span>
+        </span>
+        <!-- prettier-ignore -->
+        <div class="spend-line" class:critical={now.months < 3} aria-live="polite"><span class="spend-months">{now.months}</span> months</div>
+        {#if now.over}
+          <button
+            class="log"
+            on:click={() => (spent = 0)}
+          >
+            Start over
+          </button>
+        {:else}
+          <button
+            class="log"
+            on:click={() => (spent += s.lunch)}
+          >
+            Log a {money(s.lunch)} lunch
+          </button>
+        {/if}
       </div>
-      <span
-        class="hint"
-        aria-hidden="true"
-      >
-        Type your own numbers
-      </span>
-      <p
-        class="answer"
-        aria-live="polite"
-      >
-        <span class="answer-num">{monthsText}</span>
-        {unit}
-      </p>
-      <p class="runs-out">{result.runsOut}</p>
+      <h4>{s.title}</h4>
+      <p>{s.body}</p>
     </div>
 
     <div class="item">
@@ -351,6 +350,7 @@
   /* One frame for every card: the focal point on top, then a heading and
      one line. About four things to take in, never more. */
   .item {
+    --focal-h: 11rem;
     flex: 0 0 auto;
     display: flex;
     flex-direction: column;
@@ -370,7 +370,7 @@
     line-height: 1.3;
   }
 
-  .item:not(.calc) p {
+  .item p {
     margin: 0;
     color: var(--muted);
   }
@@ -379,7 +379,7 @@
   .tap {
     all: unset;
     flex: none;
-    height: 9rem;
+    height: var(--focal-h);
     display: grid;
     place-content: center;
     justify-items: center;
@@ -390,11 +390,11 @@
 
   /* Only the cards you can play with answer the mouse. */
   @media (hover: hover) and (pointer: fine) {
-    .item:has(.tap) {
+    .item:has(button) {
       transition: border-color var(--motion-medium, 350ms);
     }
 
-    .item:has(.tap:hover) {
+    .item:has(button:hover) {
       border-color: color-mix(in srgb, var(--runway-paper) 55%, transparent);
     }
   }
@@ -516,78 +516,58 @@
     color: var(--muted);
   }
 
-  .calc {
-    border-color: var(--runway-mint);
-    background: var(--runway-mint);
-    color: var(--runway-ink);
-  }
-
-  .inputs {
+  /* The spending card: what is committed, what is left to live on, and
+     the months, which hold still until the living budget runs out. */
+  .focal {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-3);
-    font-size: var(--text-sm);
+    place-content: center;
+    justify-items: center;
+    gap: var(--space-2);
+    height: var(--focal-h);
   }
 
-  .inputs label {
-    display: grid;
+  .committed {
+    color: var(--muted);
   }
 
-  .calc .hint {
-    margin-top: var(--space-2);
-    color: var(--runway-ink);
+  .living {
+    color: var(--runway-mint);
   }
 
-  /* A field that looks like one before it is touched: a light box with
-     an ink underline. Focus thickens the underline; the browser's own
-     caret blinks, only once someone is typing. */
-  .calc input {
-    min-width: 0;
-    margin-top: var(--space-1);
-    padding: var(--space-2);
-    border: 0;
-    border-bottom: 2px solid var(--runway-ink);
-    border-radius: var(--radius-sm) var(--radius-sm) 0 0;
-    background: color-mix(in srgb, var(--runway-paper) 45%, transparent);
-    color: inherit;
-    caret-color: var(--runway-ink);
-    font: inherit;
+  .spend-line {
     font-family: var(--font-mono);
-    font-weight: 600;
-    transition:
-      background-color var(--motion-medium, 350ms),
-      box-shadow var(--motion-medium, 350ms);
+    color: var(--runway-mint);
   }
 
-  .calc input:hover {
-    background: color-mix(in srgb, var(--runway-paper) 65%, transparent);
+  /* Runway turns critical under three months, in the same rose. */
+  .spend-line.critical {
+    color: var(--runway-rose);
   }
 
-  .calc input:focus {
-    outline: none;
-  }
-
-  .calc input:focus-visible,
-  .calc input:focus {
-    background: var(--runway-paper);
-    box-shadow: inset 0 -2px 0 var(--runway-ink);
-  }
-
-  .answer {
-    margin: auto 0 0;
-  }
-
-  .answer-num {
-    overflow-wrap: anywhere;
-    font-family: var(--font-mono);
-    font-size: 3rem;
-    font-weight: 600;
+  .spend-months {
+    font-size: 2.75rem;
     line-height: 1;
+    font-weight: 600;
   }
 
-  .runs-out {
-    margin: var(--space-1) 0 0;
+  .log {
+    padding: var(--space-1) var(--space-3);
+    border: 1px solid var(--runway-mint);
+    border-radius: var(--radius-pill);
+    background: none;
+    color: var(--runway-mint);
+    font-family: var(--font-mono);
     font-size: var(--text-sm);
+    cursor: pointer;
+  }
+
+  .log:hover {
+    background: color-mix(in srgb, var(--runway-mint) 14%, transparent);
+  }
+
+  .log:focus-visible {
+    outline: 2px solid var(--runway-mint);
+    outline-offset: 3px;
   }
 
   @media (min-width: 640px) {

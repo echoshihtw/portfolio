@@ -22,6 +22,8 @@
   export let openArrow = "↑";
   export let open = false;
   export let phone = false;
+  /** Smaller and muted, for a link repeated down a list. */
+  export let quiet = false;
 
   onMount(() => {
     const mq = window.matchMedia("(max-width: 767.98px)");
@@ -35,6 +37,7 @@
 <button
   type="button"
   class="link-cta reveal"
+  class:quiet
   aria-expanded={phone ? undefined : open}
   aria-haspopup={phone ? "dialog" : undefined}
   on:click={() => (open = !open)}
@@ -69,6 +72,12 @@
   .reveal {
     align-self: flex-start;
     margin-top: var(--space-1);
+  }
+
+  .quiet {
+    font-size: var(--text-xs, 0.72rem);
+    color: var(--muted);
+    border-color: transparent;
   }
 
   .inline {

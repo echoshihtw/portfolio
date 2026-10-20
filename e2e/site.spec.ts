@@ -171,12 +171,14 @@ test.describe("Runway", () => {
     await page.goto("/");
     const strip = page.getByRole("region", { name: "How it thinks" });
     await expect(strip.locator(":scope > *")).toHaveCount(3);
-    // The calculator starts in another state, so it never repeats the 12.
-    await expect(page.locator("#selected-work .big")).toContainText("12");
-    await expect(strip.locator(".answer-num")).toHaveText("3");
-    await expect(strip.locator(":scope > *").first()).toContainText(
-      /type your own numbers/i
-    );
+    // Spending inside the living budget costs no months; going over does.
+    const months = strip.locator(".spend-months");
+    const lunch = strip.getByRole("button", { name: /log a \$15 lunch/i });
+    await expect(months).toHaveText("3");
+    for (let i = 0; i < 6; i++) await lunch.click();
+    await expect(months).toHaveText("3");
+    await lunch.click();
+    await expect(months).toHaveText("2");
 
     const debt = strip.getByRole("button", { name: /debt/i });
     await expect(debt).toHaveAttribute("aria-pressed", "false");
@@ -216,5 +218,18 @@ test.describe("Hero", () => {
   test("says whose page this is", async ({ page }) => {
     await page.goto("/");
     await expect(page.locator("#home")).toContainText("Echo Shih");
+  });
+});
+
+test.describe("Where I've worked", () => {
+  test.beforeEach(({ page }) => skipGate(page));
+
+  // Four jobs, four short quiet links, not four loud identical ones.
+  test("offers each job's details quietly", async ({ page }) => {
+    await page.goto("/");
+    const links = page.locator("#work .reveal");
+    await expect(links).toHaveCount(4);
+    await expect(links.first()).toHaveText(/^\s*Details/);
+    await expect(links.first()).toHaveClass(/quiet/);
   });
 });

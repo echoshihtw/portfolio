@@ -41,8 +41,9 @@
     {/if}
 
     <Reveal
-      label="Read the details"
+      label="Details"
       name={item.company}
+      quiet
     >
       <ul class="details">
         {#each item.highlights as h}
