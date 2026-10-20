@@ -12,12 +12,16 @@
    ========================================================================== */
 
 :root {
-  /* Colour: warm cream and dark ink carry the page. Blue is what you can
-     click. Orange-red and yellow are editorial, one moment each. Sage is
-     for the one status that means "running". */
-  --canvas: #f4f2ec;
-  --ink: #1a1a1a;
-  --surface: #faf8f2;
+  /* Colour, from her paintings: off-white paper, green-black ink, oxide red
+     for one word. Runway's indigo and mint are its own; Clio's colours come
+     from @echoshihtw/clio-brand. */
+  --canvas: #fbfaf7;
+  --smoke: #efefec;
+  --ink: #0a150f;
+  --surface: #ffffff;
+  --runway-indigo: #262c4c;
+  --runway-mint: #8fddaa;
+  --clio-number: var(--clio-ink);
   --border: rgb(23 23 20 / 0.18);
   --border-strong: var(--ink);
   --muted: rgb(23 23 20 / 0.62);
@@ -31,7 +35,7 @@
   --accent-ink: #171714;
   /* The same orange for type. #f15a3a is a fill colour: on cream it is
      2.9:1, under the 3:1 that large text needs, so words take this one. */
-  --accent-text: #dc4a2b;
+  --accent-text: #8d391e;
   --highlight: #f2c94c;
   --sage: #a8b5a2;
   --status-live: #4f6e4a;
@@ -115,15 +119,17 @@
    orange come up a step so they clear contrast on dark. No other rule in
    the site mentions the theme. */
 html[data-theme="dark"] {
-  --canvas: #171714;
-  --ink: #f3f0e8;
-  --surface: #1f1f1b;
+  --canvas: #0f1612;
+  --smoke: #161e19;
+  --ink: #f2efe8;
+  --surface: #161e19;
+  --clio-number: #f2efe8;
   --border: rgb(243 240 232 / 0.2);
   --muted: rgb(243 240 232 / 0.66);
   --primary: #8aa1f2;
   --primary-ink: #171714;
   --accent: #f6836a;
-  --accent-text: #f6836a;
+  --accent-text: #d9693f;
   --highlight: #f2c94c;
   --sage: #a8b5a2;
   --status-live: #a8b5a2;

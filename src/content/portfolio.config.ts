@@ -4,8 +4,8 @@
 //
 // Guardrails: facts, not noise · warmth via specificity · no clichés.
 
-// brush: the word the oil stroke sits under. accent: the blue full stop.
-type HeadlinePart = { text: string; accent?: boolean; brush?: boolean };
+// accent: the one word in her oxide red.
+type HeadlinePart = { text: string; accent?: boolean };
 
 // The hero's email and the close's first door are the same door: someone
 // writing from the top of the page is asking about a role. One value, read
@@ -40,8 +40,7 @@ export const heroConfig: {
   // and because the evidence here is scoping decisions rather than a list
   // of layers; resume.md keeps the swap list for postings that literally
   // say frontend.
-  remoteOpen:
-    "Product engineer · UTC+8 · Remote from Taiwan · APAC hours or async",
+  remoteOpen: "Product engineer · UTC+8 · Remote from Taiwan",
 
   // Things she made true, not tools she touched. Each is shown lower on the
   // page: Clio's RLS, Runway's package boundaries, Lockerbie's BFF.
@@ -52,11 +51,10 @@ export const heroConfig: {
   ],
 
   // Her own line, from the voice interview on 2026-10-19: "I make software
-  // you don't have to learn." The accent is the full stop, as in "Just me."
+  // you don't have to learn."
   headline: [
     { text: "I make software you don't have to " },
-    { text: "learn", brush: true },
-    { text: ".", accent: true },
+    { text: "learn.", accent: true },
   ],
 
   // "Web and app" and "end to end" are hers; "frontend first" keeps her own
