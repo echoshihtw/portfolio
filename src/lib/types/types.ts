@@ -2,8 +2,8 @@ interface Project {
   name: string;
   /** The mono line beside the name, e.g. "In daily use · early access". */
   statusLine?: string;
-  /** Her one handwritten line for the project, in Sharpie. */
-  note?: string;
+  /** The proof as one number, set large before the fact. */
+  figure?: string;
   /** The proof, set first and in weight. */
   fact?: string;
   /** The short notes. On a phone they open in a sheet. */
@@ -34,11 +34,4 @@ interface Project {
   };
 }
 
-interface MenuTab {
-  /** Human label, shown as-is. Both navs render this, with no stripping. */
-  name: string;
-  link: string;
-}
-
-export type MenuTabs = MenuTab[];
 export type Projects = Project[];

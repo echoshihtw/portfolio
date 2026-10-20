@@ -28,10 +28,18 @@
   function dismiss() {
     if (dismissed) return;
     dismissed = true;
+    document.getElementById("app")?.removeAttribute("inert");
     gate.classList.add("boot-gate-hide");
     setTimeout(() => gate.remove(), 420);
   }
   enterBtn.addEventListener("click", dismiss);
+  // The page behind is out of reach until the visitor enters, as a modal
+  // dialog's would be. It is parsed after this script, so wait for it.
+  document.addEventListener("DOMContentLoaded", () => {
+    if (!dismissed) document.getElementById("app")?.setAttribute("inert", "");
+  });
+  // A modal dialog takes focus, so a keyboard or screen reader starts on it.
+  enterBtn.focus();
 
   const themeToggle = document.getElementById("boot-gate-theme-toggle");
   const isLight = document.documentElement.dataset.theme === "light";

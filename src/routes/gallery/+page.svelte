@@ -39,7 +39,7 @@
         class="cta-arrow"
         aria-hidden="true"
       >
-        →
+        ↗
       </span>
     </a>
   </section>
@@ -112,15 +112,13 @@
     color: var(--accent-text);
   }
 
-  /* No rule above this. The page is built out of torn edges and tape, so a
+  /* No rule above this. The page is soft paper and framed work, so a
      crisp 1px line before the signature was the one hard edge on it. */
   .closing {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     gap: 1rem;
-    padding-top: 2.5rem;
-    padding-bottom: 1rem;
   }
 
   .closing p {

@@ -17,7 +17,7 @@ export const galleryConfig = {
 
   closing: {
     text: "The other half of this site is the software.",
-    linkLabel: "See the work",
+    linkLabel: "Back to the work",
   },
 } as const;
 

@@ -8,8 +8,8 @@ export const projectsConfig: Projects = [
   {
     name: "Clio",
     statusLine: "Early access",
-    note: "She's back. You remember.",
-    fact: "In use at a Tainan salon since May 2025. The owner typed 603 clients in by hand.",
+    figure: "603",
+    fact: "clients, typed in by hand by a Tainan salon owner. In use since May 2025.",
     story: [
       "A quick CV of the client, for the two minutes before she sits down: how long since her last visit, what was done last time, any special hair situation, the curl she likes.",
       "No booking, no payments. The owner didn't need them, yet. I never taught her to use it; she only comes to me when she forgets her password, or when a bug of mine stops her saving.",
@@ -23,31 +23,18 @@ export const projectsConfig: Projects = [
       "TanStack Query",
       "Tailwind",
     ],
+    // Four, as many as anyone holds in mind at once. Each leads with the
+    // decision in bold, then why it matters to the salon. Every fact is from
+    // the earlier list or the résumé: RLS isolation, the offline snapshot and
+    // retries (verified against clio-app main on 2026-09-15: reads restore
+    // from a per-user localStorage snapshot with its time; a transient save
+    // failure retries three times, a real one fails at once with a toast;
+    // nothing queues a write across a refresh), hosted records, CSV export.
     highlights: [
-      "The products she had tried did everything. Clio covers the two minutes before a client sits down, and stops",
-      "Each salon is isolated in the database itself, so the app never has to remember to filter",
-      "Tightened the permission defaults without locking out existing staff. The migration writes the intended values before the code stops assuming them",
-      // The specifics of the flaw I found stay off a public page: this is a live
-      // product holding real people's records, and naming a past weakness names
-      // where to look. The judgment survives; the map does not.
-      "Every access policy gets my own audit, and every change since launch a written review",
-      "Only the API layer may reach the database. A test fails the build if anything else imports it",
-      // Verified against clio-app main on 2026-09-15. Reads: every successful
-      // query is snapshotted to localStorage per user and restored when the
-      // browser goes offline, with a banner showing when the snapshot was
-      // taken (src/lib/offlineCache.ts, src/context/OfflineContext.tsx).
-      // Writes: since clio-app #116, every save goes through useMutation, and
-      // a transient failure (network error, 5xx, 408, 429) retries up to three
-      // times at 1s, 2s and 4s; a real error fails at once with a toast
-      // (src/lib/queryClient.ts). It does not say writes "survive" a flaky
-      // connection: nothing queues a write across a refresh, and a retry after
-      // a lost response can duplicate a create until device-generated ids ship
-      // (clio-app #100). The durable queue is designed in clio-app #115.
-      "The salon has patchy Wi-Fi. Reads work offline from the last snapshot, stamped with when it was taken. A save retries a dropped connection, and a failed one says so",
-      "Records live in a hosted database, so a dead hard drive can't take them",
-      // From the @echoshihtw/clio-brand README: shared by clio-web and
-      // clio-app, released with semantic-release. The demo here installs it.
-      "The brand is one package the landing page and the app both install, so a colour changes in one place and ships as a release. This page installs it too",
+      "**It does one job.** The apps she'd tried did everything. Clio covers the two minutes before a client sits down, and stops.",
+      "**No salon can see another's clients.** The database itself keeps them apart, so a forgotten filter can't leak a record.",
+      "**It works on the salon's patchy Wi-Fi.** It reads from the last snapshot, stamped with its time. A save retries, and a failed one says so.",
+      "**Her records can't be lost.** They live in a hosted database, and she can export every client and visit at any time.",
     ],
     resume: {
       descriptor: "salon operations platform, live since May 2025",
@@ -122,10 +109,13 @@ export const projectsConfig: Projects = [
     fileAlt:
       "Echology: choosing a coin-selection algorithm, Branch and Bound, scored on waste, with a fallback and an excess strategy",
     stack: ["Next.js", "TypeScript", "Tailwind CSS"],
+    // The same three facts as before, in plain words: hand-picked inputs
+    // (UTXOs) held constant, adjustable scenarios and fee rates, separate
+    // waste, fee and fee-rate-deviation figures.
     highlights: [
-      "You pick the UTXOs by hand, so the input set is a controlled variable instead of whatever the wallet happened to hold",
-      "Spend scenarios and fee rates are adjustable, because selection behaviour diverges at the extremes",
-      "Waste, fee and fee rate deviation are shown as separate figures. One combined total hides which trade-off moved",
+      "**You choose the coins.** Picking the inputs by hand keeps them the same between runs, so only the algorithm changes.",
+      "**You set the fees and the scenario.** The algorithms only behave differently at the extremes, so you can push them there.",
+      "**Each cost is its own number.** Waste, fee and fee-rate deviation are shown apart, because one total hides which trade-off moved.",
     ],
     linkLabel: "Source code →",
     status: "Archived",

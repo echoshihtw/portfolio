@@ -29,25 +29,27 @@
       type="image/png"
       href="%sveltekit.assets%/favicon.png"
     />
+    <!-- Served from the site and preloaded, so text is set in Geist from
+         the first paint and nothing moves when the font arrives. -->
     <link
-      rel="preconnect"
-      href="https://fonts.googleapis.com"
-    />
-    <link
-      rel="preconnect"
-      href="https://fonts.gstatic.com"
+      rel="preload"
+      href="%sveltekit.assets%/fonts/geist-latin.woff2"
+      as="font"
+      type="font/woff2"
       crossorigin
     />
     <link
-      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Permanent+Marker&display=swap"
-      rel="stylesheet"
+      rel="preload"
+      href="%sveltekit.assets%/fonts/geist-mono-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
     />
     <script>
       (() => {
         const key = "echo-theme";
-        // Start new visitors on paper, the theme the scrapbook is drawn
-        // for, and remember either choice. The saved preference wins
-        // regardless of OS preference.
+        // Start new visitors on paper, the light theme, and remember either
+        // choice. The saved preference wins over the OS preference.
         let theme = "light";
 
         try {
@@ -93,35 +95,39 @@
   <body data-sveltekit-preload-data="hover">
     <div
       id="boot-gate"
+      role="dialog"
+      aria-modal="true"
       aria-label="Portfolio introduction"
     >
-      <header class="gate-masthead">
+      <div class="gate-masthead">
         <p>PORTFOLIO / 2026</p>
         <div class="gate-theme-switch">
           <input
             type="checkbox"
             id="boot-gate-theme-toggle"
             class="gate-theme-input"
+            aria-label="Dark theme"
           />
           <label
             for="boot-gate-theme-toggle"
             class="gate-theme-label"
-            aria-label="Toggle theme"
           >
             <span class="gate-theme-core"></span>
           </label>
         </div>
-      </header>
+      </div>
 
-      <main class="gate-cover">
-        <p
-          class="gate-name"
-          aria-label="Echo Shih"
-        >
+      <div class="gate-cover">
+        <p class="gate-name">
           <span>Echo</span>
           <span>
             Shih
-            <span class="gate-accent">.</span>
+            <span
+              class="gate-accent"
+              aria-hidden="true"
+            >
+              .
+            </span>
           </span>
         </p>
 
@@ -136,9 +142,14 @@
             <span aria-hidden="true">→</span>
           </button>
         </div>
-      </main>
+      </div>
     </div>
     <script src="%sveltekit.assets%/boot-gate.js"></script>
-    <div style="display: contents">%sveltekit.body%</div>
+    <div
+      id="app"
+      style="display: contents"
+    >
+      %sveltekit.body%
+    </div>
   </body>
 </html>

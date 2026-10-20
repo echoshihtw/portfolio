@@ -22,11 +22,17 @@
   />
 
   <div class="hero-grid">
-    <p class="label hero-where">{heroConfig.remoteOpen}</p>
+    <!-- Each fact stays whole; lines break only between them. -->
+    <p class="label hero-where">
+      {#each heroConfig.remoteOpen as fact, i}<span class="fact">
+          {fact}{i < heroConfig.remoteOpen.length - 1 ? " ·" : ""}
+        </span>
+        {" "}{/each}
+    </p>
 
     <h1 class="hero-headline">
       <!-- prettier-ignore -->
-      {#each heroConfig.headline as part}{#if part.brush}<span class="brushed">{part.text}<svg class="brush" aria-hidden="true" viewBox="0 0 200 24" preserveAspectRatio="none"><defs><filter id="oil" x="-5%" y="-60%" width="110%" height="220%"><feTurbulence type="fractalNoise" baseFrequency="0.6 0.05" numOctaves="1" seed="7" /><feDisplacementMap in="SourceGraphic" scale="3.5" /></filter></defs><g filter="url(#oil)"><path d="M3 15 C 40 6, 92 19, 132 10 S 188 7, 197 13" fill="none" stroke="var(--brush)" stroke-width="10" stroke-linecap="round" /><path d="M10 12 C 50 5, 96 16, 136 8 S 184 6, 194 10" fill="none" stroke="var(--brush-light)" stroke-width="3" stroke-linecap="round" opacity=".8" /></g></svg></span>{:else}<span class:accent={part.accent}>{part.text}</span>{/if}{/each}
+      {#each heroConfig.headline as part}<span class:accent={part.accent}>{part.text}</span>{/each}
     </h1>
 
     {#each heroConfig.support as line}
@@ -80,13 +86,13 @@
     opacity: var(--print-opacity);
     filter: var(--print-filter);
     -webkit-mask-image: radial-gradient(
-      ellipse 55% 55% at 62% 55%,
+      ellipse closest-side at 62% 50%,
       #000 25%,
       rgba(0, 0, 0, 0.4) 55%,
       transparent 100%
     );
     mask-image: radial-gradient(
-      ellipse 55% 55% at 62% 55%,
+      ellipse closest-side at 62% 50%,
       #000 25%,
       rgba(0, 0, 0, 0.4) 55%,
       transparent 100%
@@ -100,7 +106,8 @@
     grid-template-columns: minmax(0, 1fr);
     gap: var(--space-5);
     width: 100%;
-    max-width: var(--content-max);
+    /* The content width every section has inside its padding. */
+    max-width: calc(var(--content-max) - 2 * var(--space-6));
     margin: 0 auto;
   }
 
@@ -108,33 +115,21 @@
     margin: 0;
   }
 
-  .hero-headline {
-    margin: 0;
-    font-size: var(--text-3xl);
-    font-weight: 500;
-    line-height: 1;
-    letter-spacing: -0.04em;
-    max-width: 14ch;
-  }
-
-  .brushed {
-    position: relative;
-    isolation: isolate;
+  .hero-where .fact {
     white-space: nowrap;
   }
 
-  .brush {
-    position: absolute;
-    left: -3%;
-    bottom: -0.1em;
-    width: 106%;
-    height: 0.3em;
-    overflow: visible;
-    z-index: -1;
+  .hero-headline {
+    margin: 0;
+    font-size: clamp(2.9rem, 9vw, 7rem);
+    font-weight: 600;
+    line-height: 0.98;
+    letter-spacing: -0.045em;
+    max-width: 12ch;
   }
 
   .hero-headline .accent {
-    color: var(--primary);
+    color: var(--accent-text);
   }
 
   .hero-support {
@@ -151,10 +146,13 @@
     margin: 0;
     padding: 0;
     list-style: none;
-    font-family: var(--font-mono);
     font-size: var(--text-sm);
     line-height: 1.5;
-    color: var(--muted);
+  }
+
+  .hero-owns li {
+    border-top: 1px solid var(--border);
+    padding-top: var(--space-1);
   }
 
   .hero-links {
@@ -173,7 +171,9 @@
     }
   }
 
-  @media (min-width: 900px) {
+  /* Three columns need 1024px: below it the list of what she owns wraps,
+     and one fact must never split across lines. */
+  @media (min-width: 1024px) {
     .hero {
       padding-top: calc(var(--section-y) * 1.4);
       padding-bottom: calc(var(--section-y) * 1.2);
@@ -200,7 +200,7 @@
     }
 
     .hero-owns {
-      grid-column: 7 / span 3;
+      grid-column: 6 / span 4;
     }
 
     .hero-links {
