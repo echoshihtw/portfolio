@@ -103,7 +103,7 @@
     bind:this={strip}
     on:scroll={onScroll}
   >
-    <div class="card calc">
+    <div class="item calc">
       <p class="label">Try it</p>
       <div class="inputs">
         <label>
@@ -135,7 +135,7 @@
       <p class="runs-out">{result.runsOut}</p>
     </div>
 
-    <div class="card">
+    <div class="item">
       <button
         class="tap"
         aria-pressed={debtHidden}
@@ -164,7 +164,7 @@
       <p>{c.debt.body}</p>
     </div>
 
-    <div class="card">
+    <div class="item">
       <button
         class="tap"
         aria-pressed={breathing}
@@ -313,7 +313,7 @@
 
   /* One frame for every card: the focal point on top, then a heading and
      one line. About four things to take in, never more. */
-  .card {
+  .item {
     flex: 0 0 auto;
     display: flex;
     flex-direction: column;
@@ -321,17 +321,19 @@
     min-height: 18rem;
     padding: var(--space-4);
     border-radius: 14px;
-    background: rgb(255 255 255 / 0.07);
+    /* An outline, not a fill: Runway's gold and rose only reach 4.5:1 on
+       the band itself. */
+    border: 1px solid var(--border);
     scroll-snap-align: start;
   }
 
-  .card h4 {
+  .item h4 {
     margin: var(--space-4) 0 var(--space-1);
     font-size: var(--text-lg);
     line-height: 1.3;
   }
 
-  .card:not(.calc) p {
+  .item:not(.calc) p {
     margin: 0;
     color: var(--muted);
   }
@@ -370,7 +372,7 @@
     gap: var(--space-1);
     padding: var(--space-2) var(--space-3);
     border-radius: var(--radius-md);
-    background: rgb(255 255 255 / 0.07);
+    border: 1px solid var(--border);
     font-family: var(--font-mono);
     font-size: var(--text-lg);
     font-weight: 600;
@@ -403,7 +405,7 @@
     gap: var(--space-2);
     padding: var(--space-2) var(--space-4);
     border-radius: var(--radius-pill);
-    background: color-mix(in srgb, var(--runway-rose) 16%, transparent);
+    border: 1px solid var(--runway-rose);
     color: var(--runway-rose);
     font-family: var(--font-mono);
     font-weight: 600;
@@ -465,6 +467,7 @@
   }
 
   .calc {
+    border-color: var(--runway-mint);
     background: var(--runway-mint);
     color: var(--runway-ink);
   }
@@ -542,7 +545,7 @@
       padding: 0 var(--space-6);
     }
 
-    .card {
+    .item {
       width: auto;
     }
 
