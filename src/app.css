@@ -117,7 +117,7 @@
    the site mentions the theme. */
 html[data-theme="dark"] {
   --canvas: #0f1612;
-  --smoke: #161e19;
+  --smoke: #1c2620;
   --ink: #f2efe8;
   --surface: #161e19;
   --clio-number: #f2efe8;
