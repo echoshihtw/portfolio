@@ -46,11 +46,8 @@ function routes(): string[] {
 
 const PAGES = routes();
 
-// Google Fonts is the one third party the site still calls. Everything else
-// was removed: @iconify/svelte resolved every icon over the network from
-// api.iconify.design, and app.html pulled the whole Font Awesome stylesheet
-// from cdnjs for zero `fa-` classes.
-const ALLOWED_HOSTS = ["fonts.googleapis.com", "fonts.gstatic.com"];
+// The site calls no third party: fonts are served from the site itself.
+const ALLOWED_HOSTS: string[] = [];
 
 test.describe("every page", () => {
   test.beforeEach(({ page }) => skipGate(page));
@@ -77,7 +74,7 @@ test.describe("every page", () => {
     });
   }
 
-  test("calls nobody but the font host", async ({ page }) => {
+  test("calls no third party", async ({ page }) => {
     const external = new Set<string>();
     page.on("request", (request) => {
       const host = new URL(request.url()).hostname;
