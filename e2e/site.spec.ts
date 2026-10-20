@@ -118,3 +118,32 @@ test.describe("every page", () => {
     expect(empty).toEqual([]);
   });
 });
+
+test.describe("Runway", () => {
+  test.beforeEach(({ page }) => skipGate(page));
+
+  // The story is a strip you swipe or arrow through. It scrolls sideways
+  // inside itself; the page never does.
+  test("its strip scrolls sideways, the page does not", async ({ page }) => {
+    await page.setViewportSize({ width: 320, height: 800 });
+    await page.goto("/");
+
+    const strip = page.getByRole("region", { name: "How it thinks" });
+    await strip.scrollIntoViewIfNeeded();
+    expect(await strip.evaluate((el) => el.scrollWidth > el.clientWidth)).toBe(
+      true
+    );
+    expect(
+      await page.evaluate(
+        () => document.documentElement.scrollWidth - innerWidth
+      )
+    ).toBeLessThanOrEqual(0);
+
+    await strip.focus();
+    await page.keyboard.press("ArrowRight");
+    await page.waitForTimeout(400);
+    expect(await strip.evaluate((el) => el.scrollLeft)).toBeGreaterThan(0);
+
+    await expect(page.getByRole("button", { name: /tape/i })).toHaveCount(0);
+  });
+});
