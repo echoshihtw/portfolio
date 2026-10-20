@@ -316,3 +316,23 @@ test.describe("Clio", () => {
     );
   });
 });
+
+test.describe("Echology", () => {
+  test.beforeEach(({ page }) => skipGate(page));
+
+  test("states its decisions in plain words, each led by what it does", async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 1280, height: 900 });
+    await page.goto("/");
+    const list = page
+      .locator("#projects .row")
+      .nth(1)
+      .locator(".decisions")
+      .first();
+    await expect(list.locator("li strong").first()).toHaveText(
+      "You choose the coins."
+    );
+    await expect(list).not.toContainText("UTXO");
+  });
+});

@@ -109,10 +109,13 @@ export const projectsConfig: Projects = [
     fileAlt:
       "Echology: choosing a coin-selection algorithm, Branch and Bound, scored on waste, with a fallback and an excess strategy",
     stack: ["Next.js", "TypeScript", "Tailwind CSS"],
+    // The same three facts as before, in plain words: hand-picked inputs
+    // (UTXOs) held constant, adjustable scenarios and fee rates, separate
+    // waste, fee and fee-rate-deviation figures.
     highlights: [
-      "You pick the UTXOs by hand, so the input set is a controlled variable instead of whatever the wallet happened to hold",
-      "Spend scenarios and fee rates are adjustable, because selection behaviour diverges at the extremes",
-      "Waste, fee and fee rate deviation are shown as separate figures. One combined total hides which trade-off moved",
+      "**You choose the coins.** Picking the inputs by hand keeps them the same between runs, so only the algorithm changes.",
+      "**You set the fees and the scenario.** The algorithms only behave differently at the extremes, so you can push them there.",
+      "**Each cost is its own number.** Waste, fee and fee-rate deviation are shown apart, because one total hides which trade-off moved.",
     ],
     linkLabel: "Source code →",
     status: "Archived",
