@@ -20,13 +20,19 @@
   $: unit =
     result.months === null ? "" : result.months === 1 ? "month" : "months";
 
-  // Two screenshots sit among the promises: after the first and the third.
-  const cards = c.promises.flatMap((p, i) => [
-    { kind: "promise" as const, ...p },
-    ...(i === 0 || i === 2
-      ? [{ kind: "screen" as const, ...c.screens[i === 0 ? 0 : 1] }]
-      : []),
-  ]);
+  let debtHidden = false;
+  let breathing = false;
+
+  // Which card is in view, for the counter on narrow screens.
+  let strip: HTMLElement;
+  let at = 0;
+  const CARDS = 3;
+  function onScroll() {
+    const first = strip.firstElementChild as HTMLElement;
+    const step =
+      first.offsetWidth + parseFloat(getComputedStyle(strip).columnGap);
+    at = Math.min(CARDS - 1, Math.round(strip.scrollLeft / step));
+  }
 </script>
 
 <section
@@ -55,29 +61,36 @@
         <p class="label meta">{c.meta}</p>
         <!-- prettier-ignore -->
         <p class="big">{lead.months}<span class="big-unit">months</span></p>
-        <h3>{c.question}</h3>
-        <p class="why">{c.quote}</p>
-        <p class="price">
-          {c.price} once
-          <span class="price-note">{c.priceNote}</span>
-        </p>
-        <a
-          class="btn btn-mint"
-          href={c.appStore}
-          rel="noopener"
-        >
-          Try it on the App Store <span aria-hidden="true">↗</span>
-        </a>
+        <div class="ask">
+          <h3>{c.question}</h3>
+          <p class="why">{c.quote}</p>
+        </div>
+        <div class="buy">
+          <p class="price">
+            {c.price} once
+            <!-- Each fact stays whole; lines break only between them. -->
+            {#each c.priceFacts as fact}<span class="price-note">· {fact}</span>
+              {" "}{/each}
+          </p>
+          <a
+            class="btn btn-mint"
+            href={c.appStore}
+            rel="noopener"
+          >
+            Try it on the App Store <span aria-hidden="true">↗</span>
+          </a>
+          <p class="made">{c.madeWith}</p>
+        </div>
       </div>
     </div>
 
     <div class="strip-head">
       <h3 class="label">How it thinks</h3>
       <span
-        class="label swipe"
+        class="label count"
         aria-hidden="true"
       >
-        Swipe →
+        {at + 1} / {CARDS}
       </span>
     </div>
   </div>
@@ -87,25 +100,31 @@
     class="strip"
     aria-label="How it thinks"
     tabindex="0"
+    bind:this={strip}
+    on:scroll={onScroll}
   >
     <div class="card calc">
       <p class="label">Try it</p>
-      <label for="rw-cash">I have $</label>
-      <input
-        id="rw-cash"
-        type="text"
-        inputmode="numeric"
-        autocomplete="off"
-        bind:value={cash}
-      />
-      <label for="rw-cost">A month costs me $</label>
-      <input
-        id="rw-cost"
-        type="text"
-        inputmode="numeric"
-        autocomplete="off"
-        bind:value={cost}
-      />
+      <div class="inputs">
+        <label>
+          I have $
+          <input
+            type="text"
+            inputmode="numeric"
+            autocomplete="off"
+            bind:value={cash}
+          />
+        </label>
+        <label>
+          A month costs me $
+          <input
+            type="text"
+            inputmode="numeric"
+            autocomplete="off"
+            bind:value={cost}
+          />
+        </label>
+      </div>
       <p
         class="answer"
         aria-live="polite"
@@ -116,24 +135,57 @@
       <p class="runs-out">{result.runsOut}</p>
     </div>
 
-    {#each cards as card, i}
-      {#if card.kind === "screen"}
-        <img
-          class="card screen"
-          src="{base}/{card.src}"
-          alt={card.alt}
-          loading="lazy"
-        />
-      {:else}
-        <div class="card promise">
-          <h4>{card.title}</h4>
-          <p>{card.body}</p>
-          {#if i === cards.length - 1}
-            <p class="made">{c.madeWith}</p>
-          {/if}
-        </div>
-      {/if}
-    {/each}
+    <div class="card">
+      <button
+        class="tap"
+        aria-pressed={debtHidden}
+        on:click={() => (debtHidden = !debtHidden)}
+      >
+        <span
+          class="pair"
+          class:solo={debtHidden}
+        >
+          <span class="cash">
+            <span class="label">Cash</span>
+            {c.debt.cash}
+          </span>
+          <span class="owed">
+            <span class="label">Owed</span>
+            {c.debt.owed}
+          </span>
+        </span>
+        <span class="hint">
+          {debtHidden
+            ? "Without the debt, it looks rich"
+            : "Tap to hide the debt"}
+        </span>
+      </button>
+      <h4>{c.debt.title}</h4>
+      <p>{c.debt.body}</p>
+    </div>
+
+    <div class="card">
+      <button
+        class="tap"
+        aria-pressed={breathing}
+        on:click={() => (breathing = !breathing)}
+      >
+        <span
+          class="badge"
+          class:on={breathing}
+        >
+          <i aria-hidden="true" />
+          {c.calm.status}
+        </span>
+        <span class="hint">
+          {breathing
+            ? "A resting heartbeat, never faster"
+            : "Tap to see it breathe"}
+        </span>
+      </button>
+      <h4>{c.calm.title}</h4>
+      <p>{c.calm.body}</p>
+    </div>
   </section>
 </section>
 
@@ -210,6 +262,7 @@
   .price-note {
     font-size: var(--text-sm);
     font-weight: 400;
+    white-space: nowrap;
   }
 
   .btn-mint {
@@ -231,17 +284,26 @@
     color: var(--ink);
   }
 
-  .swipe {
+  .count {
+    min-width: 3.5em;
+    text-align: right;
     color: var(--muted);
   }
 
+  /* Native sideways scroll, snapping card by card. The scrollbar is hidden;
+     the peeking next card and the counter say there is more. */
   .strip {
     display: flex;
     gap: var(--space-3);
     overflow-x: auto;
     scroll-snap-type: x mandatory;
+    scrollbar-width: none;
     padding: 0 var(--space-4) var(--space-3);
     scroll-padding: 0 var(--space-4);
+  }
+
+  .strip::-webkit-scrollbar {
+    display: none;
   }
 
   .strip:focus-visible {
@@ -249,50 +311,173 @@
     outline-offset: 4px;
   }
 
+  /* One frame for every card: the focal point on top, then a heading and
+     one line. About four things to take in, never more. */
   .card {
     flex: 0 0 auto;
-    width: 15.5rem;
-    min-height: 17.5rem;
+    display: flex;
+    flex-direction: column;
+    width: 16.5rem;
+    min-height: 18rem;
+    padding: var(--space-4);
     border-radius: 14px;
+    background: rgb(255 255 255 / 0.07);
     scroll-snap-align: start;
   }
 
-  .promise,
-  .calc {
-    padding: var(--space-4);
-  }
-
-  .promise {
-    background: rgb(255 255 255 / 0.07);
-  }
-
-  .promise h4 {
-    margin: 0 0 var(--space-2);
+  .card h4 {
+    margin: var(--space-4) 0 var(--space-1);
     font-size: var(--text-lg);
     line-height: 1.3;
   }
 
-  .promise p {
+  .card:not(.calc) p {
     margin: 0;
     color: var(--muted);
   }
 
-  .made {
-    margin-top: var(--space-4) !important;
-    font-size: var(--text-sm);
+  .tap {
+    all: unset;
+    flex: 1;
+    display: grid;
+    place-content: center;
+    justify-items: center;
+    gap: var(--space-2);
+    border-radius: var(--radius-md);
+    cursor: pointer;
   }
 
-  .screen {
-    width: auto;
-    height: 17.5rem;
-    min-height: 0;
+  .tap:focus-visible {
+    outline: 2px solid var(--runway-mint);
+    outline-offset: 4px;
+  }
+
+  .hint {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs, 0.72rem);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .pair {
+    display: flex;
+    gap: var(--space-2);
+  }
+
+  .pair > span {
+    display: grid;
+    gap: var(--space-1);
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--radius-md);
+    background: rgb(255 255 255 / 0.07);
+    font-family: var(--font-mono);
+    font-size: var(--text-lg);
+    font-weight: 600;
+  }
+
+  .cash {
+    color: var(--runway-mint);
+  }
+
+  .owed {
+    color: var(--runway-gold);
+    transition:
+      opacity var(--motion-medium, 350ms),
+      transform var(--motion-medium, 350ms);
+  }
+
+  .pair.solo .owed {
+    opacity: 0;
+    transform: translateX(var(--space-2));
+  }
+
+  .pair .label {
+    font-size: 0.65rem;
+    color: var(--muted);
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--radius-pill);
+    background: color-mix(in srgb, var(--runway-rose) 16%, transparent);
+    color: var(--runway-rose);
+    font-family: var(--font-mono);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .badge i {
+    width: 0.8rem;
+    height: 0.8rem;
+    border-radius: var(--radius-pill);
+    background: var(--runway-rose);
+  }
+
+  /* Runway's own tempo: a resting heartbeat, and only after a tap. */
+  .badge.on i {
+    animation: breathe 2.8s ease-in-out infinite;
+  }
+
+  @keyframes breathe {
+    50% {
+      box-shadow: 0 0 0 0.7rem
+        color-mix(in srgb, var(--runway-rose) 0%, transparent);
+    }
+    0%,
+    100% {
+      box-shadow: 0 0 0 0
+        color-mix(in srgb, var(--runway-rose) 55%, transparent);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .badge.on i {
+      animation: none;
+      box-shadow: 0 0 0 0.35rem
+        color-mix(in srgb, var(--runway-rose) 30%, transparent);
+    }
+  }
+
+  .ask .why {
+    margin-top: var(--space-1);
+  }
+
+  .buy {
+    display: grid;
+    justify-items: start;
+    gap: var(--space-2);
+    margin-top: var(--space-4);
+  }
+
+  .buy .price {
+    margin: 0;
+  }
+
+  .made {
+    margin: 0;
+    font-size: var(--text-sm);
+    color: var(--muted);
   }
 
   .calc {
     background: var(--runway-mint);
     color: var(--runway-ink);
-    display: flex;
-    flex-direction: column;
+  }
+
+  .inputs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-3);
+    font-size: var(--text-sm);
+  }
+
+  .inputs label {
+    display: grid;
   }
 
   .calc .label {
@@ -301,7 +486,8 @@
   }
 
   .calc input {
-    margin: var(--space-1) 0 var(--space-3);
+    min-width: 0;
+    margin-top: var(--space-1);
     padding: var(--space-1) 0;
     border: 0;
     border-bottom: 1px solid var(--runway-ink);
@@ -346,13 +532,22 @@
       align-items: center;
     }
 
+    /* All three fit, so nothing scrolls and nothing counts. */
     .strip {
-      --edge: max(
-        var(--space-6),
-        calc((100% - var(--content-max)) / 2 + var(--space-6))
-      );
-      padding-left: var(--edge);
-      scroll-padding-left: var(--edge);
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      overflow: visible;
+      max-width: var(--content-max);
+      margin: 0 auto;
+      padding: 0 var(--space-6);
+    }
+
+    .card {
+      width: auto;
+    }
+
+    .count {
+      display: none;
     }
   }
 </style>

@@ -162,4 +162,21 @@ test.describe("Runway", () => {
 
     await expect(page.getByRole("button", { name: /tape/i })).toHaveCount(0);
   });
+
+  // Three cards, about as many as anyone holds in mind at once, and the two
+  // decisions you can try answer a tap.
+  test("its strip holds three cards, and the debt can be hidden and shown", async ({
+    page,
+  }) => {
+    await page.goto("/");
+    const strip = page.getByRole("region", { name: "How it thinks" });
+    await expect(strip.locator(":scope > *")).toHaveCount(3);
+
+    const debt = strip.getByRole("button", { name: /debt/i });
+    await expect(debt).toHaveAttribute("aria-pressed", "false");
+    await debt.click();
+    await expect(debt).toHaveAttribute("aria-pressed", "true");
+    await debt.click();
+    await expect(debt).toHaveAttribute("aria-pressed", "false");
+  });
 });

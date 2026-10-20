@@ -64,6 +64,15 @@ describe("the colour bands", () => {
     ).toBeGreaterThanOrEqual(4.5);
   });
 
+  it.each([["runway-gold"], ["runway-rose"]])(
+    "%s reads on Runway's indigo",
+    (name) => {
+      expect(
+        contrastRatio(light(name), light("runway-indigo"))
+      ).toBeGreaterThanOrEqual(4.5);
+    }
+  );
+
   it("Clio's ink reads on Clio's pink", () => {
     expect(contrastRatio(clio.ink, clio.pink)).toBeGreaterThanOrEqual(4.5);
   });

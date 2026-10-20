@@ -21,6 +21,9 @@
   --surface: #ffffff;
   --runway-indigo: #262c4c;
   --runway-mint: #8fddaa;
+  /* Runway's debt gold and critical rose, from its design_system tokens. */
+  --runway-gold: #cb9a3e;
+  --runway-rose: #e8829e;
   /* Runway's band keeps its own text colours in both themes. */
   --runway-paper: #f2efe8;
   --runway-ink: #0a150f;
