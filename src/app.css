@@ -11,6 +11,17 @@
    whole page by redefining a dozen lines.
    ========================================================================== */
 
+/* Arial sized to Geist's own metrics, so the text keeps its place while
+   Geist loads and nothing below it moves when it arrives. */
+@font-face {
+  font-family: "Geist Fallback";
+  src: local("Arial");
+  ascent-override: 95.94%;
+  descent-override: 28.16%;
+  line-gap-override: 0%;
+  size-adjust: 104.76%;
+}
+
 :root {
   /* Colour, from her paintings: off-white paper, green-black ink, oxide red
      for one word. Runway's indigo and mint are its own; Clio's colours come
@@ -44,7 +55,6 @@
   --accent-text: #8d391e;
   --highlight: #f2c94c;
   --status-live: #4f6e4a;
-  --status-progress: #735809;
   /* How her ink prints sit in the page. On paper they multiply into it; on
      the ink theme they turn to chalk lines instead. */
   --print-blend: multiply;
@@ -58,8 +68,8 @@
   --section-border: var(--border);
 
   /* Type. Geist for everything read, its mono for anything that is data. */
-  --font-display: "Geist", "Helvetica Neue", Arial, sans-serif;
-  --font-body: "Geist", "Segoe UI", Roboto, sans-serif;
+  --font-display: "Geist", "Geist Fallback", Arial, sans-serif;
+  --font-body: "Geist", "Geist Fallback", Arial, sans-serif;
   --font-mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
 
   --text-xs: 0.72rem;
@@ -69,7 +79,6 @@
   --text-xl: 1.5rem;
   --text-2xl: clamp(1.9rem, 1.3rem + 2.4vw, 2.7rem);
   --text-3xl: clamp(2.6rem, 1.4rem + 5.2vw, 5rem);
-  --text-num: clamp(2.4rem, 1.5rem + 3vw, 4rem);
 
   --leading-tight: 1.02;
   --leading-snug: 1.2;
@@ -95,7 +104,6 @@
   --radius-sm: 6px;
   --radius-md: 12px;
   --radius-pill: 999px;
-  --radius-lg: clamp(2rem, 6vw, 4.5rem);
 
   /* Border. Thin and dark, never a shadow. */
   --border-w: 1px;
@@ -103,7 +111,6 @@
   /* Motion. Short, one easing, and nothing loops. */
   --dur-fast: 140ms;
   --dur-base: 220ms;
-  --dur-slow: 420ms;
   --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
 
   /* The site's moving parts, on Material 3's motion scale. Things arrive
@@ -112,7 +119,6 @@
   --motion-exit: cubic-bezier(0.3, 0, 0.8, 0.15);
   --motion-medium: 350ms;
   --motion-long: 500ms;
-  --motion-xlong: 800ms;
 }
 
 /* The ink theme. Same system, the ground and the ink swap, and blue and
@@ -133,7 +139,6 @@ html[data-theme="dark"] {
   --accent-text: #e07a4f;
   --highlight: #f2c94c;
   --status-live: #a8b5a2;
-  --status-progress: #f2c94c;
   --print-blend: screen;
   --print-filter: invert(1) contrast(1.2);
   --print-opacity: 0.16;

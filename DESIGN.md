@@ -60,7 +60,20 @@ a few lines opens in a sheet: the browser's own `<dialog>`, closed by Escape, a
 tap outside or its close button, focus returned to the button that opened it.
 Runway's story is a strip that scrolls sideways inside itself, with the next
 card peeking; the page itself never scrolls sideways. Every card in it is one
-visual, one hint under it, a heading and one line.
+visual, one hint or one control under it, a heading and one line.
+
+## Gallery
+
+Paintings hang in even 4:5 frames: one column on a phone, two from a phone held
+sideways, three on a computer. A painting opens full screen over the wall, and
+the others sit beside it: swipe, the arrow keys or the buttons move between
+them, with a counter in a fixed place. Escape, Close or a tap on the background
+returns to the same spot on the wall.
+
+## Footer
+
+It links only to the other pages: Blog, Gallery and Résumé. The header returns
+on any scroll up, so the home page's own sections need no second list.
 
 ## Motion
 

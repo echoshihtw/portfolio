@@ -118,8 +118,12 @@
   on:keydown={onKey}
   on:close={() => opener?.focus()}
 >
+  <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
   <div
     class="track"
+    role="region"
+    aria-label="Paintings, one at a time"
+    tabindex="0"
     bind:this={track}
     on:scroll={onScroll}
   >
@@ -272,6 +276,18 @@
   .step {
     padding: 0;
     font-size: 1.2rem;
+  }
+
+  /* A phone held sideways: the painting takes the height, the bar and
+     the label tuck in close. */
+  @media (max-height: 500px) {
+    .slide {
+      padding: var(--space-3) var(--space-8) var(--space-1);
+    }
+
+    .viewer-bar {
+      padding: 0 0 var(--space-2);
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {

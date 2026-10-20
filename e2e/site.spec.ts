@@ -95,6 +95,20 @@ test.describe("every page", () => {
     expect([...external]).toEqual([]);
   });
 
+  // Every file a page asks for arrives. Vercel's own scripts exist only
+  // on Vercel, so they are left out.
+  test("loads every file it asks for", async ({ page }) => {
+    const missing = new Set<string>();
+    page.on("response", (r) => {
+      const url = new URL(r.url());
+      if (r.status() >= 400 && !url.pathname.startsWith("/_vercel/"))
+        missing.add(`${r.status()} ${url.pathname}`);
+    });
+    for (const path of PAGES)
+      await page.goto(path, { waitUntil: "networkidle" });
+    expect([...missing]).toEqual([]);
+  });
+
   // The calm studio has no handwriting face anywhere.
   test("uses no handwriting face", async ({ page }) => {
     const found: string[] = [];
