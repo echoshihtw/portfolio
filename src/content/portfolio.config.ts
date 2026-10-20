@@ -87,10 +87,7 @@ export const closingConfig = {
   heading: "Available for a role or a project",
   // One door, then a subject for each kind of message, so the inbox shows
   // which one it is before the message is opened.
-  ways: "For a role, a project, or a founding-partner seat. Or start with a subject:",
-  // How she works, said plainly: she keeps her work clean (her words,
-  // 2026-10-19), and what that means in practice.
-  team: "I work remote from Taiwan, and I like to write things down so anyone can pick up where I left off. I share work early, because the team usually sees what I miss, so tell me, and we'll fix it together.",
+  ways: "Or email",
   paths: [
     { key: "role", label: "about a role", subject: ROLE_SUBJECT },
     { key: "project", label: "about a project", subject: "Product project" },

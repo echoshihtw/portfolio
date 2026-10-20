@@ -17,6 +17,7 @@ export const aboutMeConfig = {
   story: [
     "BA in Italian language and culture. Mandarin and Taiwanese are native, English at work. Then restaurants, and work as a teaching and research assistant.",
     "That work came with software. Logging my hours, entering students' scores, applying for a research budget. All of it outdated, and all of it needed a manual. Bad design is still what interests me most, so now I write the software.",
+    "I work remote from Taiwan, and I like to write things down so anyone can pick up where I left off. I share work early, because the team usually sees what I miss, so tell me, and we'll fix it together.",
     "I paint too. Private lessons in high school, and I wanted to go to art school. I studied Italian instead, then took painting classes in Florence for three months. Since 2012, mostly at my desk or on a train.",
   ],
 

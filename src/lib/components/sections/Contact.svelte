@@ -45,7 +45,7 @@
         </a>
       </div>
       <p class="ways">
-        {closingConfig.ways}
+        {closingConfig.ways}{" "}
         {#each closingConfig.paths as path, i}{#if i > 0}<span
               class="sep"
               aria-hidden="true"
@@ -60,7 +60,6 @@
             {path.label}
           </a>{/each}
       </p>
-      <p class="team">{closingConfig.team}</p>
     </div>
   </div>
 </section>
@@ -122,14 +121,6 @@
     max-width: 46ch;
     font-size: var(--text-sm);
     line-height: 1.8;
-    color: var(--muted);
-  }
-
-  .team {
-    margin: var(--space-3) 0 0;
-    max-width: 46ch;
-    font-size: var(--text-sm);
-    line-height: 1.7;
     color: var(--muted);
   }
 </style>
