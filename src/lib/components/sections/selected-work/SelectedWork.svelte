@@ -9,10 +9,10 @@
   let cost = c.calculator.cost;
 
   const today = new Date();
-  // The headline number is the calculator's own answer, so they never disagree.
+  // The headline number comes from the same function the calculator uses.
   const lead = runway(
-    parseAmount(c.calculator.cash),
-    parseAmount(c.calculator.cost),
+    parseAmount(c.lead.cash),
+    parseAmount(c.lead.cost),
     today
   );
 

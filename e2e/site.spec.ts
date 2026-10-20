@@ -171,6 +171,9 @@ test.describe("Runway", () => {
     await page.goto("/");
     const strip = page.getByRole("region", { name: "How it thinks" });
     await expect(strip.locator(":scope > *")).toHaveCount(3);
+    // The calculator starts in another state, so it never repeats the 12.
+    await expect(page.locator("#selected-work .big")).toContainText("12");
+    await expect(strip.locator(".answer-num")).toHaveText("3");
     await expect(strip.locator(":scope > *").first()).toContainText(
       /type your own numbers/i
     );

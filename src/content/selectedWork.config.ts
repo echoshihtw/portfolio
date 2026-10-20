@@ -14,8 +14,10 @@ export const selectedWorkConfig = {
   question: "How long will your money last? One number, counted from today.",
   price: "US$3.99",
   priceFacts: ["no subscription", "no account, no bank login"],
-  // The calculator starts on the numbers in the store screenshots.
-  calculator: { cash: "34,336", cost: "2,803" },
+  // The headline runway uses the store screenshot's numbers. The calculator
+  // starts elsewhere, in caution, so it shows another state, not the same 12.
+  lead: { cash: "34,336", cost: "2,803" },
+  calculator: { cash: "8,400", cost: "2,800" },
   // Her words, cut to the one line a visitor reads.
   quote: "I built something I would use.",
   // The two decisions a visitor can try, with the store screenshot's figures.
