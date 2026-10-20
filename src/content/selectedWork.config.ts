@@ -22,12 +22,12 @@ export const selectedWorkConfig = {
   debt: {
     cash: "$34,336",
     owed: "$17,790",
-    title: "Debt sits beside cash.",
-    body: "Otherwise a loan looks like money.",
+    title: "What you owe sits next to what you have.",
+    body: "A loan raises your cash. Without the debt beside it, the number would lie.",
   },
   calm: {
     status: "Critical",
-    title: "Calm when money is short.",
+    title: "It stays calm when money is short.",
     body: "Soft pink, never alarm red.",
   },
   madeWith: "I had a picture of how it should be. AI made it happen faster.",

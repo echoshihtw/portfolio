@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { onMount } from "svelte";
   import { base } from "$app/paths";
   import { selectedWorkConfig as c } from "../../../../content/selectedWork.config";
   import { parseAmount, runway } from "$lib/runway";
@@ -27,6 +28,13 @@
   let previewDebt = false;
   let previewCalm = false;
   const mouse = (e: PointerEvent) => e.pointerType === "mouse";
+
+  // The hints name the gesture this device has.
+  let verb = "Tap";
+  onMount(() => {
+    if (matchMedia("(hover: hover) and (pointer: fine)").matches)
+      verb = "Hover";
+  });
 
   $: debtShown = debtHidden || previewDebt;
   $: calmShown = breathing || previewCalm;
@@ -112,7 +120,7 @@
     on:scroll={onScroll}
   >
     <div class="item calc">
-      <p class="label">Try it</p>
+      <p class="label">Your turn</p>
       <div class="inputs">
         <label>
           I have $
@@ -170,10 +178,10 @@
           aria-hidden="true"
         >
           {debtHidden
-            ? "Without the debt, it looks rich"
+            ? "You look richer than you are"
             : previewDebt
               ? "Click to keep it hidden"
-              : "Tap to hide the debt"}
+              : `${verb} to hide the debt`}
         </span>
       </button>
       <h4>{c.debt.title}</h4>
@@ -204,7 +212,7 @@
             ? "A resting heartbeat, never faster"
             : previewCalm
               ? "Click to keep it breathing"
-              : "Tap to see it breathe"}
+              : `${verb} to see it breathe`}
         </span>
       </button>
       <h4>{c.calm.title}</h4>
@@ -362,9 +370,11 @@
     color: var(--muted);
   }
 
+  /* A fixed focal area, so every card's visual and heading line up. */
   .tap {
     all: unset;
-    flex: 1;
+    flex: none;
+    height: 9rem;
     display: grid;
     place-content: center;
     justify-items: center;
@@ -523,16 +533,39 @@
     color: var(--runway-ink);
   }
 
+  /* A field that looks like one before it is touched: a light box with
+     an ink underline. Focus thickens the underline; the browser's own
+     caret blinks, only once someone is typing. */
   .calc input {
     min-width: 0;
     margin-top: var(--space-1);
-    padding: var(--space-1) 0;
+    padding: var(--space-2);
     border: 0;
-    border-bottom: 1px solid var(--runway-ink);
-    background: transparent;
+    border-bottom: 2px solid var(--runway-ink);
+    border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+    background: color-mix(in srgb, var(--runway-paper) 45%, transparent);
     color: inherit;
+    caret-color: var(--runway-ink);
     font: inherit;
     font-family: var(--font-mono);
+    font-weight: 600;
+    transition:
+      background-color var(--motion-medium, 350ms),
+      box-shadow var(--motion-medium, 350ms);
+  }
+
+  .calc input:hover {
+    background: color-mix(in srgb, var(--runway-paper) 65%, transparent);
+  }
+
+  .calc input:focus {
+    outline: none;
+  }
+
+  .calc input:focus-visible,
+  .calc input:focus {
+    background: var(--runway-paper);
+    box-shadow: inset 0 -2px 0 var(--runway-ink);
   }
 
   .answer {

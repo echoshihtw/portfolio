@@ -190,6 +190,9 @@ test.describe("Runway", () => {
     const debt = strip.getByRole("button", { name: /debt/i });
     const pair = debt.locator(".pair");
 
+    // A mouse is told to hover, not to tap.
+    await expect(debt).toContainText(/hover to hide the debt/i);
+
     await debt.hover();
     await expect(pair).toHaveClass(/solo/);
     await expect(debt).toHaveAttribute("aria-pressed", "false");
