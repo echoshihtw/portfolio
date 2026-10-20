@@ -119,17 +119,18 @@
    orange come up a step so they clear contrast on dark. No other rule in
    the site mentions the theme. */
 html[data-theme="dark"] {
-  --canvas: #0f1612;
-  --smoke: #1c2620;
-  --ink: #f2efe8;
-  --surface: #161e19;
-  --clio-number: #f2efe8;
+  /* Charcoal, no colour cast: light mode's paper and smoke, inverted. */
+  --canvas: #131312;
+  --smoke: #232321;
+  --ink: #f0eee8;
+  --surface: #232321;
+  --clio-number: #f0eee8;
   --border: rgb(243 240 232 / 0.2);
   --muted: rgb(243 240 232 / 0.66);
   --primary: #8aa1f2;
   --primary-ink: #171714;
   --accent: #f6836a;
-  --accent-text: #d9693f;
+  --accent-text: #e07a4f;
   --highlight: #f2c94c;
   --status-live: #a8b5a2;
   --status-progress: #f2c94c;
