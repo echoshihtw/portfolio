@@ -154,7 +154,10 @@
     padding: 0 var(--space-4);
   }
 
+  /* The row's own margin collapses into this one, so the sum is spelled out
+     to match the 40px every other section has under its row. */
   .lead {
+    margin-top: calc(var(--space-4) + var(--space-5));
     display: grid;
     gap: var(--space-5);
   }

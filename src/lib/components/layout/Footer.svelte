@@ -204,7 +204,7 @@
 
 <style>
   .footer-wrap {
-    padding: var(--space-7) var(--space-4) var(--space-6);
+    padding: var(--space-7) 0 var(--space-6);
     border-top: var(--border-w) solid var(--border-strong);
     background: var(--canvas);
   }
@@ -212,6 +212,7 @@
   .footer-shell {
     max-width: var(--content-max);
     margin: 0 auto;
+    padding: 0 var(--space-4);
   }
 
   .footer-grid {
@@ -351,9 +352,8 @@
   /* A quiet utility link, not a CTA: same size/weight as the surrounding
      meta text so it doesn't compete with the actual footer actions. */
   @media (min-width: 768px) {
-    .footer-wrap {
-      padding-left: 2.5rem;
-      padding-right: 2.5rem;
+    .footer-shell {
+      padding: 0 var(--space-6);
     }
 
     .footer-grid {

@@ -527,10 +527,8 @@ canvas {
 
 /* The quiet alternate ground: smoke behind every other section. */
 .section_smoke {
-  background: var(--smoke);
-  /* Full width even inside a capped section. */
-  box-shadow: 0 0 0 100vmax var(--smoke);
-  clip-path: inset(0 -100vmax);
+  /* Full width even inside a capped section, and only sideways. */
+  border-image: linear-gradient(var(--smoke) 0 0) fill 0 / /0 100vmax;
 }
 
 /* Sections meet at a hairline, not a band. */

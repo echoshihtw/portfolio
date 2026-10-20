@@ -80,13 +80,13 @@
     opacity: var(--print-opacity);
     filter: var(--print-filter);
     -webkit-mask-image: radial-gradient(
-      ellipse 55% 55% at 62% 55%,
+      ellipse closest-side at 62% 50%,
       #000 25%,
       rgba(0, 0, 0, 0.4) 55%,
       transparent 100%
     );
     mask-image: radial-gradient(
-      ellipse 55% 55% at 62% 55%,
+      ellipse closest-side at 62% 50%,
       #000 25%,
       rgba(0, 0, 0, 0.4) 55%,
       transparent 100%
@@ -100,7 +100,8 @@
     grid-template-columns: minmax(0, 1fr);
     gap: var(--space-5);
     width: 100%;
-    max-width: var(--content-max);
+    /* The content width every section has inside its padding. */
+    max-width: calc(var(--content-max) - 2 * var(--space-6));
     margin: 0 auto;
   }
 

@@ -236,7 +236,9 @@
   }
 
   /* The proof, large, with the brand's touch as a mark under it. */
-  .figure {
+  /* It reads as one sentence with the fact under it, so they sit close. */
+  .notes .figure {
+    margin-bottom: calc(var(--space-2) - var(--space-3));
     font-family: var(--font-mono);
     font-size: clamp(3.5rem, 8vw, 4.5rem);
     font-weight: 600;

@@ -60,6 +60,11 @@
     align-items: start;
   }
 
+  .link-cta {
+    align-self: flex-start;
+    justify-self: start;
+  }
+
   .text {
     display: flex;
     flex-direction: column;
@@ -100,12 +105,22 @@
   .portrait-slot {
     width: 100%;
     max-width: 20rem;
-    justify-self: center;
+    justify-self: start;
   }
 
   /* On a phone the heading comes first, then the portrait, then the
      story (DESIGN.md, "On a phone"). */
   @media (max-width: 899.98px) {
+    /* The paragraphs join this grid here, so it takes their 16px rhythm;
+       the portrait keeps a little more room around it. */
+    .wrap {
+      gap: var(--space-4);
+    }
+
+    .portrait-slot {
+      margin: var(--space-2) 0;
+    }
+
     .text {
       display: contents;
     }
