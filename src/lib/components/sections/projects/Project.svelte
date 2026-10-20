@@ -14,7 +14,7 @@
 
 <section
   id="projects"
-  class="section_padding section_layout section_rule"
+  class="section_padding section_layout"
   aria-labelledby="projects-title"
 >
   <SectionHead
@@ -28,7 +28,12 @@
         <ProjectRow
           {project}
           mark={clioMark}
-          brand={{ paper: "var(--clio-paper)", ink: "var(--clio-ink)" }}
+          brand={{
+            paper: "var(--clio-paper)",
+            ink: "var(--clio-ink)",
+            number: "var(--clio-number)",
+            touch: "var(--clio-pink)",
+          }}
         >
           <ClioDemo slot="lead" />
         </ProjectRow>

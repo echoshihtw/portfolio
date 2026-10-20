@@ -29,14 +29,14 @@
 </header>
 
 <style>
-  /* Sections pad their top for breathing room; the row sits up against the
-     section's rule instead, as on the design. */
+  /* Sections are bands: the row sits as far from the top as the content
+     ends from the bottom. */
   .section-head {
     display: grid;
     grid-template-columns: auto minmax(0, 1fr);
     align-items: baseline;
-    gap: var(--space-2) var(--space-5);
-    margin-top: calc(var(--space-4) - var(--section-y));
+    /* The number and the title are one label, so they sit together. */
+    gap: var(--space-2) var(--space-4);
     margin-bottom: var(--space-4);
   }
 
@@ -61,8 +61,7 @@
 
   @media (min-width: 900px) {
     .section-head {
-      grid-template-columns: 7rem minmax(0, 1fr) auto;
-      gap: var(--space-6);
+      grid-template-columns: auto minmax(0, 1fr) auto;
     }
 
     .end {

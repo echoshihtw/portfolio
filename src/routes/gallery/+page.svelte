@@ -119,8 +119,6 @@
     flex-wrap: wrap;
     align-items: center;
     gap: 1rem;
-    padding-top: 2.5rem;
-    padding-bottom: 1rem;
   }
 
   .closing p {

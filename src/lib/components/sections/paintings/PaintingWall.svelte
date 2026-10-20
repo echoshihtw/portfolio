@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { tick } from "svelte";
   import { base } from "$app/paths";
   import {
     derivativeName,
@@ -28,15 +29,76 @@
   // The medium first, then place and year where they are known.
   const details = (work: Painting) =>
     [work.place, work.year].filter(Boolean).join(", ");
+
+  // The paintings, large, side by side over the wall: swipe, the arrow
+  // keys or the buttons move between them. The browser's own modal dialog
+  // keeps focus inside, closes on Escape, and hands focus back.
+  let viewer: HTMLDialogElement;
+  let track: HTMLElement;
+  let at = 0;
+  let opener: HTMLElement | null = null;
+
+  async function open(i: number, e: MouseEvent) {
+    e.preventDefault();
+    opener = e.currentTarget as HTMLElement;
+    at = i;
+    viewer.showModal();
+    await tick();
+    snap();
+  }
+
+  // Back onto the current painting without animating: on opening, and
+  // after a rotation or resize changes the slide width.
+  function snap() {
+    track.scrollTo({ left: at * track.clientWidth, behavior: "instant" });
+  }
+
+  // The count is read aloud once a move settles, not on every frame.
+  let spoken = 0;
+  let settle: ReturnType<typeof setTimeout>;
+  $: {
+    clearTimeout(settle);
+    const now = at;
+    settle = setTimeout(() => (spoken = now), 300);
+  }
+
+  function go(step: number) {
+    const i = Math.min(works.length - 1, Math.max(0, at + step));
+    track.scrollTo({ left: i * track.clientWidth });
+    at = i;
+  }
+
+  function onScroll() {
+    at = Math.round(track.scrollLeft / track.clientWidth);
+  }
+
+  function onKey(e: KeyboardEvent) {
+    if (e.key === "ArrowRight") go(1);
+    else if (e.key === "ArrowLeft") go(-1);
+    else return;
+    e.preventDefault();
+  }
+
+  // Only a tap on the background closes it, never one on a painting.
+  function onClick(e: MouseEvent) {
+    if (
+      e.target === viewer ||
+      (e.target as HTMLElement).classList.contains("slide")
+    )
+      viewer.close();
+  }
 </script>
 
+<svelte:window on:resize={() => viewer?.open && snap()} />
+
 <ul class="wall">
-  {#each works as work (work.id)}
+  {#each works as work, i (work.id)}
     <li>
       <figure>
         <a
           class="frame"
           href={src(work.id, large)}
+          on:click={(e) => open(i, e)}
         >
           <img
             src={src(work.id, small)}
@@ -44,7 +106,7 @@
               work.id,
               large
             )} {large}w"
-            sizes="(min-width: 860px) 30vw, 90vw"
+            sizes="(min-width: 860px) 30vw, (min-width: 560px) 45vw, 90vw"
             alt={work.alt}
             style="max-width: {FILL[work.scale]}; max-height: {FILL[
               work.scale
@@ -64,7 +126,205 @@
   {/each}
 </ul>
 
+<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
+<dialog
+  class="viewer"
+  bind:this={viewer}
+  aria-label="Paintings"
+  on:click={onClick}
+  on:keydown={onKey}
+  on:close={() => opener?.focus({ preventScroll: true })}
+>
+  <button
+    type="button"
+    class="viewer-btn viewer-close"
+    on:click={() => viewer.close()}
+  >
+    Close
+  </button>
+  <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+  <div
+    class="track"
+    role="region"
+    aria-label="Paintings, one at a time"
+    tabindex="0"
+    bind:this={track}
+    on:scroll={onScroll}
+  >
+    {#each works as work}
+      <figure class="slide">
+        <img
+          src={src(work.id, large)}
+          alt={work.alt}
+          loading="lazy"
+          decoding="async"
+        />
+        <figcaption>
+          <span class="medium">{work.medium}</span>
+          {#if details(work)}<span class="details">{details(work)}</span>{/if}
+        </figcaption>
+      </figure>
+    {/each}
+  </div>
+  <div class="viewer-bar">
+    <button
+      type="button"
+      class="viewer-btn step"
+      aria-label="Previous painting"
+      disabled={at === 0}
+      on:click={() => go(-1)}
+    >
+      ‹
+    </button>
+    <span
+      class="viewer-count"
+      aria-hidden="true"
+    >
+      {at + 1} / {works.length}
+    </span>
+    <span
+      class="sr-only"
+      aria-live="polite"
+    >
+      Painting {spoken + 1} of {works.length}
+    </span>
+    <button
+      type="button"
+      class="viewer-btn step"
+      aria-label="Next painting"
+      disabled={at === works.length - 1}
+      on:click={() => go(1)}
+    >
+      ›
+    </button>
+  </div>
+</dialog>
+
 <style>
+  /* Full screen on the wall's own paper. Each painting is one snapping
+     slide, whole, with its label under it. */
+  .viewer {
+    width: 100vw;
+    max-width: none;
+    height: 100dvh;
+    max-height: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: var(--canvas);
+    color: var(--ink);
+  }
+
+  .viewer[open] {
+    display: grid;
+    grid-template-rows: minmax(0, 1fr) auto;
+  }
+
+  .viewer::backdrop {
+    background: var(--canvas);
+  }
+
+  .track {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+  }
+
+  .track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .slide {
+    flex: 0 0 100%;
+    display: grid;
+    grid-template-rows: minmax(0, 1fr) auto;
+    justify-items: center;
+    gap: var(--space-3);
+    margin: 0;
+    padding: var(--space-7) var(--space-4) var(--space-2);
+    scroll-snap-align: center;
+    cursor: zoom-out;
+  }
+
+  .slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    cursor: default;
+  }
+
+  .slide figcaption {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 var(--space-3);
+    font-size: var(--text-sm);
+  }
+
+  .viewer-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-4);
+    padding: var(--space-2) 0 var(--space-4);
+  }
+
+  .viewer-count {
+    min-width: 4.5em;
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--muted);
+  }
+
+  .viewer-btn {
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0 var(--space-4);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-pill);
+    background: var(--canvas);
+    color: var(--ink);
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    cursor: pointer;
+  }
+
+  .viewer-btn:disabled {
+    opacity: 0.35;
+    cursor: default;
+  }
+
+  .step {
+    padding: 0;
+    font-size: 1.2rem;
+  }
+
+  /* A phone held sideways: the painting takes the height, the bar and
+     the label tuck in close. */
+  @media (max-height: 500px) {
+    .slide {
+      padding: var(--space-3) var(--space-8) var(--space-1);
+    }
+
+    .viewer-bar {
+      padding: 0 0 var(--space-2);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .track {
+      scroll-behavior: auto;
+    }
+  }
+
+  .viewer-close {
+    position: absolute;
+    top: var(--space-3);
+    right: var(--space-3);
+  }
+
   .wall {
     display: grid;
     grid-template-columns: 1fr;
@@ -72,6 +332,13 @@
     margin: 0;
     padding: 0;
     list-style: none;
+  }
+
+  /* Two columns from a phone held sideways, so a frame fits one screen. */
+  @media (min-width: 560px) {
+    .wall {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
 
   @media (min-width: 860px) {

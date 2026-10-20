@@ -7,8 +7,7 @@
     date: string;
     highlights: string[];
   };
-  export let copy:
-    { story: string; note?: string; techLine: string } | undefined = undefined;
+  export let copy: { story: string; techLine: string } | undefined = undefined;
 
   // Highlights carry **bold** markers from the résumé source. Splitting on
   // the marker and letting Svelte render each part means no HTML string is
@@ -38,15 +37,13 @@
   <div class="story">
     {#if copy}
       <p class="text">{copy.story}</p>
-      {#if copy.note}
-        <p class="note">{copy.note}</p>
-      {/if}
       <p class="tech label">{copy.techLine}</p>
     {/if}
 
     <Reveal
-      label="Read the details"
+      label="Details"
       name={item.company}
+      quiet
     >
       <ul class="details">
         {#each item.highlights as h}
@@ -108,17 +105,6 @@
     line-height: 1.6;
   }
 
-  /* Her one handwritten aside on the page. */
-  .note {
-    margin: 0;
-    font-family: var(--font-hand);
-    font-size: 1.15rem;
-    line-height: 1.3;
-    color: var(--brush);
-    transform: rotate(-1deg);
-    transform-origin: left;
-  }
-
   .tech {
     margin: var(--space-1) 0 0;
     text-transform: none;
@@ -147,7 +133,7 @@
   }
 
   .details li::marker {
-    color: var(--brush);
+    color: var(--muted);
   }
 
   @media (min-width: 900px) {

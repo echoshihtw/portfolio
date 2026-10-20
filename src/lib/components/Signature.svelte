@@ -18,14 +18,17 @@
 
 <div
   class="signature"
-  style="--sig: url('{base}/assets/signature.png')"
+  style="mask-image: url('{base}/assets/signature.png'); -webkit-mask-image: url('{base}/assets/signature.png')"
   role="img"
   aria-label={label || undefined}
   aria-hidden={label ? undefined : "true"}
 />
 
 <style>
-  /* Drawn as a mask rather than an <img>, so the ink takes the page's own
+  /* The mask's url() sits on the element itself: inside a custom property,
+     a relative url resolves against the stylesheet, not the page.
+
+     Drawn as a mask rather than an <img>, so the ink takes the page's own
      text colour. One asset works in both themes: dark strokes on a light
      ground would have vanished on the indigo one, and a CSS invert filter
      would have flattened the pencil texture that is the whole character of
@@ -35,8 +38,6 @@
     /* From the asset's own 900x458, so the box never mis-shapes the ink. */
     aspect-ratio: 900 / 458;
     background-color: var(--muted);
-    -webkit-mask-image: var(--sig);
-    mask-image: var(--sig);
     -webkit-mask-size: contain;
     mask-size: contain;
     -webkit-mask-repeat: no-repeat;

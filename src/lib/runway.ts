@@ -37,7 +37,37 @@ export function runway(cash: number, cost: number, today: Date): Runway {
   if (months === 0) {
     return { months, status: "critical", runsOut: "It runs out this month." };
   }
+  // Past a hundred years a month name means nothing, and far enough out
+  // Date has no answer at all.
+  if (months > 1200) {
+    return {
+      months,
+      status: "stable",
+      runsOut: "It lasts over a hundred years.",
+    };
+  }
   const end = new Date(today.getFullYear(), today.getMonth() + months, 1);
   const label = end.toLocaleString("en", { month: "long", year: "numeric" });
   return { months, status: statusFor(months), runsOut: `Runs out ${label}.` };
+}
+
+export type Plan = {
+  cash: number;
+  /** Fixed costs, subscriptions and the living budget, per month. */
+  monthly: number;
+  /** What is left of this month's living budget. */
+  livingLeft: number;
+};
+
+/**
+ * Runway's rule for logged spending: it uses up the living budget instead
+ * of adding to costs, so only what goes over the budget takes months.
+ */
+export function spend(plan: Plan, spent: number) {
+  const over = Math.max(0, spent - plan.livingLeft);
+  return {
+    over,
+    livingLeft: Math.max(0, plan.livingLeft - spent),
+    months: Math.floor((plan.cash - over) / plan.monthly),
+  };
 }
