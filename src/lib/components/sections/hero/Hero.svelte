@@ -173,7 +173,9 @@
     }
   }
 
-  @media (min-width: 900px) {
+  /* Three columns need 1024px: below it the list of what she owns wraps,
+     and one fact must never split across lines. */
+  @media (min-width: 1024px) {
     .hero {
       padding-top: calc(var(--section-y) * 1.4);
       padding-bottom: calc(var(--section-y) * 1.2);
@@ -200,7 +202,7 @@
     }
 
     .hero-owns {
-      grid-column: 7 / span 3;
+      grid-column: 6 / span 4;
     }
 
     .hero-links {
