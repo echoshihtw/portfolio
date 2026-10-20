@@ -43,17 +43,12 @@ export const heroConfig: {
   remoteOpen:
     "Product engineer · UTC+8 · Remote from Taiwan · APAC hours or async",
 
-  // Spells out what "end to end" means, layer by layer: named techniques
-  // pulled from real project work, not category nouns any portfolio could
-  // claim. RLS and offline-first sync are Clio's; architecture tests in CI is
-  // Clio's api-layer-only test; GHCR image deploys is the Lockerbie release
-  // pipeline.
+  // Things she made true, not tools she touched. Each is shown lower on the
+  // page: Clio's RLS, Runway's package boundaries, Lockerbie's BFF.
   owns: [
-    "React 19 UI",
-    "Postgres RLS",
-    "Offline-first sync",
-    "Architecture tests in CI",
-    "GHCR image deploys",
+    "Salon data isolated in the database",
+    "Layers that can't import each other",
+    "No credential in the browser",
   ],
 
   // Her own line, from the voice interview on 2026-10-19: "I make software

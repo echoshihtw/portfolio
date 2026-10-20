@@ -82,7 +82,6 @@ export const selectedWorkConfig = {
   priceWhy:
     "An app that counts what subscriptions cost you has no business becoming one.",
   stack: runwayEntry.stack,
-  madeWith:
-    "Vibe-coded with Claude and ChatGPT. My part was deciding what to build, and checking it.",
+  madeWith: "I had a picture of how it should be. AI made it happen faster.",
   closing: "Like how this thinks? Email me",
 };
