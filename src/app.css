@@ -531,11 +531,6 @@ canvas {
   border-image: linear-gradient(var(--smoke) 0 0) fill 0 / /0 100vmax;
 }
 
-/* Sections meet at a hairline, not a band. */
-.section_rule {
-  border-top: var(--border-w) solid var(--border);
-}
-
 /* ==========================================================================
    Motion: nothing moves for someone who asked it not to.
    ========================================================================== */

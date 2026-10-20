@@ -14,7 +14,7 @@
 
 <section
   id="projects"
-  class="section_padding section_layout section_rule"
+  class="section_padding section_layout"
   aria-labelledby="projects-title"
 >
   <SectionHead

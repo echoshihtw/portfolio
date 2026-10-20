@@ -14,7 +14,7 @@
 
 <section
   id="contact"
-  class="section_padding section_layout section_rule"
+  class="section_padding section_layout"
   aria-labelledby="contact-title"
 >
   <SectionHead
