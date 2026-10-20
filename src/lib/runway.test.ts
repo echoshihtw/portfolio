@@ -46,3 +46,10 @@ describe("runway", () => {
     );
   });
 });
+
+describe("runway with a very large balance", () => {
+  it("still says when it runs out in words, never an invalid date", () => {
+    const r = runway(9_999_999_999, 1, new Date(2026, 9, 20));
+    expect(r.runsOut).toBe("It lasts over a hundred years.");
+  });
+});

@@ -140,10 +140,10 @@
 <style>
   .runway {
     background: var(--runway-indigo);
-    color: #f2efe8;
-    --ink: #f2efe8;
-    --muted: rgb(242 239 232 / 0.72);
-    --border: rgb(242 239 232 / 0.25);
+    color: var(--runway-paper);
+    --ink: var(--runway-paper);
+    --muted: color-mix(in srgb, var(--runway-paper) 72%, transparent);
+    --border: color-mix(in srgb, var(--runway-paper) 25%, transparent);
     padding-left: 0;
     padding-right: 0;
   }
@@ -211,7 +211,7 @@
 
   .btn-mint {
     background: var(--runway-mint);
-    color: #0a150f;
+    color: var(--runway-ink);
     border-color: var(--runway-mint);
   }
 
@@ -287,21 +287,21 @@
 
   .calc {
     background: var(--runway-mint);
-    color: #0a150f;
+    color: var(--runway-ink);
     display: flex;
     flex-direction: column;
   }
 
   .calc .label {
     margin: 0 0 var(--space-3);
-    color: #0a150f;
+    color: var(--runway-ink);
   }
 
   .calc input {
     margin: var(--space-1) 0 var(--space-3);
     padding: var(--space-1) 0;
     border: 0;
-    border-bottom: 1px solid #0a150f;
+    border-bottom: 1px solid var(--runway-ink);
     background: transparent;
     color: inherit;
     font: inherit;
@@ -313,6 +313,7 @@
   }
 
   .answer-num {
+    overflow-wrap: anywhere;
     font-family: var(--font-mono);
     font-size: 3rem;
     font-weight: 600;

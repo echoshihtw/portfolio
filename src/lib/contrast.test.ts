@@ -54,13 +54,13 @@ describe("the colour bands", () => {
 
   it("paper reads on Runway's indigo", () => {
     expect(
-      contrastRatio(light("canvas"), light("runway-indigo"))
+      contrastRatio(light("runway-paper"), light("runway-indigo"))
     ).toBeGreaterThanOrEqual(4.5);
   });
 
   it("dark ink reads on a mint button", () => {
     expect(
-      contrastRatio(light("ink"), light("runway-mint"))
+      contrastRatio(light("runway-ink"), light("runway-mint"))
     ).toBeGreaterThanOrEqual(4.5);
   });
 

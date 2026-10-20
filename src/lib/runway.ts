@@ -37,6 +37,15 @@ export function runway(cash: number, cost: number, today: Date): Runway {
   if (months === 0) {
     return { months, status: "critical", runsOut: "It runs out this month." };
   }
+  // Past a hundred years a month name means nothing, and far enough out
+  // Date has no answer at all.
+  if (months > 1200) {
+    return {
+      months,
+      status: "stable",
+      runsOut: "It lasts over a hundred years.",
+    };
+  }
   const end = new Date(today.getFullYear(), today.getMonth() + months, 1);
   const label = end.toLocaleString("en", { month: "long", year: "numeric" });
   return { months, status: statusFor(months), runsOut: `Runs out ${label}.` };

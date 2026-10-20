@@ -21,6 +21,9 @@
   --surface: #ffffff;
   --runway-indigo: #262c4c;
   --runway-mint: #8fddaa;
+  /* Runway's band keeps its own text colours in both themes. */
+  --runway-paper: #f2efe8;
+  --runway-ink: #0a150f;
   --clio-number: var(--clio-ink);
   --border: rgb(23 23 20 / 0.18);
   --border-strong: var(--ink);
