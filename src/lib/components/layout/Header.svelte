@@ -145,8 +145,10 @@
     position: sticky;
     top: 0;
     z-index: 40;
-    /* Full width behind a capped bar, so content never shows beside it. */
-    border-image: linear-gradient(var(--canvas) 0 0) fill 0 / 0 / 0 100vmax;
+    /* Full width behind a capped bar, and up behind the iPhone status bar,
+       so content never shows beside or above it. */
+    border-image: linear-gradient(var(--canvas) 0 0) fill 0 / 0 / 100vmax
+      100vmax 0;
     transition: transform var(--motion-medium, 350ms) var(--motion-enter, ease);
     display: flex;
     align-items: center;
