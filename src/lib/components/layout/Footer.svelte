@@ -263,7 +263,10 @@
     text-transform: uppercase;
     color: var(--muted);
     text-decoration: none;
-    margin-bottom: 0.5rem;
+    /* The gap lives inside the link, so a thumb gets 26px to tap and the
+       rhythm stays 28px. */
+    padding: 0.2rem 0;
+    margin-bottom: 0.1rem;
     transition: color var(--dur-fast) ease;
   }
 

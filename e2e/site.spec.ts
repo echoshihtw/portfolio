@@ -255,3 +255,45 @@ test.describe("Header", () => {
     expect(await top()).toBe(0);
   });
 });
+
+test.describe("Phone", () => {
+  test.beforeEach(({ page }) => skipGate(page));
+
+  // WCAG 2.2 target size: every link and button takes a tap anywhere in a
+  // 24px band around its centre, even when it looks smaller.
+  test("every link and button is at least 24px tall to a thumb", async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto("/");
+    const small = await page.evaluate(async () => {
+      const misses: string[] = [];
+      for (const el of document.querySelectorAll<HTMLElement>(
+        "main a, main button, footer a, footer button"
+      )) {
+        if (!el.offsetParent) continue;
+        el.scrollIntoView({ block: "center", behavior: "instant" });
+        await new Promise((r) => requestAnimationFrame(r));
+        const r = el.getBoundingClientRect();
+        const x = r.left + Math.min(r.width / 2, 8);
+        const cy = r.top + r.height / 2;
+        for (const y of [cy - 11, cy + 11]) {
+          const hit = document.elementFromPoint(x, y);
+          if (
+            !hit ||
+            !(
+              el === hit ||
+              el.contains(hit) ||
+              (hit.contains(el) && hit === el)
+            )
+          ) {
+            misses.push(el.textContent!.trim().slice(0, 24));
+            break;
+          }
+        }
+      }
+      return misses;
+    });
+    expect(small).toEqual([]);
+  });
+});
