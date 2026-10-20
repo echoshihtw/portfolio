@@ -10,10 +10,6 @@
 </script>
 
 <div class="demo paper">
-  <span
-    class="tape"
-    aria-hidden="true"
-  />
   <label
     for="clio-q"
     class="label"
@@ -117,21 +113,6 @@
     color: var(--paper-grey);
   }
 
-  .tape {
-    position: absolute;
-    left: -0.75rem;
-    top: -0.6rem;
-    width: 4.5rem;
-    height: 1.25rem;
-    transform: rotate(-24deg);
-    /* Clio pink: the brand's colour for memory, used once. */
-    background: repeating-linear-gradient(
-      45deg,
-      color-mix(in srgb, var(--clio-pink) 92%, transparent) 0 8px,
-      rgba(255, 255, 255, 0.85) 8px 16px
-    );
-  }
-
   .search {
     width: 100%;
     min-height: 48px;
@@ -169,12 +150,11 @@
     cursor: pointer;
   }
 
-  /* Clio's buttons are ink with paper text. Pink stays for memory: the
-     avatar, the stylist notes and the tape. */
+  /* The client in the chair, in Clio's pink. */
   .pick[aria-pressed="true"] {
-    border-color: var(--clio-ink);
-    background: var(--clio-ink);
-    color: var(--clio-paper);
+    border-color: var(--clio-pink);
+    background: var(--clio-pink);
+    color: var(--clio-ink);
   }
 
   .result {

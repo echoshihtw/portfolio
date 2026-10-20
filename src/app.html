@@ -29,25 +29,27 @@
       type="image/png"
       href="%sveltekit.assets%/favicon.png"
     />
+    <!-- Served from the site and preloaded, so text is set in Geist from
+         the first paint and nothing moves when the font arrives. -->
     <link
-      rel="preconnect"
-      href="https://fonts.googleapis.com"
-    />
-    <link
-      rel="preconnect"
-      href="https://fonts.gstatic.com"
+      rel="preload"
+      href="%sveltekit.assets%/fonts/geist-latin.woff2"
+      as="font"
+      type="font/woff2"
       crossorigin
     />
     <link
-      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Permanent+Marker&display=swap"
-      rel="stylesheet"
+      rel="preload"
+      href="%sveltekit.assets%/fonts/geist-mono-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
     />
     <script>
       (() => {
         const key = "echo-theme";
-        // Start new visitors on paper, the theme the scrapbook is drawn
-        // for, and remember either choice. The saved preference wins
-        // regardless of OS preference.
+        // Start new visitors on paper, the light theme, and remember either
+        // choice. The saved preference wins over the OS preference.
         let theme = "light";
 
         try {

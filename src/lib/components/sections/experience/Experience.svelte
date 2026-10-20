@@ -10,7 +10,7 @@
 
 <section
   id="work"
-  class="section_padding section_layout section_rule"
+  class="section_padding section_layout section_smoke"
   aria-labelledby="work-title"
 >
   <SectionHead
@@ -51,13 +51,6 @@
     width: 100%;
   }
 
-  /* The content column starts where the section head's text starts, so
-     the number sits alone in the margin. */
-  .body {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
-  }
-
   .timeline {
     margin: 0;
     padding: 0;
@@ -73,16 +66,5 @@
   .entry:first-child {
     border-top: 0;
     padding-top: var(--space-4);
-  }
-
-  @media (min-width: 900px) {
-    .body {
-      grid-template-columns: 7rem minmax(0, 1fr);
-      gap: var(--space-6);
-    }
-
-    .body > * {
-      grid-column: 2;
-    }
   }
 </style>

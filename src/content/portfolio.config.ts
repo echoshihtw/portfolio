@@ -4,8 +4,8 @@
 //
 // Guardrails: facts, not noise · warmth via specificity · no clichés.
 
-// brush: the word the oil stroke sits under. accent: the blue full stop.
-type HeadlinePart = { text: string; accent?: boolean; brush?: boolean };
+// accent: the one word in her oxide red.
+type HeadlinePart = { text: string; accent?: boolean };
 
 // The hero's email and the close's first door are the same door: someone
 // writing from the top of the page is asking about a role. One value, read
@@ -18,7 +18,7 @@ const EMAIL = "echoshihtw@gmail.com";
 const RESUME = "Chun-Yu-Echo-Shih-Software-Engineer.pdf";
 
 export const heroConfig: {
-  remoteOpen: string;
+  remoteOpen: string[];
   owns: string[];
   headline: HeadlinePart[];
   support: string[];
@@ -40,8 +40,8 @@ export const heroConfig: {
   // and because the evidence here is scoping decisions rather than a list
   // of layers; resume.md keeps the swap list for postings that literally
   // say frontend.
-  remoteOpen:
-    "Product engineer · UTC+8 · Remote from Taiwan · APAC hours or async",
+  // Her name first: the signature in the header is not readable as one.
+  remoteOpen: ["Echo Shih", "Product engineer", "UTC+8", "Remote from Taiwan"],
 
   // Things she made true, not tools she touched. Each is shown lower on the
   // page: Clio's RLS, Runway's package boundaries, Lockerbie's BFF.
@@ -52,11 +52,10 @@ export const heroConfig: {
   ],
 
   // Her own line, from the voice interview on 2026-10-19: "I make software
-  // you don't have to learn." The accent is the full stop, as in "Just me."
+  // you don't have to learn."
   headline: [
     { text: "I make software you don't have to " },
-    { text: "learn", brush: true },
-    { text: ".", accent: true },
+    { text: "learn.", accent: true },
   ],
 
   // "Web and app" and "end to end" are hers; "frontend first" keeps her own
@@ -82,16 +81,13 @@ export const heroConfig: {
 // a subject for each kind of message.
 export const closingConfig = {
   lead: "I like to untangle things.",
-  body: "Give me the part nobody's scoped yet and I'll work out what it should be, build it, and stay with it after it ships.",
+  body: "Give me the part nobody's scoped yet and I'll work out what it should be, build it, and keep it simple enough for anyone to change.",
   email: EMAIL,
   resume: RESUME,
   heading: "Available for a role or a project",
   // One door, then a subject for each kind of message, so the inbox shows
   // which one it is before the message is opened.
-  ways: "For a role, a project, or a founding-partner seat. Or start with a subject:",
-  // How she works, said plainly: she keeps her work clean (her words,
-  // 2026-10-19), and what that means in practice.
-  team: "I work remote from Taiwan, and I like to write things down so anyone can pick up where I left off. I share work early, because the team usually sees what I miss, so tell me, and we'll fix it together.",
+  ways: "Or email",
   paths: [
     { key: "role", label: "about a role", subject: ROLE_SUBJECT },
     { key: "project", label: "about a project", subject: "Product project" },
@@ -102,15 +98,13 @@ export const closingConfig = {
 // The full formal bullets stay in resume.md and show in the "details" expander.
 // Each entry is one short paragraph with the problem and the fix inside it,
 // then the stack. Written in résumé voice: implied subject, no "I".
-// `note` is her one handwritten aside on the page, so only one entry has it.
 export const experiencePortfolio: Record<
   string,
-  { story: string; note?: string; techLine: string }
+  { story: string; techLine: string }
 > = {
   "Lockerbie Technology": {
     story:
-      "Built and operated an early-stage internal platform for the UK construction sector, as one of two engineers. Brought the other to shipping independently in two months. A backend task went from a week to two days.",
-    note: "a BFF between frontend and backend, so no credential reaches the browser",
+      "Built and operated an early-stage internal platform for the UK construction sector, as one of two engineers. Brought the other to shipping independently in two months. A backend task went from a week to two days. A BFF between frontend and backend keeps every credential out of the browser.",
     techLine:
       "Next.js App Router · TanStack Query · FastAPI · ArangoDB · RabbitMQ · Docker · GHCR",
   },

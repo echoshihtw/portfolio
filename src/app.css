@@ -11,13 +11,50 @@
    whole page by redefining a dozen lines.
    ========================================================================== */
 
+/* Geist and Geist Mono, Latin subset, served from /fonts. Each file is
+   variable, so one file covers every weight the site uses. */
+@font-face {
+  font-family: "Geist";
+  src: url("/fonts/geist-latin.woff2") format("woff2");
+  font-weight: 400 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Geist Mono";
+  src: url("/fonts/geist-mono-latin.woff2") format("woff2");
+  font-weight: 400 500;
+  font-display: swap;
+}
+
+/* Arial sized to Geist's own metrics, for the rare moment before the
+   preloaded file is ready. */
+@font-face {
+  font-family: "Geist Fallback";
+  src: local("Arial");
+  ascent-override: 95.94%;
+  descent-override: 28.16%;
+  line-gap-override: 0%;
+  size-adjust: 104.76%;
+}
+
 :root {
-  /* Colour: warm cream and dark ink carry the page. Blue is what you can
-     click. Orange-red and yellow are editorial, one moment each. Sage is
-     for the one status that means "running". */
-  --canvas: #f4f2ec;
-  --ink: #1a1a1a;
-  --surface: #faf8f2;
+  /* Colour, from her paintings: off-white paper, green-black ink, oxide red
+     for one word. Runway's indigo and mint are its own; Clio's colours come
+     from @echoshihtw/clio-brand. */
+  --canvas: #fbfaf7;
+  --smoke: #efefec;
+  --ink: #0a150f;
+  --surface: #ffffff;
+  --runway-indigo: #262c4c;
+  --runway-mint: #8fddaa;
+  /* Runway's debt gold and critical rose, from its design_system tokens. */
+  --runway-gold: #cb9a3e;
+  --runway-rose: #e8829e;
+  /* Runway's band keeps its own text colours in both themes. */
+  --runway-paper: #f2efe8;
+  --runway-ink: #0a150f;
+  --clio-number: var(--clio-ink);
   --border: rgb(23 23 20 / 0.18);
   --border-strong: var(--ink);
   --muted: rgb(23 23 20 / 0.62);
@@ -31,14 +68,9 @@
   --accent-ink: #171714;
   /* The same orange for type. #f15a3a is a fill colour: on cream it is
      2.9:1, under the 3:1 that large text needs, so words take this one. */
-  --accent-text: #dc4a2b;
+  --accent-text: #8d391e;
   --highlight: #f2c94c;
-  --sage: #a8b5a2;
   --status-live: #4f6e4a;
-  --status-progress: #735809;
-  /* The oil stroke under the hero's last word: the brush, and its light. */
-  --brush: #b4451b;
-  --brush-light: #d2652c;
   /* How her ink prints sit in the page. On paper they multiply into it; on
      the ink theme they turn to chalk lines instead. */
   --print-blend: multiply;
@@ -51,12 +83,10 @@
   --surface-bg: var(--surface);
   --section-border: var(--border);
 
-  /* Type. Geist for everything read, its mono for anything that is data,
-     and a marker for what she writes by hand: notes, never headings. */
-  --font-display: "Geist", "Helvetica Neue", Arial, sans-serif;
-  --font-body: "Geist", "Segoe UI", Roboto, sans-serif;
+  /* Type. Geist for everything read, its mono for anything that is data. */
+  --font-display: "Geist", "Geist Fallback", Arial, sans-serif;
+  --font-body: "Geist", "Geist Fallback", Arial, sans-serif;
   --font-mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
-  --font-hand: "Permanent Marker", "Comic Sans MS", cursive;
 
   --text-xs: 0.72rem;
   --text-sm: 0.84rem;
@@ -65,7 +95,6 @@
   --text-xl: 1.5rem;
   --text-2xl: clamp(1.9rem, 1.3rem + 2.4vw, 2.7rem);
   --text-3xl: clamp(2.6rem, 1.4rem + 5.2vw, 5rem);
-  --text-num: clamp(2.4rem, 1.5rem + 3vw, 4rem);
 
   --leading-tight: 1.02;
   --leading-snug: 1.2;
@@ -91,7 +120,6 @@
   --radius-sm: 6px;
   --radius-md: 12px;
   --radius-pill: 999px;
-  --radius-lg: clamp(2rem, 6vw, 4.5rem);
 
   /* Border. Thin and dark, never a shadow. */
   --border-w: 1px;
@@ -99,7 +127,6 @@
   /* Motion. Short, one easing, and nothing loops. */
   --dur-fast: 140ms;
   --dur-base: 220ms;
-  --dur-slow: 420ms;
   --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
 
   /* The site's moving parts, on Material 3's motion scale. Things arrive
@@ -108,28 +135,26 @@
   --motion-exit: cubic-bezier(0.3, 0, 0.8, 0.15);
   --motion-medium: 350ms;
   --motion-long: 500ms;
-  --motion-xlong: 800ms;
 }
 
 /* The ink theme. Same system, the ground and the ink swap, and blue and
    orange come up a step so they clear contrast on dark. No other rule in
    the site mentions the theme. */
 html[data-theme="dark"] {
-  --canvas: #171714;
-  --ink: #f3f0e8;
-  --surface: #1f1f1b;
+  /* Charcoal, no colour cast: light mode's paper and smoke, inverted. */
+  --canvas: #131312;
+  --smoke: #232321;
+  --ink: #f0eee8;
+  --surface: #232321;
+  --clio-number: #f0eee8;
   --border: rgb(243 240 232 / 0.2);
   --muted: rgb(243 240 232 / 0.66);
   --primary: #8aa1f2;
   --primary-ink: #171714;
   --accent: #f6836a;
-  --accent-text: #f6836a;
+  --accent-text: #e07a4f;
   --highlight: #f2c94c;
-  --sage: #a8b5a2;
   --status-live: #a8b5a2;
-  --status-progress: #f2c94c;
-  --brush: #e0703f;
-  --brush-light: #f08a55;
   --print-blend: screen;
   --print-filter: invert(1) contrast(1.2);
   --print-opacity: 0.16;
@@ -504,6 +529,11 @@ canvas {
   transform: translateY(2px);
 }
 
+/* The page behind an open dialog holds still. */
+html:has(dialog[open]) {
+  overflow: hidden;
+}
+
 /* ==========================================================================
    Layout
    ========================================================================== */
@@ -525,9 +555,10 @@ canvas {
   gap: var(--space-5);
 }
 
-/* Sections meet at a hairline, not a band. */
-.section_rule {
-  border-top: var(--border-w) solid var(--border);
+/* The quiet alternate ground: smoke behind every other section. */
+.section_smoke {
+  /* Full width even inside a capped section, and only sideways. */
+  border-image: linear-gradient(var(--smoke) 0 0) fill 0 / /0 100vmax;
 }
 
 /* ==========================================================================

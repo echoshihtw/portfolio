@@ -9,11 +9,18 @@
   // first, then the lead, then the notes; the longer notes and the
   // decisions open in a sheet there.
   export let project: Projects[number];
+
+  // A decision may open with **its claim**, which is set in bold.
+  const LEAD = /^\*\*(.+?)\*\*\s*/;
+  const lead = (d: string) => d.match(LEAD)?.[1] ?? "";
+  const rest = (d: string) => d.replace(LEAD, "");
   /** The project's own logo, shown beside its name. */
   export let mark: string | undefined = undefined;
   /** The product's own paper and ink for its card's back, so both sides of
       the card match. Without it the back is the site's paper. */
-  export let brand: { paper: string; ink: string } | undefined = undefined;
+  export let brand:
+    { paper: string; ink: string; number: string; touch: string } | undefined =
+    undefined;
 
   // On a wide screen "Read the decisions" turns the lead object over: the
   // decisions are written on its back, at the same size, so nothing on the
@@ -52,7 +59,13 @@
       {project.name}
     </h3>
     {#if project.statusLine}
-      <span class="label">{project.statusLine}</span>
+      <span
+        class="label status"
+        style:--touch={brand?.touch}
+        style:--touch-ink={brand?.ink}
+      >
+        {project.statusLine}
+      </span>
     {/if}
   </div>
 
@@ -94,7 +107,8 @@
         <p class="label">How it's built</p>
         <ul class="decisions">
           {#each project.highlights as decision}
-            <li>{decision}</li>
+            <!-- prettier-ignore -->
+            <li>{#if lead(decision)}<strong>{lead(decision)}</strong> {/if}{rest(decision)}</li>
           {/each}
         </ul>
         <button
@@ -109,8 +123,14 @@
   </div>
 
   <div class="notes">
-    {#if project.note}
-      <p class="note">{project.note}</p>
+    {#if project.figure}
+      <p
+        class="figure"
+        style:--figure={brand?.number}
+        style:--touch={brand?.touch}
+      >
+        {project.figure}
+      </p>
     {/if}
     {#if project.fact}
       <p class="fact">{project.fact}</p>
@@ -157,7 +177,8 @@
       >
         <ul class="decisions">
           {#each project.highlights as decision}
-            <li>{decision}</li>
+            <!-- prettier-ignore -->
+            <li>{#if lead(decision)}<strong>{lead(decision)}</strong> {/if}{rest(decision)}</li>
           {/each}
         </ul>
       </Reveal>
@@ -212,13 +233,30 @@
     line-height: 1.6;
   }
 
-  .note {
-    font-family: var(--font-hand);
-    font-size: 1.25rem;
-    line-height: 1.25;
-    color: var(--brush);
-    transform: rotate(-1deg);
-    transform-origin: left;
+  .status {
+    align-self: flex-start;
+    padding: 0 var(--space-2);
+    border: 1px solid var(--touch, var(--border));
+    border-radius: var(--radius-pill);
+    background: var(--touch, transparent);
+    color: var(--touch-ink, var(--muted));
+  }
+
+  /* The proof, large, with the brand's touch as a mark under it. */
+  /* It reads as one sentence with the fact under it, so they sit close. */
+  .notes .figure {
+    margin-bottom: calc(var(--space-2) - var(--space-3));
+    font-family: var(--font-mono);
+    font-size: clamp(3.5rem, 8vw, 4.5rem);
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: var(--figure, var(--ink));
+    text-decoration: underline;
+    text-decoration-color: var(--touch, transparent);
+    text-decoration-thickness: 0.14em;
+    text-underline-offset: -0.02em;
+    text-decoration-skip-ink: none;
   }
 
   .fact {
@@ -277,7 +315,7 @@
   }
 
   .decisions li::marker {
-    color: var(--brush);
+    color: var(--muted);
   }
 
   /* The lead and its back share one place. The back is laid over the front
@@ -337,7 +375,7 @@
   /* Her orange tick, as on the rest of the page. */
   .back .decisions li::marker {
     content: "✓  ";
-    color: var(--brush);
+    color: var(--muted);
     font-weight: 600;
   }
 

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { parseAmount, runway } from "./runway.js";
+import { parseAmount, runway, spend } from "./runway.js";
 
 const OCT_19 = new Date(2026, 9, 19);
 
@@ -44,5 +44,31 @@ describe("runway", () => {
     expect(runway(1000, 1000, new Date(2026, 0, 31)).runsOut).toBe(
       "Runs out February 2026."
     );
+  });
+});
+
+describe("runway with a very large balance", () => {
+  it("still says when it runs out in words, never an invalid date", () => {
+    const r = runway(9_999_999_999, 1, new Date(2026, 9, 20));
+    expect(r.runsOut).toBe("It lasts over a hundred years.");
+  });
+});
+
+describe("spend", () => {
+  const plan = { cash: 8400, monthly: 2800, livingLeft: 90 };
+
+  it("costs no months while it stays inside the living budget", () => {
+    expect(spend(plan, 90).months).toBe(3);
+    expect(spend(plan, 90).over).toBe(0);
+  });
+
+  it("takes months only for what goes over", () => {
+    expect(spend(plan, 105).over).toBe(15);
+    expect(spend(plan, 105).months).toBe(2);
+  });
+
+  it("says what is left of the living budget, never below nothing", () => {
+    expect(spend(plan, 30).livingLeft).toBe(60);
+    expect(spend(plan, 200).livingLeft).toBe(0);
   });
 });
