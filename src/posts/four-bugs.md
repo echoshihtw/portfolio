@@ -3,7 +3,7 @@ title: "Screenshots found what 260 tests missed"
 date: "2026-08-21"
 excerpt: "260 tests passed. Four screenshots of Clio found four bugs."
 order: 2
-draft: true
+draft: false
 ---
 
 Clio is a salon app. One salon in Tainan has used it since May 2025, with more than 600 real clients in it. 260 tests were passing. I took four screenshots of a demo salon anyway, and found four bugs.
