@@ -41,7 +41,7 @@
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-svelte": "^2.30.0",
     "postcss": "^8.4.38",
-    "prettier": "^3.1.0",
+    "prettier": "^3.9.10",
     "prettier-plugin-svelte": "^3.1.2",
     "semantic-release": "^25.0.9",
     "sirv-cli": "^3.0.0",
