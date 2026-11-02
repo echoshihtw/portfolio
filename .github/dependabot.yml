@@ -8,3 +8,8 @@ updates:
     # are pulled from npm within days. Security updates are not delayed.
     cooldown:
       default-days: 7
+    # Major versions are migrations, not bumps; plan them on their own branch.
+    # Security updates still come through.
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
