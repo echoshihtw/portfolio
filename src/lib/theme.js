@@ -43,7 +43,7 @@ export function initializeTheme() {
     if (stored === LIGHT || stored === DARK) {
       nextTheme = stored;
     }
-  } catch (_error) {
+  } catch {
     // Ignore localStorage read failures.
   }
 
@@ -64,7 +64,7 @@ theme.subscribe((value) => {
 
   try {
     localStorage.setItem(THEME_KEY, value);
-  } catch (_error) {
+  } catch {
     // Ignore localStorage write failures.
   }
 });

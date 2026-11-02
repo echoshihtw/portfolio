@@ -58,7 +58,7 @@
   function replayGate() {
     try {
       sessionStorage.removeItem("echo-gate-seen");
-    } catch (_error) {
+    } catch {
       // Ignore storage failures, the gate just won't replay.
     }
     location.reload();

@@ -22,7 +22,7 @@
   role="img"
   aria-label={label || undefined}
   aria-hidden={label ? undefined : "true"}
-/>
+></div>
 
 <style>
   /* The mask's url() sits on the element itself: inside a custom property,

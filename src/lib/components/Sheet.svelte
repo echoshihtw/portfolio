@@ -36,7 +36,6 @@
   }
 </script>
 
-<!-- svelte-ignore a11y-click-events-have-key-events a11y-no-noninteractive-element-interactions -->
 <dialog
   bind:this={dialog}
   aria-label={title}
@@ -47,7 +46,7 @@
     <span
       class="grab"
       aria-hidden="true"
-    />
+    ></span>
     <div class="top">
       <p class="title">{title}</p>
       <button

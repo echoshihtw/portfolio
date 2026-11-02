@@ -1,5 +1,4 @@
 import adapter from "@sveltejs/adapter-static";
-import preprocess from "svelte-preprocess";
 import { vitePreprocess } from "@sveltejs/vite-plugin-svelte";
 import { mdsvex } from "mdsvex";
 
@@ -41,9 +40,6 @@ const config = {
     mdsvex({
       extensions: [".md"],
       rehypePlugins: [rehypeFocusableCodeBlocks],
-    }),
-    preprocess({
-      postcss: true,
     }),
     vitePreprocess({}),
   ],

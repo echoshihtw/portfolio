@@ -9,7 +9,7 @@
   let seen = false;
   try {
     seen = sessionStorage.getItem(KEY) === "1";
-  } catch (_error) {
+  } catch {
     seen = false;
   }
 
@@ -20,7 +20,7 @@
 
   try {
     sessionStorage.setItem(KEY, "1");
-  } catch (_error) {
+  } catch {
     // Ignore storage failures, worst case the gate replays.
   }
 
@@ -54,7 +54,7 @@
       document.documentElement.classList.toggle("dark", nextTheme === "dark");
       try {
         localStorage.setItem("echo-theme", nextTheme);
-      } catch (_error) {
+      } catch {
         // Ignore storage failures, the toggle still works this visit.
       }
     });
