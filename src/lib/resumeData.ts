@@ -26,7 +26,7 @@ export const experience: ExperienceItem[] = [
     "role": "Full Stack Engineer & Founding Partner",
     "date": "Singapore · Remote · Aug 2024 – Oct 2024",
     "highlights": [
-      "Founding partner on the in-store desktop app; co-ran the scrum with the CTO. Cleared the **macOS code-signing, notarisation and auto-update** work blocking release, shipped the Electron app, documented the release steps."
+      "Founding partner on the in-store Electron app; co-ran the scrum with the CTO. Shipped it by clearing **macOS code-signing, notarisation and auto-update**, and built a **crypto checkout** via a third-party payment provider."
     ]
   },
   {
