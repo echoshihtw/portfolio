@@ -110,7 +110,7 @@ export const experiencePortfolio: Record<
   },
   "SPIN.FASHION by Lablaco": {
     story:
-      "Co-ran the team's scrum with the CTO on the in-store desktop app, remote across time zones. The macOS build couldn't ship; fixed code-signing, notarisation and auto-update, and wrote the release steps down. Built the crypto checkout on a third-party provider, payment screen to API.",
+      "Co-ran the team's scrum with the CTO on the in-store desktop app, remote across time zones. The macOS build couldn't ship; fixed code-signing, notarisation and auto-update, and wrote the release steps down. Built the blockchain payment checkout on a third-party provider, payment screen to API.",
     techLine: "React · Redux-Saga · Electron",
   },
   "Find Recruiter": {
