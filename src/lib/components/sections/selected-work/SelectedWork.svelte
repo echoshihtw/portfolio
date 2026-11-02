@@ -199,7 +199,7 @@
           class="badge"
           class:on={calmShown}
         >
-          <i aria-hidden="true" />
+          <i aria-hidden="true"></i>
           {c.calm.status}
         </span>
         <span

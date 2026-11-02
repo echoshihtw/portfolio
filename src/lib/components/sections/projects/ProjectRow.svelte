@@ -54,7 +54,7 @@
           class="mark"
           style="--mark: url('{mark}')"
           aria-hidden="true"
-        />
+        ></span>
       {/if}
       {project.name}
     </h3>
