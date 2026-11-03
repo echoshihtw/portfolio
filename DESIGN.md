@@ -60,7 +60,9 @@ a few lines opens in a sheet: the browser's own `<dialog>`, closed by Escape, a
 tap outside or its close button, focus returned to the button that opened it.
 Runway's story is a strip that scrolls sideways inside itself, with the next
 card peeking; the page itself never scrolls sideways. Every card in it is one
-visual, one hint or one control under it, a heading and one line.
+visual, one hint or one control under it, a heading and one line. A card you
+can press is named by its visible text, and its hint is its description, so
+voice control matches what the eye reads.
 
 ## Gallery
 

@@ -152,7 +152,7 @@
     <div class="item">
       <button
         class="tap"
-        aria-label="Hide the debt: cash {c.debt.cash}, owed {c.debt.owed}"
+        aria-describedby="debt-hint"
         aria-pressed={debtHidden}
         on:click={() => (debtHidden = !debtHidden)}
         on:pointerenter={(e) => (previewDebt = mouse(e))}
@@ -172,6 +172,7 @@
           </span>
         </span>
         <span
+          id="debt-hint"
           class="hint"
           aria-hidden="true"
         >
@@ -189,7 +190,7 @@
     <div class="item">
       <button
         class="tap"
-        aria-label="Let the {c.calm.status} badge breathe"
+        aria-describedby="calm-hint"
         aria-pressed={breathing}
         on:click={() => (breathing = !breathing)}
         on:pointerenter={(e) => (previewCalm = mouse(e))}
@@ -203,6 +204,7 @@
           {c.calm.status}
         </span>
         <span
+          id="calm-hint"
           class="hint"
           aria-hidden="true"
         >

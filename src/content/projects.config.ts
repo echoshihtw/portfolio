@@ -74,7 +74,7 @@ export const projectsConfig: Projects = [
     // Selected work section (selectedWork.config.ts), not in More projects.
     // The product page, not the repository: it opens on what the app does and
     // puts the App Store download first.
-    href: "https://echoshihtw.github.io/runway/",
+    href: "https://echoshihtw.github.io/runway-site/",
     stack: ["Flutter", "Dart", "Riverpod", "Drift", "SQLCipher", "RevenueCat"],
     highlights: [
       "A goal is a number of months, not an amount of money. The question was never how much I had, it was how many months it covers",
