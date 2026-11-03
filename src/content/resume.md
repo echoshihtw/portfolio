@@ -29,7 +29,7 @@
 % and Contract or partnership as two paths. A start date is a question for the
 % first email, where "immediately" is a good answer to give in person.
 {\small\color{muted}Taipei, Taiwan (UTC+8) · Remote · APAC hours or async · Open to full-time or contract}\\[1pt]
-{\small\color{muted}echoshihtw@gmail.com · linkedin.com/in/echoshihtw · github.com/echoshihtw · echoshih.com}
+{\small\color{muted}\href{mailto:echoshihtw@gmail.com}{echoshihtw@gmail.com} · \href{https://www.linkedin.com/in/echoshihtw}{linkedin.com/in/echoshihtw} · \href{https://github.com/echoshihtw}{github.com/echoshihtw} · \href{https://echoshih.com}{echoshih.com}}
 \vspace{2pt}
 ```
 
