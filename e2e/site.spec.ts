@@ -195,7 +195,7 @@ test.describe("Runway", () => {
       strip.getByRole("button", { name: /start over/i })
     ).toBeFocused();
 
-    const debt = strip.getByRole("button", { name: /debt/i });
+    const debt = strip.getByRole("button", { name: /^cash .+ owed /i });
     await expect(debt).toHaveAttribute("aria-pressed", "false");
     await debt.click();
     await expect(debt).toHaveAttribute("aria-pressed", "true");
@@ -210,7 +210,7 @@ test.describe("Runway", () => {
     await page.setViewportSize({ width: 1280, height: 900 });
     await page.goto("/");
     const strip = page.getByRole("region", { name: "How it thinks" });
-    const debt = strip.getByRole("button", { name: /debt/i });
+    const debt = strip.getByRole("button", { name: /^cash .+ owed /i });
     const pair = debt.locator(".pair");
 
     // A mouse is told to hover, not to tap.
