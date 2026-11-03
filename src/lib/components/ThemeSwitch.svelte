@@ -31,7 +31,7 @@
     for={id}
     class="theme-label chip"
   >
-    <span class="theme-core" />
+    <span class="theme-core"></span>
   </label>
 </div>
 

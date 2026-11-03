@@ -62,14 +62,25 @@
     settle = setTimeout(() => (spoken = now), 300);
   }
 
+  // Where a key press is heading. Until the smooth scroll arrives, the
+  // frames it passes through must not overwrite `at`, or a quick second
+  // press would count from a painting already left behind.
+  let target: number | null = null;
+
   function go(step: number) {
-    const i = Math.min(works.length - 1, Math.max(0, at + step));
-    track.scrollTo({ left: i * track.clientWidth });
+    const i = Math.min(works.length - 1, Math.max(0, (target ?? at) + step));
+    target = i;
     at = i;
+    track.scrollTo({ left: i * track.clientWidth });
   }
 
   function onScroll() {
-    at = Math.round(track.scrollLeft / track.clientWidth);
+    const i = Math.round(track.scrollLeft / track.clientWidth);
+    if (target !== null) {
+      if (i === target) target = null;
+      return;
+    }
+    at = i;
   }
 
   function onKey(e: KeyboardEvent) {
@@ -126,7 +137,6 @@
   {/each}
 </ul>
 
-<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
 <dialog
   class="viewer"
   bind:this={viewer}
@@ -150,6 +160,8 @@
     tabindex="0"
     bind:this={track}
     on:scroll={onScroll}
+    on:pointerdown={() => (target = null)}
+    on:wheel={() => (target = null)}
   >
     {#each works as work}
       <figure class="slide">

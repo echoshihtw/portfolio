@@ -1,4 +1,5 @@
 import { error } from "@sveltejs/kit";
+import type { Component } from "svelte";
 import type { PageLoad } from "./$types";
 
 export const prerender = true;
@@ -39,7 +40,7 @@ export const load: PageLoad = async ({ params }) => {
   }
 
   const post = (await importPost()) as {
-    default: unknown;
+    default: Component;
     metadata: PostMeta;
   };
 
