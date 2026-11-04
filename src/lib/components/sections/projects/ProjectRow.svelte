@@ -290,18 +290,26 @@
     line-height: 1.6;
   }
 
+  /* Each decision is its claim on one line and its reason under it. The gap
+     between decisions is about twice the space between their lines, so each
+     reads as one. */
   .decisions {
     margin: 0;
     padding-left: 1.1rem;
     display: grid;
-    gap: 0.4rem;
+    gap: var(--space-4);
     max-width: 62ch;
   }
 
   .decisions li {
-    font-size: var(--text-sm);
-    line-height: 1.6;
+    font-size: var(--text-base);
+    line-height: 1.5;
     color: var(--muted);
+  }
+
+  .decisions strong {
+    display: block;
+    color: var(--ink);
   }
 
   .decisions li::marker {
@@ -333,8 +341,8 @@
     inset: 0;
     display: flex;
     flex-direction: column;
-    gap: var(--space-3);
-    padding: 1.5rem 1.6rem 1.2rem;
+    gap: var(--space-4);
+    padding: var(--space-5);
     overflow-y: auto;
     background: var(--back-paper, #fffdf8);
     color: var(--paper-ink);
@@ -360,7 +368,7 @@
     color: color-mix(in srgb, var(--paper-ink) 85%, transparent);
   }
 
-  /* Her orange tick, as on the rest of the page. */
+  /* A tick for each decision, quiet so the claim leads. */
   .back .decisions li::marker {
     content: "✓  ";
     color: var(--muted);
