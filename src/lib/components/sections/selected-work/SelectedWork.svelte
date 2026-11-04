@@ -85,7 +85,7 @@
         </div>
         <div class="buy">
           <p class="price">
-            {c.price} once
+            {c.price}
             <!-- Each fact stays whole; lines break only between them. -->
             {#each c.priceFacts as fact}<span class="price-note">· {fact}</span>
               {" "}{/each}

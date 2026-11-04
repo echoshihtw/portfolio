@@ -8,11 +8,11 @@ export const selectedWorkConfig = {
     src: "assets/runway/banner.webp",
     width: 1200,
     height: 675,
-    alt: "Financial Runway on an iPhone: how long will your money last? 12 months of runway.",
+    alt: "Financial Runway: your money, counted in time. An iPhone shows the app's home, a blue circle reading 12 months until November 2027, with a Check up button.",
   },
   meta: "Financial Runway · iOS · 2026 · built solo",
-  question: "How long will your money last? One number, counted from today.",
-  price: "US$3.99",
+  question: "Your money, counted in time. One number, from today.",
+  price: "Free",
   priceFacts: ["no subscription", "no account, no bank login"],
   // The headline runway uses the store screenshot's numbers. The calculator
   // starts elsewhere, so it shows another state, not the same 12.
