@@ -148,53 +148,65 @@
       <p class="fact">{project.fact}</p>
     {/if}
     {#if project.story?.length}
-      <div class="story wide">
-        {#each project.story as paragraph}
-          <p>{paragraph}</p>
+      <!-- The first paragraph says what it is, so it is always on screen. On
+           a phone the rest opens in a sheet. -->
+      <div class="story">
+        <p>{project.story[0]}</p>
+        {#each project.story.slice(1) as paragraph}
+          <p class="wide">{paragraph}</p>
         {/each}
       </div>
     {/if}
-    <p class="tech label">{project.stack.join(" · ")}</p>
-    {#if project.href}
-      <a
-        class="link-cta"
-        href={project.href}
-        target="_blank"
-        rel="noreferrer noopener"
-      >
-        {linkText} ↗
-      </a>
-    {/if}
-    {#if project.story?.length}
-      <div class="narrow">
-        <Reveal
-          label="Read more"
-          name={project.name}
+    <!-- Each name stays whole; lines break only between them. -->
+    <p class="tech label">
+      {#each project.stack as tool, i}<span>
+          {tool}{i < project.stack.length - 1 ? " ·" : ""}
+        </span>
+        {" "}{/each}
+    </p>
+    <!-- The ways in, together on one row that wraps between them. -->
+    <div class="actions">
+      {#if project.href}
+        <a
+          class="link-cta"
+          href={project.href}
+          target="_blank"
+          rel="noreferrer noopener"
         >
-          {#each project.story as paragraph}
-            <p class="sheet-p">{paragraph}</p>
-          {/each}
+          {linkText} ↗
+        </a>
+      {/if}
+      {#if (project.story?.length ?? 0) > 1}
+        <div class="narrow">
+          <Reveal
+            label="Read more"
+            name={project.name}
+          >
+            {#each project.story?.slice(1) ?? [] as paragraph}
+              <p class="sheet-p">{paragraph}</p>
+            {/each}
+          </Reveal>
+        </div>
+      {/if}
+      {#if project.highlights?.length}
+        <Reveal
+          label="Read the decisions"
+          name="{project.name} decisions"
+          inline={false}
+          openLabel="Turn it back"
+          openArrow="↺"
+          bind:open={decisionsOpen}
+          bind:phone
+        >
+          <ul class="decisions">
+            {#each project.highlights as decision}
+              <!-- prettier-ignore -->
+              <li>{#if lead(decision)}<strong>{lead(decision)}</strong> {/if}{rest(decision)}</li>
+            {/each}
+          </ul>
         </Reveal>
-      </div>
-    {/if}
-    {#if project.highlights?.length}
-      <Reveal
-        label="Read the decisions"
-        name="{project.name} decisions"
-        inline={false}
-        openLabel="Turn it back"
-        openArrow="↺"
-        bind:open={decisionsOpen}
-        bind:phone
-      >
-        <ul class="decisions">
-          {#each project.highlights as decision}
-            <!-- prettier-ignore -->
-            <li>{#if lead(decision)}<strong>{lead(decision)}</strong> {/if}{rest(decision)}</li>
-          {/each}
-        </ul>
-      </Reveal>
-    {/if}
+      {/if}
+    </div>
   </div>
 </article>
 
@@ -284,6 +296,29 @@
 
   .link-cta {
     align-self: flex-start;
+  }
+
+  .tech span {
+    white-space: nowrap;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--space-3) var(--space-5);
+  }
+
+  .actions :global(button.reveal) {
+    margin-top: 0;
+  }
+
+  /* On a phone the "Read more" wrapper steps aside, so its link lines up
+     with the others in the row. */
+  @media (max-width: 767.98px) {
+    .actions .narrow {
+      display: contents;
+    }
   }
 
   .frame {

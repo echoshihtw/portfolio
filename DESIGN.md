@@ -55,7 +55,9 @@ Contact, the close, is the one centred section, and has words only.
 
 ## Phones
 
-Everything stacks; the label comes before the lead object. Anything longer than
+Everything stacks; the label comes before the lead object. A project's first
+paragraph says what it is, so it is always on screen; only the rest opens in a
+sheet. Anything longer than
 a few lines opens in a sheet: the browser's own `<dialog>`, closed by Escape, a
 tap outside or its close button, focus returned to the button that opened it.
 Runway's section is editorial rather than cards: the name large across the
