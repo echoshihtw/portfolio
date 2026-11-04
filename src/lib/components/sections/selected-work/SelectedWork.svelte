@@ -130,8 +130,8 @@
     margin: 0 auto;
   }
 
-  /* Phone: name, demo, notes. Wide: name and notes on one row, the demo
-     full width under them. */
+  /* Phone: name, demo, notes. Wide: the name across the top, the demo
+     beside the notes under it. */
   .lead {
     margin-top: calc(var(--space-4) + var(--space-5));
     display: grid;
@@ -247,7 +247,7 @@
   /* A hairline, the label, then the diagram and the points. No boxes: the
      lines and the space do the grouping. */
   .built {
-    margin-top: var(--space-8);
+    margin-top: var(--space-7);
     padding-top: var(--space-4);
     border-top: 1px solid var(--hairline);
     display: grid;
@@ -307,11 +307,11 @@
     .lead {
       grid-template-columns: 7fr 5fr;
       grid-template-areas:
-        "title notes"
-        "demo demo";
-      column-gap: var(--space-8);
-      row-gap: var(--space-7);
-      align-items: end;
+        "title title"
+        "demo notes";
+      column-gap: var(--space-7);
+      row-gap: var(--space-6);
+      align-items: center;
     }
 
     .notes > :last-child {
@@ -320,7 +320,7 @@
 
     .built {
       grid-template-columns: 7fr 5fr;
-      column-gap: var(--space-8);
+      column-gap: var(--space-7);
     }
 
     .built .label {
