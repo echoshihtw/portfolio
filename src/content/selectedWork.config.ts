@@ -33,7 +33,7 @@ export const selectedWorkConfig = {
     },
     {
       title: "Time is handed in, never read.",
-      body: "One function reads the clock. Tests run on Paris time, so month ends and clock changes are checked.",
+      body: "One function reads the clock. Everything else is given the time, so tests can set any date.",
     },
   ],
 };
