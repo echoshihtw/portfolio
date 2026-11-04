@@ -46,11 +46,9 @@
   --smoke: #efefec;
   --ink: #0a150f;
   --surface: #ffffff;
-  /* Runway's band is the app's ink, with its dark-theme runway blue,
-     attention and act. */
+  /* Runway's band is the app's ink, with its dark-theme runway blue and act. */
   --runway-field: #1b2638;
   --runway-blue: #9db2e0;
-  --runway-attention: #e2a54a;
   --runway-act: #ed7023;
   /* Runway's band keeps its own text colours in both themes. */
   --runway-paper: #f5f0e6;

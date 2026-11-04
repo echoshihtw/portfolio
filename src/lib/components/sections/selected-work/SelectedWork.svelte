@@ -1,45 +1,13 @@
 <script lang="ts">
-  import { onMount } from "svelte";
   import { base } from "$app/paths";
   import { selectedWorkConfig as c } from "../../../../content/selectedWork.config";
-  import { parseAmount, runway, spend } from "$lib/runway";
+  import { projectsConfig } from "../../../../content/projects.config";
   import SectionHead from "$lib/components/SectionHead.svelte";
+  import RunwayArchitecture from "./RunwayArchitecture.svelte";
 
-  const today = new Date();
-  // The headline number comes from the same rules as the cards.
-  const lead = runway(
-    parseAmount(c.lead.cash),
-    parseAmount(c.lead.cost),
-    today
-  );
-
-  const s = c.spend;
-  const plan = {
-    cash: s.cash,
-    monthly: s.rent + s.subscriptions + s.living,
-    livingLeft: s.livingLeft,
-  };
-  let spent = 0;
-  $: now = spend(plan, spent);
-  const money = (n: number) => "$" + n.toLocaleString("en");
-
-  // A click keeps a decision on; a mouse hovering only previews it. Touch
-  // and keyboard skip the preview and go straight to the click.
-  let debtHidden = false;
-  let breathing = false;
-  let previewDebt = false;
-  let previewCalm = false;
-  const mouse = (e: PointerEvent) => e.pointerType === "mouse";
-
-  // The hints name the gesture this device has.
-  let verb = "Tap";
-  onMount(() => {
-    if (matchMedia("(hover: hover) and (pointer: fine)").matches)
-      verb = "Hover";
-  });
-
-  $: debtShown = debtHidden || previewDebt;
-  $: calmShown = breathing || previewCalm;
+  // The stack is written once, on the project's card.
+  const stack =
+    projectsConfig.find((p) => p.name === c.name)?.stack.slice(0, 5) ?? [];
 
   let video: HTMLVideoElement;
   let playing = false;
@@ -110,35 +78,37 @@
         </button>
       </div>
       <div class="notes">
-        <p class="label meta">{c.meta}</p>
-        <!-- prettier-ignore -->
-        <p class="big">{lead.months}<span class="big-unit">months</span></p>
-        <div class="ask">
-          <h3>{c.question}</h3>
-          <p class="why">{c.quote}</p>
-        </div>
-        <div class="buy">
-          <p class="price">
-            {c.price}
-            <!-- Each fact stays whole; lines break only between them. -->
-            {#each c.priceFacts as fact}<span class="price-note">· {fact}</span>
-              {" "}{/each}
-          </p>
-          <a
-            class="btn btn-paper"
-            href={c.appStore}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Try it on the App Store <span aria-hidden="true">↗</span>
-          </a>
-          <p class="made">{c.madeWith}</p>
-        </div>
+        <h3>{c.name}</h3>
+        <p class="lede">{c.lede}</p>
+        <ul class="facts">
+          {#each c.facts as fact}
+            <li>
+              <b>{fact.value}</b>
+              <span>{fact.label}</span>
+            </li>
+          {/each}
+        </ul>
+        <!-- Each name stays whole; lines break only between them. -->
+        <p class="stack">
+          {#each stack as tool, i}<span>
+              {tool}{i < stack.length - 1 ? " ·" : ""}
+            </span>
+            {" "}{/each}
+        </p>
+        <a
+          class="btn btn-paper"
+          href={c.appStore}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Try it free on the App Store <span aria-hidden="true">↗</span>
+        </a>
+        <p class="note">{c.note}</p>
       </div>
     </div>
 
     <div class="strip-head">
-      <h3 class="label">How it thinks</h3>
+      <h3 class="label">How it is built</h3>
       <span
         class="label count"
         aria-hidden="true"
@@ -151,108 +121,44 @@
   <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
   <section
     class="strip"
-    aria-label="How it thinks"
+    aria-label="How it is built"
     tabindex="0"
     bind:this={strip}
     on:scroll={onScroll}
   >
-    <div class="item">
-      <div class="focal">
-        <p class="example">{s.example}</p>
-        <dl class="ledger">
-          <div>
-            <dt>Rent & bills</dt>
-            <dd>{money(s.rent + s.subscriptions)}</dd>
-          </div>
-          <div class="living">
-            <dt>Left to spend</dt>
-            <dd>{money(now.livingLeft)}</dd>
-          </div>
-        </dl>
-        <!-- prettier-ignore -->
-        <div class="spend-line" class:critical={now.months < 3} aria-live="polite"><span class="spend-months">{now.months}</span> months</div>
-        <!-- One button that changes its job, so focus stays on it. -->
-        <button
-          class="log"
-          on:click={() => (spent = now.over ? 0 : spent + s.lunch)}
-        >
-          {now.over ? "Start over" : `Log a ${money(s.lunch)} lunch`}
-        </button>
+    <div class="item wide">
+      <div class="focal"><RunwayArchitecture /></div>
+      <h4>{c.architecture.title}</h4>
+      <p>{c.architecture.body}</p>
+    </div>
+    {#each [c.privacy, c.release] as card}
+      <div class="item">
+        <div class="focal">
+          <ol class="steps">
+            {#each card.steps as step}
+              <li class={step.tone ?? ""}>
+                <span>{step.key}</span>
+                {step.text}
+              </li>
+            {/each}
+          </ol>
+        </div>
+        <h4>{card.title}</h4>
+        <p>{card.body}</p>
       </div>
-      <h4>{s.title}</h4>
-      <p>{s.body}</p>
-    </div>
-
-    <div class="item">
-      <button
-        class="tap"
-        aria-describedby="debt-hint"
-        aria-pressed={debtHidden}
-        on:click={() => (debtHidden = !debtHidden)}
-        on:pointerenter={(e) => (previewDebt = mouse(e))}
-        on:pointerleave={() => (previewDebt = false)}
-      >
-        <span
-          class="pair"
-          class:solo={debtShown}
-        >
-          <span class="cash">
-            <span class="label">Cash</span>
-            {c.debt.cash}
-          </span>
-          <span class="owed">
-            <span class="label">Owed</span>
-            {c.debt.owed}
-          </span>
-        </span>
-        <span
-          id="debt-hint"
-          class="hint"
-          aria-hidden="true"
-        >
-          {debtHidden
-            ? "You look richer than you are"
-            : previewDebt
-              ? "Click to keep it hidden"
-              : `${verb} to hide the debt`}
-        </span>
-      </button>
-      <h4>{c.debt.title}</h4>
-      <p>{c.debt.body}</p>
-    </div>
-
-    <div class="item">
-      <button
-        class="tap"
-        aria-describedby="calm-hint"
-        aria-pressed={breathing}
-        on:click={() => (breathing = !breathing)}
-        on:pointerenter={(e) => (previewCalm = mouse(e))}
-        on:pointerleave={() => (previewCalm = false)}
-      >
-        <span
-          class="badge"
-          class:on={calmShown}
-        >
-          <i aria-hidden="true"></i>
-          {c.calm.status}
-        </span>
-        <span
-          id="calm-hint"
-          class="hint"
-          aria-hidden="true"
-        >
-          {breathing
-            ? "A resting heartbeat, never faster"
-            : previewCalm
-              ? "Click to keep it breathing"
-              : `${verb} to see it breathe`}
-        </span>
-      </button>
-      <h4>{c.calm.title}</h4>
-      <p>{c.calm.body}</p>
-    </div>
+    {/each}
   </section>
+
+  <p class="inner links">
+    <a
+      href={c.site}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      The product story <span aria-hidden="true">↗</span>
+    </a>
+    <a href="#contact">Ask me for a code walkthrough</a>
+  </p>
 </section>
 
 <style>
@@ -280,23 +186,20 @@
     gap: var(--space-5);
   }
 
-  .banner {
-    width: 100%;
-    height: auto;
-    border-radius: var(--radius-md);
-  }
-
   .demo {
     position: relative;
   }
 
   .banner {
     display: block;
+    width: 100%;
+    height: auto;
     object-fit: cover;
+    border-radius: var(--radius-md);
   }
 
-  /* The one control on the demo: paper on the frame's corner, so it never
-     covers the number. */
+  /* The one control on the demo, on the frame's corner, so it never covers
+     the number. */
   .play {
     position: absolute;
     left: var(--space-3);
@@ -314,7 +217,8 @@
     cursor: pointer;
   }
 
-  .play:focus-visible {
+  .play:focus-visible,
+  .links a:focus-visible {
     outline: 2px solid var(--runway-blue);
     outline-offset: 3px;
   }
@@ -334,26 +238,7 @@
   }
 
   .notes > * {
-    margin: 0 0 var(--space-3);
-  }
-
-  .meta {
-    color: var(--muted);
-  }
-
-  .big {
-    font-family: var(--font-mono);
-    font-weight: 600;
-    font-size: clamp(5rem, 14vw, 10rem);
-    line-height: 0.9;
-    letter-spacing: -0.05em;
-    color: var(--runway-blue);
-  }
-
-  .big-unit {
-    margin-left: 0.4em;
-    font-size: 0.2em;
-    letter-spacing: 0;
+    margin: 0 0 var(--space-4);
   }
 
   h3 {
@@ -362,26 +247,51 @@
     letter-spacing: -0.02em;
   }
 
-  .why,
-  .price-note {
+  .lede {
+    font-size: var(--text-lg);
+    line-height: 1.45;
+  }
+
+  /* Three facts, one row at every width: the value big, its label under it. */
+  .facts {
+    display: flex;
+    gap: var(--space-4) var(--space-5);
+    padding: 0;
+    list-style: none;
+    font-size: var(--text-sm);
     color: var(--muted);
   }
 
-  .price {
-    font-size: var(--text-lg);
-    font-weight: 600;
+  .facts b {
+    display: block;
+    white-space: nowrap;
+    font-family: var(--font-mono);
+    font-size: clamp(var(--text-lg), 4vw, var(--text-xl));
+    font-weight: 500;
+    line-height: 1.1;
+    color: var(--runway-blue);
   }
 
-  .price-note {
-    font-size: var(--text-sm);
-    font-weight: 400;
+  .stack span,
+  .facts span {
     white-space: nowrap;
+  }
+
+  .stack {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--muted);
   }
 
   .btn-paper {
     background: var(--runway-paper);
     color: var(--runway-ink);
     border-color: var(--runway-paper);
+  }
+
+  .note {
+    font-size: var(--text-sm);
+    color: var(--muted);
   }
 
   .strip-head {
@@ -424,21 +334,30 @@
     outline-offset: 4px;
   }
 
-  /* One frame for every card: the focal point on top, then a heading and
-     one line. About four things to take in, never more. */
+  /* One frame for every card: the picture on top, then a heading and one
+     line. About four things to take in, never more. */
   .item {
-    --focal-h: 12rem;
+    --focal-h: 14rem;
     flex: 0 0 auto;
     display: flex;
     flex-direction: column;
-    width: 16.5rem;
-    min-height: 18rem;
+    width: 17rem;
     padding: var(--space-4);
     border-radius: 14px;
-    /* An outline, not a fill: Runway's gold and rose only reach 4.5:1 on
-       the band itself. */
     border: 1px solid var(--border);
     scroll-snap-align: start;
+  }
+
+  .item.wide {
+    --focal-h: 22rem;
+    width: min(18.5rem, 82vw);
+  }
+
+  .focal {
+    flex: none;
+    height: var(--focal-h);
+    display: grid;
+    place-items: center;
   }
 
   .item h4 {
@@ -452,230 +371,59 @@
     color: var(--muted);
   }
 
-  /* A fixed focal area, so every card's visual and heading line up. */
-  .tap {
-    all: unset;
-    flex: none;
-    height: var(--focal-h);
+  /* A step-by-step: the step's name, then what happens. */
+  .steps {
     display: grid;
-    place-content: center;
-    justify-items: center;
     gap: var(--space-2);
-    border-radius: var(--radius-md);
-    cursor: pointer;
-  }
-
-  /* Only the cards you can play with answer the mouse. */
-  @media (hover: hover) and (pointer: fine) {
-    .item:has(button) {
-      transition: border-color var(--motion-medium, 350ms);
-    }
-
-    .item:has(button:hover) {
-      border-color: color-mix(in srgb, var(--runway-paper) 55%, transparent);
-    }
-  }
-
-  .tap:focus-visible {
-    outline: 2px solid var(--runway-blue);
-    outline-offset: 4px;
-  }
-
-  .hint {
-    font-family: var(--font-mono);
-    font-size: var(--text-xs, 0.72rem);
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
-
-  .pair {
-    display: flex;
-    gap: var(--space-2);
-  }
-
-  .pair > span {
-    display: grid;
-    gap: var(--space-1);
-    padding: var(--space-2) var(--space-3);
-    border-radius: var(--radius-md);
-    border: 1px solid var(--border);
-    font-family: var(--font-mono);
-    font-size: var(--text-lg);
-    font-weight: 600;
-  }
-
-  .cash {
-    color: var(--runway-blue);
-  }
-
-  .owed {
-    color: var(--runway-attention);
-    transition:
-      opacity var(--motion-medium, 350ms),
-      transform var(--motion-medium, 350ms);
-  }
-
-  .pair.solo .owed {
-    opacity: 0;
-    transform: translateX(var(--space-2));
-  }
-
-  .pair .label {
-    font-size: 0.65rem;
-    color: var(--muted);
-  }
-
-  .badge {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-2);
-    padding: var(--space-2) var(--space-4);
-    border-radius: var(--radius-pill);
-    border: 1px solid var(--runway-act);
-    color: var(--runway-act);
-    font-family: var(--font-mono);
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-
-  .badge i {
-    width: 0.8rem;
-    height: 0.8rem;
-    border-radius: var(--radius-pill);
-    background: var(--runway-act);
-  }
-
-  /* Runway's own tempo: a resting heartbeat, and only after a tap. */
-  .badge.on i {
-    animation: breathe 2.8s ease-in-out infinite;
-  }
-
-  @keyframes breathe {
-    50% {
-      box-shadow: 0 0 0 0.7rem
-        color-mix(in srgb, var(--runway-act) 0%, transparent);
-    }
-    0%,
-    100% {
-      box-shadow: 0 0 0 0 color-mix(in srgb, var(--runway-act) 55%, transparent);
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .badge.on i {
-      animation: none;
-      box-shadow: 0 0 0 0.35rem
-        color-mix(in srgb, var(--runway-act) 30%, transparent);
-    }
-  }
-
-  .ask .why {
-    margin-top: var(--space-1);
-  }
-
-  .buy {
-    display: grid;
-    justify-items: start;
-    gap: var(--space-2);
-    margin-top: var(--space-4);
-  }
-
-  .buy .price {
-    margin: 0;
-  }
-
-  .made {
-    margin: 0;
-    font-size: var(--text-sm);
-    color: var(--muted);
-  }
-
-  /* The spending card: rent and bills, what is left to live on, and
-     the months, which hold still until the living budget runs out. */
-  .focal {
-    display: grid;
-    align-content: center;
-    justify-items: center;
-    gap: var(--space-2);
-    height: var(--focal-h);
-  }
-
-  .example {
-    margin: 0;
-    font-family: var(--font-mono);
-    font-size: var(--text-xs, 0.72rem);
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
-
-  /* Read like a receipt: label left, amount right, one row each. */
-  .ledger {
-    display: grid;
-    gap: var(--space-1);
     width: 100%;
     margin: 0;
+    padding: 0;
+    list-style: none;
     font-family: var(--font-mono);
-  }
-
-  .ledger div {
-    display: flex;
-    justify-content: space-between;
-    gap: var(--space-3);
-    padding-bottom: var(--space-1);
-    border-bottom: 1px solid var(--border);
+    font-size: var(--text-sm);
     color: var(--muted);
   }
 
-  .ledger dt {
-    font-size: var(--text-sm);
+  .steps li {
+    display: grid;
+    grid-template-columns: 5rem 1fr;
+    gap: var(--space-3);
+    align-items: baseline;
+    padding-left: var(--space-3);
+    border-left: 1px solid var(--border);
   }
 
-  .ledger dd {
-    margin: 0;
-    font-weight: 600;
+  .steps span {
+    color: var(--runway-paper);
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
   }
 
-  .ledger .living {
+  .steps .ok,
+  .steps .ok span {
     color: var(--runway-blue);
+    border-color: var(--runway-blue);
   }
 
-  .spend-line {
-    font-family: var(--font-mono);
-    color: var(--runway-blue);
-  }
-
-  /* Runway turns critical under three months, in the same rose. */
-  .spend-line.critical {
+  .steps .no,
+  .steps .no span {
     color: var(--runway-act);
+    border-color: var(--runway-act);
   }
 
-  .spend-months {
-    font-size: 2.75rem;
-    line-height: 1;
-    font-weight: 600;
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-5);
+    margin-top: var(--space-5);
   }
 
-  .log {
-    padding: var(--space-1) var(--space-3);
-    border: 1px solid var(--runway-blue);
-    border-radius: var(--radius-pill);
-    background: none;
-    color: var(--runway-blue);
-    font-family: var(--font-mono);
-    font-size: var(--text-sm);
-    cursor: pointer;
-  }
-
-  .log:hover {
-    background: color-mix(in srgb, var(--runway-blue) 14%, transparent);
-  }
-
-  .log:focus-visible {
-    outline: 2px solid var(--runway-blue);
-    outline-offset: 3px;
+  .links a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    color: var(--runway-paper);
   }
 
   @media (min-width: 640px) {
@@ -695,18 +443,22 @@
       gap: var(--space-7);
       align-items: center;
     }
+  }
 
-    /* All three fit, so nothing scrolls and nothing counts. */
+  /* All three fit, so nothing scrolls and nothing counts. */
+  @media (min-width: 1100px) {
     .strip {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: 1.5fr 1fr 1fr;
       overflow: visible;
       max-width: var(--content-max);
       margin: 0 auto;
       padding: 0 var(--space-6);
     }
 
-    .item {
+    .item,
+    .item.wide {
+      --focal-h: 15rem;
       width: auto;
     }
 

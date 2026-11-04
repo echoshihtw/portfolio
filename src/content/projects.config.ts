@@ -80,7 +80,7 @@ export const projectsConfig: Projects = [
       "A goal is a number of months, not an amount of money. The question was never how much I had, it was how many months it covers",
       "Logged spending uses up its budget instead of adding to it. Monthly costs only rise when a budget is overspent, so a lunch never counts twice",
       "Runway counts from today. The rest of this month costs what's left of its budget, not a whole month that's already partly paid",
-      "The layers are separate Dart packages and can't import each other. A boundary violation is a compile error",
+      "The layers are separate Dart packages and can't import each other. A boundary violation fails CI",
       "Financial data never leaves the device. The app checks the database is actually encrypted every time it opens, instead of trusting the build settings",
     ],
     resume: {

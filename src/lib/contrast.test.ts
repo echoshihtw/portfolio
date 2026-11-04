@@ -64,14 +64,11 @@ describe("the colour bands", () => {
     ).toBeGreaterThanOrEqual(4.5);
   });
 
-  it.each([["runway-attention"], ["runway-act"]])(
-    "%s reads on Runway's ink field",
-    (name) => {
-      expect(
-        contrastRatio(light(name), light("runway-field"))
-      ).toBeGreaterThanOrEqual(4.5);
-    }
-  );
+  it.each([["runway-act"]])("%s reads on Runway's ink field", (name) => {
+    expect(
+      contrastRatio(light(name), light("runway-field"))
+    ).toBeGreaterThanOrEqual(4.5);
+  });
 
   it("Clio's ink reads on Clio's pink", () => {
     expect(contrastRatio(clio.ink, clio.pink)).toBeGreaterThanOrEqual(4.5);

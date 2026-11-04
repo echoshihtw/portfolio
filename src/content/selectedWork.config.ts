@@ -1,11 +1,10 @@
-// Selected work: Financial Runway, plainly, then a strip of how it thinks.
-// The copy is hers.
-const APP_STORE = "https://apps.apple.com/app/id6778675088";
-
+// Selected work: Financial Runway, told as how it is built. The demo shows the
+// product; the cards show the engineering. The copy is hers.
 export const selectedWorkConfig = {
-  appStore: APP_STORE,
+  appStore: "https://apps.apple.com/app/id6778675088",
+  site: "https://echoshihtw.github.io/runway-site/",
   // A short recording of the real app, played on a tap. The still frame is
-  // the app's home, the same 12 months the notes show.
+  // the app's home.
   demo: {
     src: "assets/runway/demo.mp4",
     poster: "assets/runway/demo-poster.webp",
@@ -14,41 +13,38 @@ export const selectedWorkConfig = {
     label:
       "Financial Runway on an iPhone: the app's home, a blue circle reading 12 months until November 2027, with a Check up button.",
   },
-  meta: "Financial Runway · iOS · 2026 · built solo",
-  question: "Your money, counted in time. One number, from today.",
-  price: "Free",
-  priceFacts: ["no subscription", "no account, no bank login"],
-  // The headline runway uses the store screenshot's numbers. The calculator
-  // starts elsewhere, so it shows another state, not the same 12.
-  lead: { cash: "34,336", cost: "2,803" },
-  // The spending card: the store screenshot's costs (rent and fixed 1,450,
-  // subscriptions and loans 253, living budget 1,100: 2,803 a month), late
-  // in a tighter month. Cash sits just above three months, so six lunches
-  // fit the budget and the seventh, $15 over, drops it to two.
-  spend: {
-    example: "Example: end of the month",
-    cash: 8420,
-    rent: 1450,
-    subscriptions: 253,
-    living: 1100,
-    livingLeft: 90,
-    lunch: 15,
-    title: "Spending what you planned costs you nothing.",
-    body: "Your months fall only when you go over.",
+  name: "Financial Runway",
+  lede: "An iPhone app that counts your money in time. I designed, built and ship it alone, on the same process a team would use.",
+  // Facts a recruiter and a CTO both read at a glance; none goes out of date
+  // with the next commit.
+  facts: [
+    { value: "Live", label: "since Oct 2026" },
+    { value: "6", label: "languages" },
+    { value: "Every PR", label: "gated by CI" },
+  ],
+  note: "I direct AI and check its work with tests and review. Every change still goes through a PR.",
+  architecture: {
+    title: "Layers that can't leak.",
+    body: "A pure core holds the rules. Everything else, from the database to the App Store, plugs in through its interfaces, and a wrong import fails CI.",
   },
-  // Her words, cut to the one line a visitor reads.
-  quote: "I built something I would use.",
-  // The two decisions a visitor can try, with the store screenshot's figures.
-  debt: {
-    cash: "$34,336",
-    owed: "$17,790",
-    title: "What you owe sits next to what you have.",
-    body: "A loan raises your cash. Without the debt beside it, the number would lie.",
+  privacy: {
+    steps: [
+      { key: "Open", text: "the app" },
+      { key: "Ask", text: "PRAGMA cipher_version" },
+      { key: "Answer", text: "start", tone: "ok" },
+      { key: "None", text: "stop, never plain SQLite", tone: "no" },
+    ],
+    title: "Privacy checked, not assumed.",
+    body: "No account, no bank login. The app proves its database is encrypted each time it opens, instead of trusting the build.",
   },
-  calm: {
-    status: "Critical",
-    title: "It stays calm when money is short.",
-    body: "Soft pink, never alarm red.",
+  release: {
+    steps: [
+      { key: "PR", text: "CI: analyze, test, privacy" },
+      { key: "Staging", text: "tested on a build" },
+      { key: "Main", text: "merge commit" },
+      { key: "Tag", text: "the version, from the commits", tone: "ok" },
+    ],
+    title: "Releases without ceremony.",
+    body: "A merge to main tags and ships. The version comes from the commit messages, so nobody guesses it.",
   },
-  madeWith: "I had a picture of how it should be. AI made it happen faster.",
 };
