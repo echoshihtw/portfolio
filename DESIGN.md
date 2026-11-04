@@ -85,6 +85,10 @@ Nothing moves on its own. The header steps aside while you scroll down and
 returns on any scroll up. Things move only when someone taps: a sheet rises, a
 card turns. Reduced motion swaps every movement for an instant change.
 
+The cover shows once per tab, on the home page only. Enter, a scroll, a swipe up
+or a key down enters it, and its red full stop travels to the full stop of
+"learn." while the headline arrives around it.
+
 ## Checks for every change
 
 - Does it make her more trustworthy, or less?
