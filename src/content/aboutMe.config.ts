@@ -34,7 +34,7 @@ export const aboutMeConfig = {
     {
       // Her view, in her words, cut to three sentences on 2026-11-04.
       label: "With AI",
-      text: "AI lets me try more ideas, and build and see them faster. It won't make software safer on its own: we broke things before AI, and we still will. Knowing how to prevent it is what an engineer brings.",
+      text: "AI lets me try more ideas, and build and see them faster. It's still a tool: the vision is ours. We broke things before AI and we still will, so knowing how to prevent it is what an engineer brings.",
     },
     {
       label: "Outside work",
