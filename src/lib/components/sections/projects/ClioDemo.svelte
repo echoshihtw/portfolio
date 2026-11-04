@@ -104,9 +104,8 @@
     background: var(--clio-paper);
     color: var(--paper-ink);
     border-radius: 10px;
-    box-shadow:
-      0 2px 0 rgba(0, 0, 0, 0.04),
-      0 12px 28px rgba(60, 40, 10, 0.12);
+    /* a hairline, not a shadow: the page groups by lines and space */
+    border: 1px solid var(--border);
   }
 
   .demo .label {

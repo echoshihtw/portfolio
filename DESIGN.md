@@ -24,13 +24,13 @@ The tokens live in `src/app.css`. This file says how to use them.
 
 Every colour has a job. Nothing is decoration.
 
-| Token                             | Job                                                                                    |
-| --------------------------------- | -------------------------------------------------------------------------------------- |
-| `--canvas`, `--smoke`             | the page, and every other section                                                      |
-| `--ink`, `--muted`                | text                                                                                   |
-| `--accent-text`                   | her oxide red, on the one word "learn." only                                           |
-| `--runway-field`, `--runway-blue` | Runway's band: the page's one strong colour field, in the app's own ink and blue       |
-| `--clio-pink`, `--clio-number`    | Clio's touch: its tag, the client in the chair, the mark under 603. Never a background |
+| Token                             | Job                                                                              |
+| --------------------------------- | -------------------------------------------------------------------------------- |
+| `--canvas`, `--smoke`             | the page, and every other section                                                |
+| `--ink`, `--muted`                | text                                                                             |
+| `--accent-text`                   | her oxide red, on the one word "learn." only                                     |
+| `--runway-field`, `--runway-blue` | Runway's band: the page's one strong colour field, in the app's own ink and blue |
+| `--clio-pink`, `--clio-number`    | Clio's touch: the client in the chair, the mark under 603. Never a background    |
 
 Each app brings its own feeling in its own colours. Archived work gets none.
 Every text pair clears 4.5:1 in both themes; `src/lib/contrast.test.ts` holds

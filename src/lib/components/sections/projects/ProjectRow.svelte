@@ -59,11 +59,7 @@
       {project.name}
     </h3>
     {#if project.statusLine}
-      <span
-        class="label status"
-        style:--touch={brand?.touch}
-        style:--touch-ink={brand?.ink}
-      >
+      <span class="label status">
         {project.statusLine}
       </span>
     {/if}
@@ -233,13 +229,9 @@
     line-height: 1.6;
   }
 
+  /* Said in words, like the rest of the page, not set in a pill. */
   .status {
-    align-self: flex-start;
-    padding: 0 var(--space-2);
-    border: 1px solid var(--touch, var(--border));
-    border-radius: var(--radius-pill);
-    background: var(--touch, transparent);
-    color: var(--touch-ink, var(--muted));
+    color: var(--muted);
   }
 
   /* The proof, large, with the brand's touch as a mark under it. */
@@ -282,9 +274,7 @@
     padding: 0.5rem;
     background: #fffdf8;
     border-radius: 6px;
-    box-shadow:
-      0 2px 0 rgba(0, 0, 0, 0.04),
-      0 12px 28px rgba(60, 40, 10, 0.1);
+    border: 1px solid var(--border);
   }
 
   .frame img {
@@ -349,9 +339,7 @@
     background: var(--back-paper, #fffdf8);
     color: var(--paper-ink);
     border-radius: 10px;
-    box-shadow:
-      0 2px 0 rgba(0, 0, 0, 0.04),
-      0 12px 28px rgba(60, 40, 10, 0.12);
+    border: 1px solid var(--border);
     transform: rotateY(180deg);
   }
 
