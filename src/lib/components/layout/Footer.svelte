@@ -262,7 +262,7 @@
        rhythm stays 28px. */
     padding: 0.2rem 0;
     margin-bottom: 0.1rem;
-    transition: color var(--dur-fast) ease;
+    transition: color var(--motion-short) ease;
   }
 
   .footer-nav a:hover {
@@ -332,8 +332,8 @@
     font-size: 1.1rem;
     color: var(--muted);
     transition:
-      color var(--dur-fast) ease,
-      border-color var(--dur-fast) ease;
+      color var(--motion-short) ease,
+      border-color var(--motion-short) ease;
   }
 
   .footer-top:hover,

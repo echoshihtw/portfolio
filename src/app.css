@@ -123,17 +123,15 @@
   /* Border. Thin and dark, never a shadow. */
   --border-w: 1px;
 
-  /* Motion. Short, one easing, and nothing loops. */
-  --dur-fast: 140ms;
-  --dur-base: 220ms;
-  --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
-
-  /* The site's moving parts, on Material 3's motion scale. Things arrive
-     slowing down and leave speeding up, and leaving is always quicker. */
+  /* Motion: one scale for the whole site, on Material 3's steps. Things
+     arrive slowing down and leave speeding up, and leaving is quicker. The
+     cover (static/boot-gate.*) reads these too. Nothing loops. */
+  --motion-short: 150ms; /* hovers, a press, the cover leaving */
+  --motion-base: 250ms; /* a sheet or a detail opening, words arriving */
+  --motion-medium: 350ms; /* the header stepping aside */
+  --motion-long: 450ms; /* a card turning, the cover's dot travelling */
   --motion-enter: cubic-bezier(0.05, 0.7, 0.1, 1);
   --motion-exit: cubic-bezier(0.3, 0, 0.8, 0.15);
-  --motion-medium: 350ms;
-  --motion-long: 500ms;
 }
 
 /* The ink theme. Same system, the ground and the ink swap, and blue and
@@ -190,8 +188,8 @@ body {
   background: var(--canvas);
   color: var(--ink);
   transition:
-    background-color var(--dur-base) ease,
-    color var(--dur-base) ease;
+    background-color var(--motion-base) ease,
+    color var(--motion-base) ease;
 }
 
 /* Paper grain. A fixed overlay well below where it reads as texture; it
@@ -234,9 +232,9 @@ a {
 a,
 button {
   transition:
-    color var(--dur-fast) ease,
-    border-color var(--dur-fast) ease,
-    background-color var(--dur-fast) ease;
+    color var(--motion-short) ease,
+    border-color var(--motion-short) ease,
+    background-color var(--motion-short) ease;
 }
 
 a:focus-visible,
@@ -365,9 +363,9 @@ canvas {
   white-space: nowrap;
   cursor: pointer;
   transition:
-    transform var(--dur-fast) ease,
-    background-color var(--dur-fast) ease,
-    border-color var(--dur-fast) ease;
+    transform var(--motion-short) ease,
+    background-color var(--motion-short) ease,
+    border-color var(--motion-short) ease;
 }
 
 .btn:hover,
@@ -450,8 +448,8 @@ canvas {
   white-space: nowrap;
   cursor: pointer;
   transition:
-    color var(--dur-fast) ease,
-    border-color var(--dur-fast) ease;
+    color var(--motion-short) ease,
+    border-color var(--motion-short) ease;
 }
 
 /* The touch target, invisible: 48px tall around a 20px link. */
@@ -483,9 +481,9 @@ canvas {
   color: var(--ink);
   cursor: pointer;
   transition:
-    border-color var(--dur-fast) ease,
-    color var(--dur-fast) ease,
-    background-color var(--dur-fast) ease;
+    border-color var(--motion-short) ease,
+    color var(--motion-short) ease,
+    background-color var(--motion-short) ease;
 }
 
 .chip::after {
@@ -515,7 +513,7 @@ canvas {
 /* The arrow inside any of them nudges the way it points. */
 .cta-arrow {
   display: inline-block;
-  transition: transform var(--dur-fast) ease;
+  transition: transform var(--motion-short) ease;
 }
 
 .btn:hover .cta-arrow,

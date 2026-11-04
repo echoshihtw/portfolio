@@ -78,16 +78,30 @@
     flyer.style.transformOrigin = `${start.left - box.left}px ${start.top - box.top}px`;
     dot.style.visibility = "hidden";
 
+    // The site's motion scale, from app.css, with the cover's own fallbacks.
+    const root = getComputedStyle(document.documentElement);
+    const ms = (name, fallback) =>
+      parseFloat(root.getPropertyValue(name)) || fallback;
+    const short = ms("--motion-short", 150);
+    const long = ms("--motion-long", 450);
+    const base = ms("--motion-base", 250);
+    const enter =
+      root.getPropertyValue("--motion-enter").trim() ||
+      "cubic-bezier(.05,.7,.1,1)";
+    const exit =
+      root.getPropertyValue("--motion-exit").trim() ||
+      "cubic-bezier(.3,0,.8,.15)";
+
     const scale = to.height / start.height;
     const leave = {
-      duration: 150,
-      easing: "cubic-bezier(.3,0,.8,.15)",
+      duration: short,
+      easing: exit,
       fill: "forwards",
     };
     const arrive = {
-      duration: 450,
-      delay: 150,
-      easing: "cubic-bezier(.05,.7,.1,1)",
+      duration: long,
+      delay: short,
+      easing: enter,
       fill: "forwards",
     };
     hero.style.opacity = "0";
@@ -106,8 +120,8 @@
       .finished.then(() => {
         hero
           .animate([{ opacity: 0 }, { opacity: 1 }], {
-            duration: 250,
-            easing: "ease-out",
+            duration: base,
+            easing: enter,
             fill: "forwards",
           })
           .finished.then(() => {

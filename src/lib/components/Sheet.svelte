@@ -81,7 +81,7 @@
   }
 
   dialog[open] {
-    animation: rise 0.28s var(--ease-out);
+    animation: rise var(--motion-base) var(--motion-enter);
   }
 
   @keyframes rise {

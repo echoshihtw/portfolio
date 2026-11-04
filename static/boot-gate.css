@@ -18,7 +18,7 @@
   overflow: hidden;
   background: var(--gate-canvas);
   color: var(--gate-ink);
-  transition: opacity 380ms ease;
+  transition: opacity var(--motion-medium, 350ms) var(--motion-exit, ease);
 }
 
 html[data-theme="dark"] #boot-gate {
@@ -101,7 +101,7 @@ html[data-theme="dark"] #boot-gate {
   font-size: 0.75rem;
   letter-spacing: 0.03em;
   cursor: pointer;
-  transition: transform 160ms ease;
+  transition: transform var(--motion-short, 150ms) ease;
 }
 
 html[data-theme="dark"] .gate-enter {
@@ -119,7 +119,7 @@ html[data-theme="dark"] .gate-enter {
 
 .gate-enter span {
   display: inline-block;
-  transition: transform 160ms ease;
+  transition: transform var(--motion-short, 150ms) ease;
 }
 
 .gate-enter:hover span {
@@ -156,8 +156,8 @@ html[data-theme="dark"] .gate-enter {
   background: transparent;
   cursor: pointer;
   transition:
-    transform 160ms ease,
-    border-color 160ms ease;
+    transform var(--motion-short, 150ms) ease,
+    border-color var(--motion-short, 150ms) ease;
 }
 
 .gate-theme-label:hover {
