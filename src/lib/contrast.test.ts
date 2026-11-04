@@ -46,29 +46,29 @@ describe.each([
 });
 
 describe("the colour bands", () => {
-  it("mint reads on Runway's indigo", () => {
+  it("runway blue reads on Runway's ink field", () => {
     expect(
-      contrastRatio(light("runway-mint"), light("runway-indigo"))
+      contrastRatio(light("runway-blue"), light("runway-field"))
     ).toBeGreaterThanOrEqual(4.5);
   });
 
-  it("paper reads on Runway's indigo", () => {
+  it("paper reads on Runway's ink field", () => {
     expect(
-      contrastRatio(light("runway-paper"), light("runway-indigo"))
+      contrastRatio(light("runway-paper"), light("runway-field"))
     ).toBeGreaterThanOrEqual(4.5);
   });
 
-  it("dark ink reads on a mint button", () => {
+  it("ink reads on a paper button", () => {
     expect(
-      contrastRatio(light("runway-ink"), light("runway-mint"))
+      contrastRatio(light("runway-ink"), light("runway-paper"))
     ).toBeGreaterThanOrEqual(4.5);
   });
 
-  it.each([["runway-gold"], ["runway-rose"]])(
-    "%s reads on Runway's indigo",
+  it.each([["runway-attention"], ["runway-act"]])(
+    "%s reads on Runway's ink field",
     (name) => {
       expect(
-        contrastRatio(light(name), light("runway-indigo"))
+        contrastRatio(light(name), light("runway-field"))
       ).toBeGreaterThanOrEqual(4.5);
     }
   );

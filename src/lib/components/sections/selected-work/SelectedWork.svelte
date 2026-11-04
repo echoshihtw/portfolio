@@ -41,6 +41,18 @@
   $: debtShown = debtHidden || previewDebt;
   $: calmShown = breathing || previewCalm;
 
+  let video: HTMLVideoElement;
+  let playing = false;
+  function playDemo() {
+    playing = true;
+    video.play();
+  }
+  function stopDemo() {
+    playing = false;
+    video.pause();
+    video.load(); // back to the still frame
+  }
+
   // Which card is in view, for the counter on narrow screens.
   let strip: HTMLElement;
   let at = 0;
@@ -68,13 +80,35 @@
     </SectionHead>
 
     <div class="lead">
-      <img
-        class="banner"
-        src="{base}/{c.banner.src}"
-        alt={c.banner.alt}
-        width={c.banner.width}
-        height={c.banner.height}
-      />
+      <!-- The demo plays only when asked, and returns to its still frame. -->
+      <div class="demo">
+        <video
+          class="banner"
+          bind:this={video}
+          src="{base}/{c.demo.src}"
+          poster="{base}/{c.demo.poster}"
+          width={c.demo.width}
+          height={c.demo.height}
+          aria-label={c.demo.label}
+          muted
+          playsinline
+          preload="none"
+          on:ended={stopDemo}
+        ></video>
+        <button
+          class="play"
+          type="button"
+          on:click={playing ? stopDemo : playDemo}
+        >
+          <span
+            class="play-icon"
+            aria-hidden="true"
+          >
+            {playing ? "■" : "▶"}
+          </span>
+          {playing ? "Stop the demo" : "Watch it work"}
+        </button>
+      </div>
       <div class="notes">
         <p class="label meta">{c.meta}</p>
         <!-- prettier-ignore -->
@@ -91,7 +125,7 @@
               {" "}{/each}
           </p>
           <a
-            class="btn btn-mint"
+            class="btn btn-paper"
             href={c.appStore}
             target="_blank"
             rel="noopener noreferrer"
@@ -223,7 +257,7 @@
 
 <style>
   .runway {
-    background: var(--runway-indigo);
+    background: var(--runway-field);
     color: var(--runway-paper);
     --ink: var(--runway-paper);
     --muted: color-mix(in srgb, var(--runway-paper) 72%, transparent);
@@ -252,6 +286,53 @@
     border-radius: var(--radius-md);
   }
 
+  .demo {
+    position: relative;
+  }
+
+  .banner {
+    display: block;
+    object-fit: cover;
+  }
+
+  /* The one control on the demo: paper on the frame's corner, so it never
+     covers the number. */
+  .play {
+    position: absolute;
+    left: var(--space-3);
+    bottom: var(--space-3);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    min-height: 44px;
+    padding: 0 var(--space-4);
+    border: 0;
+    border-radius: 999px;
+    background: var(--runway-ink);
+    color: var(--runway-paper);
+    font: inherit;
+    cursor: pointer;
+  }
+
+  .play:focus-visible {
+    outline: 2px solid var(--runway-blue);
+    outline-offset: 3px;
+  }
+
+  .play-icon {
+    font-size: 0.8em;
+  }
+
+  /* On a narrow frame the corner is the phone itself, so it sits underneath. */
+  @media (max-width: 600px) {
+    .play {
+      position: static;
+      margin-top: var(--space-3);
+      /* on the band it needs its own edge */
+      border: 1px solid color-mix(in srgb, var(--runway-paper) 55%, transparent);
+    }
+  }
+
   .notes > * {
     margin: 0 0 var(--space-3);
   }
@@ -266,7 +347,7 @@
     font-size: clamp(5rem, 14vw, 10rem);
     line-height: 0.9;
     letter-spacing: -0.05em;
-    color: var(--runway-mint);
+    color: var(--runway-blue);
   }
 
   .big-unit {
@@ -297,10 +378,10 @@
     white-space: nowrap;
   }
 
-  .btn-mint {
-    background: var(--runway-mint);
+  .btn-paper {
+    background: var(--runway-paper);
     color: var(--runway-ink);
-    border-color: var(--runway-mint);
+    border-color: var(--runway-paper);
   }
 
   .strip-head {
@@ -339,7 +420,7 @@
   }
 
   .strip:focus-visible {
-    outline: 2px solid var(--runway-mint);
+    outline: 2px solid var(--runway-blue);
     outline-offset: 4px;
   }
 
@@ -396,7 +477,7 @@
   }
 
   .tap:focus-visible {
-    outline: 2px solid var(--runway-mint);
+    outline: 2px solid var(--runway-blue);
     outline-offset: 4px;
   }
 
@@ -425,11 +506,11 @@
   }
 
   .cash {
-    color: var(--runway-mint);
+    color: var(--runway-blue);
   }
 
   .owed {
-    color: var(--runway-gold);
+    color: var(--runway-attention);
     transition:
       opacity var(--motion-medium, 350ms),
       transform var(--motion-medium, 350ms);
@@ -451,8 +532,8 @@
     gap: var(--space-2);
     padding: var(--space-2) var(--space-4);
     border-radius: var(--radius-pill);
-    border: 1px solid var(--runway-rose);
-    color: var(--runway-rose);
+    border: 1px solid var(--runway-act);
+    color: var(--runway-act);
     font-family: var(--font-mono);
     font-weight: 600;
     letter-spacing: 0.08em;
@@ -463,7 +544,7 @@
     width: 0.8rem;
     height: 0.8rem;
     border-radius: var(--radius-pill);
-    background: var(--runway-rose);
+    background: var(--runway-act);
   }
 
   /* Runway's own tempo: a resting heartbeat, and only after a tap. */
@@ -474,12 +555,11 @@
   @keyframes breathe {
     50% {
       box-shadow: 0 0 0 0.7rem
-        color-mix(in srgb, var(--runway-rose) 0%, transparent);
+        color-mix(in srgb, var(--runway-act) 0%, transparent);
     }
     0%,
     100% {
-      box-shadow: 0 0 0 0
-        color-mix(in srgb, var(--runway-rose) 55%, transparent);
+      box-shadow: 0 0 0 0 color-mix(in srgb, var(--runway-act) 55%, transparent);
     }
   }
 
@@ -487,7 +567,7 @@
     .badge.on i {
       animation: none;
       box-shadow: 0 0 0 0.35rem
-        color-mix(in srgb, var(--runway-rose) 30%, transparent);
+        color-mix(in srgb, var(--runway-act) 30%, transparent);
     }
   }
 
@@ -559,17 +639,17 @@
   }
 
   .ledger .living {
-    color: var(--runway-mint);
+    color: var(--runway-blue);
   }
 
   .spend-line {
     font-family: var(--font-mono);
-    color: var(--runway-mint);
+    color: var(--runway-blue);
   }
 
   /* Runway turns critical under three months, in the same rose. */
   .spend-line.critical {
-    color: var(--runway-rose);
+    color: var(--runway-act);
   }
 
   .spend-months {
@@ -580,21 +660,21 @@
 
   .log {
     padding: var(--space-1) var(--space-3);
-    border: 1px solid var(--runway-mint);
+    border: 1px solid var(--runway-blue);
     border-radius: var(--radius-pill);
     background: none;
-    color: var(--runway-mint);
+    color: var(--runway-blue);
     font-family: var(--font-mono);
     font-size: var(--text-sm);
     cursor: pointer;
   }
 
   .log:hover {
-    background: color-mix(in srgb, var(--runway-mint) 14%, transparent);
+    background: color-mix(in srgb, var(--runway-blue) 14%, transparent);
   }
 
   .log:focus-visible {
-    outline: 2px solid var(--runway-mint);
+    outline: 2px solid var(--runway-blue);
     outline-offset: 3px;
   }
 

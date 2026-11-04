@@ -40,20 +40,21 @@
 
 :root {
   /* Colour, from her paintings: off-white paper, green-black ink, oxide red
-     for one word. Runway's indigo and mint are its own; Clio's colours come
-     from @echoshihtw/clio-brand. */
+     for one word. Runway's colours are its own, from the app's tokens.json;
+     Clio's come from @echoshihtw/clio-brand. */
   --canvas: #fbfaf7;
   --smoke: #efefec;
   --ink: #0a150f;
   --surface: #ffffff;
-  --runway-indigo: #262c4c;
-  --runway-mint: #8fddaa;
-  /* Runway's debt gold and critical rose, from its design_system tokens. */
-  --runway-gold: #cb9a3e;
-  --runway-rose: #e8829e;
+  /* Runway's band is the app's ink, with its dark-theme runway blue,
+     attention and act. */
+  --runway-field: #1b2638;
+  --runway-blue: #9db2e0;
+  --runway-attention: #e2a54a;
+  --runway-act: #ed7023;
   /* Runway's band keeps its own text colours in both themes. */
-  --runway-paper: #f2efe8;
-  --runway-ink: #0a150f;
+  --runway-paper: #f5f0e6;
+  --runway-ink: #1b2638;
   --clio-number: var(--clio-ink);
   --border: rgb(23 23 20 / 0.18);
   --border-strong: var(--ink);

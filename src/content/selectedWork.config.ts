@@ -4,11 +4,15 @@ const APP_STORE = "https://apps.apple.com/app/id6778675088";
 
 export const selectedWorkConfig = {
   appStore: APP_STORE,
-  banner: {
-    src: "assets/runway/banner.webp",
+  // A short recording of the real app, played on a tap. The still frame is
+  // the app's home, the same 12 months the notes show.
+  demo: {
+    src: "assets/runway/demo.mp4",
+    poster: "assets/runway/demo-poster.webp",
     width: 1200,
     height: 675,
-    alt: "Financial Runway: your money, counted in time. An iPhone shows the app's home, a blue circle reading 12 months until November 2027, with a Check up button.",
+    label:
+      "Financial Runway on an iPhone: the app's home, a blue circle reading 12 months until November 2027, with a Check up button.",
   },
   meta: "Financial Runway · iOS · 2026 · built solo",
   question: "Your money, counted in time. One number, from today.",
