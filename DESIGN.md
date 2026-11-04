@@ -46,10 +46,11 @@ that.
 
 About four chunks per block. The same layout in every section.
 
-| Layout         | Columns on a wide screen | Used by                                |
-| -------------- | ------------------------ | -------------------------------------- |
-| Lead and notes | lead 7, notes 5          | Selected work, More projects, Who I am |
-| List           | label 3, body 9          | Where I've worked                      |
+| Layout             | Columns on a wide screen | Used by                      |
+| ------------------ | ------------------------ | ---------------------------- |
+| Lead and notes     | lead 7, notes 5          | Selected work, More projects |
+| Portrait and words | portrait 5, words 7      | Who I am                     |
+| List               | label 3, body 9          | Where I've worked            |
 
 Contact, the close, is the one centred section, and has words only.
 

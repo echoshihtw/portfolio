@@ -12,13 +12,28 @@
 // with work from January 2026, so nothing here says "used to".
 export const aboutMeConfig = {
   // Hers, and only hers: every fact and motive is one she gave, in the voice
-  // interview on 2026-10-19 and before it. Three beats: where she started,
-  // the software that started it, painting. Casual register, contractions.
-  story: [
-    "BA in Italian language and culture. Mandarin and Taiwanese are native, English at work. Then restaurants, and work as a teaching and research assistant.",
-    "That work came with software. Logging my hours, entering students' scores, applying for a research budget. All of it outdated, and all of it needed a manual. Bad design is still what interests me most, so now I write the software.",
-    "I work remote from Taiwan, and I like to write things down so anyone can pick up where I left off. I share work early, because the team usually sees what I miss, so tell me, and we'll fix it together.",
-    "I paint too. Private lessons in high school, and I wanted to go to art school. I studied Italian instead, then took painting classes in Florence for three months. Since 2012, mostly at my desk or on a train.",
+  // interview on 2026-10-19 and since. The headline is her own line about
+  // why she builds; the parts are cut to one idea each, under a label, so a
+  // skimming reader can jump to the one they want.
+  headline:
+    "Bad design is what interests me most, so now I write the software.",
+  parts: [
+    {
+      label: "Background",
+      text: "BA in Italian language and culture. Mandarin and Taiwanese native, English at work. Before software: restaurants, then teaching and research assistant.",
+    },
+    {
+      label: "Why software",
+      text: "Logging hours, entering scores, applying for a research budget: all of it ran on outdated software that needed a manual.",
+    },
+    {
+      label: "How I work",
+      text: "Before I fix a bug, I make it happen again, and I don't call it done until I've shown it working. I share work early, because the team usually sees what I miss.",
+    },
+    {
+      label: "Outside work",
+      text: "I paint, since 2012, mostly at my desk or on a train, after three months of classes in Florence.",
+    },
   ],
 
   // Served at the size the page shows it, with its box reserved.
