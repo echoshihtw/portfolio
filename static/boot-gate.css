@@ -5,7 +5,6 @@
   --gate-ink: #171714;
   --gate-muted: rgba(23, 23, 20, 0.62);
   --gate-border: rgba(23, 23, 20, 0.18);
-  --gate-primary: #3155d9;
   --gate-accent: #dc4a2b;
 
   position: fixed;
@@ -26,7 +25,6 @@ html[data-theme="dark"] #boot-gate {
   --gate-ink: #f3f0e8;
   --gate-muted: rgba(243, 240, 232, 0.66);
   --gate-border: rgba(243, 240, 232, 0.2);
-  --gate-primary: #8aa1f2;
   --gate-accent: #f6836a;
 }
 
@@ -60,11 +58,29 @@ html[data-theme="dark"] #boot-gate {
   grid-template-rows: 1fr auto;
 }
 
-.gate-name {
+.gate-title {
+  --gate-name-size: clamp(4.5rem, 15vw, 12rem);
   align-self: center;
+}
+
+/* Her motto, one bold line under the name. The E carries 0.08 of the
+   name's size as space on its left, so the motto moves in by that, less its
+   own S's, to line up with the letter rather than its box. */
+.gate-motto {
+  margin: clamp(1rem, 2.5vw, 2rem) 0 0
+    calc(var(--gate-name-size) * 0.08 - 0.05em);
+  font-family: "Geist", "Helvetica Neue", Arial, sans-serif;
+  font-size: clamp(1.25rem, 2.6vw, 2.25rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  color: var(--gate-ink);
+}
+
+.gate-name {
   margin: 0;
   font-family: "Geist", "Helvetica Neue", Arial, sans-serif;
-  font-size: clamp(4.5rem, 15vw, 12rem);
+  font-size: var(--gate-name-size);
   font-weight: 700;
   letter-spacing: -0.075em;
   line-height: 0.78;
@@ -91,12 +107,14 @@ html[data-theme="dark"] #boot-gate {
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
-  min-height: 2.5rem;
+  min-height: 44px;
   padding: 0.55rem 1.25rem;
-  border: 1px solid var(--gate-primary);
+  border: 1px solid var(--gate-ink);
   border-radius: 999px;
-  background: var(--gate-primary);
-  color: #fff;
+  /* Ink, like the page's main button, so the red dot is the cover's only
+     colour. */
+  background: var(--gate-ink);
+  color: var(--gate-canvas);
   font-family: "Geist Mono", ui-monospace, monospace;
   font-size: 0.75rem;
   letter-spacing: 0.03em;
@@ -104,16 +122,12 @@ html[data-theme="dark"] #boot-gate {
   transition: transform var(--motion-short, 150ms) ease;
 }
 
-html[data-theme="dark"] .gate-enter {
-  color: #171714;
-}
-
 .gate-enter:hover {
   transform: translateY(-1px);
 }
 
 .gate-enter:focus-visible {
-  outline: 2px solid var(--gate-primary);
+  outline: 2px solid var(--gate-ink);
   outline-offset: 3px;
 }
 
@@ -162,11 +176,11 @@ html[data-theme="dark"] .gate-enter {
 
 .gate-theme-label:hover {
   transform: translateY(-1px);
-  border-color: var(--gate-primary);
+  border-color: var(--gate-ink);
 }
 
 .gate-theme-input:focus-visible + .gate-theme-label {
-  outline: 2px solid var(--gate-primary);
+  outline: 2px solid var(--gate-ink);
   outline-offset: 2px;
 }
 
@@ -202,8 +216,8 @@ html[data-theme="dark"] .gate-enter {
 }
 
 @media (max-width: 520px) {
-  .gate-name {
-    font-size: clamp(4.25rem, 24vw, 7rem);
+  .gate-title {
+    --gate-name-size: clamp(4.25rem, 24vw, 7rem);
   }
 
   .gate-lower {

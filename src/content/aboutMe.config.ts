@@ -32,6 +32,11 @@ export const aboutMeConfig = {
       text: "Before I fix a bug, I make it happen again, and I don't call it done until I've shown it working. I share work early, because the team usually sees what I miss.",
     },
     {
+      // Her view, in her words, cut to three sentences on 2026-11-04.
+      label: "With AI",
+      text: "AI lets me build and see ideas faster. It won't make software safer on its own: we broke things before AI, and we still will. Knowing how to prevent it is what an engineer brings.",
+    },
+    {
       label: "Outside work",
       text: "I paint, since 2012, mostly at my desk or on a train, after three months of classes in Florence.",
     },
