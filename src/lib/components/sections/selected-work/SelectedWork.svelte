@@ -24,7 +24,7 @@
   // Which card is in view, for the counter on narrow screens.
   let strip: HTMLElement;
   let at = 0;
-  const CARDS = 3;
+  const CARDS = 2;
   function onScroll() {
     const first = strip.firstElementChild as HTMLElement;
     const step =
@@ -78,14 +78,6 @@
       <div class="notes">
         <h3>{c.name}</h3>
         <p class="lede">{c.lede}</p>
-        <ul class="facts">
-          {#each c.facts as fact}
-            <li>
-              <b>{fact.value}</b>
-              <span>{fact.label}</span>
-            </li>
-          {/each}
-        </ul>
         <!-- Each name stays whole; lines break only between them. -->
         <p class="stack">
           {#each stack as tool, i}<span>
@@ -228,28 +220,7 @@
     line-height: 1.45;
   }
 
-  /* Three facts, one row at every width: the value big, its label under it. */
-  .facts {
-    display: flex;
-    gap: var(--space-4) var(--space-5);
-    padding: 0;
-    list-style: none;
-    font-size: var(--text-sm);
-    color: var(--muted);
-  }
-
-  .facts b {
-    display: block;
-    white-space: nowrap;
-    font-family: var(--font-mono);
-    font-size: clamp(var(--text-lg), 4vw, var(--text-xl));
-    font-weight: 500;
-    line-height: 1.1;
-    color: var(--runway-blue);
-  }
-
-  .stack span,
-  .facts span {
+  .stack span {
     white-space: nowrap;
   }
 
@@ -365,12 +336,11 @@
     }
   }
 
-  /* All three fit, so nothing scrolls and nothing counts. */
+  /* Both fit, so nothing scrolls and nothing counts. */
   @media (min-width: 1100px) {
     .strip {
       display: grid;
       grid-template-columns: 3fr 2fr;
-      grid-template-rows: auto auto;
       overflow: visible;
       max-width: var(--content-max);
       margin: 0 auto;
@@ -382,10 +352,9 @@
       width: auto;
     }
 
-    /* The one picture on the left; the two claims stacked beside it. */
+    /* The one picture on the left, the claim beside it. */
     .item.wide {
       --focal-h: 15rem;
-      grid-row: 1 / 3;
     }
 
     .count {
