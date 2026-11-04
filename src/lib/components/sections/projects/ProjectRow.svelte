@@ -1,6 +1,15 @@
+<script
+  context="module"
+  lang="ts"
+>
+  import { writable } from "svelte/store";
+  // Which project's card is turned over, so only one is at a time.
+  const turned = writable<string | null>(null);
+</script>
+
 <script lang="ts">
   import { base } from "$app/paths";
-  import { tick } from "svelte";
+  import { onDestroy, tick } from "svelte";
   import Reveal from "$lib/components/Reveal.svelte";
   import type { Projects } from "$lib/types/types";
 
@@ -31,6 +40,13 @@
   let back: HTMLElement;
 
   $: flipped = decisionsOpen && !phone;
+  // Turning this card over turns any other back.
+  $: if (decisionsOpen && !phone) turned.set(project.name);
+  onDestroy(
+    turned.subscribe((name) => {
+      if (name !== project.name) decisionsOpen = false;
+    })
+  );
   $: if (flipped) tick().then(() => back?.focus({ preventScroll: true }));
 
   async function turnBack() {
