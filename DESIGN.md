@@ -59,9 +59,10 @@ Everything stacks; the label comes before the lead object. Anything longer than
 a few lines opens in a sheet: the browser's own `<dialog>`, closed by Escape, a
 tap outside or its close button, focus returned to the button that opened it.
 Runway's "How it is built" is a strip that scrolls sideways inside itself, with
-the next card peeking, until all three fit side by side; the page itself never
-scrolls sideways. Every card is one picture, a heading and one line. The demo
-plays only on a tap, and its button is named by its visible text.
+the next card peeking; on a wide screen the architecture diagram sits on the
+left and the two claims stack beside it. The page itself never scrolls
+sideways. The diagram is the section's one picture; every other card is a
+heading and one line. The demo plays only on a tap.
 
 ## Gallery
 

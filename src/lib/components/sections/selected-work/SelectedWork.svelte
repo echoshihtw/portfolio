@@ -43,9 +43,7 @@
       number="01"
       title="Selected work"
       id="selected-work-title"
-    >
-      <span slot="end">Live on the App Store</span>
-    </SectionHead>
+    ></SectionHead>
 
     <div class="lead">
       <!-- The demo plays only when asked, and returns to its still frame. -->
@@ -131,34 +129,13 @@
       <h4>{c.architecture.title}</h4>
       <p>{c.architecture.body}</p>
     </div>
-    {#each [c.privacy, c.release] as card}
+    {#each c.cards as card}
       <div class="item">
-        <div class="focal">
-          <ol class="steps">
-            {#each card.steps as step}
-              <li class={step.tone ?? ""}>
-                <span>{step.key}</span>
-                {step.text}
-              </li>
-            {/each}
-          </ol>
-        </div>
         <h4>{card.title}</h4>
         <p>{card.body}</p>
       </div>
     {/each}
   </section>
-
-  <p class="inner links">
-    <a
-      href={c.site}
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      The product story <span aria-hidden="true">↗</span>
-    </a>
-    <a href="#contact">Ask me for a code walkthrough</a>
-  </p>
 </section>
 
 <style>
@@ -217,8 +194,7 @@
     cursor: pointer;
   }
 
-  .play:focus-visible,
-  .links a:focus-visible {
+  .play:focus-visible {
     outline: 2px solid var(--runway-blue);
     outline-offset: 3px;
   }
@@ -334,10 +310,9 @@
     outline-offset: 4px;
   }
 
-  /* One frame for every card: the picture on top, then a heading and one
-     line. About four things to take in, never more. */
+  /* One frame for every card: a heading and one line, under the one picture
+     on the wide card. */
   .item {
-    --focal-h: 14rem;
     flex: 0 0 auto;
     display: flex;
     flex-direction: column;
@@ -371,61 +346,6 @@
     color: var(--muted);
   }
 
-  /* A step-by-step: the step's name, then what happens. */
-  .steps {
-    display: grid;
-    gap: var(--space-2);
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    font-family: var(--font-mono);
-    font-size: var(--text-sm);
-    color: var(--muted);
-  }
-
-  .steps li {
-    display: grid;
-    grid-template-columns: 5rem 1fr;
-    gap: var(--space-3);
-    align-items: baseline;
-    padding-left: var(--space-3);
-    border-left: 1px solid var(--border);
-  }
-
-  .steps span {
-    color: var(--runway-paper);
-    font-size: 0.75rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-  }
-
-  .steps .ok,
-  .steps .ok span {
-    color: var(--runway-blue);
-    border-color: var(--runway-blue);
-  }
-
-  .steps .no,
-  .steps .no span {
-    color: var(--runway-act);
-    border-color: var(--runway-act);
-  }
-
-  .links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-2) var(--space-5);
-    margin-top: var(--space-5);
-  }
-
-  .links a {
-    display: inline-flex;
-    align-items: center;
-    min-height: 44px;
-    color: var(--runway-paper);
-  }
-
   @media (min-width: 640px) {
     .inner {
       padding: 0 var(--space-6);
@@ -449,7 +369,8 @@
   @media (min-width: 1100px) {
     .strip {
       display: grid;
-      grid-template-columns: 1.5fr 1fr 1fr;
+      grid-template-columns: 3fr 2fr;
+      grid-template-rows: auto auto;
       overflow: visible;
       max-width: var(--content-max);
       margin: 0 auto;
@@ -458,8 +379,13 @@
 
     .item,
     .item.wide {
-      --focal-h: 15rem;
       width: auto;
+    }
+
+    /* The one picture on the left; the two claims stacked beside it. */
+    .item.wide {
+      --focal-h: 15rem;
+      grid-row: 1 / 3;
     }
 
     .count {
