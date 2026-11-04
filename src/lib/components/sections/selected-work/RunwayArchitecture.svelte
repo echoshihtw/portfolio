@@ -235,7 +235,7 @@
   </svg>
   <svg
     class="tall"
-    viewBox="0 0 240 330"
+    viewBox="0 0 320 264"
     role="img"
     aria-hidden="true"
   >
@@ -275,169 +275,169 @@
       class="root"
       x="4"
       y="4"
-      width="232"
-      height="322"
+      width="312"
+      height="256"
       rx="14"
     />
     <text
       class="rootl"
       x="16"
-      y="20"
+      y="22"
     >
       app · wires adapters in
     </text>
     <g class="n">
       <rect
-        x="12.0"
-        y="34.0"
-        width="104"
+        x="14"
+        y="36"
+        width="136"
         height="36"
         rx="8"
       />
       <text
-        x="64"
-        y="49"
+        x="82"
+        y="51"
       >
         presentation
       </text>
       <text
         class="sub"
-        x="64"
-        y="63"
+        x="82"
+        y="65"
       >
         the screens
       </text>
     </g>
     <g class="n">
       <rect
-        x="124.0"
-        y="34.0"
-        width="104"
+        x="170"
+        y="36"
+        width="136"
         height="36"
         rx="8"
       />
       <text
-        x="176"
-        y="49"
+        x="238"
+        y="51"
       >
         data
       </text>
       <text
         class="sub"
-        x="176"
-        y="63"
+        x="238"
+        y="65"
       >
         Drift + SQLCipher
       </text>
     </g>
     <g class="n core">
       <circle
-        cx="120"
-        cy="150"
-        r="46"
+        cx="160"
+        cy="124"
+        r="40"
       />
       <text
-        x="120"
-        y="147"
+        x="160"
+        y="121"
       >
         domain
       </text>
       <text
         class="sub"
-        x="120"
-        y="161"
+        x="160"
+        y="135"
       >
         rules · ports
       </text>
     </g>
     <g class="n">
       <rect
-        x="12.0"
-        y="232.0"
-        width="104"
+        x="14"
+        y="176"
+        width="136"
         height="36"
         rx="8"
       />
       <text
-        x="64"
-        y="247"
+        x="82"
+        y="191"
       >
         application
       </text>
       <text
         class="sub"
-        x="64"
-        y="261"
+        x="82"
+        y="205"
       >
         ports
       </text>
     </g>
     <g class="n">
       <rect
-        x="124.0"
-        y="232.0"
-        width="104"
+        x="170"
+        y="176"
+        width="136"
         height="36"
         rx="8"
       />
       <text
-        x="176"
-        y="247"
+        x="238"
+        y="191"
       >
         adapters
       </text>
       <text
         class="sub"
-        x="176"
-        y="261"
+        x="238"
+        y="205"
       >
         in app
       </text>
     </g>
     <line
       class="e"
-      x1="80"
-      y1="70"
-      x2="100"
-      y2="108"
+      x1="120"
+      y1="72"
+      x2="133"
+      y2="94"
       marker-end="url(#a2)"
     />
     <line
       class="e"
-      x1="160"
-      y1="70"
-      x2="140"
-      y2="108"
+      x1="200"
+      y1="72"
+      x2="187"
+      y2="94"
       marker-end="url(#a2)"
     />
     <line
       class="e"
-      x1="80"
-      y1="232"
-      x2="100"
-      y2="192"
+      x1="120"
+      y1="176"
+      x2="133"
+      y2="154"
       marker-end="url(#a2)"
     />
     <line
       class="e"
-      x1="126"
-      y1="250"
-      x2="118"
-      y2="250"
+      x1="170"
+      y1="194"
+      x2="152"
+      y2="194"
       marker-end="url(#a2)"
     />
     <line
       class="e"
-      x1="30"
-      y1="70"
-      x2="30"
-      y2="232"
+      x1="40"
+      y1="72"
+      x2="40"
+      y2="174"
       marker-end="url(#a2)"
     />
     <text
       class="xl"
-      x="120"
-      y="300"
+      x="160"
+      y="240"
     >
       presentation ✕ data fails CI
     </text>
@@ -461,7 +461,7 @@
   }
   .tall {
     display: none;
-    max-width: 15rem;
+    max-width: 22rem;
   }
   /* On a narrow screen the tall one keeps its labels readable. */
   @media (max-width: 600px) {
