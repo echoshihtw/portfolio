@@ -28,7 +28,7 @@ export const selectedWorkConfig = {
   // Text only: each is one claim, and the diagram stays the one picture.
   cards: [
     {
-      title: "Privacy proven, not promised.",
+      title: "Privacy checked, not promised.",
       body: "The database is checked as encrypted at every open, and CI fails if the app sends an event its privacy page doesn't list.",
     },
     {

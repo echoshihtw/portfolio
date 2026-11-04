@@ -3,11 +3,11 @@
      to six boxes so it stays true as features come and go. -->
 <figure class="arch">
   <p class="vh">
-    The app is built around a pure domain holding the rules and five interfaces.
-    Presentation and application depend on it; data implements its interfaces
-    with Drift and SQLCipher; platform adapters for RevenueCat, Firebase and
-    notifications implement the application interfaces; only the app knows the
-    real adapters. Presentation importing data fails CI.
+    The app is built around a pure domain holding the rules and their
+    interfaces. Presentation and application depend on it; data implements its
+    interfaces with Drift and SQLCipher; platform adapters for RevenueCat,
+    Firebase and notifications implement the application interfaces; only the
+    app knows the real adapters. Presentation importing data fails CI.
   </p>
   <svg
     class="wide"
@@ -81,7 +81,7 @@
         x="78"
         y="75"
       >
-        10 features
+        the screens
       </text>
     </g>
     <g class="n">
@@ -103,7 +103,7 @@
         x="78"
         y="187"
       >
-        providers · 7 ports
+        providers · ports
       </text>
     </g>
     <g class="n">
@@ -167,7 +167,7 @@
         x="200"
         y="131"
       >
-        rules · 5 ports
+        rules · ports
       </text>
     </g>
     <line
@@ -305,7 +305,7 @@
         x="64"
         y="63"
       >
-        10 features
+        the screens
       </text>
     </g>
     <g class="n">
@@ -347,7 +347,7 @@
         x="120"
         y="161"
       >
-        rules · 5 ports
+        rules · ports
       </text>
     </g>
     <g class="n">
@@ -369,7 +369,7 @@
         x="64"
         y="261"
       >
-        7 ports
+        ports
       </text>
     </g>
     <g class="n">
