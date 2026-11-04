@@ -13,7 +13,11 @@
     seen = false;
   }
 
-  if (seen) {
+  // An introduction belongs at the front door. A visitor who lands on a post
+  // or the gallery came for that page, so it is never in their way.
+  const home = location.pathname === "/" || location.pathname === "/index.html";
+
+  if (seen || !home) {
     gate.remove();
     return;
   }
@@ -29,10 +33,130 @@
     if (dismissed) return;
     dismissed = true;
     document.getElementById("app")?.removeAttribute("inert");
-    gate.classList.add("boot-gate-hide");
-    setTimeout(() => gate.remove(), 420);
+    if (!carryTheDot()) {
+      gate.classList.add("boot-gate-hide");
+      setTimeout(() => gate.remove(), 420);
+    }
+  }
+
+  // The red full stop of the name is the one thing that stays: the cover
+  // leaves, the dot travels to the full stop of "learn." and the headline
+  // arrives around it as it lands. Reduce Motion keeps the plain fade.
+  function carryTheDot() {
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return false;
+    const dot = gate.querySelector(".gate-accent");
+    const word = document.querySelector(".hero-headline .accent");
+    const hero = document.getElementById("home");
+    const from = fullStop(dot);
+    const to = fullStop(word);
+    if (!from || !to || !hero) return false;
+
+    const style = getComputedStyle(dot);
+    const flyer = document.createElement("span");
+    flyer.textContent = ".";
+    flyer.setAttribute("aria-hidden", "true");
+    Object.assign(flyer.style, {
+      position: "fixed",
+      left: from.left + "px",
+      top: from.top + "px",
+      height: from.height + "px",
+      lineHeight: from.height + "px",
+      font: style.font,
+      letterSpacing: style.letterSpacing,
+      color: style.color,
+      zIndex: "10000",
+      pointerEvents: "none",
+    });
+    document.body.append(flyer);
+    // Line boxes differ from glyph boxes, so set the copy exactly over the
+    // original, then hide the original: one dot on screen, never two.
+    const own = fullStop(flyer);
+    flyer.style.left = from.left + (from.left - own.left) + "px";
+    flyer.style.top = from.top + (from.top - own.top) + "px";
+    const start = fullStop(flyer);
+    const box = flyer.getBoundingClientRect();
+    flyer.style.transformOrigin = `${start.left - box.left}px ${start.top - box.top}px`;
+    dot.style.visibility = "hidden";
+
+    const scale = to.height / start.height;
+    const leave = {
+      duration: 150,
+      easing: "cubic-bezier(.3,0,.8,.15)",
+      fill: "forwards",
+    };
+    const arrive = {
+      duration: 450,
+      delay: 150,
+      easing: "cubic-bezier(.05,.7,.1,1)",
+      fill: "forwards",
+    };
+    hero.style.opacity = "0";
+    gate.animate([{ opacity: 1 }, { opacity: 0 }], leave);
+    flyer
+      .animate(
+        [
+          { transform: "none" },
+          {
+            transform: `translate(${to.left - start.left}px, ${to.top - start.top}px) scale(${scale})`,
+            color: getComputedStyle(word).color,
+          },
+        ],
+        arrive
+      )
+      .finished.then(() => {
+        hero
+          .animate([{ opacity: 0 }, { opacity: 1 }], {
+            duration: 250,
+            easing: "ease-out",
+            fill: "forwards",
+          })
+          .finished.then(() => {
+            hero.style.opacity = "";
+            flyer.remove();
+          });
+        gate.remove();
+      });
+    return true;
+  }
+
+  // Where the "." of an element is drawn on screen.
+  function fullStop(el) {
+    if (!el) return null;
+    const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+    let node,
+      last = null;
+    while ((node = walker.nextNode()))
+      if (node.textContent.includes(".")) last = node;
+    if (!last) return null;
+    const i = last.textContent.lastIndexOf(".");
+    const range = document.createRange();
+    range.setStart(last, i);
+    range.setEnd(last, i + 1);
+    const r = range.getBoundingClientRect();
+    return r.width ? r : null;
   }
   enterBtn.addEventListener("click", dismiss);
+  // Scrolling, swiping up or a key that moves down the page also enters, so
+  // the most natural move never meets a wall.
+  gate.addEventListener("wheel", (e) => e.deltaY > 0 && dismiss(), {
+    passive: true,
+  });
+  let touchY = null;
+  gate.addEventListener("touchstart", (e) => (touchY = e.touches[0].clientY), {
+    passive: true,
+  });
+  gate.addEventListener(
+    "touchmove",
+    (e) => touchY !== null && touchY - e.touches[0].clientY > 24 && dismiss(),
+    { passive: true }
+  );
+  addEventListener("keydown", (e) => {
+    if (
+      ["ArrowDown", "PageDown", "End", " "].includes(e.key) &&
+      !(e.target instanceof HTMLInputElement)
+    )
+      dismiss();
+  });
   // The page behind is out of reach until the visitor enters, as a modal
   // dialog's would be. It is parsed after this script, so wait for it.
   document.addEventListener("DOMContentLoaded", () => {
