@@ -23,7 +23,7 @@ export const aboutMeConfig = {
       text: "BA in Italian language and culture. Mandarin and Taiwanese native, English at work. Before software: restaurants, then teaching and research assistant.",
     },
     {
-      label: "Why software",
+      label: "What changed",
       text: "Logging hours, entering scores, applying for a research budget: all of it ran on outdated software that needed a manual.",
     },
     {
