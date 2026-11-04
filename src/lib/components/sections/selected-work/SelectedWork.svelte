@@ -20,17 +20,6 @@
     video.pause();
     video.load(); // back to the still frame
   }
-
-  // Which card is in view, for the counter on narrow screens.
-  let strip: HTMLElement;
-  let at = 0;
-  const CARDS = 2;
-  function onScroll() {
-    const first = strip.firstElementChild as HTMLElement;
-    const step =
-      first.offsetWidth + parseFloat(getComputedStyle(strip).columnGap);
-    at = Math.min(CARDS - 1, Math.round(strip.scrollLeft / step));
-  }
 </script>
 
 <section
@@ -43,13 +32,17 @@
       number="01"
       title="Selected work"
       id="selected-work-title"
-    ></SectionHead>
+    />
 
+    <!-- The name, the product, then the notes. On a phone the demo comes
+         straight after the name, so the product is seen before the words. -->
     <div class="lead">
+      <h3 class="title">{c.name}</h3>
+
       <!-- The demo plays only when asked, and returns to its still frame. -->
       <div class="demo">
         <video
-          class="banner"
+          class="frame"
           bind:this={video}
           src="{base}/{c.demo.src}"
           poster="{base}/{c.demo.poster}"
@@ -75,8 +68,8 @@
           {playing ? "Stop the demo" : "Watch it work"}
         </button>
       </div>
+
       <div class="notes">
-        <h3>{c.name}</h3>
         <p class="lede">{c.lede}</p>
         <!-- Each name stays whole; lines break only between them. -->
         <p class="stack">
@@ -85,49 +78,42 @@
             </span>
             {" "}{/each}
         </p>
-        <a
-          class="btn btn-paper"
-          href={c.appStore}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Try it free on the App Store <span aria-hidden="true">↗</span>
-        </a>
-        <p class="note">{c.note}</p>
+        <div class="act">
+          <a
+            class="btn btn-paper"
+            href={c.appStore}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Try it free on the App Store <span aria-hidden="true">↗</span>
+          </a>
+          <p class="note">{c.note}</p>
+        </div>
       </div>
     </div>
 
-    <div class="strip-head">
+    <!-- How it is built: the one picture, and the points beside it. -->
+    <div class="built">
       <h3 class="label">How it is built</h3>
-      <span
-        class="label count"
-        aria-hidden="true"
-      >
-        {at + 1} / {CARDS}
-      </span>
+      <div class="diagram"><RunwayArchitecture /></div>
+      <ol class="points">
+        {#each c.points as point, i}
+          <li>
+            <span
+              class="num"
+              aria-hidden="true"
+            >
+              {String(i + 1).padStart(2, "0")}
+            </span>
+            <div>
+              <h4>{point.title}</h4>
+              <p>{point.body}</p>
+            </div>
+          </li>
+        {/each}
+      </ol>
     </div>
   </div>
-
-  <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
-  <section
-    class="strip"
-    aria-label="How it is built"
-    tabindex="0"
-    bind:this={strip}
-    on:scroll={onScroll}
-  >
-    <div class="item wide">
-      <div class="focal"><RunwayArchitecture /></div>
-      <h4>{c.architecture.title}</h4>
-      <p>{c.architecture.body}</p>
-    </div>
-    {#each c.cards as card}
-      <div class="item">
-        <h4>{card.title}</h4>
-        <p>{card.body}</p>
-      </div>
-    {/each}
-  </section>
 </section>
 
 <style>
@@ -135,31 +121,46 @@
     background: var(--runway-field);
     color: var(--runway-paper);
     --ink: var(--runway-paper);
-    --muted: color-mix(in srgb, var(--runway-paper) 72%, transparent);
-    --border: color-mix(in srgb, var(--runway-paper) 25%, transparent);
-    padding-left: 0;
-    padding-right: 0;
+    --muted: color-mix(in srgb, var(--runway-paper) 68%, transparent);
+    --hairline: color-mix(in srgb, var(--runway-paper) 18%, transparent);
   }
 
   .inner {
     max-width: var(--content-max);
     margin: 0 auto;
-    padding: 0 var(--space-4);
   }
 
-  /* The row's own margin collapses into this one, so the sum is spelled out
-     to match the 40px every other section has under its row. */
+  /* Phone: name, demo, notes. Wide: name and notes on one row, the demo
+     full width under them. */
   .lead {
     margin-top: calc(var(--space-4) + var(--space-5));
     display: grid;
     gap: var(--space-5);
+    grid-template-areas:
+      "title"
+      "demo"
+      "notes";
+  }
+
+  .title {
+    grid-area: title;
+    margin: 0;
+    font-size: var(--text-3xl);
+    font-weight: 600;
+    line-height: 0.95;
+    letter-spacing: -0.045em;
   }
 
   .demo {
+    grid-area: demo;
     position: relative;
   }
 
-  .banner {
+  .notes {
+    grid-area: notes;
+  }
+
+  .frame {
     display: block;
     width: 100%;
     height: auto;
@@ -171,8 +172,8 @@
      the number. */
   .play {
     position: absolute;
-    left: var(--space-3);
-    bottom: var(--space-3);
+    left: var(--space-4);
+    bottom: var(--space-4);
     display: inline-flex;
     align-items: center;
     gap: var(--space-2);
@@ -209,25 +210,26 @@
     margin: 0 0 var(--space-4);
   }
 
-  h3 {
-    font-size: var(--text-xl);
-    line-height: 1.2;
-    letter-spacing: -0.02em;
-  }
-
   .lede {
     font-size: var(--text-lg);
     line-height: 1.45;
-  }
-
-  .stack span {
-    white-space: nowrap;
   }
 
   .stack {
     font-family: var(--font-mono);
     font-size: var(--text-sm);
     color: var(--muted);
+  }
+
+  .stack span {
+    white-space: nowrap;
+  }
+
+  .act {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3) var(--space-5);
   }
 
   .btn-paper {
@@ -237,128 +239,92 @@
   }
 
   .note {
+    margin: 0;
     font-size: var(--text-sm);
     color: var(--muted);
   }
 
-  .strip-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    margin: var(--space-7) 0 var(--space-3);
+  /* A hairline, the label, then the diagram and the points. No boxes: the
+     lines and the space do the grouping. */
+  .built {
+    margin-top: var(--space-8);
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--hairline);
+    display: grid;
+    gap: var(--space-5);
   }
 
-  .strip-head h3 {
+  .built .label {
     margin: 0;
-    font-size: inherit;
-    color: var(--ink);
-  }
-
-  .count {
-    min-width: 3.5em;
-    text-align: right;
     color: var(--muted);
   }
 
-  /* Native sideways scroll, snapping card by card. The scrollbar is hidden;
-     the peeking next card and the counter say there is more. */
-  .strip {
-    display: flex;
-    gap: var(--space-3);
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scrollbar-width: none;
-    padding: 0 var(--space-4) var(--space-3);
-    scroll-padding: 0 var(--space-4);
-  }
-
-  .strip::-webkit-scrollbar {
-    display: none;
-  }
-
-  .strip:focus-visible {
-    outline: 2px solid var(--runway-blue);
-    outline-offset: 4px;
-  }
-
-  /* One frame for every card: a heading and one line, under the one picture
-     on the wide card. */
-  .item {
-    flex: 0 0 auto;
-    display: flex;
-    flex-direction: column;
-    width: 17rem;
-    padding: var(--space-4);
-    border-radius: 14px;
-    border: 1px solid var(--border);
-    scroll-snap-align: start;
-  }
-
-  .item.wide {
-    --focal-h: 22rem;
-    width: min(18.5rem, 82vw);
-  }
-
-  .focal {
-    flex: none;
-    height: var(--focal-h);
+  .diagram {
     display: grid;
     place-items: center;
   }
 
-  .item h4 {
-    margin: var(--space-4) 0 var(--space-1);
-    font-size: var(--text-lg);
-    line-height: 1.3;
+  .points {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    align-content: start;
   }
 
-  .item p {
+  .points li {
+    display: grid;
+    grid-template-columns: 2.5rem 1fr;
+    padding: var(--space-5) 0;
+    border-top: 1px solid var(--hairline);
+  }
+
+  .points li:first-child {
+    padding-top: 0;
+    border-top: 0;
+  }
+
+  .num {
+    padding-top: 0.35em;
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--runway-blue);
+  }
+
+  .points h4 {
+    margin: 0 0 var(--space-1);
+    font-size: var(--text-xl);
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+  }
+
+  .points p {
     margin: 0;
     color: var(--muted);
-  }
-
-  @media (min-width: 640px) {
-    .inner {
-      padding: 0 var(--space-6);
-    }
-
-    .strip {
-      padding: 0 var(--space-6) var(--space-3);
-      scroll-padding: 0 var(--space-6);
-    }
   }
 
   @media (min-width: 900px) {
     .lead {
       grid-template-columns: 7fr 5fr;
-      gap: var(--space-7);
-      align-items: center;
-    }
-  }
-
-  /* Both fit, so nothing scrolls and nothing counts. */
-  @media (min-width: 1100px) {
-    .strip {
-      display: grid;
-      grid-template-columns: 3fr 2fr;
-      overflow: visible;
-      max-width: var(--content-max);
-      margin: 0 auto;
-      padding: 0 var(--space-6);
+      grid-template-areas:
+        "title notes"
+        "demo demo";
+      column-gap: var(--space-8);
+      row-gap: var(--space-7);
+      align-items: end;
     }
 
-    .item,
-    .item.wide {
-      width: auto;
+    .notes > :last-child {
+      margin-bottom: 0;
     }
 
-    /* The one picture on the left, the claim beside it. */
-    .item.wide {
-      --focal-h: 15rem;
+    .built {
+      grid-template-columns: 7fr 5fr;
+      column-gap: var(--space-8);
     }
 
-    .count {
-      display: none;
+    .built .label {
+      grid-column: 1 / -1;
     }
   }
 </style>

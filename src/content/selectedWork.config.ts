@@ -1,5 +1,5 @@
 // Selected work: Financial Runway, told as how it is built. The demo shows the
-// product; the cards show the engineering. The copy is hers.
+// product; the diagram and the points show the engineering. The copy is hers.
 export const selectedWorkConfig = {
   appStore: "https://apps.apple.com/app/id6778675088",
   // A short recording of the real app, played on a tap. The still frame is
@@ -15,12 +15,12 @@ export const selectedWorkConfig = {
   name: "Financial Runway",
   lede: "An iPhone app that counts your money in time. Designed, built and shipped alone, live on the App Store since October 2026.",
   note: "Built with AI, checked by tests and review.",
-  architecture: {
-    title: "Layers that can't leak.",
-    body: "A pure core holds the rules. Everything else plugs in through its interfaces, and a wrong import fails CI.",
-  },
-  // Text only: one claim, and the diagram stays the one picture.
-  cards: [
+  // How it is built: one picture, then these points beside it, numbered.
+  points: [
+    {
+      title: "Layers that can't leak.",
+      body: "A pure core holds the rules. Everything else plugs in through its interfaces, and a wrong import fails CI.",
+    },
     {
       title: "Privacy checked, not promised.",
       body: "The database is checked as encrypted at every open, and CI fails if the app sends an event its privacy page doesn't list.",

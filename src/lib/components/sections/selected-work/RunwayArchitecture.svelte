@@ -457,14 +457,14 @@
     overflow: visible;
   }
   .wide {
-    max-width: 25rem;
+    max-width: 34rem;
   }
   .tall {
     display: none;
     max-width: 15rem;
   }
-  /* Below 1100px the cards are a sideways strip, too narrow for the wide one. */
-  @media (max-width: 1099px) {
+  /* On a narrow screen the tall one keeps its labels readable. */
+  @media (max-width: 600px) {
     .wide {
       display: none;
     }

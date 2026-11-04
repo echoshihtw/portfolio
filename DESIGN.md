@@ -58,11 +58,11 @@ Contact, the close, is the one centred section, and has words only.
 Everything stacks; the label comes before the lead object. Anything longer than
 a few lines opens in a sheet: the browser's own `<dialog>`, closed by Escape, a
 tap outside or its close button, focus returned to the button that opened it.
-Runway's "How it is built" is a strip that scrolls sideways inside itself, with
-the next card peeking; on a wide screen the architecture diagram sits on the
-left and the privacy claim sits beside it. The page itself never scrolls
-sideways. The diagram is the section's one picture; the other card is a
-heading and one line. The demo plays only on a tap.
+Runway's section is editorial rather than cards: the name large, the notes
+beside it, and the demo full width under them; on a phone the demo comes
+straight after the name. "How it is built" is a hairline, the architecture
+diagram, and numbered points beside it, with no boxes. The diagram is the
+section's one picture. The demo plays only on a tap.
 
 ## Gallery
 
