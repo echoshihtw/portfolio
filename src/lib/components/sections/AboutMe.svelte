@@ -32,7 +32,10 @@
     </div>
 
     <div class="text">
-      <h3 class="headline">{aboutMeConfig.headline}</h3>
+      <div class="intro">
+        <h3 class="headline">{aboutMeConfig.headline}</h3>
+        <p class="instinct">{aboutMeConfig.instinct}</p>
+      </div>
       <dl class="parts">
         {#each aboutMeConfig.parts as part}
           <div>
@@ -83,11 +86,24 @@
   .headline {
     margin: 0;
     max-width: 20ch;
+    text-wrap: balance;
     font-family: var(--font-display);
     font-size: var(--text-2xl);
     font-weight: 600;
     line-height: 1.12;
     letter-spacing: -0.025em;
+  }
+
+  /* The line under the headline belongs to it, so it sits close. */
+  .intro {
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  .instinct {
+    margin: 0;
+    font-size: var(--text-lg);
+    color: var(--muted);
   }
 
   /* Four parts, each a label and one idea, divided by a hairline. */

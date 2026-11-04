@@ -12,11 +12,12 @@
 // with work from January 2026, so nothing here says "used to".
 export const aboutMeConfig = {
   // Hers, and only hers: every fact and motive is one she gave, in the voice
-  // interview on 2026-10-19 and since. The headline is her own line about
-  // why she builds; the parts are cut to one idea each, under a label, so a
+  // interview on 2026-10-19 and since. The headline is why she builds, in
+  // her words; the parts are cut to one idea each, under a label, so a
   // skimming reader can jump to the one they want.
-  headline:
-    "Bad design is what interests me most, so now I write the software.",
+  headline: "Bad design annoys me, so I write software that doesn't.",
+  // The instinct, in her words: she feels it before she can say why.
+  instinct: "I notice it before I can explain why.",
   parts: [
     {
       label: "Background",
