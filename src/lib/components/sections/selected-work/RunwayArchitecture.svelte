@@ -140,14 +140,14 @@
         x="322"
         y="173"
       >
-        platform
+        platform adapters
       </text>
       <text
         class="sub"
         x="322"
         y="187"
       >
-        store · alerts
+        in app
       </text>
     </g>
     <g class="n core">
@@ -384,14 +384,14 @@
         x="176"
         y="247"
       >
-        platform
+        adapters
       </text>
       <text
         class="sub"
         x="176"
         y="261"
       >
-        store · alerts
+        in app
       </text>
     </g>
     <line
