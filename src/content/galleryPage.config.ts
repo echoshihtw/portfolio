@@ -24,7 +24,3 @@ export const galleryConfig = {
     linkLabel: "Back to the work",
   },
 } as const;
-
-export const features = {
-  paintingDialog: false,
-} as const;

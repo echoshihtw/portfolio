@@ -346,7 +346,7 @@
     width: 7px;
     height: 7px;
     border-radius: 50%;
-    /* muted, so red stays the page's one accent */
+    /* muted, so the ochre stays the page's one accent */
     background: var(--muted);
   }
 

@@ -41,12 +41,6 @@ export type Painting = {
    * shown at their true relative size, because nobody has measured them.
    */
   scale: "canvas" | "paper" | "card";
-  /**
-   * Echo's own words about the piece, for its dialog. Absent until she
-   * writes it, and never drafted on her behalf. The dialog stays behind
-   * `features.paintingDialog` until every piece has one.
-   */
-  note?: string;
 };
 
 /**

@@ -38,7 +38,10 @@
   size-adjust: 104.76%;
 }
 
-:root {
+/* The light set. The gallery wears it in both themes (.stay-light), so
+   its paintings sit on a lit wall even when the rest of the page is dark. */
+:root,
+.stay-light {
   /* Colour, from her paintings: warm paper, brown-black ink, and her ochre
      for the accent. Runway's colours are its own, from the app's tokens.json;
      Clio's come from @echoshihtw/clio-brand. */

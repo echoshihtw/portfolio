@@ -16,7 +16,7 @@ function token(selector: string, name: string): string {
   return brand ? clio[brand[1]] : match[1];
 }
 
-const light = (name: string) => token(":root {", name);
+const light = (name: string) => token(":root,\n.stay-light {", name);
 const dark = (name: string) => {
   try {
     return token('html[data-theme="dark"] {', name);
