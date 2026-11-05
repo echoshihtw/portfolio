@@ -33,9 +33,9 @@ On a picture, it takes the picture's ink.
 | ----------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `--canvas`, `--smoke`, `--surface`                                                  | the page, every other section, and raised panels                                                                                                                                                                                                                               |
 | `--ink`, `--muted`, `--primary`, `--border`                                         | text, controls, which follow the ink, and hairlines                                                                                                                                                                                                                            |
-| `--accent-text`                                                                     | her red pen, for words: the gallery's "hand." and the header link's underline on hover and on the current page. Coral in the ink theme                                                                                                                                         |
-| `--accent-shape`                                                                    | the brighter red, for pen marks: the wavy line under "learn", the available dot, the caret, the cover's full stop and the theme switch's sun, through `--highlight`                                                                                                            |
-| `--mark`, `--mark-ink`                                                              | the highlighter, yellow on paper and mint on ink, always with ink on it: behind the hero's "don't" and under its two links                                                                                                                                                     |
+| `--accent-text`                                                                     | her red pen, for words: the header link's underline on hover and on the current page. Coral in the ink theme                                                                                                                                                                   |
+| `--accent-shape`                                                                    | the brighter red, for pen marks and doodles, the available dot, the caret, the cover's full stop and the theme switch's sun, through `--highlight`                                                                                                                             |
+| `--mark`, `--mark-ink`, `--mark-solid`                                              | the highlighter, always with ink on it. Yellow on paper. On a dark ground it is see-through mint (yellow on the Runway band) and the word keeps its light ink, so a letter the stroke misses still reads. The hero's one word keeps a solid stroke, `--mark-solid`             |
 | `--runway-field`, `--runway-ink`, `--runway-paper`, `--runway-blue`, `--runway-act` | Runway's band: the app's own ink, paper, blue and act colours                                                                                                                                                                                                                  |
 | `--clio-pink`, `--clio-paper`, `--clio-ink`, `--clio-number`                        | Clio's touch: pink, paper and ink from `@echoshihtw/clio-brand`, and its number in `app.css`. Pink for small marks and tints only: the chosen client, the mark under 603, and the demo's soft fills. Paper and ink for the demo and Clio's card back. Never a section's ground |
 
@@ -97,6 +97,25 @@ so a rewrite keeps the fact.
 
 The résumé downloads as a PDF named with her name, so it stays hers in any
 downloads folder.
+
+## Her two pens
+
+The page reads like her own notebook, marked up with two pens. The highlighter
+marks what matters, the fact a reader should take away. The red pen is her
+remark: a circle, a line, or the hero's wavy line under "learn". Both live in
+`Mark.svelte`, and the phrase each one marks sits beside its copy in the
+config.
+
+- **One mark on the proof,** at most, in a card or a part, and only where there
+  is a result to mark. No mark is better than a mark on a summary.
+- **Doodles are rare:** a red pen star by How I work, a light bulb by With AI,
+  and an arrow to the full history in the résumé, in `Doodle.svelte`. Each means
+  something; none decorates.
+- **Hand-drawn marks on clean type,** never a handwriting face.
+- **Runway and Clio keep their own colours.** Clio's 603 keeps its pink line.
+- **Each mark draws once,** as its section scrolls into view: the highlighter is
+  uncovered behind a moving pen tip, and a pen line is drawn along its path.
+  With Reduce Motion, or without JavaScript, it is simply there.
 
 ## Every section
 

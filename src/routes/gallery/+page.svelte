@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Mark from "$lib/components/Mark.svelte";
   import { base } from "$app/paths";
   import Seo from "$lib/components/Seo.svelte";
   import PaintingWall from "$lib/components/sections/paintings/PaintingWall.svelte";
@@ -30,7 +31,7 @@
   <section class="story section_padding">
     <div class="words">
       <!-- prettier-ignore -->
-      <h1>{#each galleryConfig.heading as part}<span class:accent={part.accent} data-text={part.accent ? part.text : undefined}>{part.text}</span>{/each}</h1>
+      <h1>{#each galleryConfig.heading as part}{#if part.accent}<Mark kind="line">{part.text}</Mark>{:else}{part.text}{/if}{/each}</h1>
       {#each galleryConfig.story as paragraph}
         <p class="intro">{paragraph}</p>
       {/each}
@@ -180,12 +181,6 @@
     letter-spacing: -0.03em;
   }
 
-  /* The same treatment the home page gives its headline, so the two pages
-     read as one site: the key word in her red. */
-  .gallery-page h1 .accent {
-    color: var(--accent-text);
-  }
-
   /* No rule above this. The page is soft paper and framed work, so a
      crisp 1px line here would be the one hard edge on it. */
   .closing {
@@ -198,18 +193,5 @@
   .closing p {
     margin: 0;
     font-size: 1.02rem;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .gallery-page h1 .accent:hover,
-    .gallery-page h1 .accent:hover::before,
-    .gallery-page h1 .accent:hover::after {
-      animation: none;
-    }
-
-    .gallery-page h1 .accent:hover::before,
-    .gallery-page h1 .accent:hover::after {
-      content: none;
-    }
   }
 </style>

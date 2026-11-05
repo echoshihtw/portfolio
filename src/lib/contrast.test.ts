@@ -57,11 +57,28 @@ describe.each([
     ["quiet text on a raised panel", "muted", "surface"],
     ["her accent on a raised panel", "accent-text", "surface"],
     ["Clio's number on paper", "clio-number", "canvas"],
-    ["ink on the highlighter", "mark-ink", "mark"],
   ])("%s", (_, fg, bg) => {
     expect(contrastRatio(over(t(fg), t(bg)), t(bg))).toBeGreaterThanOrEqual(
       4.5
     );
+  });
+});
+
+// The highlighter can be see-through, so the word is read against the
+// highlighter over the page, and against the page where the stroke misses it.
+describe.each([
+  ["light", light],
+  ["dark", dark],
+])("the highlighted word in the %s theme reads at 4.5:1", (_, t) => {
+  it("on the hero's solid stroke", () => {
+    expect(
+      contrastRatio(t("mark-solid-ink"), t("mark-solid"))
+    ).toBeGreaterThanOrEqual(4.5);
+  });
+
+  it("on the highlighter", () => {
+    const ground = over(t("mark"), t("canvas"));
+    expect(contrastRatio(t("mark-ink"), ground)).toBeGreaterThanOrEqual(4.5);
   });
 });
 

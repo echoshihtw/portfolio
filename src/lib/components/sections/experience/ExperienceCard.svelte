@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Marked from "$lib/components/Marked.svelte";
   import Reveal from "$lib/components/Reveal.svelte";
 
   export let item: {
@@ -7,7 +8,9 @@
     date: string;
     highlights: string[];
   };
-  export let copy: { story: string; techLine: string } | undefined = undefined;
+  import type { experiencePortfolio } from "../../../../content/portfolio.config";
+
+  export let copy: (typeof experiencePortfolio)[string] | undefined = undefined;
 
   // Highlights carry **bold** markers from the résumé source. Splitting on
   // the marker and letting Svelte render each part means no HTML string is
@@ -36,7 +39,13 @@
 
   <div class="story">
     {#if copy}
-      <p class="text">{copy.story}</p>
+      <p class="text">
+        <Marked
+          text={copy.story}
+          phrase={copy.mark?.phrase ?? ""}
+          kind={copy.mark?.kind}
+        />
+      </p>
       <p class="tech label">{copy.techLine}</p>
     {/if}
 

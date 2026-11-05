@@ -4,6 +4,7 @@
   import { projectsConfig } from "../../../../content/projects.config";
   import SectionHead from "$lib/components/SectionHead.svelte";
   import RunwayArchitecture from "./RunwayArchitecture.svelte";
+  import Marked from "$lib/components/Marked.svelte";
 
   // The stack is written once, on the project's card.
   const stack =
@@ -70,7 +71,12 @@
       </div>
 
       <div class="notes">
-        <p class="lede">{c.lede}</p>
+        <p class="lede">
+          <Marked
+            text={c.lede}
+            phrase="live on the App Store"
+          />
+        </p>
         <!-- Each name stays whole; lines break only between them. -->
         <p class="stack">
           {#each stack as tool, i}<span>
@@ -126,6 +132,11 @@
     /* Focus rings and link hovers are paper here: ink would vanish on the
        band. */
     --primary: var(--runway-paper);
+    /* On the dark band the highlighter is see-through and the word stays
+       paper, as in the dark theme. */
+    --mark: rgb(255 225 77 / 0.3);
+    --mark-ink: var(--runway-paper);
+    --mark-blend: normal;
   }
 
   .inner {

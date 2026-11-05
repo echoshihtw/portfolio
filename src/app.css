@@ -76,6 +76,10 @@
      hero's "don't" and under a link on hover, always with ink on it. */
   --mark: #ffe14d;
   --mark-ink: #17140f;
+  --mark-blend: multiply; /* ink on paper soaks in */
+  /* The hero's one word under a solid stroke, in either theme. */
+  --mark-solid: var(--mark);
+  --mark-solid-ink: var(--mark-ink);
 
   /* Legacy names, aliased. Older rules read these three; nothing new
      should, and the five nothing read at all are gone. */
@@ -152,8 +156,13 @@ html[data-theme="dark"] {
   --accent-text: #ff8a6f;
   --accent-shape: #ff7a5c;
   --highlight: var(--accent-shape);
-  --mark: #b8f28c;
-  --mark-ink: var(--canvas);
+  /* On a dark ground the highlighter is see-through and the word keeps its
+     own light ink, so a letter the stroke misses still reads. */
+  --mark: rgb(184 242 140 / 0.3);
+  --mark-ink: var(--ink);
+  --mark-blend: normal;
+  --mark-solid: #b8f28c;
+  --mark-solid-ink: var(--canvas);
 }
 
 /* ==========================================================================

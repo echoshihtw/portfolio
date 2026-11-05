@@ -7,6 +7,7 @@
   import { mailtoWithSubject } from "$lib/contactLinks";
   import { trackEmail, trackResume } from "$lib/analytics";
   import { onMount, tick } from "svelte";
+  import Mark from "$lib/components/Mark.svelte";
 
   // The headline in three parts: the words before "don't", "don't", and the
   // words after it, each its own span so it can slide when "don't" arrives.
@@ -24,6 +25,11 @@
   // to their new places, then the highlighter sweeps behind it. Without the
   // cover, or with Reduce Motion, the sentence is simply there.
   let state: "done" | "waiting" | "caret" | "in" = "done";
+  // The highlighter sweeps just after "don't" arrives; the pen draws once
+  // the highlighter has finished. Both read the motion scale on mount.
+  $: drawn = state === "in" || state === "done";
+  let sweepDelay = 0;
+  let penDelay = 0;
   let words: HTMLElement[] = [];
 
   onMount(() => {
@@ -33,6 +39,8 @@
     state = "waiting";
     const root = getComputedStyle(document.documentElement);
     const ms = (name: string) => parseFloat(root.getPropertyValue(name));
+    sweepDelay = ms("--motion-short");
+    penDelay = sweepDelay + ms("--motion-long");
     const play = () => {
       setTimeout(() => (state = "caret"), ms("--motion-medium"));
       setTimeout(insert, ms("--motion-medium") + ms("--motion-long"));
@@ -85,7 +93,7 @@
       data-state={state}
     >
       <!-- prettier-ignore -->
-      <span aria-hidden="true"><svg class="defs" width="0" height="0"><filter id="hero-pen" x="-5%" y="-20%" width="110%" height="140%"><feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="7" /><feDisplacementMap in="SourceGraphic" scale="3" /></filter></svg>{#each before as part}{part.text.trimEnd()}{/each}<span class="caret"></span>{" "}<span class="mark"><span>{mark.text}</span></span>{#each after as word, i}{" "}<span class="word" bind:this={words[i]}>{#if i === after.length - 1 && word.text.endsWith(".")}<span class="pen">{word.text.slice(0, -1)}<svg viewBox="0 0 300 120" preserveAspectRatio="none"><g filter="url(#hero-pen)"><path class="pass" pathLength="1" d="M6 100 C 18 86, 30 86, 40 98 S 62 112, 74 98 S 98 84, 110 97 S 134 111, 146 98 S 170 85, 182 97 S 206 110, 218 97 S 242 85, 254 96 S 280 106, 296 92" /><path class="echo" pathLength="1" d="M14 104 C 24 92, 34 92, 44 102 S 66 114, 78 102 S 102 90, 114 101 S 138 113, 150 102 S 174 90, 186 101 S 210 112, 222 101 S 246 90, 258 100 S 282 108, 292 98" /></g></svg></span><span class="stop">.</span>{:else}{word.text}{/if}</span>{/each}</span>
+      <span aria-hidden="true">{#each before as part}{part.text.trimEnd()}{/each}<span class="caret"></span>{" "}<span class="insert"><Mark {drawn} delay={sweepDelay}>{mark.text}</Mark></span>{#each after as word, i}{" "}<span class="word" bind:this={words[i]}>{#if i === after.length - 1 && word.text.endsWith(".")}<Mark kind="wavy" {drawn} delay={penDelay}>{word.text.slice(0, -1)}</Mark><span class="stop">.</span>{:else}{word.text}{/if}</span>{/each}</span>
     </h1>
 
     <div class="hero-links">
@@ -159,153 +167,31 @@
     max-width: 13ch;
   }
 
-  /* A red pen line under "learn", like a remark in a notebook: a wobble from
-     a noise filter, and a second lighter pass just off the first. It is
-     drawn after the highlighter, left to right. */
-  .pen {
-    position: relative;
-    display: inline-block;
-  }
-
-  .pen svg {
-    position: absolute;
-    left: -0.16em;
-    top: -0.14em;
-    width: calc(100% + 0.34em);
-    height: calc(100% + 0.36em);
-    overflow: visible;
-    pointer-events: none;
-  }
-
-  .pen path {
-    fill: none;
-    stroke: var(--accent-shape);
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-dasharray: 1;
-    /* the box stretches; the line keeps its pen width */
-    vector-effect: non-scaling-stroke;
-  }
-
-  .pen .pass {
-    stroke-width: 0.06em;
-    opacity: 0.92;
-  }
-
-  .pen .echo {
-    stroke-width: 0.025em;
-    opacity: 0.5;
-  }
-
-  [data-state="waiting"] .pen path,
-  [data-state="caret"] .pen path {
-    stroke-dashoffset: 1;
-  }
-
-  [data-state="in"] .pen path {
-    animation: draw var(--motion-long)
-      calc(var(--motion-short) + var(--motion-long))
-      cubic-bezier(0.65, 0, 0.35, 1) backwards;
-  }
-
-  @keyframes draw {
-    from {
-      stroke-dashoffset: 1;
-    }
-  }
-
-  .defs {
-    position: absolute;
-  }
-
   .word {
     display: inline-block;
   }
 
-  /* "don't", under the highlighter. Before it arrives it takes no room. */
-  .mark {
-    position: relative;
+  /* The hero's stroke is solid in both themes: "don't" is one short word
+     the stroke always covers. Longer marks elsewhere can be see-through. */
+  .hero-headline {
+    --mark: var(--mark-solid);
+    --mark-ink: var(--mark-solid-ink);
+  }
+
+  /* "don't", before it arrives, takes no room; then it fades in as the words
+     after it slide over. */
+  .insert {
     display: inline-block;
     white-space: nowrap;
   }
 
-  .mark > span {
-    position: relative;
-    z-index: 1;
-    color: var(--mark-ink);
-  }
-
-  /* A highlighter stroke: one pass of flat ink, ends cut at the chisel's
-     angle, edges that wave a little, lighter along the middle where the felt
-     presses less. On paper it multiplies like real ink. */
-  .mark::before {
-    content: "";
-    position: absolute;
-    inset: 0.12em -0.2em 0 -0.14em;
-    background: linear-gradient(
-      178deg,
-      var(--mark) 0 30%,
-      color-mix(in srgb, var(--mark) 82%, #fff) 48%,
-      var(--mark) 66% 100%
-    );
-    clip-path: polygon(
-      4% 4%,
-      7% 6.8%,
-      14% 5.8%,
-      21% 3.6%,
-      29% 4.8%,
-      36% 6.4%,
-      43% 3.8%,
-      50% 5.3%,
-      57% 6.6%,
-      64% 4.2%,
-      71% 4.1%,
-      79% 6.7%,
-      86% 5%,
-      93% 3.6%,
-      100% 6.4%,
-      97% 94.4%,
-      93% 93.4%,
-      86% 96.3%,
-      79% 96.9%,
-      71% 93.8%,
-      64% 94.4%,
-      57% 96.9%,
-      50% 95.9%,
-      43% 93.7%,
-      36% 95.3%,
-      29% 97%,
-      21% 95%,
-      14% 93.6%,
-      7% 95.8%,
-      0 97%
-    );
-    transform: rotate(-1.4deg);
-    transform-origin: left center;
-  }
-
-  :global(html:not([data-theme="dark"])) .mark::before {
-    mix-blend-mode: multiply;
-  }
-
-  [data-state="waiting"] .mark,
-  [data-state="caret"] .mark {
+  [data-state="waiting"] .insert,
+  [data-state="caret"] .insert {
     display: none;
   }
 
-  [data-state="in"] .mark::before {
-    animation: sweep var(--motion-long) var(--motion-short)
-      cubic-bezier(0.45, 0, 0.15, 1) backwards;
-  }
-
-  [data-state="in"] .mark > span {
+  [data-state="in"] .insert {
     animation: arrive var(--motion-base) var(--motion-enter) backwards;
-  }
-
-  @keyframes sweep {
-    from {
-      transform: scaleX(0) rotate(-1.4deg);
-    }
   }
 
   @keyframes arrive {

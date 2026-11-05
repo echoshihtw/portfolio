@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Doodle from "$lib/components/Doodle.svelte";
   import { experience } from "$lib/resumeData";
   import { experiencePortfolio } from "../../../../content/portfolio.config";
   import SectionHead from "$lib/components/SectionHead.svelte";
@@ -26,7 +27,7 @@
       rel="noreferrer noopener"
       on:click={() => trackResume("experience")}
     >
-      Full history in the résumé ↗
+      <Doodle icon="arrow" />Full history in the résumé ↗
     </a>
   </SectionHead>
 
@@ -45,6 +46,11 @@
 </section>
 
 <style>
+  /* The arrow sits before the words it points at. */
+  .link-cta :global(.doodle) {
+    margin: -0.6em 0.3em -0.6em 0;
+  }
+
   section {
     max-width: var(--content-max);
     margin: 0 auto;

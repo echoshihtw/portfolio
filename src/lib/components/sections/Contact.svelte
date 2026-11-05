@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Marked from "$lib/components/Marked.svelte";
   import { base } from "$app/paths";
   import {
     RESUME_LABEL,
@@ -28,7 +29,13 @@
 
   <div class="close">
     <div class="notes">
-      <p class="lead">{closingConfig.lead}</p>
+      <p class="lead">
+        <Marked
+          text={closingConfig.lead}
+          phrase="untangle"
+          kind="circle"
+        />
+      </p>
       <p class="body">{closingConfig.body}</p>
       <div class="actions">
         <a

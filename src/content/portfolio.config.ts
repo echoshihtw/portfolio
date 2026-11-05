@@ -104,22 +104,33 @@ export const closingConfig = {
 // then the stack. Written in résumé voice: implied subject, no "I".
 export const experiencePortfolio: Record<
   string,
-  { story: string; techLine: string }
+  // mark: the card's one result, under one of her pens, if it has one.
+  {
+    story: string;
+    techLine: string;
+    mark?: { phrase: string; kind: "highlight" | "circle" | "line" };
+  }
 > = {
   "Lockerbie Technology": {
     story:
       "One of two engineers on an early-stage internal platform for the UK construction sector. Brought the other to shipping independently in two months. A backend task went from a week to two days, and a deployment from a full day to five minutes, run by someone who is not an engineer. A BFF between frontend and backend keeps every credential out of the browser.",
+    mark: { phrase: "five minutes", kind: "circle" },
     techLine:
       "Next.js App Router · TanStack Query · FastAPI · ArangoDB · RabbitMQ · Docker · GHCR",
   },
   "SPIN.FASHION by Lablaco": {
     story:
       "Co-ran the team's scrum with the CTO on the in-store desktop app, remote across time zones. The macOS build couldn't ship; fixed code-signing, notarisation and auto-update, and wrote the release steps down. Built the blockchain payment checkout on a third-party provider, payment screen to API.",
+    mark: {
+      phrase: "fixed code-signing, notarisation and auto-update",
+      kind: "highlight",
+    },
     techLine: "React · Redux-Saga · Electron",
   },
   "Find Recruiter": {
     story:
       "Led frontend delivery on a recruiting and ATS platform, on a two-engineer team. Moved a production React codebase to TypeScript while it kept shipping.",
+    mark: { phrase: "while it kept shipping", kind: "line" },
     techLine:
       "React · TypeScript · Redux-Saga · Firebase · Server-Sent Events · Google Analytics · Sentry",
   },
