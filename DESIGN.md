@@ -5,8 +5,9 @@ an example of her own software style: minimal, intuitive, cognitively friendly,
 and clean underneath. Professional means clear and honest, not anonymous.
 
 Her paintings are the foundation. They set the colours, the balance of block
-and space, and the restraint. The Gallery holds the work; the home page shows
-only her Jakarta sketch, printed faintly into the paper beside the headline.
+and space, and the restraint. The Gallery holds the work; the only painting on
+the home page is her Jakarta sketch, printed faintly into the paper beside the
+headline.
 
 The tokens live in `src/app.css`. This file says how to use them.
 
@@ -22,8 +23,10 @@ The tokens live in `src/app.css`. This file says how to use them.
 
 ## Colour
 
-Every colour has a job. Nothing is decoration. Links, focus rings and buttons
-are ink, so the ochre is the page's one accent.
+Every colour has a job. Nothing is decoration. The ochre is the site's own
+accent; each app keeps its own colours inside its section. Links and buttons are
+ink, and a focus ring takes the text colour of the ground it sits on: ink on
+paper, paper on Runway's band.
 
 | Token                                             | Job                                                                                       |
 | ------------------------------------------------- | ----------------------------------------------------------------------------------------- |
@@ -36,9 +39,47 @@ are ink, so the ochre is the page's one accent.
 
 Each app brings its own feeling in its own colours, inside its own section.
 Archived work gets none. The light set is defined once, in `:root` and
-`.stay-light`; the gallery wears `.stay-light`, so it stays light in the dark
-theme. Every text pair clears 4.5:1 in both themes; `src/lib/contrast.test.ts`
+`.stay-light`. The gallery's content wears `.stay-light`, so its paintings stay
+on a light wall in the dark theme while the header and footer follow the theme.
+The cover follows the theme too. Every text pair clears 4.5:1 in both themes; `src/lib/contrast.test.ts`
 holds that.
+
+## What each section must carry
+
+The words live in `src/content/`; this list says what each part has to prove,
+so a rewrite keeps the fact.
+
+- **Cover** (`src/app.html`): her name with the ochre full stop, "Product
+  Engineer · Taipei", and one Enter button. Nothing else.
+- **Hero** (`portfolio.config.ts`, `heroConfig`): her role and where she works,
+  the claim, one line on what she does, three things she made true that the
+  page shows lower down, then "Email me" with a role subject and "Résumé, PDF".
+- **Selected work** (`selectedWork.config.ts`): what Runway is, that she built
+  and shipped it alone, live on the App Store since October 2026 with its link,
+  the stack (read from `projects.config.ts`), one line on how she uses AI, the
+  architecture diagram, and the privacy checks: the database checked as
+  encrypted at every open, and CI checking the privacy page against what the app
+  sends.
+- **Where I've worked** (`portfolio.config.ts`): each company with her role, the
+  dates and where, the problem and the result in one paragraph, the stack, and
+  the details on request. The full history is in the résumé.
+- **More projects** (`projects.config.ts`): each project's name, its status in
+  words, its proof first (Clio: 603 clients typed in by hand, in use since May
+  2025), what it is, the stack, its link, and its decisions on the back.
+- **Who I am** (`aboutMe.config.ts`): her portrait, her line on why she builds,
+  and five parts in story order: Background, What changed, How I work, With AI,
+  Outside work. How I work holds habits a reader can check, not adjectives.
+- **Contact** (`portfolio.config.ts`, `closingConfig`): that she is available,
+  one line on what she takes on, a main button that emails with a role subject,
+  the résumé, and a quiet link that emails with a project subject.
+- **Blog** (`src/posts/`): working notes, each on what broke, what it turned out
+  to be, and what she would do differently.
+- **Footer**: where and when she works ("Taiwan, UTC+8 · APAC hours or async"),
+  email, a call, the site's source, GitHub, LinkedIn and Instagram, and a way to
+  replay the cover.
+
+The résumé downloads as a PDF named with her name, so it stays hers in any
+downloads folder.
 
 ## Every section
 
@@ -64,23 +105,29 @@ Runway's section is editorial rather than cards: the name large across the top,
 then the demo beside the notes. "How it is built" is a hairline, the
 architecture diagram, and numbered points beside it, with no boxes. The diagram
 is the section's one picture, drawn from the packages' real dependencies and
-named without counts, so it stays true between releases. The demo plays only
+named without counts, so it stays true between releases. A screen reader hears it
+described once as a whole, not box by box. The demo plays only
 on a tap.
 
 ## More projects
 
 Each project's lead object sits in a hairline frame, not a shadow. "Read the
 decisions" turns the card over on a wide screen, and only one card is turned at
-a time. In the dark theme, Clio's demo keeps its own paper inside a frame of the
+a time. Focus moves to the card's back, and "Turn it back" returns it to the
+button that turned it. In the dark theme, Clio's demo keeps its own paper inside a frame of the
 page's surface, and screenshots are dimmed a little.
 
 ## Phones
 
-Everything stacks; the label comes before the lead object. A project's first
+Everything stacks; the label comes before the lead object. No fact splits
+across lines. Held sideways, everything scrolls and nothing is clipped, and no
+picture is taller than the screen. A project's first
 paragraph says what it is, so it is always on screen; only the rest opens in a
-sheet. A sheet is the browser's own `<dialog>`, closed by Escape, a tap outside
+sheet. A sheet is the browser's own `<dialog>`, named by its title, closed by
+Escape, a tap outside
 or its close button, with focus returned to the button that opened it. In
-Runway's section the demo comes straight after the name.
+Runway's section the demo comes straight after the name, and the diagram turns
+to its tall version so its labels stay readable.
 
 ## Gallery
 
@@ -90,8 +137,8 @@ the heading, and never taller than the screen. The wall below leaves it out.
 The rest hang in even 4:5 frames: one column on a phone, two from 560 px wide,
 three from 860 px. A painting opens full screen over the wall, and the others
 sit beside it: swipe, the arrow keys or the buttons move between them, with a
-counter in a fixed place. Escape, Close or a tap on the background returns to
-the same spot on the wall.
+counter in a fixed place that a screen reader hears as it changes. Escape, Close or a tap on the background returns to
+the same spot on the wall. The page ends with one way back to the software.
 
 ## Header and footer
 
@@ -108,8 +155,8 @@ comes from one scale in `app.css`, `--motion-short` to `--motion-long` with
 instant change.
 
 The cover shows once per tab, on the home page only, and never on a link to a
-section. Enter, a scroll, a swipe up or a key down enters it, and the page
-behind waits at the top. Its ochre full stop then travels to the full stop of
+section. Focus starts on Enter. Enter, Space, the down arrow, a scroll or a
+swipe up goes in, and the page behind waits at the top. Its ochre full stop then travels to the full stop of
 "learn." while the headline arrives around it.
 
 ## Checks for every change
@@ -117,5 +164,6 @@ behind waits at the top. Its ochre full stop then travels to the full stop of
 - Does it make her more trustworthy, or less?
 - One lead object, about four chunks, the proof the largest?
 - Does every colour have a job?
-- Light and dark both pass the contrast test?
+- Does the contrast test still pass?
+- Is every control reachable in reading order, with a visible focus ring?
 - Would deleting it lose a fact? If not, delete it.
