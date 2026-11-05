@@ -57,7 +57,7 @@ so a rewrite keeps the fact.
   and country, and one Enter button. Nothing else, and it fits any
   screen without scrolling.
 - **Hero** (`portfolio.config.ts`, `heroConfig`): her role, that she works
-  remote, and her time zone,
+  remote, her time zone, and that she is available now,
   the claim, one line on what she does (frontend first, and the structure under
   it that keeps a team consistent), three things she made true that the
   page shows lower down, then "Email me" with a role subject and "Résumé, PDF". No

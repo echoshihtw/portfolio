@@ -47,14 +47,15 @@ export const heroConfig: {
   // Her name first: the signature in the header is not readable as one.
   // A remote employer filters on the hours first, so the time zone is here;
   // the cover names the city and country, and the footer her hours.
-  remoteOpen: ["Product engineer", "Remote", "UTC+8"],
+  remoteOpen: ["Product engineer", "Remote", "UTC+8", "Available now"],
 
-  // Things she made true, not tools she touched. Each is shown lower on the
-  // page: Clio's RLS, Runway's package boundaries, Lockerbie's BFF.
+  // Things she made true, as the result for a person, not the mechanism.
+  // Each is shown lower on the page: Clio's RLS, Runway's package boundaries,
+  // Lockerbie's BFF.
   owns: [
-    "Salon data isolated in the database",
-    "Layers that can't import each other",
-    "No credential in the browser",
+    "One salon can't see another's clients",
+    "A wrong import fails the build",
+    "Passwords and keys stay out of the browser",
   ],
 
   // Her own line, from the voice interview on 2026-10-19: "I make software
