@@ -393,7 +393,7 @@
   }
 
   .back {
-    --paper-ink: var(--back-ink, #1a1a1a);
+    --paper-ink: var(--back-ink, var(--ink));
     position: absolute;
     inset: 0;
     display: flex;
@@ -401,7 +401,7 @@
     gap: var(--space-4);
     padding: var(--space-5);
     overflow-y: auto;
-    background: var(--back-paper, #fffdf8);
+    background: var(--back-paper, var(--surface));
     color: var(--paper-ink);
     border-radius: 10px;
     border: 1px solid var(--border);

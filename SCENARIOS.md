@@ -1,4 +1,4 @@
-History: 16/40 (40%), 51/55 (93%), 55/57 (96%), 59/59 (100%)
+History: 16/40 (40%), 51/55 (93%), 55/57 (96%), 59/59 (100%), 59/60 (98%)
 
 # Portfolio scenarios
 
@@ -111,3 +111,7 @@ Each is one situation and what a good site does. Graded against DESIGN.md.
 ## Found in round 4
 
 60. A keyboard user tabs to Runway's "Watch it work" on a wide screen, where it sits on the demo's cream picture. Expected: its focus ring stands out from the picture.
+
+## Found in round 5
+
+61. A keyboard user on the cover presses Tab past Enter. Expected: focus stays on the cover; the page behind is out of reach until they enter.

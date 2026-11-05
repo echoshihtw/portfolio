@@ -190,8 +190,10 @@
     cursor: pointer;
   }
 
+  /* On the demo's cream picture the ring is the band's ink; under the picture,
+     on the band itself, it is the band's paper. */
   .play:focus-visible {
-    outline: 2px solid var(--runway-blue);
+    outline: 2px solid var(--runway-ink);
     outline-offset: 3px;
   }
 
@@ -201,6 +203,10 @@
 
   /* On a narrow frame the corner is the phone itself, so it sits underneath. */
   @media (max-width: 600px) {
+    .play:focus-visible {
+      outline-color: var(--runway-paper);
+    }
+
     .play {
       position: static;
       margin-top: var(--space-3);

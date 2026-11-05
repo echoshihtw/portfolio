@@ -26,19 +26,20 @@ The tokens live in `src/app.css`. This file says how to use them.
 Every colour has a job. Nothing is decoration. The ochre is the site's own
 accent; each app keeps its own colours inside its section. Links and buttons
 take the text colour of the ground they sit on. A focus ring always stands out
-from what is behind it: ink on paper, the band's paper on Runway's band, Runway
-blue on the demo's cream picture.
+from what is behind it: ink on paper, the band's paper on Runway's band, and the
+band's ink where the demo's play button sits on its cream picture.
 
-| Token                                                                               | Job                                                                                                                                                                                                        |
-| ----------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `--canvas`, `--smoke`, `--surface`                                                  | the page, every other section, and raised panels                                                                                                                                                           |
-| `--ink`, `--muted`                                                                  | text                                                                                                                                                                                                       |
-| `--accent-text`                                                                     | her ochre, from the paintings, for words: "learn.", the gallery's "hand.", and the header link's underline on hover and on the current page                                                                |
-| `--accent-shape`                                                                    | the brighter ochre, for decoration only: the cover's full stop and the theme switch's sun                                                                                                                  |
-| `--runway-field`, `--runway-ink`, `--runway-paper`, `--runway-blue`, `--runway-act` | Runway's band: the app's own ink, paper, blue and act colours                                                                                                                                              |
-| `--clio-pink`, `--clio-paper`, `--clio-number`                                      | Clio's touch: pink and paper from `@echoshihtw/clio-brand`, and its number in `app.css`. Pink for small marks only, the chosen client and the mark under 603; paper for the demo. Never a section's ground |
+| Token                                                                               | Job                                                                                                                                                                                                                                          |
+| ----------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--canvas`, `--smoke`, `--surface`                                                  | the page, every other section, and raised panels                                                                                                                                                                                             |
+| `--ink`, `--muted`, `--primary`, `--border`                                         | text, controls, which follow the ink, and hairlines                                                                                                                                                                                          |
+| `--accent-text`                                                                     | her ochre, from the paintings, for words: "learn.", the gallery's "hand.", and the header link's underline on hover and on the current page                                                                                                  |
+| `--accent-shape`                                                                    | the brighter ochre, for decoration only: the cover's full stop and the theme switch's sun, through `--highlight`                                                                                                                             |
+| `--runway-field`, `--runway-ink`, `--runway-paper`, `--runway-blue`, `--runway-act` | Runway's band: the app's own ink, paper, blue and act colours                                                                                                                                                                                |
+| `--clio-pink`, `--clio-paper`, `--clio-number`                                      | Clio's touch: pink and paper from `@echoshihtw/clio-brand`, and its number in `app.css`. Pink for small marks and tints only: the chosen client, the mark under 603, and the demo's soft fills; paper for the demo. Never a section's ground |
 
-Archived work gets no colour. The light set is defined once, in `:root` and
+Archived work gets no colour. A component's own tokens, such as `--hairline`,
+are mixes of these, never new colours. The light set is defined once, in `:root` and
 `.stay-light`. The gallery's content wears `.stay-light`, so its paintings stay
 on a light wall in the dark theme while the header and footer follow the theme.
 The cover follows the theme too. Every text pair clears 4.5:1 in both themes; `src/lib/contrast.test.ts`
@@ -78,7 +79,7 @@ so a rewrite keeps the fact.
   the résumé, and a quiet link that emails with a project subject.
 - **Blog** (`src/posts/`): working notes, each on what broke, what it turned out
   to be, and what she took from it.
-- **Footer**: where and when she works ("Taiwan, UTC+8 · APAC hours or async"),
+- **Footer** (`Footer.svelte`): where and when she works ("Taiwan, UTC+8 · APAC hours or async"),
   email, a call, the site's source, GitHub, LinkedIn and Instagram, and a way to
   replay the cover.
 
@@ -147,8 +148,7 @@ the same spot on the wall. The page ends with one way back to the software.
 ## Header and footer
 
 The header returns on any scroll up, so the home page's sections need no second
-list. The footer carries what the list above names, on every page. Replaying the
-cover opens it again on the home page.
+list. The footer carries what the list above names, on every page. Replaying the cover is under Motion.
 
 ## Motion
 
@@ -158,11 +158,14 @@ comes from one scale in `app.css`, `--motion-short` to `--motion-long` with
 `--motion-enter` and `--motion-exit`. Reduced motion swaps every movement for an
 instant change.
 
-The cover shows once per tab, unless replayed from the footer, on the home page
-only, and never on a link to a
-section. Focus starts on Enter. Enter, Space, the down arrow, a scroll or a
-swipe up goes in, and the page behind waits at the top. Its ochre full stop then travels to the full stop of
-"learn." while the headline arrives around it.
+The cover shows once per tab, on the home page only. A link to a section skips
+it. Replaying it from the footer, on any page, opens the home page with the
+cover.
+
+While the cover is up, the page behind is out of reach and waits at the top.
+Focus starts on Enter. Enter, Space, the down arrow, a scroll or a swipe up goes
+in. Its ochre full stop then travels to the full stop of "learn." while the
+headline arrives around it.
 
 ## Checks for every change
 
