@@ -24,21 +24,21 @@ The tokens live in `src/app.css`. This file says how to use them.
 ## Colour
 
 Every colour has a job. Nothing is decoration. The ochre is the site's own
-accent; each app keeps its own colours inside its section. Links, buttons and
-focus rings take the text colour of the ground they sit on: ink on paper, and
-the band's own paper, `--runway-paper`, on Runway's band.
+accent; each app keeps its own colours inside its section. Links and buttons
+take the text colour of the ground they sit on. A focus ring always stands out
+from what is behind it: ink on paper, the band's paper on Runway's band, Runway
+blue on the demo's cream picture.
 
-| Token                                             | Job                                                                                                                               |
-| ------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| `--canvas`, `--smoke`                             | the page, and every other section                                                                                                 |
-| `--ink`, `--muted`                                | text                                                                                                                              |
-| `--accent-text`                                   | her ochre, from the paintings, for words: "learn." and the gallery's "hand."                                                      |
-| `--accent-shape`                                  | the brighter ochre, for decoration only: the cover's full stop and the theme switch's sun                                         |
-| `--runway-field`, `--runway-blue`, `--runway-act` | Runway's band: the app's own ink, blue and act colours, with `--runway-paper` for its text                                        |
-| `--clio-pink`, `--clio-number`                    | Clio's touch, from `@echoshihtw/clio-brand`: small marks only, the chosen client and the mark under 603. Never a section's ground |
+| Token                                                                               | Job                                                                                                                                                                                                        |
+| ----------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--canvas`, `--smoke`, `--surface`                                                  | the page, every other section, and raised panels                                                                                                                                                           |
+| `--ink`, `--muted`                                                                  | text                                                                                                                                                                                                       |
+| `--accent-text`                                                                     | her ochre, from the paintings, for words: "learn.", the gallery's "hand.", and the header link's underline on hover and on the current page                                                                |
+| `--accent-shape`                                                                    | the brighter ochre, for decoration only: the cover's full stop and the theme switch's sun                                                                                                                  |
+| `--runway-field`, `--runway-ink`, `--runway-paper`, `--runway-blue`, `--runway-act` | Runway's band: the app's own ink, paper, blue and act colours                                                                                                                                              |
+| `--clio-pink`, `--clio-paper`, `--clio-number`                                      | Clio's touch: pink and paper from `@echoshihtw/clio-brand`, and its number in `app.css`. Pink for small marks only, the chosen client and the mark under 603; paper for the demo. Never a section's ground |
 
-Each app brings its own feeling in its own colours, inside its own section.
-Archived work gets none. The light set is defined once, in `:root` and
+Archived work gets no colour. The light set is defined once, in `:root` and
 `.stay-light`. The gallery's content wears `.stay-light`, so its paintings stay
 on a light wall in the dark theme while the header and footer follow the theme.
 The cover follows the theme too. Every text pair clears 4.5:1 in both themes; `src/lib/contrast.test.ts`
@@ -60,12 +60,12 @@ so a rewrite keeps the fact.
 - **Selected work** (`selectedWork.config.ts`): what Runway is, that she built
   and shipped it alone, live on the App Store since October 2026 with its link,
   the stack (read from `projects.config.ts`), one line on how she uses AI, the
-  architecture diagram (the pure core, its adapters, and the one import that
-  fails CI), and the privacy checks: the database checked as
+  architecture diagram in `RunwayArchitecture.svelte` (the pure core, its
+  adapters, and the one import that fails CI), and the privacy checks: the database checked as
   encrypted at every open, and CI checking the privacy page against what the app
   sends.
-- **Where I've worked** (`portfolio.config.ts`): each company with her role, the
-  dates and where, the problem and the result in one paragraph, the stack, and
+- **Where I've worked** (`resumeData.ts`, built from `resume.md`, and
+  `portfolio.config.ts`): each company with her role, the dates and where, the problem and the result in one paragraph, the stack, and
   the details on request. The full history is in the résumé.
 - **More projects** (`projects.config.ts`): each project's name, its status in
   words, its proof first (Clio: 603 clients typed in by hand, in use since May
@@ -125,8 +125,7 @@ page's surface, and screenshots are dimmed a little.
 
 Everything stacks; the label comes before the lead object. No fact splits
 across lines, and nothing is clipped or overlaps, upright or sideways. Held
-sideways, the page scrolls, though the cover never does, and no picture is
-taller than the screen. A project's first
+sideways, the page scrolls, and no picture is taller than the screen. A project's first
 paragraph says what it is, so it is always on screen; only the rest opens in a
 sheet. A sheet is the browser's own `<dialog>`, named by its title, closed by
 Escape, a tap outside
@@ -149,7 +148,7 @@ the same spot on the wall. The page ends with one way back to the software.
 
 The header returns on any scroll up, so the home page's sections need no second
 list. The footer carries what the list above names, on every page. Replaying the
-cover takes the visitor to the home page, where the cover lives.
+cover opens it again on the home page.
 
 ## Motion
 

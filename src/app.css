@@ -379,7 +379,7 @@ canvas {
   background: color-mix(in srgb, var(--primary-ink) 12%, var(--primary));
 }
 
-/* The ink variant: for a page whose one button should not be blue. */
+/* The main button: ink, so the ochre stays the page's one accent. */
 .btn-ink {
   border-color: var(--ink);
   background: var(--ink);

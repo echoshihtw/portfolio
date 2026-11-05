@@ -1,4 +1,4 @@
-History: 16/40 (40%), 51/55 (93%), 55/57 (96%)
+History: 16/40 (40%), 51/55 (93%), 55/57 (96%), 59/59 (100%)
 
 # Portfolio scenarios
 
@@ -107,3 +107,7 @@ Each is one situation and what a good site does. Graded against DESIGN.md.
 
 58. A screen reader user lands on the cover. Expected: it is announced as a dialog named "Portfolio introduction", with focus on Enter.
 59. A visitor who prefers dark wants to switch before entering. Expected: the theme switch is on the cover.
+
+## Found in round 4
+
+60. A keyboard user tabs to Runway's "Watch it work" on a wide screen, where it sits on the demo's cream picture. Expected: its focus ring stands out from the picture.
