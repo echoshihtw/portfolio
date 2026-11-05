@@ -43,7 +43,8 @@ Archived work gets no colour. A component's own tokens, such as `--hairline`,
 are mixes of these, never new colours. Shadows and the sheet's backdrop are mixes
 of `--shade`, the one dark that stays the same in both themes. The light set is `:root` and `.stay-light`, defined once in `app.css`. The gallery's content wears `.stay-light`, so its paintings stay
 on a light wall in the dark theme while the header and footer follow the theme.
-The cover follows the theme too. Every text pair clears 4.5:1 in both themes; `src/lib/contrast.test.ts`
+The cover follows the theme too. A first visit starts on light, whatever the
+device is set to; the switch remembers the visitor's choice after that. Every text pair clears 4.5:1 in both themes; `src/lib/contrast.test.ts`
 holds that.
 
 ## What each section must carry
@@ -72,7 +73,7 @@ so a rewrite keeps the fact.
   the details on request. The full history is in the résumé.
 - **More projects** (`projects.config.ts`): each project's name, its status in
   words, its proof first (Clio: 603 clients typed in by hand, in use since May
-  2025), what it is, the stack, its link, and its decisions on the back.
+  2025), what it is, the stack, its link if it has one, and its decisions on the back.
 - **Who I am** (`aboutMe.config.ts`): her portrait, her line on why she builds,
   and five parts in story order: Background, What changed, How I work, With AI,
   Outside work. How I work holds habits a reader can check, not adjectives.
@@ -124,7 +125,7 @@ on a tap.
 Each project's lead object sits in a hairline frame, not a shadow. "Read the
 decisions" turns the card over on a wide screen, and only one card is turned at
 a time. Focus moves to the card's back, and "Turn it back" returns it to the
-button that turned it. In the dark theme, Clio's demo and card back keep its own paper inside a frame of the
+button that turned it. In the dark theme, Clio's demo keeps its own paper inside a frame of the
 page's surface, and screenshots are dimmed a little.
 
 ## Phones
@@ -146,7 +147,7 @@ the heading, and never taller than the screen. The wall below leaves it out.
 
 The rest hang in even 4:5 frames: one column on a phone, two from 560 px wide,
 three from 860 px. A painting opens full screen over the wall, in the browser's own modal dialog,
-so focus stays inside it and it keeps the light wall in the dark theme, and the others
+so focus stays inside it, and the others
 sit beside it: swipe, the arrow keys or the buttons move between them, with a
 counter in a fixed place that a screen reader hears as it changes. Escape, Close or a tap on the background returns to
 the same spot on the wall. The page ends with one way back to the software.
