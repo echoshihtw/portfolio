@@ -16,8 +16,6 @@ export const aboutMeConfig = {
   // her words; the parts are cut to one idea each, under a label, so a
   // skimming reader can jump to the one they want.
   headline: "Bad design annoys me, so I write software that doesn't.",
-  // The instinct, in her words: she feels it before she can say why.
-  instinct: "I notice it before I can explain why.",
   parts: [
     {
       label: "Background",
