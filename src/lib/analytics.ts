@@ -12,7 +12,7 @@ import { track } from "@vercel/analytics";
 
 /**
  * Which call to action was used. This is the interesting half of the data:
- * the same résumé link sits in four places, and knowing that people take it
+ * the same résumé link sits in several places, and knowing that people take it
  * from the header rather than the hero would change where it goes.
  */
 export type CtaPlace =
