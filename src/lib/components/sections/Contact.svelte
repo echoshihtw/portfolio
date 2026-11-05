@@ -1,15 +1,15 @@
 <script lang="ts">
   import { base } from "$app/paths";
-  import { closingConfig, heroConfig } from "../../../content/portfolio.config";
+  import { closingConfig } from "../../../content/portfolio.config";
   import SectionHead from "$lib/components/SectionHead.svelte";
   import { mailtoWithSubject } from "$lib/contactLinks";
   import { trackEmail, trackResume } from "$lib/analytics";
 
-  // The page's one door, at the end: the same "Email me" as the hero, the
-  // résumé beside it, and a subject for each kind of message under them.
+  // The page's one door, at the end: email about a role, the résumé beside
+  // it, and any other kind of message as a quiet link under them.
   // Analytics keeps the "about" places it had when this sat inside Who I
   // am, so the numbers stay comparable.
-  const email = mailtoWithSubject(closingConfig.email, heroConfig.emailSubject);
+  const [main, ...others] = closingConfig.paths;
 </script>
 
 <section
@@ -30,10 +30,10 @@
       <div class="actions">
         <a
           class="btn btn-ink"
-          href={email}
+          href={mailtoWithSubject(closingConfig.email, main.subject)}
           on:click={() => trackEmail("about")}
         >
-          Email me
+          Email {main.label}
         </a>
         <a
           class="btn btn-line"
@@ -45,8 +45,8 @@
         </a>
       </div>
       <p class="ways">
-        {closingConfig.ways}{" "}
-        {#each closingConfig.paths as path, i}{#if i > 0}<span
+        {closingConfig.ways}
+        {#each others as path, i}{#if i > 0}<span
               class="sep"
               aria-hidden="true"
             >
@@ -103,6 +103,7 @@
     max-width: 44ch;
     font-size: var(--text-lg);
     line-height: 1.5;
+    text-wrap: balance;
   }
 
   .actions {
@@ -116,9 +117,11 @@
     margin: 0 0.6em;
   }
 
+  /* One typeface in the line, like the links in it. */
   .ways {
     margin: 0;
     max-width: 46ch;
+    font-family: var(--font-mono);
     font-size: var(--text-sm);
     line-height: 1.8;
     color: var(--muted);

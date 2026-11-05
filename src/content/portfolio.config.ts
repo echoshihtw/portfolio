@@ -81,13 +81,14 @@ export const heroConfig: {
 // a subject for each kind of message.
 export const closingConfig = {
   lead: "I like to untangle things.",
-  body: "Give me the part nobody's scoped yet and I'll work out what it should be, build it, and keep it simple enough for anyone to change.",
+  body: "Give me the part nobody's scoped yet and I'll work out what it should be, build it, and keep it simple enough for the next person to change.",
   email: EMAIL,
   resume: RESUME,
   heading: "Available for a role or a project",
-  // One door, then a subject for each kind of message, so the inbox shows
-  // which one it is before the message is opened.
-  ways: "Or email",
+  // One door: the first path is the main button, the rest are quiet links
+  // under it. Each carries its own subject, so the inbox shows which kind of
+  // message it is before it is opened.
+  ways: "or email",
   paths: [
     { key: "role", label: "about a role", subject: ROLE_SUBJECT },
     { key: "project", label: "about a project", subject: "Product project" },
