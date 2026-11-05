@@ -25,22 +25,24 @@ paints before the site's styles load. This file says how to use them.
 
 Every colour has a job. Nothing is decoration. The ochre is the site's own
 accent; each app keeps its own colours inside its section. Links, buttons and
-focus rings take the text colour of the ground they sit on, so a ring always
-stands out from what is behind it.
+focus rings take the text colour of what is directly behind them, so a ring
+always stands out. A ring sits just outside a control, on the page; on a panel
+that fills its own ground, such as a turned card, it sits inside, on the panel.
+On a picture, it takes the picture's ink.
 
 | Token                                                                               | Job                                                                                                                                                                                                                                                                            |
 | ----------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `--canvas`, `--smoke`, `--surface`                                                  | the page, every other section, and raised panels                                                                                                                                                                                                                               |
 | `--ink`, `--muted`, `--primary`, `--border`                                         | text, controls, which follow the ink, and hairlines                                                                                                                                                                                                                            |
 | `--accent-text`                                                                     | her ochre, from the paintings, for words and the line under them: "learn.", the gallery's "hand.", and the header link's underline on hover and on the current page                                                                                                            |
-| `--accent-shape`                                                                    | the brighter ochre, for decoration only: the cover's full stop and the theme switch's sun, through `--highlight`                                                                                                                                                               |
+| `--accent-shape`                                                                    | the brighter ochre, for shapes only: the cover's full stop and the theme switch's sun, through `--highlight`                                                                                                                                                                   |
 | `--runway-field`, `--runway-ink`, `--runway-paper`, `--runway-blue`, `--runway-act` | Runway's band: the app's own ink, paper, blue and act colours                                                                                                                                                                                                                  |
 | `--clio-pink`, `--clio-paper`, `--clio-ink`, `--clio-number`                        | Clio's touch: pink, paper and ink from `@echoshihtw/clio-brand`, and its number in `app.css`. Pink for small marks and tints only: the chosen client, the mark under 603, and the demo's soft fills. Paper and ink for the demo and Clio's card back. Never a section's ground |
 
 Archived work gets no colour. A component's own tokens, such as `--hairline`,
-are mixes of these, never new colours. Shadows and the sheet's backdrop are the
-one exception: a fixed dark tint, in both themes. The light set is defined once, in `:root` and
-`.stay-light`. The gallery's content wears `.stay-light`, so its paintings stay
+are mixes of these, never new colours. Shadows and the sheet's backdrop are mixes
+of `--shade`, the one dark that stays the same in both themes. The light set is defined in `app.css`, in `:root` and `.stay-light`, and
+repeated only for the cover, where a test keeps the copy equal. The gallery's content wears `.stay-light`, so its paintings stay
 on a light wall in the dark theme while the header and footer follow the theme.
 The cover follows the theme too. Every text pair clears 4.5:1 in both themes; `src/lib/contrast.test.ts`
 holds that.
@@ -145,7 +147,7 @@ the heading, and never taller than the screen. The wall below leaves it out.
 
 The rest hang in even 4:5 frames: one column on a phone, two from 560 px wide,
 three from 860 px. A painting opens full screen over the wall, in the browser's own modal dialog,
-so focus stays inside it, and the others
+so focus stays inside it and it keeps the light wall in the dark theme, and the others
 sit beside it: swipe, the arrow keys or the buttons move between them, with a
 counter in a fixed place that a screen reader hears as it changes. Escape, Close or a tap on the background returns to
 the same spot on the wall. The page ends with one way back to the software.

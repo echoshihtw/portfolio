@@ -16,6 +16,8 @@ const ROLE_SUBJECT = "Product engineering role";
 // One address and one résumé file for every door on the page.
 const EMAIL = "echoshihtw@gmail.com";
 const RESUME = "Chun-Yu-Echo-Shih-Software-Engineer.pdf";
+// The one label for the résumé link, wherever it appears.
+export const RESUME_LABEL = "Résumé, PDF";
 
 export const heroConfig: {
   remoteOpen: string[];

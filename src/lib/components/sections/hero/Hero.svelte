@@ -1,6 +1,9 @@
 <script lang="ts">
   import { base } from "$app/paths";
-  import { heroConfig } from "../../../../content/portfolio.config";
+  import {
+    RESUME_LABEL,
+    heroConfig,
+  } from "../../../../content/portfolio.config";
   import { mailtoWithSubject } from "$lib/contactLinks";
   import { trackEmail, trackResume } from "$lib/analytics";
 </script>
@@ -59,7 +62,7 @@
         download
         on:click={() => trackResume("hero")}
       >
-        Résumé, PDF
+        {RESUME_LABEL}
       </a>
     </div>
   </div>

@@ -4,8 +4,7 @@ export const galleryConfig = {
   heading: [
     // "Made by" stays together, so a narrow column breaks before "hand".
     { text: "Made\u00a0by " },
-    { text: "hand", accent: true },
-    { text: "." },
+    { text: "hand.", accent: true },
   ] as { text: string; accent?: boolean }[],
 
   // One line of provenance for the work below. Her degree and the rest of

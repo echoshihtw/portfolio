@@ -97,3 +97,25 @@ describe("the colour bands", () => {
     expect(contrastRatio(clio.ink, clio.pink)).toBeGreaterThanOrEqual(4.5);
   });
 });
+
+// The cover paints before the site's styles load, so it keeps its own copy of
+// the paper, ink and ochre. This keeps the copy equal to the source.
+describe("the cover's colours match the site's", () => {
+  const cover = readFileSync("static/boot-gate.css", "utf8");
+  const gate = (selector: string, name: string) => {
+    const block = cover.slice(cover.indexOf(selector));
+    const body = block.slice(0, block.indexOf("\n}"));
+    const m = body.match(new RegExp(`--gate-${name}:\\s*([^;]+);`));
+    if (!m) throw new Error(`${selector} has no --gate-${name}`);
+    const fallback = m[1].match(/^var\(--[\w-]+,\s*(#[0-9a-f]+)\)$/i);
+    return (fallback ? fallback[1] : m[1]).trim().toLowerCase();
+  };
+  it.each([
+    ["light", "#boot-gate {", light],
+    ["dark", 'html[data-theme="dark"] #boot-gate {', dark],
+  ])("in the %s theme", (_, selector, t) => {
+    expect(gate(selector, "canvas")).toBe(t("canvas").toLowerCase());
+    expect(gate(selector, "ink")).toBe(t("ink").toLowerCase());
+    expect(gate(selector, "accent")).toBe(t("accent-shape").toLowerCase());
+  });
+});

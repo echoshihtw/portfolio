@@ -68,6 +68,9 @@
      carries no meaning, like the cover's full stop (2.5:1), never for words
      or controls. */
   --accent-text: #7d5a12;
+  /* The one dark for shadows and the sheet's backdrop, the same in both
+     themes; each use is a mix of it. */
+  --shade: #14100a;
   --accent-shape: #c9921f;
   --highlight: var(--accent-shape); /* the theme switch's sun is her ochre */
   /* How her ink prints sit in the page. On paper they multiply into it; on

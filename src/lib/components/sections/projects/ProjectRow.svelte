@@ -416,6 +416,12 @@
     outline: none;
   }
 
+  /* The back fills its own ground, so its ring is drawn inside, on that
+     ground, where the card's ink stands out. */
+  .back:focus-visible {
+    outline-offset: -6px;
+  }
+
   .back .label {
     margin: 0;
     color: color-mix(in srgb, var(--paper-ink) 68%, transparent);

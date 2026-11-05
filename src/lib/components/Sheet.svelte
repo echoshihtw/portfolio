@@ -73,11 +73,11 @@
     border-radius: 18px 18px 0 0;
     background: var(--surface);
     color: var(--ink);
-    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.18);
+    box-shadow: 0 -10px 30px color-mix(in srgb, var(--shade) 18%, transparent);
   }
 
   dialog::backdrop {
-    background: rgba(26, 26, 26, 0.32);
+    background: color-mix(in srgb, var(--shade) 32%, transparent);
   }
 
   dialog[open] {

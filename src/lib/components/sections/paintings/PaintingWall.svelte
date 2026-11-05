@@ -382,7 +382,7 @@
     inset: 0;
     margin: auto;
     display: block;
-    box-shadow: 0 3px 10px rgb(28 22 14 / 0.14);
+    box-shadow: 0 3px 10px color-mix(in srgb, var(--shade) 14%, transparent);
   }
 
   figcaption {

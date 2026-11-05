@@ -1,4 +1,4 @@
-History: 16/40 (40%), 51/55 (93%), 55/57 (96%), 59/59 (100%), 59/60 (98%), 61/61 (100%), 62/62 (100%)
+History: 16/40 (40%), 51/55 (93%), 55/57 (96%), 59/59 (100%), 59/60 (98%), 61/61 (100%), 62/62 (100%), 62/64 (97%)
 
 # Portfolio scenarios
 
@@ -122,5 +122,9 @@ Each is one situation and what a good site does. Graded against DESIGN.md.
 
 ## Found in round 7
 
-63. In the dark theme, a keyboard user turns Clio's card over. Expected: the ring on its back is Clio's ink on Clio's paper, clearly visible.
+63. In the dark theme, a keyboard user turns Clio's card over. Expected: the ring is drawn inside the card's back, Clio's ink on Clio's paper, clearly visible.
 64. A keyboard user opens a painting full screen and presses Tab. Expected: focus stays inside the viewer until it is closed.
+
+## Found in round 8
+
+65. In the dark theme, a visitor opens a painting full screen. Expected: the viewer keeps the light wall, like the gallery.

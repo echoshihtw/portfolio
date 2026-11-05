@@ -1,6 +1,9 @@
 <script lang="ts">
   import { base } from "$app/paths";
-  import { closingConfig } from "../../../content/portfolio.config";
+  import {
+    RESUME_LABEL,
+    closingConfig,
+  } from "../../../content/portfolio.config";
   import SectionHead from "$lib/components/SectionHead.svelte";
   import { mailtoWithSubject } from "$lib/contactLinks";
   import { trackEmail, trackResume } from "$lib/analytics";
@@ -41,7 +44,7 @@
           download
           on:click={() => trackResume("about")}
         >
-          Résumé, PDF
+          {RESUME_LABEL}
         </a>
       </div>
       <p class="ways">
