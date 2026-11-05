@@ -24,9 +24,9 @@ The tokens live in `src/app.css`. This file says how to use them.
 ## Colour
 
 Every colour has a job. Nothing is decoration. The ochre is the site's own
-accent; each app keeps its own colours inside its section. Links and buttons are
-ink, and a focus ring takes the text colour of the ground it sits on: ink on
-paper, paper on Runway's band.
+accent; each app keeps its own colours inside its section. Links, buttons and
+focus rings take the text colour of the ground they sit on: ink on paper, paper
+on Runway's band.
 
 | Token                                             | Job                                                                                       |
 | ------------------------------------------------- | ----------------------------------------------------------------------------------------- |
@@ -50,14 +50,17 @@ The words live in `src/content/`; this list says what each part has to prove,
 so a rewrite keeps the fact.
 
 - **Cover** (`src/app.html`): her name with the ochre full stop, "Product
-  Engineer · Taipei", and one Enter button. Nothing else.
+  Engineer · Taipei", and one Enter button. Nothing else, and it fits any
+  screen without scrolling.
 - **Hero** (`portfolio.config.ts`, `heroConfig`): her role and where she works,
-  the claim, one line on what she does, three things she made true that the
+  the claim, one line on what she does (frontend first, and the structure under
+  it that keeps a team consistent), three things she made true that the
   page shows lower down, then "Email me" with a role subject and "Résumé, PDF".
 - **Selected work** (`selectedWork.config.ts`): what Runway is, that she built
   and shipped it alone, live on the App Store since October 2026 with its link,
   the stack (read from `projects.config.ts`), one line on how she uses AI, the
-  architecture diagram, and the privacy checks: the database checked as
+  architecture diagram (the pure core, its adapters, and the one import that
+  fails CI), and the privacy checks: the database checked as
   encrypted at every open, and CI checking the privacy page against what the app
   sends.
 - **Where I've worked** (`portfolio.config.ts`): each company with her role, the
@@ -87,7 +90,7 @@ downloads folder.
    most one quiet link on the right.
 2. **One lead object.** The thing the section is about.
 3. **Notes.** Short text beside or under it. The proof first, and the largest.
-4. **At most one link out.**
+4. **At most one link to another site.**
 
 About four chunks per block. The same layout in every section.
 
@@ -120,8 +123,8 @@ page's surface, and screenshots are dimmed a little.
 ## Phones
 
 Everything stacks; the label comes before the lead object. No fact splits
-across lines. Held sideways, everything scrolls and nothing is clipped, and no
-picture is taller than the screen. A project's first
+across lines, and nothing is clipped or overlaps, upright or sideways. Held
+sideways, the page scrolls, and no picture is taller than the screen. A project's first
 paragraph says what it is, so it is always on screen; only the rest opens in a
 sheet. A sheet is the browser's own `<dialog>`, named by its title, closed by
 Escape, a tap outside
@@ -143,8 +146,8 @@ the same spot on the wall. The page ends with one way back to the software.
 ## Header and footer
 
 The header returns on any scroll up, so the home page's sections need no second
-list. The footer links to the other pages, email, a call and the site's source,
-her social profiles, and a way to replay the cover.
+list. The footer carries what the list above names, on every page. Replaying the
+cover takes the visitor to the home page, where the cover lives.
 
 ## Motion
 

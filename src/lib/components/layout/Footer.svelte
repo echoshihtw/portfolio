@@ -61,7 +61,8 @@
     } catch {
       // Ignore storage failures, the gate just won't replay.
     }
-    location.reload();
+    // The cover belongs to the home page, so replaying it goes there.
+    location.href = `${base}/`;
   }
 </script>
 

@@ -1,4 +1,4 @@
-History: 16/40 (40%)
+History: 16/40 (40%), 51/55 (93%)
 
 # Portfolio scenarios
 
@@ -97,3 +97,8 @@ Each is one situation and what a good site does. Graded against DESIGN.md.
 53. A developer-tools team checks frontend depth. Expected: the hero says frontend first, and the work and projects show Next.js and React in production.
 54. A developer-tools team checks whether she cares how code is structured for other developers. Expected: the hero says the structure keeps a team consistent, and Runway shows boundaries that fail CI when broken.
 55. A developer-tools team wants to read her code. Expected: the footer links her GitHub and the site's own source.
+
+## Found in round 2
+
+56. A visitor on a blog post presses "Replay intro card" in the footer. Expected: the home page opens with the cover.
+57. A visitor holds a phone sideways (568 × 320) on the cover. Expected: the cover fits without scrolling, since a scroll means going in.
