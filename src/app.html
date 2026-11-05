@@ -48,9 +48,11 @@
     <script>
       (() => {
         const key = "echo-theme";
-        // Start new visitors on paper, the light theme, and remember either
-        // choice. The saved preference wins over the OS preference.
-        let theme = "light";
+        // The one place the first theme is chosen: a choice the visitor made
+        // with the switch, or else their device's own setting.
+        let theme = matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "light";
 
         try {
           const savedTheme = localStorage.getItem(key);
@@ -58,7 +60,7 @@
             theme = savedTheme;
           }
         } catch (_error) {
-          theme = "light";
+          // No storage: the device's setting stands.
         }
 
         document.documentElement.dataset.theme = theme;

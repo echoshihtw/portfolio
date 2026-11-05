@@ -43,8 +43,8 @@ Archived work gets no colour. A component's own tokens, such as `--hairline`,
 are mixes of these, never new colours. Shadows and the sheet's backdrop are mixes
 of `--shade`, the one dark that stays the same in both themes. The light set is `:root` and `.stay-light`, defined once in `app.css`. The gallery's content wears `.stay-light`, so its paintings stay
 on a light wall in the dark theme while the header and footer follow the theme.
-The cover follows the theme too. A first visit starts on light, whatever the
-device is set to; the switch remembers the visitor's choice after that. Every text pair clears 4.5:1 in both themes; `src/lib/contrast.test.ts`
+The cover follows the theme too. A first visit follows the device's own setting,
+until the visitor flips the switch; the site remembers that choice. Every text pair clears 4.5:1 in both themes; `src/lib/contrast.test.ts`
 holds that.
 
 ## What each section must carry
@@ -77,9 +77,10 @@ so a rewrite keeps the fact.
 - **Who I am** (`aboutMe.config.ts`): her portrait, her line on why she builds,
   and five parts in story order: Background, What changed, How I work, With AI,
   Outside work. How I work holds habits a reader can check, not adjectives.
-- **Contact** (`portfolio.config.ts`, `closingConfig`): that she is available,
-  one line on what she takes on, a main button that emails with a role subject,
-  the résumé, and a quiet link that emails with a project subject.
+- **Contact** (`portfolio.config.ts`, `closingConfig`): that she is available for
+  work, one line on what she takes on, a main button
+  that emails with a role subject, the résumé, and quiet links that email with a
+  contract subject and a project subject.
 - **Gallery** (`galleryPage.config.ts`): its heading, one line of provenance,
   the lead painting, and one way back to the software.
 - **Blog** (`src/posts/`): working notes, each on what broke, what it turned out

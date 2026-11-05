@@ -128,3 +128,8 @@ Each is one situation and what a good site does. Graded against DESIGN.md.
 ## Found in round 8
 
 65. In the dark theme, a visitor opens a painting full screen. Expected: the viewer keeps the light wall, like the gallery.
+
+## Added on 2026-11-05
+
+66. A company wants to hire her as a contractor, not an employee. Expected: Contact offers a quiet link to email about a contract, with its own subject.
+67. A visitor whose device is set to dark opens the site for the first time. Expected: it starts in the dark theme, and only a flip of the switch is remembered.

@@ -88,13 +88,15 @@ export const closingConfig = {
   body: "Give me the part nobody's scoped yet and I'll work out what it should be, build it, and keep it simple enough for the next person to change.",
   email: EMAIL,
   resume: RESUME,
-  heading: "Available for a role or a project",
+  // The kinds of work are the links below it, so the heading stays short.
+  heading: "Available for work",
   // One door: the first path is the main button, the rest are quiet links
   // under it. Each carries its own subject, so the inbox shows which kind of
   // message it is before it is opened.
   ways: "or email",
   paths: [
     { key: "role", label: "about a role", subject: ROLE_SUBJECT },
+    { key: "contract", label: "about a contract", subject: "Contract work" },
     { key: "project", label: "about a project", subject: "Product project" },
   ],
 } as const;

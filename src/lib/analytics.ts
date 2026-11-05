@@ -18,7 +18,7 @@ import { track } from "@vercel/analytics";
 export type CtaPlace =
   | "hero"
   | "about"
-  | "about-role"
+  | "about-contract"
   | "about-project"
   | "header"
   | "footer"
