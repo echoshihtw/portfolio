@@ -15,7 +15,9 @@ type HeadlinePart = { text: string; accent?: boolean };
 const ROLE_SUBJECT = "Product engineering role";
 // One address and one résumé file for every door on the page.
 const EMAIL = "echoshihtw@gmail.com";
-const RESUME = "Chun-Yu-Echo-Shih-Software-Engineer.pdf";
+// The résumé file, named for the title the site uses. The build script reads
+// it from here; vercel.json redirects the old names to it.
+export const RESUME = "Chun-Yu-Echo-Shih-Product-Engineer.pdf";
 // The one label for the résumé link, wherever it appears.
 export const RESUME_LABEL = "Résumé, PDF";
 
