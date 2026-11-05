@@ -25,17 +25,17 @@ The tokens live in `src/app.css`. This file says how to use them.
 
 Every colour has a job. Nothing is decoration. The ochre is the site's own
 accent; each app keeps its own colours inside its section. Links, buttons and
-focus rings take the text colour of the ground they sit on: ink on paper, paper
-on Runway's band.
+focus rings take the text colour of the ground they sit on: ink on paper, and
+the band's own paper, `--runway-paper`, on Runway's band.
 
-| Token                                             | Job                                                                                       |
-| ------------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| `--canvas`, `--smoke`                             | the page, and every other section                                                         |
-| `--ink`, `--muted`                                | text and controls                                                                         |
-| `--accent-text`                                   | her ochre, from the paintings, for words: "learn." and the gallery's "hand."              |
-| `--accent-shape`                                  | the brighter ochre, for decoration only: the cover's full stop and the theme switch's sun |
-| `--runway-field`, `--runway-blue`, `--runway-act` | Runway's band: the app's own ink, blue and act colours                                    |
-| `--clio-pink`, `--clio-number`                    | Clio's touch: the client in the chair, the mark under 603. Never a background             |
+| Token                                             | Job                                                                                                                               |
+| ------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| `--canvas`, `--smoke`                             | the page, and every other section                                                                                                 |
+| `--ink`, `--muted`                                | text                                                                                                                              |
+| `--accent-text`                                   | her ochre, from the paintings, for words: "learn." and the gallery's "hand."                                                      |
+| `--accent-shape`                                  | the brighter ochre, for decoration only: the cover's full stop and the theme switch's sun                                         |
+| `--runway-field`, `--runway-blue`, `--runway-act` | Runway's band: the app's own ink, blue and act colours, with `--runway-paper` for its text                                        |
+| `--clio-pink`, `--clio-number`                    | Clio's touch, from `@echoshihtw/clio-brand`: small marks only, the chosen client and the mark under 603. Never a section's ground |
 
 Each app brings its own feeling in its own colours, inside its own section.
 Archived work gets none. The light set is defined once, in `:root` and
@@ -49,8 +49,9 @@ holds that.
 The words live in `src/content/`; this list says what each part has to prove,
 so a rewrite keeps the fact.
 
-- **Cover** (`src/app.html`): her name with the ochre full stop, "Product
-  Engineer · Taipei", and one Enter button. Nothing else, and it fits any
+- **Cover** (`src/app.html`): a dialog named "Portfolio introduction", holding
+  "PORTFOLIO" and the theme switch along the top, her name with the ochre full
+  stop, "Product Engineer · Taipei", and one Enter button. Nothing else, and it fits any
   screen without scrolling.
 - **Hero** (`portfolio.config.ts`, `heroConfig`): her role and where she works,
   the claim, one line on what she does (frontend first, and the structure under
@@ -76,7 +77,7 @@ so a rewrite keeps the fact.
   one line on what she takes on, a main button that emails with a role subject,
   the résumé, and a quiet link that emails with a project subject.
 - **Blog** (`src/posts/`): working notes, each on what broke, what it turned out
-  to be, and what she would do differently.
+  to be, and what she took from it.
 - **Footer**: where and when she works ("Taiwan, UTC+8 · APAC hours or async"),
   email, a call, the site's source, GitHub, LinkedIn and Instagram, and a way to
   replay the cover.
@@ -92,7 +93,7 @@ downloads folder.
 3. **Notes.** Short text beside or under it. The proof first, and the largest.
 4. **At most one link to another site.**
 
-About four chunks per block. The same layout in every section.
+About four chunks per block.
 
 | Layout             | Columns on a wide screen | Used by                      |
 | ------------------ | ------------------------ | ---------------------------- |
@@ -100,7 +101,7 @@ About four chunks per block. The same layout in every section.
 | Portrait and words | portrait 5, words 7      | Who I am                     |
 | List               | label 3, body 9          | Where I've worked            |
 
-Contact, the close, is the one centred section, and has words only.
+Contact, the close, is the one centred section, and has no picture.
 
 ## Selected work
 
@@ -124,7 +125,8 @@ page's surface, and screenshots are dimmed a little.
 
 Everything stacks; the label comes before the lead object. No fact splits
 across lines, and nothing is clipped or overlaps, upright or sideways. Held
-sideways, the page scrolls, and no picture is taller than the screen. A project's first
+sideways, the page scrolls, though the cover never does, and no picture is
+taller than the screen. A project's first
 paragraph says what it is, so it is always on screen; only the rest opens in a
 sheet. A sheet is the browser's own `<dialog>`, named by its title, closed by
 Escape, a tap outside
@@ -157,7 +159,8 @@ comes from one scale in `app.css`, `--motion-short` to `--motion-long` with
 `--motion-enter` and `--motion-exit`. Reduced motion swaps every movement for an
 instant change.
 
-The cover shows once per tab, on the home page only, and never on a link to a
+The cover shows once per tab, unless replayed from the footer, on the home page
+only, and never on a link to a
 section. Focus starts on Enter. Enter, Space, the down arrow, a scroll or a
 swipe up goes in, and the page behind waits at the top. Its ochre full stop then travels to the full stop of
 "learn." while the headline arrives around it.

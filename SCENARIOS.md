@@ -1,4 +1,4 @@
-History: 16/40 (40%), 51/55 (93%)
+History: 16/40 (40%), 51/55 (93%), 55/57 (96%)
 
 # Portfolio scenarios
 
@@ -102,3 +102,8 @@ Each is one situation and what a good site does. Graded against DESIGN.md.
 
 56. A visitor on a blog post presses "Replay intro card" in the footer. Expected: the home page opens with the cover.
 57. A visitor holds a phone sideways (568 × 320) on the cover. Expected: the cover fits without scrolling, since a scroll means going in.
+
+## Found in round 3
+
+58. A screen reader user lands on the cover. Expected: it is announced as a dialog named "Portfolio introduction", with focus on Enter.
+59. A visitor who prefers dark wants to switch before entering. Expected: the theme switch is on the cover.
