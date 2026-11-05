@@ -323,7 +323,7 @@
 
   .frame {
     padding: 0.5rem;
-    background: #fffdf8;
+    background: var(--surface);
     border-radius: 6px;
     border: 1px solid var(--border);
   }
@@ -334,6 +334,12 @@
     height: auto;
     border-radius: 3px;
     filter: grayscale(0.35);
+  }
+
+  /* A screenshot cannot follow the theme, so on dark it is dimmed a little
+     instead of glaring. */
+  :global(html[data-theme="dark"]) .frame img {
+    filter: grayscale(0.35) brightness(0.85);
   }
 
   .sheet-p {

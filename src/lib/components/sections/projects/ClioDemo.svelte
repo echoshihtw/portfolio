@@ -108,6 +108,13 @@
     border: 1px solid var(--border);
   }
 
+  /* Clio keeps its own paper in both themes. On dark it sits in a frame of
+     the page's surface, like a lit screen, rather than as a bright hole. */
+  :global(html[data-theme="dark"]) .demo {
+    box-shadow: 0 0 0 0.5rem var(--surface);
+    margin: 0.5rem;
+  }
+
   .demo .label {
     color: var(--paper-grey);
   }

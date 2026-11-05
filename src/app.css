@@ -66,7 +66,7 @@
      or controls. */
   --accent-text: #7d5a12;
   --accent-shape: #c9921f;
-  --highlight: #f2c94c;
+  --highlight: var(--accent-shape); /* the theme switch's sun is her ochre */
   /* How her ink prints sit in the page. On paper they multiply into it; on
      the ink theme they turn to chalk lines instead. */
   --print-blend: multiply;
@@ -147,7 +147,7 @@ html[data-theme="dark"] {
   --primary-ink: var(--canvas);
   --accent-text: #c9921f;
   --accent-shape: #d4a03a;
-  --highlight: #f2c94c;
+  --highlight: var(--accent-shape);
   --print-blend: screen;
   --print-filter: invert(1) contrast(1.2);
   --print-opacity: 0.16;

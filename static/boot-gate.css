@@ -172,7 +172,7 @@ html[data-theme="dark"] #boot-gate {
   width: 0.86rem;
   height: 0.86rem;
   border-radius: 999px;
-  background: #f2c94c;
+  background: var(--gate-accent);
 }
 
 .gate-theme-core::after {
