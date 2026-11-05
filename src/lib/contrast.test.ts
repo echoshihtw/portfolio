@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs";
 import { createRequire } from "node:module";
 import { describe, expect, it } from "vitest";
-import { contrastRatio } from "./contrast";
+import { contrastRatio, over } from "./contrast";
 
 const css = readFileSync("src/app.css", "utf8");
 const clio = createRequire(import.meta.url)("@echoshihtw/clio-brand/tokens.js");
@@ -12,18 +12,29 @@ function token(selector: string, name: string): string {
   const body = block.slice(0, block.indexOf("\n}"));
   const match = body.match(new RegExp(`--${name}:\\s*([^;]+);`));
   if (!match) throw new Error(`${selector} has no --${name}`);
-  const brand = match[1].match(/^var\(--clio-(\w+)\)$/);
-  return brand ? clio[brand[1]] : match[1];
+  return match[1].trim();
 }
 
-const light = (name: string) => token(":root,\n.stay-light {", name);
-const dark = (name: string) => {
+// A token's colour, following var(--x) to the same theme's token or to the
+// Clio brand.
+function resolve(get: (name: string) => string, name: string): string {
+  const value = get(name);
+  const brand = value.match(/^var\(--clio-(\w+)\)$/);
+  if (brand) return clio[brand[1]];
+  const ref = value.match(/^var\(--([\w-]+)\)$/);
+  return ref ? resolve(get, ref[1]) : value;
+}
+
+const lightRaw = (name: string) => token(":root,\n.stay-light {", name);
+const darkRaw = (name: string) => {
   try {
     return token('html[data-theme="dark"] {', name);
   } catch {
-    return light(name);
+    return lightRaw(name);
   }
 };
+const light = (name: string) => resolve(lightRaw, name);
+const dark = (name: string) => resolve(darkRaw, name);
 
 describe("contrastRatio", () => {
   it("is 21 for black on white", () => {
@@ -39,9 +50,14 @@ describe.each([
     ["ink on paper", "ink", "canvas"],
     ["ink on smoke", "ink", "smoke"],
     ["her accent on paper", "accent-text", "canvas"],
+    ["her accent on smoke", "accent-text", "smoke"],
+    ["quiet text on paper", "muted", "canvas"],
+    ["quiet text on smoke", "muted", "smoke"],
     ["Clio's number on paper", "clio-number", "canvas"],
   ])("%s", (_, fg, bg) => {
-    expect(contrastRatio(t(fg), t(bg))).toBeGreaterThanOrEqual(4.5);
+    expect(contrastRatio(over(t(fg), t(bg)), t(bg))).toBeGreaterThanOrEqual(
+      4.5
+    );
   });
 });
 

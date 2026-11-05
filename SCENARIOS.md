@@ -1,4 +1,4 @@
-History: 16/40 (40%), 51/55 (93%), 55/57 (96%), 59/59 (100%), 59/60 (98%)
+History: 16/40 (40%), 51/55 (93%), 55/57 (96%), 59/59 (100%), 59/60 (98%), 61/61 (100%)
 
 # Portfolio scenarios
 
@@ -115,3 +115,7 @@ Each is one situation and what a good site does. Graded against DESIGN.md.
 ## Found in round 5
 
 61. A keyboard user on the cover presses Tab past Enter. Expected: focus stays on the cover; the page behind is out of reach until they enter.
+
+## Found in round 6
+
+62. A keyboard user turns a project card over. Expected: a visible ring shows where focus landed, on the card's back.

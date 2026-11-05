@@ -143,7 +143,7 @@ html[data-theme="dark"] {
   --smoke: #211d17;
   --ink: #f1ebdf;
   --surface: #211d17;
-  --clio-number: #f1ebdf;
+  --clio-number: var(--ink);
   --border: rgb(241 235 223 / 0.2);
   --muted: rgb(241 235 223 / 0.66);
   --primary: var(--ink);

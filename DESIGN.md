@@ -13,8 +13,6 @@ The tokens live in `src/app.css`. This file says how to use them.
 
 ## The page
 
-- **Paper and ink.** `--canvas` is the warm paper, `--smoke` the quiet
-  alternate ground, `--ink` the brown-black text, `--muted` the quiet text.
 - **One grid.** Twelve columns, `--content-max` wide. A section's content
   starts at the same left edge in every section.
 - **One spacing scale.** `--space-1` to `--space-8`. Nothing in between.
@@ -33,7 +31,7 @@ band's ink where the demo's play button sits on its cream picture.
 | ----------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `--canvas`, `--smoke`, `--surface`                                                  | the page, every other section, and raised panels                                                                                                                                                                                             |
 | `--ink`, `--muted`, `--primary`, `--border`                                         | text, controls, which follow the ink, and hairlines                                                                                                                                                                                          |
-| `--accent-text`                                                                     | her ochre, from the paintings, for words: "learn.", the gallery's "hand.", and the header link's underline on hover and on the current page                                                                                                  |
+| `--accent-text`                                                                     | her ochre, from the paintings, for words and the line under them: "learn.", the gallery's "hand.", and the header link's underline on hover and on the current page                                                                          |
 | `--accent-shape`                                                                    | the brighter ochre, for decoration only: the cover's full stop and the theme switch's sun, through `--highlight`                                                                                                                             |
 | `--runway-field`, `--runway-ink`, `--runway-paper`, `--runway-blue`, `--runway-act` | Runway's band: the app's own ink, paper, blue and act colours                                                                                                                                                                                |
 | `--clio-pink`, `--clio-paper`, `--clio-number`                                      | Clio's touch: pink and paper from `@echoshihtw/clio-brand`, and its number in `app.css`. Pink for small marks and tints only: the chosen client, the mark under 603, and the demo's soft fills; paper for the demo. Never a section's ground |
@@ -47,12 +45,12 @@ holds that.
 
 ## What each section must carry
 
-The words live in `src/content/`; this list says what each part has to prove,
+The words live in the files named below; this list says what each part has to prove,
 so a rewrite keeps the fact.
 
 - **Cover** (`src/app.html`): a dialog named "Portfolio introduction", holding
   "PORTFOLIO" and the theme switch along the top, her name with the ochre full
-  stop, "Product Engineer · Taipei, Taiwan", and one Enter button. Nothing else, and it fits any
+  stop, "Product engineer · Taipei, Taiwan", and one Enter button. Nothing else, and it fits any
   screen without scrolling.
 - **Hero** (`portfolio.config.ts`, `heroConfig`): her role, that she works
   remote, and her time zone,
@@ -80,7 +78,7 @@ so a rewrite keeps the fact.
   the résumé, and a quiet link that emails with a project subject.
 - **Blog** (`src/posts/`): working notes, each on what broke, what it turned out
   to be, and what she took from it.
-- **Footer** (`Footer.svelte`): where and when she works ("Taiwan, UTC+8 · APAC hours or async"),
+- **Footer** (`Footer.svelte`): where and when she works ("Available remote · Taiwan, UTC+8 · APAC hours or async"),
   email, a call, the site's source, GitHub, LinkedIn and Instagram, and a way to
   replay the cover.
 

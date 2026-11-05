@@ -408,7 +408,9 @@
     transform: rotateY(180deg);
   }
 
-  .back:focus {
+  /* Focus lands here when the card turns. A mouse turn shows no ring; a
+     keyboard turn shows one, so the reader can see where focus went. */
+  .back:focus:not(:focus-visible) {
     outline: none;
   }
 
