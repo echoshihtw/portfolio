@@ -41,8 +41,9 @@ export const heroConfig: {
   // of layers; resume.md keeps the swap list for postings that literally
   // say frontend.
   // Her name first: the signature in the header is not readable as one.
-  // The cover and the header already say her name, and the footer her hours.
-  remoteOpen: ["Product engineer", "Remote from Taiwan"],
+  // A remote employer filters on the hours first, so the time zone is here;
+  // the cover names the city and country, and the footer her hours.
+  remoteOpen: ["Product engineer", "Remote", "UTC+8"],
 
   // Things she made true, not tools she touched. Each is shown lower on the
   // page: Clio's RLS, Runway's package boundaries, Lockerbie's BFF.

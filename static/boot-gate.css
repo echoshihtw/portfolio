@@ -94,7 +94,7 @@ html[data-theme="dark"] #boot-gate {
   padding: 0.55rem 1.25rem;
   border: 1px solid var(--gate-ink);
   border-radius: 999px;
-  /* Ink, like the page's main button, so the red dot is the cover's only
+  /* Ink, like the page's main button, so the ochre dot is the cover's only
      colour. */
   background: var(--gate-ink);
   color: var(--gate-canvas);

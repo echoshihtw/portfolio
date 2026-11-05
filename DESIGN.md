@@ -52,9 +52,10 @@ so a rewrite keeps the fact.
 
 - **Cover** (`src/app.html`): a dialog named "Portfolio introduction", holding
   "PORTFOLIO" and the theme switch along the top, her name with the ochre full
-  stop, "Product Engineer · Taipei", and one Enter button. Nothing else, and it fits any
+  stop, "Product Engineer · Taipei, Taiwan", and one Enter button. Nothing else, and it fits any
   screen without scrolling.
-- **Hero** (`portfolio.config.ts`, `heroConfig`): her role and where she works,
+- **Hero** (`portfolio.config.ts`, `heroConfig`): her role, that she works
+  remote, and her time zone,
   the claim, one line on what she does (frontend first, and the structure under
   it that keeps a team consistent), three things she made true that the
   page shows lower down, then "Email me" with a role subject and "Résumé, PDF".

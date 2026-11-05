@@ -76,7 +76,7 @@ Each is one situation and what a good site does. Graded against DESIGN.md.
 
 ## Headhunters
 
-44. A headhunter checks location, time zone and how she works. Expected: "Remote from Taiwan" in the hero, and "Taiwan, UTC+8 · APAC hours or async" in the footer.
+44. A headhunter checks location, time zone and how she works. Expected: "Remote · UTC+8" in the hero, "Taipei, Taiwan" on the cover, and "Taiwan, UTC+8 · APAC hours or async" in the footer.
 45. A headhunter checks her experience. Expected: each company with her role, dates and place, and the full history in the résumé.
 46. A headhunter forwards the résumé to a client. Expected: the PDF's name carries her name.
 47. A headhunter wants a call before writing. Expected: a way to book a call in the footer.

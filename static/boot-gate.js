@@ -60,9 +60,10 @@
     history.scrollRestoration = "auto";
   }
 
-  // The red full stop of the name is the one thing that stays: the cover
+  // The ochre full stop of the name is the one thing that stays: the cover
   // leaves, the dot travels to the full stop of "learn." and the headline
-  // arrives around it as it lands. Reduce Motion keeps the plain fade.
+  // arrives around it as it lands. With Reduce Motion it is skipped, and the
+  // cover goes at once.
   function carryTheDot() {
     if (matchMedia("(prefers-reduced-motion: reduce)").matches) return false;
     const dot = gate.querySelector(".gate-accent");
