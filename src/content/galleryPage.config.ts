@@ -11,7 +11,7 @@ export const galleryConfig = {
   // One line of provenance for the work below. Her degree and the rest of
   // her story are on the landing page, in aboutMe.config.ts.
   story: [
-    "Since 2012, mostly on trains and planes. Three months at Accademia del Giglio, Florence.",
+    "Since 2012, mostly at my desk or on the way somewhere. Three months at Accademia del Giglio, Florence.",
   ],
 
   // The one painting that opens the page, whole and unframed, so the work is
