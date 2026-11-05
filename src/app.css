@@ -73,11 +73,6 @@
   --shade: #14100a;
   --accent-shape: #c9921f;
   --highlight: var(--accent-shape); /* the theme switch's sun is her ochre */
-  /* How her ink prints sit in the page. On paper they multiply into it; on
-     the ink theme they turn to chalk lines instead. */
-  --print-blend: multiply;
-  --print-filter: saturate(1.3) contrast(1.3);
-  --print-opacity: 0.24;
 
   /* Legacy names, aliased. Older rules read these three; nothing new
      should, and the five nothing read at all are gone. */
@@ -154,9 +149,6 @@ html[data-theme="dark"] {
   --accent-text: #c9921f;
   --accent-shape: #d4a03a;
   --highlight: var(--accent-shape);
-  --print-blend: screen;
-  --print-filter: invert(1) contrast(1.2);
-  --print-opacity: 0.16;
 }
 
 /* ==========================================================================

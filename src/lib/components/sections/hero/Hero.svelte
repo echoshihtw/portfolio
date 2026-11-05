@@ -8,207 +8,161 @@
   import { trackEmail, trackResume } from "$lib/analytics";
 </script>
 
-<!-- The claim on the left, her Jakarta sketch printed into the paper on the
-     right and faded on every edge, so it reads as drawn on the page rather
-     than placed on it. -->
+<!-- An editorial page: her facts along the top, the claim large at the
+     foot, then the line on what she does, the two links and her slogan. -->
 <section
   id="home"
   class="hero section_padding"
 >
-  <img
-    class="print"
-    src="{base}/assets/paintings/jakarta-1024.jpg"
-    alt=""
-    aria-hidden="true"
-    width="1024"
-    height="698"
-  />
-
   <div class="hero-grid">
-    <!-- Each fact stays whole; lines break only between them. -->
-    <p class="label hero-where">
-      {#each heroConfig.remoteOpen as fact, i}<span class="fact">
-          {fact}{i < heroConfig.remoteOpen.length - 1 ? " ·" : ""}
-        </span>
-        {" "}{/each}
-    </p>
+    <ul class="hero-facts">
+      {#each heroConfig.remoteOpen as fact}<li>{fact}</li>{/each}
+    </ul>
 
     <h1 class="hero-headline">
       <!-- prettier-ignore -->
       {#each heroConfig.headline as part}<span class:accent={part.accent}>{part.text}</span>{/each}
     </h1>
 
-    {#each heroConfig.support as line}
-      <p class="hero-support">{line}</p>
-    {/each}
+    <div class="hero-foot">
+      <div class="hero-say">
+        {#each heroConfig.support as line}
+          <p class="hero-support">{line}</p>
+        {/each}
 
-    <ul class="hero-owns">
-      {#each heroConfig.owns as layer}
-        <li>{layer}</li>
-      {/each}
-    </ul>
+        <div class="hero-links">
+          <a
+            href={mailtoWithSubject(heroConfig.email, heroConfig.emailSubject)}
+            on:click={() => trackEmail("hero")}
+          >
+            Email me
+          </a>
+          <a
+            href="{base}/{heroConfig.resume}"
+            download
+            on:click={() => trackResume("hero")}
+          >
+            {RESUME_LABEL}
+          </a>
+        </div>
+      </div>
 
-    <div class="hero-links">
-      <a
-        class="btn btn-ink"
-        href={mailtoWithSubject(heroConfig.email, heroConfig.emailSubject)}
-        on:click={() => trackEmail("hero")}
-      >
-        Email me
-      </a>
-      <a
-        class="btn btn-line"
-        href="{base}/{heroConfig.resume}"
-        download
-        on:click={() => trackResume("hero")}
-      >
-        {RESUME_LABEL}
-      </a>
+      <!-- Her slogan, quiet, last. -->
+      <p class="hero-owns">{heroConfig.owns.join(", ")}.</p>
     </div>
   </div>
 </section>
 
 <style>
-  .hero {
-    position: relative;
-    overflow: hidden;
-  }
-
-  /* Lifted so the dense rows of seats sit beside the headline, in empty
-     paper, and the words below it stay on clean ground. Phones leave it
-     out: the hero there is already full. */
-  .print {
-    display: none;
-    position: absolute;
-    right: -3rem;
-    top: -11rem;
-    width: min(66vw, 60rem);
-    height: auto;
-    object-fit: cover;
-    mix-blend-mode: var(--print-blend);
-    opacity: var(--print-opacity);
-    filter: var(--print-filter);
-    -webkit-mask-image: radial-gradient(
-      ellipse closest-side at 62% 50%,
-      #000 25%,
-      rgba(0, 0, 0, 0.4) 55%,
-      transparent 100%
-    );
-    mask-image: radial-gradient(
-      ellipse closest-side at 62% 50%,
-      #000 25%,
-      rgba(0, 0, 0, 0.4) 55%,
-      transparent 100%
-    );
-    pointer-events: none;
-  }
-
   .hero-grid {
-    position: relative;
     display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    gap: var(--space-5);
+    gap: var(--space-7);
     width: 100%;
-    /* The content width every section has inside its padding. */
     max-width: calc(var(--content-max) - 2 * var(--space-6));
     margin: 0 auto;
   }
 
-  .hero-where {
+  .hero-grid p {
     margin: 0;
   }
 
-  .hero-where .fact {
-    white-space: nowrap;
+  /* Each fact its own column, so none splits across lines. */
+  .hero-facts {
+    list-style: none;
+    margin-top: var(--space-5);
+    padding: var(--space-3) 0 0;
+    border-top: 1px solid var(--ink);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-1) var(--space-5);
+    font-size: var(--text-sm);
+  }
+
+  /* The last fact is that she is available: the one a reader acts on, so it
+     carries the ochre of "learn.". */
+  .hero-facts li:last-child::before {
+    content: "";
+    display: inline-block;
+    width: 0.5em;
+    height: 0.5em;
+    margin-right: 0.5em;
+    border-radius: 50%;
+    background: var(--accent-shape);
   }
 
   .hero-headline {
     margin: 0;
-    font-size: clamp(2.9rem, 9vw, 7rem);
+    font-size: clamp(2.75rem, 8.4vw, 8.5rem);
     font-weight: 600;
     line-height: 0.98;
-    letter-spacing: -0.045em;
-    max-width: 12ch;
+    letter-spacing: -0.035em;
+    max-width: 14ch;
   }
 
   .hero-headline .accent {
     color: var(--accent-text);
   }
 
+  .hero-foot {
+    display: grid;
+    gap: var(--space-5);
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--border);
+  }
+
+  .hero-say {
+    display: grid;
+    gap: var(--space-3);
+  }
+
   .hero-support {
-    margin: 0;
     max-width: 34ch;
     font-size: var(--text-lg);
     line-height: 1.5;
   }
 
-  .hero-owns {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-1);
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    font-size: var(--text-sm);
-    line-height: 1.5;
-  }
-
-  .hero-owns li {
-    border-top: 1px solid var(--border);
-    padding-top: var(--space-1);
-  }
-
   .hero-links {
     display: flex;
-    flex-direction: column;
-    gap: var(--space-3);
+    flex-wrap: wrap;
+    gap: 0 var(--space-5);
   }
 
-  .hero-links .btn {
-    justify-content: center;
+  .hero-links a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    font-size: var(--text-lg);
+    font-weight: 500;
+    color: var(--ink);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.3em;
   }
 
-  @media (min-width: 768px) {
-    .print {
-      display: block;
-    }
+  .hero-links a:hover {
+    text-decoration-color: var(--accent-text);
   }
 
-  /* Three columns need 1024px: below it the list of what she owns wraps,
-     and one fact must never split across lines. */
+  .hero-owns {
+    color: var(--muted);
+  }
+
   @media (min-width: 1024px) {
-    .hero {
-      padding-top: calc(var(--section-y) * 1.4);
-      padding-bottom: calc(var(--section-y) * 1.2);
-    }
-
-    .hero-grid {
+    .hero-foot {
       grid-template-columns: repeat(12, minmax(0, 1fr));
       column-gap: var(--space-5);
-      row-gap: var(--space-7);
-      align-items: start;
+      align-items: end;
     }
 
-    .hero-where,
-    .hero-headline {
-      grid-column: 1 / -1;
-    }
-
-    .hero-headline {
-      max-width: 13ch;
-    }
-
-    .hero-support {
-      grid-column: 1 / span 5;
+    .hero-say {
+      grid-column: 1 / span 6;
     }
 
     .hero-owns {
-      grid-column: 6 / span 4;
-    }
-
-    .hero-links {
       grid-column: 10 / span 3;
-      align-items: flex-end;
+      /* the links' 44px line, so the slogan shares their baseline */
+      line-height: 44px;
+      text-align: right;
     }
   }
 </style>

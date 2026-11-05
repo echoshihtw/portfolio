@@ -76,7 +76,7 @@ Each is one situation and what a good site does. Graded against DESIGN.md.
 
 ## Headhunters
 
-44. A headhunter checks location, time zone and how she works. Expected: "Remote · UTC+8" in the hero, "Taipei, Taiwan" on the cover, and "Taiwan, UTC+8 · Europe mornings or async" in the footer.
+44. A headhunter checks location, time zone and how she works. Expected: "Remote" and "UTC+8" in the hero, "Taipei, Taiwan" on the cover, and "Taiwan, UTC+8 · Europe mornings or async" in the footer.
 45. A headhunter checks her experience. Expected: each company with her role, dates and place, and the full history in the résumé.
 46. A headhunter forwards the résumé to a client. Expected: the PDF's name carries her name.
 47. A headhunter wants a call before writing. Expected: a way to book a call in the footer.
@@ -84,7 +84,7 @@ Each is one situation and what a good site does. Graded against DESIGN.md.
 ## CTOs
 
 48. A CTO wants to know how she handles bugs in production. Expected: How I work states concrete habits, and the blog shows real bugs and what they turned out to be.
-49. A CTO checks that her claims on the home page are backed further down. Expected: each of the hero's three "made true" lines is shown lower on the page.
+49. A CTO checks that her claims on the home page are backed further down. Expected: the hero makes no claim the page doesn't show, and its slogan, Verify, Distill, Simplify, matches How I work in Who I am.
 
 ## Remote-first companies
 

@@ -5,9 +5,8 @@ an example of her own software style: minimal, intuitive, cognitively friendly,
 and clean underneath. Professional means clear and honest, not anonymous.
 
 Her paintings are the foundation. They set the colours, the balance of block
-and space, and the restraint. The Gallery holds the work; the only painting on
-the home page is her Jakarta sketch, printed faintly into the paper beside the
-headline.
+and space, and the restraint. The Gallery holds the work; the home page has no
+painting.
 
 The site's tokens live in `src/app.css`, and Clio's in its brand preset. The
 cover repeats the light and dark values in `static/boot-gate.css`, because it
@@ -56,13 +55,14 @@ so a rewrite keeps the fact.
   switch along the top, her name with the ochre full stop, her role with her city
   and country, and one Enter button. Nothing else, and it fits any
   screen without scrolling.
-- **Hero** (`portfolio.config.ts`, `heroConfig`): her role, that she works
-  remote, her time zone, and that she is available now,
-  the claim, one line on what she does (frontend first, and the structure under
-  it that keeps a team consistent), three things she made true that the
-  page shows lower down, then "Email me" with a role subject and "Résumé, PDF". No
-  seniority word or count of years: the work shows the level, and the résumé
-  holds the timeline.
+- **Hero** (`portfolio.config.ts`, `heroConfig`): a rule, then her facts on one
+  line: her role, remote, her time zone, and that she is available now, marked
+  with an ochre dot. Then the claim, large. Under a hairline, one line on what
+  she does (frontend first, and the structure under it that keeps a team
+  consistent) with "Email me" (a role subject) and "Résumé, PDF" as text links
+  under it, and her slogan, Verify, Distill, Simplify, quiet on the right. No
+  picture, no button, no seniority word or count of years: the work shows the
+  level, and the résumé holds the timeline.
 - **Selected work** (`selectedWork.config.ts`): what Runway is, that she built
   and shipped it alone, live on the App Store since October 2026 with its link,
   the stack (read from `projects.config.ts`), one line on how she uses AI, the

@@ -49,14 +49,10 @@ export const heroConfig: {
   // the cover names the city and country, and the footer her hours.
   remoteOpen: ["Product engineer", "Remote", "UTC+8", "Available now"],
 
-  // Things she made true, as the result for a person, not the mechanism.
-  // Each is shown lower on the page: Clio's RLS, Runway's package boundaries,
-  // Lockerbie's BFF.
-  owns: [
-    "One salon can't see another's clients",
-    "A wrong import fails the build",
-    "Passwords and keys stay out of the browser",
-  ],
+  // Her three habits, as a quiet slogan: check before trusting, find the right
+  // level of abstraction, leave it simpler for the next person. The page
+  // below proves each one, which is what keeps it from reading as a poster.
+  owns: ["Verify", "Distill", "Simplify"],
 
   // Her own line, from the voice interview on 2026-10-19: "I make software
   // you don't have to learn."
