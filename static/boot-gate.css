@@ -1,11 +1,12 @@
 /* Blocking styles for the once-per-tab editorial cover. They live outside
    app.css so the cover is opaque before SvelteKit paints the homepage. */
 #boot-gate {
-  --gate-canvas: #f3f0e8;
-  --gate-ink: #171714;
-  --gate-muted: rgba(23, 23, 20, 0.62);
-  --gate-border: rgba(23, 23, 20, 0.18);
-  --gate-accent: #dc4a2b;
+  --gate-canvas: #f6f1e6;
+  --gate-ink: #17140f;
+  --gate-muted: rgba(23, 20, 15, 0.62);
+  --gate-border: rgba(23, 20, 15, 0.18);
+  /* the site's --accent-shape, kept here too: the cover can paint first */
+  --gate-accent: var(--accent-shape, #c9921f);
 
   position: fixed;
   inset: 0;
@@ -21,11 +22,11 @@
 }
 
 html[data-theme="dark"] #boot-gate {
-  --gate-canvas: #171714;
-  --gate-ink: #f3f0e8;
-  --gate-muted: rgba(243, 240, 232, 0.66);
-  --gate-border: rgba(243, 240, 232, 0.2);
-  --gate-accent: #f6836a;
+  --gate-canvas: #15130f;
+  --gate-ink: #f1ebdf;
+  --gate-muted: rgba(241, 235, 223, 0.66);
+  --gate-border: rgba(241, 235, 223, 0.2);
+  --gate-accent: var(--accent-shape, #d4a03a);
 }
 
 #boot-gate.boot-gate-hide {

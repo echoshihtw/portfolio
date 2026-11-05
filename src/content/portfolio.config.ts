@@ -4,7 +4,7 @@
 //
 // Guardrails: facts, not noise · warmth via specificity · no clichés.
 
-// accent: the one word in her oxide red.
+// accent: the one word in her ochre.
 type HeadlinePart = { text: string; accent?: boolean };
 
 // The hero's email and the close's first door are the same door: someone
@@ -41,7 +41,8 @@ export const heroConfig: {
   // of layers; resume.md keeps the swap list for postings that literally
   // say frontend.
   // Her name first: the signature in the header is not readable as one.
-  remoteOpen: ["Echo Shih", "Product engineer", "UTC+8", "Remote from Taiwan"],
+  // The cover and the header already say her name, and the footer her hours.
+  remoteOpen: ["Product engineer", "Remote from Taiwan"],
 
   // Things she made true, not tools she touched. Each is shown lower on the
   // page: Clio's RLS, Runway's package boundaries, Lockerbie's BFF.

@@ -346,7 +346,8 @@
     width: 7px;
     height: 7px;
     border-radius: 50%;
-    background: var(--status-live);
+    /* muted, so red stays the page's one accent */
+    background: var(--muted);
   }
 
   /* A quiet utility link, not a CTA: same size/weight as the surrounding

@@ -58,17 +58,6 @@
      everything inside, including the wall, inherits the cream set without
      knowing anything about the theme. */
   .gallery-page {
-    --canvas: #f3f0e8;
-    --ink: #171714;
-    --surface: #faf8f2;
-    --border: rgb(23 23 20 / 0.18);
-    --border-strong: #171714;
-    --muted: rgb(23 23 20 / 0.62);
-    --primary: #3155d9;
-    --primary-ink: #ffffff;
-    --accent: #f15a3a;
-    --accent-text: #dc4a2b;
-
     background-color: var(--canvas);
     color: var(--ink);
     /* A faint plaster grain, well below where it reads as texture. It only

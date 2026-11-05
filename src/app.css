@@ -39,13 +39,13 @@
 }
 
 :root {
-  /* Colour, from her paintings: off-white paper, green-black ink, oxide red
-     for one word. Runway's colours are its own, from the app's tokens.json;
+  /* Colour, from her paintings: warm paper, brown-black ink, and her ochre
+     for the accent. Runway's colours are its own, from the app's tokens.json;
      Clio's come from @echoshihtw/clio-brand. */
-  --canvas: #fbfaf7;
-  --smoke: #efefec;
-  --ink: #0a150f;
-  --surface: #ffffff;
+  --canvas: #f6f1e6;
+  --smoke: #ece5d6;
+  --ink: #17140f;
+  --surface: #fbf8f1;
   /* Runway's band is the app's ink, with its dark-theme runway blue and act. */
   --runway-field: #1b2638;
   --runway-blue: #9db2e0;
@@ -54,22 +54,19 @@
   --runway-paper: #f5f0e6;
   --runway-ink: #1b2638;
   --clio-number: var(--clio-ink);
-  --border: rgb(23 23 20 / 0.18);
+  --border: rgb(23 20 15 / 0.18);
   --border-strong: var(--ink);
-  --muted: rgb(23 23 20 / 0.62);
-  --primary: #3155d9;
-  --primary-ink: #ffffff;
-  --accent: #f15a3a;
-  /* The ink that goes on an accent fill. A literal, and the same one in both
-     themes on purpose: --primary-ink flips white to near-black between them,
-     but the accent fill is light in both, so its text has to be dark in
-     both. 5.4:1 on the light theme's fill, 7.2:1 on the dark theme's. */
-  --accent-ink: #171714;
-  /* The same orange for type. #f15a3a is a fill colour: on cream it is
-     2.9:1, under the 3:1 that large text needs, so words take this one. */
-  --accent-text: #8d391e;
+  --muted: rgb(23 20 15 / 0.62);
+  /* Controls are ink: one accent on the page, and it is the ochre. */
+  --primary: var(--ink);
+  --primary-ink: var(--canvas);
+  /* Her ochre, from the paintings: the one accent. The deep one is for
+     words (5.6:1 on the paper). The bright one is only for decoration that
+     carries no meaning, like the cover's full stop (2.5:1), never for words
+     or controls. */
+  --accent-text: #7d5a12;
+  --accent-shape: #c9921f;
   --highlight: #f2c94c;
-  --status-live: #4f6e4a;
   /* How her ink prints sit in the page. On paper they multiply into it; on
      the ink theme they turn to chalk lines instead. */
   --print-blend: multiply;
@@ -134,24 +131,23 @@
   --motion-exit: cubic-bezier(0.3, 0, 0.8, 0.15);
 }
 
-/* The ink theme. Same system, the ground and the ink swap, and blue and
-   orange come up a step so they clear contrast on dark. No other rule in
+/* The ink theme. Same system, the ground and the ink swap, and the ochre
+   comes up a step so it clears contrast on dark. No other rule in
    the site mentions the theme. */
 html[data-theme="dark"] {
-  /* Charcoal, no colour cast: light mode's paper and smoke, inverted. */
-  --canvas: #131312;
-  --smoke: #232321;
-  --ink: #f0eee8;
-  --surface: #232321;
-  --clio-number: #f0eee8;
-  --border: rgb(243 240 232 / 0.2);
-  --muted: rgb(243 240 232 / 0.66);
-  --primary: #8aa1f2;
-  --primary-ink: #171714;
-  --accent: #f6836a;
-  --accent-text: #e07a4f;
+  /* Warm charcoal: light mode's paper and smoke, inverted. */
+  --canvas: #15130f;
+  --smoke: #211d17;
+  --ink: #f1ebdf;
+  --surface: #211d17;
+  --clio-number: #f1ebdf;
+  --border: rgb(241 235 223 / 0.2);
+  --muted: rgb(241 235 223 / 0.66);
+  --primary: var(--ink);
+  --primary-ink: var(--canvas);
+  --accent-text: #c9921f;
+  --accent-shape: #d4a03a;
   --highlight: #f2c94c;
-  --status-live: #a8b5a2;
   --print-blend: screen;
   --print-filter: invert(1) contrast(1.2);
   --print-opacity: 0.16;
@@ -391,24 +387,6 @@ canvas {
 .btn-ink:focus-visible {
   background: color-mix(in srgb, var(--canvas) 8%, var(--ink));
   border-color: color-mix(in srgb, var(--canvas) 8%, var(--ink));
-}
-
-/* The accent variant: for a button that names a different path from the one
-   blue means. Mirrors .btn-ink's steps exactly, so the two behave alike. */
-.btn-accent {
-  border-color: var(--accent);
-  background: var(--accent);
-  color: var(--accent-ink);
-}
-
-.btn-accent:hover,
-.btn-accent:focus-visible {
-  background: color-mix(in srgb, var(--accent-ink) 8%, var(--accent));
-  border-color: color-mix(in srgb, var(--accent-ink) 8%, var(--accent));
-}
-
-.btn-accent:active {
-  background: color-mix(in srgb, var(--accent-ink) 12%, var(--accent));
 }
 
 .btn-ink:active {
