@@ -80,7 +80,7 @@ so a rewrite keeps the fact.
 - **Contact** (`portfolio.config.ts`, `closingConfig`): that she is available for
   work now, one line on what she takes on, a main button
   that emails with a role subject, the résumé, and quiet links that email with a
-  contract subject and a project subject.
+  contract subject and a project subject, then how a project starts.
 - **Gallery** (`galleryPage.config.ts`): its heading, one line of provenance,
   the lead painting, and one way back to the software.
 - **Blog** (`src/posts/`): working notes, each on what broke, what it turned out

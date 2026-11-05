@@ -133,3 +133,4 @@ Each is one situation and what a good site does. Graded against DESIGN.md.
 
 66. A company wants to hire her as a contractor, not an employee. Expected: Contact offers a quiet link to email about a contract, with its own subject.
 67. A visitor whose device is set to dark opens the site for the first time. Expected: it starts in the dark theme, and only a flip of the switch is remembered.
+68. A founder wants to know what working with her looks like before writing. Expected: Contact says how a project starts: a one-week paid scoping with a plan, a first working piece and a fixed quote.

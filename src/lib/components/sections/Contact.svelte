@@ -63,6 +63,7 @@
             {path.label}
           </a>{/each}
       </p>
+      <p class="start">{closingConfig.projectStart}</p>
     </div>
   </div>
 </section>
@@ -121,6 +122,15 @@
   }
 
   /* One typeface in the line, like the links in it. */
+  .start {
+    margin: 0;
+    max-width: 46ch;
+    font-size: var(--text-sm);
+    line-height: 1.6;
+    color: var(--muted);
+    text-wrap: balance;
+  }
+
   .ways {
     margin: 0;
     max-width: 46ch;

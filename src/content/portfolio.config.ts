@@ -94,6 +94,10 @@ export const closingConfig = {
   // under it. Each carries its own subject, so the inbox shows which kind of
   // message it is before it is opened.
   ways: "or email",
+  // How a project with her starts, so a founder sees the first step before
+  // writing. Her choice on 2026-11-05: a small paid start, not a paid call.
+  projectStart:
+    "Projects start with a one-week paid scoping: a plan, a first working piece, and a fixed quote for the rest.",
   paths: [
     { key: "role", label: "about a role", subject: ROLE_SUBJECT },
     { key: "contract", label: "about a contract", subject: "Contract work" },
