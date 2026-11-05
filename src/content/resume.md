@@ -28,7 +28,7 @@
 % case, never goes stale, and matches the site, which already offers Employment
 % and Contract or partnership as two paths. A start date is a question for the
 % first email, where "immediately" is a good answer to give in person.
-{\small\color{muted}Taipei, Taiwan (UTC+8) · Remote · APAC hours or async · Open to full-time or contract}\\[1pt]
+{\small\color{muted}Taipei, Taiwan (UTC+8) · Remote · Europe mornings or async · Open to full-time or contract}\\[1pt]
 {\small\color{muted}\href{mailto:echoshihtw@gmail.com}{echoshihtw@gmail.com} · \href{https://www.linkedin.com/in/echoshihtw}{linkedin.com/in/echoshihtw} · \href{https://github.com/echoshihtw}{github.com/echoshihtw} · \href{https://echoshih.com}{echoshih.com}}
 \vspace{2pt}
 ```
