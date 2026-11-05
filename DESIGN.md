@@ -23,21 +23,21 @@ paints before the site's styles load, and a test keeps the copy equal. This file
 ## Colour
 
 Every colour has a job. Nothing is decoration. Her two pens are the site's own
-colours: a red pen for her remarks and a yellow highlighter for what matters; each app keeps its own colours inside its section. Links, buttons and
+colours: a blue pen for her remarks and a yellow highlighter for what matters; each app keeps its own colours inside its section. Links, buttons and
 focus rings take the text colour of what is directly behind them, so a ring
 always stands out. A ring sits just outside a control, on the page; on a panel
 that fills its own ground, such as a turned card, it sits inside, on the panel.
 On a picture, it takes the picture's ink.
 
-| Token                                                                               | Job                                                                                                                                                                                                                                                                            |
-| ----------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `--canvas`, `--smoke`, `--surface`                                                  | the page, every other section, and raised panels                                                                                                                                                                                                                               |
-| `--ink`, `--muted`, `--primary`, `--border`                                         | text, controls, which follow the ink, and hairlines                                                                                                                                                                                                                            |
-| `--accent-text`                                                                     | her red pen, for words: the header link's underline on hover and on the current page. Coral in the ink theme                                                                                                                                                                   |
-| `--accent-shape`                                                                    | the brighter red, for pen marks and doodles, the available dot, the caret, the cover's full stop and the theme switch's sun, through `--highlight`                                                                                                                             |
-| `--mark`, `--mark-ink`, `--mark-solid`                                              | the highlighter, always with ink on it. Yellow on paper. On a dark ground it is see-through mint (yellow on the Runway band) and the word keeps its light ink, so a letter the stroke misses still reads. The hero's one word keeps a solid stroke, `--mark-solid`             |
-| `--runway-field`, `--runway-ink`, `--runway-paper`, `--runway-blue`, `--runway-act` | Runway's band: the app's own ink, paper, blue and act colours                                                                                                                                                                                                                  |
-| `--clio-pink`, `--clio-paper`, `--clio-ink`, `--clio-number`                        | Clio's touch: pink, paper and ink from `@echoshihtw/clio-brand`, and its number in `app.css`. Pink for small marks and tints only: the chosen client, the mark under 603, and the demo's soft fills. Paper and ink for the demo and Clio's card back. Never a section's ground |
+| Token                                                                               | Job                                                                                                                                                                                                                                                                |
+| ----------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `--canvas`, `--smoke`, `--surface`                                                  | the page, every other section, and raised panels                                                                                                                                                                                                                   |
+| `--ink`, `--muted`, `--primary`, `--border`                                         | text, controls, which follow the ink, and hairlines                                                                                                                                                                                                                |
+| `--accent-text`                                                                     | her blue pen, for words: the header link's underline on hover and on the current page. A lighter blue in the ink theme                                                                                                                                             |
+| `--accent-shape`                                                                    | the brighter blue, for pen marks and doodles, the available dot, the caret, the cover's full stop and the theme switch's sun, through `--highlight`                                                                                                                |
+| `--mark`, `--mark-ink`, `--mark-solid`                                              | the highlighter, always with ink on it. Yellow on paper. On a dark ground it is see-through mint (yellow on the Runway band) and the word keeps its light ink, so a letter the stroke misses still reads. The hero's one word keeps a solid stroke, `--mark-solid` |
+| `--runway-field`, `--runway-ink`, `--runway-paper`, `--runway-blue`, `--runway-act` | Runway's band: the app's own ink, paper, blue and act colours                                                                                                                                                                                                      |
+| `--clio-pink`, `--clio-paper`, `--clio-ink`, `--clio-number`                        | Clio's touch: pink, paper and ink from `@echoshihtw/clio-brand`, and its number in `app.css`. Pink for small marks and tints only: the chosen client and the demo's soft fills. Paper and ink for the demo and Clio's card back. Never a section's ground          |
 
 Archived work gets no colour. A component's own tokens, such as `--hairline`,
 are mixes of these, never new colours. Shadows and the sheet's backdrop are mixes
@@ -53,13 +53,13 @@ The words live in the files named below; this list says what each part has to pr
 so a rewrite keeps the fact.
 
 - **Cover** (`src/app.html`): a named dialog holding the masthead and the theme
-  switch along the top, her name with the red full stop, her role with her city
+  switch along the top, her name with the blue full stop, her role with her city
   and country, and one Enter button. Nothing else, and it fits any
   screen without scrolling.
 - **Hero** (`portfolio.config.ts`, `heroConfig`): one screen. Her facts on one
   line: her role, remote, her time zone, and that she is available now, marked
-  with a red dot. Then the claim, large, with "don't" under the highlighter and
-  a wavy red pen line under "learn"; the full stop is ink. Then "Email me" (a
+  with a blue dot. Then the claim, large, with "don't" under the highlighter and
+  a wavy blue pen line under "learn"; the full stop is ink. Then "Email me" (a
   role subject) and "Résumé, PDF" as text links with a highlighter line under
   each, and under them, small and quiet, one line on what she does (frontend
   first, and the structure under it that keeps a team consistent) and her
@@ -101,7 +101,7 @@ downloads folder.
 ## Her two pens
 
 The page reads like her own notebook, marked up with two pens. The highlighter
-marks what matters, the fact a reader should take away. The red pen is her
+marks what matters, the fact a reader should take away. The blue pen is her
 remark: a circle, a line, or the hero's wavy line under "learn". Every pen and doodle
 is defined once in `src/lib/pens/pens.ts`, drawn by the components beside it,
 and shown together on the unlisted `/pens` page. The phrase each one marks sits
@@ -110,11 +110,11 @@ along the text, breaking only where the line does.
 
 - **One mark on the proof,** at most, in a card or a part, and only where there
   is a result to mark. No mark is better than a mark on a summary.
-- **Doodles are rare:** a red pen star by How I work, a light bulb by With AI,
+- **Doodles are rare:** a blue pen star by How I work, a light bulb by With AI,
   and an arrow to the full history in the résumé, in `pens.ts`. Each means
   something; none decorates.
 - **Hand-drawn marks on clean type,** never a handwriting face.
-- **Runway and Clio keep their own colours.** Clio's 603 keeps its pink line.
+- **Runway and Clio keep their own colours** inside their demos; her pen underlines Clio's 603, as it marks every other proof.
 - **Each mark draws once,** as its section scrolls into view: the highlighter is
   uncovered behind a moving pen tip, and a pen line is drawn along its path.
   With Reduce Motion, or without JavaScript, it is simply there.
@@ -199,12 +199,12 @@ cover.
 
 While the cover is up, the page behind is out of reach and waits at the top.
 Focus starts on Enter. Enter, Space, the down arrow, a scroll or a swipe up goes
-in. Its red full stop then travels to the full stop of "learn." while the
+in. Its blue full stop then travels to the full stop of "learn." while the
 headline arrives around it.
 
 The hero has one move of its own, once, after the cover has gone: a still
 beat, a caret blinks after "you", "don't" arrives as the words after it slide
-to their new places, the highlighter sweeps behind it, and the red pen draws
+to their new places, the highlighter sweeps behind it, and the blue pen draws
 its wavy line under "learn". About two seconds, from the motion scale, and never again. Without the cover, or with
 Reduce Motion, the sentence is simply there, and a screen reader hears it
 whole.

@@ -1,6 +1,6 @@
 <script lang="ts">
   /**
-   * A small hand-drawn icon in her red pen, like the cues in a notebook's
+   * A small hand-drawn icon in her blue pen, like the cues in a notebook's
    * margin: a star for what matters most, a light bulb for a new idea, an
    * arrow to what to read next.
    * At most one per section, and only where it means something. Drawn once
@@ -8,10 +8,12 @@
    * JavaScript. Decoration only, so screen readers skip it.
    */
   import { onMount } from "svelte";
-  import { doodles, type DoodleName } from "./pens";
+  import { doodles, inkColour, type DoodleName, type InkName } from "./pens";
   import { whenSeen } from "./whenSeen";
 
   export let icon: DoodleName;
+  /** Another ink: one of the named inks in pens.ts, or any CSS colour. */
+  export let ink: InkName | string | undefined = undefined;
 
   let el: SVGSVGElement;
   let shown = true;
@@ -29,6 +31,7 @@
 
 <svg
   bind:this={el}
+  style={ink ? `--pen-ink: ${inkColour(ink)}` : undefined}
   class="doodle"
   class:undrawn={!shown}
   class:animate
@@ -57,7 +60,7 @@
 
   path {
     fill: none;
-    stroke: var(--accent-shape);
+    stroke: var(--pen-ink, var(--accent-shape));
     stroke-width: 1.6;
     stroke-linecap: round;
     stroke-linejoin: round;

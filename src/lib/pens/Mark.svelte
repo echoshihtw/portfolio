@@ -1,13 +1,13 @@
 <script lang="ts">
   /**
    * One of her pens over some words: the yellow highlighter for what
-   * matters, the red pen for her own remark. Every pen is defined in
+   * matters, the blue pen for her own remark. Every pen is defined in
    * pens.ts. Each mark draws once: when its section scrolls into view, or,
    * when `drawn` is given, the moment it turns true. Already drawn when
    * the page loads, with Reduce Motion, or without JavaScript.
    */
   import { onMount } from "svelte";
-  import { pens, type PenName } from "./pens";
+  import { inkColour, pens, type InkName, type PenName } from "./pens";
   import { whenSeen } from "./whenSeen";
 
   export let kind: PenName = "highlight";
@@ -15,6 +15,8 @@
   export let drawn: boolean | undefined = undefined;
   /** Milliseconds to wait before drawing. */
   export let delay = 0;
+  /** Another ink: one of the named inks in pens.ts, or any CSS colour. */
+  export let ink: InkName | string | undefined = undefined;
   /** A phrase that may wrap: one stroke that runs along the text and breaks
       only where the line does. A single word keeps its hand-drawn shape. */
   export let flow = false;
@@ -43,15 +45,21 @@
   });
 
   $: pen = pens[kind];
+  $: inkStyle = ink
+    ? `--pen-ink: ${inkColour(ink)}; --hl-ink: ${inkColour(ink)};`
+    : "";
 </script>
 
 <!-- No whitespace between the parts: inside running text it would show as a
      space before the punctuation that follows the mark. -->
 <!-- prettier-ignore -->
-<span bind:this={el} class="mark mark-{kind} frame-{pen.frame}" class:undrawn={!shown} class:animate class:flow style="--delay: {delay}ms"><span class="word"><slot /></span>{#if pen.strokes.length && !flow}<svg viewBox="0 0 300 120" preserveAspectRatio="none" aria-hidden="true"><g filter="url(#pen-wobble)">{#each pen.strokes as stroke, i}<path class="{stroke.width} ink-{stroke.ink ?? 'pen'}" pathLength="1" d={stroke.d} style="--i: {i}" />{/each}</g></svg>{/if}</span>
+<span bind:this={el} class="mark mark-{kind} frame-{pen.frame}" class:undrawn={!shown} class:animate class:flow style="--delay: {delay}ms; {inkStyle}"><span class="word"><slot /></span>{#if pen.strokes.length && !flow}<svg viewBox="0 0 300 120" preserveAspectRatio="none" aria-hidden="true"><g filter="url(#pen-wobble)">{#each pen.strokes as stroke, i}<path class="{stroke.width} ink-{stroke.ink ?? 'pen'}" pathLength="1" d={stroke.d} style="--i: {i}" />{/each}</g></svg>{/if}</span>
 
 <style>
+  /* Her blue pen and her highlighter, unless the mark is given an ink. */
   .mark {
+    --pen-ink: var(--accent-shape);
+    --hl-ink: var(--mark);
     position: relative;
     display: inline-block;
   }
@@ -74,9 +82,9 @@
     inset: 0.12em -0.2em 0 -0.14em;
     background: linear-gradient(
       178deg,
-      var(--mark) 0 30%,
-      color-mix(in srgb, var(--mark) 82%, #fff) 48%,
-      var(--mark) 66% 100%
+      var(--hl-ink) 0 30%,
+      color-mix(in srgb, var(--hl-ink) 82%, #fff) 48%,
+      var(--hl-ink) 66% 100%
     );
     clip-path: polygon(
       4% 4%,
@@ -133,7 +141,7 @@
     }
   }
 
-  /* The red pen: a wobble from a noise filter, and a second lighter pass. */
+  /* The blue pen: a wobble from a noise filter, and a second lighter pass. */
   svg {
     position: absolute;
     left: -0.16em;
@@ -146,7 +154,7 @@
 
   path {
     fill: none;
-    stroke: var(--accent-shape);
+    stroke: var(--pen-ink);
     stroke-linecap: round;
     stroke-linejoin: round;
     stroke-dasharray: 1;
@@ -178,7 +186,7 @@
   }
 
   .ink-highlighter {
-    stroke: var(--mark);
+    stroke: var(--hl-ink);
     mix-blend-mode: var(--mark-blend);
     opacity: 1;
   }
@@ -233,7 +241,7 @@
     padding: 0 0.12em;
     margin: 0 -0.12em;
     border-radius: 0.12em 0.3em 0.18em 0.25em;
-    background-image: linear-gradient(var(--mark), var(--mark));
+    background-image: linear-gradient(var(--hl-ink), var(--hl-ink));
     background-position: 0 88%;
     background-size: 100% 74%;
   }
@@ -244,10 +252,10 @@
 
   .flow.mark-line {
     background-image:
-      linear-gradient(var(--accent-shape), var(--accent-shape)),
+      linear-gradient(var(--pen-ink), var(--pen-ink)),
       linear-gradient(
-        color-mix(in srgb, var(--accent-shape) 50%, transparent),
-        color-mix(in srgb, var(--accent-shape) 50%, transparent)
+        color-mix(in srgb, var(--pen-ink) 50%, transparent),
+        color-mix(in srgb, var(--pen-ink) 50%, transparent)
       );
     background-position:
       0 calc(100% - 0.02em),

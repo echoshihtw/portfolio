@@ -42,7 +42,7 @@
    its paintings sit on a lit wall even when the rest of the page is dark. */
 :root,
 .stay-light {
-  /* Colour, from her paintings: warm paper, brown-black ink, a red pen for the
+  /* Colour, from her paintings: warm paper, brown-black ink, a blue pen for the
      accent, and a yellow highlighter. Runway's colours are its own, from the app's tokens.json;
      Clio's come from @echoshihtw/clio-brand. */
   --canvas: #f6f1e6;
@@ -60,23 +60,24 @@
   --border: rgb(23 20 15 / 0.18);
   --border-strong: var(--ink);
   --muted: rgb(23 20 15 / 0.62);
-  /* Controls are ink: one accent on the page, and it is the red pen. */
+  /* Controls are ink: one accent on the page, and it is the blue pen. */
   --primary: var(--ink);
   --primary-ink: var(--canvas);
-  /* Her red pen: the one accent. The deep red is for words (5.5:1 on the
-     paper); the brighter red is for marks only, like the pen line under
-     "learn" and the cover's full stop (3.9:1). */
-  --accent-text: #b3311b;
+  /* Her blue pen: the one accent. The deep blue is for words (5.2:1 on the
+     paper); the brighter blue is for marks only, like the pen line under
+     "learn" and the cover's full stop (3.8:1). */
+  --accent-text: #2f5bd3;
   /* The one dark for shadows and the sheet's backdrop, the same in both
      themes; each use is a mix of it. */
   --shade: #14100a;
-  --accent-shape: #d8432c;
-  --highlight: var(--accent-shape); /* the theme switch's sun is her red */
+  --accent-shape: #3d6be0;
+  --highlight: var(--accent-shape); /* the theme switch's sun is her blue */
   /* The highlighter: yellow on paper, as a real one is. Only behind the
      hero's "don't" and under a link on hover, always with ink on it. */
   --mark: #ffe14d;
   --mark-ink: #17140f;
   --mark-blend: multiply; /* ink on paper soaks in */
+  --mark-alpha: 1; /* how solid any highlighter ink is on this ground */
   /* The hero's one word under a solid stroke, in either theme. */
   --mark-solid: var(--mark);
   --mark-solid-ink: var(--mark-ink);
@@ -139,8 +140,8 @@
   --motion-exit: cubic-bezier(0.3, 0, 0.8, 0.15);
 }
 
-/* The ink theme. Same system, the ground and the ink swap, the red pen turns
-   coral and the highlighter mint, so both clear contrast on dark. No other rule in
+/* The ink theme. Same system, the ground and the ink swap, the blue pen turns
+   lighter and the highlighter mint, so both clear contrast on dark. No other rule in
    the site mentions the theme. */
 html[data-theme="dark"] {
   /* Warm charcoal: light mode's paper and smoke, inverted. */
@@ -153,14 +154,15 @@ html[data-theme="dark"] {
   --muted: rgb(241 235 223 / 0.66);
   --primary: var(--ink);
   --primary-ink: var(--canvas);
-  --accent-text: #ff8a6f;
-  --accent-shape: #ff7a5c;
+  --accent-text: #8fb0ff;
+  --accent-shape: #7f9ef5;
   --highlight: var(--accent-shape);
   /* On a dark ground the highlighter is see-through and the word keeps its
      own light ink, so a letter the stroke misses still reads. */
   --mark: rgb(184 242 140 / 0.3);
   --mark-ink: var(--ink);
   --mark-blend: normal;
+  --mark-alpha: 0.3;
   --mark-solid: #b8f28c;
   --mark-solid-ink: var(--canvas);
 }
@@ -388,7 +390,7 @@ canvas {
   background: color-mix(in srgb, var(--primary-ink) 12%, var(--primary));
 }
 
-/* The main button: ink, so the red stays the page's one accent. */
+/* The main button: ink, so the blue stays the page's one accent. */
 .btn-ink {
   border-color: var(--ink);
   background: var(--ink);

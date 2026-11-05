@@ -38,7 +38,7 @@ export const heroConfig: {
   // What a remote employer filters on first: the role, remote, the time
   // zone, and whether she is free. Stated as facts, since "open to" reads as
   // asking. The cover names her city, and the footer her hours. Availability
-  // stays last: the hero marks the last fact with the red dot.
+  // stays last: the hero marks the last fact with the blue dot.
   remoteOpen: ["Product engineer", "Remote", "UTC+8", "Available now"],
 
   // Her three habits, as a quiet slogan: check before trusting, find the right
@@ -49,7 +49,7 @@ export const heroConfig: {
   // Her own line, from the voice interview on 2026-10-19: "I make software
   // you don't have to learn."
   // "don't" is the word the hero writes in after the cover, under the
-  // highlighter. A red pen line runs under "learn"; the cover's dot lands on its full stop.
+  // highlighter. A blue pen line runs under "learn"; the cover's dot lands on its full stop.
   headline: [
     { text: "I make software you " },
     { text: "don't", mark: true },

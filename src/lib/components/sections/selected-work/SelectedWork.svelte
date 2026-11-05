@@ -137,6 +137,7 @@
     --mark: rgb(255 225 77 / 0.3);
     --mark-ink: var(--runway-paper);
     --mark-blend: normal;
+    --mark-alpha: 0.3;
   }
 
   .inner {

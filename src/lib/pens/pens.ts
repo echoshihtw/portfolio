@@ -4,7 +4,7 @@
 // A mark's strokes are drawn by hand in a 300 by 120 box stretched over the
 // marked words, in the order a hand would draw them. Where the box sits is the
 // mark's frame: "under" for lines below the words, "around" for shapes round
-// them. Each stroke is a pen width and an ink: her red pen, or the yellow
+// them. Each stroke is a pen width and an ink: her blue pen, or the yellow
 // highlighter.
 
 export type Width = "pen" | "echo" | "fine" | "marker" | "scribble";
@@ -174,10 +174,125 @@ const defined = {
     frame: "around",
     strokes: [{ d: "M0 66 C 80 58, 200 62, 300 56", width: "fine" }],
   },
+  dashed: {
+    label: "Dashed underline",
+    note: "quick broken strokes, like a pencil sketch",
+    frame: "under",
+    strokes: [
+      {
+        d: "M4 100 L 26 99 M 38 99 L 62 98 M 74 98 L 98 98 M 110 98 L 134 97 M 146 97 L 170 97 M 182 97 L 206 96 M 218 96 L 242 96 M 254 95 L 278 95 M 288 95 L 296 94",
+        width: "pen",
+      },
+    ],
+  },
+  dotted: {
+    label: "Dotted underline",
+    note: "a row of pen dots under the words",
+    frame: "under",
+    strokes: [
+      {
+        d: "M8 102 L 9 102 M 30 101 L 31 101 M 52 101 L 53 101 M 74 100 L 75 100 M 96 100 L 97 100 M 118 100 L 119 100 M 140 99 L 141 99 M 162 99 L 163 99 M 184 99 L 185 99 M 206 98 L 207 98 M 228 98 L 229 98 M 250 98 L 251 98 M 272 97 L 273 97 M 292 97 L 293 97",
+        width: "marker",
+      },
+    ],
+  },
+  swoosh: {
+    label: "Swoosh",
+    note: "an underline that lifts off at the end, like a quick signature",
+    frame: "under",
+    strokes: [
+      {
+        d: "M4 104 C 90 110, 200 108, 260 96 C 280 92, 292 84, 300 72",
+        width: "pen",
+      },
+    ],
+  },
+  pointer: {
+    label: "Underline arrow",
+    note: "an underline that ends in an arrowhead, pointing on",
+    frame: "under",
+    strokes: [
+      { d: "M4 102 C 90 98, 200 98, 294 98", width: "fine" },
+      { d: "M280 88 L 296 98 L 280 108", width: "fine" },
+    ],
+  },
+  brace: {
+    label: "Brace",
+    note: "a curly brace under the words, gathering them into one",
+    frame: "under",
+    strokes: [
+      {
+        d: "M4 92 C 4 104, 20 104, 70 104 C 120 104, 140 104, 150 116 C 160 104, 180 104, 230 104 C 280 104, 296 104, 296 92",
+        width: "fine",
+      },
+    ],
+  },
+  oval: {
+    label: "Double loop",
+    note: "a circle gone round twice, in a hurry",
+    frame: "around",
+    strokes: [
+      {
+        d: "M250 24 C 200 4, 90 4, 40 22 C 2 38, 4 82, 40 98 C 100 120, 220 116, 268 98 C 304 82, 300 36, 252 22 C 210 10, 120 12, 60 26 C 20 38, 16 76, 54 92",
+        width: "fine",
+      },
+    ],
+  },
+  corner: {
+    label: "Corner",
+    note: "half a box, an editor's tick to the words",
+    frame: "around",
+    strokes: [{ d: "M6 70 L 6 110 L 120 110", width: "fine" }],
+  },
+  check: {
+    label: "Tick",
+    note: "a tick after the words: done, shipped",
+    frame: "around",
+    strokes: [{ d: "M300 64 L 312 80 L 334 36", width: "pen" }],
+  },
+  sweep: {
+    label: "Two-pass highlight",
+    note: "the highlighter swept twice, the second pass shorter",
+    frame: "around",
+    strokes: [
+      {
+        d: "M2 82 C 100 76, 200 78, 298 74",
+        width: "marker",
+        ink: "highlighter",
+      },
+      {
+        d: "M16 64 C 100 60, 190 62, 270 58",
+        width: "marker",
+        ink: "highlighter",
+      },
+    ],
+  },
 } satisfies Record<string, Pen>;
 
 export type PenName = keyof typeof defined;
 export const pens: Record<PenName, Pen> = defined;
+
+// Inks a mark or a doodle can be given in place of its own. Pen inks are for
+// lines and shapes; highlighter inks are light, so ink on them reads, and
+// they turn see-through on a dark ground (--mark-alpha), as the yellow does.
+export const inks = {
+  pen: "var(--accent-shape)",
+  red: "#d8432c",
+  yellow: "var(--mark)",
+  ink: "var(--ink)",
+  green: "#2f9e5c",
+  pink: "rgb(255 179 199 / var(--mark-alpha))",
+  mint: "rgb(184 242 140 / var(--mark-alpha))",
+  sky: "rgb(168 216 255 / var(--mark-alpha))",
+  peach: "rgb(255 194 122 / var(--mark-alpha))",
+} satisfies Record<string, string>;
+
+export type InkName = keyof typeof inks;
+
+/** A named ink's colour, or the CSS colour given. */
+export function inkColour(ink: string): string {
+  return ink in inks ? inks[ink as InkName] : ink;
+}
 
 /** Her favourites, the ones to reach for first. */
 export const favourites: PenName[] = [

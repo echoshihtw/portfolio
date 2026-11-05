@@ -62,7 +62,7 @@
     document.dispatchEvent(new Event("cover:gone"));
   }
 
-  // The red full stop of the name is the one thing that stays: the cover
+  // The blue full stop of the name is the one thing that stays: the cover
   // leaves, the dot travels to the full stop of "learn." and the headline
   // arrives around it as it lands. With Reduce Motion it is skipped, and the
   // cover goes at once.

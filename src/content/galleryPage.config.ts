@@ -4,7 +4,7 @@ export const galleryConfig = {
   heading: [
     // "Made by" stays together, so a narrow column breaks before "hand".
     { text: "Made\u00a0by " },
-    // under her red pen, like "learn" on the home page
+    // under her blue pen, like "learn" on the home page
     { text: "hand.", accent: true },
   ] as { text: string; accent?: boolean }[],
 

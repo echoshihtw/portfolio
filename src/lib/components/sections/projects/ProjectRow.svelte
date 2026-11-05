@@ -8,7 +8,7 @@
 </script>
 
 <script lang="ts">
-  import { Marked } from "$lib/pens";
+  import { Mark, Marked } from "$lib/pens";
   import { base } from "$app/paths";
   import { onDestroy, tick } from "svelte";
   import Reveal from "$lib/components/Reveal.svelte";
@@ -28,8 +28,7 @@
   export let mark: string | undefined = undefined;
   /** The product's own paper and ink for its card's back, so both sides of
       the card match. Without it the back is the site's paper. */
-  export let brand:
-    { paper: string; ink: string; number: string; touch: string } | undefined =
+  export let brand: { paper: string; ink: string; number: string } | undefined =
     undefined;
 
   // On a wide screen "Read the decisions" turns the lead object over: the
@@ -140,9 +139,8 @@
       <p
         class="figure"
         style:--figure={brand?.number}
-        style:--touch={brand?.touch}
       >
-        {project.figure}
+        <Mark kind="line">{project.figure}</Mark>
       </p>
     {/if}
     {#if project.fact}
@@ -281,8 +279,8 @@
     color: var(--muted);
   }
 
-  /* The proof, large, with the brand's touch as a mark under it. */
-  /* It reads as one sentence with the fact under it, so they sit close. */
+  /* The proof, large, with her pen line under it. It reads as one sentence
+     with the fact under it, so they sit close. */
   .notes .figure {
     margin-bottom: calc(var(--space-2) - var(--space-3));
     font-family: var(--font-mono);
@@ -291,11 +289,6 @@
     line-height: 1;
     letter-spacing: -0.04em;
     color: var(--figure, var(--ink));
-    text-decoration: underline;
-    text-decoration-color: var(--touch, transparent);
-    text-decoration-thickness: 0.14em;
-    text-underline-offset: -0.02em;
-    text-decoration-skip-ink: none;
   }
 
   .fact {

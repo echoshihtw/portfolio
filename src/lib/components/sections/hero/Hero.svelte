@@ -147,7 +147,7 @@
   }
 
   /* The last fact is that she is available: the one a reader acts on, so it
-     carries the red of the pen. */
+     carries the blue of the pen. */
   .hero-facts li:last-child::before {
     content: "";
     display: inline-block;

@@ -1,11 +1,15 @@
 <script lang="ts">
   // The reference for her pens: every mark and doodle in pens.ts, on the
   // same phrase. Linked from nowhere and kept out of search.
-  import { Doodle, Mark, doodles, favourites, pens } from "$lib/pens";
-  import type { DoodleName, PenName } from "$lib/pens";
+  import { Doodle, Mark, doodles, favourites, inks, pens } from "$lib/pens";
+  import type { DoodleName, InkName, PenName } from "$lib/pens";
 
   const names = Object.keys(pens) as PenName[];
   const icons = Object.keys(doodles) as DoodleName[];
+  const inkNames = Object.keys(inks) as InkName[];
+
+  // Every sample in one ink, or each in its own when none is chosen.
+  let ink: InkName | undefined;
 
   // Changing the key draws every mark again.
   let round = 0;
@@ -27,13 +31,41 @@
       <code>src/lib/pens/pens.ts</code>
       . A star marks a favourite.
     </p>
-    <button
-      class="btn btn-line"
-      type="button"
-      on:click={() => round++}
-    >
-      Draw them again
-    </button>
+    <div class="tools">
+      <button
+        class="btn btn-line"
+        type="button"
+        on:click={() => round++}
+      >
+        Draw them again
+      </button>
+      <div
+        class="inks"
+        role="group"
+        aria-label="Ink"
+      >
+        <button
+          type="button"
+          aria-pressed={ink === undefined}
+          on:click={() => ((ink = undefined), round++)}
+        >
+          own
+        </button>
+        {#each inkNames as name}
+          <button
+            type="button"
+            aria-pressed={ink === name}
+            on:click={() => ((ink = name), round++)}
+          >
+            <span
+              class="swatch"
+              style="background: {inks[name]}"
+            ></span>
+            {name}
+          </button>
+        {/each}
+      </div>
+    </div>
   </header>
 
   {#key round}
@@ -48,7 +80,10 @@
           <h2>{pens[name].label}</h2>
           <p class="note">{pens[name].note}</p>
           <p class="sample">
-            A deployment went from a full day to <Mark kind={name}>
+            A deployment went from a full day to <Mark
+              kind={name}
+              {ink}
+            >
               five minutes
             </Mark>.
           </p>
@@ -60,7 +95,10 @@
     <ul class="doodles">
       {#each icons as icon}
         <li>
-          <Doodle {icon} />
+          <Doodle
+            {icon}
+            {ink}
+          />
           <span class="label">{icon}</span>
         </li>
       {/each}
@@ -89,6 +127,44 @@
   header p {
     margin: 0;
     color: var(--muted);
+  }
+
+  .tools {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    align-items: center;
+  }
+
+  .inks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .inks button {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    min-height: 44px;
+    padding: 0 var(--space-3);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: none;
+    color: var(--ink);
+    font: inherit;
+    font-size: var(--text-sm);
+    cursor: pointer;
+  }
+
+  .inks button[aria-pressed="true"] {
+    border-color: var(--ink);
+  }
+
+  .swatch {
+    width: 0.9em;
+    height: 0.9em;
+    border-radius: 50%;
   }
 
   .grid {
