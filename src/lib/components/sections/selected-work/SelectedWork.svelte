@@ -123,6 +123,9 @@
     --ink: var(--runway-paper);
     --muted: color-mix(in srgb, var(--runway-paper) 68%, transparent);
     --hairline: color-mix(in srgb, var(--runway-paper) 18%, transparent);
+    /* Focus rings and link hovers are paper here: ink would vanish on the
+       band. */
+    --primary: var(--runway-paper);
   }
 
   .inner {

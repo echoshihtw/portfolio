@@ -69,7 +69,9 @@ section's one picture. The demo plays only on a tap.
 
 ## Gallery
 
-Paintings hang in even 4:5 frames: one column on a phone, two from a phone held
+One painting opens the page, whole and unframed at its own proportions, beside
+the heading; the wall below leaves it out. The page stays light in the dark
+theme, like a lit wall in a dark room. Paintings hang in even 4:5 frames: one column on a phone, two from a phone held
 sideways, three on a computer. A painting opens full screen over the wall, and
 the others sit beside it: swipe, the arrow keys or the buttons move between
 them, with a counter in a fixed place. Escape, Close or a tap on the background

@@ -88,6 +88,18 @@
      everything inside, including the wall, inherits the cream set without
      knowing anything about the theme. */
   .gallery-page {
+    /* The light set, the same values as app.css's :root, redeclared so the
+       dark theme cannot reach inside. */
+    --canvas: #f6f1e6;
+    --ink: #17140f;
+    --surface: #fbf8f1;
+    --border: rgb(23 20 15 / 0.18);
+    --border-strong: #17140f;
+    --muted: rgb(23 20 15 / 0.62);
+    --primary: #17140f;
+    --primary-ink: #f6f1e6;
+    --accent-text: #7d5a12;
+
     background-color: var(--canvas);
     color: var(--ink);
     /* A faint plaster grain, well below where it reads as texture. It only
@@ -125,12 +137,16 @@
     margin: 0;
   }
 
-  /* Whole, at its own proportions, never cropped; on a wide screen it is
-     capped to the first screen, so a tall painting gets narrower instead. */
+  /* Whole, at its own proportions, never cropped: a tall painting gets
+     narrower rather than taller than the screen. */
   .lead img {
     display: block;
-    width: 100%;
+    width: auto;
+    max-width: 100%;
     height: auto;
+    /* never taller than the screen, so it is seen whole on a phone held
+       sideways too */
+    max-height: calc(100svh - 4rem);
     border-radius: 4px;
   }
 
@@ -155,10 +171,8 @@
       justify-self: center;
     }
 
+    /* the header, the page's top space and the caption all fit too */
     .lead img {
-      width: auto;
-      max-width: 100%;
-      /* the header, the page's top space and the caption all fit too */
       max-height: calc(100svh - 16rem);
     }
   }
