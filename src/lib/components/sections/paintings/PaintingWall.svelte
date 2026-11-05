@@ -8,9 +8,9 @@
     type Painting,
   } from "../../../../content/paintings.config";
 
-  // The manifest is the wall: the opening photograph is a separate asset,
-  // not an entry here, so nothing has to be filtered out.
-  const works = paintingsConfig;
+  /** A painting shown elsewhere on the page, so the wall leaves it out. */
+  export let skip: string | undefined = undefined;
+  const works = paintingsConfig.filter((work) => work.id !== skip);
 
   // Every frame is the same 4:5, so the wall reads as one calm row of
   // shapes. Inside it, the painting fills the frame by how big the real
