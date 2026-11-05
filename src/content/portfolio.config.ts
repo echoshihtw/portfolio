@@ -33,20 +33,10 @@ export const heroConfig: {
   emailSubject: string;
   resume: string;
 } = {
-  // Taipei-based, so the first thing an overseas recruiter needs is the time
-  // zone and how far it stretches. Remote only: naming an on-site option
-  // invited the wrong roles. Stated as fact rather than availability:
-  // "open to" in front of it reads as asking.
-  // The title leads this line now. The site never said what role it wanted:
-  // a reader had to infer it from a résumé link. Adding the noun where
-  // someone already looks for logistics costs no space and removes the
-  // guess. "Product engineer" because it is the title these companies post
-  // and because the evidence here is scoping decisions rather than a list
-  // of layers; resume.md keeps the swap list for postings that literally
-  // say frontend.
-  // Her name first: the signature in the header is not readable as one.
-  // A remote employer filters on the hours first, so the time zone is here;
-  // the cover names the city and country, and the footer her hours.
+  // What a remote employer filters on first: the role, remote, the time
+  // zone, and whether she is free. Stated as facts, since "open to" reads as
+  // asking. The cover names her city, and the footer her hours. Availability
+  // stays last: the hero marks the last fact with the ochre dot.
   remoteOpen: ["Product engineer", "Remote", "UTC+8", "Available now"],
 
   // Her three habits, as a quiet slogan: check before trusting, find the right
