@@ -39,8 +39,8 @@ export function initializeTheme() {
   theme.set(resolveInitialTheme());
 }
 
-// Only a flip of the switch is remembered, so until then the site keeps
-// following the device's own setting.
+// Only a flip of the switch is remembered, so until then the site opens in
+// the dark theme.
 export function toggleTheme() {
   theme.update((current) => {
     const next = current === DARK ? LIGHT : DARK;

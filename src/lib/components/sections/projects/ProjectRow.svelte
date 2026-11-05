@@ -8,6 +8,7 @@
 </script>
 
 <script lang="ts">
+  import { Marked } from "$lib/pens";
   import { base } from "$app/paths";
   import { onDestroy, tick } from "svelte";
   import Reveal from "$lib/components/Reveal.svelte";
@@ -151,9 +152,21 @@
       <!-- The first paragraph says what it is, so it is always on screen. On
            a phone the rest opens in a sheet. -->
       <div class="story">
-        <p>{project.story[0]}</p>
+        <p>
+          <Marked
+            text={project.story[0]}
+            phrase={project.mark?.phrase ?? ""}
+            kind={project.mark?.kind}
+          />
+        </p>
         {#each project.story.slice(1) as paragraph}
-          <p class="wide">{paragraph}</p>
+          <p class="wide">
+            <Marked
+              text={paragraph}
+              phrase={project.mark?.phrase ?? ""}
+              kind={project.mark?.kind}
+            />
+          </p>
         {/each}
       </div>
     {/if}
@@ -183,7 +196,13 @@
             name={project.name}
           >
             {#each project.story?.slice(1) ?? [] as paragraph}
-              <p class="sheet-p">{paragraph}</p>
+              <p class="sheet-p">
+                <Marked
+                  text={paragraph}
+                  phrase={project.mark?.phrase ?? ""}
+                  kind={project.mark?.kind}
+                />
+              </p>
             {/each}
           </Reveal>
         </div>
@@ -498,7 +517,7 @@
 
   @media (min-width: 768px) {
     .wide {
-      display: flex;
+      display: block;
     }
 
     .narrow {

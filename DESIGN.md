@@ -43,8 +43,8 @@ Archived work gets no colour. A component's own tokens, such as `--hairline`,
 are mixes of these, never new colours. Shadows and the sheet's backdrop are mixes
 of `--shade`, the one dark that stays the same in both themes. The light set is `:root` and `.stay-light`, defined once in `app.css`. The gallery's content wears `.stay-light`, so its paintings stay
 on a light wall in the dark theme while the header and footer follow the theme.
-The cover follows the theme too. A first visit follows the device's own setting,
-until the visitor flips the switch; the site remembers that choice. Every text pair clears 4.5:1 in both themes; `src/lib/contrast.test.ts`
+The cover follows the theme too. A first visit opens in the dark theme, where the
+hero is at its best, until the visitor flips the switch; the site remembers that choice. Every text pair clears 4.5:1 in both themes; `src/lib/contrast.test.ts`
 holds that.
 
 ## What each section must carry
@@ -102,14 +102,16 @@ downloads folder.
 
 The page reads like her own notebook, marked up with two pens. The highlighter
 marks what matters, the fact a reader should take away. The red pen is her
-remark: a circle, a line, or the hero's wavy line under "learn". Both live in
-`Mark.svelte`, and the phrase each one marks sits beside its copy in the
-config.
+remark: a circle, a line, or the hero's wavy line under "learn". Every pen and doodle
+is defined once in `src/lib/pens/pens.ts`, drawn by the components beside it,
+and shown together on the unlisted `/pens` page. The phrase each one marks sits
+beside its copy in the config. A phrase longer than a word runs as one stroke
+along the text, breaking only where the line does.
 
 - **One mark on the proof,** at most, in a card or a part, and only where there
   is a result to mark. No mark is better than a mark on a summary.
 - **Doodles are rare:** a red pen star by How I work, a light bulb by With AI,
-  and an arrow to the full history in the résumé, in `Doodle.svelte`. Each means
+  and an arrow to the full history in the résumé, in `pens.ts`. Each means
   something; none decorates.
 - **Hand-drawn marks on clean type,** never a handwriting face.
 - **Runway and Clio keep their own colours.** Clio's 603 keeps its pink line.
@@ -151,7 +153,8 @@ Each project's lead object sits in a hairline frame, not a shadow. "Read the
 decisions" turns the card over on a wide screen, and only one card is turned at
 a time. Focus moves to the card's back, and "Turn it back" returns it to the
 button that turned it. In the dark theme, Clio's demo keeps its own paper inside a frame of the
-page's surface, and screenshots are dimmed a little.
+page's surface, and the demo and the screenshots are dimmed a little so they
+don't glare.
 
 ## Phones
 

@@ -93,6 +93,12 @@
   /* Clio's own card: its brand paper and ink from @echoshihtw/clio-brand,
      the same in both themes. Grey is a blend of the two, as the brand
      asks, never a new colour. */
+  /* Clio's paper would glare on the dark page, so it is dimmed a little,
+     as the screenshots are. */
+  :global(html[data-theme="dark"]) .demo {
+    filter: brightness(0.82);
+  }
+
   .demo {
     --paper-ink: var(--clio-ink);
     --paper-grey: color-mix(in srgb, var(--clio-ink) 68%, var(--clio-paper));

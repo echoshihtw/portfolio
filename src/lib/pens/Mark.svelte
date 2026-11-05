@@ -1,18 +1,23 @@
 <script lang="ts">
   /**
-   * Her two pens on the page: the yellow highlighter for what matters, and
-   * the red pen for her own remark (a circle, a line or the hero's wavy
-   * line). Each mark draws once: when its section scrolls into view, or,
+   * One of her pens over some words: the yellow highlighter for what
+   * matters, the red pen for her own remark. Every pen is defined in
+   * pens.ts. Each mark draws once: when its section scrolls into view, or,
    * when `drawn` is given, the moment it turns true. Already drawn when
    * the page loads, with Reduce Motion, or without JavaScript.
    */
   import { onMount } from "svelte";
+  import { pens, type PenName } from "./pens";
+  import { whenSeen } from "./whenSeen";
 
-  export let kind: "highlight" | "circle" | "line" | "wavy" = "highlight";
+  export let kind: PenName = "highlight";
   /** Leave unset to draw on scroll; set it to draw on cue. */
   export let drawn: boolean | undefined = undefined;
   /** Milliseconds to wait before drawing. */
   export let delay = 0;
+  /** A phrase that may wrap: one stroke that runs along the text and breaks
+      only where the line does. A single word keeps its hand-drawn shape. */
+  export let flow = false;
 
   let el: HTMLElement;
   let mounted = false;
@@ -29,66 +34,21 @@
   onMount(() => {
     mounted = true;
     if (drawn !== undefined) return;
-    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    inView = false;
-    const seen = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry.isIntersecting) return;
-        animate = true;
-        inView = true;
-        seen.disconnect();
-      },
-      { threshold: 1, rootMargin: "0px 0px -15% 0px" }
-    );
-    seen.observe(el);
-    return () => seen.disconnect();
+    const stop = whenSeen(el, () => {
+      animate = true;
+      inView = true;
+    });
+    if (stop) inView = false;
+    return stop || undefined;
   });
 
-  // A hand-drawn path for each pen mark, in a 300 by 120 box stretched over
-  // the word. The second path is a lighter pass just off the first.
-  const paths: Record<string, [string, string]> = {
-    circle: [
-      "M236 22 C 196 6, 98 4, 44 22 C 6 36, 0 70, 22 90 C 52 116, 168 120, 240 104 C 292 92, 304 60, 280 36 C 262 18, 226 10, 178 12 C 150 13, 128 18, 116 24",
-      "M232 26 C 190 12, 104 10, 50 26 C 14 40, 10 70, 30 88 C 60 110, 166 114, 236 100 C 284 90, 296 62, 276 40",
-    ],
-    line: [
-      "M4 104 C 60 98, 140 97, 210 100 C 250 101, 278 98, 296 94",
-      "M14 108 C 70 103, 150 102, 220 104 C 256 105, 280 102, 290 99",
-    ],
-    wavy: [
-      "M6 100 C 18 86, 30 86, 40 98 S 62 112, 74 98 S 98 84, 110 97 S 134 111, 146 98 S 170 85, 182 97 S 206 110, 218 97 S 242 85, 254 96 S 280 106, 296 92",
-      "M14 104 C 24 92, 34 92, 44 102 S 66 114, 78 102 S 102 90, 114 101 S 138 113, 150 102 S 174 90, 186 101 S 210 112, 222 101 S 246 90, 258 100 S 282 108, 292 98",
-    ],
-  };
+  $: pen = pens[kind];
 </script>
 
-<span
-  bind:this={el}
-  class="mark mark-{kind}"
-  class:undrawn={!shown}
-  class:animate
-  style="--delay: {delay}ms"
->
-  <span class="word"><slot /></span>
-  {#if kind !== "highlight"}<svg
-      viewBox="0 0 300 120"
-      preserveAspectRatio="none"
-      aria-hidden="true"
-    >
-      <g filter="url(#pen-wobble)">
-        <path
-          class="pass"
-          pathLength="1"
-          d={paths[kind][0]}
-        />
-        <path
-          class="echo"
-          pathLength="1"
-          d={paths[kind][1]}
-        />
-      </g>
-    </svg>{/if}
-</span>
+<!-- No whitespace between the parts: inside running text it would show as a
+     space before the punctuation that follows the mark. -->
+<!-- prettier-ignore -->
+<span bind:this={el} class="mark mark-{kind} frame-{pen.frame}" class:undrawn={!shown} class:animate class:flow style="--delay: {delay}ms"><span class="word"><slot /></span>{#if pen.strokes.length && !flow}<svg viewBox="0 0 300 120" preserveAspectRatio="none" aria-hidden="true"><g filter="url(#pen-wobble)">{#each pen.strokes as stroke, i}<path class="{stroke.width} ink-{stroke.ink ?? 'pen'}" pathLength="1" d={stroke.d} style="--i: {i}" />{/each}</g></svg>{/if}</span>
 
 <style>
   .mark {
@@ -194,7 +154,8 @@
     vector-effect: non-scaling-stroke;
   }
 
-  .pass {
+  /* Pen widths, and the two inks. */
+  .pen {
     stroke-width: 0.06em;
     opacity: 0.92;
   }
@@ -204,8 +165,31 @@
     opacity: 0.5;
   }
 
-  /* A circle needs room around the word; a line sits under it. */
-  .mark-circle svg {
+  .fine {
+    stroke-width: 0.045em;
+  }
+
+  .marker {
+    stroke-width: 0.2em;
+  }
+
+  .scribble {
+    stroke-width: 0.11em;
+  }
+
+  .ink-highlighter {
+    stroke: var(--mark);
+    mix-blend-mode: var(--mark-blend);
+    opacity: 1;
+  }
+
+  /* A drawn shape covers its whole phrase, so the phrase never breaks. */
+  .mark:not(.flow) {
+    white-space: nowrap;
+  }
+
+  /* A shape round the words needs room on every side. */
+  .frame-around svg {
     top: -0.2em;
     left: -0.24em;
     width: calc(100% + 0.48em);
@@ -219,7 +203,8 @@
   }
 
   .animate path {
-    animation: draw var(--motion-long) var(--delay)
+    animation: draw var(--motion-long)
+      calc(var(--delay) + var(--i) * var(--motion-short))
       cubic-bezier(0.65, 0, 0.35, 1) backwards;
   }
 
@@ -230,6 +215,74 @@
     }
     1% {
       opacity: 1;
+    }
+  }
+
+  /* A phrase that wraps: the ink is a background on the text itself, so it
+     runs unbroken along each line and is repeated on the next line. The
+     highlighter covers the lower part of the letters, as a real one does;
+     the pen line is a thin stroke with a lighter pass just under it. */
+  .flow {
+    display: inline;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+    background-repeat: no-repeat;
+  }
+
+  .flow.mark-highlight {
+    padding: 0 0.12em;
+    margin: 0 -0.12em;
+    border-radius: 0.12em 0.3em 0.18em 0.25em;
+    background-image: linear-gradient(var(--mark), var(--mark));
+    background-position: 0 88%;
+    background-size: 100% 74%;
+  }
+
+  .flow.mark-highlight::before {
+    content: none;
+  }
+
+  .flow.mark-line {
+    background-image:
+      linear-gradient(var(--accent-shape), var(--accent-shape)),
+      linear-gradient(
+        color-mix(in srgb, var(--accent-shape) 50%, transparent),
+        color-mix(in srgb, var(--accent-shape) 50%, transparent)
+      );
+    background-position:
+      0 calc(100% - 0.02em),
+      0.2em 100%;
+    background-size:
+      100% 0.07em,
+      calc(100% - 0.4em) 0.03em;
+  }
+
+  .flow.undrawn {
+    background-size:
+      0 74%,
+      0 0.03em;
+  }
+
+  .flow.animate {
+    animation: flow-in var(--motion-long) var(--delay)
+      cubic-bezier(0.45, 0, 0.15, 1) backwards;
+  }
+
+  .flow.mark-line.animate {
+    animation-name: flow-line;
+  }
+
+  @keyframes flow-in {
+    from {
+      background-size: 0 74%;
+    }
+  }
+
+  @keyframes flow-line {
+    from {
+      background-size:
+        0 0.07em,
+        0 0.03em;
     }
   }
 </style>

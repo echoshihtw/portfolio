@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Mark from "$lib/components/Mark.svelte";
+  import { Mark } from "$lib/pens";
   import { base } from "$app/paths";
   import Seo from "$lib/components/Seo.svelte";
   import PaintingWall from "$lib/components/sections/paintings/PaintingWall.svelte";

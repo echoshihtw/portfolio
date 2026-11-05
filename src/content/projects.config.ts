@@ -14,6 +14,8 @@ export const projectsConfig: Projects = [
       "A record of each client for the two minutes before she sits down: last visit, last service, her hair notes.",
       "No booking, no payments. The owner didn't need them, yet. I never taught her to use it; she only comes to me when she forgets her password, or when a bug of mine stops her saving.",
     ],
+    // the hero's claim, shown by a real user
+    mark: { phrase: "I never taught her to use it", kind: "highlight" },
     href: "https://cliohq.app",
     stack: [
       "React 19",
@@ -103,6 +105,7 @@ export const projectsConfig: Projects = [
     story: [
       "I designed and built the frontend of a demo wallet for comparing Bitcoin coin-selection algorithms, the rules that decide which coins a payment spends. Built with a core maintainer of the Bitcoin Dev Kit.",
     ],
+    mark: { phrase: "a core maintainer of the Bitcoin Dev Kit", kind: "line" },
     href: "https://github.com/evanlinjin/echology",
     file: "assets/echology.png",
     fileSize: { width: 2952, height: 1996 },

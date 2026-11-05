@@ -4,7 +4,7 @@
   import { projectsConfig } from "../../../../content/projects.config";
   import SectionHead from "$lib/components/SectionHead.svelte";
   import RunwayArchitecture from "./RunwayArchitecture.svelte";
-  import Marked from "$lib/components/Marked.svelte";
+  import { Marked } from "$lib/pens";
 
   // The stack is written once, on the project's card.
   const stack =

@@ -49,10 +49,9 @@
       (() => {
         const key = "echo-theme";
         // The one place the first theme is chosen: a choice the visitor made
-        // with the switch, or else their device's own setting.
-        let theme = matchMedia("(prefers-color-scheme: dark)").matches
-          ? "dark"
-          : "light";
+        // with the switch, or else the dark theme, where the hero is at its
+        // best.
+        let theme = "dark";
 
         try {
           const savedTheme = localStorage.getItem(key);
@@ -60,7 +59,7 @@
             theme = savedTheme;
           }
         } catch (_error) {
-          // No storage: the device's setting stands.
+          // No storage: the dark theme stands.
         }
 
         document.documentElement.dataset.theme = theme;

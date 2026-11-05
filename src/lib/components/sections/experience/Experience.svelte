@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Doodle from "$lib/components/Doodle.svelte";
+  import { Doodle } from "$lib/pens";
   import { experience } from "$lib/resumeData";
   import { experiencePortfolio } from "../../../../content/portfolio.config";
   import SectionHead from "$lib/components/SectionHead.svelte";

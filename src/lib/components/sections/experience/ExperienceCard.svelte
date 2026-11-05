@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Marked from "$lib/components/Marked.svelte";
+  import { Marked } from "$lib/pens";
   import Reveal from "$lib/components/Reveal.svelte";
 
   export let item: {

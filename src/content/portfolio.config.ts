@@ -5,6 +5,8 @@
 // Guardrails: facts, not noise · warmth via specificity · no clichés.
 
 // mark: the word under the hero's highlighter.
+import type { PenName } from "../lib/pens/pens";
+
 type HeadlinePart = { text: string; mark?: boolean };
 
 // The hero's email and the close's first door are the same door: someone
@@ -108,7 +110,7 @@ export const experiencePortfolio: Record<
   {
     story: string;
     techLine: string;
-    mark?: { phrase: string; kind: "highlight" | "circle" | "line" };
+    mark?: { phrase: string; kind: PenName };
   }
 > = {
   "Lockerbie Technology": {

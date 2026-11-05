@@ -1,6 +1,5 @@
 <script lang="ts">
-  import Marked from "$lib/components/Marked.svelte";
-  import Doodle from "$lib/components/Doodle.svelte";
+  import { Doodle, Marked } from "$lib/pens";
   import { base } from "$app/paths";
   import { aboutMeConfig } from "../../../content/aboutMe.config";
   import SectionHead from "$lib/components/SectionHead.svelte";

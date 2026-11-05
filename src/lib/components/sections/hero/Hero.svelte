@@ -7,7 +7,7 @@
   import { mailtoWithSubject } from "$lib/contactLinks";
   import { trackEmail, trackResume } from "$lib/analytics";
   import { onMount, tick } from "svelte";
-  import Mark from "$lib/components/Mark.svelte";
+  import { Mark } from "$lib/pens";
 
   // The headline in three parts: the words before "don't", "don't", and the
   // words after it, each its own span so it can slide when "don't" arrives.
