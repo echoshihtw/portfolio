@@ -15,12 +15,22 @@
 
   // An introduction belongs at the front door. A visitor who lands on a post
   // or the gallery came for that page, so it is never in their way.
-  const home = location.pathname === "/" || location.pathname === "/index.html";
+  // A link to a section (/#about) came for that section, so it skips it too.
+  const home =
+    (location.pathname === "/" || location.pathname === "/index.html") &&
+    !location.hash;
 
   if (seen || !home) {
     gate.remove();
     return;
   }
+
+  // The cover introduces the top of the page, so the page waits there: it
+  // cannot scroll behind the cover, and a reload does not restore an old
+  // position. Entering hands it back.
+  history.scrollRestoration = "manual";
+  scrollTo(0, 0);
+  document.documentElement.style.overflow = "hidden";
 
   try {
     sessionStorage.setItem(KEY, "1");
@@ -33,10 +43,21 @@
     if (dismissed) return;
     dismissed = true;
     document.getElementById("app")?.removeAttribute("inert");
+    scrollTo(0, 0);
     if (!carryTheDot()) {
       gate.classList.add("boot-gate-hide");
-      setTimeout(() => gate.remove(), 420);
+      setTimeout(() => {
+        gate.remove();
+        release();
+      }, 420);
     }
+  }
+
+  // The page is handed back once the cover has gone, so the rest of the
+  // flick that entered does not carry it away.
+  function release() {
+    document.documentElement.style.overflow = "";
+    history.scrollRestoration = "auto";
   }
 
   // The red full stop of the name is the one thing that stays: the cover
@@ -127,6 +148,7 @@
           .finished.then(() => {
             hero.style.opacity = "";
             flyer.remove();
+            release();
           });
         gate.remove();
       });
