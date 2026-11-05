@@ -9,7 +9,9 @@ and space, and the restraint. The Gallery holds the work; the only painting on
 the home page is her Jakarta sketch, printed faintly into the paper beside the
 headline.
 
-The tokens live in `src/app.css`. This file says how to use them.
+The site's tokens live in `src/app.css`, and Clio's in its brand preset. The
+cover repeats the light and dark values in `static/boot-gate.css`, because it
+paints before the site's styles load. This file says how to use them.
 
 ## The page
 
@@ -22,22 +24,22 @@ The tokens live in `src/app.css`. This file says how to use them.
 ## Colour
 
 Every colour has a job. Nothing is decoration. The ochre is the site's own
-accent; each app keeps its own colours inside its section. Links and buttons
-take the text colour of the ground they sit on. A focus ring always stands out
-from what is behind it: ink on paper, the band's paper on Runway's band, and the
-band's ink where the demo's play button sits on its cream picture.
+accent; each app keeps its own colours inside its section. Links, buttons and
+focus rings take the text colour of the ground they sit on, so a ring always
+stands out from what is behind it.
 
-| Token                                                                               | Job                                                                                                                                                                                                                                          |
-| ----------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `--canvas`, `--smoke`, `--surface`                                                  | the page, every other section, and raised panels                                                                                                                                                                                             |
-| `--ink`, `--muted`, `--primary`, `--border`                                         | text, controls, which follow the ink, and hairlines                                                                                                                                                                                          |
-| `--accent-text`                                                                     | her ochre, from the paintings, for words and the line under them: "learn.", the gallery's "hand.", and the header link's underline on hover and on the current page                                                                          |
-| `--accent-shape`                                                                    | the brighter ochre, for decoration only: the cover's full stop and the theme switch's sun, through `--highlight`                                                                                                                             |
-| `--runway-field`, `--runway-ink`, `--runway-paper`, `--runway-blue`, `--runway-act` | Runway's band: the app's own ink, paper, blue and act colours                                                                                                                                                                                |
-| `--clio-pink`, `--clio-paper`, `--clio-number`                                      | Clio's touch: pink and paper from `@echoshihtw/clio-brand`, and its number in `app.css`. Pink for small marks and tints only: the chosen client, the mark under 603, and the demo's soft fills; paper for the demo. Never a section's ground |
+| Token                                                                               | Job                                                                                                                                                                                                                                                                            |
+| ----------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `--canvas`, `--smoke`, `--surface`                                                  | the page, every other section, and raised panels                                                                                                                                                                                                                               |
+| `--ink`, `--muted`, `--primary`, `--border`                                         | text, controls, which follow the ink, and hairlines                                                                                                                                                                                                                            |
+| `--accent-text`                                                                     | her ochre, from the paintings, for words and the line under them: "learn.", the gallery's "hand.", and the header link's underline on hover and on the current page                                                                                                            |
+| `--accent-shape`                                                                    | the brighter ochre, for decoration only: the cover's full stop and the theme switch's sun, through `--highlight`                                                                                                                                                               |
+| `--runway-field`, `--runway-ink`, `--runway-paper`, `--runway-blue`, `--runway-act` | Runway's band: the app's own ink, paper, blue and act colours                                                                                                                                                                                                                  |
+| `--clio-pink`, `--clio-paper`, `--clio-ink`, `--clio-number`                        | Clio's touch: pink, paper and ink from `@echoshihtw/clio-brand`, and its number in `app.css`. Pink for small marks and tints only: the chosen client, the mark under 603, and the demo's soft fills. Paper and ink for the demo and Clio's card back. Never a section's ground |
 
 Archived work gets no colour. A component's own tokens, such as `--hairline`,
-are mixes of these, never new colours. The light set is defined once, in `:root` and
+are mixes of these, never new colours. Shadows and the sheet's backdrop are the
+one exception: a fixed dark tint, in both themes. The light set is defined once, in `:root` and
 `.stay-light`. The gallery's content wears `.stay-light`, so its paintings stay
 on a light wall in the dark theme while the header and footer follow the theme.
 The cover follows the theme too. Every text pair clears 4.5:1 in both themes; `src/lib/contrast.test.ts`
@@ -48,9 +50,9 @@ holds that.
 The words live in the files named below; this list says what each part has to prove,
 so a rewrite keeps the fact.
 
-- **Cover** (`src/app.html`): a dialog named "Portfolio introduction", holding
-  "PORTFOLIO" and the theme switch along the top, her name with the ochre full
-  stop, "Product engineer · Taipei, Taiwan", and one Enter button. Nothing else, and it fits any
+- **Cover** (`src/app.html`): a named dialog holding the masthead and the theme
+  switch along the top, her name with the ochre full stop, her role with her city
+  and country, and one Enter button. Nothing else, and it fits any
   screen without scrolling.
 - **Hero** (`portfolio.config.ts`, `heroConfig`): her role, that she works
   remote, and her time zone,
@@ -76,9 +78,12 @@ so a rewrite keeps the fact.
 - **Contact** (`portfolio.config.ts`, `closingConfig`): that she is available,
   one line on what she takes on, a main button that emails with a role subject,
   the résumé, and a quiet link that emails with a project subject.
+- **Gallery** (`galleryPage.config.ts`): its heading, one line of provenance,
+  the lead painting, and one way back to the software.
 - **Blog** (`src/posts/`): working notes, each on what broke, what it turned out
   to be, and what she took from it.
-- **Footer** (`Footer.svelte`): where and when she works ("Available remote · Taiwan, UTC+8 · APAC hours or async"),
+- **Footer** (`Footer.svelte`): that she is available remote, her country and
+  time zone, and her hours,
   email, a call, the site's source, GitHub, LinkedIn and Instagram, and a way to
   replay the cover.
 
@@ -139,7 +144,8 @@ One painting opens the page, whole and unframed at its own proportions, beside
 the heading, and never taller than the screen. The wall below leaves it out.
 
 The rest hang in even 4:5 frames: one column on a phone, two from 560 px wide,
-three from 860 px. A painting opens full screen over the wall, and the others
+three from 860 px. A painting opens full screen over the wall, in the browser's own modal dialog,
+so focus stays inside it, and the others
 sit beside it: swipe, the arrow keys or the buttons move between them, with a
 counter in a fixed place that a screen reader hears as it changes. Escape, Close or a tap on the background returns to
 the same spot on the wall. The page ends with one way back to the software.
@@ -147,7 +153,7 @@ the same spot on the wall. The page ends with one way back to the software.
 ## Header and footer
 
 The header returns on any scroll up, so the home page's sections need no second
-list. The footer carries what the list above names, on every page. Replaying the cover is under Motion.
+list. The footer carries what the list above names, on every page.
 
 ## Motion
 

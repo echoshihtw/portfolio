@@ -53,6 +53,9 @@ describe.each([
     ["her accent on smoke", "accent-text", "smoke"],
     ["quiet text on paper", "muted", "canvas"],
     ["quiet text on smoke", "muted", "smoke"],
+    ["ink on a raised panel", "ink", "surface"],
+    ["quiet text on a raised panel", "muted", "surface"],
+    ["her accent on a raised panel", "accent-text", "surface"],
     ["Clio's number on paper", "clio-number", "canvas"],
   ])("%s", (_, fg, bg) => {
     expect(contrastRatio(over(t(fg), t(bg)), t(bg))).toBeGreaterThanOrEqual(
@@ -84,6 +87,10 @@ describe("the colour bands", () => {
     expect(
       contrastRatio(light(name), light("runway-field"))
     ).toBeGreaterThanOrEqual(4.5);
+  });
+
+  it("Clio's ink reads on Clio's paper, on its demo and card back", () => {
+    expect(contrastRatio(clio.ink, clio.paper)).toBeGreaterThanOrEqual(4.5);
   });
 
   it("Clio's ink reads on Clio's pink", () => {

@@ -394,6 +394,8 @@
 
   .back {
     --paper-ink: var(--back-ink, var(--ink));
+    /* the ring and links on the back take the card's own ink */
+    --primary: var(--paper-ink);
     position: absolute;
     inset: 0;
     display: flex;
