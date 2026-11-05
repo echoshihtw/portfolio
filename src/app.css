@@ -42,8 +42,8 @@
    its paintings sit on a lit wall even when the rest of the page is dark. */
 :root,
 .stay-light {
-  /* Colour, from her paintings: warm paper, brown-black ink, and her ochre
-     for the accent. Runway's colours are its own, from the app's tokens.json;
+  /* Colour, from her paintings: warm paper, brown-black ink, a red pen for the
+     accent, and a yellow highlighter. Runway's colours are its own, from the app's tokens.json;
      Clio's come from @echoshihtw/clio-brand. */
   --canvas: #f6f1e6;
   --smoke: #ece5d6;
@@ -60,19 +60,22 @@
   --border: rgb(23 20 15 / 0.18);
   --border-strong: var(--ink);
   --muted: rgb(23 20 15 / 0.62);
-  /* Controls are ink: one accent on the page, and it is the ochre. */
+  /* Controls are ink: one accent on the page, and it is the red pen. */
   --primary: var(--ink);
   --primary-ink: var(--canvas);
-  /* Her ochre, from the paintings: the one accent. The deep one is for
-     words (5.6:1 on the paper). The bright one is only for decoration that
-     carries no meaning, like the cover's full stop (2.5:1), never for words
-     or controls. */
-  --accent-text: #7d5a12;
+  /* Her red pen: the one accent. The deep red is for words (5.5:1 on the
+     paper); the brighter red is for marks only, like the pen line under
+     "learn" and the cover's full stop (3.9:1). */
+  --accent-text: #b3311b;
   /* The one dark for shadows and the sheet's backdrop, the same in both
      themes; each use is a mix of it. */
   --shade: #14100a;
-  --accent-shape: #c9921f;
-  --highlight: var(--accent-shape); /* the theme switch's sun is her ochre */
+  --accent-shape: #d8432c;
+  --highlight: var(--accent-shape); /* the theme switch's sun is her red */
+  /* The highlighter: yellow on paper, as a real one is. Only behind the
+     hero's "don't" and under a link on hover, always with ink on it. */
+  --mark: #ffe14d;
+  --mark-ink: #17140f;
 
   /* Legacy names, aliased. Older rules read these three; nothing new
      should, and the five nothing read at all are gone. */
@@ -132,8 +135,8 @@
   --motion-exit: cubic-bezier(0.3, 0, 0.8, 0.15);
 }
 
-/* The ink theme. Same system, the ground and the ink swap, and the ochre
-   comes up a step so it clears contrast on dark. No other rule in
+/* The ink theme. Same system, the ground and the ink swap, the red pen turns
+   coral and the highlighter mint, so both clear contrast on dark. No other rule in
    the site mentions the theme. */
 html[data-theme="dark"] {
   /* Warm charcoal: light mode's paper and smoke, inverted. */
@@ -146,9 +149,11 @@ html[data-theme="dark"] {
   --muted: rgb(241 235 223 / 0.66);
   --primary: var(--ink);
   --primary-ink: var(--canvas);
-  --accent-text: #c9921f;
-  --accent-shape: #d4a03a;
+  --accent-text: #ff8a6f;
+  --accent-shape: #ff7a5c;
   --highlight: var(--accent-shape);
+  --mark: #b8f28c;
+  --mark-ink: var(--canvas);
 }
 
 /* ==========================================================================
@@ -374,7 +379,7 @@ canvas {
   background: color-mix(in srgb, var(--primary-ink) 12%, var(--primary));
 }
 
-/* The main button: ink, so the ochre stays the page's one accent. */
+/* The main button: ink, so the red stays the page's one accent. */
 .btn-ink {
   border-color: var(--ink);
   background: var(--ink);

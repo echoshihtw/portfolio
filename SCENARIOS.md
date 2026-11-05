@@ -6,8 +6,8 @@ Each is one situation and what a good site does. Graded against DESIGN.md.
 
 ## First visit and cover
 
-1. A first-time visitor opens echoshih.com. Expected: the cover shows her name and the ochre full stop, nothing else competing, and one way in.
-2. The visitor presses Enter. Expected: the cover leaves, the ochre dot travels to the full stop of "learn.", and the headline arrives around it.
+1. A first-time visitor opens echoshih.com. Expected: the cover shows her name and the red full stop, nothing else competing, and one way in.
+2. The visitor presses Enter. Expected: the cover leaves, the red dot travels to the full stop of "learn.", the headline arrives around it, then "don't" is written in under the highlighter and a red pen line is drawn under "learn".
 3. The visitor scrolls the wheel on the cover instead of pressing Enter. Expected: it enters, and the page lands at the top, not partway down.
 4. The visitor reloads the home page in the same tab after entering. Expected: no cover again; it shows once per tab.
 5. Someone opens a link to echoshih.com/#about. Expected: no cover; it goes straight to Who I am.
@@ -45,7 +45,7 @@ Each is one situation and what a good site does. Graded against DESIGN.md.
 
 ## Dark theme
 
-28. A visitor switches to the dark theme. Expected: the same warm studio at night, the ochre still the one accent, every text pair at 4.5:1.
+28. A visitor switches to the dark theme. Expected: the same warm studio at night, the red pen and the highlighter still the only colours of her own, every text pair at 4.5:1.
 29. In the dark theme, a visitor reaches More projects. Expected: Clio's demo and the screenshots don't glare.
 30. In the dark theme, a visitor opens the gallery. Expected: the paintings stay on a light wall; the header and footer turn dark.
 31. In the dark theme, a visitor tabs to the App Store button in Runway's band. Expected: a visible focus ring.
@@ -70,7 +70,7 @@ Each is one situation and what a good site does. Graded against DESIGN.md.
 
 ## Found in round 1
 
-41. A visitor in the dark theme opens the home page for the first time. Expected: the cover follows the theme, with the ochre full stop on the dark ground.
+41. A visitor in the dark theme opens the home page for the first time. Expected: the cover follows the theme, with the coral full stop on the dark ground.
 42. A recruiter on a phone taps "Résumé, PDF". Expected: the PDF downloads, named with her name.
 43. A keyboard user turns a project card over on a wide screen. Expected: focus moves to the card's back, and "Turn it back" returns focus to the button.
 

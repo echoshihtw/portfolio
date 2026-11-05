@@ -57,6 +57,7 @@ describe.each([
     ["quiet text on a raised panel", "muted", "surface"],
     ["her accent on a raised panel", "accent-text", "surface"],
     ["Clio's number on paper", "clio-number", "canvas"],
+    ["ink on the highlighter", "mark-ink", "mark"],
   ])("%s", (_, fg, bg) => {
     expect(contrastRatio(over(t(fg), t(bg)), t(bg))).toBeGreaterThanOrEqual(
       4.5
@@ -99,7 +100,7 @@ describe("the colour bands", () => {
 });
 
 // The cover paints before the site's styles load, so it keeps its own copy of
-// the paper, ink and ochre. This keeps the copy equal to the source.
+// the paper, ink and red. This keeps the copy equal to the source.
 describe("the cover's colours match the site's", () => {
   const cover = readFileSync("static/boot-gate.css", "utf8");
   const gate = (selector: string, name: string) => {

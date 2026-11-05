@@ -4,8 +4,8 @@
 //
 // Guardrails: facts, not noise · warmth via specificity · no clichés.
 
-// accent: the one word in her ochre.
-type HeadlinePart = { text: string; accent?: boolean };
+// mark: the word under the hero's highlighter.
+type HeadlinePart = { text: string; mark?: boolean };
 
 // The hero's email and the close's first door are the same door: someone
 // writing from the top of the page is asking about a role. One value, read
@@ -36,7 +36,7 @@ export const heroConfig: {
   // What a remote employer filters on first: the role, remote, the time
   // zone, and whether she is free. Stated as facts, since "open to" reads as
   // asking. The cover names her city, and the footer her hours. Availability
-  // stays last: the hero marks the last fact with the ochre dot.
+  // stays last: the hero marks the last fact with the red dot.
   remoteOpen: ["Product engineer", "Remote", "UTC+8", "Available now"],
 
   // Her three habits, as a quiet slogan: check before trusting, find the right
@@ -46,9 +46,13 @@ export const heroConfig: {
 
   // Her own line, from the voice interview on 2026-10-19: "I make software
   // you don't have to learn."
+  // "don't" is the word the hero writes in after the cover, under the
+  // highlighter. A red pen line runs under "learn"; the cover's dot lands on its full stop.
   headline: [
-    { text: "I make software you don't have to " },
-    { text: "learn.", accent: true },
+    { text: "I make software you " },
+    { text: "don't", mark: true },
+    { text: " have to " },
+    { text: "learn." },
   ],
 
   // "Web and app" and "end to end" are hers; "frontend first" keeps her own

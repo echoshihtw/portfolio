@@ -58,16 +58,18 @@
   function release() {
     document.documentElement.style.overflow = "";
     history.scrollRestoration = "auto";
+    // The hero's one move waits for this, so the two never overlap.
+    document.dispatchEvent(new Event("cover:gone"));
   }
 
-  // The ochre full stop of the name is the one thing that stays: the cover
+  // The red full stop of the name is the one thing that stays: the cover
   // leaves, the dot travels to the full stop of "learn." and the headline
   // arrives around it as it lands. With Reduce Motion it is skipped, and the
   // cover goes at once.
   function carryTheDot() {
     if (matchMedia("(prefers-reduced-motion: reduce)").matches) return false;
     const dot = gate.querySelector(".gate-accent");
-    const word = document.querySelector(".hero-headline .accent");
+    const word = document.querySelector(".hero-headline .stop");
     const hero = document.getElementById("home");
     const from = fullStop(dot);
     const to = fullStop(word);

@@ -181,7 +181,7 @@
   }
 
   /* The same treatment the home page gives its headline, so the two pages
-     read as one site: the key word in her ochre. */
+     read as one site: the key word in her red. */
   .gallery-page h1 .accent {
     color: var(--accent-text);
   }

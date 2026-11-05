@@ -22,8 +22,8 @@ paints before the site's styles load, and a test keeps the copy equal. This file
 
 ## Colour
 
-Every colour has a job. Nothing is decoration. The ochre is the site's own
-accent; each app keeps its own colours inside its section. Links, buttons and
+Every colour has a job. Nothing is decoration. Her two pens are the site's own
+colours: a red pen for her remarks and a yellow highlighter for what matters; each app keeps its own colours inside its section. Links, buttons and
 focus rings take the text colour of what is directly behind them, so a ring
 always stands out. A ring sits just outside a control, on the page; on a panel
 that fills its own ground, such as a turned card, it sits inside, on the panel.
@@ -33,8 +33,9 @@ On a picture, it takes the picture's ink.
 | ----------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `--canvas`, `--smoke`, `--surface`                                                  | the page, every other section, and raised panels                                                                                                                                                                                                                               |
 | `--ink`, `--muted`, `--primary`, `--border`                                         | text, controls, which follow the ink, and hairlines                                                                                                                                                                                                                            |
-| `--accent-text`                                                                     | her ochre, from the paintings, for words and the line under them: "learn.", the gallery's "hand.", and the header link's underline on hover and on the current page                                                                                                            |
-| `--accent-shape`                                                                    | the brighter ochre, for shapes only: the cover's full stop and the theme switch's sun, through `--highlight`                                                                                                                                                                   |
+| `--accent-text`                                                                     | her red pen, for words: the gallery's "hand." and the header link's underline on hover and on the current page. Coral in the ink theme                                                                                                                                         |
+| `--accent-shape`                                                                    | the brighter red, for pen marks: the wavy line under "learn", the available dot, the caret, the cover's full stop and the theme switch's sun, through `--highlight`                                                                                                            |
+| `--mark`, `--mark-ink`                                                              | the highlighter, yellow on paper and mint on ink, always with ink on it: behind the hero's "don't" and under its two links                                                                                                                                                     |
 | `--runway-field`, `--runway-ink`, `--runway-paper`, `--runway-blue`, `--runway-act` | Runway's band: the app's own ink, paper, blue and act colours                                                                                                                                                                                                                  |
 | `--clio-pink`, `--clio-paper`, `--clio-ink`, `--clio-number`                        | Clio's touch: pink, paper and ink from `@echoshihtw/clio-brand`, and its number in `app.css`. Pink for small marks and tints only: the chosen client, the mark under 603, and the demo's soft fills. Paper and ink for the demo and Clio's card back. Never a section's ground |
 
@@ -52,17 +53,19 @@ The words live in the files named below; this list says what each part has to pr
 so a rewrite keeps the fact.
 
 - **Cover** (`src/app.html`): a named dialog holding the masthead and the theme
-  switch along the top, her name with the ochre full stop, her role with her city
+  switch along the top, her name with the red full stop, her role with her city
   and country, and one Enter button. Nothing else, and it fits any
   screen without scrolling.
-- **Hero** (`portfolio.config.ts`, `heroConfig`): a rule, then her facts on one
+- **Hero** (`portfolio.config.ts`, `heroConfig`): one screen. Her facts on one
   line: her role, remote, her time zone, and that she is available now, marked
-  with an ochre dot. Then the claim, large. Under a hairline, one line on what
-  she does (frontend first, and the structure under it that keeps a team
-  consistent) with "Email me" (a role subject) and "Résumé, PDF" as text links
-  under it, and her slogan, Verify, Distill, Simplify, quiet on the right. No
-  picture, no button, no seniority word or count of years: the work shows the
-  level, and the résumé holds the timeline.
+  with a red dot. Then the claim, large, with "don't" under the highlighter and
+  a wavy red pen line under "learn"; the full stop is ink. Then "Email me" (a
+  role subject) and "Résumé, PDF" as text links with a highlighter line under
+  each, and under them, small and quiet, one line on what she does (frontend
+  first, and the structure under it that keeps a team consistent) and her
+  slogan, Verify, Distill, Simplify. No picture, no button, no rule, no
+  seniority word or count of years: the work shows the level, and the résumé
+  holds the timeline.
 - **Selected work** (`selectedWork.config.ts`): what Runway is, that she built
   and shipped it alone, live on the App Store since October 2026 with its link,
   the stack (read from `projects.config.ts`), one line on how she uses AI, the
@@ -174,8 +177,15 @@ cover.
 
 While the cover is up, the page behind is out of reach and waits at the top.
 Focus starts on Enter. Enter, Space, the down arrow, a scroll or a swipe up goes
-in. Its ochre full stop then travels to the full stop of "learn." while the
+in. Its red full stop then travels to the full stop of "learn." while the
 headline arrives around it.
+
+The hero has one move of its own, once, after the cover has gone: a still
+beat, a caret blinks after "you", "don't" arrives as the words after it slide
+to their new places, the highlighter sweeps behind it, and the red pen draws
+its wavy line under "learn". About two seconds, from the motion scale, and never again. Without the cover, or with
+Reduce Motion, the sentence is simply there, and a screen reader hears it
+whole.
 
 ## Checks for every change
 
