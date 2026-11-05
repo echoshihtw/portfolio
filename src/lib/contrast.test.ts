@@ -110,6 +110,13 @@ describe("the cover's colours match the site's", () => {
     const fallback = m[1].match(/^var\(--[\w-]+,\s*(#[0-9a-f]+)\)$/i);
     return (fallback ? fallback[1] : m[1]).trim().toLowerCase();
   };
+  // rgba(23, 20, 15, 0.62) and rgb(23 20 15 / 0.62) are the same colour.
+  const same = (c: string) =>
+    c
+      .replace(/rgba?\(|\)|,|\//g, " ")
+      .trim()
+      .split(/\s+/)
+      .join(" ");
   it.each([
     ["light", "#boot-gate {", light],
     ["dark", 'html[data-theme="dark"] #boot-gate {', dark],
@@ -117,5 +124,7 @@ describe("the cover's colours match the site's", () => {
     expect(gate(selector, "canvas")).toBe(t("canvas").toLowerCase());
     expect(gate(selector, "ink")).toBe(t("ink").toLowerCase());
     expect(gate(selector, "accent")).toBe(t("accent-shape").toLowerCase());
+    expect(same(gate(selector, "muted"))).toBe(same(t("muted")));
+    expect(same(gate(selector, "border"))).toBe(same(t("border")));
   });
 });

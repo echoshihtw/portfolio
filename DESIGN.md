@@ -11,7 +11,7 @@ headline.
 
 The site's tokens live in `src/app.css`, and Clio's in its brand preset. The
 cover repeats the light and dark values in `static/boot-gate.css`, because it
-paints before the site's styles load. This file says how to use them.
+paints before the site's styles load, and a test keeps the copy equal. This file says how to use them.
 
 ## The page
 
@@ -41,8 +41,7 @@ On a picture, it takes the picture's ink.
 
 Archived work gets no colour. A component's own tokens, such as `--hairline`,
 are mixes of these, never new colours. Shadows and the sheet's backdrop are mixes
-of `--shade`, the one dark that stays the same in both themes. The light set is defined in `app.css`, in `:root` and `.stay-light`, and
-repeated only for the cover, where a test keeps the copy equal. The gallery's content wears `.stay-light`, so its paintings stay
+of `--shade`, the one dark that stays the same in both themes. The light set is `:root` and `.stay-light`, defined once in `app.css`. The gallery's content wears `.stay-light`, so its paintings stay
 on a light wall in the dark theme while the header and footer follow the theme.
 The cover follows the theme too. Every text pair clears 4.5:1 in both themes; `src/lib/contrast.test.ts`
 holds that.
@@ -125,7 +124,7 @@ on a tap.
 Each project's lead object sits in a hairline frame, not a shadow. "Read the
 decisions" turns the card over on a wide screen, and only one card is turned at
 a time. Focus moves to the card's back, and "Turn it back" returns it to the
-button that turned it. In the dark theme, Clio's demo keeps its own paper inside a frame of the
+button that turned it. In the dark theme, Clio's demo and card back keep its own paper inside a frame of the
 page's surface, and screenshots are dimmed a little.
 
 ## Phones
