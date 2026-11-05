@@ -58,29 +58,11 @@ html[data-theme="dark"] #boot-gate {
   grid-template-rows: 1fr auto;
 }
 
-.gate-title {
-  --gate-name-size: clamp(4.5rem, 15vw, 12rem);
-  align-self: center;
-}
-
-/* Her motto, one bold line under the name. The E carries 0.08 of the
-   name's size as space on its left, so the motto moves in by that, less its
-   own S's, to line up with the letter rather than its box. */
-.gate-motto {
-  margin: clamp(1rem, 2.5vw, 2rem) 0 0
-    calc(var(--gate-name-size) * 0.08 - 0.05em);
-  font-family: "Geist", "Helvetica Neue", Arial, sans-serif;
-  font-size: clamp(1.25rem, 2.6vw, 2.25rem);
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  line-height: 1.15;
-  color: var(--gate-ink);
-}
-
 .gate-name {
+  align-self: center;
   margin: 0;
   font-family: "Geist", "Helvetica Neue", Arial, sans-serif;
-  font-size: var(--gate-name-size);
+  font-size: clamp(4.5rem, 15vw, 12rem);
   font-weight: 700;
   letter-spacing: -0.075em;
   line-height: 0.78;
@@ -216,8 +198,8 @@ html[data-theme="dark"] #boot-gate {
 }
 
 @media (max-width: 520px) {
-  .gate-title {
-    --gate-name-size: clamp(4.25rem, 24vw, 7rem);
+  .gate-name {
+    font-size: clamp(4.25rem, 24vw, 7rem);
   }
 
   .gate-lower {
