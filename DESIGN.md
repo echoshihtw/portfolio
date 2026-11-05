@@ -78,7 +78,7 @@ so a rewrite keeps the fact.
   and five parts in story order: Background, What changed, How I work, With AI,
   Outside work. How I work holds habits a reader can check, not adjectives.
 - **Contact** (`portfolio.config.ts`, `closingConfig`): that she is available for
-  work, one line on what she takes on, a main button
+  work now, one line on what she takes on, a main button
   that emails with a role subject, the résumé, and quiet links that email with a
   contract subject and a project subject.
 - **Gallery** (`galleryPage.config.ts`): its heading, one line of provenance,

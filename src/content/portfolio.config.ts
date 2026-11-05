@@ -89,7 +89,7 @@ export const closingConfig = {
   email: EMAIL,
   resume: RESUME,
   // The kinds of work are the links below it, so the heading stays short.
-  heading: "Available for work",
+  heading: "Available for work now",
   // One door: the first path is the main button, the rest are quiet links
   // under it. Each carries its own subject, so the inbox shows which kind of
   // message it is before it is opened.
