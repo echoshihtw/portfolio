@@ -60,7 +60,9 @@ so a rewrite keeps the fact.
   remote, and her time zone,
   the claim, one line on what she does (frontend first, and the structure under
   it that keeps a team consistent), three things she made true that the
-  page shows lower down, then "Email me" with a role subject and "Résumé, PDF".
+  page shows lower down, then "Email me" with a role subject and "Résumé, PDF". No
+  seniority word or count of years: the work shows the level, and the résumé
+  holds the timeline.
 - **Selected work** (`selectedWork.config.ts`): what Runway is, that she built
   and shipped it alone, live on the App Store since October 2026 with its link,
   the stack (read from `projects.config.ts`), one line on how she uses AI, the
