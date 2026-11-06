@@ -117,6 +117,8 @@ along the text, breaking only where the line does.
 - **Runway and Clio keep their own colours** inside their demos; her pen underlines Clio's 603, as it marks every other proof.
 - **Each mark draws once,** as its section scrolls into view: the highlighter is
   uncovered behind a moving pen tip, and a pen line is drawn along its path.
+  Marks that come into view together draw one after another in reading
+  order, a beat (`--motion-short`) apart.
   With Reduce Motion, or without JavaScript, it is simply there.
 
 ## Every section
