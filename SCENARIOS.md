@@ -110,7 +110,7 @@ Each is one situation and what a good site does. Graded against DESIGN.md.
 
 ## Found in round 4
 
-60. A keyboard user tabs to Runway's "Watch it work" on a wide screen, where it sits on the demo's cream picture. Expected: its focus ring stands out from the picture.
+60. A keyboard user tabs to Runway's "Pause the demo" button on a wide screen, where it sits on the demo's cream picture. Expected: its focus ring stands out from the picture.
 
 ## Found in round 5
 

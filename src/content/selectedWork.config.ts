@@ -2,8 +2,8 @@
 // product; the diagram and the points show the engineering. The copy is hers.
 export const selectedWorkConfig = {
   appStore: "https://apps.apple.com/app/id6778675088",
-  // A short recording of the real app, played on a tap: home, then one
-  // check-up. The still frame is home. Recorded by the Runway repo's
+  // A short recording of the real app, playing on its own like a GIF:
+  // home, then one check-up. The still frame is home. Recorded by the Runway repo's
   // assets/marketing/video/portfolio.sh.
   demo: {
     src: "assets/runway/demo.mp4",

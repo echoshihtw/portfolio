@@ -14,21 +14,21 @@
   // The demo plays like a GIF: on its own, silent and looping, while it is
   // on screen. The button pauses it, and a pause is kept. With Reduce
   // Motion it waits for the button.
+  // `playing` follows the video's own events, so the button always says
+  // what the video is really doing. When the page wakes up, the video's
+  // address is written again and it reloads, which stops it without a
+  // pause event; so a reload resets the button, and once the video is ready
+  // again it starts if it should.
   let video: HTMLVideoElement;
   let playing = false;
   let paused = false;
+  let inView = false;
 
-  function play() {
-    playing = true;
-    video.play().catch(() => (playing = false));
-  }
-  function pause() {
-    playing = false;
-    video.pause();
-  }
+  // A browser can refuse to start a video; it then stays on its still frame.
+  const play = () => video.play().catch(() => {});
   function toggle() {
     paused = playing;
-    if (playing) pause();
+    if (playing) video.pause();
     else play();
   }
 
@@ -36,8 +36,9 @@
     if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const seen = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting && !paused) play();
-        else if (!entry.isIntersecting && playing) pause();
+        inView = entry.isIntersecting;
+        if (inView && !paused) play();
+        else if (!inView) video.pause();
       },
       { threshold: 0.5 }
     );
@@ -77,6 +78,10 @@
           loop
           playsinline
           preload="metadata"
+          on:play={() => (playing = true)}
+          on:pause={() => (playing = false)}
+          on:emptied={() => (playing = false)}
+          on:loadeddata={() => inView && !paused && play()}
         ></video>
         <button
           class="play"
@@ -207,12 +212,12 @@
     border-radius: var(--radius-md);
   }
 
-  /* The one control on the demo, on the frame's corner, so it never covers
-     the number. */
+  /* The one control on the demo, in the frame's top left corner: plain
+     paper, clear of the phone and of the blue arc below. */
   .play {
     position: absolute;
     left: var(--space-4);
-    bottom: var(--space-4);
+    top: var(--space-4);
     display: inline-flex;
     align-items: center;
     gap: var(--space-2);
