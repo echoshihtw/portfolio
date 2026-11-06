@@ -14,7 +14,7 @@ export const selectedWorkConfig = {
   },
   name: "Financial Runway",
   lede: "An iPhone app that counts your money in time. Designed, built and shipped alone, live on the App Store since October 2026.",
-  ledeMark: { phrase: "live on the App Store", kind: "highlight" },
+  ledeMark: { phrase: "live on the App Store", kind: "highlight" as const },
   note: "Built with AI, checked by tests and review.",
   // How it is built: one picture, then these points beside it, numbered.
   points: [
