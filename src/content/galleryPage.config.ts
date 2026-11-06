@@ -2,25 +2,28 @@
 // aboutMe.config.ts: this page is the work and nothing else.
 export const galleryConfig = {
   heading: [
-    { text: "Made by " },
-    { text: "hand", accent: true },
-    { text: "." },
+    // "Made by" stays together, so a narrow column breaks before "hand".
+    { text: "Made\u00a0by " },
+    // under her blue pen, like "learn" on the home page
+    { text: "hand.", accent: true },
   ] as { text: string; accent?: boolean }[],
 
-  // Moved here from the landing page. It reads better against the work than
-  // against a photograph of her: the second paragraph is provenance for
-  // pieces on the wall directly below it, and the first is why they exist
-  // in Florence at all.
+  // One line of provenance for the work below. Her degree and the rest of
+  // her story are on the landing page, in aboutMe.config.ts.
   story: [
-    "I have been painting since 2012, mostly at my desk or on the way somewhere, on a train or a plane. I studied Italian language and culture at Fu Jen Catholic University in Taipei, and after I finished I spent three months at Accademia del Giglio in Florence.",
+    "Since 2012, mostly at my desk or on the way somewhere. Three months at Accademia del Giglio, Florence.",
   ],
+  // how long she has painted, under her double underline
+  storyMark: { phrase: "Since 2012", kind: "double" as const },
+
+  // The one painting that opens the page, whole and unframed, so the work is
+  // the first thing seen. It is left out of the wall below. Its size is the
+  // 1024 file's, so the page keeps its place while it loads.
+  lead: { id: "seated-figure", width: 1024, height: 1513 },
 
   closing: {
     text: "The other half of this site is the software.",
+    mark: { phrase: "software", kind: "circle" as const },
     linkLabel: "Back to the work",
   },
-} as const;
-
-export const features = {
-  paintingDialog: false,
 } as const;

@@ -11,9 +11,11 @@ export const projectsConfig: Projects = [
     figure: "603",
     fact: "clients, typed in by hand by a Tainan salon owner. In use since May 2025.",
     story: [
-      "A quick CV of the client, for the two minutes before she sits down: how long since her last visit, what was done last time, any special hair situation, the curl she likes.",
+      "A record of each client for the two minutes before she sits down: last visit, last service, her hair notes.",
       "No booking, no payments. The owner didn't need them, yet. I never taught her to use it; she only comes to me when she forgets her password, or when a bug of mine stops her saving.",
     ],
+    // the hero's claim, shown by a real user
+    mark: { phrase: "I never taught her to use it", kind: "highlight" },
     href: "https://cliohq.app",
     stack: [
       "React 19",
@@ -80,7 +82,7 @@ export const projectsConfig: Projects = [
       "A goal is a number of months, not an amount of money. The question was never how much I had, it was how many months it covers",
       "Logged spending uses up its budget instead of adding to it. Monthly costs only rise when a budget is overspent, so a lunch never counts twice",
       "Runway counts from today. The rest of this month costs what's left of its budget, not a whole month that's already partly paid",
-      "The layers are separate Dart packages and can't import each other. A boundary violation is a compile error",
+      "The layers are separate Dart packages and can't import each other. A boundary violation fails CI",
       "Financial data never leaves the device. The app checks the database is actually encrypted every time it opens, instead of trusting the build settings",
     ],
     resume: {
@@ -103,6 +105,7 @@ export const projectsConfig: Projects = [
     story: [
       "I designed and built the frontend of a demo wallet for comparing Bitcoin coin-selection algorithms, the rules that decide which coins a payment spends. Built with a core maintainer of the Bitcoin Dev Kit.",
     ],
+    mark: { phrase: "a core maintainer of the Bitcoin Dev Kit", kind: "line" },
     href: "https://github.com/evanlinjin/echology",
     file: "assets/echology.png",
     fileSize: { width: 2952, height: 1996 },

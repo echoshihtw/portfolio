@@ -32,7 +32,6 @@
             paper: "var(--clio-paper)",
             ink: "var(--clio-ink)",
             number: "var(--clio-number)",
-            touch: "var(--clio-pink)",
           }}
         >
           <ClioDemo slot="lead" />

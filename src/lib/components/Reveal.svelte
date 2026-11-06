@@ -25,7 +25,15 @@
   /** Smaller and muted, for a link repeated down a list. */
   export let quiet = false;
 
+  // The site's one motion scale lives in app.css; read it rather than copy it.
+  let motionBase = 250;
   onMount(() => {
+    motionBase =
+      parseFloat(
+        getComputedStyle(document.documentElement).getPropertyValue(
+          "--motion-base"
+        )
+      ) || motionBase;
     const mq = window.matchMedia("(max-width: 767.98px)");
     const sync = () => (phone = mq.matches);
     sync();
@@ -62,7 +70,7 @@
 {:else if open && inline}
   <div
     class="inline"
-    transition:slide|local={{ duration: 220 }}
+    transition:slide|local={{ duration: motionBase }}
   >
     <slot />
   </div>

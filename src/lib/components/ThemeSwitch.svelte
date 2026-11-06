@@ -73,8 +73,8 @@
     background: var(--highlight);
     box-shadow: 0 0 0 2px color-mix(in srgb, var(--highlight) 35%, transparent);
     transition:
-      background-color var(--dur-fast) ease,
-      box-shadow var(--dur-fast) ease;
+      background-color var(--motion-short) ease,
+      box-shadow var(--motion-short) ease;
   }
 
   .theme-core::after {
@@ -89,8 +89,8 @@
     opacity: 0;
     transform: scale(0.6);
     transition:
-      opacity var(--dur-fast) ease,
-      transform var(--dur-fast) ease;
+      opacity var(--motion-short) ease,
+      transform var(--motion-short) ease;
   }
 
   .theme-input:focus-visible + .theme-label {

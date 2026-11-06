@@ -7,8 +7,12 @@ import { closingConfig } from "./portfolio.config";
 describe("closing paths", () => {
   const paths = closingConfig.paths;
 
-  it("offers a role first, then a project", () => {
-    expect(paths.map((path) => path.key)).toEqual(["role", "project"]);
+  it("offers a role first, then a contract, then a project", () => {
+    expect(paths.map((path) => path.key)).toEqual([
+      "role",
+      "contract",
+      "project",
+    ]);
   });
 
   it("gives each path its own email subject and label", () => {

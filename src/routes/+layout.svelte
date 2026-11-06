@@ -6,6 +6,7 @@
   import "$lib/generated/icons";
   import { AppShell } from "../lib/components/layout";
   import { injectAnalytics } from "@vercel/analytics/sveltekit";
+  import { PenDefs } from "$lib/pens";
 
   injectAnalytics();
 </script>
@@ -13,3 +14,5 @@
 <AppShell>
   <slot />
 </AppShell>
+
+<PenDefs />

@@ -1,50 +1,31 @@
-// Selected work: Financial Runway, plainly, then a strip of how it thinks.
-// The copy is hers.
-const APP_STORE = "https://apps.apple.com/app/id6778675088";
-
+// Selected work: Financial Runway, told as how it is built. The demo shows the
+// product; the diagram and the points show the engineering. The copy is hers.
 export const selectedWorkConfig = {
-  appStore: APP_STORE,
-  banner: {
-    src: "assets/runway/banner.webp",
+  appStore: "https://apps.apple.com/app/id6778675088",
+  // A short recording of the real app, playing on its own like a GIF:
+  // home, then one check-up. The still frame is home. Recorded by the Runway repo's
+  // assets/marketing/video/portfolio.sh.
+  demo: {
+    src: "assets/runway/demo.mp4",
+    poster: "assets/runway/demo-poster.webp",
     width: 1200,
-    height: 675,
-    alt: "Financial Runway on an iPhone: how long will your money last? 12 months of runway.",
+    height: 674,
+    label:
+      "Financial Runway on an iPhone: home reads 12 months. A check-up types this week's balance, and the runway grows to 13 months, until December 2027.",
   },
-  meta: "Financial Runway · iOS · 2026 · built solo",
-  question: "How long will your money last? One number, counted from today.",
-  price: "US$3.99",
-  priceFacts: ["no subscription", "no account, no bank login"],
-  // The headline runway uses the store screenshot's numbers. The calculator
-  // starts elsewhere, so it shows another state, not the same 12.
-  lead: { cash: "34,336", cost: "2,803" },
-  // The spending card: the store screenshot's costs (rent and fixed 1,450,
-  // subscriptions and loans 253, living budget 1,100: 2,803 a month), late
-  // in a tighter month. Cash sits just above three months, so six lunches
-  // fit the budget and the seventh, $15 over, drops it to two.
-  spend: {
-    example: "Example: end of the month",
-    cash: 8420,
-    rent: 1450,
-    subscriptions: 253,
-    living: 1100,
-    livingLeft: 90,
-    lunch: 15,
-    title: "Spending what you planned costs you nothing.",
-    body: "Your months fall only when you go over.",
-  },
-  // Her words, cut to the one line a visitor reads.
-  quote: "I built something I would use.",
-  // The two decisions a visitor can try, with the store screenshot's figures.
-  debt: {
-    cash: "$34,336",
-    owed: "$17,790",
-    title: "What you owe sits next to what you have.",
-    body: "A loan raises your cash. Without the debt beside it, the number would lie.",
-  },
-  calm: {
-    status: "Critical",
-    title: "It stays calm when money is short.",
-    body: "Soft pink, never alarm red.",
-  },
-  madeWith: "I had a picture of how it should be. AI made it happen faster.",
+  name: "Financial Runway",
+  lede: "An iPhone app that counts your money in time. Designed, built and shipped alone, live on the App Store since October 2026.",
+  ledeMark: { phrase: "live on the App Store", kind: "highlight" as const },
+  note: "Built with AI, checked by tests and review.",
+  // How it is built: one picture, then these points beside it, numbered.
+  points: [
+    {
+      title: "Layers that can't leak.",
+      body: "A pure core holds the rules. Everything else plugs in through its interfaces, and a wrong import fails CI.",
+    },
+    {
+      title: "Privacy checked, not promised.",
+      body: "The database is checked as encrypted at every open, and CI fails if the app sends an event its privacy page doesn't list.",
+    },
+  ],
 };

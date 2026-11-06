@@ -4,8 +4,10 @@
 //
 // Guardrails: facts, not noise · warmth via specificity · no clichés.
 
-// accent: the one word in her oxide red.
-type HeadlinePart = { text: string; accent?: boolean };
+// mark: the word under the hero's highlighter.
+import type { PenName } from "../lib/pens/pens.js";
+
+type HeadlinePart = { text: string; mark?: boolean };
 
 // The hero's email and the close's first door are the same door: someone
 // writing from the top of the page is asking about a role. One value, read
@@ -15,7 +17,11 @@ type HeadlinePart = { text: string; accent?: boolean };
 const ROLE_SUBJECT = "Product engineering role";
 // One address and one résumé file for every door on the page.
 const EMAIL = "echoshihtw@gmail.com";
-const RESUME = "Chun-Yu-Echo-Shih-Software-Engineer.pdf";
+// The résumé file, named for the title the site uses. The build script reads
+// it from here; vercel.json redirects the old names to it.
+export const RESUME = "Chun-Yu-Echo-Shih-Product-Engineer.pdf";
+// The one label for the résumé link, wherever it appears.
+export const RESUME_LABEL = "Résumé, PDF";
 
 export const heroConfig: {
   remoteOpen: string[];
@@ -29,33 +35,33 @@ export const heroConfig: {
   emailSubject: string;
   resume: string;
 } = {
-  // Taipei-based, so the first thing an overseas recruiter needs is the time
-  // zone and how far it stretches. Remote only: naming an on-site option
-  // invited the wrong roles. Stated as fact rather than availability:
-  // "open to" in front of it reads as asking.
-  // The title leads this line now. The site never said what role it wanted:
-  // a reader had to infer it from a résumé link. Adding the noun where
-  // someone already looks for logistics costs no space and removes the
-  // guess. "Product engineer" because it is the title these companies post
-  // and because the evidence here is scoping decisions rather than a list
-  // of layers; resume.md keeps the swap list for postings that literally
-  // say frontend.
-  // Her name first: the signature in the header is not readable as one.
-  remoteOpen: ["Echo Shih", "Product engineer", "UTC+8", "Remote from Taiwan"],
-
-  // Things she made true, not tools she touched. Each is shown lower on the
-  // page: Clio's RLS, Runway's package boundaries, Lockerbie's BFF.
-  owns: [
-    "Salon data isolated in the database",
-    "Layers that can't import each other",
-    "No credential in the browser",
+  // What a remote employer filters on first: the role, remote, the time
+  // zone, and whether she is free. Stated as facts, since "open to" reads as
+  // asking. The cover names her city, and the footer her hours. Availability
+  // stays last: the hero marks the last fact with the blue dot. Her name
+  // comes first: the signature in the header can't be read as one.
+  remoteOpen: [
+    "Echo Shih",
+    "Product engineer",
+    "Remote",
+    "UTC+8",
+    "Available now",
   ],
+
+  // Her three habits, as a quiet slogan: check before trusting, find the right
+  // level of abstraction, leave it simpler for the next person. The page
+  // below proves each one, which is what keeps it from reading as a poster.
+  owns: ["Verify", "Distill", "Simplify"],
 
   // Her own line, from the voice interview on 2026-10-19: "I make software
   // you don't have to learn."
+  // "don't" is the word the hero writes in after the cover, under the
+  // highlighter. A blue pen line runs under "learn"; the cover's dot lands on its full stop.
   headline: [
-    { text: "I make software you don't have to " },
-    { text: "learn.", accent: true },
+    { text: "I make software you " },
+    { text: "don't", mark: true },
+    { text: " have to " },
+    { text: "learn." },
   ],
 
   // "Web and app" and "end to end" are hers; "frontend first" keeps her own
@@ -81,15 +87,23 @@ export const heroConfig: {
 // a subject for each kind of message.
 export const closingConfig = {
   lead: "I like to untangle things.",
-  body: "Give me the part nobody's scoped yet and I'll work out what it should be, build it, and keep it simple enough for anyone to change.",
+  leadMark: { phrase: "untangle", kind: "circle" },
+  body: "Give me the part nobody's scoped yet and I'll work out what it should be, build it, and keep it simple enough for the next person to change.",
   email: EMAIL,
   resume: RESUME,
-  heading: "Available for a role or a project",
-  // One door, then a subject for each kind of message, so the inbox shows
-  // which one it is before the message is opened.
-  ways: "Or email",
+  // The kinds of work are the links below it, so the heading stays short.
+  heading: "Available for work now",
+  // One door: the first path is the main button, the rest are quiet links
+  // under it. Each carries its own subject, so the inbox shows which kind of
+  // message it is before it is opened.
+  ways: "or email",
+  // How a project with her starts, so a founder sees the first step before
+  // writing. Her choice on 2026-11-05: a small paid start, not a paid call.
+  projectStart:
+    "Projects start with a one-week paid scoping: a plan, a first working piece, and a fixed quote for the rest.",
   paths: [
     { key: "role", label: "about a role", subject: ROLE_SUBJECT },
+    { key: "contract", label: "about a contract", subject: "Contract work" },
     { key: "project", label: "about a project", subject: "Product project" },
   ],
 } as const;
@@ -100,22 +114,33 @@ export const closingConfig = {
 // then the stack. Written in résumé voice: implied subject, no "I".
 export const experiencePortfolio: Record<
   string,
-  { story: string; techLine: string }
+  // mark: the card's one result, under one of her pens, if it has one.
+  {
+    story: string;
+    techLine: string;
+    mark?: { phrase: string; kind: PenName };
+  }
 > = {
   "Lockerbie Technology": {
     story:
-      "Built and operated an early-stage internal platform for the UK construction sector, as one of two engineers. Brought the other to shipping independently in two months. A backend task went from a week to two days. A BFF between frontend and backend keeps every credential out of the browser.",
+      "One of two engineers on an early-stage internal platform for the UK construction sector. Brought the other to shipping independently in two months. A backend task went from a week to two days, and a deployment from a full day to five minutes, run by someone who is not an engineer. A BFF between frontend and backend keeps every credential out of the browser.",
+    mark: { phrase: "five minutes", kind: "circle" },
     techLine:
       "Next.js App Router · TanStack Query · FastAPI · ArangoDB · RabbitMQ · Docker · GHCR",
   },
   "SPIN.FASHION by Lablaco": {
     story:
       "Co-ran the team's scrum with the CTO on the in-store desktop app, remote across time zones. The macOS build couldn't ship; fixed code-signing, notarisation and auto-update, and wrote the release steps down. Built the blockchain payment checkout on a third-party provider, payment screen to API.",
+    mark: {
+      phrase: "fixed code-signing, notarisation and auto-update",
+      kind: "highlight",
+    },
     techLine: "React · Redux-Saga · Electron",
   },
   "Find Recruiter": {
     story:
       "Led frontend delivery on a recruiting and ATS platform, on a two-engineer team. Moved a production React codebase to TypeScript while it kept shipping.",
+    mark: { phrase: "while it kept shipping", kind: "line" },
     techLine:
       "React · TypeScript · Redux-Saga · Firebase · Server-Sent Events · Google Analytics · Sentry",
   },

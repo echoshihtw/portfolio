@@ -101,7 +101,7 @@
     text-decoration: none;
     color: inherit;
     border-radius: var(--radius-md);
-    transition: background-color 160ms ease;
+    transition: background-color var(--motion-short) ease;
   }
 
   .blog-list-link:hover,

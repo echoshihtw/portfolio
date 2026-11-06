@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { Doodle, Marked } from "$lib/pens";
   import { base } from "$app/paths";
   import { aboutMeConfig } from "../../../content/aboutMe.config";
   import SectionHead from "$lib/components/SectionHead.svelte";
@@ -16,7 +17,9 @@
     id="about-title"
   />
 
-  <!-- Lead and notes: her portrait, her story beside it. -->
+  <!-- Her portrait, then her line and the four parts of her story beside it.
+       The portrait takes 5 columns and the words 7, the one section where the
+       lead is the narrower side (DESIGN.md). -->
   <div class="wrap">
     <div class="portrait-slot">
       <img
@@ -30,17 +33,42 @@
     </div>
 
     <div class="text">
-      <p class="just-me">Just me.</p>
-      {#each aboutMeConfig.story as paragraph}
-        <p class="story">{paragraph}</p>
-      {/each}
+      <h3 class="headline">
+        <Marked
+          text={aboutMeConfig.headline}
+          phrase={aboutMeConfig.headlineMark.phrase}
+          kind={aboutMeConfig.headlineMark.kind}
+        />
+      </h3>
+      <dl class="parts">
+        {#each aboutMeConfig.parts as part}
+          <div>
+            <dt class="label">
+              {part.label}{#if "doodle" in part}<Doodle
+                  icon={part.doodle}
+                />{/if}
+            </dt>
+            <dd>
+              <Marked
+                text={part.text}
+                phrase={"mark" in part ? part.mark.phrase : ""}
+                kind={"mark" in part ? part.mark.kind : undefined}
+              />
+            </dd>
+          </div>
+        {/each}
+      </dl>
 
       <a
         class="link-cta"
         href="{base}{aboutMeConfig.cta.href}"
       >
         {aboutMeConfig.cta.label}
-        <span aria-hidden="true">↗</span>
+        <!-- a page on this site: her pen arrow, not the external ↗ -->
+        <Doodle
+          icon="arrow"
+          ink="currentColor"
+        />
       </a>
     </div>
   </div>
@@ -68,25 +96,45 @@
   .text {
     display: flex;
     flex-direction: column;
-    gap: var(--space-4);
+    gap: var(--space-5);
     min-width: 0;
   }
 
-  /* The section's real headline, set large: the row above only says where
-     you are. */
-  .just-me {
-    position: relative;
-    align-self: flex-start;
-    justify-self: start;
+  /* Her own line, set large: the row above only says where you are. */
+  .headline {
     margin: 0;
+    max-width: 20ch;
+    text-wrap: balance;
     font-family: var(--font-display);
     font-size: var(--text-2xl);
-    font-weight: 500;
-    line-height: 1;
-    letter-spacing: -0.035em;
+    font-weight: 600;
+    line-height: 1.12;
+    letter-spacing: -0.025em;
   }
 
-  .story {
+  /* Four parts, each a label and one idea, divided by a hairline. */
+  .parts {
+    margin: 0;
+    display: grid;
+  }
+
+  .parts div {
+    display: grid;
+    gap: var(--space-1);
+    padding: var(--space-4) 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .parts div:first-child {
+    padding-top: 0;
+    border-top: 0;
+  }
+
+  .parts dt {
+    color: var(--muted);
+  }
+
+  .parts dd {
     margin: 0;
     max-width: 58ch;
     line-height: var(--leading-body);
@@ -101,52 +149,27 @@
     border-radius: var(--radius-md);
   }
 
-  /* Capped so the picture is present without being the section. */
   .portrait-slot {
     width: 100%;
-    max-width: 20rem;
+    max-width: 26rem;
     justify-self: start;
   }
 
-  /* On a phone the heading comes first, then the portrait, then the
-     story (DESIGN.md, "On a phone"). */
+  /* On a phone the portrait comes first, then her line and the parts. */
   @media (max-width: 899.98px) {
-    /* The paragraphs join this grid here, so it takes their 16px rhythm;
-       the portrait keeps a little more room around it. */
     .wrap {
-      gap: var(--space-4);
-    }
-
-    .portrait-slot {
-      margin: var(--space-2) 0;
-    }
-
-    .text {
-      display: contents;
-    }
-
-    .just-me {
-      order: -1;
+      gap: var(--space-5);
     }
   }
 
   @media (min-width: 900px) {
     .wrap {
-      grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+      grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
       gap: var(--space-7);
     }
 
-    .portrait {
-      display: block;
-      width: 100%;
-      height: auto;
-      aspect-ratio: 4 / 5;
-      object-fit: cover;
-      border-radius: var(--radius-md);
-    }
-
     .portrait-slot {
-      max-width: 26rem;
+      max-width: none;
     }
   }
 </style>

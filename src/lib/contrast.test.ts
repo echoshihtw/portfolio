@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs";
 import { createRequire } from "node:module";
 import { describe, expect, it } from "vitest";
-import { contrastRatio } from "./contrast";
+import { contrastRatio, over } from "./contrast";
 
 const css = readFileSync("src/app.css", "utf8");
 const clio = createRequire(import.meta.url)("@echoshihtw/clio-brand/tokens.js");
@@ -12,18 +12,29 @@ function token(selector: string, name: string): string {
   const body = block.slice(0, block.indexOf("\n}"));
   const match = body.match(new RegExp(`--${name}:\\s*([^;]+);`));
   if (!match) throw new Error(`${selector} has no --${name}`);
-  const brand = match[1].match(/^var\(--clio-(\w+)\)$/);
-  return brand ? clio[brand[1]] : match[1];
+  return match[1].trim();
 }
 
-const light = (name: string) => token(":root {", name);
-const dark = (name: string) => {
+// A token's colour, following var(--x) to the same theme's token or to the
+// Clio brand.
+function resolve(get: (name: string) => string, name: string): string {
+  const value = get(name);
+  const brand = value.match(/^var\(--clio-(\w+)\)$/);
+  if (brand) return clio[brand[1]];
+  const ref = value.match(/^var\(--([\w-]+)\)$/);
+  return ref ? resolve(get, ref[1]) : value;
+}
+
+const lightRaw = (name: string) => token(":root,\n.stay-light {", name);
+const darkRaw = (name: string) => {
   try {
     return token('html[data-theme="dark"] {', name);
   } catch {
-    return light(name);
+    return lightRaw(name);
   }
 };
+const light = (name: string) => resolve(lightRaw, name);
+const dark = (name: string) => resolve(darkRaw, name);
 
 describe("contrastRatio", () => {
   it("is 21 for black on white", () => {
@@ -39,41 +50,99 @@ describe.each([
     ["ink on paper", "ink", "canvas"],
     ["ink on smoke", "ink", "smoke"],
     ["her accent on paper", "accent-text", "canvas"],
+    ["her accent on smoke", "accent-text", "smoke"],
+    ["quiet text on paper", "muted", "canvas"],
+    ["quiet text on smoke", "muted", "smoke"],
+    ["ink on a raised panel", "ink", "surface"],
+    ["quiet text on a raised panel", "muted", "surface"],
+    ["her accent on a raised panel", "accent-text", "surface"],
     ["Clio's number on paper", "clio-number", "canvas"],
   ])("%s", (_, fg, bg) => {
-    expect(contrastRatio(t(fg), t(bg))).toBeGreaterThanOrEqual(4.5);
+    expect(contrastRatio(over(t(fg), t(bg)), t(bg))).toBeGreaterThanOrEqual(
+      4.5
+    );
+  });
+});
+
+// The highlighter can be see-through, so the word is read against the
+// highlighter over the page, and against the page where the stroke misses it.
+describe.each([
+  ["light", light],
+  ["dark", dark],
+])("the highlighted word in the %s theme reads at 4.5:1", (_, t) => {
+  it("on the hero's solid stroke", () => {
+    expect(
+      contrastRatio(t("mark-solid-ink"), t("mark-solid"))
+    ).toBeGreaterThanOrEqual(4.5);
+  });
+
+  it("on the highlighter", () => {
+    const ground = over(t("mark"), t("canvas"));
+    expect(contrastRatio(t("mark-ink"), ground)).toBeGreaterThanOrEqual(4.5);
   });
 });
 
 describe("the colour bands", () => {
-  it("mint reads on Runway's indigo", () => {
+  it("runway blue reads on Runway's ink field", () => {
     expect(
-      contrastRatio(light("runway-mint"), light("runway-indigo"))
+      contrastRatio(light("runway-blue"), light("runway-field"))
     ).toBeGreaterThanOrEqual(4.5);
   });
 
-  it("paper reads on Runway's indigo", () => {
+  it("paper reads on Runway's ink field", () => {
     expect(
-      contrastRatio(light("runway-paper"), light("runway-indigo"))
+      contrastRatio(light("runway-paper"), light("runway-field"))
     ).toBeGreaterThanOrEqual(4.5);
   });
 
-  it("dark ink reads on a mint button", () => {
+  it("ink reads on a paper button", () => {
     expect(
-      contrastRatio(light("runway-ink"), light("runway-mint"))
+      contrastRatio(light("runway-ink"), light("runway-paper"))
     ).toBeGreaterThanOrEqual(4.5);
   });
 
-  it.each([["runway-gold"], ["runway-rose"]])(
-    "%s reads on Runway's indigo",
-    (name) => {
-      expect(
-        contrastRatio(light(name), light("runway-indigo"))
-      ).toBeGreaterThanOrEqual(4.5);
-    }
-  );
+  it.each([["runway-act"]])("%s reads on Runway's ink field", (name) => {
+    expect(
+      contrastRatio(light(name), light("runway-field"))
+    ).toBeGreaterThanOrEqual(4.5);
+  });
+
+  it("Clio's ink reads on Clio's paper, on its demo and card back", () => {
+    expect(contrastRatio(clio.ink, clio.paper)).toBeGreaterThanOrEqual(4.5);
+  });
 
   it("Clio's ink reads on Clio's pink", () => {
     expect(contrastRatio(clio.ink, clio.pink)).toBeGreaterThanOrEqual(4.5);
+  });
+});
+
+// The cover paints before the site's styles load, so it keeps its own copy of
+// the paper, ink and red. This keeps the copy equal to the source.
+describe("the cover's colours match the site's", () => {
+  const cover = readFileSync("static/boot-gate.css", "utf8");
+  const gate = (selector: string, name: string) => {
+    const block = cover.slice(cover.indexOf(selector));
+    const body = block.slice(0, block.indexOf("\n}"));
+    const m = body.match(new RegExp(`--gate-${name}:\\s*([^;]+);`));
+    if (!m) throw new Error(`${selector} has no --gate-${name}`);
+    const fallback = m[1].match(/^var\(--[\w-]+,\s*(#[0-9a-f]+)\)$/i);
+    return (fallback ? fallback[1] : m[1]).trim().toLowerCase();
+  };
+  // rgba(23, 20, 15, 0.62) and rgb(23 20 15 / 0.62) are the same colour.
+  const same = (c: string) =>
+    c
+      .replace(/rgba?\(|\)|,|\//g, " ")
+      .trim()
+      .split(/\s+/)
+      .join(" ");
+  it.each([
+    ["light", "#boot-gate {", light],
+    ["dark", 'html[data-theme="dark"] #boot-gate {', dark],
+  ])("in the %s theme", (_, selector, t) => {
+    expect(gate(selector, "canvas")).toBe(t("canvas").toLowerCase());
+    expect(gate(selector, "ink")).toBe(t("ink").toLowerCase());
+    expect(gate(selector, "accent")).toBe(t("accent-shape").toLowerCase());
+    expect(same(gate(selector, "muted"))).toBe(same(t("muted")));
+    expect(same(gate(selector, "border"))).toBe(same(t("border")));
   });
 });

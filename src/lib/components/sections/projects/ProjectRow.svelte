@@ -1,6 +1,16 @@
+<script
+  context="module"
+  lang="ts"
+>
+  import { writable } from "svelte/store";
+  // Which project's card is turned over, so only one is at a time.
+  const turned = writable<string | null>(null);
+</script>
+
 <script lang="ts">
+  import { Mark, Marked } from "$lib/pens";
   import { base } from "$app/paths";
-  import { tick } from "svelte";
+  import { onDestroy, tick } from "svelte";
   import Reveal from "$lib/components/Reveal.svelte";
   import type { Projects } from "$lib/types/types";
 
@@ -18,8 +28,7 @@
   export let mark: string | undefined = undefined;
   /** The product's own paper and ink for its card's back, so both sides of
       the card match. Without it the back is the site's paper. */
-  export let brand:
-    { paper: string; ink: string; number: string; touch: string } | undefined =
+  export let brand: { paper: string; ink: string; number: string } | undefined =
     undefined;
 
   // On a wide screen "Read the decisions" turns the lead object over: the
@@ -31,6 +40,13 @@
   let back: HTMLElement;
 
   $: flipped = decisionsOpen && !phone;
+  // Turning this card over turns any other back.
+  $: if (decisionsOpen && !phone) turned.set(project.name);
+  onDestroy(
+    turned.subscribe((name) => {
+      if (name !== project.name) decisionsOpen = false;
+    })
+  );
   $: if (flipped) tick().then(() => back?.focus({ preventScroll: true }));
 
   async function turnBack() {
@@ -59,11 +75,7 @@
       {project.name}
     </h3>
     {#if project.statusLine}
-      <span
-        class="label status"
-        style:--touch={brand?.touch}
-        style:--touch-ink={brand?.ink}
-      >
+      <span class="label status">
         {project.statusLine}
       </span>
     {/if}
@@ -127,62 +139,91 @@
       <p
         class="figure"
         style:--figure={brand?.number}
-        style:--touch={brand?.touch}
       >
-        {project.figure}
+        <Mark kind="line">{project.figure}</Mark>
       </p>
     {/if}
     {#if project.fact}
       <p class="fact">{project.fact}</p>
     {/if}
     {#if project.story?.length}
-      <div class="story wide">
-        {#each project.story as paragraph}
-          <p>{paragraph}</p>
+      <!-- The first paragraph says what it is, so it is always on screen. On
+           a phone the rest opens in a sheet. -->
+      <div class="story">
+        <p>
+          <Marked
+            text={project.story[0]}
+            phrase={project.mark?.phrase ?? ""}
+            kind={project.mark?.kind}
+          />
+        </p>
+        {#each project.story.slice(1) as paragraph}
+          <p class="wide">
+            <Marked
+              text={paragraph}
+              phrase={project.mark?.phrase ?? ""}
+              kind={project.mark?.kind}
+            />
+          </p>
         {/each}
       </div>
     {/if}
-    <p class="tech label">{project.stack.join(" · ")}</p>
-    {#if project.href}
-      <a
-        class="link-cta"
-        href={project.href}
-        target="_blank"
-        rel="noreferrer noopener"
-      >
-        {linkText} ↗
-      </a>
-    {/if}
-    {#if project.story?.length}
-      <div class="narrow">
-        <Reveal
-          label="Read more"
-          name={project.name}
+    <!-- Each name stays whole; lines break only between them. -->
+    <p class="tech label">
+      {#each project.stack as tool, i}<span>
+          {tool}{i < project.stack.length - 1 ? " ·" : ""}
+        </span>
+        {" "}{/each}
+    </p>
+    <!-- The ways in, together on one row that wraps between them. -->
+    <div class="actions">
+      {#if project.href}
+        <a
+          class="link-cta"
+          href={project.href}
+          target="_blank"
+          rel="noreferrer noopener"
         >
-          {#each project.story as paragraph}
-            <p class="sheet-p">{paragraph}</p>
-          {/each}
+          {linkText} ↗
+        </a>
+      {/if}
+      {#if (project.story?.length ?? 0) > 1}
+        <div class="narrow">
+          <Reveal
+            label="Read more"
+            name={project.name}
+          >
+            {#each project.story?.slice(1) ?? [] as paragraph}
+              <p class="sheet-p">
+                <Marked
+                  text={paragraph}
+                  phrase={project.mark?.phrase ?? ""}
+                  kind={project.mark?.kind}
+                />
+              </p>
+            {/each}
+          </Reveal>
+        </div>
+      {/if}
+      {#if project.highlights?.length}
+        <Reveal
+          label="Read the decisions"
+          name="{project.name} decisions"
+          inline={false}
+          openLabel="Turn it back"
+          openArrow="↺"
+          bind:open={decisionsOpen}
+          bind:phone
+        >
+          <ul class="decisions">
+            {#each project.highlights as decision}
+              <!-- prettier-ignore -->
+              <li>{#if lead(decision)}<strong>{lead(decision)}</strong> {/if}{rest(decision)}</li>
+            {/each}
+          </ul>
         </Reveal>
-      </div>
-    {/if}
-    {#if project.highlights?.length}
-      <Reveal
-        label="Read the decisions"
-        name="{project.name} decisions"
-        inline={false}
-        openLabel="Turn it back"
-        openArrow="↺"
-        bind:open={decisionsOpen}
-        bind:phone
-      >
-        <ul class="decisions">
-          {#each project.highlights as decision}
-            <!-- prettier-ignore -->
-            <li>{#if lead(decision)}<strong>{lead(decision)}</strong> {/if}{rest(decision)}</li>
-          {/each}
-        </ul>
-      </Reveal>
-    {/if}
+      {/if}
+    </div>
   </div>
 </article>
 
@@ -233,17 +274,13 @@
     line-height: 1.6;
   }
 
+  /* Said in words, like the rest of the page, not set in a pill. */
   .status {
-    align-self: flex-start;
-    padding: 0 var(--space-2);
-    border: 1px solid var(--touch, var(--border));
-    border-radius: var(--radius-pill);
-    background: var(--touch, transparent);
-    color: var(--touch-ink, var(--muted));
+    color: var(--muted);
   }
 
-  /* The proof, large, with the brand's touch as a mark under it. */
-  /* It reads as one sentence with the fact under it, so they sit close. */
+  /* The proof, large, with her pen line under it. It reads as one sentence
+     with the fact under it, so they sit close. */
   .notes .figure {
     margin-bottom: calc(var(--space-2) - var(--space-3));
     font-family: var(--font-mono);
@@ -252,11 +289,6 @@
     line-height: 1;
     letter-spacing: -0.04em;
     color: var(--figure, var(--ink));
-    text-decoration: underline;
-    text-decoration-color: var(--touch, transparent);
-    text-decoration-thickness: 0.14em;
-    text-underline-offset: -0.02em;
-    text-decoration-skip-ink: none;
   }
 
   .fact {
@@ -278,13 +310,36 @@
     align-self: flex-start;
   }
 
+  .tech span {
+    white-space: nowrap;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    /* Wide enough between wrapped lines that each link's 48px touch area
+       never covers its neighbour's. */
+    gap: var(--space-5);
+  }
+
+  .actions :global(button.reveal) {
+    margin-top: 0;
+  }
+
+  /* On a phone the "Read more" wrapper steps aside, so its link lines up
+     with the others in the row. */
+  @media (max-width: 767.98px) {
+    .actions .narrow {
+      display: contents;
+    }
+  }
+
   .frame {
     padding: 0.5rem;
-    background: #fffdf8;
+    background: var(--surface);
     border-radius: 6px;
-    box-shadow:
-      0 2px 0 rgba(0, 0, 0, 0.04),
-      0 12px 28px rgba(60, 40, 10, 0.1);
+    border: 1px solid var(--border);
   }
 
   .frame img {
@@ -295,23 +350,37 @@
     filter: grayscale(0.35);
   }
 
+  /* A screenshot cannot follow the theme, so on dark it is dimmed a little
+     instead of glaring. */
+  :global(html[data-theme="dark"]) .frame img {
+    filter: grayscale(0.35) brightness(0.85);
+  }
+
   .sheet-p {
     margin: 0;
     line-height: 1.6;
   }
 
+  /* Each decision is its claim on one line and its reason under it. The gap
+     between decisions is about twice the space between their lines, so each
+     reads as one. */
   .decisions {
     margin: 0;
     padding-left: 1.1rem;
     display: grid;
-    gap: 0.4rem;
+    gap: var(--space-4);
     max-width: 62ch;
   }
 
   .decisions li {
-    font-size: var(--text-sm);
-    line-height: 1.6;
+    font-size: var(--text-base);
+    line-height: 1.5;
     color: var(--muted);
+  }
+
+  .decisions strong {
+    display: block;
+    color: var(--ink);
   }
 
   .decisions li::marker {
@@ -338,25 +407,33 @@
   }
 
   .back {
-    --paper-ink: var(--back-ink, #1a1a1a);
+    --paper-ink: var(--back-ink, var(--ink));
+    /* the ring and links on the back take the card's own ink */
+    --primary: var(--paper-ink);
     position: absolute;
     inset: 0;
     display: flex;
     flex-direction: column;
-    gap: var(--space-3);
-    padding: 1.5rem 1.6rem 1.2rem;
+    gap: var(--space-4);
+    padding: var(--space-5);
     overflow-y: auto;
-    background: var(--back-paper, #fffdf8);
+    background: var(--back-paper, var(--surface));
     color: var(--paper-ink);
     border-radius: 10px;
-    box-shadow:
-      0 2px 0 rgba(0, 0, 0, 0.04),
-      0 12px 28px rgba(60, 40, 10, 0.12);
+    border: 1px solid var(--border);
     transform: rotateY(180deg);
   }
 
-  .back:focus {
+  /* Focus lands here when the card turns. A mouse turn shows no ring; a
+     keyboard turn shows one, so the reader can see where focus went. */
+  .back:focus:not(:focus-visible) {
     outline: none;
+  }
+
+  /* The back fills its own ground, so its ring is drawn inside, on that
+     ground, where the card's ink stands out. */
+  .back:focus-visible {
+    outline-offset: -6px;
   }
 
   .back .label {
@@ -372,7 +449,7 @@
     color: color-mix(in srgb, var(--paper-ink) 85%, transparent);
   }
 
-  /* Her orange tick, as on the rest of the page. */
+  /* A tick for each decision, quiet so the claim leads. */
   .back .decisions li::marker {
     content: "✓  ";
     color: var(--muted);
@@ -435,7 +512,7 @@
 
   @media (min-width: 768px) {
     .wide {
-      display: flex;
+      display: block;
     }
 
     .narrow {

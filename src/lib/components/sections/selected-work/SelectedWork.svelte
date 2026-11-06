@@ -1,56 +1,50 @@
 <script lang="ts">
-  import { onMount } from "svelte";
   import { base } from "$app/paths";
   import { selectedWorkConfig as c } from "../../../../content/selectedWork.config";
-  import { parseAmount, runway, spend } from "$lib/runway";
+  import { projectsConfig } from "../../../../content/projects.config";
   import SectionHead from "$lib/components/SectionHead.svelte";
+  import RunwayArchitecture from "./RunwayArchitecture.svelte";
+  import { Marked } from "$lib/pens";
+  import { onMount } from "svelte";
 
-  const today = new Date();
-  // The headline number comes from the same rules as the cards.
-  const lead = runway(
-    parseAmount(c.lead.cash),
-    parseAmount(c.lead.cost),
-    today
-  );
+  // The stack is written once, on the project's card.
+  const stack =
+    projectsConfig.find((p) => p.name === c.name)?.stack.slice(0, 5) ?? [];
 
-  const s = c.spend;
-  const plan = {
-    cash: s.cash,
-    monthly: s.rent + s.subscriptions + s.living,
-    livingLeft: s.livingLeft,
-  };
-  let spent = 0;
-  $: now = spend(plan, spent);
-  const money = (n: number) => "$" + n.toLocaleString("en");
+  // The demo plays like a GIF: on its own, silent and looping, while it is
+  // on screen. The button pauses it, and a pause is kept. With Reduce
+  // Motion it waits for the button.
+  // `playing` follows the video's own events, so the button always says
+  // what the video is really doing. When the page wakes up, the video's
+  // address is written again and it reloads, which stops it without a
+  // pause event; so a reload resets the button, and once the video is ready
+  // again it starts if it should.
+  let video: HTMLVideoElement;
+  let playing = false;
+  let paused = false;
+  let inView = false;
 
-  // A click keeps a decision on; a mouse hovering only previews it. Touch
-  // and keyboard skip the preview and go straight to the click.
-  let debtHidden = false;
-  let breathing = false;
-  let previewDebt = false;
-  let previewCalm = false;
-  const mouse = (e: PointerEvent) => e.pointerType === "mouse";
-
-  // The hints name the gesture this device has.
-  let verb = "Tap";
-  onMount(() => {
-    if (matchMedia("(hover: hover) and (pointer: fine)").matches)
-      verb = "Hover";
-  });
-
-  $: debtShown = debtHidden || previewDebt;
-  $: calmShown = breathing || previewCalm;
-
-  // Which card is in view, for the counter on narrow screens.
-  let strip: HTMLElement;
-  let at = 0;
-  const CARDS = 3;
-  function onScroll() {
-    const first = strip.firstElementChild as HTMLElement;
-    const step =
-      first.offsetWidth + parseFloat(getComputedStyle(strip).columnGap);
-    at = Math.min(CARDS - 1, Math.round(strip.scrollLeft / step));
+  // A browser can refuse to start a video; it then stays on its still frame.
+  const play = () => video.play().catch(() => {});
+  function toggle() {
+    paused = playing;
+    if (playing) video.pause();
+    else play();
   }
+
+  onMount(() => {
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const seen = new IntersectionObserver(
+      ([entry]) => {
+        inView = entry.isIntersecting;
+        if (inView && !paused) play();
+        else if (!inView) video.pause();
+      },
+      { threshold: 0.5 }
+    );
+    seen.observe(video);
+    return () => seen.disconnect();
+  });
 </script>
 
 <section
@@ -63,575 +57,324 @@
       number="01"
       title="Selected work"
       id="selected-work-title"
-    >
-      <span slot="end">Live on the App Store</span>
-    </SectionHead>
+    />
 
+    <!-- The name, the product, then the notes. On a phone the demo comes
+         straight after the name, so the product is seen before the words. -->
     <div class="lead">
-      <img
-        class="banner"
-        src="{base}/{c.banner.src}"
-        alt={c.banner.alt}
-        width={c.banner.width}
-        height={c.banner.height}
-      />
+      <h3 class="title">{c.name}</h3>
+
+      <!-- The demo plays on its own while on screen; the button pauses it. -->
+      <div class="demo">
+        <video
+          class="frame"
+          bind:this={video}
+          src="{base}/{c.demo.src}"
+          poster="{base}/{c.demo.poster}"
+          width={c.demo.width}
+          height={c.demo.height}
+          aria-label={c.demo.label}
+          muted
+          loop
+          playsinline
+          preload="metadata"
+          on:play={() => (playing = true)}
+          on:pause={() => (playing = false)}
+          on:emptied={() => (playing = false)}
+          on:loadeddata={() => inView && !paused && play()}
+        ></video>
+        <button
+          class="play"
+          type="button"
+          on:click={toggle}
+        >
+          <span
+            class="play-icon"
+            aria-hidden="true"
+          >
+            {playing ? "❚❚" : "▶"}
+          </span>
+          {playing ? "Pause the demo" : "Play the demo"}
+        </button>
+      </div>
+
       <div class="notes">
-        <p class="label meta">{c.meta}</p>
-        <!-- prettier-ignore -->
-        <p class="big">{lead.months}<span class="big-unit">months</span></p>
-        <div class="ask">
-          <h3>{c.question}</h3>
-          <p class="why">{c.quote}</p>
-        </div>
-        <div class="buy">
-          <p class="price">
-            {c.price} once
-            <!-- Each fact stays whole; lines break only between them. -->
-            {#each c.priceFacts as fact}<span class="price-note">· {fact}</span>
-              {" "}{/each}
-          </p>
+        <p class="lede">
+          <Marked
+            text={c.lede}
+            phrase={c.ledeMark.phrase}
+            kind={c.ledeMark.kind}
+          />
+        </p>
+        <!-- Each name stays whole; lines break only between them. -->
+        <p class="stack">
+          {#each stack as tool, i}<span>
+              {tool}{i < stack.length - 1 ? " ·" : ""}
+            </span>
+            {" "}{/each}
+        </p>
+        <div class="act">
           <a
-            class="btn btn-mint"
+            class="btn btn-paper"
             href={c.appStore}
             target="_blank"
             rel="noopener noreferrer"
           >
-            Try it on the App Store <span aria-hidden="true">↗</span>
+            Try it free on the App Store <span aria-hidden="true">↗</span>
           </a>
-          <p class="made">{c.madeWith}</p>
+          <p class="note">{c.note}</p>
         </div>
       </div>
     </div>
 
-    <div class="strip-head">
-      <h3 class="label">How it thinks</h3>
-      <span
-        class="label count"
-        aria-hidden="true"
-      >
-        {at + 1} / {CARDS}
-      </span>
+    <!-- How it is built: the one picture, and the points beside it. -->
+    <div class="built">
+      <h3 class="label">How it is built</h3>
+      <div class="diagram"><RunwayArchitecture /></div>
+      <ol class="points">
+        {#each c.points as point, i}
+          <li>
+            <span
+              class="num"
+              aria-hidden="true"
+            >
+              {String(i + 1).padStart(2, "0")}
+            </span>
+            <div>
+              <h4>{point.title}</h4>
+              <p>{point.body}</p>
+            </div>
+          </li>
+        {/each}
+      </ol>
     </div>
   </div>
-
-  <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
-  <section
-    class="strip"
-    aria-label="How it thinks"
-    tabindex="0"
-    bind:this={strip}
-    on:scroll={onScroll}
-  >
-    <div class="item">
-      <div class="focal">
-        <p class="example">{s.example}</p>
-        <dl class="ledger">
-          <div>
-            <dt>Rent & bills</dt>
-            <dd>{money(s.rent + s.subscriptions)}</dd>
-          </div>
-          <div class="living">
-            <dt>Left to spend</dt>
-            <dd>{money(now.livingLeft)}</dd>
-          </div>
-        </dl>
-        <!-- prettier-ignore -->
-        <div class="spend-line" class:critical={now.months < 3} aria-live="polite"><span class="spend-months">{now.months}</span> months</div>
-        <!-- One button that changes its job, so focus stays on it. -->
-        <button
-          class="log"
-          on:click={() => (spent = now.over ? 0 : spent + s.lunch)}
-        >
-          {now.over ? "Start over" : `Log a ${money(s.lunch)} lunch`}
-        </button>
-      </div>
-      <h4>{s.title}</h4>
-      <p>{s.body}</p>
-    </div>
-
-    <div class="item">
-      <button
-        class="tap"
-        aria-describedby="debt-hint"
-        aria-pressed={debtHidden}
-        on:click={() => (debtHidden = !debtHidden)}
-        on:pointerenter={(e) => (previewDebt = mouse(e))}
-        on:pointerleave={() => (previewDebt = false)}
-      >
-        <span
-          class="pair"
-          class:solo={debtShown}
-        >
-          <span class="cash">
-            <span class="label">Cash</span>
-            {c.debt.cash}
-          </span>
-          <span class="owed">
-            <span class="label">Owed</span>
-            {c.debt.owed}
-          </span>
-        </span>
-        <span
-          id="debt-hint"
-          class="hint"
-          aria-hidden="true"
-        >
-          {debtHidden
-            ? "You look richer than you are"
-            : previewDebt
-              ? "Click to keep it hidden"
-              : `${verb} to hide the debt`}
-        </span>
-      </button>
-      <h4>{c.debt.title}</h4>
-      <p>{c.debt.body}</p>
-    </div>
-
-    <div class="item">
-      <button
-        class="tap"
-        aria-describedby="calm-hint"
-        aria-pressed={breathing}
-        on:click={() => (breathing = !breathing)}
-        on:pointerenter={(e) => (previewCalm = mouse(e))}
-        on:pointerleave={() => (previewCalm = false)}
-      >
-        <span
-          class="badge"
-          class:on={calmShown}
-        >
-          <i aria-hidden="true"></i>
-          {c.calm.status}
-        </span>
-        <span
-          id="calm-hint"
-          class="hint"
-          aria-hidden="true"
-        >
-          {breathing
-            ? "A resting heartbeat, never faster"
-            : previewCalm
-              ? "Click to keep it breathing"
-              : `${verb} to see it breathe`}
-        </span>
-      </button>
-      <h4>{c.calm.title}</h4>
-      <p>{c.calm.body}</p>
-    </div>
-  </section>
 </section>
 
 <style>
   .runway {
-    background: var(--runway-indigo);
+    background: var(--runway-field);
     color: var(--runway-paper);
     --ink: var(--runway-paper);
-    --muted: color-mix(in srgb, var(--runway-paper) 72%, transparent);
-    --border: color-mix(in srgb, var(--runway-paper) 25%, transparent);
-    padding-left: 0;
-    padding-right: 0;
+    --muted: color-mix(in srgb, var(--runway-paper) 68%, transparent);
+    --hairline: color-mix(in srgb, var(--runway-paper) 18%, transparent);
+    /* Focus rings and link hovers are paper here: ink would vanish on the
+       band. */
+    --primary: var(--runway-paper);
+    /* On the dark band the highlighter is see-through and the word stays
+       paper, as in the dark theme. */
+    --mark: rgb(255 225 77 / 0.3);
+    --mark-ink: var(--runway-paper);
+    --mark-blend: normal;
+    --mark-alpha: 0.3;
   }
 
   .inner {
     max-width: var(--content-max);
     margin: 0 auto;
-    padding: 0 var(--space-4);
   }
 
-  /* The row's own margin collapses into this one, so the sum is spelled out
-     to match the 40px every other section has under its row. */
+  /* Phone: name, demo, notes. Wide: the name across the top, the demo
+     beside the notes under it. */
   .lead {
     margin-top: calc(var(--space-4) + var(--space-5));
     display: grid;
     gap: var(--space-5);
+    grid-template-areas:
+      "title"
+      "demo"
+      "notes";
   }
 
-  .banner {
+  .title {
+    grid-area: title;
+    margin: 0;
+    font-size: var(--text-3xl);
+    font-weight: 600;
+    line-height: 0.95;
+    letter-spacing: -0.045em;
+  }
+
+  .demo {
+    grid-area: demo;
+    position: relative;
+  }
+
+  .notes {
+    grid-area: notes;
+  }
+
+  .frame {
+    display: block;
     width: 100%;
     height: auto;
+    object-fit: cover;
     border-radius: var(--radius-md);
   }
 
-  .notes > * {
-    margin: 0 0 var(--space-3);
-  }
-
-  .meta {
-    color: var(--muted);
-  }
-
-  .big {
-    font-family: var(--font-mono);
-    font-weight: 600;
-    font-size: clamp(5rem, 14vw, 10rem);
-    line-height: 0.9;
-    letter-spacing: -0.05em;
-    color: var(--runway-mint);
-  }
-
-  .big-unit {
-    margin-left: 0.4em;
-    font-size: 0.2em;
-    letter-spacing: 0;
-  }
-
-  h3 {
-    font-size: var(--text-xl);
-    line-height: 1.2;
-    letter-spacing: -0.02em;
-  }
-
-  .why,
-  .price-note {
-    color: var(--muted);
-  }
-
-  .price {
-    font-size: var(--text-lg);
-    font-weight: 600;
-  }
-
-  .price-note {
-    font-size: var(--text-sm);
-    font-weight: 400;
-    white-space: nowrap;
-  }
-
-  .btn-mint {
-    background: var(--runway-mint);
-    color: var(--runway-ink);
-    border-color: var(--runway-mint);
-  }
-
-  .strip-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    margin: var(--space-7) 0 var(--space-3);
-  }
-
-  .strip-head h3 {
-    margin: 0;
-    font-size: inherit;
-    color: var(--ink);
-  }
-
-  .count {
-    min-width: 3.5em;
-    text-align: right;
-    color: var(--muted);
-  }
-
-  /* Native sideways scroll, snapping card by card. The scrollbar is hidden;
-     the peeking next card and the counter say there is more. */
-  .strip {
-    display: flex;
-    gap: var(--space-3);
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scrollbar-width: none;
-    padding: 0 var(--space-4) var(--space-3);
-    scroll-padding: 0 var(--space-4);
-  }
-
-  .strip::-webkit-scrollbar {
-    display: none;
-  }
-
-  .strip:focus-visible {
-    outline: 2px solid var(--runway-mint);
-    outline-offset: 4px;
-  }
-
-  /* One frame for every card: the focal point on top, then a heading and
-     one line. About four things to take in, never more. */
-  .item {
-    --focal-h: 12rem;
-    flex: 0 0 auto;
-    display: flex;
-    flex-direction: column;
-    width: 16.5rem;
-    min-height: 18rem;
-    padding: var(--space-4);
-    border-radius: 14px;
-    /* An outline, not a fill: Runway's gold and rose only reach 4.5:1 on
-       the band itself. */
-    border: 1px solid var(--border);
-    scroll-snap-align: start;
-  }
-
-  .item h4 {
-    margin: var(--space-4) 0 var(--space-1);
-    font-size: var(--text-lg);
-    line-height: 1.3;
-  }
-
-  .item p {
-    margin: 0;
-    color: var(--muted);
-  }
-
-  /* A fixed focal area, so every card's visual and heading line up. */
-  .tap {
-    all: unset;
-    flex: none;
-    height: var(--focal-h);
-    display: grid;
-    place-content: center;
-    justify-items: center;
-    gap: var(--space-2);
-    border-radius: var(--radius-md);
-    cursor: pointer;
-  }
-
-  /* Only the cards you can play with answer the mouse. */
-  @media (hover: hover) and (pointer: fine) {
-    .item:has(button) {
-      transition: border-color var(--motion-medium, 350ms);
-    }
-
-    .item:has(button:hover) {
-      border-color: color-mix(in srgb, var(--runway-paper) 55%, transparent);
-    }
-  }
-
-  .tap:focus-visible {
-    outline: 2px solid var(--runway-mint);
-    outline-offset: 4px;
-  }
-
-  .hint {
-    font-family: var(--font-mono);
-    font-size: var(--text-xs, 0.72rem);
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
-
-  .pair {
-    display: flex;
-    gap: var(--space-2);
-  }
-
-  .pair > span {
-    display: grid;
-    gap: var(--space-1);
-    padding: var(--space-2) var(--space-3);
-    border-radius: var(--radius-md);
-    border: 1px solid var(--border);
-    font-family: var(--font-mono);
-    font-size: var(--text-lg);
-    font-weight: 600;
-  }
-
-  .cash {
-    color: var(--runway-mint);
-  }
-
-  .owed {
-    color: var(--runway-gold);
-    transition:
-      opacity var(--motion-medium, 350ms),
-      transform var(--motion-medium, 350ms);
-  }
-
-  .pair.solo .owed {
-    opacity: 0;
-    transform: translateX(var(--space-2));
-  }
-
-  .pair .label {
-    font-size: 0.65rem;
-    color: var(--muted);
-  }
-
-  .badge {
+  /* The one control on the demo, in the frame's top left corner: plain
+     paper, clear of the phone and of the blue arc below. */
+  .play {
+    position: absolute;
+    left: var(--space-4);
+    top: var(--space-4);
     display: inline-flex;
     align-items: center;
     gap: var(--space-2);
-    padding: var(--space-2) var(--space-4);
-    border-radius: var(--radius-pill);
-    border: 1px solid var(--runway-rose);
-    color: var(--runway-rose);
-    font-family: var(--font-mono);
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-
-  .badge i {
-    width: 0.8rem;
-    height: 0.8rem;
-    border-radius: var(--radius-pill);
-    background: var(--runway-rose);
-  }
-
-  /* Runway's own tempo: a resting heartbeat, and only after a tap. */
-  .badge.on i {
-    animation: breathe 2.8s ease-in-out infinite;
-  }
-
-  @keyframes breathe {
-    50% {
-      box-shadow: 0 0 0 0.7rem
-        color-mix(in srgb, var(--runway-rose) 0%, transparent);
-    }
-    0%,
-    100% {
-      box-shadow: 0 0 0 0
-        color-mix(in srgb, var(--runway-rose) 55%, transparent);
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .badge.on i {
-      animation: none;
-      box-shadow: 0 0 0 0.35rem
-        color-mix(in srgb, var(--runway-rose) 30%, transparent);
-    }
-  }
-
-  .ask .why {
-    margin-top: var(--space-1);
-  }
-
-  .buy {
-    display: grid;
-    justify-items: start;
-    gap: var(--space-2);
-    margin-top: var(--space-4);
-  }
-
-  .buy .price {
-    margin: 0;
-  }
-
-  .made {
-    margin: 0;
-    font-size: var(--text-sm);
-    color: var(--muted);
-  }
-
-  /* The spending card: rent and bills, what is left to live on, and
-     the months, which hold still until the living budget runs out. */
-  .focal {
-    display: grid;
-    align-content: center;
-    justify-items: center;
-    gap: var(--space-2);
-    height: var(--focal-h);
-  }
-
-  .example {
-    margin: 0;
-    font-family: var(--font-mono);
-    font-size: var(--text-xs, 0.72rem);
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
-
-  /* Read like a receipt: label left, amount right, one row each. */
-  .ledger {
-    display: grid;
-    gap: var(--space-1);
-    width: 100%;
-    margin: 0;
-    font-family: var(--font-mono);
-  }
-
-  .ledger div {
-    display: flex;
-    justify-content: space-between;
-    gap: var(--space-3);
-    padding-bottom: var(--space-1);
-    border-bottom: 1px solid var(--border);
-    color: var(--muted);
-  }
-
-  .ledger dt {
-    font-size: var(--text-sm);
-  }
-
-  .ledger dd {
-    margin: 0;
-    font-weight: 600;
-  }
-
-  .ledger .living {
-    color: var(--runway-mint);
-  }
-
-  .spend-line {
-    font-family: var(--font-mono);
-    color: var(--runway-mint);
-  }
-
-  /* Runway turns critical under three months, in the same rose. */
-  .spend-line.critical {
-    color: var(--runway-rose);
-  }
-
-  .spend-months {
-    font-size: 2.75rem;
-    line-height: 1;
-    font-weight: 600;
-  }
-
-  .log {
-    padding: var(--space-1) var(--space-3);
-    border: 1px solid var(--runway-mint);
-    border-radius: var(--radius-pill);
-    background: none;
-    color: var(--runway-mint);
-    font-family: var(--font-mono);
-    font-size: var(--text-sm);
+    min-height: 44px;
+    padding: 0 var(--space-4);
+    border: 0;
+    border-radius: 999px;
+    background: var(--runway-ink);
+    color: var(--runway-paper);
+    font: inherit;
     cursor: pointer;
   }
 
-  .log:hover {
-    background: color-mix(in srgb, var(--runway-mint) 14%, transparent);
-  }
-
-  .log:focus-visible {
-    outline: 2px solid var(--runway-mint);
+  /* On the demo's cream picture the ring is the band's ink; under the picture,
+     on the band itself, it is the band's paper. */
+  .play:focus-visible {
+    outline: 2px solid var(--runway-ink);
     outline-offset: 3px;
   }
 
-  @media (min-width: 640px) {
-    .inner {
-      padding: 0 var(--space-6);
+  .play-icon {
+    font-size: 0.8em;
+  }
+
+  /* On a narrow frame the corner is the phone itself, so it sits underneath. */
+  @media (max-width: 600px) {
+    .play:focus-visible {
+      outline-color: var(--runway-paper);
     }
 
-    .strip {
-      padding: 0 var(--space-6) var(--space-3);
-      scroll-padding: 0 var(--space-6);
+    .play {
+      position: static;
+      margin-top: var(--space-3);
+      /* on the band it needs its own edge */
+      border: 1px solid color-mix(in srgb, var(--runway-paper) 55%, transparent);
     }
+  }
+
+  .notes > * {
+    margin: 0 0 var(--space-4);
+  }
+
+  .lede {
+    font-size: var(--text-lg);
+    line-height: 1.45;
+  }
+
+  .stack {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--muted);
+  }
+
+  .stack span {
+    white-space: nowrap;
+  }
+
+  .act {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3) var(--space-5);
+  }
+
+  .btn-paper {
+    background: var(--runway-paper);
+    color: var(--runway-ink);
+    border-color: var(--runway-paper);
+  }
+
+  .note {
+    margin: 0;
+    font-size: var(--text-sm);
+    color: var(--muted);
+  }
+
+  /* A hairline, the label, then the diagram and the points. No boxes: the
+     lines and the space do the grouping. */
+  .built {
+    margin-top: var(--space-7);
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--hairline);
+    display: grid;
+    gap: var(--space-5);
+  }
+
+  .built .label {
+    margin: 0;
+    color: var(--muted);
+  }
+
+  .diagram {
+    display: grid;
+    place-items: center;
+  }
+
+  .points {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    align-content: start;
+  }
+
+  .points li {
+    display: grid;
+    grid-template-columns: 2.5rem 1fr;
+    padding: var(--space-5) 0;
+    border-top: 1px solid var(--hairline);
+  }
+
+  .points li:first-child {
+    padding-top: 0;
+    border-top: 0;
+  }
+
+  .num {
+    padding-top: 0.35em;
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--runway-blue);
+  }
+
+  .points h4 {
+    margin: 0 0 var(--space-1);
+    font-size: var(--text-xl);
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+  }
+
+  .points p {
+    margin: 0;
+    color: var(--muted);
   }
 
   @media (min-width: 900px) {
     .lead {
       grid-template-columns: 7fr 5fr;
-      gap: var(--space-7);
+      grid-template-areas:
+        "title title"
+        "demo notes";
+      column-gap: var(--space-7);
+      row-gap: var(--space-6);
       align-items: center;
     }
 
-    /* All three fit, so nothing scrolls and nothing counts. */
-    .strip {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      overflow: visible;
-      max-width: var(--content-max);
-      margin: 0 auto;
-      padding: 0 var(--space-6);
+    .notes > :last-child {
+      margin-bottom: 0;
     }
 
-    .item {
-      width: auto;
+    .built {
+      grid-template-columns: 7fr 5fr;
+      column-gap: var(--space-7);
     }
 
-    .count {
-      display: none;
+    .built .label {
+      grid-column: 1 / -1;
     }
   }
 </style>

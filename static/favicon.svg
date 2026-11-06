@@ -24,7 +24,7 @@
        C 19 46, 31 49, 42 43"
     transform="translate(2 2)"
     fill="none"
-    stroke="#3155d9"
+    stroke="#17140f"
     stroke-width="5.5"
     stroke-linecap="round"
     stroke-linejoin="round"
@@ -46,6 +46,6 @@
     cx="48"
     cy="47"
     r="3.75"
-    fill="#f15a3a"
+    fill="#c9921f"
   />
 </svg>
