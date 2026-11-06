@@ -113,6 +113,8 @@ along the text, breaking only where the line does.
 - **Doodles are rare:** a blue pen star by How I work, a light bulb by With AI,
   and an arrow to the full history in the résumé, in `pens.ts`. Each means
   something; none decorates.
+- **Link icons:** ↗ means another site or a new tab; her pen arrow means a
+  page on this site.
 - **Hand-drawn marks on clean type,** never a handwriting face.
 - **Runway and Clio keep their own colours** inside their demos; her pen underlines Clio's 603, as it marks every other proof.
 - **Each mark draws once,** as its section scrolls into view: the highlighter is

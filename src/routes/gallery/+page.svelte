@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Mark } from "$lib/pens";
+  import { Doodle, Mark, Marked } from "$lib/pens";
   import { base } from "$app/paths";
   import Seo from "$lib/components/Seo.svelte";
   import PaintingWall from "$lib/components/sections/paintings/PaintingWall.svelte";
@@ -33,7 +33,13 @@
       <!-- prettier-ignore -->
       <h1>{#each galleryConfig.heading as part}{#if part.accent}<Mark kind="line">{part.text}</Mark>{:else}{part.text}{/if}{/each}</h1>
       {#each galleryConfig.story as paragraph}
-        <p class="intro">{paragraph}</p>
+        <p class="intro">
+          <Marked
+            text={paragraph}
+            phrase={galleryConfig.storyMark.phrase}
+            kind={galleryConfig.storyMark.kind}
+          />
+        </p>
       {/each}
     </div>
     {#if leadWork}
@@ -60,18 +66,23 @@
   </section>
 
   <section class="section_padding closing">
-    <p>{galleryConfig.closing.text}</p>
+    <p>
+      <Marked
+        text={galleryConfig.closing.text}
+        phrase={galleryConfig.closing.mark.phrase}
+        kind={galleryConfig.closing.mark.kind}
+      />
+    </p>
     <a
       class="btn btn-ink"
       href="{base}/"
     >
       {galleryConfig.closing.linkLabel}
-      <span
-        class="cta-arrow"
-        aria-hidden="true"
-      >
-        ↗
-      </span>
+      <!-- her pen arrow, in the button's own colour -->
+      <Doodle
+        icon="arrow"
+        ink="currentColor"
+      />
     </a>
   </section>
 </div>

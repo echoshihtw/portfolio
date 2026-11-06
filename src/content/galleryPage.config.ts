@@ -13,6 +13,8 @@ export const galleryConfig = {
   story: [
     "Since 2012, mostly at my desk or on the way somewhere. Three months at Accademia del Giglio, Florence.",
   ],
+  // how long she has painted, under her double underline
+  storyMark: { phrase: "Since 2012", kind: "double" as const },
 
   // The one painting that opens the page, whole and unframed, so the work is
   // the first thing seen. It is left out of the wall below. Its size is the
@@ -21,6 +23,7 @@ export const galleryConfig = {
 
   closing: {
     text: "The other half of this site is the software.",
+    mark: { phrase: "software", kind: "circle" as const },
     linkLabel: "Back to the work",
   },
 } as const;

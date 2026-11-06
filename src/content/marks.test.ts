@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { aboutMeConfig } from "./aboutMe.config";
+import { galleryConfig } from "./galleryPage.config";
 import { closingConfig, experiencePortfolio } from "./portfolio.config";
 import { projectsConfig } from "./projects.config";
 import { selectedWorkConfig } from "./selectedWork.config";
@@ -18,6 +19,16 @@ const marks: [string, string, string][] = [
     aboutMeConfig.headlineMark.phrase,
   ],
   ["Contact's lead", closingConfig.lead, closingConfig.leadMark.phrase],
+  [
+    "Gallery story",
+    galleryConfig.story.join(" "),
+    galleryConfig.storyMark.phrase,
+  ],
+  [
+    "Gallery close",
+    galleryConfig.closing.text,
+    galleryConfig.closing.mark.phrase,
+  ],
   ...aboutMeConfig.parts.flatMap((p): [string, string, string][] =>
     "mark" in p ? [[p.label, p.text, p.mark.phrase]] : []
   ),

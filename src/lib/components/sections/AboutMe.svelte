@@ -64,7 +64,11 @@
         href="{base}{aboutMeConfig.cta.href}"
       >
         {aboutMeConfig.cta.label}
-        <span aria-hidden="true">↗</span>
+        <!-- a page on this site: her pen arrow, not the external ↗ -->
+        <Doodle
+          icon="arrow"
+          ink="currentColor"
+        />
       </a>
     </div>
   </div>
