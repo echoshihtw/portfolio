@@ -151,8 +151,10 @@ then the demo beside the notes. "How it is built" is a hairline, the
 architecture diagram, and numbered points beside it, with no boxes. The diagram
 is the section's one picture, drawn from the packages' real dependencies and
 named without counts, so it stays true between releases. A screen reader hears it
-described once as a whole, not box by box. The demo plays only
-on a tap.
+described once as a whole, not box by box. The demo plays like a GIF: on its
+own, silent and looping, while it is on screen, and it stops when it scrolls
+away. One button pauses and plays it, and a pause is kept. With Reduce Motion
+it waits on its still frame until the button is pressed.
 
 ## More projects
 
@@ -194,7 +196,8 @@ list. The footer carries what the list above names, on every page.
 
 ## Motion
 
-Nothing moves on its own. Things move only when someone acts: the header steps
+Nothing moves on its own, except Runway's demo, which shows the product
+working. Everything else moves only when someone acts: the header steps
 aside on a scroll down, a sheet rises, a card turns. Every duration and curve
 comes from one scale in `app.css`, `--motion-short` to `--motion-long` with
 `--motion-enter` and `--motion-exit`. Reduced motion swaps every movement for an

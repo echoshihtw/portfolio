@@ -5,22 +5,45 @@
   import SectionHead from "$lib/components/SectionHead.svelte";
   import RunwayArchitecture from "./RunwayArchitecture.svelte";
   import { Marked } from "$lib/pens";
+  import { onMount } from "svelte";
 
   // The stack is written once, on the project's card.
   const stack =
     projectsConfig.find((p) => p.name === c.name)?.stack.slice(0, 5) ?? [];
 
+  // The demo plays like a GIF: on its own, silent and looping, while it is
+  // on screen. The button pauses it, and a pause is kept. With Reduce
+  // Motion it waits for the button.
   let video: HTMLVideoElement;
   let playing = false;
-  function playDemo() {
+  let paused = false;
+
+  function play() {
     playing = true;
-    video.play();
+    video.play().catch(() => (playing = false));
   }
-  function stopDemo() {
+  function pause() {
     playing = false;
     video.pause();
-    video.load(); // back to the still frame
   }
+  function toggle() {
+    paused = playing;
+    if (playing) pause();
+    else play();
+  }
+
+  onMount(() => {
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const seen = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !paused) play();
+        else if (!entry.isIntersecting && playing) pause();
+      },
+      { threshold: 0.5 }
+    );
+    seen.observe(video);
+    return () => seen.disconnect();
+  });
 </script>
 
 <section
@@ -40,7 +63,7 @@
     <div class="lead">
       <h3 class="title">{c.name}</h3>
 
-      <!-- The demo plays only when asked, and returns to its still frame. -->
+      <!-- The demo plays on its own while on screen; the button pauses it. -->
       <div class="demo">
         <video
           class="frame"
@@ -51,22 +74,22 @@
           height={c.demo.height}
           aria-label={c.demo.label}
           muted
+          loop
           playsinline
-          preload="none"
-          on:ended={stopDemo}
+          preload="metadata"
         ></video>
         <button
           class="play"
           type="button"
-          on:click={playing ? stopDemo : playDemo}
+          on:click={toggle}
         >
           <span
             class="play-icon"
             aria-hidden="true"
           >
-            {playing ? "■" : "▶"}
+            {playing ? "❚❚" : "▶"}
           </span>
-          {playing ? "Stop the demo" : "Watch it work"}
+          {playing ? "Pause the demo" : "Play the demo"}
         </button>
       </div>
 
