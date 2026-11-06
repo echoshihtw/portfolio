@@ -38,8 +38,15 @@ export const heroConfig: {
   // What a remote employer filters on first: the role, remote, the time
   // zone, and whether she is free. Stated as facts, since "open to" reads as
   // asking. The cover names her city, and the footer her hours. Availability
-  // stays last: the hero marks the last fact with the blue dot.
-  remoteOpen: ["Product engineer", "Remote", "UTC+8", "Available now"],
+  // stays last: the hero marks the last fact with the blue dot. Her name
+  // comes first: the signature in the header can't be read as one.
+  remoteOpen: [
+    "Echo Shih",
+    "Product engineer",
+    "Remote",
+    "UTC+8",
+    "Available now",
+  ],
 
   // Her three habits, as a quiet slogan: check before trusting, find the right
   // level of abstraction, leave it simpler for the next person. The page

@@ -146,6 +146,12 @@
     color: var(--muted);
   }
 
+  /* Her name first, in ink: who, then four facts about her work. */
+  .hero-facts li:first-child {
+    color: var(--ink);
+    font-weight: 500;
+  }
+
   /* The last fact is that she is available: the one a reader acts on, so it
      carries the blue of the pen. */
   .hero-facts li:last-child::before {

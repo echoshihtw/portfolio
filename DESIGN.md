@@ -57,7 +57,9 @@ so a rewrite keeps the fact.
   and country, and one Enter button. Nothing else, and it fits any
   screen without scrolling.
 - **Hero** (`portfolio.config.ts`, `heroConfig`): one screen. Her facts on one
-  line: her role, remote, her time zone, and that she is available now, marked
+  line: her name in ink, since the header's signature can't be read as one,
+  then quietly her role,
+  remote, her time zone, and that she is available now, marked
   with a blue dot. Then the claim, large, with "don't" under the highlighter and
   a wavy blue pen line under "learn"; the full stop is ink. Then "Email me" (a
   role subject) and "Résumé, PDF" as text links with a highlighter line under

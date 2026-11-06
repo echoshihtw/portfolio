@@ -318,7 +318,9 @@
     display: flex;
     flex-wrap: wrap;
     align-items: baseline;
-    gap: var(--space-3) var(--space-5);
+    /* Wide enough between wrapped lines that each link's 48px touch area
+       never covers its neighbour's. */
+    gap: var(--space-5);
   }
 
   .actions :global(button.reveal) {
