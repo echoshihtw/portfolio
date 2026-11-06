@@ -80,6 +80,7 @@ export const heroConfig: {
 // a subject for each kind of message.
 export const closingConfig = {
   lead: "I like to untangle things.",
+  leadMark: { phrase: "untangle", kind: "circle" },
   body: "Give me the part nobody's scoped yet and I'll work out what it should be, build it, and keep it simple enough for the next person to change.",
   email: EMAIL,
   resume: RESUME,

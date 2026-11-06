@@ -16,6 +16,7 @@ export const aboutMeConfig = {
   // her words; the parts are cut to one idea each, under a label, so a
   // skimming reader can jump to the one they want.
   headline: "Bad design annoys me, so I write software that doesn't.",
+  headlineMark: { phrase: "annoys", kind: "line" },
   parts: [
     {
       label: "Background",

@@ -36,8 +36,8 @@
       <h3 class="headline">
         <Marked
           text={aboutMeConfig.headline}
-          phrase="annoys"
-          kind="line"
+          phrase={aboutMeConfig.headlineMark.phrase}
+          kind={aboutMeConfig.headlineMark.kind}
         />
       </h3>
       <dl class="parts">

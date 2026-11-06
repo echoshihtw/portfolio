@@ -74,7 +74,8 @@
         <p class="lede">
           <Marked
             text={c.lede}
-            phrase="live on the App Store"
+            phrase={c.ledeMark.phrase}
+            kind={c.ledeMark.kind}
           />
         </p>
         <!-- Each name stays whole; lines break only between them. -->

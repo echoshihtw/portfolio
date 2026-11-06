@@ -32,8 +32,8 @@
       <p class="lead">
         <Marked
           text={closingConfig.lead}
-          phrase="untangle"
-          kind="circle"
+          phrase={closingConfig.leadMark.phrase}
+          kind={closingConfig.leadMark.kind}
         />
       </p>
       <p class="body">{closingConfig.body}</p>
