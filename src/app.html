@@ -48,9 +48,10 @@
     <script>
       (() => {
         const key = "echo-theme";
-        // Start new visitors on paper, the light theme, and remember either
-        // choice. The saved preference wins over the OS preference.
-        let theme = "light";
+        // The one place the first theme is chosen: a choice the visitor made
+        // with the switch, or else the dark theme, where the hero is at its
+        // best.
+        let theme = "dark";
 
         try {
           const savedTheme = localStorage.getItem(key);
@@ -58,7 +59,7 @@
             theme = savedTheme;
           }
         } catch (_error) {
-          theme = "light";
+          // No storage: the dark theme stands.
         }
 
         document.documentElement.dataset.theme = theme;
@@ -100,7 +101,7 @@
       aria-label="Portfolio introduction"
     >
       <div class="gate-masthead">
-        <p>PORTFOLIO / 2026</p>
+        <p>PORTFOLIO</p>
         <div class="gate-theme-switch">
           <input
             type="checkbox"
@@ -132,7 +133,7 @@
         </p>
 
         <div class="gate-lower">
-          <p class="gate-role">Product Engineer · Taipei</p>
+          <p class="gate-role">Product engineer · Taipei, Taiwan</p>
           <button
             type="button"
             class="gate-enter"

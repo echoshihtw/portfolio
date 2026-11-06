@@ -1,9 +1,22 @@
 <script lang="ts">
+  import { Doodle, Mark, Marked } from "$lib/pens";
   import { base } from "$app/paths";
   import Seo from "$lib/components/Seo.svelte";
   import PaintingWall from "$lib/components/sections/paintings/PaintingWall.svelte";
-  import Signature from "$lib/components/Signature.svelte";
   import { galleryConfig } from "../../content/galleryPage.config";
+  import {
+    derivativeName,
+    paintingsConfig,
+    WIDTHS,
+  } from "../../content/paintings.config";
+
+  const lead = galleryConfig.lead;
+  const leadWork = paintingsConfig.find((work) => work.id === lead.id);
+  const leadSrc = (width: number) =>
+    `${base}/assets/paintings/${derivativeName(lead.id, width)}`;
+  const leadDetails = [leadWork?.place, leadWork?.year]
+    .filter(Boolean)
+    .join(", ");
 </script>
 
 <Seo
@@ -12,35 +25,64 @@
   path="/gallery"
 />
 
-<div class="gallery-page">
+<div class="gallery-page stay-light">
+  <!-- The words on one side and one painting, whole and unframed, on the
+       other, so the work is the first thing seen. -->
   <section class="story section_padding">
-    <!-- prettier-ignore -->
-    <h1>{#each galleryConfig.heading as part}<span class:accent={part.accent} data-text={part.accent ? part.text : undefined}>{part.text}</span>{/each}</h1>
-    {#each galleryConfig.story as paragraph}
-      <p class="intro">{paragraph}</p>
-    {/each}
-    <div class="signed">
-      <Signature />
+    <div class="words">
+      <!-- prettier-ignore -->
+      <h1>{#each galleryConfig.heading as part}{#if part.accent}<Mark kind="line">{part.text}</Mark>{:else}{part.text}{/if}{/each}</h1>
+      {#each galleryConfig.story as paragraph}
+        <p class="intro">
+          <Marked
+            text={paragraph}
+            phrase={galleryConfig.storyMark.phrase}
+            kind={galleryConfig.storyMark.kind}
+          />
+        </p>
+      {/each}
     </div>
+    {#if leadWork}
+      <figure class="lead">
+        <img
+          src={leadSrc(WIDTHS[1])}
+          srcset="{leadSrc(WIDTHS[0])} {WIDTHS[0]}w, {leadSrc(
+            WIDTHS[1]
+          )} {WIDTHS[1]}w"
+          sizes="(min-width: 900px) 50vw, 100vw"
+          alt={leadWork.alt}
+          width={lead.width}
+          height={lead.height}
+        />
+        <figcaption>
+          {leadWork.medium}{#if leadDetails}<span>{leadDetails}</span>{/if}
+        </figcaption>
+      </figure>
+    {/if}
   </section>
 
   <section class="section_padding">
-    <PaintingWall />
+    <PaintingWall skip={lead.id} />
   </section>
 
   <section class="section_padding closing">
-    <p>{galleryConfig.closing.text}</p>
+    <p>
+      <Marked
+        text={galleryConfig.closing.text}
+        phrase={galleryConfig.closing.mark.phrase}
+        kind={galleryConfig.closing.mark.kind}
+      />
+    </p>
     <a
       class="btn btn-ink"
       href="{base}/"
     >
       {galleryConfig.closing.linkLabel}
-      <span
-        class="cta-arrow"
-        aria-hidden="true"
-      >
-        ↗
-      </span>
+      <!-- her pen arrow, in the button's own colour -->
+      <Doodle
+        icon="arrow"
+        ink="currentColor"
+      />
     </a>
   </section>
 </div>
@@ -54,21 +96,10 @@
      toggle still works: it changes the header, nav and footer around this
      page. It does not take the paintings with it.
 
-     The tokens are redeclared rather than overridden one by one, so
-     everything inside, including the wall, inherits the cream set without
-     knowing anything about the theme. */
+     It wears app.css's light set (.stay-light), so everything inside,
+     including the wall, takes the light colours without knowing about the
+     theme. */
   .gallery-page {
-    --canvas: #f3f0e8;
-    --ink: #171714;
-    --surface: #faf8f2;
-    --border: rgb(23 23 20 / 0.18);
-    --border-strong: #171714;
-    --muted: rgb(23 23 20 / 0.62);
-    --primary: #3155d9;
-    --primary-ink: #ffffff;
-    --accent: #f15a3a;
-    --accent-text: #dc4a2b;
-
     background-color: var(--canvas);
     color: var(--ink);
     /* A faint plaster grain, well below where it reads as texture. It only
@@ -90,6 +121,62 @@
     gap: 0.9rem;
   }
 
+  /* Phone: the words, then the painting. Wide: the words beside it. */
+  .story {
+    display: grid;
+    gap: var(--space-5);
+    align-items: center;
+  }
+
+  .words {
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  .lead {
+    margin: 0;
+  }
+
+  /* Whole, at its own proportions, never cropped: a tall painting gets
+     narrower rather than taller than the screen. */
+  .lead img {
+    display: block;
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    /* never taller than the screen, so it is seen whole on a phone held
+       sideways too */
+    max-height: calc(100svh - 4rem);
+    border-radius: 4px;
+  }
+
+  .lead figcaption {
+    display: flex;
+    gap: var(--space-3);
+    margin-top: var(--space-3);
+    font-size: var(--text-sm);
+  }
+
+  .lead figcaption span {
+    color: var(--muted);
+  }
+
+  @media (min-width: 900px) {
+    .story {
+      grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+      column-gap: var(--space-7);
+    }
+
+    .lead {
+      justify-self: center;
+    }
+
+    /* the header, the page's top space and the caption all fit too */
+    .lead img {
+      max-height: calc(100svh - 16rem);
+    }
+  }
+
   .intro {
     margin: 0;
     font-size: 1rem;
@@ -103,17 +190,10 @@
     font-size: var(--text-3xl);
     line-height: var(--leading-tight);
     letter-spacing: -0.03em;
-    text-wrap: balance;
-  }
-
-  /* The same treatment the home page gives its headline, so the two pages
-     read as one site: the key word in orange-red. */
-  .gallery-page h1 .accent {
-    color: var(--accent-text);
   }
 
   /* No rule above this. The page is soft paper and framed work, so a
-     crisp 1px line before the signature was the one hard edge on it. */
+     crisp 1px line here would be the one hard edge on it. */
   .closing {
     display: flex;
     flex-wrap: wrap;
@@ -124,32 +204,5 @@
   .closing p {
     margin: 0;
     font-size: 1.02rem;
-  }
-
-  .signed {
-    display: flex;
-    justify-content: flex-end;
-    width: 100%;
-    max-width: 56ch;
-    padding-top: 0.35rem;
-  }
-
-  .signed :global(.signature) {
-    width: 10rem;
-    transform: rotate(-4deg);
-    transform-origin: center;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .gallery-page h1 .accent:hover,
-    .gallery-page h1 .accent:hover::before,
-    .gallery-page h1 .accent:hover::after {
-      animation: none;
-    }
-
-    .gallery-page h1 .accent:hover::before,
-    .gallery-page h1 .accent:hover::after {
-      content: none;
-    }
   }
 </style>

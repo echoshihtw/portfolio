@@ -3,7 +3,10 @@ import { pathToFileURL } from "url";
 import path from "path";
 import { execFileSync } from "child_process";
 import { projectsConfig } from "../src/content/projects.config.js";
-import { experiencePortfolio } from "../src/content/portfolio.config.js";
+import {
+  experiencePortfolio,
+  RESUME as RESUME_FILENAME,
+} from "../src/content/portfolio.config.js";
 import { resumeSkillLines } from "../src/content/skills.config.js";
 
 const ROOT = process.cwd();
@@ -12,7 +15,6 @@ const OUTPUT_DIR = path.join(ROOT, "output");
 const BUILD_MD = path.join(OUTPUT_DIR, "resume.build.md");
 const RESUME_DATA_PATH = path.join(ROOT, "src/lib/resumeData.ts");
 // Must match `resume` in portfolio.config.ts and the redirect in vercel.json.
-const RESUME_FILENAME = "Chun-Yu-Echo-Shih-Software-Engineer.pdf";
 
 /*
 --------------------------------------------------

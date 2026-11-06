@@ -1,211 +1,267 @@
 <script lang="ts">
   import { base } from "$app/paths";
-  import { heroConfig } from "../../../../content/portfolio.config";
+  import {
+    RESUME_LABEL,
+    heroConfig,
+  } from "../../../../content/portfolio.config";
   import { mailtoWithSubject } from "$lib/contactLinks";
   import { trackEmail, trackResume } from "$lib/analytics";
+  import { onMount, tick } from "svelte";
+  import { Mark } from "$lib/pens";
+
+  // The headline in three parts: the words before "don't", "don't", and the
+  // words after it, each its own span so it can slide when "don't" arrives.
+  const at = heroConfig.headline.findIndex((p) => p.mark);
+  const before = heroConfig.headline.slice(0, at);
+  const mark = heroConfig.headline[at];
+  const after = heroConfig.headline
+    .slice(at + 1)
+    .flatMap((p) => p.text.trim().split(" "))
+    .map((text) => ({ text }));
+  const sentence = heroConfig.headline.map((p) => p.text).join("");
+
+  // The hero's one move, once, after the cover: a still beat, the caret
+  // blinks where "don't" goes, "don't" arrives as the words after it slide
+  // to their new places, then the highlighter sweeps behind it. Without the
+  // cover, or with Reduce Motion, the sentence is simply there.
+  let state: "done" | "waiting" | "caret" | "in" = "done";
+  // The highlighter sweeps just after "don't" arrives; the pen draws once
+  // the highlighter has finished. Both read the motion scale on mount.
+  $: drawn = state === "in" || state === "done";
+  let sweepDelay = 0;
+  let penDelay = 0;
+  let words: HTMLElement[] = [];
+
+  onMount(() => {
+    const cover = document.getElementById("boot-gate");
+    if (!cover || matchMedia("(prefers-reduced-motion: reduce)").matches)
+      return;
+    state = "waiting";
+    const root = getComputedStyle(document.documentElement);
+    const ms = (name: string) => parseFloat(root.getPropertyValue(name));
+    sweepDelay = ms("--motion-short");
+    penDelay = sweepDelay + ms("--motion-long");
+    const play = () => {
+      setTimeout(() => (state = "caret"), ms("--motion-medium"));
+      setTimeout(insert, ms("--motion-medium") + ms("--motion-long"));
+    };
+    document.addEventListener("cover:gone", play, { once: true });
+    return () => document.removeEventListener("cover:gone", play);
+  });
+
+  // Words move by transform only: measure, let "don't" in, then slide each
+  // word from where it was to where it now sits.
+  async function insert() {
+    const was = words.map((w) => w.getBoundingClientRect());
+    state = "in";
+    await tick();
+    words.forEach((w, i) => {
+      const now = w.getBoundingClientRect();
+      w.animate(
+        [
+          {
+            transform: `translate(${was[i].left - now.left}px, ${was[i].top - now.top}px)`,
+          },
+          { transform: "none" },
+        ],
+        {
+          duration: parseFloat(
+            getComputedStyle(w).getPropertyValue("--motion-base")
+          ),
+          easing: getComputedStyle(w).getPropertyValue("--motion-enter"),
+        }
+      );
+    });
+  }
 </script>
 
-<!-- The claim on the left, her Jakarta sketch printed into the paper on the
-     right and faded on every edge, so it reads as drawn on the page rather
-     than placed on it. -->
+<!-- One screen, centred: her facts, the claim large, the two links, then
+     what she does and her slogan, quiet. -->
 <section
   id="home"
   class="hero section_padding"
 >
-  <img
-    class="print"
-    src="{base}/assets/paintings/jakarta-1024.jpg"
-    alt=""
-    aria-hidden="true"
-    width="1024"
-    height="698"
-  />
-
   <div class="hero-grid">
-    <!-- Each fact stays whole; lines break only between them. -->
-    <p class="label hero-where">
-      {#each heroConfig.remoteOpen as fact, i}<span class="fact">
-          {fact}{i < heroConfig.remoteOpen.length - 1 ? " ·" : ""}
-        </span>
-        {" "}{/each}
-    </p>
-
-    <h1 class="hero-headline">
-      <!-- prettier-ignore -->
-      {#each heroConfig.headline as part}<span class:accent={part.accent}>{part.text}</span>{/each}
-    </h1>
-
-    {#each heroConfig.support as line}
-      <p class="hero-support">{line}</p>
-    {/each}
-
-    <ul class="hero-owns">
-      {#each heroConfig.owns as layer}
-        <li>{layer}</li>
-      {/each}
+    <ul class="hero-facts">
+      {#each heroConfig.remoteOpen as fact}<li>{fact}</li>{/each}
     </ul>
+
+    <!-- Screen readers hear the whole sentence once, never the edit. -->
+    <h1
+      class="hero-headline"
+      aria-label={sentence}
+      data-state={state}
+    >
+      <!-- prettier-ignore -->
+      <span aria-hidden="true">{#each before as part}{part.text.trimEnd()}{/each}<span class="caret"></span>{" "}<span class="insert"><Mark {drawn} delay={sweepDelay}>{mark.text}</Mark></span>{#each after as word, i}{" "}<span class="word" bind:this={words[i]}>{#if i === after.length - 1 && word.text.endsWith(".")}<Mark kind="wavy" {drawn} delay={penDelay}>{word.text.slice(0, -1)}</Mark><span class="stop">.</span>{:else}{word.text}{/if}</span>{/each}</span>
+    </h1>
 
     <div class="hero-links">
       <a
-        class="btn btn-ink"
         href={mailtoWithSubject(heroConfig.email, heroConfig.emailSubject)}
         on:click={() => trackEmail("hero")}
       >
         Email me
       </a>
       <a
-        class="btn btn-line"
         href="{base}/{heroConfig.resume}"
         download
         on:click={() => trackResume("hero")}
       >
-        Résumé, PDF
+        {RESUME_LABEL}
       </a>
+    </div>
+
+    <!-- What she does and her slogan, small and quiet under the links. -->
+    <div class="hero-quiet">
+      {#each heroConfig.support as line}
+        <p>{line}</p>
+      {/each}
+      <p>{heroConfig.owns.join(", ")}.</p>
     </div>
   </div>
 </section>
 
 <style>
-  .hero {
-    position: relative;
-    overflow: hidden;
-  }
-
-  /* Lifted so the dense rows of seats sit beside the headline, in empty
-     paper, and the words below it stay on clean ground. Phones leave it
-     out: the hero there is already full. */
-  .print {
-    display: none;
-    position: absolute;
-    right: -3rem;
-    top: -11rem;
-    width: min(66vw, 60rem);
-    height: auto;
-    object-fit: cover;
-    mix-blend-mode: var(--print-blend);
-    opacity: var(--print-opacity);
-    filter: var(--print-filter);
-    -webkit-mask-image: radial-gradient(
-      ellipse closest-side at 62% 50%,
-      #000 25%,
-      rgba(0, 0, 0, 0.4) 55%,
-      transparent 100%
-    );
-    mask-image: radial-gradient(
-      ellipse closest-side at 62% 50%,
-      #000 25%,
-      rgba(0, 0, 0, 0.4) 55%,
-      transparent 100%
-    );
-    pointer-events: none;
-  }
-
   .hero-grid {
-    position: relative;
     display: grid;
-    grid-template-columns: minmax(0, 1fr);
     gap: var(--space-5);
     width: 100%;
-    /* The content width every section has inside its padding. */
     max-width: calc(var(--content-max) - 2 * var(--space-6));
     margin: 0 auto;
   }
 
-  .hero-where {
+  .hero-grid p {
     margin: 0;
   }
 
-  .hero-where .fact {
-    white-space: nowrap;
+  /* Each fact its own item, so none splits across lines. */
+  .hero-facts {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-1) var(--space-5);
+    color: var(--muted);
+  }
+
+  /* Her name first, in ink: who, then four facts about her work. */
+  .hero-facts li:first-child {
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  /* The last fact is that she is available: the one a reader acts on, so it
+     carries the blue of the pen. */
+  .hero-facts li:last-child::before {
+    content: "";
+    display: inline-block;
+    width: 0.5em;
+    height: 0.5em;
+    margin-right: 0.5em;
+    border-radius: 50%;
+    background: var(--accent-shape);
   }
 
   .hero-headline {
     margin: 0;
-    font-size: clamp(2.9rem, 9vw, 7rem);
+    font-size: clamp(2.75rem, 8.4vw, 8.5rem);
     font-weight: 600;
-    line-height: 0.98;
-    letter-spacing: -0.045em;
-    max-width: 12ch;
+    line-height: 1.02;
+    letter-spacing: -0.035em;
+    max-width: 13ch;
   }
 
-  .hero-headline .accent {
-    color: var(--accent-text);
+  .word {
+    display: inline-block;
   }
 
-  .hero-support {
-    margin: 0;
-    max-width: 34ch;
-    font-size: var(--text-lg);
-    line-height: 1.5;
+  /* The hero's stroke is solid in both themes: "don't" is one short word
+     the stroke always covers. Longer marks elsewhere can be see-through. */
+  .hero-headline {
+    --mark: var(--mark-solid);
+    --mark-ink: var(--mark-solid-ink);
   }
 
-  .hero-owns {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-1);
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    font-size: var(--text-sm);
-    line-height: 1.5;
+  /* "don't", before it arrives, takes no room; then it fades in as the words
+     after it slide over. */
+  .insert {
+    display: inline-block;
+    white-space: nowrap;
   }
 
-  .hero-owns li {
-    border-top: 1px solid var(--border);
-    padding-top: var(--space-1);
+  [data-state="waiting"] .insert,
+  [data-state="caret"] .insert {
+    display: none;
+  }
+
+  [data-state="in"] .insert {
+    animation: arrive var(--motion-base) var(--motion-enter) backwards;
+  }
+
+  @keyframes arrive {
+    from {
+      opacity: 0;
+    }
+  }
+
+  /* The caret takes no room, so the line reads with normal spacing. */
+  .caret {
+    display: inline-block;
+    width: 0.07em;
+    height: 0.82em;
+    margin: 0 -0.13em 0 0.06em;
+    vertical-align: -0.04em;
+    background: var(--accent-text);
+    opacity: 0;
+  }
+
+  [data-state="caret"] .caret {
+    animation: blink var(--motion-long) steps(1) 1;
+  }
+
+  @keyframes blink {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
   }
 
   .hero-links {
     display: flex;
-    flex-direction: column;
-    gap: var(--space-3);
+    flex-wrap: wrap;
+    gap: 0 var(--space-5);
   }
 
-  .hero-links .btn {
-    justify-content: center;
+  /* A highlighter line under each link, which fills behind it on hover. */
+  .hero-links a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    font-size: var(--text-lg);
+    font-weight: 500;
+    color: var(--ink);
+    text-decoration: none;
+    background: linear-gradient(var(--mark), var(--mark)) 0 calc(100% - 8px) /
+      100% 2px no-repeat;
+    transition:
+      background-size var(--motion-short) var(--motion-enter),
+      color var(--motion-short) var(--motion-enter);
   }
 
-  @media (min-width: 768px) {
-    .print {
-      display: block;
-    }
+  .hero-links a:hover {
+    background-size: 100% calc(100% - 16px);
+    color: var(--mark-ink);
   }
 
-  /* Three columns need 1024px: below it the list of what she owns wraps,
-     and one fact must never split across lines. */
-  @media (min-width: 1024px) {
-    .hero {
-      padding-top: calc(var(--section-y) * 1.4);
-      padding-bottom: calc(var(--section-y) * 1.2);
-    }
-
-    .hero-grid {
-      grid-template-columns: repeat(12, minmax(0, 1fr));
-      column-gap: var(--space-5);
-      row-gap: var(--space-7);
-      align-items: start;
-    }
-
-    .hero-where,
-    .hero-headline {
-      grid-column: 1 / -1;
-    }
-
-    .hero-headline {
-      max-width: 13ch;
-    }
-
-    .hero-support {
-      grid-column: 1 / span 5;
-    }
-
-    .hero-owns {
-      grid-column: 6 / span 4;
-    }
-
-    .hero-links {
-      grid-column: 10 / span 3;
-      align-items: flex-end;
-    }
+  .hero-quiet {
+    display: grid;
+    gap: var(--space-1);
+    max-width: 40ch;
+    color: var(--muted);
   }
 </style>

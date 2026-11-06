@@ -58,3 +58,10 @@ Agents should:
 - update automation scripts instead of editing generated files by hand
 - preserve existing architecture unless explicitly asked to redesign
 - check every visual change against `DESIGN.md`: one lead object, about four chunks per block, and every colour with a job
+
+## Scenarios
+
+- doc: DESIGN.md
+- set: SCENARIOS.md
+- areas: first visit and cover, headhunters, CTOs, remote-first companies, developer-tools teams (like Vercel), phone and sideways, dark theme, keyboard and screen reader, gallery, contact
+- mockup: none

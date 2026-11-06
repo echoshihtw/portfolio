@@ -31,40 +31,26 @@ function applyTheme(nextTheme) {
   document.documentElement.classList.toggle("dark", nextTheme === DARK);
 }
 
+// app.html chooses the first theme before the page paints; this reads it.
 export function initializeTheme() {
   if (typeof window === "undefined") {
     return;
   }
-
-  /** @type {string} */
-  let nextTheme = LIGHT;
-  try {
-    const stored = localStorage.getItem(THEME_KEY);
-    if (stored === LIGHT || stored === DARK) {
-      nextTheme = stored;
-    }
-  } catch {
-    // Ignore localStorage read failures.
-  }
-
-  theme.set(nextTheme);
-  applyTheme(nextTheme);
+  theme.set(resolveInitialTheme());
 }
 
+// Only a flip of the switch is remembered, so until then the site opens in
+// the dark theme.
 export function toggleTheme() {
-  theme.update((current) => (current === DARK ? LIGHT : DARK));
+  theme.update((current) => {
+    const next = current === DARK ? LIGHT : DARK;
+    try {
+      localStorage.setItem(THEME_KEY, next);
+    } catch {
+      // Ignore localStorage write failures.
+    }
+    return next;
+  });
 }
 
-theme.subscribe((value) => {
-  applyTheme(value);
-
-  if (typeof window === "undefined") {
-    return;
-  }
-
-  try {
-    localStorage.setItem(THEME_KEY, value);
-  } catch {
-    // Ignore localStorage write failures.
-  }
-});
+theme.subscribe(applyTheme);

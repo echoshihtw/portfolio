@@ -17,7 +17,10 @@
   const AVAILABILITY = [
     "Available remote",
     "Taiwan, UTC+8",
-    "APAC hours or async",
+    // Her overlap: Europe's mornings, or async. US meetings happen now and
+    // then by arrangement, and are left off so the page promises only what
+    // lasts.
+    "Europe mornings or async",
   ];
 
   const year = new Date().getFullYear();
@@ -61,7 +64,8 @@
     } catch {
       // Ignore storage failures, the gate just won't replay.
     }
-    location.reload();
+    // The cover belongs to the home page, so replaying it goes there.
+    location.href = `${base}/`;
   }
 </script>
 
@@ -262,7 +266,7 @@
        rhythm stays 28px. */
     padding: 0.2rem 0;
     margin-bottom: 0.1rem;
-    transition: color var(--dur-fast) ease;
+    transition: color var(--motion-short) ease;
   }
 
   .footer-nav a:hover {
@@ -332,8 +336,8 @@
     font-size: 1.1rem;
     color: var(--muted);
     transition:
-      color var(--dur-fast) ease,
-      border-color var(--dur-fast) ease;
+      color var(--motion-short) ease,
+      border-color var(--motion-short) ease;
   }
 
   .footer-top:hover,
@@ -346,7 +350,8 @@
     width: 7px;
     height: 7px;
     border-radius: 50%;
-    background: var(--status-live);
+    /* muted, so the blue stays the page's one accent */
+    background: var(--muted);
   }
 
   /* A quiet utility link, not a CTA: same size/weight as the surrounding

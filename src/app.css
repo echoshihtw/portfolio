@@ -38,44 +38,49 @@
   size-adjust: 104.76%;
 }
 
-:root {
-  /* Colour, from her paintings: off-white paper, green-black ink, oxide red
-     for one word. Runway's indigo and mint are its own; Clio's colours come
-     from @echoshihtw/clio-brand. */
-  --canvas: #fbfaf7;
-  --smoke: #efefec;
-  --ink: #0a150f;
-  --surface: #ffffff;
-  --runway-indigo: #262c4c;
-  --runway-mint: #8fddaa;
-  /* Runway's debt gold and critical rose, from its design_system tokens. */
-  --runway-gold: #cb9a3e;
-  --runway-rose: #e8829e;
+/* The light set. The gallery wears it in both themes (.stay-light), so
+   its paintings sit on a lit wall even when the rest of the page is dark. */
+:root,
+.stay-light {
+  /* Colour, from her paintings: warm paper, brown-black ink, a blue pen for the
+     accent, and a yellow highlighter. Runway's colours are its own, from the app's tokens.json;
+     Clio's come from @echoshihtw/clio-brand. */
+  --canvas: #f6f1e6;
+  --smoke: #ece5d6;
+  --ink: #17140f;
+  --surface: #fbf8f1;
+  /* Runway's band is the app's ink, with its dark-theme runway blue and act. */
+  --runway-field: #1b2638;
+  --runway-blue: #9db2e0;
+  --runway-act: #ed7023;
   /* Runway's band keeps its own text colours in both themes. */
-  --runway-paper: #f2efe8;
-  --runway-ink: #0a150f;
+  --runway-paper: #f5f0e6;
+  --runway-ink: #1b2638;
   --clio-number: var(--clio-ink);
-  --border: rgb(23 23 20 / 0.18);
+  --border: rgb(23 20 15 / 0.18);
   --border-strong: var(--ink);
-  --muted: rgb(23 23 20 / 0.62);
-  --primary: #3155d9;
-  --primary-ink: #ffffff;
-  --accent: #f15a3a;
-  /* The ink that goes on an accent fill. A literal, and the same one in both
-     themes on purpose: --primary-ink flips white to near-black between them,
-     but the accent fill is light in both, so its text has to be dark in
-     both. 5.4:1 on the light theme's fill, 7.2:1 on the dark theme's. */
-  --accent-ink: #171714;
-  /* The same orange for type. #f15a3a is a fill colour: on cream it is
-     2.9:1, under the 3:1 that large text needs, so words take this one. */
-  --accent-text: #8d391e;
-  --highlight: #f2c94c;
-  --status-live: #4f6e4a;
-  /* How her ink prints sit in the page. On paper they multiply into it; on
-     the ink theme they turn to chalk lines instead. */
-  --print-blend: multiply;
-  --print-filter: saturate(1.3) contrast(1.3);
-  --print-opacity: 0.24;
+  --muted: rgb(23 20 15 / 0.62);
+  /* Controls are ink: one accent on the page, and it is the blue pen. */
+  --primary: var(--ink);
+  --primary-ink: var(--canvas);
+  /* Her blue pen: the one accent. The deep blue is for words (5.2:1 on the
+     paper); the brighter blue is for marks only, like the pen line under
+     "learn" and the cover's full stop (3.8:1). */
+  --accent-text: #2f5bd3;
+  /* The one dark for shadows and the sheet's backdrop, the same in both
+     themes; each use is a mix of it. */
+  --shade: #14100a;
+  --accent-shape: #3d6be0;
+  --highlight: var(--accent-shape); /* the theme switch's sun is her blue */
+  /* The highlighter: yellow on paper, as a real one is. Only behind the
+     hero's "don't" and under a link on hover, always with ink on it. */
+  --mark: #ffe14d;
+  --mark-ink: #17140f;
+  --mark-blend: multiply; /* ink on paper soaks in */
+  --mark-alpha: 1; /* how solid any highlighter ink is on this ground */
+  /* The hero's one word under a solid stroke, in either theme. */
+  --mark-solid: var(--mark);
+  --mark-solid-ink: var(--mark-ink);
 
   /* Legacy names, aliased. Older rules read these three; nothing new
      should, and the five nothing read at all are gone. */
@@ -124,40 +129,42 @@
   /* Border. Thin and dark, never a shadow. */
   --border-w: 1px;
 
-  /* Motion. Short, one easing, and nothing loops. */
-  --dur-fast: 140ms;
-  --dur-base: 220ms;
-  --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
-
-  /* The site's moving parts, on Material 3's motion scale. Things arrive
-     slowing down and leave speeding up, and leaving is always quicker. */
+  /* Motion: one scale for the whole site, on Material 3's steps. Things
+     arrive slowing down and leave speeding up, and leaving is quicker. The
+     cover (static/boot-gate.*) reads these too. Nothing loops. */
+  --motion-short: 150ms; /* hovers, a press, the cover leaving */
+  --motion-base: 250ms; /* a sheet or a detail opening, words arriving */
+  --motion-medium: 350ms; /* the header stepping aside */
+  --motion-long: 450ms; /* a card turning, the cover's dot travelling */
   --motion-enter: cubic-bezier(0.05, 0.7, 0.1, 1);
   --motion-exit: cubic-bezier(0.3, 0, 0.8, 0.15);
-  --motion-medium: 350ms;
-  --motion-long: 500ms;
 }
 
-/* The ink theme. Same system, the ground and the ink swap, and blue and
-   orange come up a step so they clear contrast on dark. No other rule in
+/* The ink theme. Same system, the ground and the ink swap, the blue pen turns
+   lighter and the highlighter mint, so both clear contrast on dark. No other rule in
    the site mentions the theme. */
 html[data-theme="dark"] {
-  /* Charcoal, no colour cast: light mode's paper and smoke, inverted. */
-  --canvas: #131312;
-  --smoke: #232321;
-  --ink: #f0eee8;
-  --surface: #232321;
-  --clio-number: #f0eee8;
-  --border: rgb(243 240 232 / 0.2);
-  --muted: rgb(243 240 232 / 0.66);
-  --primary: #8aa1f2;
-  --primary-ink: #171714;
-  --accent: #f6836a;
-  --accent-text: #e07a4f;
-  --highlight: #f2c94c;
-  --status-live: #a8b5a2;
-  --print-blend: screen;
-  --print-filter: invert(1) contrast(1.2);
-  --print-opacity: 0.16;
+  /* Warm charcoal: light mode's paper and smoke, inverted. */
+  --canvas: #15130f;
+  --smoke: #211d17;
+  --ink: #f1ebdf;
+  --surface: #211d17;
+  --clio-number: var(--ink);
+  --border: rgb(241 235 223 / 0.2);
+  --muted: rgb(241 235 223 / 0.66);
+  --primary: var(--ink);
+  --primary-ink: var(--canvas);
+  --accent-text: #8fb0ff;
+  --accent-shape: #7f9ef5;
+  --highlight: var(--accent-shape);
+  /* On a dark ground the highlighter is see-through and the word keeps its
+     own light ink, so a letter the stroke misses still reads. */
+  --mark: rgb(184 242 140 / 0.3);
+  --mark-ink: var(--ink);
+  --mark-blend: normal;
+  --mark-alpha: 0.3;
+  --mark-solid: #b8f28c;
+  --mark-solid-ink: var(--canvas);
 }
 
 /* ==========================================================================
@@ -191,8 +198,8 @@ body {
   background: var(--canvas);
   color: var(--ink);
   transition:
-    background-color var(--dur-base) ease,
-    color var(--dur-base) ease;
+    background-color var(--motion-base) ease,
+    color var(--motion-base) ease;
 }
 
 /* Paper grain. A fixed overlay well below where it reads as texture; it
@@ -235,9 +242,9 @@ a {
 a,
 button {
   transition:
-    color var(--dur-fast) ease,
-    border-color var(--dur-fast) ease,
-    background-color var(--dur-fast) ease;
+    color var(--motion-short) ease,
+    border-color var(--motion-short) ease,
+    background-color var(--motion-short) ease;
 }
 
 a:focus-visible,
@@ -366,9 +373,9 @@ canvas {
   white-space: nowrap;
   cursor: pointer;
   transition:
-    transform var(--dur-fast) ease,
-    background-color var(--dur-fast) ease,
-    border-color var(--dur-fast) ease;
+    transform var(--motion-short) ease,
+    background-color var(--motion-short) ease,
+    border-color var(--motion-short) ease;
 }
 
 .btn:hover,
@@ -383,7 +390,7 @@ canvas {
   background: color-mix(in srgb, var(--primary-ink) 12%, var(--primary));
 }
 
-/* The ink variant: for a page whose one button should not be blue. */
+/* The main button: ink, so the blue stays the page's one accent. */
 .btn-ink {
   border-color: var(--ink);
   background: var(--ink);
@@ -394,24 +401,6 @@ canvas {
 .btn-ink:focus-visible {
   background: color-mix(in srgb, var(--canvas) 8%, var(--ink));
   border-color: color-mix(in srgb, var(--canvas) 8%, var(--ink));
-}
-
-/* The accent variant: for a button that names a different path from the one
-   blue means. Mirrors .btn-ink's steps exactly, so the two behave alike. */
-.btn-accent {
-  border-color: var(--accent);
-  background: var(--accent);
-  color: var(--accent-ink);
-}
-
-.btn-accent:hover,
-.btn-accent:focus-visible {
-  background: color-mix(in srgb, var(--accent-ink) 8%, var(--accent));
-  border-color: color-mix(in srgb, var(--accent-ink) 8%, var(--accent));
-}
-
-.btn-accent:active {
-  background: color-mix(in srgb, var(--accent-ink) 12%, var(--accent));
 }
 
 .btn-ink:active {
@@ -451,8 +440,8 @@ canvas {
   white-space: nowrap;
   cursor: pointer;
   transition:
-    color var(--dur-fast) ease,
-    border-color var(--dur-fast) ease;
+    color var(--motion-short) ease,
+    border-color var(--motion-short) ease;
 }
 
 /* The touch target, invisible: 48px tall around a 20px link. */
@@ -484,9 +473,9 @@ canvas {
   color: var(--ink);
   cursor: pointer;
   transition:
-    border-color var(--dur-fast) ease,
-    color var(--dur-fast) ease,
-    background-color var(--dur-fast) ease;
+    border-color var(--motion-short) ease,
+    color var(--motion-short) ease,
+    background-color var(--motion-short) ease;
 }
 
 .chip::after {
@@ -516,7 +505,7 @@ canvas {
 /* The arrow inside any of them nudges the way it points. */
 .cta-arrow {
   display: inline-block;
-  transition: transform var(--dur-fast) ease;
+  transition: transform var(--motion-short) ease;
 }
 
 .btn:hover .cta-arrow,

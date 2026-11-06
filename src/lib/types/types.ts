@@ -1,3 +1,5 @@
+import type { PenName } from "../pens/pens.js";
+
 interface Project {
   name: string;
   /** The mono line beside the name, e.g. "In daily use · early access". */
@@ -8,6 +10,8 @@ interface Project {
   fact?: string;
   /** The short notes. On a phone they open in a sheet. */
   story?: string[];
+  /** the card's one result, under one of her pens */
+  mark?: { phrase: string; kind: PenName };
   /** Optional: not every project has somewhere to send a reader. */
   href?: string;
   stack: string[];
