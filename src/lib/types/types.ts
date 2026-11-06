@@ -1,4 +1,4 @@
-import type { PenName } from "$lib/pens/pens";
+import type { PenName } from "../pens/pens.js";
 
 interface Project {
   name: string;

@@ -5,7 +5,7 @@
 // Guardrails: facts, not noise · warmth via specificity · no clichés.
 
 // mark: the word under the hero's highlighter.
-import type { PenName } from "../lib/pens/pens";
+import type { PenName } from "../lib/pens/pens.js";
 
 type HeadlinePart = { text: string; mark?: boolean };
 

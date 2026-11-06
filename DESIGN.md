@@ -111,7 +111,8 @@ along the text, breaking only where the line does.
 - **One mark on the proof,** at most, in a card or a part, and only where there
   is a result to mark. No mark is better than a mark on a summary.
 - **Doodles are rare:** a blue pen star by How I work, a light bulb by With AI,
-  and an arrow to the full history in the résumé, in `pens.ts`. Each means
+  and her pen arrow on links to her own pages and to the full history in the
+  résumé, in `pens.ts`. Each means
   something; none decorates.
 - **Link icons:** ↗ means another site or a new tab; her pen arrow means a
   page on this site.
