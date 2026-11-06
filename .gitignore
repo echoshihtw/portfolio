@@ -38,3 +38,6 @@ vite.config.ts.timestamp-*
 # Playwright: browser-test output, regenerated on every run.
 /test-results/
 /playwright-report/
+
+# Editor settings stay on each machine.
+.idea/
