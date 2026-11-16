@@ -1,5 +1,4 @@
 import { describe, expect, it } from "vitest";
-import { aboutMeConfig } from "./aboutMe.config";
 import { runwayCaseStudy as cs } from "./runwayCaseStudy.config";
 import { galleryConfig } from "./galleryPage.config";
 import { closingConfig, experiencePortfolio } from "./portfolio.config";
@@ -13,11 +12,6 @@ const marks: [string, string, string][] = [
     "Runway's lede",
     selectedWorkConfig.lede,
     selectedWorkConfig.ledeMark.phrase,
-  ],
-  [
-    "Who I am headline",
-    aboutMeConfig.headline,
-    aboutMeConfig.headlineMark.phrase,
   ],
   ["Contact's lead", closingConfig.lead, closingConfig.leadMark.phrase],
   ["Case study lede", cs.lede, cs.ledeMark.phrase],
@@ -40,9 +34,6 @@ const marks: [string, string, string][] = [
     galleryConfig.closing.text,
     galleryConfig.closing.mark.phrase,
   ],
-  ...aboutMeConfig.parts.flatMap((p): [string, string, string][] =>
-    "mark" in p ? [[p.label, p.text, p.mark.phrase]] : []
-  ),
   ...Object.entries(experiencePortfolio).flatMap(
     ([company, c]): [string, string, string][] =>
       c.mark ? [[company, c.story, c.mark.phrase]] : []
