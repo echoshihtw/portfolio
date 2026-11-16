@@ -49,10 +49,10 @@
     <p class="label">{c.model.label}</p>
     <h2 id="model">{c.model.heading}</h2>
     <dl class="card">
-      {#each c.model.rows as [name, value], i}
-        <div class:total={i === 2 || i === 4}>
-          <dt>{name}</dt>
-          <dd>{value}</dd>
+      {#each c.model.rows as row}
+        <div class:total={row.total}>
+          <dt>{row.name}</dt>
+          <dd>{row.value}</dd>
         </div>
       {/each}
     </dl>
@@ -229,8 +229,8 @@
     background: var(--surface);
   }
 
-  dl.card div,
-  tr {
+  /* The diff stays a real table, so a screen reader reads it as one. */
+  dl.card div {
     display: flex;
     justify-content: space-between;
     gap: var(--space-4);
@@ -255,6 +255,16 @@
   dl.card .total {
     border-top: 1px solid var(--border);
     font-weight: 600;
+  }
+
+  th,
+  td {
+    padding: var(--space-2) 0;
+    vertical-align: baseline;
+  }
+
+  td {
+    text-align: right;
   }
 
   table {
@@ -328,5 +338,26 @@
     margin: var(--space-1) 0 0;
     color: var(--muted);
     line-height: 1.6;
+  }
+
+  /* On a small phone each label stays whole and the amounts step down a
+     size, so no fact splits across lines. */
+  @media (max-width: 480px) {
+    .card {
+      padding: var(--space-3) var(--space-4);
+    }
+
+    th {
+      white-space: nowrap;
+      padding-right: var(--space-3);
+    }
+
+    td {
+      font-size: var(--text-sm);
+    }
+
+    .quiet th {
+      white-space: normal;
+    }
   }
 </style>
