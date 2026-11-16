@@ -69,9 +69,26 @@
   <section aria-labelledby="simpler">
     <p class="label">{c.simpler.label}</p>
     <h2 id="simpler">{c.simpler.heading}</h2>
+    <div class="compare">
+      {#each c.simpler.rows as { version, side }}
+        <p class="label version">{version}</p>
+        {#each c.simpler.compare as pair}
+          <figure>
+            <img
+              src="{base}/{pair[side].src}"
+              alt={pair[side].alt}
+              width={c.simpler.screen.width}
+              height={c.simpler.screen.height}
+              loading="lazy"
+            />
+            <figcaption class="label">{pair.label}</figcaption>
+          </figure>
+        {/each}
+      {/each}
+    </div>
     <ol class="steps">
       {#each c.simpler.steps as step}
-        <li>
+        <li class="experiment">
           <h3>
             <Marked
               text={step.title}
@@ -80,7 +97,14 @@
             />
             {#if step.tag}<span class="label">{step.tag}</span>{/if}
           </h3>
-          <p>{step.body}</p>
+          <dl>
+            {#each [["Hypothesis", step.hypothesis], ["Test", step.test], ["Result", step.result], ["Next", step.next]] as [name, words]}
+              <div>
+                <dt class="label">{name}</dt>
+                <dd>{words}</dd>
+              </div>
+            {/each}
+          </dl>
         </li>
       {/each}
     </ol>
@@ -282,6 +306,37 @@
     border-top: 1px solid var(--border);
   }
 
+  /* A row of 1.0's screens over a row of the redesign's, the same screen in
+     each column. */
+  .compare {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-4);
+    align-items: start;
+    margin-bottom: var(--space-5);
+  }
+
+  .compare figure {
+    margin: 0;
+  }
+
+  .compare img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+  }
+
+  .compare figcaption {
+    margin-top: var(--space-2);
+  }
+
+  .compare .version {
+    grid-column: 1 / -1;
+    margin: var(--space-2) 0 0;
+  }
+
   .steps,
   .flow {
     margin: 0;
@@ -289,21 +344,54 @@
     list-style: none;
   }
 
-  .steps li {
-    padding: var(--space-3) 0;
+  /* An experiment card: its four lines as label and words, the result in
+     ink because it is what happened. */
+  .experiment {
+    margin-bottom: var(--space-4);
+    padding: var(--space-4) var(--space-5);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
   }
 
+  .experiment dl {
+    margin: 0;
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  .experiment dl div {
+    display: grid;
+    grid-template-columns: 7rem 1fr;
+    gap: var(--space-3);
+    align-items: baseline;
+  }
+
+  .experiment dd {
+    margin: 0;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+
+  .experiment dl div:nth-child(3) dd {
+    color: var(--ink);
+  }
+
+  @media (max-width: 480px) {
+    .experiment dl div {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+  }
+
+  /* The title stays whole; its tag wraps under it on a narrow screen. */
   h3 {
     display: flex;
+    flex-wrap: wrap;
+    white-space: nowrap;
     align-items: baseline;
     gap: var(--space-3);
     margin: 0 0 var(--space-1);
     font-size: var(--text-lg);
-  }
-
-  .steps p {
-    margin: 0;
-    color: var(--muted);
   }
 
   .flow {
