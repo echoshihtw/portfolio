@@ -69,7 +69,12 @@ export const runwayCaseStudy = {
     ],
     mark: { phrase: "The cut", kind: "circle" } as Mark,
     // Before and after, as real screens of 1.0 and of the redesign, paired
-    // by what they do. Every screen is 600 by 1164.
+    // by what they do, all cut to one size.
+    screen: { width: 600, height: 1164 },
+    rows: [
+      { version: "1.0", side: "before" },
+      { version: "Now", side: "after" },
+    ] as const,
     compare: [
       {
         label: "Home",

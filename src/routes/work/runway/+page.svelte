@@ -70,15 +70,15 @@
     <p class="label">{c.simpler.label}</p>
     <h2 id="simpler">{c.simpler.heading}</h2>
     <div class="compare">
-      {#each [["1.0", "before"], ["Now", "after"]] as [version, side]}
+      {#each c.simpler.rows as { version, side }}
         <p class="label version">{version}</p>
         {#each c.simpler.compare as pair}
           <figure>
             <img
-              src="{base}/{pair[side === 'before' ? 'before' : 'after'].src}"
-              alt={pair[side === "before" ? "before" : "after"].alt}
-              width="600"
-              height="1164"
+              src="{base}/{pair[side].src}"
+              alt={pair[side].alt}
+              width={c.simpler.screen.width}
+              height={c.simpler.screen.height}
               loading="lazy"
             />
             <figcaption class="label">{pair.label}</figcaption>
