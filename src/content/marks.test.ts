@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { aboutMeConfig } from "./aboutMe.config";
+import { runwayCaseStudy as cs } from "./runwayCaseStudy.config";
 import { galleryConfig } from "./galleryPage.config";
 import { closingConfig, experiencePortfolio } from "./portfolio.config";
 import { projectsConfig } from "./projects.config";
@@ -19,6 +20,16 @@ const marks: [string, string, string][] = [
     aboutMeConfig.headlineMark.phrase,
   ],
   ["Contact's lead", closingConfig.lead, closingConfig.leadMark.phrase],
+  ["Case study lede", cs.lede, cs.ledeMark.phrase],
+  ["Case study problem", cs.problem.body.join(" "), cs.problem.mark.phrase],
+  ["Case study model", cs.model.rule, cs.model.mark.phrase],
+  [
+    "Case study steps",
+    cs.simpler.steps.map((s) => s.title).join(" "),
+    cs.simpler.mark.phrase,
+  ],
+  ["Case study learned", cs.learned.body.join(" "), cs.learned.mark.phrase],
+  ["Case study close", cs.rest.body.join(" "), cs.rest.mark.phrase],
   [
     "Gallery story",
     galleryConfig.story.join(" "),

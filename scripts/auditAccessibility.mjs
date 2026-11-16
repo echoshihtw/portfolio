@@ -22,6 +22,7 @@ const ROOT = path.join(process.cwd(), "build");
 const PORT = 4319;
 const ROUTES = [
   "/",
+  "/work/runway",
   "/gallery",
   "/blog",
   "/blog/dont-fight-the-tools-defaults",
