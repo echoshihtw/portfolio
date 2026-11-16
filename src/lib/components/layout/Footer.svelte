@@ -17,10 +17,10 @@
   const AVAILABILITY = [
     "Available remote",
     "Taiwan, UTC+8",
-    // Her overlap: Europe's mornings, or async. US meetings happen now and
-    // then by arrangement, and are left off so the page promises only what
-    // lasts.
-    "Europe mornings or async",
+    // Her overlap: her own APAC day, Europe's mornings, or async. US meetings
+    // happen now and then by arrangement, and are left off so the page
+    // promises only what lasts.
+    "APAC hours, Europe mornings or async",
   ];
 
   const year = new Date().getFullYear();

@@ -88,7 +88,7 @@ Each is one situation and what a good site does. Graded against DESIGN.md.
 
 ## Remote-first companies
 
-50. A remote-first company checks hours of overlap. Expected: the footer gives her time zone and "Europe mornings or async".
+50. A remote-first company checks hours of overlap. Expected: the footer gives her time zone and "APAC hours, Europe mornings or async".
 51. A remote-first company checks how she writes. Expected: the blog's working notes show how she writes up what broke and why.
 52. A remote-first company checks how she works with a distributed team. Expected: How I work says she shares work early.
 
