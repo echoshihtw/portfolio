@@ -2,9 +2,9 @@
   import { base } from "$app/paths";
   import { selectedWorkConfig as c } from "../../../../content/selectedWork.config";
   import { projectsConfig } from "../../../../content/projects.config";
+  import { runwayCaseStudy } from "../../../../content/runwayCaseStudy.config";
   import SectionHead from "$lib/components/SectionHead.svelte";
-  import RunwayArchitecture from "./RunwayArchitecture.svelte";
-  import { Marked } from "$lib/pens";
+  import { Doodle, Marked } from "$lib/pens";
   import { onMount } from "svelte";
 
   // The stack is written once, on the project's card.
@@ -122,31 +122,19 @@
           >
             Try it free on the App Store <span aria-hidden="true">↗</span>
           </a>
+          <a
+            class="case-study"
+            href="{base}{runwayCaseStudy.path}"
+          >
+            Read the case study
+            <Doodle
+              icon="arrow"
+              ink="currentColor"
+            />
+          </a>
           <p class="note">{c.note}</p>
         </div>
       </div>
-    </div>
-
-    <!-- How it is built: the one picture, and the points beside it. -->
-    <div class="built">
-      <h3 class="label">How it is built</h3>
-      <div class="diagram"><RunwayArchitecture /></div>
-      <ol class="points">
-        {#each c.points as point, i}
-          <li>
-            <span
-              class="num"
-              aria-hidden="true"
-            >
-              {String(i + 1).padStart(2, "0")}
-            </span>
-            <div>
-              <h4>{point.title}</h4>
-              <p>{point.body}</p>
-            </div>
-          </li>
-        {/each}
-      </ol>
     </div>
   </div>
 </section>
@@ -294,63 +282,11 @@
     color: var(--muted);
   }
 
-  /* A hairline, the label, then the diagram and the points. No boxes: the
-     lines and the space do the grouping. */
-  .built {
-    margin-top: var(--space-7);
-    padding-top: var(--space-4);
-    border-top: 1px solid var(--hairline);
-    display: grid;
-    gap: var(--space-5);
-  }
-
-  .built .label {
-    margin: 0;
-    color: var(--muted);
-  }
-
-  .diagram {
-    display: grid;
-    place-items: center;
-  }
-
-  .points {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    display: grid;
-    align-content: start;
-  }
-
-  .points li {
-    display: grid;
-    grid-template-columns: 2.5rem 1fr;
-    padding: var(--space-5) 0;
-    border-top: 1px solid var(--hairline);
-  }
-
-  .points li:first-child {
-    padding-top: 0;
-    border-top: 0;
-  }
-
-  .num {
-    padding-top: 0.35em;
-    font-family: var(--font-mono);
-    font-size: var(--text-xs);
-    color: var(--runway-blue);
-  }
-
-  .points h4 {
-    margin: 0 0 var(--space-1);
-    font-size: var(--text-xl);
-    line-height: 1.2;
-    letter-spacing: -0.015em;
-  }
-
-  .points p {
-    margin: 0;
-    color: var(--muted);
+  .case-study {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    color: var(--runway-paper);
   }
 
   @media (min-width: 900px) {
@@ -366,15 +302,6 @@
 
     .notes > :last-child {
       margin-bottom: 0;
-    }
-
-    .built {
-      grid-template-columns: 7fr 5fr;
-      column-gap: var(--space-7);
-    }
-
-    .built .label {
-      grid-column: 1 / -1;
     }
   }
 </style>
