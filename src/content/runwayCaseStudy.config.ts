@@ -26,13 +26,14 @@ export const runwayCaseStudy = {
   model: {
     label: "The model",
     heading: "Three numbers and one rule",
+    // A total closes the lines above it, so it is set apart.
     rows: [
-      ["Bank and cash", "$3,200"],
-      ["Card bill so far", "minus $300"],
-      ["Your money", "$2,900"],
-      ["Your normal month", "$1,500"],
-      ["Lasts", "about 2 months"],
-    ] as [string, string][],
+      { name: "Bank and cash", value: "$3,200" },
+      { name: "Card bill so far", value: "minus $300" },
+      { name: "Your money", value: "$2,900", total: true },
+      { name: "Your normal month", value: "$1,500" },
+      { name: "Lasts", value: "about 2 months", total: true },
+    ],
     note: "Rent and bills are taken on their due days. Pay, what-ifs and goals live in Plan and never change the main number.",
     rule: "We don't guess. The app shows what you typed and what it expected. It never claims a bill was paid.",
     mark: { phrase: "We don't guess.", kind: "highlight" } as Mark,
