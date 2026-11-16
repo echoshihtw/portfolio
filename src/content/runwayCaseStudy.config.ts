@@ -9,7 +9,7 @@ type Mark = { phrase: string; kind: PenName };
 export const runwayCaseStudy = {
   path: "/work/runway",
   title: "Runway",
-  kicker: "Case study · iOS app · 2026",
+  kicker: "Case study · an experiment in less toil",
   lede: "An app that answers one question: how long does my money last? No bank login, no daily logging, about 30 seconds a week.",
   ledeMark: { phrase: "about 30 seconds a week", kind: "highlight" } as Mark,
 
@@ -17,6 +17,8 @@ export const runwayCaseStudy = {
     label: "The problem",
     heading: "Budgets ask for discipline people don't have",
     body: [
+      // Her own origin, from the Devpost submission's Inspiration.
+      "I was planning two years abroad on savings, and I worked it out in a spreadsheet. A spreadsheet does the job; it's just not my thing. I wanted the answer on my phone in two seconds, so I built that.",
       "Most money apps want every coffee logged or a bank account linked. People stop within weeks, and the numbers quietly drift from the truth. Runway turns money into a length of time, a shape people already understand, and keeps it true with one short check-up a week: you type what's in your accounts, and the app does the rest.",
       "It had to work for almost everyone: a student, a retiree, someone between jobs, a kid with pocket money. Six languages, from day one.",
     ],
@@ -41,32 +43,68 @@ export const runwayCaseStudy = {
 
   simpler: {
     label: "How it got simpler",
-    heading: "From a learning engine to a passbook",
+    heading: "Same goal, less toil",
+    // Each version as an experiment: what she believed, how she tried it,
+    // what happened, and what she changed because of it.
     steps: [
       {
-        title: "The clever version",
-        tag: "v1.1",
-        body: "The app learned your spending from check-ups, matched pay and bills automatically, awarded a star for a normal month, and asked about anything surprising. It was accurate, and exhausting to explain, even to its own designer.",
-      },
-      {
-        title: "An accountant's audit",
-        tag: "v1.2",
-        body: "The money model was rebuilt so every bill is counted once and every entry balances, then audited eight times by an accounting review before it shipped.",
-      },
-      {
-        title: "Stress tests, round after round",
-        body: "Each rule was walked through 30 extreme cases: card paid while still swiping, rent paid late, a direct debit that bounced, a six-month gap. Every patch opened two new edge cases. The lesson: the hidden maths itself was the problem.",
+        title: "The budget app",
+        tag: "1.0, on the App Store",
+        hypothesis:
+          "If people log every spend, they'll always know their runway.",
+        test: "I built it and used it myself.",
+        result: "Impractical. Nobody keeps logging up, me included.",
+        next: "Keep the same goal, but ask for one number you already know: what's in your accounts.",
       },
       {
         title: "The cut",
-        body: "Learning, the star, the month-end card and money-in matching were removed. The app now judges only the change in your total, keeps a bill due until money actually leaves, and asks only about a big unexplained drop.",
-      },
-      {
-        title: "The pressure test",
-        body: "The simpler model was run against seven everyday weeks in real code. The runway was never longer than the truth, and no bill was counted twice.",
+        tag: "1.3.0",
+        hypothesis:
+          "If the app judges only the change in your total, it stays true without any logging.",
+        test: "I kept only what you type: what's in your accounts and what you spend. Then I ran it against seven everyday weeks in real code.",
+        result:
+          "The runway was never longer than the truth, and no bill was counted twice.",
+        next: "A check-up that works like git. Designed, not yet tested.",
       },
     ],
     mark: { phrase: "The cut", kind: "circle" } as Mark,
+    // Before and after, as real screens of 1.0 and of the redesign, paired
+    // by what they do. Every screen is 600 by 1164.
+    compare: [
+      {
+        label: "Home",
+        before: {
+          src: "assets/runway/v1-home.webp",
+          alt: "Runway 1.0's home: 12 months in a dark panel, with cash, owed, monthly income, costs and this month's in and out.",
+        },
+        after: {
+          src: "assets/runway/now-home.webp",
+          alt: "The redesign's home: a blue circle reading 8 months, until June, and a Do a check-up button.",
+        },
+      },
+      {
+        label: "Input",
+        before: {
+          src: "assets/runway/v1-log.webp",
+          alt: "Runway 1.0: a list of logged spends, with a form to log a new one by amount, note and category.",
+        },
+        after: {
+          src: "assets/runway/now-spend.webp",
+          alt: "The redesign's setup: rent, food and getting around, said once, adding up to $2,550 a month.",
+        },
+      },
+      {
+        label: "Plan",
+        before: {
+          src: "assets/runway/v1-plan.webp",
+          alt: "Runway 1.0's scenario planning: type a new monthly cost and run a simulation.",
+        },
+        after: {
+          src: "assets/runway/now-plan.webp",
+          alt: "The redesign's plan: 8 months, until June 2027, a calendar of months, and a goal of Tokyo.",
+        },
+      },
+    ],
   },
 
   redesign: {
@@ -92,19 +130,15 @@ export const runwayCaseStudy = {
 
   principles: {
     label: "Principles that held",
-    heading: "What every screen was checked against",
+    heading: "The rules every screen had to pass",
     items: [
       {
         title: "Never flatter",
         body: "If unsure, the runway errs short. A late bill stays due; a blank field changes nothing.",
       },
       {
-        title: "Don't guess",
-        body: 'Show typed facts and stated plans. No ticks, no "paid", no confirm dialogs about things the numbers already say.',
-      },
-      {
         title: "A grandma or a kid can read it",
-        body: "Words over symbols, the answer first, about four chunks per screen, one term per idea.",
+        body: "Words over symbols, the answer first, little to read on each screen, one word for each idea.",
       },
       {
         title: "One source of truth",
@@ -119,10 +153,9 @@ export const runwayCaseStudy = {
 
   learned: {
     label: "What I learned",
-    heading: "Clarity beat cleverness every time",
+    heading: "Less toil, more truth",
     body: [
-      "Edge-case hunting has diminishing returns. Fixing what people actually hit beat chasing what a tester can invent, and a fixed scenario set is what makes progress measurable.",
-      "A feature that needs explaining is a feature to cut. Removing the learning engine made the app more accurate to its users, not less.",
+      "A feature that needs explaining is a feature to cut.",
       "Familiar shapes do the teaching: a fuel gauge for the number, a passbook for the history, a diff for the check-up.",
       "Calm is a design choice. Rises are never questioned, and only one kind of surprise asks for an answer.",
     ],
@@ -137,11 +170,11 @@ export const runwayCaseStudy = {
   rest: {
     label: "Where it rests",
     body: [
-      "I wanted to show money as time, simple enough for almost anyone. Runway does that, and it's on the App Store.",
+      "I wanted to show money as time, simple enough for anyone to keep up. The redesign does that.",
       "It does what I set out to build, so I'm calling it finished.",
     ],
     facts:
-      "Version 1.0 is on the App Store. The simpler model is built but not released. The new check-up is a mockup only.",
+      "Version 1.0, the logging version, is on the App Store. The redesign is built and tested, not released. The git-style check-up is a mockup only.",
     mark: { phrase: "finished", kind: "line" } as Mark,
   },
 };

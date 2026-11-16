@@ -74,12 +74,15 @@ so a rewrite keeps the fact.
   link to the case study. The section shows the product; the case study tells
   how it was made.
 - **Runway case study** (`runwayCaseStudy.config.ts`, at `/work/runway`): her
-  own story of making Runway, told as a close: she is pausing it, finished. The
-  problem, the model and its one rule ("We don't guess"), how it got simpler,
-  the git-like check-up redesign (a mockup, said plainly), the principles that
-  held, privacy among them, what she learned, and "Where it rests", in her
-  own words, then the plain facts of what is live and what is not. One pen mark
-  per section at most, on its proof.
+  own story of making Runway, told as an experiment in less toil and closed as
+  finished. Why she started, in her words. The problem, and the model with its
+  one rule ("We don't guess"). Then 1.0 and now side by side as real screens,
+  and each version as an experiment card: hypothesis, test, result, next. Then
+  the git-like check-up redesign (a mockup, said plainly), the rules every screen
+  had to pass, privacy among them, what she learned, and "Where it rests", then
+  the plain facts of what is live and what is not. One pen mark per section at
+  most, on its proof. Screens from before the cut that show the app claiming a
+  bill was paid stay out: they contradict "We don't guess".
 - **Where I've worked** (`resumeData.ts`, built from `resume.md`, and
   `portfolio.config.ts`): each company with her role, the dates and where, the problem and the result in one paragraph, the stack, and
   the details on request. The full history is in the résumé.
