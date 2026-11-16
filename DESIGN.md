@@ -70,11 +70,16 @@ so a rewrite keeps the fact.
   holds the timeline.
 - **Selected work** (`selectedWork.config.ts`): what Runway is, that she built
   and shipped it alone, live on the App Store since October 2026 with its link,
-  the stack (read from `projects.config.ts`), one line on how she uses AI, the
-  architecture diagram in `RunwayArchitecture.svelte` (the pure core, its
-  adapters, and the one import that fails CI), and the privacy checks: the database checked as
-  encrypted at every open, and CI checking the privacy page against what the app
-  sends.
+  the stack (read from `projects.config.ts`), one line on how she uses AI, and a
+  link to the case study. The section shows the product; the case study tells
+  how it was made.
+- **Runway case study** (`runwayCaseStudy.config.ts`, at `/work/runway`): her
+  own story of making Runway, told as a close: she is pausing it, finished. The
+  problem, the model and its one rule ("We don't guess"), how it got simpler,
+  the git-like check-up redesign (a mockup, said plainly), the principles that
+  held, privacy among them, what she learned, and "Where it rests", in her
+  own words, then the plain facts of what is live and what is not. One pen mark
+  per section at most, on its proof.
 - **Where I've worked** (`resumeData.ts`, built from `resume.md`, and
   `portfolio.config.ts`): each company with her role, the dates and where, the problem and the result in one paragraph, the stack, and
   the details on request. The full history is in the résumé.
@@ -147,11 +152,9 @@ Contact, the close, is the one centred section, and has no picture.
 ## Selected work
 
 Runway's section is editorial rather than cards: the name large across the top,
-then the demo beside the notes. "How it is built" is a hairline, the
-architecture diagram, and numbered points beside it, with no boxes. The diagram
-is the section's one picture, drawn from the packages' real dependencies and
-named without counts, so it stays true between releases. A screen reader hears it
-described once as a whole, not box by box. The demo plays like a GIF: on its
+then the demo beside the notes, and a link to the case study. The section has no
+architecture diagram: a clean layered app looks like any other, so the case study
+tells what was distinctive instead. The demo plays like a GIF: on its
 own, silent and looping, while it is on screen, and it stops when it scrolls
 away. One button pauses and plays it, and a pause is kept. With Reduce Motion
 it waits on its still frame until the button is pressed.
@@ -174,8 +177,7 @@ paragraph says what it is, so it is always on screen; only the rest opens in a
 sheet. A sheet is the browser's own `<dialog>`, named by its title, closed by
 Escape, a tap outside
 or its close button, with focus returned to the button that opened it. In
-Runway's section the demo comes straight after the name, and the diagram turns
-to its tall version so its labels stay readable.
+Runway's section the demo comes straight after the name.
 
 ## Gallery
 

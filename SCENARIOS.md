@@ -26,8 +26,8 @@ Each is one situation and what a good site does. Graded against DESIGN.md.
 
 ## CTO deep read
 
-15. A CTO wants to see how Runway is built. Expected: an architecture diagram of the real packages, a pure core with adapters around it, and the one forbidden import marked as failing CI.
-16. A CTO checks that the diagram is honest. Expected: every box and arrow matches the code, with no counts that go out of date.
+15. A CTO wants to see how Runway was made. Expected: a "Read the case study" link in Runway's section, opening her own story at /work/runway.
+16. A CTO checks that the case study is honest. Expected: it says plainly what is live (1.0), what is in the app, and that the git-like check-up is a mockup, not built.
 17. A CTO asks how privacy is enforced. Expected: the database is checked as encrypted at every open, and CI checks the privacy page against what the app sends.
 18. A CTO wants the engineering decisions behind Clio. Expected: "Read the decisions" shows the decisions without leaving the page.
 19. A CTO opens Clio's decisions, then Echology's. Expected: only one card is turned over at a time.
@@ -40,7 +40,7 @@ Each is one situation and what a good site does. Graded against DESIGN.md.
 23. A visitor holds a phone sideways (568 × 320). Expected: everything reachable; scrolling is fine, nothing clipped.
 24. On a phone, a visitor reaches Runway's section. Expected: the name, then the demo, then the notes.
 25. On a phone, a visitor taps "Read more" on Clio. Expected: a sheet rises with the rest of the story; the first paragraph was already on screen.
-26. On a phone, a visitor reads Runway's diagram. Expected: the tall version, with labels readable.
+26. On a phone, a visitor reads the Runway case study. Expected: one column, the model and the check-up diff readable with no sideways scroll.
 27. On a phone, the gallery's lead painting. Expected: whole, at its own proportions, never cropped and never taller than the screen.
 
 ## Dark theme
@@ -54,7 +54,7 @@ Each is one situation and what a good site does. Graded against DESIGN.md.
 
 32. A keyboard user arrives on the cover. Expected: focus starts on Enter, and Enter, Space or the down arrow goes in.
 33. A keyboard user tabs through the home page. Expected: every control reachable with a visible focus ring, in reading order.
-34. A screen reader user reaches Runway's diagram. Expected: one description of the architecture, not a list of box labels.
+34. A screen reader user reaches the case study's check-up diff. Expected: each line read as its name, what it was and what it is now.
 35. A screen reader user opens a sheet. Expected: it's announced as a dialog with its title, and closing returns focus to the button that opened it.
 
 ## Gallery
@@ -95,7 +95,7 @@ Each is one situation and what a good site does. Graded against DESIGN.md.
 ## Developer-tools teams (like Vercel)
 
 53. A developer-tools team checks frontend depth. Expected: the hero says frontend first, and the work and projects show Next.js and React in production.
-54. A developer-tools team checks whether she cares how code is structured for other developers. Expected: the hero says the structure keeps a team consistent, and Runway shows boundaries that fail CI when broken.
+54. A developer-tools team checks whether she cares how code is structured for other developers. Expected: the hero says the structure keeps a team consistent, and the case study's principles include one source of truth and checks the build enforces.
 55. A developer-tools team wants to read her code. Expected: the footer links her GitHub and the site's own source.
 
 ## Found in round 2
