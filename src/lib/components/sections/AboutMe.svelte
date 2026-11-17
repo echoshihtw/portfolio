@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Doodle, Marked } from "$lib/pens";
+  import { Doodle } from "$lib/pens";
   import { base } from "$app/paths";
   import { aboutMeConfig } from "../../../content/aboutMe.config";
   import SectionHead from "$lib/components/SectionHead.svelte";
@@ -33,13 +33,7 @@
     </div>
 
     <div class="text">
-      <h3 class="headline">
-        <Marked
-          text={aboutMeConfig.headline}
-          phrase={aboutMeConfig.headlineMark.phrase}
-          kind={aboutMeConfig.headlineMark.kind}
-        />
-      </h3>
+      <h3 class="headline">{aboutMeConfig.headline}</h3>
       <dl class="parts">
         {#each aboutMeConfig.parts as part}
           <div>
@@ -48,13 +42,7 @@
                   icon={part.doodle}
                 />{/if}
             </dt>
-            <dd>
-              <Marked
-                text={part.text}
-                phrase={"mark" in part ? part.mark.phrase : ""}
-                kind={"mark" in part ? part.mark.kind : undefined}
-              />
-            </dd>
+            <dd>{part.text}</dd>
           </div>
         {/each}
       </dl>
