@@ -3,6 +3,29 @@
   import Seo from "$lib/components/Seo.svelte";
   import { Marked } from "$lib/pens";
   import { runwayCaseStudy as c } from "../../../content/runwayCaseStudy.config";
+  import { onMount } from "svelte";
+
+  // The side menu: one link per part of the story, by its short name.
+  const contents = c.parts.map(({ id, menu }) => ({ id, label: menu }));
+
+  // The section being read is the last one whose heading has passed the top
+  // third of the screen.
+  let current = contents[0].id;
+  onMount(() => {
+    const headings = contents
+      .map(({ id }) => document.getElementById(id))
+      .filter((el): el is HTMLElement => el !== null);
+    const update = () => {
+      const line = innerHeight / 3;
+      const passed = headings.filter(
+        (h) => h.getBoundingClientRect().top <= line
+      );
+      current = (passed.at(-1) ?? headings[0]).id;
+    };
+    update();
+    addEventListener("scroll", update, { passive: true });
+    return () => removeEventListener("scroll", update);
+  });
 </script>
 
 <Seo
@@ -11,190 +34,94 @@
   path={c.path}
 />
 
-<main class="study section_padding">
-  <a
-    class="back"
-    href="{base}/#selected-work"
+<div class="layout section_padding">
+  <nav
+    class="contents"
+    aria-label="Case study sections"
   >
-    ← Selected work
-  </a>
-
-  <header>
-    <p class="label">{c.kicker}</p>
-    <h1>{c.title}</h1>
-    <p class="lede">
-      <Marked
-        text={c.lede}
-        phrase={c.ledeMark.phrase}
-        kind={c.ledeMark.kind}
-      />
-    </p>
-  </header>
-
-  <section aria-labelledby="problem">
-    <p class="label">{c.problem.label}</p>
-    <h2 id="problem">{c.problem.heading}</h2>
-    {#each c.problem.body as paragraph}
-      <p>
-        <Marked
-          text={paragraph}
-          phrase={c.problem.mark.phrase}
-          kind={c.problem.mark.kind}
-        />
-      </p>
-    {/each}
-  </section>
-
-  <section aria-labelledby="model">
-    <p class="label">{c.model.label}</p>
-    <h2 id="model">{c.model.heading}</h2>
-    <dl class="card">
-      {#each c.model.rows as row}
-        <div class:total={row.total}>
-          <dt>{row.name}</dt>
-          <dd>{row.value}</dd>
-        </div>
-      {/each}
-    </dl>
-    <p class="quiet">{c.model.note}</p>
-    <p>
-      <Marked
-        text={c.model.rule}
-        phrase={c.model.mark.phrase}
-        kind={c.model.mark.kind}
-      />
-    </p>
-  </section>
-
-  <section aria-labelledby="simpler">
-    <p class="label">{c.simpler.label}</p>
-    <h2 id="simpler">{c.simpler.heading}</h2>
-    <div class="compare">
-      {#each c.simpler.rows as { version, side }}
-        <p class="label version">{version}</p>
-        {#each c.simpler.compare as pair}
-          <figure>
-            <img
-              src="{base}/{pair[side].src}"
-              alt={pair[side].alt}
-              width={c.simpler.screen.width}
-              height={c.simpler.screen.height}
-              loading="lazy"
-            />
-            <figcaption class="label">{pair.label}</figcaption>
-          </figure>
-        {/each}
-      {/each}
-    </div>
-    <ol class="steps">
-      {#each c.simpler.steps as step}
-        <li class="experiment">
-          <h3>
-            <Marked
-              text={step.title}
-              phrase={c.simpler.mark.phrase}
-              kind={c.simpler.mark.kind}
-            />
-            {#if step.tag}<span class="label">{step.tag}</span>{/if}
-          </h3>
-          <dl>
-            {#each [["Hypothesis", step.hypothesis], ["Test", step.test], ["Result", step.result], ["Next", step.next]] as [name, words]}
-              <div>
-                <dt class="label">{name}</dt>
-                <dd>{words}</dd>
-              </div>
-            {/each}
-          </dl>
+    <ol>
+      {#each contents as item}
+        <li>
+          <a
+            href="#{item.id}"
+            aria-current={current === item.id ? "location" : undefined}
+          >
+            {item.label}
+          </a>
         </li>
       {/each}
     </ol>
-  </section>
+  </nav>
 
-  <section aria-labelledby="redesign">
-    <p class="label">{c.redesign.label}</p>
-    <h2 id="redesign">{c.redesign.heading}</h2>
-    <p>{c.redesign.body}</p>
-    <ol class="flow">
-      {#each c.redesign.flow as step}<li>{step}</li>{/each}
-    </ol>
-    <div class="card">
-      <table>
-        <caption class="sr-only">What one check-up changed</caption>
-        <tbody>
-          {#each c.redesign.diff as [name, was, now]}
-            <tr>
-              <th scope="row">{name}</th>
-              <td>
-                <span class="was">{was}</span>
-                <span aria-hidden="true">→</span>
-                <span class="sr-only">to</span>
-                {now}
-              </td>
-            </tr>
-          {/each}
-          <tr class="quiet">
-            <th scope="row">{c.redesign.expected[0]}</th>
-            <td>{c.redesign.expected[1]}</td>
-          </tr>
-        </tbody>
-      </table>
-      <p class="result">{c.redesign.result}</p>
-    </div>
-    <p class="quiet">{c.redesign.status}</p>
-  </section>
+  <main class="study">
+    <a
+      class="back"
+      href="{base}/#selected-work"
+    >
+      ← Selected work
+    </a>
 
-  <section aria-labelledby="principles">
-    <p class="label">{c.principles.label}</p>
-    <h2 id="principles">{c.principles.heading}</h2>
-    <dl class="principles">
-      {#each c.principles.items as item}
-        <div>
-          <dt>{item.title}</dt>
-          <dd>{item.body}</dd>
-        </div>
-      {/each}
-    </dl>
-  </section>
-
-  <section aria-labelledby="learned">
-    <p class="label">{c.learned.label}</p>
-    <h2 id="learned">{c.learned.heading}</h2>
-    {#each c.learned.body as paragraph}
-      <p>
+    <header>
+      <p class="label">{c.kicker}</p>
+      <h1>{c.title}</h1>
+      <p class="lede">
         <Marked
-          text={paragraph}
-          phrase={c.learned.mark.phrase}
-          kind={c.learned.mark.kind}
+          text={c.lede}
+          phrase={c.ledeMark.phrase}
+          kind={c.ledeMark.kind}
         />
       </p>
-    {/each}
-  </section>
+    </header>
 
-  <section
-    class="rest"
-    aria-labelledby="rest"
-  >
-    <p class="label">{c.rest.label}</p>
-    {#each c.rest.body as paragraph, i}
-      <p
-        class="close"
-        id={i === 0 ? "rest" : undefined}
-      >
-        <Marked
-          text={paragraph}
-          phrase={c.rest.mark.phrase}
-          kind={c.rest.mark.kind}
-        />
-      </p>
+    {#each c.parts as part}
+      <section aria-labelledby={part.id}>
+        <h2 id={part.id}>{part.heading}</h2>
+        {#each part.body as paragraph}
+          <p>
+            <Marked
+              text={paragraph}
+              phrase={part.mark?.phrase ?? ""}
+              kind={part.mark?.kind}
+            />
+          </p>
+        {/each}
+        {#if part.screens}
+          <div class="compare">
+            {#each c.screens.compare as pair}
+              <figure class="pair">
+                <figcaption class="label">{pair.label}</figcaption>
+                {#each c.screens.rows as { version, side, width, height }}
+                  <div class="shot">
+                    <p class="label">{version}</p>
+                    <img
+                      src="{base}/{pair[side].src}"
+                      alt={pair[side].alt}
+                      {width}
+                      {height}
+                      loading="lazy"
+                    />
+                  </div>
+                {/each}
+              </figure>
+            {/each}
+          </div>
+        {/if}
+      </section>
     {/each}
-    <p class="quiet">{c.rest.facts}</p>
-  </section>
-</main>
+
+    <p class="quiet facts">{c.facts}</p>
+  </main>
+</div>
 
 <style>
   .study {
     max-width: 46rem;
     margin: 0 auto;
+  }
+
+  /* Headings a menu link lands on clear the header. */
+  .study :global([id]) {
+    scroll-margin-top: var(--space-7);
   }
 
   .back {
@@ -220,13 +147,13 @@
     line-height: 1.4;
   }
 
+  /* Space, not lines, between the parts, so the story reads on. */
   section {
-    padding: var(--space-6) 0;
-    border-top: 1px solid var(--border);
+    padding: var(--space-5) 0;
   }
 
   h2 {
-    margin: var(--space-2) 0 var(--space-4);
+    margin: 0 0 var(--space-4);
     font-size: var(--text-2xl);
     letter-spacing: -0.03em;
     line-height: 1.15;
@@ -234,93 +161,46 @@
 
   p {
     margin: 0 0 var(--space-4);
+    font-size: var(--text-lg);
     line-height: 1.65;
   }
 
   .label {
     margin: 0;
+    font-size: var(--text-xs);
   }
 
   .quiet {
     color: var(--muted);
   }
 
-  .card {
-    margin: 0 0 var(--space-4);
-    padding: var(--space-4) var(--space-5);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-md);
-    background: var(--surface);
-  }
-
-  /* The diff stays a real table, so a screen reader reads it as one. */
-  dl.card div {
-    display: flex;
-    justify-content: space-between;
-    gap: var(--space-4);
-    padding: var(--space-2) 0;
-  }
-
-  dl.card dt,
-  dl.card dd,
-  th,
-  td {
-    margin: 0;
-    font-weight: 400;
-    text-align: left;
-  }
-
-  dl.card dd,
-  td {
-    font-family: var(--font-mono);
-    white-space: nowrap;
-  }
-
-  dl.card .total {
+  .facts {
+    padding-top: var(--space-5);
     border-top: 1px solid var(--border);
-    font-weight: 600;
+    font-size: var(--text-base);
   }
 
-  th,
-  td {
-    padding: var(--space-2) 0;
-    vertical-align: baseline;
-  }
-
-  td {
-    text-align: right;
-  }
-
-  table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-
-  .was {
-    color: var(--muted);
-  }
-
-  .result {
-    margin: var(--space-3) 0 0;
-    padding-top: var(--space-3);
-    border-top: 1px solid var(--border);
-  }
-
-  /* A row of 1.0's screens over a row of the redesign's, the same screen in
-     each column. */
+  /* Each job as a pair, 1.0 beside 1.3.0, so the change reads at a glance. */
   .compare {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-4);
-    align-items: start;
-    margin-bottom: var(--space-5);
+    gap: var(--space-6);
+    max-width: 28rem;
+    margin: var(--space-5) auto var(--space-2);
   }
 
-  .compare figure {
+  .pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-2) var(--space-3);
+    align-items: start;
     margin: 0;
   }
 
-  .compare img {
+  .pair figcaption {
+    grid-column: 1 / -1;
+  }
+
+  .shot img {
     display: block;
     width: 100%;
     height: auto;
@@ -328,124 +208,61 @@
     border-radius: var(--radius-md);
   }
 
-  .compare figcaption {
-    margin-top: var(--space-2);
+  .shot .label {
+    margin-bottom: var(--space-1);
   }
 
-  .compare .version {
-    grid-column: 1 / -1;
-    margin: var(--space-2) 0 0;
+  /* The side menu shows only where there is room beside the column. */
+  .contents {
+    display: none;
   }
 
-  .steps,
-  .flow {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-
-  /* An experiment card: its four lines as label and words, the result in
-     ink because it is what happened. */
-  .experiment {
-    margin-bottom: var(--space-4);
-    padding: var(--space-4) var(--space-5);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-md);
-  }
-
-  .experiment dl {
-    margin: 0;
-    display: grid;
-    gap: var(--space-2);
-  }
-
-  .experiment dl div {
-    display: grid;
-    grid-template-columns: 7rem 1fr;
-    gap: var(--space-3);
-    align-items: baseline;
-  }
-
-  .experiment dd {
-    margin: 0;
-    color: var(--muted);
-    line-height: 1.55;
-  }
-
-  .experiment dl div:nth-child(3) dd {
-    color: var(--ink);
-  }
-
-  @media (max-width: 480px) {
-    .experiment dl div {
-      grid-template-columns: 1fr;
-      gap: 0;
-    }
-  }
-
-  /* The title stays whole; its tag wraps under it on a narrow screen. */
-  h3 {
-    display: flex;
-    flex-wrap: wrap;
-    white-space: nowrap;
-    align-items: baseline;
-    gap: var(--space-3);
-    margin: 0 0 var(--space-1);
-    font-size: var(--text-lg);
-  }
-
-  .flow {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-2) var(--space-3);
-    margin-bottom: var(--space-4);
-    font-family: var(--font-mono);
-    font-size: var(--text-sm);
-  }
-
-  .flow li + li::before {
-    content: "→ ";
-    color: var(--muted);
-  }
-
-  /* The close: her own words, larger, then the plain facts. */
-  .close {
-    font-size: var(--text-xl);
-    line-height: 1.45;
-  }
-
-  .principles div {
-    padding: var(--space-3) 0;
-  }
-
-  .principles dt {
-    font-weight: 600;
-  }
-
-  .principles dd {
-    margin: var(--space-1) 0 0;
-    color: var(--muted);
-    line-height: 1.6;
-  }
-
-  /* On a small phone each label stays whole and the amounts step down a
-     size, so no fact splits across lines. */
-  @media (max-width: 480px) {
-    .card {
-      padding: var(--space-3) var(--space-4);
+  @media (min-width: 1100px) {
+    .layout {
+      display: grid;
+      grid-template-columns: 12rem minmax(0, 46rem) 12rem;
+      justify-content: center;
+      column-gap: var(--space-6);
     }
 
-    th {
-      white-space: nowrap;
-      padding-right: var(--space-3);
+    .study {
+      margin: 0;
     }
 
-    td {
+    .contents {
+      display: block;
+      position: sticky;
+      top: var(--space-7);
+      align-self: start;
+      margin-top: calc(var(--space-7) * 2);
+    }
+
+    .contents ol {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      border-left: 1px solid var(--border);
+    }
+
+    .contents a {
+      display: flex;
+      align-items: center;
+      min-height: 44px;
+      padding-left: var(--space-4);
+      margin-left: -1px;
+      border-left: 2px solid transparent;
       font-size: var(--text-sm);
+      color: var(--muted);
+      text-decoration: none;
     }
 
-    .quiet th {
-      white-space: normal;
+    .contents a:hover,
+    .contents a[aria-current] {
+      color: var(--ink);
+    }
+
+    .contents a[aria-current] {
+      border-left-color: var(--accent-shape);
     }
   }
 </style>

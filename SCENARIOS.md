@@ -27,7 +27,7 @@ Each is one situation and what a good site does. Graded against DESIGN.md.
 ## CTO deep read
 
 15. A CTO wants to see how Runway was made. Expected: a "Read the case study" link in Runway's section, opening her own story at /work/runway.
-16. A CTO checks that the case study is honest. Expected: it says plainly what is live (1.0), what is in the app, and that the git-like check-up is a mockup, not built.
+16. A CTO checks that the case study is honest. Expected: it says plainly that 1.0, the logging version, is on the App Store and 1.3.0 is on its way there.
 17. A CTO asks how privacy is enforced. Expected: the database is checked as encrypted at every open, and CI checks the privacy page against what the app sends.
 18. A CTO wants the engineering decisions behind Clio. Expected: "Read the decisions" shows the decisions without leaving the page.
 19. A CTO opens Clio's decisions, then Echology's. Expected: only one card is turned over at a time.
@@ -95,7 +95,7 @@ Each is one situation and what a good site does. Graded against DESIGN.md.
 ## Developer-tools teams (like Vercel)
 
 53. A developer-tools team checks frontend depth. Expected: the hero says frontend first, and the work and projects show Next.js and React in production.
-54. A developer-tools team checks whether she cares how code is structured for other developers. Expected: the hero says the structure keeps a team consistent, and the case study's principles include one source of truth and checks the build enforces.
+54. A developer-tools team checks whether she cares how code is structured for other developers. Expected: the hero says the structure keeps a team consistent, and Where I've worked shows it in practice.
 55. A developer-tools team wants to read her code. Expected: the footer links her GitHub and the site's own source.
 
 ## Found in round 2

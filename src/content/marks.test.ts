@@ -21,15 +21,9 @@ const marks: [string, string, string][] = [
   ],
   ["Contact's lead", closingConfig.lead, closingConfig.leadMark.phrase],
   ["Case study lede", cs.lede, cs.ledeMark.phrase],
-  ["Case study problem", cs.problem.body.join(" "), cs.problem.mark.phrase],
-  ["Case study model", cs.model.rule, cs.model.mark.phrase],
-  [
-    "Case study steps",
-    cs.simpler.steps.map((s) => s.title).join(" "),
-    cs.simpler.mark.phrase,
-  ],
-  ["Case study learned", cs.learned.body.join(" "), cs.learned.mark.phrase],
-  ["Case study close", cs.rest.body.join(" "), cs.rest.mark.phrase],
+  ...cs.parts.flatMap((p): [string, string, string][] =>
+    p.mark ? [[p.heading, p.body.join(" "), p.mark.phrase]] : []
+  ),
   [
     "Gallery story",
     galleryConfig.story.join(" "),
