@@ -88,7 +88,8 @@ so a rewrite keeps the fact.
   the details on request. The full history is in the résumé.
 - **More projects** (`projects.config.ts`): each project's name, its status in
   words, its proof first (Clio: 603 clients typed in by hand, in use since May
-  2025), what it is, the stack, its link if it has one, and its decisions on the back.
+  2025), what it is, the stack, its link if it has one, its decisions on the back,
+  and when it was made.
 - **Who I am** (`aboutMe.config.ts`): her portrait, her line on why she builds,
   and five parts in story order: Background, What changed, How I work, With AI,
   Outside work. How I work holds habits a reader can check, not adjectives.
@@ -163,6 +164,18 @@ away. One button pauses and plays it, and a pause is kept. With Reduce Motion
 it waits on its still frame until the button is pressed.
 
 ## More projects
+
+The projects are a deck, like Time Machine: one in front, in full, and the next
+three stacked behind it, each further back in time, showing only its name and
+date. Every card is the size of the tallest, so the deck never jumps. A tap on a
+card behind, or on a project's name in the timeline beside the deck, slides it
+to the front. The timeline is the keyboard and screen-reader path, and it marks
+the project in front. On a wide screen every card is one fixed size and a
+project's picture fills its column, so no card is half empty. On a phone there
+is no stack: the timeline is a row of tabs, and one card shows at its own
+height. Screenshots sit a little quieter than the page. The cards
+behind are switched off (`inert`) until they come forward. With Reduce Motion
+they change places without sliding.
 
 Each project's lead object sits in a hairline frame, not a shadow. "Read the
 decisions" turns the card over on a wide screen, and only one card is turned at

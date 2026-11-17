@@ -223,7 +223,9 @@ test.describe("Phone", () => {
       for (const el of document.querySelectorAll<HTMLElement>(
         "main a, main button, footer a, footer button"
       )) {
-        if (!el.offsetParent) continue;
+        // Hidden, or switched off with `inert` (a project card behind the
+        // front one): no one can tap it, so it has no target to check.
+        if (!el.offsetParent || el.closest("[inert]")) continue;
         el.scrollIntoView({ block: "center", behavior: "instant" });
         await new Promise((r) => requestAnimationFrame(r));
         const r = el.getBoundingClientRect();

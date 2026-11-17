@@ -7,6 +7,7 @@ import type { Projects } from "../lib/types/types.js";
 export const projectsConfig: Projects = [
   {
     name: "Clio",
+    when: "2025 to now",
     statusLine: "Early access",
     figure: "603",
     fact: "clients, typed in by hand by a Tainan salon owner. In use since May 2025.",
@@ -72,6 +73,7 @@ export const projectsConfig: Projects = [
   },
   {
     name: "Financial Runway",
+    when: "2026",
     // Live on the App Store since 2026-10-04 (id6778675088). Shown in its own
     // Selected work section (selectedWork.config.ts), not in More projects.
     // The product page, not the repository: it opens on what the app does and
@@ -101,7 +103,8 @@ export const projectsConfig: Projects = [
   },
   {
     name: "Echology",
-    statusLine: "Archived · 2023",
+    when: "2023",
+    statusLine: "Archived",
     story: [
       "I designed and built the frontend of a demo wallet for comparing Bitcoin coin-selection algorithms, the rules that decide which coins a payment spends. Built with a core maintainer of the Bitcoin Dev Kit.",
     ],

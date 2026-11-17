@@ -2,6 +2,8 @@ import type { PenName } from "../pens/pens.js";
 
 interface Project {
   name: string;
+  /** When it was made, on the deck's timeline, e.g. "2025 to now". */
+  when: string;
   /** The mono line beside the name, e.g. "In daily use · early access". */
   statusLine?: string;
   /** The proof as one number, set large before the fact. */
