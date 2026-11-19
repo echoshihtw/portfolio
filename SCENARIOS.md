@@ -27,7 +27,7 @@ Each is one situation and what a good site does. Graded against DESIGN.md.
 ## CTO deep read
 
 15. A CTO wants to see how Runway was made. Expected: a "Read the case study" link in Runway's section, opening her own story at /work/runway.
-16. A CTO checks that the case study is honest. Expected: it says plainly what is live (1.0), what is in the app, and that the git-like check-up is a mockup, not built.
+16. A CTO checks that the case study is honest. Expected: it says plainly that 1.0, the logging version, is on the App Store and 1.3.0 is on its way there.
 17. A CTO asks how privacy is enforced. Expected: the database is checked as encrypted at every open, and CI checks the privacy page against what the app sends.
 18. A CTO wants the engineering decisions behind Clio. Expected: "Read the decisions" shows the decisions without leaving the page.
 19. A CTO opens Clio's decisions, then Echology's. Expected: only one card is turned over at a time.
@@ -76,7 +76,7 @@ Each is one situation and what a good site does. Graded against DESIGN.md.
 
 ## Headhunters
 
-44. A headhunter checks location, time zone and how she works. Expected: "Remote" and "UTC+8" in the hero, "Taipei, Taiwan" on the cover, and "Taiwan, UTC+8 · Europe mornings or async" in the footer.
+44. A headhunter checks location, time zone and how she works. Expected: "Remote" and "UTC+8" in the hero, "Taipei, Taiwan" on the cover, and "Taiwan, UTC+8 · APAC hours, Europe mornings or async" in the footer.
 45. A headhunter checks her experience. Expected: each company with her role, dates and place, and the full history in the résumé.
 46. A headhunter forwards the résumé to a client. Expected: the PDF's name carries her name.
 47. A headhunter wants a call before writing. Expected: a way to book a call in the footer.
@@ -88,14 +88,14 @@ Each is one situation and what a good site does. Graded against DESIGN.md.
 
 ## Remote-first companies
 
-50. A remote-first company checks hours of overlap. Expected: the footer gives her time zone and "Europe mornings or async".
+50. A remote-first company checks hours of overlap. Expected: the footer gives her time zone and "APAC hours, Europe mornings or async".
 51. A remote-first company checks how she writes. Expected: the blog's working notes show how she writes up what broke and why.
 52. A remote-first company checks how she works with a distributed team. Expected: How I work says she shares work early.
 
 ## Developer-tools teams (like Vercel)
 
 53. A developer-tools team checks frontend depth. Expected: the hero says frontend first, and the work and projects show Next.js and React in production.
-54. A developer-tools team checks whether she cares how code is structured for other developers. Expected: the hero says the structure keeps a team consistent, and the case study's principles include one source of truth and checks the build enforces.
+54. A developer-tools team checks whether she cares how code is structured for other developers. Expected: the hero says the structure keeps a team consistent, and Where I've worked shows it in practice.
 55. A developer-tools team wants to read her code. Expected: the footer links her GitHub and the site's own source.
 
 ## Found in round 2

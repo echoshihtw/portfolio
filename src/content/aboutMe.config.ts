@@ -15,8 +15,7 @@ export const aboutMeConfig = {
   // interview on 2026-10-19 and since. The headline is why she builds, in
   // her words; the parts are cut to one idea each, under a label, so a
   // skimming reader can jump to the one they want.
-  headline: "Bad design annoys me, so I write software that doesn't.",
-  headlineMark: { phrase: "annoys", kind: "line" },
+  headline: "Software shouldn't need a manual.",
   parts: [
     {
       label: "Background",
@@ -24,9 +23,7 @@ export const aboutMeConfig = {
     },
     {
       label: "What changed",
-      text: "Logging hours, entering scores, applying for a research budget: all of it ran on outdated software that needed a manual.",
-      // the reason for the hero's claim, under her pen
-      mark: { phrase: "needed a manual", kind: "circle" },
+      text: "Logging hours, entering scores, applying for a research budget: all of it ran on software that was hard to use.",
     },
     {
       label: "How I work",
