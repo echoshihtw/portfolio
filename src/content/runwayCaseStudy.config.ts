@@ -97,7 +97,7 @@ export const runwayCaseStudy = {
         },
         after: {
           src: "assets/runway/now-home.webp",
-          alt: "1.3.0's home: a blue circle reading 12 months, until November 2027, then Future with pay of $400 a month and a Tokyo trip, and a Do a check-up button.",
+          alt: "1.3.0's home: a blue circle reading 12 months, until November 2027, a Saved line, $100 gone out since 20 October, then Future with pay of $400 a month, and a Do a check-up button.",
         },
       },
       {
@@ -108,7 +108,7 @@ export const runwayCaseStudy = {
         },
         after: {
           src: "assets/runway/now-spend.webp",
-          alt: "1.3.0's check-up: How much money do you have right now? with $14,300 typed in.",
+          alt: "1.3.0's check-up, Today's numbers: the bank account typed as $14,300, was $14,400, and your money $14,300, with a Review button.",
         },
       },
       {
