@@ -123,14 +123,14 @@ export const experiencePortfolio: Record<
 > = {
   "Lockerbie Technology": {
     story:
-      "One of two engineers on an early-stage internal platform for the UK construction sector. Brought the other to shipping independently in two months. A backend task went from a week to two days, and a deployment from a full day to five minutes, run by someone who is not an engineer. A BFF between frontend and backend keeps every credential out of the browser.",
+      "One of two engineers on an early-stage internal platform for the UK construction sector. I brought the other to shipping independently in two months. While the backend's author was on leave, I built a modular structure and a migration plan; we finished it together in two weeks, and a backend task went from a week to two days. Deployment went from a full day to five minutes, run by someone who is not an engineer. A BFF between frontend and backend keeps every credential out of the browser.",
     mark: { phrase: "five minutes", kind: "circle" },
     techLine:
       "Next.js App Router · TanStack Query · FastAPI · ArangoDB · RabbitMQ · Docker · GHCR",
   },
   "SPIN.FASHION by Lablaco": {
     story:
-      "Co-ran the team's scrum with the CTO on the in-store desktop app, remote across time zones. The macOS build couldn't ship; fixed code-signing, notarisation and auto-update, and wrote the release steps down. Built the blockchain payment checkout on a third-party provider, payment screen to API.",
+      "Founding partner on the in-store desktop app, remote across time zones. The macOS build couldn't ship; I fixed code-signing, notarisation and auto-update, then automated and documented the release so anyone on the team could ship. I co-ran the scrum with the CTO and was the main developer on the blockchain payment checkout, payment screen to API.",
     mark: {
       phrase: "fixed code-signing, notarisation and auto-update",
       kind: "highlight",
@@ -139,14 +139,14 @@ export const experiencePortfolio: Record<
   },
   "Find Recruiter": {
     story:
-      "Led frontend delivery on a recruiting and ATS platform, on a two-engineer team. Moved a production React codebase to TypeScript while it kept shipping.",
+      "Frontend lead on a recruiting and ATS platform, on a two-engineer team. The React codebase was about 150,000 lines with no TypeScript when I joined; I moved it over step by step, and within a year almost all new code was TypeScript, while it kept shipping.",
     mark: { phrase: "while it kept shipping", kind: "line" },
     techLine:
       "React · TypeScript · Redux-Saga · Firebase · Server-Sent Events · Google Analytics · Sentry",
   },
   "Independent / Freelance Engineering": {
     story:
-      "Shipped frontends and fixed UX for clients in fintech and e-commerce, remote, 2020 to 2024.",
+      "Frontends and UX fixes for clients in fintech and e-commerce, remote, 2020 to 2024.",
     techLine: "Next.js · TypeScript · BDK",
   },
 };
