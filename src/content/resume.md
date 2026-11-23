@@ -105,7 +105,7 @@ ask "the user of what", and that is a question she wants asked.
 What it deliberately does not say: intuitive, natural, self-explanatory. Those
 are Echo's actual values, stated on 2026-09-19, and they are also the three
 adjectives every UX-adjacent CV uses and none can check. The belief is better
-served by the evidence above than by naming it. 
+served by the evidence above than by naming it.
 2026-11-23: line 1 changed from a stack list to "Product engineer with four
 years in React and TypeScript, building software people don't have to learn."
 Echo's own phrase is the hook. A recruiter and HR read wanted role, years and
