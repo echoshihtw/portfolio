@@ -56,9 +56,7 @@ jobs:
           path: static/*.pdf
           key: resume-${{ hashFiles('src/content/**', 'scripts/buildResume.ts', 'scripts/resume-*', 'scripts/pandoc-version.txt') }}
 
-      # texlive-fonts-extra is about a gigabyte and it is not optional: the
-      # résumé sets mainfont=XCharter, and Debian ships XCharter only there.
-      # So cache the .debs. A résumé edit busts the PDF cache below on every
+      # Cache the .debs. A résumé edit busts the PDF cache below on every
       # change; without this it would also re-download the whole of TeX each
       # time, which is the part that actually costs minutes.
       - name: Restore apt packages
@@ -91,6 +89,13 @@ jobs:
           sudo apt-get update $APT_OPTS
           sudo apt-get install -y --no-install-recommends $APT_OPTS \
             $(grep -vE '^\s*(#|$)' scripts/resume-tex-packages.txt | tr '\n' ' ')
+
+          # XCharter (mainfont) comes from the repo, not apt: Debian ships it
+          # only inside texlive-fonts-extra, about 1GB, whose download outlasted
+          # this step's timeout on 23 Nov.
+          sudo install -D -m 0644 -t /usr/local/share/fonts/xcharter scripts/fonts/xcharter/*.otf
+          fc-cache -f > /dev/null
+          fc-list | grep -q XCharter
 
           # pandoc from its own release rather than apt: the apt copy is the
           # download that stalled, and pinning means CI and Vercel run the same

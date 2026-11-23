@@ -24,3 +24,6 @@ static/resume.pdf
 
 test-results/
 playwright-report/
+
+# Third-party font and its licence notice, kept verbatim.
+scripts/fonts/
