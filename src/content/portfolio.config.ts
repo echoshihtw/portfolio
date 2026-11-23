@@ -111,7 +111,8 @@ export const closingConfig = {
 // Distilled experience copy, keyed by company (matches resumeData `experience`).
 // The full formal bullets stay in resume.md and show in the "details" expander.
 // Each entry is one short paragraph with the problem and the fix inside it,
-// then the stack. Written in résumé voice: implied subject, no "I".
+// then the stack. Each opens with a short caption of her role, then says what
+// she did in first person. The résumé keeps its own implied-subject voice.
 export const experiencePortfolio: Record<
   string,
   // mark: the card's one result, under one of her pens, if it has one.

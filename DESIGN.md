@@ -82,7 +82,9 @@ so a rewrite keeps the fact.
   part and marks the one being read. At most one pen mark per part.
 - **Where I've worked** (`resumeData.ts`, built from `resume.md`, and
   `portfolio.config.ts`): each company with her role, the dates and where, the problem and the result in one paragraph, the stack, and
-  the details on request. The full history is in the résumé.
+  the details on request. The full history is in the résumé. Each paragraph
+  opens with a short caption of her role ("One of two engineers on…"), then
+  says what she did in first person; the résumé stays verb-first.
 - **More projects** (`projects.config.ts`): each project's name, its status in
   words, its proof first (Clio: 603 clients typed in by hand, in use since May
   2025), what it is, the stack, its link if it has one, and its decisions on the back.
