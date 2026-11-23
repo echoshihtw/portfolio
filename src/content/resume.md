@@ -112,7 +112,10 @@ Echo's own phrase is the hook. A recruiter and HR read wanted role, years and
 the two stack words every ad filters on, so those stay in the same sentence;
 the headline above still lists the rest. "Intuitive, straightforward" was cut
 because it repeats the hook. Lines 2 and 3 drop "I" to match the site's
-caption voice; the one "I" left is in "so I was the user first". Line 2 was
+caption voice. Line 3 is "I was the user first, and I still am." in Echo's
+words: customer relations was only one of the jobs where she used software
+that could be better (teaching and research assistant too), and she still is
+a user. Line 2 was
 shortened so each line ends on its own line in the PDF.
 -->
 
@@ -120,7 +123,7 @@ Product engineer with four years in React and TypeScript, building software peop
 
 Frontend and the delivery path under it: a module template for the team, a five-minute release a non-engineer runs.
 
-Came to engineering from customer relations, so I was the user first.
+I was the user first, and I still am.
 
 # Experience
 
