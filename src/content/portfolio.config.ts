@@ -123,7 +123,7 @@ export const experiencePortfolio: Record<
 > = {
   "Lockerbie Technology": {
     story:
-      "On an early-stage internal platform for the UK construction sector, I was one of two engineers and brought the other to shipping independently in two months. While the backend's author was on leave, I built a modular structure and a migration plan; we finished it together in two weeks, and a backend task went from a week to two days. Deployment went from a full day to five minutes, run by someone who is not an engineer. A BFF between frontend and backend keeps every credential out of the browser.",
+      "One of two engineers on an early-stage internal platform for the UK construction sector. I brought the other to shipping independently in two months. While the backend's author was on leave, I built a modular structure and a migration plan; we finished it together in two weeks, and a backend task went from a week to two days. Deployment went from a full day to five minutes, run by someone who is not an engineer. A BFF between frontend and backend keeps every credential out of the browser.",
     mark: { phrase: "five minutes", kind: "circle" },
     techLine:
       "Next.js App Router · TanStack Query · FastAPI · ArangoDB · RabbitMQ · Docker · GHCR",
