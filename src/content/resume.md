@@ -203,22 +203,22 @@ background-check forms, not here. -->
 Full-Stack Engineer, Internal Platform · _Taipei, Taiwan · Dec 2024 – Jul 2026_
 
 - **Wrote the whole Next.js / TypeScript frontend** on an early-stage internal platform for the **UK construction sector** (ISO 19650), one of two engineers. Wrote the spec and held scope to it; phase one shipped on its agreed July 2026 date.
-- **A backend task went from a week to two days.** Every task used to start with an argument about where code goes. Refactored the backend into the team's **event-driven modular monolith**, seven business-domain modules over RabbitMQ, then set up the module template, the CI quality gate and a shared Postman collection.
+- **A backend task went from a week to two days.** The backend ran from one `main.py`. While its author was on leave, built a modular structure and a migration plan; together we moved it to an **event-driven modular monolith** in two weeks: seven modules over RabbitMQ, a module template, a CI gate and a shared Postman collection.
 - **A deployment went from a full day to five minutes, run by someone who is not an engineer.** It meant a non-technical stakeholder cloning the repo onto Ubuntu over SSH, fixing missing packages by hand. Replaced with a **build-once, promote-once release pipeline**: one `.env` and compose file, then `make run` pulls the image GHCR built and tagged on merge to main. Frontend and backend, staging and production.
 - **Permission changes stopped being a redesign.** Scattered rules meant re-reasoning the whole flow. Designed one **role-to-capability map**: seven organisation-level and project-scoped roles into 26 capability flags. A new role is one entry read against the others, and super-admin derives from them, so it cannot drift. Services read a flag, never the rule. Behind a **BFF security boundary**: server-managed auth, centralised CSRF, no backend credentials in the browser.
-- Diagnosed a **RabbitMQ RPC bug** where a stale, uninitialised consumer round-robined into login lookups and failed every user's first attempt; fixed with a fail-fast DB check before broker registration.
+- After the refactor, every first login failed: a stale RabbitMQ consumer took the lookups. Fixed with a startup DB check.
 
 ## SPIN.FASHION by Lablaco
 
 Full Stack Engineer & Founding Partner · _Singapore · Remote · Aug 2024 – Oct 2024_
 
-- Founding partner on the in-store Electron app; co-ran the scrum with the CTO. Shipped it by clearing **macOS code-signing, notarisation and auto-update**, and built a **blockchain payment checkout** on a third-party provider.
+- Founding partner on the in-store Electron app; co-ran the scrum with the CTO. Cleared **macOS code-signing, notarisation and auto-update**, then automated and documented releases. Main developer on its **blockchain payment checkout**.
 
 ## Find Recruiter
 
 Software Engineer · _Taipei, Taiwan · Aug 2022 – May 2024_
 
-- Led the frontend of a **B2B and B2C recruitment and ATS platform** in React and Redux-Saga, two engineers under the CTO. Planned the TypeScript migration in steps so it shipped without breaking, authoring 100 shared components.
+- Led the frontend of a **B2B and B2C recruitment and ATS platform** in React and Redux-Saga, two engineers under the CTO. Led its move to TypeScript in steps: within a year almost all new code was TypeScript.
 - Wrote the **Server-Sent Events** channel the frontend consumed AI-generated drafts through.
 
 ## Independent / Freelance Engineering
