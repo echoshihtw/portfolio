@@ -105,13 +105,22 @@ ask "the user of what", and that is a question she wants asked.
 What it deliberately does not say: intuitive, natural, self-explanatory. Those
 are Echo's actual values, stated on 2026-09-19, and they are also the three
 adjectives every UX-adjacent CV uses and none can check. The belief is better
-served by the evidence above than by naming it. -->
+served by the evidence above than by naming it. 
+2026-11-23: line 1 changed from a stack list to "Product engineer with four
+years in React and TypeScript, building software people don't have to learn."
+Echo's own phrase is the hook. A recruiter and HR read wanted role, years and
+the two stack words every ad filters on, so those stay in the same sentence;
+the headline above still lists the rest. "Intuitive, straightforward" was cut
+because it repeats the hook. Lines 2 and 3 drop "I" to match the site's
+caption voice; the one "I" left is in "so I was the user first". Line 2 was
+shortened so each line ends on its own line in the PDF.
+-->
 
-Product engineer on the software a business runs on: React, TypeScript, Next.js, Python, Postgres, Docker.
+Product engineer with four years in React and TypeScript, building software people don't have to learn.
 
-I build the frontend and the delivery path under it: the module template a team builds against, the release a non-engineer runs in five minutes.
+Frontend and the delivery path under it: a module template for the team, a five-minute release a non-engineer runs.
 
-I came to engineering from customer relations. I was the user first.
+Came to engineering from customer relations, so I was the user first.
 
 # Experience
 
