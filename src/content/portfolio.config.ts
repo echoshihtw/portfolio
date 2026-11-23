@@ -130,7 +130,7 @@ export const experiencePortfolio: Record<
   },
   "SPIN.FASHION by Lablaco": {
     story:
-      "The in-store desktop app couldn't ship on macOS. I fixed code-signing, notarisation and auto-update, then automated and documented the release so anyone on the team could ship. Remote across time zones, I co-ran the scrum with the CTO and was the main developer on the blockchain payment checkout, payment screen to API.",
+      "Founding partner on the in-store desktop app, remote across time zones. The macOS build couldn't ship; I fixed code-signing, notarisation and auto-update, then automated and documented the release so anyone on the team could ship. I co-ran the scrum with the CTO and was the main developer on the blockchain payment checkout, payment screen to API.",
     mark: {
       phrase: "fixed code-signing, notarisation and auto-update",
       kind: "highlight",
@@ -139,7 +139,7 @@ export const experiencePortfolio: Record<
   },
   "Find Recruiter": {
     story:
-      "A recruiting and ATS platform: about 150,000 lines of React with no TypeScript when I joined. On a two-engineer team, I led frontend delivery and moved it over step by step; within a year almost all new code was TypeScript, while it kept shipping.",
+      "Frontend lead on a recruiting and ATS platform, on a two-engineer team. The React codebase was about 150,000 lines with no TypeScript when I joined; I moved it over step by step, and within a year almost all new code was TypeScript, while it kept shipping.",
     mark: { phrase: "while it kept shipping", kind: "line" },
     techLine:
       "React · TypeScript · Redux-Saga · Firebase · Server-Sent Events · Google Analytics · Sentry",
