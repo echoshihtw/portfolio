@@ -6,8 +6,8 @@
 # to CI would throw away a gigabyte of TeX.
 texlive-xetex
 texlive-fonts-recommended
-# XCharter lives here and nowhere else in Debian packaging; the résumé sets
-# mainfont=XCharter, so this ~1GB package is not optional.
-texlive-fonts-extra
+# XCharter (mainfont) is not here: in Debian it ships only inside
+# texlive-fonts-extra, about 1GB, so verify.yml fetches the font alone
+# from CTAN instead.
 lmodern
 poppler-utils
