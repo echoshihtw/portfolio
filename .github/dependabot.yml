@@ -13,3 +13,9 @@ updates:
     ignore:
       - dependency-name: "*"
         update-types: ["version-update:semver-major"]
+    # typescript-eslint's packages must share one version; bumped alone, the
+    # parser pulls a second copy of its internals (#193).
+    groups:
+      typescript-eslint:
+        patterns:
+          - "@typescript-eslint/*"
