@@ -23,7 +23,9 @@ export const aboutMeConfig = {
     },
     {
       label: "What changed",
-      text: "Logging hours, entering scores, applying for a research budget: all of it ran on software that was hard to use.",
+      // The start, in her words (2026-11-25): C first, in CS50, before the
+      // bootcamp. No reason is given for it; she gave none.
+      text: "Logging hours, entering scores, applying for a research budget: all of it ran on software that was hard to use. In 2021 I started programming with C, in Harvard's CS50, then a front-end bootcamp.",
     },
     {
       label: "How I work",
