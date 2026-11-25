@@ -6,6 +6,35 @@ import type { Projects } from "../lib/types/types.js";
 // listed in `stack`, so the highlights can carry judgment, not tool names.
 export const projectsConfig: Projects = [
   {
+    name: "Financial Runway",
+    // Live on the App Store since 2026-10-04 (id6778675088). Shown in its own
+    // Selected work section (selectedWork.config.ts), not in More projects.
+    // The product page, not the repository: it opens on what the app does and
+    // puts the App Store download first.
+    href: "https://echoshihtw.github.io/runway-site/",
+    stack: ["Flutter", "Dart", "Riverpod", "Drift", "SQLCipher", "RevenueCat"],
+    highlights: [
+      "A goal is a number of months, not an amount of money. The question was never how much I had, it was how many months it covers",
+      "Logged spending uses up its budget instead of adding to it. Monthly costs only rise when a budget is overspent, so a lunch never counts twice",
+      "Runway counts from today. The rest of this month costs what's left of its budget, not a whole month that's already partly paid",
+      "The layers are separate Dart packages and can't import each other. A boundary violation fails CI",
+      "Financial data never leaves the device. The app checks the database is actually encrypted every time it opens, instead of trusting the build settings",
+    ],
+    resume: {
+      descriptor: "personal finance app, Flutter",
+      role: "Founder",
+      bullets: [
+        // "Clean Architecture across a Melos monorepo, SQLCipher-encrypted
+        // local storage" was cut for the one-page pass: it is the only line in
+        // Projects that names a pattern rather than a result, and the card on
+        // the site carries it with the reasoning attached.
+        "6 languages and 6 currencies, built solo; live on the App Store",
+      ],
+    },
+    linkLabel: "See the app →",
+    status: "Live",
+  },
+  {
     name: "Clio",
     statusLine: "Early access",
     figure: "603",
@@ -68,35 +97,6 @@ export const projectsConfig: Projects = [
       ],
     },
     linkLabel: "cliohq.app",
-    status: "Live",
-  },
-  {
-    name: "Financial Runway",
-    // Live on the App Store since 2026-10-04 (id6778675088). Shown in its own
-    // Selected work section (selectedWork.config.ts), not in More projects.
-    // The product page, not the repository: it opens on what the app does and
-    // puts the App Store download first.
-    href: "https://echoshihtw.github.io/runway-site/",
-    stack: ["Flutter", "Dart", "Riverpod", "Drift", "SQLCipher", "RevenueCat"],
-    highlights: [
-      "A goal is a number of months, not an amount of money. The question was never how much I had, it was how many months it covers",
-      "Logged spending uses up its budget instead of adding to it. Monthly costs only rise when a budget is overspent, so a lunch never counts twice",
-      "Runway counts from today. The rest of this month costs what's left of its budget, not a whole month that's already partly paid",
-      "The layers are separate Dart packages and can't import each other. A boundary violation fails CI",
-      "Financial data never leaves the device. The app checks the database is actually encrypted every time it opens, instead of trusting the build settings",
-    ],
-    resume: {
-      descriptor: "personal finance app, Flutter",
-      role: "Founder",
-      bullets: [
-        // "Clean Architecture across a Melos monorepo, SQLCipher-encrypted
-        // local storage" was cut for the one-page pass: it is the only line in
-        // Projects that names a pattern rather than a result, and the card on
-        // the site carries it with the reasoning attached.
-        "6 languages and 6 currencies, built solo; live on the App Store",
-      ],
-    },
-    linkLabel: "See the app →",
     status: "Live",
   },
   {
