@@ -3,7 +3,9 @@ updates:
   - package-ecosystem: npm
     directory: /
     schedule:
-      interval: weekly
+      # Monthly: routine bumps to a personal site are noise at a weekly pace.
+      # Security updates ignore this schedule and arrive as soon as they exist.
+      interval: monthly
     # Wait a week before proposing a new release: most malicious publishes
     # are pulled from npm within days. Security updates are not delayed.
     cooldown:
@@ -13,9 +15,16 @@ updates:
     ignore:
       - dependency-name: "*"
         update-types: ["version-update:semver-major"]
-    # typescript-eslint's packages must share one version; bumped alone, the
-    # parser pulls a second copy of its internals (#193).
+    # A group is only for packages released together under one version
+    # number. typescript-eslint's must match: bumped alone, the parser pulled
+    # a second copy of its internals (#193). axe-core and its Playwright
+    # wrapper ship as one release too. Packages that only work together,
+    # like prettier and its Svelte plugin, still update on their own.
     groups:
       typescript-eslint:
         patterns:
           - "@typescript-eslint/*"
+      axe-core:
+        patterns:
+          - "axe-core"
+          - "@axe-core/*"
